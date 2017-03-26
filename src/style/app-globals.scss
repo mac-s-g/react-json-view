@@ -1,0 +1,106 @@
+@import '_variables';
+
+.pretty-json-container {
+    font-family: monospace;
+    cursor: default;
+
+    .brace {
+        font-weight: bold;
+        color: $brace-color;
+
+        &.open {
+
+        }
+
+        &.close {
+
+        }
+
+    }
+
+    .pushed-content {
+
+        >div {
+            display: inline-block;
+
+            &.push {
+                width: $indent-width;
+            }
+
+            &.object-content {
+
+                .object-key-val {
+                    border-left: 2px solid rgba(0, 0, 0, 0);
+                    padding: 3px 5px;
+
+                    &:hover {
+                        border-left: 2px solid rgba(0, 0, 0, 0.1);
+                    }
+
+                    .object-key {
+                        display: inline-block;
+                        margin-right: $key-margin;
+                        color: $key-color;
+                        background-color: $key-background-color;
+                        letter-spacing: $key-letter-spacing;
+                        padding: $key-padding;
+                        font-style: $key-font-style;
+                        border-radius: $key-border-radius;
+                        vertical-align: top;
+
+                        .key-colon {
+                            display: inline-block;
+                            font-weight: $key-colon-weight;
+                            color: $key-colon-color;
+                        }
+                    }
+
+                    .object-value {
+                        display: inline-block;
+
+                        &.string {
+                            color: $string-color;
+                        }
+
+                        &.number {
+                            color: $number-color;
+                        }
+
+                        &.boolean {
+                            color: $boolean-color;
+                        }
+
+                        &.null {
+                            color: $null-color;
+                            font-size: $null-font-size;
+                        }
+
+                        &.nan {
+                            color: $nan-color;
+                            font-size: $nan-font-size;
+                        }
+
+                        &.function {
+                            color: $function-color;
+                            white-space: pre-line;
+                        }
+
+                        span.data-type {
+                            font-size: $data-type-font-size;
+                            margin-right: $data-type-margin-right;
+                            opacity: $data-type-opacity;
+                        }
+                    }
+
+                }
+
+            }
+
+        }
+
+
+        
+    }
+
+    
+}

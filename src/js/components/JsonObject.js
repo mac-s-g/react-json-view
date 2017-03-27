@@ -41,8 +41,7 @@ export default class extends React.Component {
     render = () => {
         const {depth, src, name, ...rest} = this.props; 
         const {expanded} = this.state;
-        const expanded_class = expanded ? "expanded" : "collapsed"; 
-        console.log(expanded);
+        const expanded_class = expanded ? "expanded" : "collapsed";
         return (<div class="object-key-val">
             <div onClick={this.toggleExpanded} class="open brace-row">
                 <div class={"icon-container " + expanded_class}>

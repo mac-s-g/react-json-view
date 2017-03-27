@@ -1,11 +1,10 @@
 # react-json-view
-Interactive json viewer wrapped up in a react component.
+Interactive JSON display wrapped up in a react component.
 
-### Output Example:
+## Example Component Display:
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-3.png?raw=true "Output Example")
 
-## Usage
-### Implementation Example:
+## Implementation Example:
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/source-example-5.png?raw=true "Usage Example")
 
 ## Features

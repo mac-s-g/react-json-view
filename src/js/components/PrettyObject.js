@@ -10,7 +10,6 @@ export default class extends React.Component {
     }
 
     render = () => {
-        console.log('children', this.props.children);
         const {depth, children} = this.props; 
         return (<div>
             <div class="open brace">{'{'}</div>

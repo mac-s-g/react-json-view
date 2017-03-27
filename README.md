@@ -1,13 +1,13 @@
-# reactive-json
+# react-json-view
 interactive json viewer wrapped up in a react component
 object nodes can be collapsed and expanded.
 
 ## Usage
 ### Implementation Example:
-![alt text](https://github.com/mac-s-g/reactive-json/blob/master/doc/source-example-2.png?raw=true "Usage Example")
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/source-example-2.png?raw=true "Usage Example")
 
 ### Output Example:
-![alt text](https://github.com/mac-s-g/reactive-json/blob/master/doc/output-example-3.png?raw=true "Output Example")
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-3.png?raw=true "Output Example")
 
 ## Customizing Style
 update or override `src/style/_variables.scss` to apply your own theme.
@@ -17,10 +17,10 @@ You can use Docker to run the source code in your browser:
   1. Clone this repo
   2. Make sure docker is installed
   3. Build the docker image
-    * `docker build -t reactive-json .`
+    * `docker build -t react-json-view .`
     * *note:* you may need to use `sudo` to run docker commands
   4. Run the docker container on port 2000
-    * `cd reactive-json`
+    * `cd react-json-view`
     * `./docker/server.sh`
     * *note:* you may need to use `sudo` to run the server file
   5. open port 2000 in your browser

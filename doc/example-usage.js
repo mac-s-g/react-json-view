@@ -1,5 +1,5 @@
 
-import ReactiveJson from 'reactive-json';
+import ReactiveJson from 'react-json-view';
 
 //you have some json to display
 let my_important_data = {

@@ -10,20 +10,20 @@
 7 silly cache add   scope: null,
 7 silly cache add   name: null,
 7 silly cache add   rawSpec: '.',
-7 silly cache add   spec: '/home/mac/dev/git/reactive-json',
+7 silly cache add   spec: '/home/mac/dev/git/react-json-view',
 7 silly cache add   type: 'directory' }
-8 verbose addLocalDirectory /home/mac/.npm/reactive-json/1.0.0/package.tgz not in flight; packing
-9 info lifecycle reactive-json@1.0.0~prepublish: reactive-json@1.0.0
-10 silly lifecycle reactive-json@1.0.0~prepublish: no script for prepublish, continuing
-11 verbose tar pack [ '/home/mac/.npm/reactive-json/1.0.0/package.tgz',
-11 verbose tar pack   '/home/mac/dev/git/reactive-json' ]
-12 verbose tarball /home/mac/.npm/reactive-json/1.0.0/package.tgz
-13 verbose folder /home/mac/dev/git/reactive-json
-14 verbose addLocalTarball adding from inside cache /home/mac/.npm/reactive-json/1.0.0/package.tgz
-15 silly cache afterAdd reactive-json@1.0.0
-16 verbose afterAdd /home/mac/.npm/reactive-json/1.0.0/package/package.json not in flight; writing
-17 verbose afterAdd /home/mac/.npm/reactive-json/1.0.0/package/package.json written
-18 silly publish { name: 'reactive-json',
+8 verbose addLocalDirectory /home/mac/.npm/react-json-view/1.0.0/package.tgz not in flight; packing
+9 info lifecycle react-json-view@1.0.0~prepublish: react-json-view@1.0.0
+10 silly lifecycle react-json-view@1.0.0~prepublish: no script for prepublish, continuing
+11 verbose tar pack [ '/home/mac/.npm/react-json-view/1.0.0/package.tgz',
+11 verbose tar pack   '/home/mac/dev/git/react-json-view' ]
+12 verbose tarball /home/mac/.npm/react-json-view/1.0.0/package.tgz
+13 verbose folder /home/mac/dev/git/react-json-view
+14 verbose addLocalTarball adding from inside cache /home/mac/.npm/react-json-view/1.0.0/package.tgz
+15 silly cache afterAdd react-json-view@1.0.0
+16 verbose afterAdd /home/mac/.npm/react-json-view/1.0.0/package/package.json not in flight; writing
+17 verbose afterAdd /home/mac/.npm/react-json-view/1.0.0/package/package.json written
+18 silly publish { name: 'react-json-view',
 18 silly publish   description: 'interactive json viewer wrapped up in a react component',
 18 silly publish   version: '1.0.0',
 18 silly publish   main: 'main.js',
@@ -79,7 +79,7 @@
 18 silly publish      'dev:hot': 'webpack-dev-server' },
 18 silly publish   repository:
 18 silly publish    { type: 'git',
-18 silly publish      url: 'git+https://github.com/mac-s-g/reactive-json.git' },
+18 silly publish      url: 'git+https://github.com/mac-s-g/react-json-view.git' },
 18 silly publish   keywords:
 18 silly publish    [ 'react-component',
 18 silly publish      'react',
@@ -94,29 +94,29 @@
 18 silly publish      'pretty' ],
 18 silly publish   license: 'ISC',
 18 silly publish   author: { name: 'Mac Gainor' },
-18 silly publish   bugs: { url: 'https://github.com/mac-s-g/reactive-json/issues' },
-18 silly publish   homepage: 'https://github.com/mac-s-g/reactive-json',
+18 silly publish   bugs: { url: 'https://github.com/mac-s-g/react-json-view/issues' },
+18 silly publish   homepage: 'https://github.com/mac-s-g/react-json-view',
 18 silly publish   directories: { docs: 'docs', test: 'test' },
-18 silly publish   readme: '# reactive-json\ninteractive json viewer wrapped up in a react component\n\n## Usage\n### Implementation Example:\n![alt text](https://github.com/mac-s-g/reactive-json/blob/master/docs/source-example-v1.png?raw=true "Usage Example")\n\n### Output Example:\n![alt text](https://github.com/mac-s-g/reactive-json/blob/master/docs/output-example-v1.png?raw=true "Output Example")\n\n## Customizing Style\nupdate or override `src/style/_variables.scss` to apply your own theme.\n\n## Working with the source code:\nYou can use Docker to run the source code in your browser:\n  1. Clone this repo\n  2. Make sure docker is installed\n  3. Build the docker image\n    * `docker build -t reactive-json .`\n    * *note:* you may need to use `sudo` to run docker commands\n  4. Run the docker container on port 2000\n    * `cd reactive-json`\n    * `./docker/server.sh`\n    * *note:* you may need to use `sudo` to run the server file\n  5. open port 2000 in your browser\n    * navigate to localhost:2000\n  \nYour source code will be mounted inside the docker container.  The container is built on the standard Node image.  \n\nWebpack-dev-server is running in the container and hot-reloading when changes are made locally.\n\nAll node modules are installed within the container, so make sure to rebuild your container if you make changes to package.json (see step 3, above).\n\n## ToDo\'s\n1. Add Tests!\n2. move each data type into it\'s own component\n```\ncase \'string\':\n    return <div class="object-value string">\n        <span class="data-type">string</span> \n        {value}\n    </div>;\n```\nshould become \n``` \ncase \'string\':\n    return <PrettyString value={value} />;\n```\n\n3. improve customizability\n    * add optional `depth` prop\n    * consider moving to postcss\n    * add a few different themes on top of `_variables.scss`\n4. add collapsed attributes to objects and support collapse / expand functionality\n',
+18 silly publish   readme: '# react-json-view\ninteractive json viewer wrapped up in a react component\n\n## Usage\n### Implementation Example:\n![alt text](https://github.com/mac-s-g/react-json-view/blob/master/docs/source-example-v1.png?raw=true "Usage Example")\n\n### Output Example:\n![alt text](https://github.com/mac-s-g/react-json-view/blob/master/docs/output-example-v1.png?raw=true "Output Example")\n\n## Customizing Style\nupdate or override `src/style/_variables.scss` to apply your own theme.\n\n## Working with the source code:\nYou can use Docker to run the source code in your browser:\n  1. Clone this repo\n  2. Make sure docker is installed\n  3. Build the docker image\n    * `docker build -t react-json-view .`\n    * *note:* you may need to use `sudo` to run docker commands\n  4. Run the docker container on port 2000\n    * `cd react-json-view`\n    * `./docker/server.sh`\n    * *note:* you may need to use `sudo` to run the server file\n  5. open port 2000 in your browser\n    * navigate to localhost:2000\n  \nYour source code will be mounted inside the docker container.  The container is built on the standard Node image.  \n\nWebpack-dev-server is running in the container and hot-reloading when changes are made locally.\n\nAll node modules are installed within the container, so make sure to rebuild your container if you make changes to package.json (see step 3, above).\n\n## ToDo\'s\n1. Add Tests!\n2. move each data type into it\'s own component\n```\ncase \'string\':\n    return <div class="object-value string">\n        <span class="data-type">string</span> \n        {value}\n    </div>;\n```\nshould become \n``` \ncase \'string\':\n    return <PrettyString value={value} />;\n```\n\n3. improve customizability\n    * add optional `depth` prop\n    * consider moving to postcss\n    * add a few different themes on top of `_variables.scss`\n4. add collapsed attributes to objects and support collapse / expand functionality\n',
 18 silly publish   readmeFilename: 'README.md',
 18 silly publish   gitHead: '166db49760f0169cb5e332efa22c0e6d72b38b14',
-18 silly publish   _id: 'reactive-json@1.0.0',
+18 silly publish   _id: 'react-json-view@1.0.0',
 18 silly publish   _shasum: 'e1681aeddf43353ba8abad2a229b768685c6a33c',
 18 silly publish   _from: '.' }
 19 verbose getPublishConfig undefined
-20 silly mapToRegistry name reactive-json
+20 silly mapToRegistry name react-json-view
 21 silly mapToRegistry using default registry
 22 silly mapToRegistry registry https://registry.npmjs.org/
-23 silly mapToRegistry uri https://registry.npmjs.org/reactive-json
+23 silly mapToRegistry uri https://registry.npmjs.org/react-json-view
 24 verbose publish registryBase https://registry.npmjs.org/
-25 silly publish uploading /home/mac/.npm/reactive-json/1.0.0/package.tgz
-26 verbose request uri https://registry.npmjs.org/reactive-json
+25 silly publish uploading /home/mac/.npm/react-json-view/1.0.0/package.tgz
+26 verbose request uri https://registry.npmjs.org/react-json-view
 27 verbose request sending authorization for write operation
 28 info attempt registry request try #1 at 8:11:39 PM
 29 verbose request using bearer token for auth
 30 verbose request id 2c3def4a7a9f53d7
-31 http request PUT https://registry.npmjs.org/reactive-json
-32 http 403 https://registry.npmjs.org/reactive-json
+31 http request PUT https://registry.npmjs.org/react-json-view
+32 http 403 https://registry.npmjs.org/react-json-view
 33 verbose headers { 'content-type': 'application/json',
 33 verbose headers   'cache-control': 'max-age=300',
 33 verbose headers   'content-length': '111',
@@ -129,9 +129,9 @@
 33 verbose headers   'x-cache-hits': '0',
 33 verbose headers   'x-timer': 'S1490584299.271812,VS0,VE48',
 33 verbose headers   vary: 'Accept-Encoding' }
-34 verbose request invalidating /home/mac/.npm/registry.npmjs.org/reactive-json on PUT
+34 verbose request invalidating /home/mac/.npm/registry.npmjs.org/react-json-view on PUT
 35 error publish Failed PUT 403
-36 verbose stack Error: you do not have permission to publish "reactive-json". Are you logged in as the correct user? : reactive-json
+36 verbose stack Error: you do not have permission to publish "react-json-view". Are you logged in as the correct user? : react-json-view
 36 verbose stack     at makeError (/usr/share/npm/node_modules/npm-registry-client/lib/request.js:264:12)
 36 verbose stack     at CachingRegistryClient.<anonymous> (/usr/share/npm/node_modules/npm-registry-client/lib/request.js:252:14)
 36 verbose stack     at Request._callback (/usr/share/npm/node_modules/npm-registry-client/lib/request.js:172:14)
@@ -143,14 +143,14 @@
 36 verbose stack     at Request.emit (events.js:169:7)
 36 verbose stack     at IncomingMessage.<anonymous> (/usr/share/npm/node_modules/request/request.js:1009:12)
 37 verbose statusCode 403
-38 verbose pkgid reactive-json
-39 verbose cwd /home/mac/dev/git/reactive-json
+38 verbose pkgid react-json-view
+39 verbose cwd /home/mac/dev/git/react-json-view
 40 error Linux 4.4.0-66-generic
 41 error argv "/usr/bin/nodejs" "/usr/bin/npm" "publish"
 42 error node v4.2.6
 43 error npm  v3.5.2
 44 error code E403
-45 error you do not have permission to publish "reactive-json". Are you logged in as the correct user? : reactive-json
+45 error you do not have permission to publish "react-json-view". Are you logged in as the correct user? : react-json-view
 46 error If you need help, you may report this error at:
 46 error     <https://github.com/npm/npm/issues>
 47 verbose exit [ 1, true ]

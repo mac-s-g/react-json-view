@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>reactive-json</title>
+    <title>react-json-view</title>
     <meta charset="UTF-8">
     <!--[if lt IE 9]>
     <script>

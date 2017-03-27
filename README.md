@@ -47,7 +47,7 @@ case 'string':
 ```
 
 2. improve customizability
-  * add optional `depth` prop
-  * consider moving to postcss
-  * add a few different themes on top of `_variables.scss`
+    * add optional `depth` prop
+    * consider moving to postcss
+    * add a few different themes on top of `_variables.scss`
 3. add collapsed attributes to objects and support collapse / expand functionality

@@ -32,7 +32,8 @@ All node modules are installed within the container, so make sure to rebuild you
 update or override `src/style/_variables.scss` to apply your own theme.
 
 ## ToDo's
-1. move each data type into it's own component
+1. Add Tests!
+2. move each data type into it's own component
 ```
 case 'string':
     return <div class="object-value string">
@@ -46,8 +47,8 @@ case 'string':
     return <PrettyString value={value} />;
 ```
 
-2. improve customizability
+3. improve customizability
     * add optional `depth` prop
     * consider moving to postcss
     * add a few different themes on top of `_variables.scss`
-3. add collapsed attributes to objects and support collapse / expand functionality
+4. add collapsed attributes to objects and support collapse / expand functionality

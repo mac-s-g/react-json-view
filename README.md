@@ -1,12 +1,12 @@
 # react-json-view
-Interactive json viewer wrapped up in a react component. 
+Interactive json viewer wrapped up in a react component.
+
+### Output Example:
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-3.png?raw=true "Output Example")
 
 ## Usage
 ### Implementation Example:
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/source-example-5.png?raw=true "Usage Example")
-
-### Output Example:
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-3.png?raw=true "Output Example")
 
 ## Features
 * Object nodes can be collapsed and expanded
@@ -28,8 +28,8 @@ You can use Docker to run the source code in your browser:
     * *note:* you may need to use `sudo` to run the server file
   5. open port 2000 in your browser
     * navigate to localhost:2000
-  
-Your source code will be mounted inside the docker container.  The container is built on the standard Node image.  
+
+Your source code will be mounted inside the docker container.  The container is built on the standard Node image.
 
 Webpack-dev-server is running in the container and hot-reloading when changes are made locally.
 
@@ -41,12 +41,12 @@ All node modules are installed within the container, so make sure to rebuild you
 ```
 case 'string':
     return <div class="object-value string">
-        <span class="data-type">string</span> 
+        <span class="data-type">string</span>
         {value}
     </div>;
 ```
-should become 
-``` 
+should become
+```
 case 'string':
     return <PrettyString value={value} />;
 ```

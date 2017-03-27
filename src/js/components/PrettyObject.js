@@ -58,6 +58,12 @@ export default class extends React.Component {
                         {value}
                     </div>;
 
+                case 'array':
+                    return <div class="object-value array">
+                        <span class="data-type">array</span>
+                        [{value.toString()}]
+                    </div>;
+
                 case 'boolean':
                     if (value) {
                         return <div class="object-value boolean">

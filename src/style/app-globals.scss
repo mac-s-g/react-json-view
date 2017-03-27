@@ -66,6 +66,10 @@
                             color: $number-color;
                         }
 
+                        &.array {
+                            color: $array-color;
+                        }
+
                         &.boolean {
                             color: $boolean-color;
                         }

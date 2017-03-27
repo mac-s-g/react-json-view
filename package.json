@@ -71,8 +71,7 @@
       "viewer",
       "responsive",
       "interactive",
-      "pretty"
-      "reactive",
+      "pretty",
       "react-component"
   ],
   "license": "MIT",

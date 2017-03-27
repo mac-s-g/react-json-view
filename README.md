@@ -3,7 +3,7 @@ Interactive json viewer wrapped up in a react component.
 
 ## Usage
 ### Implementation Example:
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/source-example-2.png?raw=true "Usage Example")
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/source-example-3.png?raw=true "Usage Example")
 
 ### Output Example:
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-3.png?raw=true "Output Example")

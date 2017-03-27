@@ -17,6 +17,6 @@
   </head>
   <body>
   <div id="app-container"></div>
-  <script type="text/javascript" src="/assets/build.js"></script>
+  <script type="text/javascript" src="/assets/dist.js"></script>
   </body>
 </html>

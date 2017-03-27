@@ -3,10 +3,10 @@ interactive json viewer wrapped up in a react component
 
 ## Usage
 ### Implementation Example:
-![alt text](https://github.com/mac-s-g/react-pretty-json/blob/master/docs/source-example.png?raw=true "Usage Example")
+![alt text](https://github.com/mac-s-g/react-json-viewer/blob/master/docs/source-example-v1.png?raw=true "Usage Example")
 
 ### Output Example:
-![alt text](https://github.com/mac-s-g/react-pretty-json/blob/master/docs/output-example.png?raw=true "Output Example")
+![alt text](https://github.com/mac-s-g/react-json-viewer/blob/master/docs/output-example-v1.png?raw=true "Output Example")
 
 ## Customizing Style
 update or override `src/style/_variables.scss` to apply your own theme.

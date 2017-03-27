@@ -5,9 +5,7 @@
 import React from "react";
 import ReactDom from "react-dom";
 
-import PrettyJson from './components/PrettyJson';
-
-console.log('WOWOWOW');
+import JsonViewer from './components/JsonViewer';
 
 const app = document.getElementById('app-container');
 
@@ -38,7 +36,7 @@ let test_json = {
 
 ReactDom.render(
     <div class="app-entry">
-        <PrettyJson src={test_json} />
+        <JsonViewer src={test_json} />
     </div>,
     app
 );

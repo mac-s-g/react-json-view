@@ -1,5 +1,5 @@
 import React from "react";
-import PrettyObject from './PrettyObject';
+import PrettyObject from './JsonObject';
 
 require('./../../style/app-globals.scss');
 

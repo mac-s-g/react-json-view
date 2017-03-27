@@ -1,6 +1,6 @@
 import React from "react";
 import {toType} from './../helpers/util';
-import PrettyObject from './PrettyObject';
+import JsonObject from './JsonObject';
 
 const DEPTH_OFFSET = 1
 
@@ -42,9 +42,9 @@ export default class extends React.Component {
             //eg: <PrettyString>{value}</PrettyString>
             switch (type) {
                 case 'object':
-                    return <PrettyObject depth={depth + 1}>
+                    return <JsonObject depth={depth + 1}>
                         {value}
-                    </PrettyObject>;
+                    </JsonObject>;
 
                 case 'string':
                     return <div class="object-value string">

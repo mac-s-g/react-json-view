@@ -30,18 +30,19 @@
             &.object-content {
 
                 .object-key-val {
-                    border-left: 2px solid rgba(0, 0, 0, 0);
+                    border-left: 1px solid rgba(0, 0, 0, 0.1);
                     padding: 3px 5px;
 
                     &:hover {
-                        border-left: 2px solid rgba(0, 0, 0, 0.1);
+                        padding-left: 4px;
+                        border-left: 2px solid rgba(0, 0, 0, 0.2);
                     }
 
                     .object-key {
                         display: inline-block;
                         margin-right: $key-margin;
                         color: $key-color;
-                        background-color: $key-background-color;
+                        // background-color: $key-background-color;
                         letter-spacing: $key-letter-spacing;
                         padding: $key-padding;
                         font-style: $key-font-style;

@@ -11,14 +11,43 @@
             display: inline-block;
 
         }
-        &:hover {
-            .mdi {
-                color: $green;
-            }
-        }
+        // &:hover {
+        //     .mdi {
+        //         &.mdi-plus-circle-outline {
+        //             color: $magenta;
+        //         }
+        //         &.mdi-minus-circle-outline {
+        //             color: $green;
+        //         }
+        //     }
+        // }
 
-        .mdi {
-            color: $magenta;
+        .icon-container {
+            -webkit-transition: all 0.2s ease-out;
+            -moz-transition: all 0.2s ease-out;
+            -o-transition: all 0.2s ease-out;
+            -ms-transition: all 0.2s ease-out;
+            transition: all 0.2s ease-out;
+
+            &.expanded {
+                .mdi {
+                    color: $cyan;
+                }
+            }
+            &.collapsed {
+                .mdi {
+                    color: $magenta;
+                }
+            }
+
+            .mdi {
+
+                &.mdi-plus-circle-outline {
+                }
+                &.mdi-minus-circle-outline {
+                }
+            }
+
         }
 
         .brace {

@@ -45,7 +45,7 @@ export default class extends React.Component {
         console.log(expanded);
         return (<div class="object-key-val">
             <div onClick={this.toggleExpanded} class="open brace-row">
-                <div>
+                <div class={"icon-container " + expanded_class}>
                     <i class={
                         "mdi mdi-" 
                         + (expanded ? 'minus' : 'plus') 

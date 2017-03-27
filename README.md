@@ -3,10 +3,10 @@ interactive json viewer wrapped up in a react component
 
 ## Usage
 ### Implementation Example:
-![alt text](https://github.com/mac-s-g/reactive-json/blob/master/docs/source-example-v1.png?raw=true "Usage Example")
+![alt text](https://github.com/mac-s-g/reactive-json/blob/master/doc/source-example-2.png?raw=true "Usage Example")
 
 ### Output Example:
-![alt text](https://github.com/mac-s-g/reactive-json/blob/master/docs/output-example-v1.png?raw=true "Output Example")
+![alt text](https://github.com/mac-s-g/reactive-json/blob/master/doc/output-example-2.png?raw=true "Output Example")
 
 ## Customizing Style
 update or override `src/style/_variables.scss` to apply your own theme.

@@ -7,8 +7,8 @@ echo "Running with NODE_ENV=$NODE_ENV"
 # stop and remove the containers if they are running
 stop_and_remove_container()
 {
-    docker stop react-json-viewer
-    docker rm react-json-viewer
+    docker stop reactive-json
+    docker rm reactive-json
 }
 stop_and_remove_container || true
 
@@ -18,8 +18,8 @@ docker run \
     -v $(pwd)/test:/react/test \
     -v $(pwd)/entrypoints:/react/entrypoints \
     -v $(pwd)/webpack.config.js:/react/webpack.config.js \
-    --name=react-json-viewer \
+    --name=reactive-json \
     -e NODE_ENV=$NODE_ENV \
     --publish 2000:2000 \
     --entrypoint=/react/entrypoints/server.sh \
-    -t react-json-viewer
+    -t reactive-json

@@ -1,12 +1,12 @@
-# react-json-viewer
+# reactive-json
 interactive json viewer wrapped up in a react component
 
 ## Usage
 ### Implementation Example:
-![alt text](https://github.com/mac-s-g/react-json-viewer/blob/master/docs/source-example-v1.png?raw=true "Usage Example")
+![alt text](https://github.com/mac-s-g/reactive-json/blob/master/docs/source-example-v1.png?raw=true "Usage Example")
 
 ### Output Example:
-![alt text](https://github.com/mac-s-g/react-json-viewer/blob/master/docs/output-example-v1.png?raw=true "Output Example")
+![alt text](https://github.com/mac-s-g/reactive-json/blob/master/docs/output-example-v1.png?raw=true "Output Example")
 
 ## Customizing Style
 update or override `src/style/_variables.scss` to apply your own theme.
@@ -16,10 +16,10 @@ You can use Docker to run the source code in your browser:
   1. Clone this repo
   2. Make sure docker is installed
   3. Build the docker image
-    * `docker build -t react-json-viewer .`
+    * `docker build -t reactive-json .`
     * *note:* you may need to use `sudo` to run docker commands
   4. Run the docker container on port 2000
-    * `cd react-json-viewer`
+    * `cd reactive-json`
     * `./docker/server.sh`
     * *note:* you may need to use `sudo` to run the server file
   5. open port 2000 in your browser

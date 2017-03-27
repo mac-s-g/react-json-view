@@ -1,7 +1,7 @@
 {
-  "name": "react-json-viewer",
+  "name": "reactive-json",
   "description": "interactive json viewer wrapped up in a react component",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "main.js",
   "devDependencies": {
     "babel-core": "^6.21.0",
@@ -58,7 +58,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mac-s-g/react-json-viewer.git"
+    "url": "https://github.com/mac-s-g/reactive-json.git"
   },
   "keywords": [
       "react-component",
@@ -77,9 +77,9 @@
   "author": "Mac Gainor",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mac-s-g/react-json-viewer/issues"
+    "url": "https://github.com/mac-s-g/reactive-json/issues"
   },
-  "homepage": "https://github.com/mac-s-g/react-json-viewer",
+  "homepage": "https://github.com/mac-s-g/reactive-json",
   "directories": {
     "docs": "docs",
     "test": "test"

@@ -10,13 +10,13 @@ export default class extends React.Component {
     }
 
     render = () => {
-        const {depth, children} = this.props; 
+        const {depth, src} = this.props; 
         return (<div>
             <div class="open brace">{'{'}</div>
             <div class="pushed-content">
                 <div class="push">{this.renderPush(depth)}</div>
                 <div class="object-content">
-                    {this.renderObjectConents(children)}
+                    {this.renderObjectConents(src)}
                 </div>
             </div>
             <div class="close brace">{'}'}</div>
@@ -42,9 +42,7 @@ export default class extends React.Component {
             //eg: <PrettyString>{value}</PrettyString>
             switch (type) {
                 case 'object':
-                    return <JsonObject depth={depth + 1}>
-                        {value}
-                    </JsonObject>;
+                    return <JsonObject depth={depth + 1} src={value}/>
 
                 case 'string':
                     return <div class="object-value string">

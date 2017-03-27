@@ -6,10 +6,10 @@ You can use Docker to run the source code in your browser:
   1. Clone this repo
   2. Make sure docker is installed
   3. Build the docker image
-    * `docker build -t react-pretty-json .`
+    * `docker build -t react-json-viewer .`
     * *note:* you may need to use `sudo` to run docker commands
   4. Run the docker container on port 2000
-    * `cd react-pretty-json`
+    * `cd react-json-viewer`
     * `./docker/server.sh`
     * *note:* you may need to use `sudo` to run the server file
   5. open port 2000 in your browser

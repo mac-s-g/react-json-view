@@ -1,5 +1,5 @@
 {
-  "name": "react-pretty-json",
+  "name": "react-json-viewer",
   "description": "interactive json viewer wrapped up in a react component",
   "version": "1.0.0",
   "main": "main.js",
@@ -12,7 +12,7 @@
     "babel-plugin-transform-function-bind": "^6.8.0",
     "babel-plugin-transform-node-env-inline": "^6.8.0",
     "babel-plugin-react-html-attrs": "^2.0.0",
-    "babel-preset-latest": "^6.24.0",
+    "babel-preset-es2015": "^6.24.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.22.0",
     "babel-preset-stage-2": "^6.22.0",
@@ -51,22 +51,37 @@
   "scripts": {
     "start": "node server.js",
     "build": "webpack --display-error-details --progress",
-    "test": "mocha -w --require ignore-styles /react/test/helpers/browser.js /react/test/*test.js /react/test/**/*test.js",
+    "testonly": "mocha $npm_package_options_mocha",
+    "test": "npm run lint && npm run testonly",
+    "test-watch": "npm run testonly -- --watch --watch-extensions js",
     "dev:hot": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mac-s-g/web-index-src"
+    "url": "https://github.com/mac-s-g/react-json-viewer.git"
   },
-  "keywords": [],
+  "keywords": [
+      "react-component",
+      "react",
+      "json-viewer",
+      "pretty-print",
+      "responsive-json",
+      "interactive-json",
+      "json",
+      "viewer",
+      "responsive",
+      "interactive",
+      "pretty"
+  ],
+  "license": "MIT",
   "author": "Mac Gainor",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mac-s-g/react-pretty-json"
+    "url": "https://github.com/mac-s-g/react-json-viewer/issues"
   },
-  "homepage": "mac-s-g.github.io",
+  "homepage": "https://github.com/mac-s-g/react-json-viewer",
   "directories": {
-    "doc": "doc",
+    "docs": "docs",
     "test": "test"
   }
 }

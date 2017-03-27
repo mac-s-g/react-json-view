@@ -6,8 +6,8 @@ const PATHS = {
     src: path.join(__dirname, 'src'),
     js: path.join(__dirname, 'src/js'),
     style: path.join(__dirname, 'src/style'),
-    build_index: path.join(__dirname, 'build'),
-    build_assets: path.join(__dirname, 'build/assets')
+    dist_index: path.join(__dirname, 'dist'),
+    dist_assets: path.join(__dirname, 'dist/assets')
 };
 
 const config = {
@@ -34,12 +34,12 @@ const config = {
     hot: true,
     inline: true,
     historyApiFallback: true,
-    contentBase: PATHS.build_index,
+    contentBase: PATHS.dist_index,
     publicPath: '/assets/'
   },
   output: {
-      path: PATHS.build_assets,
-      filename: 'build.js',
+      path: PATHS.dist_assets,
+      filename: 'dist.js',
       publicPath: '/assets/'
   },
   plugins: [

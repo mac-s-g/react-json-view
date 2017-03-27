@@ -1,6 +1,5 @@
 # react-json-view
-interactive json viewer wrapped up in a react component
-object nodes can be collapsed and expanded.
+Interactive json viewer wrapped up in a react component. 
 
 ## Usage
 ### Implementation Example:
@@ -8,6 +7,10 @@ object nodes can be collapsed and expanded.
 
 ### Output Example:
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-3.png?raw=true "Output Example")
+
+## Features
+* Object nodes can be collapsed and expanded
+* Different classes are applied to different types for style interaction.
 
 ## Customizing Style
 update or override `src/style/_variables.scss` to apply your own theme.

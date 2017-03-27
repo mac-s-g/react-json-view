@@ -1,4 +1,4 @@
-# react-json-viewer
+# reactive-json
 interactive json viewer wrapped up in a react component
 
 ## Usage

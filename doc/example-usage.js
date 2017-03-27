@@ -15,7 +15,7 @@ let my_important_data = {
         'last-sibling': {
             grand_child: NaN,
             'grand-child-func': (a) => {
-                let b = a*a;
+                let b = 5;
                 return a.push(b);
             }
         }

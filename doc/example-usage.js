@@ -1,5 +1,5 @@
 
-import ReactiveJson from 'react-json-view';
+import ReactJson from 'react-json-view';
 
 //you have some json to display
 let my_important_data = {
@@ -24,4 +24,6 @@ let my_important_data = {
 }
 
 //so put it on the page!
-<ReactiveJson src={my_important_data} />
+<ReactJson src={my_important_data} />
+
+

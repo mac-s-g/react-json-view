@@ -5,9 +5,12 @@
 import React from "react";
 import ReactDom from "react-dom";
 
+import PrettyJson from './components/PrettyJson';
+
+console.log('WOWOWOW');
+
 const app = document.getElementById('app-container');
 
-import PrettyJson from './components/PrettyJson';
 
 let test_json = {
     test: 'this is a test string',

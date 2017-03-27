@@ -60,7 +60,7 @@ const config = {
             loader: 'babel-loader',
             options: {
               presets: [
-                'babel-preset-latest',
+                'babel-preset-es2015',
                 'babel-preset-react',
                 'babel-preset-stage-0'
               ].map(require.resolve),

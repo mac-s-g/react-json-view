@@ -1,4 +1,4 @@
-# react-pretty-json
+# react-json-viewer
 interactive json viewer wrapped up in a react component
 
 ## Working with the source code:

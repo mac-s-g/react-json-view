@@ -9,10 +9,10 @@ export default class extends React.Component {
     }
 
     render = () => {
-        const {props} = this;
+        const {name, ...rest} = this.props;
         return (
         <div class="pretty-json-container">
-            <JsonObject {...props}></JsonObject>
+            <JsonObject name='root' {...rest}></JsonObject>
         </div>
         );
     }

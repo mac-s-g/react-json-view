@@ -4,11 +4,43 @@
     font-family: monospace;
     cursor: default;
 
-    .brace {
-        font-weight: bold;
-        color: $brace-color;
+    .brace-row {
+        display: inline-block;
+
+        >div {
+            display: inline-block;
+
+        }
+        &:hover {
+            .mdi {
+                color: $green;
+            }
+        }
+
+        .mdi {
+            color: $magenta;
+        }
+
+        .brace {
+            font-weight: bold;
+            color: $brace-color;
+        }
 
         &.open {
+            cursor: pointer;
+
+            .object-name {
+                color: $key-color;
+                letter-spacing: $key-letter-spacing;
+                padding: $key-padding;
+                font-style: $key-font-style;
+                border-radius: $key-border-radius;
+                vertical-align: top;
+            }
+
+            .object-colon {
+                margin-right: $key-margin;
+            }
 
         }
 
@@ -42,7 +74,6 @@
                         display: inline-block;
                         margin-right: $key-margin;
                         color: $key-color;
-                        // background-color: $key-background-color;
                         letter-spacing: $key-letter-spacing;
                         padding: $key-padding;
                         font-style: $key-font-style;
@@ -102,10 +133,17 @@
             }
 
         }
-
-
-        
+    
     }
 
+    .collapsed-elipsis {
+
+        display: inline-block;
+        letter-spacing: 0px;
+        color: $orange;
+        font-size: $collapsed-elipsis-font-size;
+        line-height: 10px;
+
+    }
     
 }

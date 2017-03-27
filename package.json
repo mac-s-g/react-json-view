@@ -29,7 +29,7 @@
     "html-webpack-plugin": "2.28.0",
     "ignore-styles": "^5.0.1",
     "jsdom": "^8.0.1",
-    "material-design-icons": "^3.0.1",
+    "mdi": "^1.8.36",
     "mocha": "^2.4.5",
     "node-sass": "^3.8.0",
     "react": "^15.4.2",
@@ -72,6 +72,8 @@
       "responsive",
       "interactive",
       "pretty"
+      "reactive",
+      "react-component"
   ],
   "license": "MIT",
   "author": "Mac Gainor",

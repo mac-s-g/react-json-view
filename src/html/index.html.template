@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>react-json-viewer</title>
     <meta charset="UTF-8">
     <!--[if lt IE 9]>
     <script>

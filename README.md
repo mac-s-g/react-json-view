@@ -1,6 +1,16 @@
 # react-json-viewer
 interactive json viewer wrapped up in a react component
 
+## Usage
+### Implementation Example:
+![alt text](https://github.com/mac-s-g/react-pretty-json/blob/master/docs/source-example.png?raw=true "Usage Example")
+
+### Output Example:
+![alt text](https://github.com/mac-s-g/react-pretty-json/blob/master/docs/output-example.png?raw=true "Output Example")
+
+## Customizing Style
+update or override `src/style/_variables.scss` to apply your own theme.
+
 ## Working with the source code:
 You can use Docker to run the source code in your browser:
   1. Clone this repo
@@ -20,16 +30,6 @@ Your source code will be mounted inside the docker container.  The container is 
 Webpack-dev-server is running in the container and hot-reloading when changes are made locally.
 
 All node modules are installed within the container, so make sure to rebuild your container if you make changes to package.json (see step 3, above).
-
-## Usage
-### Implementation Example:
-![alt text](https://github.com/mac-s-g/react-pretty-json/blob/master/docs/source-example.png?raw=true "Usage Example")
-
-### Output Example:
-![alt text](https://github.com/mac-s-g/react-pretty-json/blob/master/docs/output-example.png?raw=true "Output Example")
-
-## Customizing Style
-update or override `src/style/_variables.scss` to apply your own theme.
 
 ## ToDo's
 1. Add Tests!

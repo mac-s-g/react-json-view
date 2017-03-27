@@ -1,12 +1,13 @@
 # reactive-json
 interactive json viewer wrapped up in a react component
+object nodes can be collapsed and expanded.
 
 ## Usage
 ### Implementation Example:
 ![alt text](https://github.com/mac-s-g/reactive-json/blob/master/doc/source-example-2.png?raw=true "Usage Example")
 
 ### Output Example:
-![alt text](https://github.com/mac-s-g/reactive-json/blob/master/doc/output-example-2.png?raw=true "Output Example")
+![alt text](https://github.com/mac-s-g/reactive-json/blob/master/doc/output-example-3.png?raw=true "Output Example")
 
 ## Customizing Style
 update or override `src/style/_variables.scss` to apply your own theme.
@@ -51,4 +52,4 @@ case 'string':
     * add optional `depth` prop
     * consider moving to postcss
     * add a few different themes on top of `_variables.scss`
-4. add collapsed attributes to objects and support collapse / expand functionality
+4. add array component supports collapse and expand

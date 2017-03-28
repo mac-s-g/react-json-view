@@ -8,6 +8,7 @@ echo "Running with NODE_ENV=$NODE_ENV"
 docker run \
     --rm \
     -v $(pwd)/src:/react/src \
+    -v $(pwd)/example:/react/example \
     -v $(pwd)/test:/react/test \
     -e NODE_ENV=$NODE_ENV \
     --entrypoint=/bin/bash \

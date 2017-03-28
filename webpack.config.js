@@ -6,14 +6,15 @@ const PATHS = {
     src: path.join(__dirname, 'src'),
     js: path.join(__dirname, 'src/js'),
     style: path.join(__dirname, 'src/style'),
-    build_index: path.join(__dirname, 'dist'),
-    build_assets: path.join(__dirname, 'dist')
+    build: path.join(__dirname, 'dist'),
+    example: path.join(__dirname, 'example')
 };
 
+const entrypoint = process.env.NODE_ENV === 'local_example'
+  ? PATHS.example + '/example.js' : PATHS.js + '/index.js';
+
 const config = {
-  entry: [
-    PATHS.js + '/index.js',
-  ],
+  entry: [entrypoint],
   externals: {},
   devServer: {
     host: '0.0.0.0',
@@ -21,10 +22,10 @@ const config = {
     hot: true,
     inline: true,
     historyApiFallback: true,
-    contentBase: PATHS.build_index
+    contentBase: PATHS.build
   },
   output: {
-    path: PATHS.build_index,
+    path: PATHS.build,
     filename: 'main.js',
     library: 'reactJsonView',
     libraryTarget: 'var'
@@ -60,7 +61,7 @@ const config = {
             }
           }
         ],
-        include: PATHS.js
+        include: [PATHS.js, PATHS.example]
       },
       {
         test: /\.s?css(\?v=[0-9]\.[0-9]\.[0-9])?$/,

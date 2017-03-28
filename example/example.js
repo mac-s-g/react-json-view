@@ -5,10 +5,9 @@
 import React from "react";
 import ReactDom from "react-dom";
 
-import JsonViewer from './index';
+import JsonViewer from './../src/js/index';
 
 const app = document.getElementById('app-container');
-
 
 let test_json = {
     test: 'this is a test string',

@@ -10,28 +10,14 @@ const PATHS = {
     example: path.join(__dirname, 'example')
 };
 
+//example environment points at preloaded example
+//see: react-json-view/example/example.js
 const entrypoint = process.env.NODE_ENV === 'local_example'
   ? PATHS.example + '/example.js' : PATHS.js + '/index.js';
 
 const config = {
   entry: [entrypoint],
-  externals: {
-      react: {
-        root: 'React',
-        commonjs2: 'react',
-        commonjs: 'react',
-        amd: 'react'
-      }
-    },
-    {
-      'react-dom': {
-        root: 'ReactDOM',
-        commonjs2: 'react-dom',
-        commonjs: 'react-dom',
-        amd: 'react-dom'
-      }
-    },
-  },
+  externals: {},
   devServer: {
     host: '0.0.0.0',
     port: wds_port,
@@ -88,15 +74,7 @@ const config = {
         ]
       },
       {
-        test: /\.swf$/,
-        loader: "file-loader"
-      },
-      {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "url-loader?limit=10000&minetype=application/font-woff"
-      },
-      {
-        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        test: /\.(swf|woff(2)?|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: "file-loader"
       }
     ]

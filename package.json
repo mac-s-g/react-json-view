@@ -1,7 +1,7 @@
 {
   "name": "react-json-view",
   "description": "interactive json viewer wrapped up in a react component",
-  "version": "1.1.7",
+  "version": "1.1.11",
   "main": "dist/main.js",
   "devDependencies": {
     "babel-core": "^6.21.0",
@@ -29,7 +29,6 @@
     "html-webpack-plugin": "2.28.0",
     "ignore-styles": "^5.0.1",
     "jsdom": "^8.0.1",
-    "mdi": "^1.8.36",
     "mocha": "^2.4.5",
     "node-sass": "^3.8.0",
     "react": "^15.4.2",
@@ -47,6 +46,7 @@
     "webpack-dev-server": "^2.3.0"
   },
   "dependencies": {
+    "mdi": "^1.8.36"
   },
   "scripts": {
     "start": "node server.js",
@@ -54,7 +54,8 @@
     "testonly": "mocha $npm_package_options_mocha",
     "test": "npm run lint && npm run testonly",
     "test-watch": "npm run testonly -- --watch --watch-extensions js",
-    "dev:hot": "webpack-dev-server"
+    "dev:hot": "webpack-dev-server",
+    "prepublish": "./docker/prepublish.sh"
   },
   "repository": {
     "type": "git",

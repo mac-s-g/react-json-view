@@ -5,10 +5,6 @@ import JsonObject from './JsonObject';
 const DEPTH_OFFSET = 1
 
 export default class extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     state = {
         expanded: this.props.expanded === false ? false : true
     }
@@ -39,17 +35,17 @@ export default class extends React.Component {
     }
 
     render = () => {
-        const {depth, src, name, ...rest} = this.props; 
+        const {depth, src, name, ...rest} = this.props;
         const {expanded} = this.state;
         const expanded_class = expanded ? "expanded" : "collapsed";
         return (<div class="object-key-val">
             <div onClick={this.toggleExpanded} class="open brace-row">
                 <div class={"icon-container " + expanded_class}>
                     <i class={
-                        "mdi mdi-" 
-                        + (expanded ? 'minus' : 'plus') 
+                        "mdi mdi-"
+                        + (expanded ? 'minus' : 'plus')
                         + "-circle-outline"
-                    }></i>    
+                    }></i>
                 </div>
                 <div class="object-name">{
                     (name ? name : '')
@@ -57,8 +53,8 @@ export default class extends React.Component {
                 <div class="object-colon">:</div>
                 <div class="brace">{'{'}</div>
             </div>
-            {expanded 
-                ? this.getObjectContent(depth, src, rest) 
+            {expanded
+                ? this.getObjectContent(depth, src, rest)
                 : this.getElipsis(expanded)
             }
             <div class="close brace-row">
@@ -76,11 +72,11 @@ export default class extends React.Component {
             if (variable.type == 'object') {
                 elements.push(
                     <JsonObject key={variable.name}
-                        depth={depth + 1} 
+                        depth={depth + 1}
                         name={variable.name}
-                        src={variable.value} 
+                        src={variable.value}
                         {...props}
-                    />); 
+                    />);
             } else {
                 elements.push(<div class="object-key-val" key={variable.name}>
                     <div class="object-key">
@@ -88,7 +84,7 @@ export default class extends React.Component {
                         <div class="key-colon">:</div>
                     </div>
                     {getValue(variable)}
-                </div>);                
+                </div>);
             }
         }
         return elements;
@@ -99,7 +95,7 @@ export default class extends React.Component {
             switch (variable.type) {
                 case 'string':
                     return <div class="object-value string">
-                        <span class="data-type">string</span> 
+                        <span class="data-type">string</span>
                         {variable.value}
                     </div>;
 
@@ -118,20 +114,20 @@ export default class extends React.Component {
                 case 'boolean':
                     if (variable.value) {
                         return <div class="object-value boolean">
-                            <span class="data-type">boolean</span> 
+                            <span class="data-type">boolean</span>
                             True
                         </div>;
 
                     } else {
                         return <div class="object-value boolean">
-                            <span class="data-type">boolean</span> 
+                            <span class="data-type">boolean</span>
                             False
                         </div>;
 
                     }
                 case 'function':
                     return <div class="object-value function">
-                        <span class="data-type">function</span> 
+                        <span class="data-type">function</span>
                         {variable.value.toString().slice(9, -1)}
                     </div>;
 
@@ -148,7 +144,7 @@ export default class extends React.Component {
                 default:
                     return <div class="object-value">
                         {variable.value}
-                    </div>;   
+                    </div>;
             }
         }
     }
@@ -160,5 +156,5 @@ class JsonVariable {
         this.name = name;
         this.value = value;
         this.type = toType(value);
-    } 
+    }
 }

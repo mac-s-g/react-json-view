@@ -6,41 +6,28 @@ const PATHS = {
     src: path.join(__dirname, 'src'),
     js: path.join(__dirname, 'src/js'),
     style: path.join(__dirname, 'src/style'),
-    build_index: path.join(__dirname, 'build'),
-    build_assets: path.join(__dirname, 'build/assets')
+    build_index: path.join(__dirname, 'dist'),
+    build_assets: path.join(__dirname, 'dist')
 };
 
 const config = {
   entry: [
-    // activate HMR for React
-    'react-hot-loader/patch',
-    // bundle the client for webpack-dev-server
-    // and connect to the provided endpoint
-    'webpack-dev-server/client?http://localhost:' + wds_port,
-    // bundle the client for hot reloading
-    // only- means to only hot reload for successful updates
-    'webpack/hot/only-dev-server',
-    // the entry point of our app
-    PATHS.js + '/entry.js',
+    PATHS.js + '/index.js',
   ],
-  externals: {
-    'react/addons': true,
-    'react/lib/ExecutionEnvironment': true,
-    'react/lib/ReactContext': true
-  },
+  externals: {},
   devServer: {
     host: '0.0.0.0',
     port: wds_port,
     hot: true,
     inline: true,
     historyApiFallback: true,
-    contentBase: PATHS.build_index,
-    publicPath: '/assets/'
+    contentBase: PATHS.build_index
   },
   output: {
-      path: PATHS.build_assets,
-      filename: 'build.js',
-      publicPath: '/assets/'
+    path: PATHS.build_index,
+    filename: 'main.js',
+    library: 'reactJsonView',
+    libraryTarget: 'var'
   },
   plugins: [
     new webpack.EnvironmentPlugin(['NODE_ENV']),
@@ -83,17 +70,17 @@ const config = {
           "sass-loader",
         ]
       },
-      { 
-        test: /\.swf$/, 
-        loader: "file-loader" 
+      {
+        test: /\.swf$/,
+        loader: "file-loader"
       },
-      { 
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: "url-loader?limit=10000&minetype=application/font-woff"
       },
-      { 
-        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
-        loader: "file-loader" 
+      {
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "file-loader"
       }
     ]
   }

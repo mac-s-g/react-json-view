@@ -1,14 +1,11 @@
 //app entrypoint
 "use strict";
 
-//material design icons
-require("mdi/css/materialdesignicons.min.css");
-
 //REACT
 import React from "react";
 import ReactDom from "react-dom";
 
-import JsonViewer from './components/JsonViewer';
+import JsonViewer from './index';
 
 const app = document.getElementById('app-container');
 

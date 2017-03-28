@@ -1,9 +1,6 @@
 //app entrypoint
 "use strict";
 
-//material design icons
-require("mdi/css/materialdesignicons.min.css");
-
 //REACT
 import React from "react";
 import ReactDom from "react-dom";

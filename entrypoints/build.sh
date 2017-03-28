@@ -1,26 +1,27 @@
 #!/bin/bash
-# Builds output files
+# builds component output files
 
 export NODE_ENV=${NODE_ENV:-local}
 
-echo Building react site...
+echo Building react app...
 
-# remove build files if they exist,
-# otherwise create the build directory
-if [ -d /react/build ]; then
-    echo Removing build artifacts
-    rm -rf /react/build/*
+# remove dist files if they exist,
+# otherwise create the dist directory
+if [ -d /react/dist ]; then
+    echo Removing dist artifacts
+    rm -rf /react/dist/*
 else
-    echo Creating build directory
-    mkdir /react/build
+    echo Creating dist directory
+    mkdir /react/dist
 fi
 
-# copy over the index.html file
-cp /react/src/html/index.html.template /react/build/index.html
+# copy over the index.html file for functional test
+cp /react/src/html/test-dist.html.template /react/dist/test.html
 
-# now, build the site
+# now, build the app
 cd /react
 npm run build
 
-# ... and copy them to where nginx can serve them up
-cp -a /react/build /build
+# ... and copy files for dist
+cp -a /react/dist /dist
+echo Copied distribution to /dist

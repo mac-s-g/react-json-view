@@ -3,7 +3,7 @@
 
 export NODE_ENV=${NODE_ENV:-local}
 
-echo Building react site...
+echo Building react app...
 
 # remove dist files if they exist,
 # otherwise create the dist directory
@@ -16,7 +16,7 @@ else
 fi
 
 # copy over the index.html file for functional test
-cp /react/src/html/test-dist.html.template /react/dist/index.html
+cp /react/src/html/test-dist.html.template /react/dist/test.html
 
 # now, build the app
 cd /react
@@ -24,3 +24,4 @@ npm run build
 
 # ... and copy files for dist
 cp -a /react/dist /dist
+echo Copied distribution to /dist

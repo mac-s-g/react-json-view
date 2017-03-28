@@ -15,7 +15,23 @@ const entrypoint = process.env.NODE_ENV === 'local_example'
 
 const config = {
   entry: [entrypoint],
-  externals: {},
+  externals: {
+      react: {
+        root: 'React',
+        commonjs2: 'react',
+        commonjs: 'react',
+        amd: 'react'
+      }
+    },
+    {
+      'react-dom': {
+        root: 'ReactDOM',
+        commonjs2: 'react-dom',
+        commonjs: 'react-dom',
+        amd: 'react-dom'
+      }
+    },
+  },
   devServer: {
     host: '0.0.0.0',
     port: wds_port,
@@ -28,7 +44,7 @@ const config = {
     path: PATHS.build,
     filename: 'main.js',
     library: 'reactJsonView',
-    libraryTarget: 'var'
+    libraryTarget: 'umd'
   },
   plugins: [
     new webpack.EnvironmentPlugin(['NODE_ENV']),

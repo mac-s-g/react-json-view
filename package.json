@@ -2,7 +2,8 @@
   "name": "react-json-view",
   "description": "interactive json viewer wrapped up in a react component",
   "version": "1.1.4",
-  "main": "src/js/JsonObject.js",
+  "main": "dist/main.js",
+  "module": "src/js/index.js",
   "devDependencies": {
     "babel-core": "^6.21.0",
     "babel-eslint": "~7.1.1",
@@ -25,7 +26,7 @@
     "eslint-plugin-babel": "~4.0.1",
     "eslint-plugin-react": "^6.9.0",
     "file-loader": "^0.9.0",
-    "flux": "^2.1.1",    
+    "flux": "^2.1.1",
     "html-webpack-plugin": "2.28.0",
     "ignore-styles": "^5.0.1",
     "jsdom": "^8.0.1",

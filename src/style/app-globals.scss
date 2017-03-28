@@ -1,6 +1,6 @@
 @import '_variables';
 
-.pretty-json-container {
+.react-json-view{
     font-family: monospace;
     cursor: default;
 
@@ -162,7 +162,7 @@
             }
 
         }
-    
+
     }
 
     .collapsed-elipsis {
@@ -174,5 +174,5 @@
         line-height: 10px;
 
     }
-    
+
 }

@@ -14,7 +14,7 @@ This component provides a responsive interface for displaying JSON in a web brow
 ### Implementation Example:
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/source-example-5.png?raw=true "Usage Example")
 
-### Intallation
+### Intallation Instructions
 Install this package with npm:
 ```
 npm install --save react-json-view

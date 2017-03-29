@@ -6,14 +6,17 @@ const PATHS = {
     src: path.join(__dirname, 'src'),
     js: path.join(__dirname, 'src/js'),
     style: path.join(__dirname, 'src/style'),
-    build_index: path.join(__dirname, 'dist'),
-    build_assets: path.join(__dirname, 'dist')
+    build: path.join(__dirname, 'dist'),
+    example: path.join(__dirname, 'example')
 };
 
+//example environment points at preloaded example
+//see: react-json-view/example/example.js
+const entrypoint = process.env.NODE_ENV === 'local_example'
+  ? PATHS.example + '/example.js' : PATHS.js + '/index.js';
+
 const config = {
-  entry: [
-    PATHS.js + '/index.js',
-  ],
+  entry: [entrypoint],
   externals: {},
   devServer: {
     host: '0.0.0.0',
@@ -21,13 +24,13 @@ const config = {
     hot: true,
     inline: true,
     historyApiFallback: true,
-    contentBase: PATHS.build_index
+    contentBase: PATHS.build
   },
   output: {
-    path: PATHS.build_index,
+    path: PATHS.build,
     filename: 'main.js',
     library: 'reactJsonView',
-    libraryTarget: 'var'
+    libraryTarget: 'umd'
   },
   plugins: [
     new webpack.EnvironmentPlugin(['NODE_ENV']),
@@ -60,7 +63,7 @@ const config = {
             }
           }
         ],
-        include: PATHS.js
+        include: [PATHS.js, PATHS.example]
       },
       {
         test: /\.s?css(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -71,15 +74,7 @@ const config = {
         ]
       },
       {
-        test: /\.swf$/,
-        loader: "file-loader"
-      },
-      {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "url-loader?limit=10000&minetype=application/font-woff"
-      },
-      {
-        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        test: /\.(swf|woff(2)?|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: "file-loader"
       }
     ]

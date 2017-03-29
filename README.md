@@ -7,6 +7,18 @@ Interactive JSON display wrapped up in a react component.
 ## Implementation Example:
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/source-example-5.png?raw=true "Usage Example")
 
+## Intallation
+Install this package with npm:
+```
+npm install --save react-json-view
+```
+Or add to your package.json config file:
+```
+"dependencies": {
+    "react-json-view": "latest"
+}
+```
+
 ## Features
 * Object nodes can be collapsed and expanded
 * Different classes are applied to different types for style interaction.

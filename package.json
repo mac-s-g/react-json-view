@@ -1,8 +1,11 @@
 {
   "name": "react-json-view",
   "description": "interactive json viewer wrapped up in a react component",
-  "version": "1.1.6",
+  "version": "1.1.12",
   "main": "dist/main.js",
+  "files": [
+    "dist/"
+  ],
   "devDependencies": {
     "babel-core": "^6.21.0",
     "babel-eslint": "~7.1.1",
@@ -28,18 +31,16 @@
     "flux": "^2.1.1",
     "html-webpack-plugin": "2.28.0",
     "ignore-styles": "^5.0.1",
-    "jsdom": "^8.0.1",
-    "mdi": "^1.8.36",
     "mocha": "^2.4.5",
     "node-sass": "^3.8.0",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-test-utils": "^15.4.1",
-    "react-css-themr":"2.0.0",
+    "react-css-themr": "2.0.0",
     "react-dom": "^15.4.2",
     "react-hot-loader": "^3.0.0-beta.6",
-    "react-style-proptype":"^2.0.1",
-    "resolve-url-loader":"1.6.1",
+    "react-style-proptype": "^2.0.1",
+    "resolve-url-loader": "1.6.1",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
@@ -47,6 +48,7 @@
     "webpack-dev-server": "^2.3.0"
   },
   "dependencies": {
+    "mdi": "^1.8.36"
   },
   "scripts": {
     "start": "node server.js",
@@ -54,29 +56,34 @@
     "testonly": "mocha $npm_package_options_mocha",
     "test": "npm run lint && npm run testonly",
     "test-watch": "npm run testonly -- --watch --watch-extensions js",
-    "dev:hot": "webpack-dev-server"
+    "dev:hot": "webpack-dev-server",
+    "prepublish": "./docker/prepublish.sh"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/mac-s-g/react-json-view.git"
   },
   "keywords": [
-      "react-component",
-      "react",
-      "json-viewer",
-      "pretty-print",
-      "responsive-json",
-      "interactive-json",
-      "json",
-      "viewer",
-      "responsive",
-      "interactive",
-      "pretty",
-      "react-component"
+    "component",
+    "interactive",
+    "interactive-json",
+    "json",
+    "json-component",
+    "json-display",
+    "json-view",
+    "json-viewer",
+    "pretty",
+    "pretty-print",
+    "react",
+    "reactjs",
+    "react-component"
+    "responsive",
+    "responsive-json",
+    "view",
+    "viewer",
   ],
   "license": "MIT",
   "author": "Mac Gainor",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/mac-s-g/react-json-view/issues"
   },

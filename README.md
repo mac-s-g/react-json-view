@@ -1,6 +1,8 @@
 # react-json-view
 Interactive JSON display wrapped up in a react component.
 
+This component provides a responsive interface for displaying JSON in a web browser.  NPM offers a distribution of this source that's transpiled to ES5; so you can include this component with *any javascript application*.
+
 ## Example Component Display:
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-3.png?raw=true "Output Example")
 
@@ -27,7 +29,7 @@ Or add to your package.json config file:
 update or override `src/style/_variables.scss` to apply your own theme.
 
 ## Working with the source code:
-You can use Docker to run the source code in your browser:
+You can use Docker to run the source code in a local development environment:
   1. Clone this repo
   2. Make sure docker is installed
   3. Build the docker image

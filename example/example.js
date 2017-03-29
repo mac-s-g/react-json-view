@@ -1,8 +1,6 @@
 //app entrypoint
 "use strict";
 
-console.log('FOUND EXAMPLE');
-
 //REACT
 import React from "react";
 import ReactDom from "react-dom";
@@ -72,5 +70,34 @@ function getExample1() {
 }
 
 function getExample2() {
-    return {"normalized":{"1-grams":{"body":1,"testing":1},"2-grams":{"testing body":1},"3-grams":{}},"noun_phrases":{"body":1},"lemmatized":{"1-grams":{"test":1,"body":1},"2-grams":{"test body":1},"3-grams":{}},"dependency":{"1-grams":{"testingVERBROOTtestingVERB":1,"bodyNOUNdobjtestingVERB":1},"2-grams":{"testingVERBROOTtestingVERB bodyNOUNdobjtestingVERB":1},"3-grams":{}}};
+    return {"normalized":{
+        "1-grams":{
+            "body":1,
+            "testing":1
+        },
+        "2-grams":{
+            "testing body":1
+        },
+        "3-grams":{}
+        },
+        "noun_phrases":{
+            "body":1
+        },"lemmatized":{
+            "1-grams":{
+                "test":1,
+                "body":1
+            },"2-grams":{
+                "test body":1
+            },"3-grams":{}
+        },"dependency":{
+            "1-grams":{
+                "testingVERBROOTtestingVERB":1,
+                "bodyNOUNdobjtestingVERB":1
+            },
+            "2-grams":{
+                "testingVERBROOTtestingVERB bodyNOUNdobjtestingVERB":1
+            },"3-grams":{}
+        }
+    };
 }
+

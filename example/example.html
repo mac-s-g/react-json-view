@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>react-json-view</title>
+    <meta charset="UTF-8">
+    <!--[if lt IE 9]>
+    <script>
+    (function(){
+      var ef = function(){};
+      window.console = window.console || {log:ef,warn:ef,error:ef,dir:ef};
+    }());
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv-printshiv.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-sham.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  <div id="app-container"></div>
+  <script src="https://unpkg.com/react@15/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+  <script src="https://unpkg.com/react-json-view/dist/main.js"></script>
+  <link href="css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
+  <script type="text/javascript">
+      var test_json = {
+          test: 'this is a test string',
+          sibling: 'sibling_string',
+          another_sibling: 45,
+          basic_array: [1, 2, 3],
+          how_will_array_do: [1, 2, 3, 'test'],
+          how_will_floats_do: -2.757,
+          parent: {
+              sibling1: true,
+              sibling2: false,
+              "sibling2.5": ['first', {'second': true}, [4, 5, 'sixth']],
+              sibling3: null,
+              sibling4: 'test',
+              'last-sibling': {
+                  grand_child: NaN,
+                  'grand-child-func': (a) => {
+                      let b = a*a;
+                      return a.push(b);
+                  }
+              }
+          },
+          number: 1234
+      };
+
+      // reactJsonView is a global variable
+      var jsonView = new reactJsonView.default({
+        src: test_json
+      });
+      ReactDOM.render(
+        jsonView.render(),
+        document.getElementById('app-container')
+      );
+  </script>
+  </body>
+</html>

@@ -14,7 +14,7 @@ ReactDom.render(
         <JsonViewer src={getExampleJson1()} />
         <JsonViewer src={getExampleJson2()} />
     </div>,
-    app
+    document.getElementById('app-container')
 );
 
 //just a function to get an example JSON object

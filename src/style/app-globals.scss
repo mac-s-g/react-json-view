@@ -55,7 +55,7 @@
             color: $brace-color;
         }
 
-        &.open {
+        &.open-brace {
             cursor: pointer;
 
             .object-name {
@@ -73,7 +73,7 @@
 
         }
 
-        &.close {
+        &.close-brace {
 
         }
 

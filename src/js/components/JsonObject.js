@@ -39,7 +39,7 @@ export default class extends React.Component {
         const {expanded} = this.state;
         const expanded_class = expanded ? "expanded" : "collapsed";
         return (<div class="object-key-val">
-            <div onClick={this.toggleExpanded} class="open brace-row">
+            <div onClick={this.toggleExpanded} class="open-brace brace-row">
                 <div class={"icon-container " + expanded_class}>
                     <i class={
                         "mdi mdi-"
@@ -57,7 +57,7 @@ export default class extends React.Component {
                 ? this.getObjectContent(depth, src, rest)
                 : this.getElipsis(expanded)
             }
-            <div class="close brace-row">
+            <div class="close-brace brace-row">
             <div class="brace">{'}'}</div>
             </div>
         </div>);

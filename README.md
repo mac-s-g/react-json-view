@@ -1,15 +1,20 @@
 # react-json-view
 Interactive JSON display wrapped up in a react component.
 
-This component provides a responsive interface for displaying JSON in a web browser.  NPM offers a distribution of this source that's transpiled to ES5; so you can include this component with *any javascript application*.
+This component provides a responsive interface for displaying JSON in a web browser.  NPM offers a distribution of the source that's transpiled to ES5; so you can include this component with *any javascript application*.
 
-## Example Component Display:
+  * Check out an [interactive demo here](http://htmlpreview.github.io/?https://raw.githubusercontent.com/mac-s-g/react-json-view/master/example/example.html).
+  * Check out a [React implementation example here](https://github.com/mac-s-g/react-json-view/blob/master/example/example.js).
+  * Check out an [ES5 implementation example here](https://github.com/mac-s-g/react-json-view/blob/master/example/example.html).
+  * [Installation instructions](https://github.com/mac-s-g/react-json-view#intallation) are listed below.
+
+### Example Component Display:
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-3.png?raw=true "Output Example")
 
-## Implementation Example:
+### Implementation Example:
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/source-example-5.png?raw=true "Usage Example")
 
-## Intallation
+### Intallation
 Install this package with npm:
 ```
 npm install --save react-json-view
@@ -21,14 +26,14 @@ Or add to your package.json config file:
 }
 ```
 
-## Features
+### Features
 * Object nodes can be collapsed and expanded
 * Different classes are applied to different types for style interaction.
 
-## Customizing Style
+### Customizing Style
 update or override `src/style/_variables.scss` to apply your own theme.
 
-## Working with the source code:
+### Working with the source code:
 You can use Docker to run the source code in a local development environment:
   1. Clone this repo
   2. Make sure docker is installed
@@ -48,7 +53,7 @@ Webpack-dev-server is running in the container and hot-reloading when changes ar
 
 All node modules are installed within the container, so make sure to rebuild your container if you make changes to package.json (see step 3, above).
 
-## ToDo's
+### ToDo's
 1. Add Tests!
 2. move each data type into it's own component
 ```

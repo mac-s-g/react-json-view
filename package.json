@@ -82,7 +82,7 @@
     "view",
     "viewer",
   ],
-  "license": "ISC",
+  "license": "MIT",
   "author": "Mac Gainor",
   "bugs": {
     "url": "https://github.com/mac-s-g/react-json-view/issues"

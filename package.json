@@ -31,6 +31,7 @@
     "flux": "^2.1.1",
     "html-webpack-plugin": "2.28.0",
     "ignore-styles": "^5.0.1",
+    "mdi": "^1.8.36",
     "mocha": "^2.4.5",
     "node-sass": "^3.8.0",
     "react": "^15.4.2",
@@ -47,9 +48,7 @@
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0"
   },
-  "dependencies": {
-    "mdi": "^1.8.36"
-  },
+  "dependencies": {},
   "scripts": {
     "start": "node server.js",
     "build": "webpack --display-error-details --progress",

@@ -1,15 +1,12 @@
 import React from "react";
+
 import {toType} from './../../helpers/util';
+import {
+    JsonArray, JsonBoolean, JsonFunction, JsonNan,
+    JsonNull, JsonNumber, JsonObject, JsonString
+} from './DataTypes';
 
-import JsonObject from './Object';
-import JsonArray from './Array';
-import JsonString from './String';
-import JsonNumber from './Number';
-import JsonBoolean from './Boolean';
-import JsonFunction from './Function';
-import JsonNull from './Null';
-import JsonNan from './Nan';
-
+//icons
 import CirclePlus from 'react-icons/lib/md/add-circle-outline';
 import CircleMinus from 'react-icons/lib/md/remove-circle-outline';
 

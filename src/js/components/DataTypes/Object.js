@@ -1,6 +1,14 @@
 import React from "react";
-import {toType} from './../helpers/util';
-import JsonObject from './JsonObject';
+import {toType} from './../../helpers/util';
+
+import JsonObject from './Object';
+import JsonArray from './Array';
+import JsonString from './String';
+import JsonNumber from './Number';
+import JsonBoolean from './Boolean';
+import JsonFunction from './Function';
+import JsonNull from './Null';
+import JsonNan from './Nan';
 
 import CirclePlus from 'react-icons/lib/md/add-circle-outline';
 import CircleMinus from 'react-icons/lib/md/remove-circle-outline';
@@ -96,61 +104,24 @@ export default class extends React.Component {
         return elements;
 
         function getValue(variable) {
-            //TODO put each of these into their own components
-            //eg: <JsonString>{value}</JsonString>
             switch (variable.type) {
                 case 'string':
-                    return <div class="object-value string">
-                        <span class="data-type">string</span>
-                        {variable.value}
-                    </div>;
-
+                    return <JsonString value={variable.value} />;
                 case 'number':
-                    return <div class="object-value number">
-                        <span class="data-type">number</span>
-                        {variable.value}
-                    </div>;
-
+                    return <JsonNumber value={variable.value} />;
                 case 'array':
-                    return <div class="object-value array">
-                        <span class="data-type">array</span>
-                        [{variable.value.toString()}]
-                    </div>;
-
+                    return <JsonArray value={variable.value} />;
                 case 'boolean':
-                    if (variable.value) {
-                        return <div class="object-value boolean">
-                            <span class="data-type">boolean</span>
-                            True
-                        </div>;
-
-                    } else {
-                        return <div class="object-value boolean">
-                            <span class="data-type">boolean</span>
-                            False
-                        </div>;
-
-                    }
+                    return <JsonBoolean value={variable.value} />;
                 case 'function':
-                    return <div class="object-value function">
-                        <span class="data-type">function</span>
-                        {variable.value.toString().slice(9, -1)}
-                    </div>;
-
+                    return <JsonFunction value={variable.value} />;
                 case 'null':
-                    return <div class="object-value null">
-                        NULL
-                    </div>;
-
+                    return <JsonNull />;
                 case 'nan':
-                    return <div class="object-value nan">
-                        NaN
-                    </div>;
-
+                    return <JsonNan />;
                 default:
-                    return <div class="object-value">
-                        {variable.value}
-                    </div>;
+                    //catch-all for types that weren't anticipated
+                    return <div class="object-value">{variable.value}</div>;
             }
         }
     }

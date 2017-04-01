@@ -43,9 +43,9 @@ cd react-json-view
 npm install
 ```
   3. Run webpack to start webpack-dev-server with hot-reloading enabled
-    * `npm run dev:hot`
+      * `npm run dev:hot`
   4. Open port 2000 in your browser
-    * navigate to localhost:2000
+      * navigate to localhost:2000
 
 #### Development within a Docker Container
 *Note:* This workflow is recommended for developers using a linux OS.  Mounting files into a docker container may have issues if you're running docker within a Windows OS.
@@ -54,14 +54,14 @@ You can use Docker to run the source code in a local development environment:
   1. Clone this repo
   2. Make sure docker is installed
   3. Build the docker image
-    * `docker build -t react-json-view .`
-    * *note:* you may need to use `sudo` to run docker commands
+      * `docker build -t react-json-view .`
+      * *note:* you may need to use `sudo` to run docker commands
   4. Run the docker container on port 2000.  This will run the webpack-dev-server with hot-reloading enabled.
-    * `cd react-json-view`
-    * `./docker/server.sh`
-    * *note:* you may need to use `sudo` to run the server file
+      * `cd react-json-view`
+      * `./docker/server.sh`
+      * *note:* you may need to use `sudo` to run the server file
   5. Open port 2000 in your browser
-    * navigate to localhost:2000
+      * navigate to localhost:2000
 
 Your source code will be mounted inside the docker container.  The container is built on the standard Node image.
 

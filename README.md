@@ -42,9 +42,9 @@ update or override `src/style/_variables.scss` to apply your own theme.
 cd react-json-view
 npm install
 ```
-  3. run webpack to start webpack-dev-server with hot-reloading enabled
+  3. Run webpack to start webpack-dev-server with hot-reloading enabled
     * `npm run dev:hot`
-  4. open port 2000 in your browser
+  4. Open port 2000 in your browser
     * navigate to localhost:2000
 
 #### Development within a Docker Container
@@ -60,7 +60,7 @@ You can use Docker to run the source code in a local development environment:
     * `cd react-json-view`
     * `./docker/server.sh`
     * *note:* you may need to use `sudo` to run the server file
-  5. open port 2000 in your browser
+  5. Open port 2000 in your browser
     * navigate to localhost:2000
 
 Your source code will be mounted inside the docker container.  The container is built on the standard Node image.

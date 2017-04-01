@@ -158,6 +158,48 @@
 
     }
 
+    .object-container {
+
+        .object-meta-data {
+            -webkit-transition: all 0.1s ease-out;
+            -moz-transition: all 0.1s ease-out;
+            -o-transition: all 0.1s ease-out;
+            -ms-transition: all 0.1s ease-out;
+            transition: all 0.1s ease-out;
+
+            display: inline-block;
+            opacity: 0;
+            padding-left: 10px;
+            float: right;
+
+            >* {
+                margin-right: 5px;
+            }
+
+            .object-size {
+                background-color: $blue;
+                opacity: 0.3;
+                color: $white;
+                padding: 1px 3px;
+                border-radius: 3px;
+            }
+
+        }
+
+        .object-meta-data {
+        }
+
+        .object-key-val:hover {
+
+            >div >.object-meta-data {
+                opacity: 1;
+
+            }
+
+        }
+
+    }
+
     .collapsed-elipsis {
 
         display: inline-block;

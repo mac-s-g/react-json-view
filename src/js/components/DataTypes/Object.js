@@ -30,7 +30,7 @@ export default class extends React.Component {
     }
 
     getObjectContent = (depth, src, props) => {
-        return (<div class="pushed-content">
+        return (<div class="pushed-content object-container">
             <div class="push">{this.renderPush(depth)}</div>
             <div class="object-content">
                 {this.renderObjectConents(src, props)}
@@ -38,7 +38,7 @@ export default class extends React.Component {
         </div>);
     }
 
-    getElipsis(expanded) {
+    getElipsis = (expanded) => {
         return (
             <div class="collapsed-elipsis" onClick={this.toggleExpanded}>
                 ...
@@ -46,11 +46,21 @@ export default class extends React.Component {
         );
     }
 
+    getObjectMetaData = (src) => {
+        const size = Object.keys(src).length;
+        return (
+        <div class="object-meta-data">
+            <span class="object-size">
+                {size} item{size > 1 ? 's' : ''}
+            </span>
+        </div>
+        );
+    }
+
     render = () => {
         const {depth, src, name, ...rest} = this.props;
         const {expanded} = this.state;
         const expanded_class = expanded ? "expanded" : "collapsed";
-
         const expanded_icon = expanded ? <CircleMinus /> : <CirclePlus />;
 
         return (<div class="object-key-val">
@@ -63,13 +73,15 @@ export default class extends React.Component {
                 }</div>
                 <div class="object-colon">:</div>
                 <div class="brace">{'{'}</div>
+                {expanded ? this.getObjectMetaData(src) : null}
             </div>
             {expanded
                 ? this.getObjectContent(depth, src, rest)
                 : this.getElipsis(expanded)
             }
             <div class="close-brace brace-row">
-            <div class="brace">{'}'}</div>
+                <div class="brace">{'}'}</div>
+                {expanded ? null : this.getObjectMetaData(src)}
             </div>
         </div>);
     }

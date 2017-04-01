@@ -12,6 +12,7 @@ ReactDom.render(
     <div>
         {/* just pass in your JSON to the src attribute */}
         <JsonViewer src={getExampleJson1()} />
+        <br />
         <JsonViewer src={getExampleJson2()} />
     </div>,
     document.getElementById('app-container')

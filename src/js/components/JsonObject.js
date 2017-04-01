@@ -2,6 +2,9 @@ import React from "react";
 import {toType} from './../helpers/util';
 import JsonObject from './JsonObject';
 
+import CirclePlus from 'react-icons/lib/md/add-circle-outline';
+import CircleMinus from 'react-icons/lib/md/remove-circle-outline';
+
 const DEPTH_OFFSET = 1
 
 export default class extends React.Component {
@@ -38,14 +41,13 @@ export default class extends React.Component {
         const {depth, src, name, ...rest} = this.props;
         const {expanded} = this.state;
         const expanded_class = expanded ? "expanded" : "collapsed";
+
+        const expanded_icon = expanded ? <CircleMinus /> : <CirclePlus />;
+
         return (<div class="object-key-val">
             <div onClick={this.toggleExpanded} class="open-brace brace-row">
                 <div class={"icon-container " + expanded_class}>
-                    <i class={
-                        "mdi mdi-"
-                        + (expanded ? 'minus' : 'plus')
-                        + "-circle-outline"
-                    }></i>
+                    {expanded_icon /*mdi icon*/}
                 </div>
                 <div class="object-name">{
                     (name ? name : '')

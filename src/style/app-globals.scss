@@ -177,11 +177,12 @@
             }
 
             .object-size {
-                background-color: $blue;
-                opacity: 0.3;
+                background-color: $black;
+                opacity: 0.2;
                 color: $white;
-                padding: 1px 3px;
+                padding: 0px 3px;
                 border-radius: 3px;
+                font-style: italic;
             }
 
         }

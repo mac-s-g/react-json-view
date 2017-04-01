@@ -55,8 +55,7 @@
     "testonly": "mocha $npm_package_options_mocha",
     "test": "npm run lint && npm run testonly",
     "test-watch": "npm run testonly -- --watch --watch-extensions js",
-    "dev:hot": "webpack-dev-server",
-    "prepublish": "./docker/prepublish.sh"
+    "dev:hot": "webpack-dev-server"
   },
   "repository": {
     "type": "git",

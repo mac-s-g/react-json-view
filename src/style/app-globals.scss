@@ -75,10 +75,21 @@
                 .object-key-val {
                     border-left: 1px solid rgba(0, 0, 0, 0.1);
                     padding: 3px 5px;
+                    position: relative;
 
                     &:hover {
-                        padding-left: 4px;
-                        border-left: 2px solid rgba(0, 0, 0, 0.2);
+
+                        &:before {
+                            content: '';
+                            position: absolute;
+                            left: -1px;
+                            top: 0px;
+                            bottom: 0px;
+                            width: 2px;
+                            background-color: #ccc;
+                            border-radius: 0px 2px 2px 0px;
+
+                        }
                     }
 
                     .object-key {
@@ -154,6 +165,7 @@
         color: $orange;
         font-size: $collapsed-elipsis-font-size;
         line-height: 10px;
+        cursor: pointer;
 
     }
 

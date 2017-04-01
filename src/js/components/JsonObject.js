@@ -34,7 +34,11 @@ export default class extends React.Component {
     }
 
     getElipsis(expanded) {
-        return (<div class="collapsed-elipsis">...</div>);
+        return (
+            <div class="collapsed-elipsis" onClick={this.toggleExpanded}>
+                ...
+            </div>
+        );
     }
 
     render = () => {

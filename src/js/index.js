@@ -1,5 +1,5 @@
 import React from 'react';
-import JsonObject from './components/JsonObject';
+import JsonViewer from './components/JsonViewer';
 
 //global style
 //TODO make this theme customizable
@@ -11,7 +11,7 @@ export default class extends React.Component {
     render() {
         const {props} = this;
         return (<div class="react-json-view">
-            <JsonObject {...props} />
+            <JsonViewer {...props} />
         </div>);
     }
 }

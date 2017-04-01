@@ -1,5 +1,5 @@
 import React from "react";
-import JsonObject from './JsonObject';
+import JsonObject from './DataTypes/Object';
 
 require('./../../style/app-globals.scss');
 

@@ -1,0 +1,52 @@
+@import '_variables';
+
+.react-json-view{
+
+    .object-container {
+
+        .object-meta-data {
+            -webkit-transition: all 0.1s ease-out;
+            -moz-transition: all 0.1s ease-out;
+            -o-transition: all 0.1s ease-out;
+            -ms-transition: all 0.1s ease-out;
+            transition: all 0.1s ease-out;
+
+            display: inline-block;
+            opacity: 0;
+            padding-left: 10px;
+            float: right;
+            cursor: default;
+
+            >* {
+                margin-right: 5px;
+                display: inline-block;
+            }
+
+            .object-size {
+                background-color: $black;
+                opacity: 0.2;
+                color: $white;
+                padding: 0px 3px;
+                border-radius: 3px;
+                font-style: italic;
+            }
+
+            .copy-to-clipboard {
+                cursor: pointer;
+                color: $blue;
+                position: relative;
+            }
+
+        }
+
+        .object-key-val:hover {
+
+            >div >.object-meta-data {
+                opacity: 1;
+            }
+
+        }
+
+    }
+
+}

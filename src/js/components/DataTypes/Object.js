@@ -5,6 +5,7 @@ import {
     JsonArray, JsonBoolean, JsonFunction, JsonNan,
     JsonNull, JsonNumber, JsonObject, JsonString
 } from './DataTypes';
+import VariableMeta from './../VariableMeta';
 
 //icons
 import CirclePlus from 'react-icons/lib/md/add-circle-outline';
@@ -49,11 +50,7 @@ export default class extends React.Component {
     getObjectMetaData = (src) => {
         const size = Object.keys(src).length;
         return (
-        <div class="object-meta-data">
-            <span class="object-size">
-                {size} item{size > 1 ? 's' : ''}
-            </span>
-        </div>
+            <VariableMeta size={size} src={src} />
         );
     }
 

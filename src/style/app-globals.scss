@@ -158,49 +158,6 @@
 
     }
 
-    .object-container {
-
-        .object-meta-data {
-            -webkit-transition: all 0.1s ease-out;
-            -moz-transition: all 0.1s ease-out;
-            -o-transition: all 0.1s ease-out;
-            -ms-transition: all 0.1s ease-out;
-            transition: all 0.1s ease-out;
-
-            display: inline-block;
-            opacity: 0;
-            padding-left: 10px;
-            float: right;
-
-            >* {
-                margin-right: 5px;
-            }
-
-            .object-size {
-                background-color: $black;
-                opacity: 0.2;
-                color: $white;
-                padding: 0px 3px;
-                border-radius: 3px;
-                font-style: italic;
-            }
-
-        }
-
-        .object-meta-data {
-        }
-
-        .object-key-val:hover {
-
-            >div >.object-meta-data {
-                opacity: 1;
-
-            }
-
-        }
-
-    }
-
     .collapsed-elipsis {
 
         display: inline-block;
@@ -210,6 +167,14 @@
         line-height: 10px;
         cursor: pointer;
 
+    }
+
+    .rjv-tooltip {
+        padding: 2px 8px;
+
+        &.hidden {
+            display: none;
+        }
     }
 
 }

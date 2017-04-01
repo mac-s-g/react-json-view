@@ -29,6 +29,7 @@ Or add to your package.json config file:
 ### Features
 * Object nodes can be collapsed and expanded
 * Object nodes display meta-data on hover
+* Object nodes include a "Copy to Clipboard" feature
 * Different classes are applied to different types for style interaction.
 
 ### Customizing Style

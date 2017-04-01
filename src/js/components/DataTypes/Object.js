@@ -6,8 +6,6 @@ import {
     JsonNull, JsonNumber, JsonObject, JsonString
 } from './DataTypes';
 
-console.log(JsonArray);
-
 //icons
 import CirclePlus from 'react-icons/lib/md/add-circle-outline';
 import CircleMinus from 'react-icons/lib/md/remove-circle-outline';

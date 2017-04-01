@@ -28,19 +28,35 @@ Or add to your package.json config file:
 
 ### Features
 * Object nodes can be collapsed and expanded
+* Object nodes display meta-data on hover
 * Different classes are applied to different types for style interaction.
 
 ### Customizing Style
 update or override `src/style/_variables.scss` to apply your own theme.
 
 ### Working with the source code:
+#### Standard Workflow
+  1. Clone this repo
+  2. Install npm dependencies
+```
+cd react-json-view
+npm install
+```
+  3. run webpack to start webpack-dev-server with hot-reloading enabled
+    * `npm run dev:hot`
+  4. open port 2000 in your browser
+    * navigate to localhost:2000
+
+#### Development within a Docker Container
+*Note:* This workflow is recommended for developers using a linux OS.  Mounting files into a docker container may have issues if you're running docker within a Windows OS.
+
 You can use Docker to run the source code in a local development environment:
   1. Clone this repo
   2. Make sure docker is installed
   3. Build the docker image
     * `docker build -t react-json-view .`
     * *note:* you may need to use `sudo` to run docker commands
-  4. Run the docker container on port 2000
+  4. Run the docker container on port 2000.  This will run the webpack-dev-server with hot-reloading enabled.
     * `cd react-json-view`
     * `./docker/server.sh`
     * *note:* you may need to use `sudo` to run the server file
@@ -55,22 +71,10 @@ All node modules are installed within the container, so make sure to rebuild you
 
 ### ToDo's
 1. Add Tests!
-2. move each data type into it's own component
-```
-case 'string':
-    return <div class="object-value string">
-        <span class="data-type">string</span>
-        {value}
-    </div>;
-```
-should become
-```
-case 'string':
-    return <PrettyString value={value} />;
-```
-
+2. improve array component:
+    * add expand/collapse
+    * add meta data display on hover
 3. improve customizability
     * add optional `depth` prop
     * consider moving to postcss
     * add a few different themes on top of `_variables.scss`
-4. add array component supports collapse and expand

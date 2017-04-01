@@ -21,12 +21,12 @@
 
             &.expanded {
                 svg {
-                    color: $cyan;
+                    color: $magenta;
                 }
             }
             &.collapsed {
                 svg {
-                    color: $magenta;
+                    color: $cyan;
                 }
             }
 

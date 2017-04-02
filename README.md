@@ -9,10 +9,10 @@ This component provides a responsive interface for displaying JSON in a web brow
   * [Installation instructions](#intallation-instructions) are listed below.
 
 ### Implementation Example:
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/source-example-5.png?raw=true "Usage Example")
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/source-example-7.png?raw=true "Usage Example")
 
 ### Example Component Display:
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-5.png?raw=true "Output Example")
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-6.png?raw=true "Output Example")
 
 ### Intallation Instructions
 Install this package with npm:
@@ -72,10 +72,10 @@ All node modules are installed within the container, so make sure to rebuild you
 
 ### ToDo's
 1. Add Tests!
-2. improve array component:
-    * add expand/collapse
-    * add meta data display on hover
-3. improve customizability
+2. Implement persistent state for expand/collapse attribute
+3. improve array component:
+    * style array keys differently than object keys
+4. improve customizability
     * add optional `depth` prop
     * consider moving to postcss
     * add a few different themes on top of `_variables.scss`

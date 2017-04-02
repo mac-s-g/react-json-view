@@ -2,8 +2,8 @@ import React from "react";
 
 import {toType} from './../../helpers/util';
 import {
-    JsonArray, JsonBoolean, JsonFunction, JsonNan,
-    JsonNull, JsonNumber, JsonObject, JsonString
+    JsonBoolean, JsonFunction, JsonNan, JsonNull,
+    JsonNumber, JsonObject, JsonString
 } from './DataTypes';
 import VariableMeta from './../VariableMeta';
 
@@ -55,7 +55,7 @@ export default class extends React.Component {
     }
 
     render = () => {
-        const {depth, src, name, ...rest} = this.props;
+        const {depth, src, name, type, ...rest} = this.props;
         const {expanded} = this.state;
         const expanded_class = expanded ? "expanded" : "collapsed";
         const expanded_icon = expanded ? <CircleMinus /> : <CirclePlus />;
@@ -69,7 +69,7 @@ export default class extends React.Component {
                     (name ? name : '')
                 }</div>
                 <div class="object-colon">:</div>
-                <div class="brace">{'{'}</div>
+                <div class="brace">{type == 'array' ? '[' : '{'}</div>
                 {expanded ? this.getObjectMetaData(src) : null}
             </div>
             {expanded
@@ -77,7 +77,7 @@ export default class extends React.Component {
                 : this.getElipsis(expanded)
             }
             <div class="close-brace brace-row">
-                <div class="brace">{'}'}</div>
+                <div class="brace">{type == 'array' ? ']' : '}'}</div>
                 {expanded ? null : this.getObjectMetaData(src)}
             </div>
         </div>);
@@ -95,6 +95,15 @@ export default class extends React.Component {
                         depth={depth + 1}
                         name={variable.name}
                         src={variable.value}
+                        {...props}
+                    />);
+            } else if (variable.type == 'array') {
+                elements.push(
+                    <JsonObject key={variable.name}
+                        depth={depth + 1}
+                        name={variable.name}
+                        src={variable.value}
+                        type="array"
                         {...props}
                     />);
             } else {
@@ -115,8 +124,6 @@ export default class extends React.Component {
                     return <JsonString value={variable.value} />;
                 case 'number':
                     return <JsonNumber value={variable.value} />;
-                case 'array':
-                    return <JsonArray value={variable.value} />;
                 case 'boolean':
                     return <JsonBoolean value={variable.value} />;
                 case 'function':

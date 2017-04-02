@@ -27,9 +27,9 @@ Or add to your package.json config file:
 ```
 
 ### Features
-* Object nodes can be collapsed and expanded
-* Object nodes display meta-data on hover
-* Object nodes include a "Copy to Clipboard" feature
+* Object and array nodes can be collapsed and expanded
+* Object and array nodes display meta-data on hover
+* Object and array nodes include a "Copy to Clipboard" feature
 * Different classes are applied to different types for style interaction.
 
 ### Customizing Style
@@ -70,7 +70,7 @@ Webpack-dev-server is running in the container and hot-reloading when changes ar
 
 All node modules are installed within the container, so make sure to rebuild your container if you make changes to package.json (see step 3, above).
 
-### ToDo's
+### To-Do's
 1. Add Tests!
 2. Implement persistent state for expand/collapse attribute
 3. improve array component:

@@ -47,6 +47,11 @@
                 font-style: $key-font-style;
                 border-radius: $key-border-radius;
                 vertical-align: top;
+                opacity: 0.9;
+
+                &:hover {
+                    opacity: 1;
+                }
             }
 
             .object-colon {
@@ -79,6 +84,10 @@
 
                     &:hover {
 
+                        >.object-key {
+                            opacity: 1;
+                        }
+
                         &:before {
                             content: '';
                             position: absolute;
@@ -101,11 +110,21 @@
                         font-style: $key-font-style;
                         border-radius: $key-border-radius;
                         vertical-align: top;
+                        opacity: 0.9;
+
+                        &.array {
+                            color: $array-key-color;
+                            .key-colon {
+                                color: $array-key-colon-color;
+                            }
+                        }
 
                         .key-colon {
                             display: inline-block;
-                            font-weight: $key-colon-weight;
+                            // font-weight: $key-colon-weight;
                             color: $key-colon-color;
+                            font-style: normal;
+                            margin-left: 3px;
                         }
                     }
 
@@ -113,11 +132,14 @@
                         display: inline-block;
 
                         &.string {
-                            color: $string-color;
+                            color: $string-color;                        }
+
+                        &.integer {
+                            color: $integer-color;
                         }
 
-                        &.number {
-                            color: $number-color;
+                        &.float {
+                            color: $float-color;
                         }
 
                         &.array {
@@ -131,11 +153,13 @@
                         &.null {
                             color: $null-color;
                             font-size: $null-font-size;
+                            font-weight: $null-font-weight;
                         }
 
                         &.nan {
                             color: $nan-color;
                             font-size: $nan-font-size;
+                            font-weight: $nan-font-weight;
                         }
 
                         &.function {

@@ -24,8 +24,10 @@ $collapsed-elipsis-font-size: 18px;
 
 $key-margin: 5px;
 $key-color: $base03;
+$array-key-color: $violet;
+$array-key-colon-color: $base03;
 $key-letter-spacing: 0.5px;
-$key-colon-color: $violet;
+$key-colon-color: $base03;
 $key-padding: 0px 3px;
 $key-font-style: italic;
 $key-border-radius: 3px;
@@ -39,7 +41,10 @@ $brace-color: $black;
 $string-color: $blue;
 
 //number
-$number-color: $green;
+$integer-color: $green;
+
+//float
+$float-color: $orange;
 
 //array
 $array-color: $base02;
@@ -50,10 +55,12 @@ $boolean-color: $cyan;
 //null
 $null-color: $red;
 $null-font-size: 11px;
+$null-font-weight: bold;
 
 //NaN
 $nan-color: $magenta;
 $nan-font-size: 11px;
+$nan-font-weight: bold;
 
 //function
 $function-color: $base01;

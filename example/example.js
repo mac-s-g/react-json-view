@@ -37,7 +37,7 @@ function getExampleJson1() {
                 }
             }
         },
-        number: 1234
+        string_number: "1234"
     };
 }
 

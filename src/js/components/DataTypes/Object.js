@@ -2,8 +2,8 @@ import React from "react";
 
 import {toType} from './../../helpers/util';
 import {
-    JsonBoolean, JsonFunction, JsonNan, JsonNull,
-    JsonNumber, JsonObject, JsonString
+    JsonBoolean, JsonFloat, JsonFunction, JsonInteger,
+    JsonNan, JsonNull, JsonObject, JsonString
 } from './DataTypes';
 import VariableMeta from './../VariableMeta';
 
@@ -30,11 +30,11 @@ export default class extends React.Component {
         this.setState(this.state);
     }
 
-    getObjectContent = (depth, src, props) => {
+    getObjectContent = (depth, src, type, props) => {
         return (<div class="pushed-content object-container">
             <div class="push">{this.renderPush(depth)}</div>
             <div class="object-content">
-                {this.renderObjectConents(src, props)}
+                {this.renderObjectConents(src, type, props)}
             </div>
         </div>);
     }
@@ -59,6 +59,7 @@ export default class extends React.Component {
         const {expanded} = this.state;
         const expanded_class = expanded ? "expanded" : "collapsed";
         const expanded_icon = expanded ? <CircleMinus /> : <CirclePlus />;
+        const cleaned_type = (type == 'array' ? 'array' : 'object');
 
         return (<div class="object-key-val">
             <div onClick={this.toggleExpanded} class="open-brace brace-row">
@@ -69,21 +70,21 @@ export default class extends React.Component {
                     (name ? name : '')
                 }</div>
                 <div class="object-colon">:</div>
-                <div class="brace">{type == 'array' ? '[' : '{'}</div>
+                <div class="brace">{cleaned_type == 'array' ? '[' : '{'}</div>
                 {expanded ? this.getObjectMetaData(src) : null}
             </div>
             {expanded
-                ? this.getObjectContent(depth, src, rest)
+                ? this.getObjectContent(depth, src, cleaned_type, rest)
                 : this.getElipsis(expanded)
             }
             <div class="close-brace brace-row">
-                <div class="brace">{type == 'array' ? ']' : '}'}</div>
+                <div class="brace">{cleaned_type == 'array' ? ']' : '}'}</div>
                 {expanded ? null : this.getObjectMetaData(src)}
             </div>
         </div>);
     }
 
-    renderObjectConents = (variables, props) => {
+    renderObjectConents = (variables, parent_type, props) => {
         const {depth} = this.props;
         let elements = [], variable;
 
@@ -108,7 +109,7 @@ export default class extends React.Component {
                     />);
             } else {
                 elements.push(<div class="object-key-val" key={variable.name}>
-                    <div class="object-key">
+                    <div class={"object-key " + parent_type}>
                             {variable.name}
                         <div class="key-colon">:</div>
                     </div>
@@ -122,8 +123,10 @@ export default class extends React.Component {
             switch (variable.type) {
                 case 'string':
                     return <JsonString value={variable.value} />;
-                case 'number':
-                    return <JsonNumber value={variable.value} />;
+                case 'integer':
+                    return <JsonInteger value={variable.value} />;
+                case 'float':
+                    return <JsonFloat value={variable.value} />;
                 case 'boolean':
                     return <JsonBoolean value={variable.value} />;
                 case 'function':

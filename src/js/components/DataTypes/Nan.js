@@ -8,7 +8,7 @@ export default class extends React.Component {
         return (
         <div class={"object-value " + type_name}>
             <span class="data-type">{type_name}</span>
-            NULL
+            NaN
         </div>
         );
     }

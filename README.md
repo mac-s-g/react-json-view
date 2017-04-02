@@ -9,10 +9,10 @@ This component provides a responsive interface for displaying JSON in a web brow
   * [Installation instructions](#intallation-instructions) are listed below.
 
 ### Implementation Example:
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/source-example-7.png?raw=true "Usage Example")
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/source-example-8.png?raw=true "Usage Example")
 
 ### Example Component Display:
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-6.png?raw=true "Output Example")
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-7.png?raw=true "Output Example")
 
 ### Intallation Instructions
 Install this package with npm:

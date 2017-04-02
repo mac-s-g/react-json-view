@@ -73,9 +73,9 @@ All node modules are installed within the container, so make sure to rebuild you
 ### To-Do's
 1. Add Tests!
 2. Implement persistent state for expand/collapse attribute
-3. improve array component:
-    * style array keys differently than object keys
-4. improve customizability
+3. improve customizability
     * add optional `depth` prop
+    * add optional `showTypes` prop
+    * add props to define what is expanded/collapsed by default
     * consider moving to postcss
     * add a few different themes on top of `_variables.scss`

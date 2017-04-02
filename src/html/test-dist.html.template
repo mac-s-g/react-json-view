@@ -22,9 +22,8 @@
   <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
   <script type="text/javascript" src="./main.js"></script>
   <script type="text/javascript">
-      var test_json =
+      var test_json = {
           test: 'this is a test string',
-          sibling: 'sibling_string',
           another_sibling: 42,
           how_will_array_do: [1, 2, 3, 'test'],
           how_will_floats_do: -2.757,
@@ -32,7 +31,6 @@
               sibling1: true,
               sibling2: false,
               sibling3: null,
-              sibling4: 'test',
               'last-sibling': {
                   grand_child: NaN,
                   'grand-child-func': (a) => {
@@ -46,11 +44,11 @@
 
       // reactJsonView is a global variable
       var jsonView = new reactJsonView.default({
-        src: test_json
+          src: test_json
       });
       ReactDOM.render(
-        jsonView.render(),
-        document.getElementById('app-container')
+          jsonView.render(),
+          document.getElementById('app-container')
       );
   </script>
   </body>

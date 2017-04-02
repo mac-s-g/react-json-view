@@ -35,11 +35,11 @@
                   grand_child: NaN,
                   'grand-child-func': (a) => {
                       let b = a*a;
-                      return a.push(b);
+                      return b;
                   }
               }
           },
-          number: 1234
+          string_number: "1234"
       };
 
       // reactJsonView is a global variable

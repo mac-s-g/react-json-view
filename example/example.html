@@ -23,25 +23,23 @@
   <script src="https://unpkg.com/react-json-view@latest/dist/main.js"></script>
   <script type="text/javascript">
       var test_json = {
-        test: 'this is a test string',
-        sibling: 'sibling_string',
-        another_sibling: 42,
-        how_will_array_do: [1, 2, 3, 'test'],
-        how_will_floats_do: -2.757,
-        parent: {
-          sibling1: true,
-          sibling2: false,
-          sibling3: null,
-          sibling4: 'test',
-          'last-sibling': {
-            grand_child: NaN,
-            'grand-child-func': (a) => {
-              let b = a*a;
-              return a.push(b);
-            }
-          }
-        },
-        number: 1234
+          test: 'this is a test string',
+          another_sibling: 42,
+          how_will_array_do: [1, 2, 3, 'test'],
+          how_will_floats_do: -2.757,
+          parent: {
+              sibling1: true,
+              sibling2: false,
+              sibling3: null,
+              'last-sibling': {
+                  grand_child: NaN,
+                  'grand-child-func': (a) => {
+                      let b = a*a;
+                      return b;
+                  }
+              }
+          },
+          string_number: "1234"
       };
 
       // reactJsonView is a global variable

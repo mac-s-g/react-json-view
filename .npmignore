@@ -6,3 +6,4 @@ entrypoints
 example
 .git
 .gitignore
+example/example-react.js

@@ -33,7 +33,7 @@ function getExampleJson1() {
                 grand_child: NaN,
                 'grand-child-func': (a) => {
                     let b = a*a;
-                    return a.push(b);
+                    return b;
                 }
             }
         },

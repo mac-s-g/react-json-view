@@ -1,4 +1,3 @@
-export {default as JsonArray} from './Array';
 export {default as JsonBoolean} from './Boolean';
 export {default as JsonFunction} from './Function';
 export {default as JsonNan} from './Nan';

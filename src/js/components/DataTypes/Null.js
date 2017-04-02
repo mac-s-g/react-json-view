@@ -7,7 +7,6 @@ export default class extends React.Component {
         const type_name = 'null';
         return (
         <div class={"object-value " + type_name}>
-            <span class="data-type">{type_name}</span>
             NULL
         </div>
         );

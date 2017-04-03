@@ -12,12 +12,23 @@ ReactDom.render(
     <div>
         {/* just pass in your JSON to the src attribute */}
         <JsonViewer src={getExampleJson1()} />
+
         <br />
+
         {/* initialize this one with a name and default collapsed */}
         <JsonViewer
         src={getExampleJson2()}
         collapsed={true}
         name={'feature_set'}
+        indentWidth={2} />
+
+        <br />
+
+        {/* initialize an example with a long string */}
+        <JsonViewer
+        src={getExampleJson3()}
+        collapsed={true}
+        name={'collapsed_by_default_example'}
         indentWidth={8} />
     </div>,
     document.getElementById('app-container')
@@ -76,5 +87,21 @@ function getExampleJson2() {
                 "testingVERBROOTtestingVERB bodyNOUNdobjtestingVERB":1
             },"3-grams":{}
         }
+    };
+}
+
+
+function getExampleJson3() {
+    return {
+        example_information: 'this example has the collapsed prop set to true and the indentWidth prop is set to 8',
+        default_collapsed: true,
+        collapsed_array: [
+            'you expanded me',
+            'try collapsing and expanding the root node',
+            'i will still be expanded',
+            {
+                leaf_node: true
+            }
+        ]
     };
 }

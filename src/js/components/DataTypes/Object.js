@@ -60,9 +60,9 @@ export default class extends React.Component {
     }
 
     getObjectContent = (depth, src, props) => {
+        const {indentWidth} = this.state;
         return (<div class="pushed-content object-container">
-            <div class="push">{this.renderPush(depth)}</div>
-            <div class="object-content">
+            <div class="object-content" style={{marginLeft:(indentWidth*5 + "px")}}>
                 {this.renderObjectConents(src, props)}
             </div>
         </div>);

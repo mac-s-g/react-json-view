@@ -17,8 +17,9 @@ $green:     #859900;
 $white:     #fff;
 $black:     #000;
 
+$app-background-color: rgba(1, 1, 1, 0);
 
-$indent-width: 20px;
+$indent-block-width: 5px;
 
 $collapsed-elipsis-font-size: 18px;
 
@@ -56,11 +57,17 @@ $boolean-color: $cyan;
 $null-color: $red;
 $null-font-size: 11px;
 $null-font-weight: bold;
+$null-background-color: rgba(0, 0, 0, 0.1);
+$null-padding: 1px 2px;
+$null-border-radius: 3px;
 
 //NaN
 $nan-color: $magenta;
 $nan-font-size: 11px;
 $nan-font-weight: bold;
+$nan-background-color: rgba(0, 0, 0, 0.1);
+$nan-padding: 1px 2px;
+$nan-border-radius: 3px;
 
 //function
 $function-color: $base01;

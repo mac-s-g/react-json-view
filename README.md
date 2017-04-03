@@ -26,6 +26,14 @@ Or add to your package.json config file:
 }
 ```
 
+### Props
+Name|Type|Default|Description
+|:---|:---|:---|:---
+`src`|`JSON Object`|None|This property contains your input JSON
+`name`|`string`|"root"|Contains the name of your root node
+`collapsed`|`boolean`|false|If set to `true`, all nodes will be collapsed by default
+`indentWidth`|`integer`|4|Set the indent-width for nested objects
+
 ### Features
 * Object and array nodes can be collapsed and expanded
 * Object and array nodes display meta-data on hover

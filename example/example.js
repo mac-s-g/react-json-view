@@ -17,7 +17,8 @@ ReactDom.render(
         <JsonViewer
         src={getExampleJson2()}
         collapsed={true}
-        name={'feature_set'} />
+        name={'feature_set'}
+        indentWidth={8} />
     </div>,
     document.getElementById('app-container')
 );

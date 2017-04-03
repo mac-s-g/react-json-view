@@ -30,7 +30,8 @@ Or add to your package.json config file:
 * Object and array nodes can be collapsed and expanded
 * Object and array nodes display meta-data on hover
 * Object and array nodes include a "Copy to Clipboard" feature
-* Different classes are applied to different types for style interaction.
+* Customizable indent width property
+* Different classes are applied to different types for style interaction
 
 ### Customizing Style
 update or override `src/style/_variables.scss` to apply your own theme.
@@ -74,7 +75,6 @@ All node modules are installed within the container, so make sure to rebuild you
 1. Add Tests!
 2. Implement persistent state for expand/collapse attribute
 3. improve customizability
-    * add optional `depth` prop
     * add optional `showTypes` prop
     * add props to define what is expanded/collapsed by default
     * consider moving to postcss

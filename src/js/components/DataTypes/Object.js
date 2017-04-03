@@ -7,41 +7,70 @@ import {
 } from './DataTypes';
 import VariableMeta from './../VariableMeta';
 
+//attribute store
+import AttributeStore from './../../stores/ObjectAttributes';
+
 //icons
 import CirclePlus from 'react-icons/lib/md/add-circle-outline';
 import CircleMinus from 'react-icons/lib/md/remove-circle-outline';
 
-const DEPTH_OFFSET = 1
+//increment 1 with each nested object & array
+const DEPTH_INCREMENT = 1
 
 export default class extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state.expanded = AttributeStore.get(
+            this.state.state_key,
+            'expanded',
+            !this.props.collapsed
+        );
+    }
+
     state = {
-        expanded: this.props.expanded === false ? false : true
+        state_key: this.props.namespace.join('.'),
+        namespace: this.props.namespace,
+        indentWidth: this.props.indentWidth,
+        expanded: null, //set in constructor
+        object_type: (this.props.type == 'array' ? 'array' : 'object'),
+        display_name: (this.props.name ? this.props.name : '')
     }
 
     renderPush = (depth) => {
+        let {indentWidth} = this.state;
         let elements = [];
-        for (let i = 0; i < depth + DEPTH_OFFSET; i++) {
-            elements.push(<div class="indent"></div>);
+
+        for (let indent = 0; indent < indentWidth; indent++) {
+            elements.push(<div key={indent} class="indent"/>);
         }
+
+        return elements;
     }
 
-    toggleExpanded = () => {
+    toggleCollapsed = () => {
         this.state.expanded = !this.state.expanded;
+        AttributeStore.set(
+            this.state.state_key,
+            'expanded',
+            this.state.expanded
+        );
         this.setState(this.state);
     }
 
-    getObjectContent = (depth, src, type, props) => {
+    getObjectContent = (depth, src, props) => {
         return (<div class="pushed-content object-container">
             <div class="push">{this.renderPush(depth)}</div>
             <div class="object-content">
-                {this.renderObjectConents(src, type, props)}
+                {this.renderObjectConents(src, props)}
             </div>
         </div>);
     }
 
-    getElipsis = (expanded) => {
+    getElipsis = () => {
         return (
-            <div class="collapsed-elipsis" onClick={this.toggleExpanded}>
+            <div class="collapsed-elipsis" onClick={this.toggleCollapsed}>
                 ...
             </div>
         );
@@ -55,37 +84,41 @@ export default class extends React.Component {
     }
 
     render = () => {
-        const {depth, src, name, type, ...rest} = this.props;
-        const {expanded} = this.state;
+        // `indentWidth` and `collapsed` props will
+        // perpetuate to children via `...rest`
+        const {
+            depth, src, namespace, name, type, ...rest
+        } = this.props;
+        const {
+            object_type, display_name, expanded
+        } = this.state;
         const expanded_class = expanded ? "expanded" : "collapsed";
         const expanded_icon = expanded ? <CircleMinus /> : <CirclePlus />;
-        const cleaned_type = (type == 'array' ? 'array' : 'object');
 
         return (<div class="object-key-val">
-            <div onClick={this.toggleExpanded} class="open-brace brace-row">
+            <div onClick={this.toggleCollapsed} class="open-brace brace-row">
                 <div class={"icon-container " + expanded_class}>
                     {expanded_icon /*mdi icon*/}
                 </div>
-                <div class="object-name">{
-                    (name ? name : '')
-                }</div>
+                <div class="object-name">{display_name}</div>
                 <div class="object-colon">:</div>
-                <div class="brace">{cleaned_type == 'array' ? '[' : '{'}</div>
+                <div class="brace">{object_type == 'array' ? '[' : '{'}</div>
                 {expanded ? this.getObjectMetaData(src) : null}
             </div>
             {expanded
-                ? this.getObjectContent(depth, src, cleaned_type, rest)
-                : this.getElipsis(expanded)
+                ? this.getObjectContent(depth, src, rest)
+                : this.getElipsis()
             }
             <div class="close-brace brace-row">
-                <div class="brace">{cleaned_type == 'array' ? ']' : '}'}</div>
+                <div class="brace">{object_type == 'array' ? ']' : '}'}</div>
                 {expanded ? null : this.getObjectMetaData(src)}
             </div>
         </div>);
     }
 
-    renderObjectConents = (variables, parent_type, props) => {
+    renderObjectConents = (variables, props) => {
         const {depth} = this.props;
+        const {namespace, object_type} = this.state;
         let elements = [], variable;
 
         for (let name in variables) {
@@ -93,23 +126,25 @@ export default class extends React.Component {
             if (variable.type == 'object') {
                 elements.push(
                     <JsonObject key={variable.name}
-                        depth={depth + 1}
+                        depth={depth + DEPTH_INCREMENT}
                         name={variable.name}
                         src={variable.value}
+                        namespace={namespace.concat(variable.name)}
                         {...props}
                     />);
             } else if (variable.type == 'array') {
                 elements.push(
                     <JsonObject key={variable.name}
-                        depth={depth + 1}
+                        depth={depth + DEPTH_INCREMENT}
                         name={variable.name}
                         src={variable.value}
+                        namespace={namespace.concat(variable.name)}
                         type="array"
                         {...props}
                     />);
             } else {
                 elements.push(<div class="object-key-val" key={variable.name}>
-                    <div class={"object-key " + parent_type}>
+                    <div class={"object-key " + object_type}>
                             {variable.name}
                         <div class="key-colon">:</div>
                     </div>

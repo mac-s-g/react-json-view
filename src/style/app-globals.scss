@@ -3,6 +3,7 @@
 .react-json-view{
     font-family: monospace;
     cursor: default;
+    background-color: $app-background-color;
 
     .brace-row {
         display: inline-block;
@@ -72,7 +73,10 @@
             display: inline-block;
 
             &.push {
-                width: $indent-width;
+                .indent {
+                    width: $indent-block-width;
+                    display: inline-block;
+                }
             }
 
             &.object-content {
@@ -154,12 +158,18 @@
                             color: $null-color;
                             font-size: $null-font-size;
                             font-weight: $null-font-weight;
+                            background-color: $null-background-color;
+                            padding: $null-padding;
+                            border-radius: $null-border-radius;
                         }
 
                         &.nan {
                             color: $nan-color;
                             font-size: $nan-font-size;
                             font-weight: $nan-font-weight;
+                            background-color: $nan-background-color;
+                            padding: $nan-padding;
+                            border-radius: $nan-border-radius;
                         }
 
                         &.function {

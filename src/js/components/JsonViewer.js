@@ -9,12 +9,16 @@ export default class extends React.Component {
     }
 
     render = () => {
-        const {name, ...rest} = this.props;
+        const {props} = this;
+        const namespace = [props.name];
 
         return (
         <div class="pretty-json-container object-container">
             <div class="object-content">
-                <JsonObject name={name ? name : 'root'} {...rest} />
+                <JsonObject
+                namespace={namespace}
+                depth={0}
+                {...props} />
             </div>
         </div>
         );

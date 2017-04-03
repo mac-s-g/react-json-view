@@ -13,7 +13,12 @@ ReactDom.render(
         {/* just pass in your JSON to the src attribute */}
         <JsonViewer src={getExampleJson1()} />
         <br />
-        <JsonViewer src={getExampleJson2()} />
+        {/* initialize this one with a name and default collapsed */}
+        <JsonViewer
+        src={getExampleJson2()}
+        collapsed={true}
+        name={'feature_set'}
+        indentWidth={8} />
     </div>,
     document.getElementById('app-container')
 );
@@ -73,4 +78,3 @@ function getExampleJson2() {
         }
     };
 }
-

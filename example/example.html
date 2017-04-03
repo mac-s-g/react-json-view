@@ -17,7 +17,10 @@
     <![endif]-->
   </head>
   <body>
-  <div id="app-container"></div>
+  <div id="app-container">
+    <div id="example1" />
+    <div id="example2" />
+  </div>
   <script src="https://unpkg.com/react@15/dist/react.js"></script>
   <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
   <script src="https://unpkg.com/react-json-view@latest/dist/main.js"></script>
@@ -50,17 +53,17 @@
       };
 
       // reactJsonView is a global variable
-      var jsonView = new reactJsonView.default({
+      var jsonView1 = new reactJsonView.default({
         src: test_json
       });
       ReactDOM.render(
         jsonView.render(),
-        document.getElementById('app-container')
+        document.getElementById('example1')
       );
 
 
       /*-----------EXAMPLE 2-----------*/
-      var jsonView = new reactJsonView.default({
+      var jsonView2 = new reactJsonView.default({
         name: 'collapsed_by_default_example'
         src: {
           example_information: 'this example has the collapsed prop set to true and the indentWidth prop is set to 8'
@@ -79,7 +82,7 @@
       });
       ReactDOM.render(
         jsonView.render(),
-        document.getElementById('app-container')
+        document.getElementById('example2')
       );
   </script>
   </body>

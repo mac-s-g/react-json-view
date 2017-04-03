@@ -38,7 +38,6 @@ Name|Type|Default|Description
 * Object and array nodes can be collapsed and expanded
 * Object and array nodes display meta-data on hover
 * Object and array nodes include a "Copy to Clipboard" feature
-* Customizable indent width property
 * Different classes are applied to different types for style interaction
 
 ### Customizing Style

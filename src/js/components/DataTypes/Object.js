@@ -16,6 +16,8 @@ import CircleMinus from 'react-icons/lib/md/remove-circle-outline';
 
 //increment 1 with each nested object & array
 const DEPTH_INCREMENT = 1
+//single indent is 5px
+const SINGLE_INDENT = 5;
 
 export default class extends React.Component {
 
@@ -38,17 +40,6 @@ export default class extends React.Component {
         display_name: (this.props.name ? this.props.name : '')
     }
 
-    renderPush = (depth) => {
-        let {indentWidth} = this.state;
-        let elements = [];
-
-        for (let indent = 0; indent < indentWidth; indent++) {
-            elements.push(<div key={indent} class="indent"/>);
-        }
-
-        return elements;
-    }
-
     toggleCollapsed = () => {
         this.state.expanded = !this.state.expanded;
         AttributeStore.set(
@@ -62,7 +53,8 @@ export default class extends React.Component {
     getObjectContent = (depth, src, props) => {
         const {indentWidth} = this.state;
         return (<div class="pushed-content object-container">
-            <div class="object-content" style={{marginLeft:(indentWidth*5 + "px")}}>
+            <div class="object-content"
+            style={{marginLeft:(indentWidth*SINGLE_INDENT + "px")}}>
                 {this.renderObjectConents(src, props)}
             </div>
         </div>);

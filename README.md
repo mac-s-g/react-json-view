@@ -31,13 +31,16 @@ Name|Type|Default|Description
 |:---|:---|:---|:---
 `src`|`JSON Object`|None|This property contains your input JSON
 `name`|`string`|"root"|Contains the name of your root node
-`collapsed`|`boolean`|false|If set to `true`, all nodes will be collapsed by default
+`collapsed`|`boolean`|`false`|When set to `true`, all nodes will be collapsed by default
 `indentWidth`|`integer`|4|Set the indent-width for nested objects
+`enableClipboard`|`boolean`|`true`|When set to `true`, the user can copy objects and arrays to clipboard 
+`displayObjectSize`|`boolean`|`true`|When set to `true`, objects and arrays are labeled with size
+`displayDataTypes`|`boolean`|`true`|When set to `true`, data type labels prefix values
 
 ### Features
 * Object and array nodes can be collapsed and expanded
-* Object and array nodes display meta-data on hover
-* Object and array nodes include a "Copy to Clipboard" feature
+* Object and array nodes display meta-data 
+* Object and array nodes support a "Copy to Clipboard" feature
 * Different classes are applied to different types for style interaction
 
 ### Customizing Style
@@ -80,9 +83,6 @@ All node modules are installed within the container, so make sure to rebuild you
 
 ### To-Do's
 1. Add Tests!
-2. Implement persistent state for expand/collapse attribute
-3. improve customizability
-    * add optional `showTypes` prop
-    * add props to define what is expanded/collapsed by default
-    * consider moving to postcss
+2. improve customizability
+    * allow specific keys to be expanded/collapsed by default
     * add a few different themes on top of `_variables.scss`

@@ -20,7 +20,9 @@ ReactDom.render(
         src={getExampleJson2()}
         collapsed={true}
         name={'feature_set'}
-        indentWidth={2} />
+        displayDataTypes={false}
+        indentWidth={2}
+        />
 
         <br />
 
@@ -29,7 +31,11 @@ ReactDom.render(
         src={getExampleJson3()}
         collapsed={true}
         name={'collapsed_by_default_example'}
-        indentWidth={8} />
+        indentWidth={8}
+        displayObjectSize={false}
+        displayDataTypes={false}
+        enableClipboard={false}
+        />
     </div>,
     document.getElementById('app-container')
 );

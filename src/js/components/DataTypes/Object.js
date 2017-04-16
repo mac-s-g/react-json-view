@@ -92,7 +92,7 @@ export default class extends React.Component {
                 <div class={"icon-container " + expanded_class}>
                     {expanded_icon /*mdi icon*/}
                 </div>
-                <div class="object-name">{display_name}</div>
+                <div class="object-name">"{display_name}"</div>
                 <div class="object-colon">:</div>
                 <div class="brace">{object_type == 'array' ? '[' : '{'}</div>
                 {expanded ? this.getObjectMetaData(src) : null}
@@ -137,7 +137,10 @@ export default class extends React.Component {
             } else {
                 elements.push(<div class="object-key-val" key={variable.name}>
                     <div class={"object-key " + object_type}>
-                            {variable.name}
+                            {
+                                this.props.type == 'array'
+                                ? variable.name : '"' + variable.name + '"'
+                            }
                         <div class="key-colon">:</div>
                     </div>
                     {getValue(variable)}

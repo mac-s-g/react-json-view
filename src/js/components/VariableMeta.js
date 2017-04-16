@@ -8,6 +8,8 @@ require('./../../style/variable_meta.scss');
 //https://www.npmjs.com/package/clipboard
 import Clipboard from 'clipboard';
 import ReactTooltip from 'react-tooltip';
+//app config key-val storage
+import ConfigStore from './../stores/ConfigStore';
 
 
 export default class extends React.Component {
@@ -19,7 +21,9 @@ export default class extends React.Component {
     state = {
         id: null,
         clipboard: null,
-        copy_state: null
+        copy_state: null,
+        display_clipboard: ConfigStore.get('enableClipboard', true),
+        display_size: ConfigStore.get('displayObjectSize', true),
     }
 
     componentDidMount = () => {
@@ -52,7 +56,9 @@ export default class extends React.Component {
         //react-tooltip to act like a react component should.
         //it does not support dynamic content updates
         return (
-            <div>
+            <div style={{
+                display: this.state.display_clipboard ? 'inline-block' : 'none'
+            }}>
                 <div
                 style={{display:copy_state=='success' ? 'none' : 'inline-block'}}
                 data-clipboard-text={JSON.stringify(src)}
@@ -92,6 +98,16 @@ export default class extends React.Component {
         );
     }
 
+    getObjectSize = (size) => {
+        if (this.state.display_size) {
+            return (
+                <span class="object-size">
+                    {size} item{size > 1 ? 's' : ''}
+                </span>
+            );
+        }
+    }
+
     render = () => {
         const {id, copy_state} = this.state;
         const {src, size} = this.props;
@@ -102,9 +118,7 @@ export default class extends React.Component {
             e.stopPropagation();
         }}>
             {/* size badge display */}
-            <span class="object-size">
-                {size} item{size > 1 ? 's' : ''}
-            </span>
+            {this.getObjectSize(size)}
             {/* copy to clipboard icon */}
             {this.getCopyComponent(
                 src, id, tooltip_id, copy_state

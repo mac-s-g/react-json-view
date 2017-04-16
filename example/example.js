@@ -40,6 +40,10 @@ ReactDom.render(
     document.getElementById('app-container')
 );
 
+/*-------------------------------------------------------------------------*/
+/*     the following functions just contain test json data for display     */
+/*-------------------------------------------------------------------------*/
+
 //just a function to get an example JSON object
 function getExampleJson1() {
     return {

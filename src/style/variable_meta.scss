@@ -12,7 +12,7 @@
             transition: all 0.1s ease-out;
 
             display: inline-block;
-            opacity: 0;
+            opacity: 1 ; //uncomment with hover block below for hover
             padding-left: 10px;
             float: right;
             cursor: default;
@@ -20,13 +20,14 @@
             >* {
                 margin-right: 5px;
                 display: inline-block;
+                padding: 0px 3px 0px 0px;
             }
 
             .object-size {
-                background-color: $black;
-                opacity: 0.2;
-                color: $white;
-                padding: 0px 3px;
+                // background-color: $black;
+                // opacity: 0.2;
+                // color: $white;
+                color: #aaa;
                 border-radius: 3px;
                 font-style: italic;
             }
@@ -41,9 +42,9 @@
 
         .object-key-val:hover {
 
-            >div >.object-meta-data {
-                opacity: 1;
-            }
+            // >div >.object-meta-data {
+            //     opacity: 1;
+            // }
 
         }
 

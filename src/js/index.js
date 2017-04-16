@@ -1,6 +1,8 @@
 import React from 'react';
 import JsonViewer from './components/JsonViewer';
 import {toType} from './helpers/util';
+//config key-val store
+import ConfigStore from './stores/ConfigStore'
 
 //global style
 //TODO make this theme customizable
@@ -18,6 +20,7 @@ export default class extends React.Component {
             } else {
                 this.state[i] = this.defaults[i];
             }
+            ConfigStore.set(i, this.state[i]);
         }
 
         //make sure `src` prop is valid
@@ -37,7 +40,10 @@ export default class extends React.Component {
         src: {},
         name: 'root',
         collapsed: false,
-        indentWidth: 4
+        indentWidth: 4,
+        enableClipboard: true,
+        displayObjectSize: true,
+        displayDataTypes: true
     }
 
     render() {

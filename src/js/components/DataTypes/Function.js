@@ -1,4 +1,5 @@
 import React from 'react';
+import DataTypeLabel from './DataTypeLabel';
 
 
 export default class extends React.Component {
@@ -7,7 +8,7 @@ export default class extends React.Component {
         const type_name = 'function';
         return (
         <div class={"object-value " + type_name}>
-            <span class="data-type">{type_name}</span>
+            <DataTypeLabel type_name={type_name} />
             {this.props.value.toString().slice(9, -1)}
         </div>
         );

@@ -3,7 +3,7 @@ Interactive JSON display wrapped up in a react component.
 
 This component provides a responsive interface for displaying JSON in a web browser.  NPM offers a distribution of the source that's transpiled to ES5; so you can include this component with *any web-based javascript application*.
 
-  * Check out an [interactive demo here](http://htmlpreview.github.io/?https://raw.githubusercontent.com/mac-s-g/react-json-view/master/example/example.html).
+  * Check out an [interactive demo here](https://mac-s-g.github.io/react-json-view/example/example.html).
   * Check out a [React implementation example here](https://github.com/mac-s-g/react-json-view/blob/master/example/example.js).
   * Check out an [ES5 implementation example here](https://github.com/mac-s-g/react-json-view/blob/master/example/example.html).
   * [Installation instructions](#intallation-instructions) are listed below.

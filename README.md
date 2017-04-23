@@ -1,5 +1,5 @@
 # react-json-view
-Interactive JSON display wrapped up in a react component.
+Interactive JSON viewer wrapped up in a react component.
 
 This component provides a responsive interface for displaying JSON in a web browser.  NPM offers a distribution of the source that's transpiled to ES5; so you can include this component with *any web-based javascript application*.
 

@@ -37,6 +37,7 @@ export default class extends React.Component {
         indentWidth: this.props.indentWidth,
         expanded: null, //set in constructor
         object_type: (this.props.type == 'array' ? 'array' : 'object'),
+        parent_type: (this.props.type == 'array' ? 'array' : 'object'),
         display_name: (this.props.name ? this.props.name : '')
     }
 
@@ -79,7 +80,7 @@ export default class extends React.Component {
         // `indentWidth` and `collapsed` props will
         // perpetuate to children via `...rest`
         const {
-            depth, src, namespace, name, type, ...rest
+            depth, src, namespace, name, type, parent_type, ...rest
         } = this.props;
         const {
             object_type, display_name, expanded
@@ -92,7 +93,11 @@ export default class extends React.Component {
                 <div class={"icon-container " + expanded_class}>
                     {expanded_icon /*mdi icon*/}
                 </div>
-                <div class="object-name">"{display_name}"</div>
+                {
+                parent_type == 'array'
+                ? <div class="object-key array">{display_name}</div>
+                : <div class="object-name">"{display_name}"</div>
+                }
                 <div class="object-colon">:</div>
                 <div class="brace">{object_type == 'array' ? '[' : '{'}</div>
                 {expanded ? this.getObjectMetaData(src) : null}
@@ -109,7 +114,7 @@ export default class extends React.Component {
     }
 
     renderObjectConents = (variables, props) => {
-        const {depth} = this.props;
+        const {depth, parent_type} = this.props;
         const {namespace, object_type} = this.state;
         let elements = [], variable;
 
@@ -122,6 +127,7 @@ export default class extends React.Component {
                         name={variable.name}
                         src={variable.value}
                         namespace={namespace.concat(variable.name)}
+                        parent_type={object_type}
                         {...props}
                     />);
             } else if (variable.type == 'array') {
@@ -132,6 +138,7 @@ export default class extends React.Component {
                         src={variable.value}
                         namespace={namespace.concat(variable.name)}
                         type="array"
+                        parent_type={object_type}
                         {...props}
                     />);
             } else {

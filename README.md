@@ -9,10 +9,10 @@ This component provides a responsive interface for displaying JSON in a web brow
   * [Installation instructions](#intallation-instructions) are listed below.
 
 ### Implementation Example:
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/source-example-6.png?raw=true "Usage Example")
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/source-example-9.png?raw=true "Usage Example")
 
 ### Example Component Display:
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-7.png?raw=true "Output Example")
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-8.png?raw=true "Output Example")
 
 ### Intallation Instructions
 Install this package with npm:
@@ -33,13 +33,13 @@ Name|Type|Default|Description
 `name`|`string`|"root"|Contains the name of your root node
 `collapsed`|`boolean`|`false`|When set to `true`, all nodes will be collapsed by default
 `indentWidth`|`integer`|4|Set the indent-width for nested objects
-`enableClipboard`|`boolean`|`true`|When set to `true`, the user can copy objects and arrays to clipboard 
+`enableClipboard`|`boolean`|`true`|When set to `true`, the user can copy objects and arrays to clipboard
 `displayObjectSize`|`boolean`|`true`|When set to `true`, objects and arrays are labeled with size
 `displayDataTypes`|`boolean`|`true`|When set to `true`, data type labels prefix values
 
 ### Features
 * Object and array nodes can be collapsed and expanded
-* Object and array nodes display meta-data 
+* Object and array nodes display meta-data
 * Object and array nodes support a "Copy to Clipboard" feature
 * Different classes are applied to different types for style interaction
 

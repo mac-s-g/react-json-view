@@ -1,4 +1,4 @@
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/rjv-icon.png?raw=true)
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/rjv-icon-alt.png?raw=true)
 # react-json-view 
 Interactive JSON viewer wrapped up in a react component.
 

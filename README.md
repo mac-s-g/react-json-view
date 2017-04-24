@@ -1,7 +1,7 @@
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/rjv-icon-alt.png?raw=true)
 
 # react-json-view
-Interactive JSON viewer wrapped up in a react component.
+Interactive react component for displaying javascript arrays and JSON objects.
 
 This component provides a responsive interface for displaying JSON in a web browser.  NPM offers a distribution of the source that's transpiled to ES5; so you can include this component with *any web-based javascript application*.
 

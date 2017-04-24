@@ -48,7 +48,7 @@ Name|Type|Default|Description
 ### Customizing Style
 update or override `src/style/_variables.scss` to apply your own theme.
 
-### Working with the source code:
+### Contributing to the source code:
 #### Standard Workflow
   1. Clone this repo
   2. Install npm dependencies

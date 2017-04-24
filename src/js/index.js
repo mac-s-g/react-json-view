@@ -24,12 +24,13 @@ export default class extends React.Component {
         }
 
         //make sure `src` prop is valid
-        if (toType(this.state.src) !== 'object') {
+        if (toType(this.state.src) !== 'object'
+            && toType(this.state.src) !== 'array'
+        ) {
             console.log('ERROR: src property must be a valid json object');
             this.state.name = 'ERROR';
             this.state.src = {
-                message: 'src property must be a valid json object',
-                received: this.state.src
+                message: 'src property must be a valid json object'
             }
         }
     }
@@ -49,7 +50,7 @@ export default class extends React.Component {
     render() {
         const {...props} = this.state;
         return (<div class="react-json-view">
-            <JsonViewer {...props} />
+            <JsonViewer {...props} type={toType(props.src)} />
         </div>);
     }
 }

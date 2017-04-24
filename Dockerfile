@@ -1,5 +1,5 @@
 FROM node
-MAINTAINER mac <mac.gainor.com>
+MAINTAINER mac <mac.gainor@gmail.com>
 
 # install the node modules at container build time
 ADD package.json /tmp/package.json

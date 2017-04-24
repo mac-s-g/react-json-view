@@ -36,6 +36,11 @@ ReactDom.render(
         displayDataTypes={false}
         enableClipboard={false}
         />
+
+        <br />
+
+        {/*demo array support*/}
+        <JsonViewer src={getExampleArray()} />
     </div>,
     document.getElementById('app-container')
 );
@@ -114,4 +119,17 @@ function getExampleJson3() {
             }
         ]
     };
+}
+
+
+function getExampleArray() {
+    return [
+        'you can also display arrays!',
+        1,
+        2,
+        3,
+        {
+            'pretty_cool': true
+        }
+    ];
 }

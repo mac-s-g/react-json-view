@@ -15,11 +15,24 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-sham.js"></script>
     <![endif]-->
+    <style>
+      .code-comment {
+        color: #aaa;
+        font-size:14px;
+        font-family: monospace;
+      }
+    </style>
   </head>
   <body>
   <div id="app-container">
+    <div class="code-comment">// example 1: JSON object</div>
     <div id="example1"></div>
+    <br />
+    <div class="code-comment">// example 2: array input</div>
     <div id="example2"></div>
+    <br />
+    <div class="code-comment">// example 3: collapsed by default</div>
+    <div id="example3"></div>
   </div>
   <script src="https://unpkg.com/react@15/dist/react.js"></script>
   <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
@@ -61,9 +74,23 @@
         document.getElementById('example1')
       );
 
-
       /*-----------EXAMPLE 2-----------*/
+      //an example ARRAY
+      var test_array = [
+        'you can also display arrays!', 1, 2, 3, {'pretty_cool': true}
+      ];
       var jsonView2 = new reactJsonView.default({
+        src: test_array,
+        name: 'array-example'
+      });
+      ReactDOM.render(
+        jsonView2.render(),
+        document.getElementById('example2')
+      );
+
+
+      /*-----------EXAMPLE 3-----------*/
+      var jsonView3 = new reactJsonView.default({
         name: 'collapsed_by_default_example',
         src: {
           example_information: 'this example has the collapsed prop set to true and the indentWidth prop is set to 8',
@@ -81,8 +108,8 @@
         indentWidth: 8
       });
       ReactDOM.render(
-        jsonView2.render(),
-        document.getElementById('example2')
+        jsonView3.render(),
+        document.getElementById('example3')
       );
   </script>
   </body>

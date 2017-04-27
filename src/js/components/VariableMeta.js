@@ -102,7 +102,7 @@ export default class extends React.Component {
         if (this.state.display_size) {
             return (
                 <span class="object-size">
-                    {size} item{size > 1 ? 's' : ''}
+                    {size} item{size == 1 ? '' : 's'}
                 </span>
             );
         }

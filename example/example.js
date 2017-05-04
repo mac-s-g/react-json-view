@@ -16,7 +16,7 @@ ReactDom.render(
         <br />
 
         {/* use a base16 theme */}
-        <JsonViewer src={getExampleJson1()} theme="monokai" />
+        <JsonViewer src={getExampleJson1()} theme='monokai' />
 
         <br />
 

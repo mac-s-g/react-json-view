@@ -11,7 +11,7 @@ This component provides a responsive interface for displaying arrays or JSON in 
   * [Installation instructions](#intallation-instructions) are listed below.
 
 ### Implementation Example:
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/source-example-9.png?raw=true "Usage Example")
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/source-example-10.png?raw=true "Usage Example")
 
 ### Example Component Display:
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-8.png?raw=true "Output Example")
@@ -98,3 +98,4 @@ All node modules are installed within the container, so make sure to rebuild you
 
 ### To-Do's
 1. Add Tests!
+2. Add some pretty badges to the github index.

@@ -1,17 +1,17 @@
 @import '_variables';
 
 .react-json-view{
-    font-family: monospace;
-    cursor: default;
-    background-color: $app-background-color;
+    // font-family: monospace;
+    // cursor: default;
+    // background-color: $app-background-color;
+
+    .object-name {
+        &:hover {
+            opacity: 1;
+        }
+    }
 
     .brace-row {
-        display: inline-block;
-
-        >div {
-            display: inline-block;
-
-        }
 
         .icon-container {
             -webkit-transition: all 0.2s ease-out;
@@ -19,44 +19,15 @@
             -o-transition: all 0.2s ease-out;
             -ms-transition: all 0.2s ease-out;
             transition: all 0.2s ease-out;
-
-            &.expanded {
-                svg {
-                    color: $magenta;
-                }
-            }
-            &.collapsed {
-                svg {
-                    color: $cyan;
-                }
-            }
-
-        }
-
-        .brace {
-            font-weight: bold;
-            color: $brace-color;
         }
 
         &.open-brace {
-            cursor: pointer;
 
             .object-name {
-                color: $key-color;
-                letter-spacing: $key-letter-spacing;
-                padding: $key-padding;
-                font-style: $key-font-style;
-                border-radius: $key-border-radius;
-                vertical-align: top;
-                opacity: 0.9;
 
                 &:hover {
                     opacity: 1;
                 }
-            }
-
-            .object-colon {
-                margin-right: $key-margin;
             }
 
         }
@@ -105,84 +76,6 @@
                         }
                     }
 
-                    .object-key {
-                        display: inline-block;
-                        margin-right: $key-margin;
-                        color: $key-color;
-                        letter-spacing: $key-letter-spacing;
-                        padding: $key-padding;
-                        font-style: $key-font-style;
-                        border-radius: $key-border-radius;
-                        vertical-align: top;
-                        opacity: 0.9;
-
-                        &.array {
-                            color: $array-key-color;
-                            .key-colon {
-                                color: $array-key-colon-color;
-                            }
-                        }
-
-                        .key-colon {
-                            display: inline-block;
-                            // font-weight: $key-colon-weight;
-                            color: $key-colon-color;
-                            font-style: normal;
-                            margin-left: 3px;
-                        }
-                    }
-
-                    .object-value {
-                        display: inline-block;
-
-                        &.string {
-                            color: $string-color;                        }
-
-                        &.integer {
-                            color: $integer-color;
-                        }
-
-                        &.float {
-                            color: $float-color;
-                        }
-
-                        &.array {
-                            color: $array-color;
-                        }
-
-                        &.boolean {
-                            color: $boolean-color;
-                        }
-
-                        &.null {
-                            color: $null-color;
-                            font-size: $null-font-size;
-                            font-weight: $null-font-weight;
-                            background-color: $null-background-color;
-                            padding: $null-padding;
-                            border-radius: $null-border-radius;
-                        }
-
-                        &.nan {
-                            color: $nan-color;
-                            font-size: $nan-font-size;
-                            font-weight: $nan-font-weight;
-                            background-color: $nan-background-color;
-                            padding: $nan-padding;
-                            border-radius: $nan-border-radius;
-                        }
-
-                        &.function {
-                            color: $function-color;
-                            white-space: pre-line;
-                        }
-
-                        span.data-type {
-                            font-size: $data-type-font-size;
-                            margin-right: $data-type-margin-right;
-                            opacity: $data-type-opacity;
-                        }
-                    }
 
                 }
 
@@ -192,23 +85,34 @@
 
     }
 
-    .collapsed-elipsis {
-
-        display: inline-block;
-        letter-spacing: 0px;
-        color: $orange;
-        font-size: $collapsed-elipsis-font-size;
-        line-height: 10px;
-        cursor: pointer;
-
-    }
-
     .rjv-tooltip {
         padding: 2px 8px;
 
         &.hidden {
             display: none;
         }
+    }
+
+    .object-container {
+
+        .object-meta-data {
+
+            >* {
+                margin-right: 5px;
+                display: inline-block;
+                padding: 0px 3px 0px 0px;
+            }
+
+        }
+
+        .object-key-val:hover {
+
+            // >div >.object-meta-data {
+            //     opacity: 1;
+            // }
+
+        }
+
     }
 
 }

@@ -15,6 +15,11 @@ ReactDom.render(
 
         <br />
 
+        {/* use a base16 theme */}
+        <JsonViewer src={getExampleJson1()} theme="monokai" />
+
+        <br />
+
         {/* initialize this one with a name and default collapsed */}
         <JsonViewer
         src={getExampleJson2()}

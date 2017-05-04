@@ -14,17 +14,24 @@ import AttributeStore from './../../stores/ObjectAttributes';
 import CirclePlus from 'react-icons/lib/md/add-circle-outline';
 import CircleMinus from 'react-icons/lib/md/remove-circle-outline';
 
+//theme
+import style from './../../themes/getStyle';
+import Radium from 'radium';
+
 //increment 1 with each nested object & array
 const DEPTH_INCREMENT = 1
 //single indent is 5px
 const SINGLE_INDENT = 5;
 
-export default class extends React.Component {
+
+@Radium
+class rjvObject extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state.expanded = AttributeStore.get(
+            this.state.rjvId,
             this.state.state_key,
             'expanded',
             !this.props.collapsed
@@ -32,6 +39,7 @@ export default class extends React.Component {
     }
 
     state = {
+        rjvId: this.props.rjvId,
         state_key: this.props.namespace.join('.'),
         namespace: this.props.namespace,
         indentWidth: this.props.indentWidth,
@@ -44,6 +52,7 @@ export default class extends React.Component {
     toggleCollapsed = () => {
         this.state.expanded = !this.state.expanded;
         AttributeStore.set(
+            this.state.rjvId,
             this.state.state_key,
             'expanded',
             this.state.expanded
@@ -56,14 +65,15 @@ export default class extends React.Component {
         return (<div class="pushed-content object-container">
             <div class="object-content"
             style={{marginLeft:(indentWidth*SINGLE_INDENT + "px")}}>
-                {this.renderObjectConents(src, props)}
+                {this.renderObjectContents(src, props)}
             </div>
         </div>);
     }
 
     getElipsis = () => {
         return (
-            <div class="collapsed-elipsis" onClick={this.toggleCollapsed}>
+            <div {...style(this.props.theme, 'elipsis')}
+            onClick={this.toggleCollapsed}>
                 ...
             </div>
         );
@@ -71,51 +81,68 @@ export default class extends React.Component {
 
     getObjectMetaData = (src) => {
         const size = Object.keys(src).length;
+        const {rjvId, theme} = this.props;
+        const props = {size, rjvId, theme, src};
         return (
-            <VariableMeta size={size} src={src} />
+            <VariableMeta {...props}/>
         );
     }
 
-    render = () => {
+    render() {
         // `indentWidth` and `collapsed` props will
         // perpetuate to children via `...rest`
         const {
-            depth, src, namespace, name, type, parent_type, ...rest
+            depth, src, namespace, name, type, parent_type, theme, jsvRoot,
+            ...rest
         } = this.props;
         const {
             object_type, display_name, expanded
         } = this.state;
-        const expanded_class = expanded ? "expanded" : "collapsed";
-        const expanded_icon = expanded ? <CircleMinus /> : <CirclePlus />;
+        //expanded/collapsed icon
+        let expanded_icon;
+        if (expanded) {
+            expanded_icon = <CircleMinus {...style(theme, 'expanded-icon')} />
+        } else {
+            expanded_icon = <CirclePlus {...style(theme, 'collapsed-icon')} />
+        }
 
-        return (<div class="object-key-val">
-            <div onClick={this.toggleCollapsed} class="open-brace brace-row">
-                <div class={"icon-container " + expanded_class}>
-                    {expanded_icon /*mdi icon*/}
-                </div>
-                {
-                parent_type == 'array'
-                ? <div class="object-key array">{display_name}</div>
-                : <div class="object-name">"{display_name}"</div>
-                }
-                <div class="object-colon">:</div>
-                <div class="brace">{object_type == 'array' ? '[' : '{'}</div>
+        return (<div {...style(theme, jsvRoot ? 'jsv-root' : 'object-key-val')}>
+            <span>
+                <span onClick={this.toggleCollapsed} {...style(theme, 'brace-row')}>
+                    <span class="icon-container">{expanded_icon}</span>
+                    {
+                    parent_type == 'array'
+                    ? <span {...style(theme, 'array-key')} key={namespace}>
+                        {display_name}
+                    </span>
+                    : <span {...style(theme, 'object-name')} key={namespace}>
+                        "{display_name}"
+                    </span>
+                    }
+                    <span {...style(theme, 'colon')}>:</span>
+                    <span {...style(theme, 'brace')}>
+                        {object_type == 'array' ? '[' : '{'}
+                    </span>
+                </span>
                 {expanded ? this.getObjectMetaData(src) : null}
-            </div>
+            </span>
             {expanded
-                ? this.getObjectContent(depth, src, rest)
+                ? this.getObjectContent(depth, src, {theme, ...rest})
                 : this.getElipsis()
             }
-            <div class="close-brace brace-row">
-                <div class="brace">{object_type == 'array' ? ']' : '}'}</div>
+            <span class="brace-row">
+                <span {...style(theme, 'brace')} >
+                    {object_type == 'array' ? ']' : '}'}
+                </span>
                 {expanded ? null : this.getObjectMetaData(src)}
-            </div>
+            </span>
         </div>);
     }
 
-    renderObjectConents = (variables, props) => {
+    renderObjectContents = (variables, props) => {
         const {depth, parent_type} = this.props;
         const {namespace, object_type} = this.state;
+        let theme = props.theme;
         let elements = [], variable;
 
         for (let name in variables) {
@@ -142,39 +169,55 @@ export default class extends React.Component {
                         {...props}
                     />);
             } else {
-                elements.push(<div class="object-key-val" key={variable.name}>
-                    <div class={"object-key " + object_type}>
-                            {
-                                this.props.type == 'array'
-                                ? variable.name : '"' + variable.name + '"'
-                            }
-                        <div class="key-colon">:</div>
-                    </div>
-                    {getValue(variable)}
-                </div>);
+                elements.push(
+                <div {...style(props.theme, 'object-key-val')}
+                key={variable.name}>
+                    {
+                        this.props.type == 'array'
+                        ? (
+                        <div {...style(props.theme, 'array-key')}
+                        key={variable.name + '_' + namespace}>
+                            {variable.name}
+                            <div {...style(props.theme, 'colon')}>:</div>
+                        </div>
+                        )
+                        : (
+                        <div {...style(props.theme, 'object-name')}
+                        key={variable.name + '_' + namespace}>
+                            "{variable.name}"
+                            <div {...style(props.theme, 'colon')}>:</div>
+                        </div>
+                        )
+
+                    }
+                    {getValue(variable, props)}
+                </div>
+                );
             }
         }
         return elements;
 
-        function getValue(variable) {
+        function getValue(variable, props) {
             switch (variable.type) {
                 case 'string':
-                    return <JsonString value={variable.value} />;
+                    return <JsonString value={variable.value} {...props} />;
                 case 'integer':
-                    return <JsonInteger value={variable.value} />;
+                    return <JsonInteger value={variable.value} {...props} />;
                 case 'float':
-                    return <JsonFloat value={variable.value} />;
+                    return <JsonFloat value={variable.value} {...props} />;
                 case 'boolean':
-                    return <JsonBoolean value={variable.value} />;
+                    return <JsonBoolean value={variable.value} {...props} />;
                 case 'function':
-                    return <JsonFunction value={variable.value} />;
+                    return <JsonFunction value={variable.value} {...props} />;
                 case 'null':
-                    return <JsonNull />;
+                    return <JsonNull {...props} />;
                 case 'nan':
-                    return <JsonNan />;
+                    return <JsonNan {...props} />;
                 default:
                     //catch-all for types that weren't anticipated
-                    return <div class="object-value">{variable.value}</div>;
+                    return <div class="object-value" {...props} >
+                        {variable.value}
+                    </div>;
             }
         }
     }
@@ -188,3 +231,6 @@ class JsonVariable {
         this.type = toType(value);
     }
 }
+
+//export component
+export default rjvObject;

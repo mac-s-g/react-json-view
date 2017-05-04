@@ -2,14 +2,15 @@ import React from 'react';
 
 //clibboard icon
 import Clippy from 'react-icons/lib/go/clippy';
-//style specifically for this component
-require('./../../style/variable_meta.scss');
 //clipboard library
 //https://www.npmjs.com/package/clipboard
 import Clipboard from 'clipboard';
 import ReactTooltip from 'react-tooltip';
 //app config key-val storage
 import ConfigStore from './../stores/ConfigStore';
+
+//theme
+import Style from './../themes/getStyle';
 
 
 export default class extends React.Component {
@@ -22,8 +23,12 @@ export default class extends React.Component {
         id: null,
         clipboard: null,
         copy_state: null,
-        display_clipboard: ConfigStore.get('enableClipboard', true),
-        display_size: ConfigStore.get('displayObjectSize', true),
+        display_clipboard: ConfigStore.get(
+            this.props.rjvId, 'enableClipboard', true
+        ),
+        display_size: ConfigStore.get(
+            this.props.rjvId, 'displayObjectSize', true
+        ),
     }
 
     componentDidMount = () => {
@@ -51,19 +56,22 @@ export default class extends React.Component {
         this.state.clipboard && this.state.clipboard.destroy();
     }
 
-    getCopyComponent(src, id, tooltip_id, copy_state) {
+    getCopyComponent = (src, id, tooltip_id, copy_state) => {
         //had to jump through some hoops to get the
         //react-tooltip to act like a react component should.
         //it does not support dynamic content updates
+        let style = Style(this.props.theme, 'copy-to-clipboard').style;
         return (
-            <div style={{
+            <span style={{
                 display: this.state.display_clipboard ? 'inline-block' : 'none'
             }}>
-                <div
-                style={{display:copy_state=='success' ? 'none' : 'inline-block'}}
+                <span
+                style={{
+                    ...style,
+                    display:copy_state=='success' ? 'none' : 'inline-block'
+                }}
                 data-clipboard-text={JSON.stringify(src)}
                 id={"clipboard-container-" + id}
-                class="copy-to-clipboard"
                 data-tip='copy to clipboard'
                 data-for={tooltip_id} >
                     <Clippy />
@@ -75,10 +83,12 @@ export default class extends React.Component {
                     delayShow={1000} >
                         copy to clipboard
                     </ReactTooltip>
-                </div>
-                <div
-                style={{display:copy_state=='success' ? 'inline-block' : 'none'}}
-                class="copy-to-clipboard"
+                </span>
+                <span
+                style={{
+                    ...style,
+                    display:copy_state=='success' ? 'inline-block' : 'none'
+                }}
                 data-tip='copied'
                 data-for={tooltip_id + '-success'} >
                     <Clippy />
@@ -93,15 +103,15 @@ export default class extends React.Component {
                     delayShow={0} >
                         copied
                     </ReactTooltip>
-                </div>
-            </div>
+                </span>
+            </span>
         );
     }
 
     getObjectSize = (size) => {
         if (this.state.display_size) {
             return (
-                <span class="object-size">
+                <span {...Style(this.props.theme, 'object-size')}>
                     {size} item{size == 1 ? '' : 's'}
                 </span>
             );
@@ -110,11 +120,13 @@ export default class extends React.Component {
 
     render = () => {
         const {id, copy_state} = this.state;
-        const {src, size} = this.props;
+        const {src, size, theme} = this.props;
         const tooltip_id = 'tooltip-' + id;
 
         return (
-        <div class="object-meta-data" onClick={(e)=>{
+        <div {...Style(theme, 'object-meta-data')}
+        class='object-meta-data'
+        onClick={(e)=>{
             e.stopPropagation();
         }}>
             {/* size badge display */}

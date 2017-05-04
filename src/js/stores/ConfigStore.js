@@ -3,11 +3,11 @@ class ConfigStore {
 
     store = {}
 
-    set = (key, value) => {
+    set = (id, key, value) => {
         this.store[key] = value;
     }
 
-    get = (key, default_value) => {
+    get = (id, key, default_value) => {
         if (this.store[key] === undefined) {
             return default_value;
         }

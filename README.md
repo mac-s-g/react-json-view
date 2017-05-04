@@ -21,6 +21,7 @@ import ReactJson from 'react-json-view'
 
 ### Example Component Display:
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-10.png?raw=true "Output Example")
+
 [See More Examples](https://mac-s-g.github.io/react-json-view/example/example.html)
 
 ### Intallation Instructions

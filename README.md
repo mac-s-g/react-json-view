@@ -11,7 +11,13 @@ This component provides a responsive interface for displaying arrays or JSON in 
   * [Installation instructions](#intallation-instructions) are listed below.
 
 ### Implementation Example:
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/source-example-9.png?raw=true "Usage Example")
+```
+// import the react-json-view component
+import ReactJson from 'react-json-view'
+
+// use the component in your app!
+<ReactJson src={my_json_object} />
+```
 
 ### Example Component Display:
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-10.png?raw=true "Output Example")

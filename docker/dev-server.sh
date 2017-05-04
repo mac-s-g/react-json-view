@@ -21,5 +21,5 @@ docker run \
     --name=react-json-view \
     -e NODE_ENV=$NODE_ENV \
     --publish 2000:2000 \
-    --entrypoint=/react/entrypoints/server.sh \
+    --entrypoint=/react/entrypoints/dev-server.sh \
     -t react-json-view

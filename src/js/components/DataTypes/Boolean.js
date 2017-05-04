@@ -1,20 +1,24 @@
 import React from 'react';
 import DataTypeLabel from './DataTypeLabel';
 
+//theme
+import Theme from './../../themes/getStyle';
+
 
 export default class extends React.Component {
 
     render() {
-        const type_name = 'boolean';
+        const type_name = 'bool';
+        const {props} = this;
         if (this.props.value) {
-            return <div class={"object-value " + type_name}>
-                <DataTypeLabel type_name={type_name} />
+            return <div {...Theme(props.theme, 'boolean')}>
+                <DataTypeLabel type_name={type_name} {...props} />
                 True
             </div>;
 
         } else {
-            return <div class={"object-value " + type_name}>
-                <DataTypeLabel type_name={type_name} />
+            return <div {...Theme(props.theme, 'boolean')}>
+                <DataTypeLabel type_name={type_name} {...props} />
                 False
             </div>;
 

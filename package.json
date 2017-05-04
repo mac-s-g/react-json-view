@@ -1,7 +1,7 @@
 {
   "name": "react-json-view",
   "description": "interactive json viewer wrapped up in a react component",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "main": "dist/main.js",
   "files": [
     "dist/"
@@ -31,9 +31,11 @@
     "jsdom": "^9.12.0",
     "mocha": "^3.2.0",
     "node-sass": "^3.8.0",
+    "radium":"^0.18.2",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-test-utils": "^15.4.1",
+    "react-base16-styling": "^0.5.3",
     "react-dom": "^15.4.2",
     "react-hot-loader": "^3.0.0-beta.6",
     "react-icons": "^2.2.3",
@@ -58,27 +60,10 @@
     "url": "https://github.com/mac-s-g/react-json-view.git"
   },
   "keywords": [
-    "component",
-    "interactive",
-    "interactive-json",
-    "json",
-    "json-component",
-    "json-display",
-    "json-tree",
-    "json-view",
+    "array-viewer",
     "json-viewer",
-    "pretty",
     "pretty-print",
-    "print",
-    "print-json",
-    "react",
-    "reactjs",
-    "react-component",
-    "react-json",
-    "responsive",
-    "responsive-json",
-    "view",
-    "viewer"
+    "react"
   ],
   "license": "MIT",
   "author": "Mac Gainor",

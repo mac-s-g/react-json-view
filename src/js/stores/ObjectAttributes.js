@@ -3,20 +3,24 @@ class ObjectAttributes {
 
     objects = {}
 
-    set = (name, key, value) => {
-        if (this.objects[name] === undefined) {
-            this.objects[name] = {};
+    set = (rjvId, name, key, value) => {
+        if (this.objects[rjvId] === undefined) {
+            this.objects[rjvId] = {};
         }
-        this.objects[name][key] = value;
+        if (this.objects[rjvId][name] === undefined) {
+            this.objects[rjvId][name] = {};
+        }
+        this.objects[rjvId][name][key] = value;
     }
 
-    get = (name, key, default_value) => {
-        if (this.objects[name] === undefined
-            || this.objects[name][key] == undefined
+    get = (rjvId, name, key, default_value) => {
+        if (this.objects[rjvId] === undefined
+            || this.objects[rjvId][name] === undefined
+            || this.objects[rjvId][name][key] == undefined
         ) {
-            this.set(name, key, default_value);
+            this.set(rjvId, name, key, default_value);
         }
-        return this.objects[name][key];
+        return this.objects[rjvId][name][key];
     }
 }
 

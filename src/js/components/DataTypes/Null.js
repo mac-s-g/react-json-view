@@ -1,12 +1,14 @@
 import React from 'react';
 
+//theme
+import Theme from './../../themes/getStyle';
 
 export default class extends React.Component {
 
     render() {
         const type_name = 'null';
         return (
-        <div class={"object-value " + type_name}>
+        <div {...Theme(this.props.theme, 'null')}>
             NULL
         </div>
         );

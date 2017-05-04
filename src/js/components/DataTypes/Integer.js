@@ -1,14 +1,17 @@
 import React from 'react';
 import DataTypeLabel from './DataTypeLabel';
 
+//theme
+import Theme from './../../themes/getStyle';
 
 export default class extends React.Component {
 
     render() {
-        const type_name = 'integer';
+        const type_name = 'int';
+        const {props} = this;
         return (
-        <div class={"object-value " + type_name}>
-            <DataTypeLabel type_name={type_name} />
+        <div {...Theme(props.theme, 'integer')}>
+            <DataTypeLabel type_name={type_name} {...props} />
             {this.props.value}
         </div>
         );

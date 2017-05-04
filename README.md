@@ -44,7 +44,7 @@ Name|Type|Default|Description
 * Object and array nodes can be collapsed and expanded
 * Object and array nodes display meta-data
 * Object and array nodes support a "Copy to Clipboard" feature
-* Different classes are applied to different types for style interaction
+* Base-16 Theme Support
 
 ### Customizing Style
 RJV now supports base-16 themes!

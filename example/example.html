@@ -20,8 +20,13 @@
         color: #aaa;
         font-size:14px;
         font-family: monospace;
+        margin-left: 6px;
       }
-      .example {padding: 5px;}
+      .react-json-view {
+        padding: 4px 6px;
+        border-radius: 3px;
+        display: inline-block;
+      }
     </style>
   </head>
   <body>
@@ -29,18 +34,21 @@
     <div class="code-comment">// example 1: JSON object</div>
     <div class="example" id="example1"></div>
     <br />
-    <div class="code-comment">// example 2: array input</div>
+    <div class="code-comment">// example 2: array input with "monokai" theme</div>
     <div class="example" id="example2"></div>
     <br />
     <div class="code-comment">// example 3: collapsed by default</div>
     <div class="example" id="example3"></div>
+    <br />
+    <div class="code-comment">// example 4: JSON with "chalk" theme</div>
+    <div class="example" id="example4"></div>
   </div>
   <script src="https://unpkg.com/react@15/dist/react.js"></script>
   <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
   <script src="https://unpkg.com/react-json-view@latest/dist/main.js"></script>
   <style>
     #app-container>div{
-      margin-bottom: 15px;
+      margin-bottom: 5px;
     }
   </style>
   <script type="text/javascript">
@@ -76,13 +84,14 @@
       );
 
       /*-----------EXAMPLE 2-----------*/
-      //an example ARRAY
+      //an example ARRAY with "monokai" theme
       var test_array = [
         'you can also display arrays!', 1, 2, 3, {'pretty_cool': true}
       ];
       var jsonView2 = new reactJsonView.default({
         src: test_array,
-        name: 'array-example'
+        name: 'array-example',
+        theme: 'monokai'
       });
       ReactDOM.render(
         jsonView2.render(),
@@ -111,6 +120,38 @@
       ReactDOM.render(
         jsonView3.render(),
         document.getElementById('example3')
+      );
+
+      /*-----------EXAMPLE 4-----------*/
+      //some test JSON with "chalk" theme
+      var test_json = {
+          test: 'this is a test string',
+          another_sibling: 42,
+          how_will_array_do: [1, 2, 3, 'test'],
+          how_will_floats_do: -2.757,
+          parent: {
+              sibling1: true,
+              sibling2: false,
+              sibling3: null,
+              'last-sibling': {
+                  grand_child: NaN,
+                  'grand-child-func': (a) => {
+                      let b = a*a;
+                      return b;
+                  }
+              }
+          },
+          string_number: "1234"
+      };
+
+      // reactJsonView is a global variable
+      var jsonView4 = new reactJsonView.default({
+        src: test_json,
+        theme: "chalk"
+      });
+      ReactDOM.render(
+        jsonView4.render(),
+        document.getElementById('example4')
       );
   </script>
   </body>

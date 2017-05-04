@@ -10,7 +10,7 @@ import ReactTooltip from 'react-tooltip';
 import ConfigStore from './../stores/ConfigStore';
 
 //theme
-import Style from './../themes/getStyle';
+import Theme from './../themes/getStyle';
 
 
 export default class extends React.Component {
@@ -60,7 +60,7 @@ export default class extends React.Component {
         //had to jump through some hoops to get the
         //react-tooltip to act like a react component should.
         //it does not support dynamic content updates
-        let style = Style(this.props.theme, 'copy-to-clipboard').style;
+        let style = Theme(this.props.theme, 'copy-to-clipboard').style;
         return (
             <span style={{
                 display: this.state.display_clipboard ? 'inline-block' : 'none'
@@ -111,7 +111,7 @@ export default class extends React.Component {
     getObjectSize = (size) => {
         if (this.state.display_size) {
             return (
-                <span {...Style(this.props.theme, 'object-size')}>
+                <span {...Theme(this.props.theme, 'object-size')}>
                     {size} item{size == 1 ? '' : 's'}
                 </span>
             );
@@ -124,7 +124,7 @@ export default class extends React.Component {
         const tooltip_id = 'tooltip-' + id;
 
         return (
-        <div {...Style(theme, 'object-meta-data')}
+        <div {...Theme(theme, 'object-meta-data')}
         class='object-meta-data'
         onClick={(e)=>{
             e.stopPropagation();

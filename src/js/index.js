@@ -6,7 +6,6 @@ import ConfigStore from './stores/ConfigStore'
 
 //global theme
 import style from './themes/getStyle';
-require('./../style/app-globals');
 
 
 //forward src through to JsonObject component

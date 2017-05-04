@@ -150,7 +150,8 @@ const getDefaultThemeStyling = theme => {
         },
         'copy-to-clipboard': {
             color: colors.copyToClipboard,
-            cursor: styleConstants.clipboardCursor
+            cursor: styleConstants.clipboardCursor,
+            margin: styleConstants.clipboardMargin
         },
         'object-meta-data': {
             display: 'inline-block',

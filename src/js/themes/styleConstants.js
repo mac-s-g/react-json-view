@@ -54,6 +54,7 @@ export default {
   objectSizeFontStyle: 'italic',
 
   clipboardCursor: 'pointer',
+  clipboardMargin: '0px 0px 0px 6px',
 
   metaDataPadding: '0px 0px 0px 10px'
 };

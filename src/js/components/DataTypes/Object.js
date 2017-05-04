@@ -15,7 +15,7 @@ import CirclePlus from 'react-icons/lib/md/add-circle-outline';
 import CircleMinus from 'react-icons/lib/md/remove-circle-outline';
 
 //theme
-import style from './../../themes/getStyle';
+import Theme from './../../themes/getStyle';
 import Radium from 'radium';
 
 //increment 1 with each nested object & array
@@ -72,7 +72,7 @@ class rjvObject extends React.Component {
 
     getElipsis = () => {
         return (
-            <div {...style(this.props.theme, 'elipsis')}
+            <div {...Theme(this.props.theme, 'elipsis')}
             onClick={this.toggleCollapsed}>
                 ...
             </div>
@@ -101,26 +101,26 @@ class rjvObject extends React.Component {
         //expanded/collapsed icon
         let expanded_icon;
         if (expanded) {
-            expanded_icon = <CircleMinus {...style(theme, 'expanded-icon')} />
+            expanded_icon = <CircleMinus {...Theme(theme, 'expanded-icon')} />
         } else {
-            expanded_icon = <CirclePlus {...style(theme, 'collapsed-icon')} />
+            expanded_icon = <CirclePlus {...Theme(theme, 'collapsed-icon')} />
         }
 
-        return (<div {...style(theme, jsvRoot ? 'jsv-root' : 'object-key-val')}>
+        return (<div {...Theme(theme, jsvRoot ? 'jsv-root' : 'object-key-val')}>
             <span>
-                <span onClick={this.toggleCollapsed} {...style(theme, 'brace-row')}>
+                <span onClick={this.toggleCollapsed} {...Theme(theme, 'brace-row')}>
                     <span class="icon-container">{expanded_icon}</span>
                     {
                     parent_type == 'array'
-                    ? <span {...style(theme, 'array-key')} key={namespace}>
+                    ? <span {...Theme(theme, 'array-key')} key={namespace}>
                         {display_name}
                     </span>
-                    : <span {...style(theme, 'object-name')} key={namespace}>
+                    : <span {...Theme(theme, 'object-name')} key={namespace}>
                         "{display_name}"
                     </span>
                     }
-                    <span {...style(theme, 'colon')}>:</span>
-                    <span {...style(theme, 'brace')}>
+                    <span {...Theme(theme, 'colon')}>:</span>
+                    <span {...Theme(theme, 'brace')}>
                         {object_type == 'array' ? '[' : '{'}
                     </span>
                 </span>
@@ -131,7 +131,7 @@ class rjvObject extends React.Component {
                 : this.getElipsis()
             }
             <span class="brace-row">
-                <span {...style(theme, 'brace')} >
+                <span {...Theme(theme, 'brace')} >
                     {object_type == 'array' ? ']' : '}'}
                 </span>
                 {expanded ? null : this.getObjectMetaData(src)}
@@ -170,22 +170,22 @@ class rjvObject extends React.Component {
                     />);
             } else {
                 elements.push(
-                <div {...style(props.theme, 'object-key-val')}
+                <div {...Theme(props.theme, 'object-key-val')}
                 key={variable.name}>
                     {
                         this.props.type == 'array'
                         ? (
-                        <div {...style(props.theme, 'array-key')}
+                        <div {...Theme(props.theme, 'array-key')}
                         key={variable.name + '_' + namespace}>
                             {variable.name}
-                            <div {...style(props.theme, 'colon')}>:</div>
+                            <div {...Theme(props.theme, 'colon')}>:</div>
                         </div>
                         )
                         : (
-                        <div {...style(props.theme, 'object-name')}
+                        <div {...Theme(props.theme, 'object-name')}
                         key={variable.name + '_' + namespace}>
                             "{variable.name}"
-                            <div {...style(props.theme, 'colon')}>:</div>
+                            <div {...Theme(props.theme, 'colon')}>:</div>
                         </div>
                         )
 

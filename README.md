@@ -34,6 +34,7 @@ Name|Type|Default|Description
 `src`|`JSON Object`|None|This property contains your input JSON
 `name`|`string`|"root"|Contains the name of your root node
 `collapsed`|`boolean`|`false`|When set to `true`, all nodes will be collapsed by default
+`theme`|`string`|"rjv-default"|RJV supports base-16 themes.  Check out the [list of supported themes here](https://github.com/gaearon/base16-js/tree/master/src). A custom "rjv-default" theme applies by default.
 `indentWidth`|`integer`|4|Set the indent-width for nested objects
 `enableClipboard`|`boolean`|`true`|When set to `true`, the user can copy objects and arrays to clipboard
 `displayObjectSize`|`boolean`|`true`|When set to `true`, objects and arrays are labeled with size
@@ -46,7 +47,19 @@ Name|Type|Default|Description
 * Different classes are applied to different types for style interaction
 
 ### Customizing Style
-update or override `src/style/_variables.scss` to apply your own theme.
+RJV now supports base-16 themes!
+
+You can specify a `theme` prop when you instantiate your rjv component.
+```
+<ReactJson src={my_important_json} theme="monokai" />
+```
+Check out the [list of supported themes here](https://github.com/gaearon/base16-js/tree/master/src).
+
+#### Monokai theme example
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-monokai.png?raw=true "Base-16 Theme Example")
+
+#### Solarized theme example
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-solarized.png?raw=true "Base-16 Theme Example")
 
 ### Contributing to the source code:
 #### Standard Workflow
@@ -85,6 +98,3 @@ All node modules are installed within the container, so make sure to rebuild you
 
 ### To-Do's
 1. Add Tests!
-2. improve customizability
-    * allow specific keys to be expanded/collapsed by default
-    * add a few different themes on top of `_variables.scss`

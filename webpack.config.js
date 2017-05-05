@@ -65,18 +65,6 @@ const config = {
         ],
         include: [PATHS.js, PATHS.example]
       },
-      {
-        test: /\.s?css(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: [
-          "style-loader",
-          "css-loader",
-          "sass-loader",
-        ]
-      },
-      {
-        test: /\.(swf|woff(2)?|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "file-loader"
-      }
     ]
   }
 };

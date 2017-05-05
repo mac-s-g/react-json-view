@@ -7,3 +7,4 @@ example
 .git
 .gitignore
 example/example-react.js
+webpack.config.template.js

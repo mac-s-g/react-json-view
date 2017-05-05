@@ -1,6 +1,6 @@
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/rjv-icon-alt.png?raw=true)
 
-[![npm](https://img.shields.io/npm/v/react-json-view.svg)](https://www.npmjs.com/package/react-json-view) [![npm](https://img.shields.io/npm/l/react-json-view.svg)](https://www.npmjs.com/package/react-json-view) 
+[![npm](https://img.shields.io/npm/v/react-json-view.svg)](https://www.npmjs.com/package/react-json-view) [![npm](https://img.shields.io/npm/l/react-json-view.svg)](https://www.npmjs.com/package/react-json-view)
 
 # react-json-view
 Interactive react component for displaying javascript **arrays** and **JSON objects**.
@@ -108,4 +108,4 @@ All node modules are installed within the container, so make sure to rebuild you
 
 ### To-Do's
 1. Add Tests!
-2. Add some pretty badges to the github index.
+2. Integrate Travis CI and indicate build status.

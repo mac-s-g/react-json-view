@@ -3,7 +3,7 @@ MAINTAINER mac <mac.gainor@gmail.com>
 
 # install the node modules at container build time
 ADD package.json /tmp/package.json
-RUN cd /tmp && npm install
+RUN cd /tmp && npm install --silent
 RUN mkdir -p /react && cp -a /tmp/node_modules /react
 
 # Now add our project code

@@ -2,3 +2,6 @@ dist
 npm-debug.log
 example/example-react.js
 webpack.config.template.js
+
+# Coverage directory used by tools like istanbul
+coverage

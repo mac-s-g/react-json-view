@@ -4,7 +4,9 @@ services:
   - docker
 
 before_install:
-- ./docker/build.sh
+  - ./docker/build.sh
+
+after_success: npm run coverage
 
 language: node_js
 node_js:

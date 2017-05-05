@@ -1,0 +1,5 @@
+{
+  "require": [
+    "/react/test/helpers/browser.js"
+  ]
+}

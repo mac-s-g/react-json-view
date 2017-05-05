@@ -17,7 +17,11 @@ const entrypoint = process.env.NODE_ENV === 'local_example'
 
 const config = {
   entry: [entrypoint],
-  externals: {},
+  externals: {
+    'cheerio': 'window',
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true,
+  },
   devServer: {
     host: '0.0.0.0',
     port: wds_port,
@@ -49,11 +53,7 @@ const config = {
           {
             loader: 'babel-loader',
             options: {
-              presets: [
-                'babel-preset-es2015',
-                'babel-preset-react',
-                'babel-preset-stage-0'
-              ].map(require.resolve),
+              presets: ['react', 'es2015', 'stage-0'],
               plugins: [
                 'transform-class-properties',
                 'transform-decorators-legacy',

@@ -63,7 +63,7 @@ export default class extends React.Component {
     }
 
     componentWillReceiveProps = (nextProps) => {
-        this.init(props);
+        this.init(this.props);
         this.setState(this.state);
     }
 

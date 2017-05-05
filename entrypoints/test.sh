@@ -8,4 +8,4 @@ mkdir -p /react/dist || true
 cp /react/src/html/index.html.template /react/dist/index.html
 cd /react
 
-exec npm run test
+exec npm run unit_test

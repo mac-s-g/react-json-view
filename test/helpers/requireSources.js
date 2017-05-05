@@ -1,0 +1,1 @@
+import '/react/src/js/index';

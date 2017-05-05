@@ -52,7 +52,8 @@
   "scripts": {
     "start": "node server.js",
     "build": "webpack --display-error-details --progress",
-    "test": "mocha --require ignore-styles /react/test/helpers/browser.js /react/test/*test.js /react/test/**/*test.js",
+    "test": "./docker/test.sh",
+    "unit_test": "mocha --require ignore-styles /react/test/helpers/browser.js /react/test/*test.js /react/test/**/*test.js",
     "dev:hot": "webpack-dev-server"
   },
   "repository": {

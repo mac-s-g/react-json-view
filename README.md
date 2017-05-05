@@ -107,4 +107,4 @@ Webpack-dev-server is running in the container and hot-reloading when changes ar
 All node modules are installed within the container, so make sure to rebuild your container if you make changes to package.json (see step 3, above).
 
 ### To-Do's
-1. Add Tests!
+1. Add more tests!

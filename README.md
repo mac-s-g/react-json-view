@@ -108,4 +108,3 @@ All node modules are installed within the container, so make sure to rebuild you
 
 ### To-Do's
 1. Add Tests!
-2. Integrate Travis CI and indicate build status.

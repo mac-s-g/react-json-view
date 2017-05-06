@@ -6,8 +6,6 @@ services:
 before_install:
   - ./docker/build.sh
 
-after_success: npm run coverage
-
 language: node_js
 node_js:
   - "7"

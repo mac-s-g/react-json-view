@@ -46,9 +46,9 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "dev:hot": "webpack-dev-server",
     "start": "node server.js",
-    "test": "./docker/test.sh",
+    "test": "./docker/coverage.sh",
     "test:watch": "mocha -w /react/test/helpers/browser.js /react/test/**/*test.js",
-    "unit_test": "nyc --reporter=html --reporter=text mocha /react/test/**/*test.js"
+    "unit_test": "nyc --reporter=html --reporter=text-lcov --reporter=text mocha /react/test/**/*test.js"
   },
   "repository": {
     "type": "git",

@@ -51,16 +51,7 @@ const config = {
         test: /\.jsx?$/,
         use: [
           {
-            loader: 'babel-loader',
-            options: {
-              presets: ['react', 'es2015', 'stage-0'],
-              plugins: [
-                'transform-class-properties',
-                'transform-decorators-legacy',
-                'react-html-attrs',
-                'transform-function-bind'
-              ]
-            }
+            loader: 'babel-loader'
           }
         ],
         include: [PATHS.js, PATHS.example]

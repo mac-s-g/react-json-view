@@ -43,12 +43,12 @@
   "dependencies": {},
   "scripts": {
     "build": "webpack --display-error-details --progress",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "dev:hot": "webpack-dev-server",
     "start": "node server.js",
     "test": "./docker/coverage.sh",
-    "test:watch": "mocha -w /react/test/helpers/browser.js /react/test/**/*test.js",
-    "unit_test": "nyc --reporter=html --reporter=text-lcov --reporter=text mocha /react/test/**/*test.js"
+    "test:coverage": "nyc report --reporter=text-lcov | coveralls",
+    "test:unit": "nyc --reporter=html --reporter=text-lcov --reporter=text mocha /react/test/**/*test.js",
+    "test:watch": "nyc --reporter=html --reporter=text-lcov --reporter=text mocha -w /react/test/**/*test.js"
   },
   "repository": {
     "type": "git",

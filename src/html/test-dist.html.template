@@ -116,7 +116,8 @@
           ]
         },
         collapsed: true,
-        indentWidth: 8
+        indentWidth: 8,
+        displayDataTypes: false
       });
       ReactDOM.render(
         jsonView3.render(),

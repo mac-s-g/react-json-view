@@ -6,8 +6,6 @@ echo "Running with NODE_ENV=$NODE_ENV"
 
 rm -rf ./coverage/*
 
-mkdir .nyc_output
-
 # run the workbench container
 docker run \
     -v $(pwd)/src:/react/src \
@@ -22,5 +20,3 @@ docker run \
     --entrypoint=/react/entrypoints/coverage.sh \
     -t react-json-view
 
-
-rm -rf .nyc_output

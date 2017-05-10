@@ -61,10 +61,9 @@ class rjvObject extends React.Component {
     }
 
     getObjectContent = (depth, src, props) => {
-        const {indentWidth} = this.state;
         return (<div class="pushed-content object-container">
             <div class="object-content"
-            style={{marginLeft:(indentWidth*SINGLE_INDENT + "px")}}>
+            {...Theme(this.props.theme, 'pushed-content')} >
                 {this.renderObjectContents(src, props)}
             </div>
         </div>);
@@ -92,21 +91,28 @@ class rjvObject extends React.Component {
         // `indentWidth` and `collapsed` props will
         // perpetuate to children via `...rest`
         const {
-            depth, src, namespace, name, type, parent_type, theme, jsvRoot,
+            depth, src, namespace, name, type,
+            parent_type, theme, jsvRoot,
             ...rest
         } = this.props;
         const {
             object_type, display_name, expanded
         } = this.state;
         //expanded/collapsed icon
-        let expanded_icon;
+        let expanded_icon, object_padding_left = 0;
+
         if (expanded) {
             expanded_icon = <CircleMinus {...Theme(theme, 'expanded-icon')} />
         } else {
             expanded_icon = <CirclePlus {...Theme(theme, 'collapsed-icon')} />
         }
 
-        return (<div {...Theme(theme, jsvRoot ? 'jsv-root' : 'object-key-val')}>
+        if (!jsvRoot) {
+            object_padding_left = this.props.indentWidth * SINGLE_INDENT;
+        }
+
+
+        return (<div {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', object_padding_left)}>
             <span>
                 <span onClick={this.toggleCollapsed} {...Theme(theme, 'brace-row')}>
                     <span class="icon-container">{expanded_icon}</span>
@@ -131,7 +137,10 @@ class rjvObject extends React.Component {
                 : this.getElipsis()
             }
             <span class="brace-row">
-                <span {...Theme(theme, 'brace')} >
+                <span style={{
+                    ...Theme(theme, 'brace').style,
+                    paddingLeft:(expanded ? '3px' : '0px')
+                }} >
                     {object_type == 'array' ? ']' : '}'}
                 </span>
                 {expanded ? null : this.getObjectMetaData(src)}
@@ -170,12 +179,12 @@ class rjvObject extends React.Component {
                     />);
             } else {
                 elements.push(
-                <div {...Theme(props.theme, 'object-key-val')}
+                <div {...Theme(theme, 'objectKeyVal', this.props.indentWidth * SINGLE_INDENT)}
                 key={variable.name}>
                     {
                         this.props.type == 'array'
                         ? (
-                        <div {...Theme(props.theme, 'array-key')}
+                        <div {...Theme(theme, 'array-key')}
                         key={variable.name + '_' + namespace}>
                             {variable.name}
                             <div {...Theme(props.theme, 'colon')}>:</div>

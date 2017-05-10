@@ -25,7 +25,7 @@ const colorMap = theme => ({
     }
 });
 
-const getDefaultThemeStyling = (theme, args) => {
+const getDefaultThemeStyling = theme => {
     const colors = colorMap(theme);
 
     return {

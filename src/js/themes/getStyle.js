@@ -25,7 +25,7 @@ const colorMap = theme => ({
     }
 });
 
-const getDefaultThemeStyling = theme => {
+const getDefaultThemeStyling = (theme, args) => {
     const colors = colorMap(theme);
 
     return {
@@ -62,15 +62,20 @@ const getDefaultThemeStyling = theme => {
             margin: styleConstants.keyMargin,
             color: colors.keyColor
         },
-        'object-key-val': {
-            padding: styleConstants.keyValPadding,
-            borderLeft: styleConstants.keyValBorderLeft
-                + ' ' + colors.objectBorder,
-            ':hover': {
-                padding: styleConstants.keyValPaddingHover,
-                borderLeft: styleConstants.keyValBorderHover
-                    + ' ' + colors.objectBorder
-            }
+        objectKeyVal: (component, paddingLeft) => {
+            return {style: {
+                paddingLeft: paddingLeft + 'px',
+                paddingTop: styleConstants.keyValPaddingTop,
+                paddingRight: styleConstants.keyValPaddingRight,
+                paddingBottom: styleConstants.keyValPaddingBottom,
+                borderLeft: styleConstants.keyValBorderLeft
+                    + ' ' + colors.objectBorder,
+                ':hover': {
+                    paddingLeft: (paddingLeft - 1)  + 'px',
+                    borderLeft: styleConstants.keyValBorderHover
+                        + ' ' + colors.objectBorder
+                }
+            }};
         },
         'object-key-val-no-border': {
             padding: styleConstants.keyValPadding
@@ -165,15 +170,17 @@ const getStyle = (theme) => {
     if (theme === false || theme === 'none') {
         rjv_theme = rjv_grey;
     }
+
     return createStyling(
         getDefaultThemeStyling,
-        {defaultBase16: rjv_theme},
+        {defaultBase16: rjv_theme}
     )(theme);
 }
 
-export default function style(theme, component) {
+export default function style(theme, component, args) {
     if (!theme) {
         console.error('theme has not been set')
     }
-    return getStyle(theme)(component);
+
+    return getStyle(theme)(component, args);
 }

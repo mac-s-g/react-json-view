@@ -63,7 +63,7 @@ class rjvObject extends React.Component {
     getObjectContent = (depth, src, props) => {
         return (<div class="pushed-content object-container">
             <div class="object-content"
-            style={{marginLeft: '6px'}}>
+            {...Theme(this.props.theme, 'pushed-content')} >
                 {this.renderObjectContents(src, props)}
             </div>
         </div>);

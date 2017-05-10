@@ -32,6 +32,8 @@ export default {
   keyValBorderHover: '2px solid',
   keyValPaddingHover: '3px 5px 3px 4px',
 
+  pushedContentMarginLeft: '6px',
+
 
   nullFontSize: '11px',
   nullFontWeight: 'bold',

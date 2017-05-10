@@ -80,6 +80,9 @@ const getDefaultThemeStyling = (theme, args) => {
         'object-key-val-no-border': {
             padding: styleConstants.keyValPadding
         },
+        'pushed-content': {
+            marginLeft: styleConstants.pushedContentMarginLeft
+        },
         'object-name': {
             display: 'inline-block',
             color: colors.keyColor,

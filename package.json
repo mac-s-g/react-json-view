@@ -54,12 +54,30 @@
     "type": "git",
     "url": "https://github.com/mac-s-g/react-json-view.git"
   },
-  "keywords": [
+   "keywords": [
     "array-viewer",
-    "json-viewer",
-    "pretty-print",
-    "react"
-  ],
+     "component",
+     "interactive",
+     "interactive-json",
+     "json",
+     "json-component",
+     "json-display",
+     "json-tree",
+     "json-view",
+     "json-viewer",
+     "pretty",
+     "pretty-print",
+     "print",
+     "print-json",
+     "react",
+     "react-component",
+     "react-json",
+     "responsive",
+     "responsive-json",
+     "view",
+     "viewer"
+   ],
+
   "license": "MIT",
   "author": "Mac Gainor",
   "bugs": {

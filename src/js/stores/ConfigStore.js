@@ -4,14 +4,20 @@ class ConfigStore {
     store = {}
 
     set = (id, key, value) => {
-        this.store[key] = value;
+        if (this.store[id] === undefined) {
+            this.store[id] = {};
+        }
+        this.store[id][key] = value;
     }
 
     get = (id, key, default_value) => {
-        if (this.store[key] === undefined) {
+        if (this.store[id] === undefined) {
+            this.store[id] = {};
+        }
+        if (this.store[id][key] === undefined) {
             return default_value;
         }
-        return this.store[key];
+        return this.store[id][key];
     }
 }
 

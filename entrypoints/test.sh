@@ -3,4 +3,4 @@ echo Running Tests
 
 cd /react
 
-exec npm run unit_test
+exec npm run test:unit

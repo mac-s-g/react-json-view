@@ -102,9 +102,15 @@ class rjvObject extends React.Component {
         let expanded_icon, object_padding_left = 0;
 
         if (expanded) {
-            expanded_icon = <CircleMinus {...Theme(theme, 'expanded-icon')} />
+            expanded_icon = <CircleMinus
+                {...Theme(theme, 'expanded-icon')}
+                class="expanded-icon"
+            />
         } else {
-            expanded_icon = <CirclePlus {...Theme(theme, 'collapsed-icon')} />
+            expanded_icon = <CirclePlus
+                {...Theme(theme, 'collapsed-icon')}
+                class="collapsed-icon"
+            />
         }
 
         if (!jsvRoot) {
@@ -112,7 +118,10 @@ class rjvObject extends React.Component {
         }
 
 
-        return (<div {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', object_padding_left)}>
+        return (<div class='object-key-val'
+            {...Theme(
+                theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', object_padding_left
+            )}>
             <span>
                 <span onClick={this.toggleCollapsed} {...Theme(theme, 'brace-row')}>
                     <span class="icon-container">{expanded_icon}</span>

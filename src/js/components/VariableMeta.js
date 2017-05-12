@@ -37,17 +37,22 @@ export default class extends React.Component {
         let clipboard_container = document.getElementById(
             'clipboard-container-' + id
         );
-        this.state.clipboard = new Clipboard(
-            clipboard_container
-        );
 
-        this.state.clipboard.on('success', (e) => {
-            this.setState({copy_state: 'success'});
-        });
+        //cant figure out why document.getElementById
+        //is not working for tests
+        if (clipboard_container) {
+            this.state.clipboard = new Clipboard(
+                clipboard_container
+            );
 
-        this.state.clipboard.on('error', (e) => {
-            this.setState({copy_state: 'error'});
-        });
+            this.state.clipboard.on('success', (e) => {
+                this.setState({copy_state: 'success'});
+            });
+
+            this.state.clipboard.on('error', (e) => {
+                this.setState({copy_state: 'error'});
+            });
+        }
 
         this.state.copy_state = null;
     }
@@ -62,7 +67,9 @@ export default class extends React.Component {
         //it does not support dynamic content updates
         let style = Theme(this.props.theme, 'copy-to-clipboard').style;
         return (
-            <span style={{
+            <span
+            class="copy-to-clipboard-container"
+            style={{
                 display: this.state.display_clipboard ? 'inline-block' : 'none'
             }}>
                 <span
@@ -111,7 +118,8 @@ export default class extends React.Component {
     getObjectSize = (size) => {
         if (this.state.display_size) {
             return (
-                <span {...Theme(this.props.theme, 'object-size')}>
+                <span class="object-size"
+                {...Theme(this.props.theme, 'object-size')}>
                     {size} item{size == 1 ? '' : 's'}
                 </span>
             );

@@ -6,6 +6,7 @@ entrypoints
 example
 .git
 .gitignore
+test
 example/example-react.js
 webpack.config.template.js
 

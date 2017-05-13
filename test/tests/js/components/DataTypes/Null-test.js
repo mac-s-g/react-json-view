@@ -2,9 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import {expect} from 'chai';
 
-import JsonNull from './../../../src/js/components/DataTypes/Null';
-import DataTypeLabel from './../../../src/js/components/DataTypes/DataTypeLabel';
-import ConfigStore from './../../../src/js/stores/ConfigStore';
+import JsonNull from '/react/src/js/components/DataTypes/Null';
+import DataTypeLabel from '/react/src/js/components/DataTypes/DataTypeLabel';
+import ConfigStore from '/react/src/js/stores/ConfigStore';
 
 describe('<JsonNull />', function () {
     const rjvId = 1;

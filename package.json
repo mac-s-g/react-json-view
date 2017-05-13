@@ -48,8 +48,8 @@
     "start": "node server.js",
     "test": "./docker/coverage.sh",
     "test:coverage": "nyc report --reporter=text-lcov | coveralls",
-    "test:unit": "nyc --reporter=html --reporter=text-lcov --reporter=text mocha /react/test/**/*test.js",
-    "test:watch": "nyc --reporter=html --reporter=text-lcov --reporter=text mocha -w /react/test/**/*test.js"
+    "test:unit": "nyc --reporter=html --reporter=text-lcov --reporter=text mocha /react/test/**/*-test.js",
+    "test:watch": "nyc --reporter=html --reporter=text-lcov --reporter=text mocha -w /react/test/**/*-test.js"
   },
   "repository": {
     "type": "git",

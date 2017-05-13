@@ -2,9 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import {expect} from 'chai';
 
-import JsonFloat from './../../../src/js/components/DataTypes/Float';
-import DataTypeLabel from './../../../src/js/components/DataTypes/DataTypeLabel';
-import ConfigStore from './../../../src/js/stores/ConfigStore';
+import JsonFloat from '/react/src/js/components/DataTypes/Float';
+import DataTypeLabel from '/react/src/js/components/DataTypes/DataTypeLabel';
+import ConfigStore from '/react/src/js/stores/ConfigStore';
 
 describe('<JsonFloat />', function () {
     const rjvId = 1;

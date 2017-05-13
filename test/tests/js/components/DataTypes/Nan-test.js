@@ -2,9 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import {expect} from 'chai';
 
-import JsonNan from './../../../src/js/components/DataTypes/Nan';
-import DataTypeLabel from './../../../src/js/components/DataTypes/DataTypeLabel';
-import ConfigStore from './../../../src/js/stores/ConfigStore';
+import JsonNan from '/react/src/js/components/DataTypes/Nan';
+import DataTypeLabel from '/react/src/js/components/DataTypes/DataTypeLabel';
+import ConfigStore from '/react/src/js/stores/ConfigStore';
 
 describe('<JsonNan />', function () {
     const rjvId = 1;

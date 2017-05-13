@@ -2,9 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import {expect} from 'chai';
 
-import JsonBoolean from './../../../src/js/components/DataTypes/Boolean';
-import DataTypeLabel from './../../../src/js/components/DataTypes/DataTypeLabel';
-import ConfigStore from './../../../src/js/stores/ConfigStore';
+import JsonBoolean from '/react/src/js/components/DataTypes/Boolean';
+import DataTypeLabel from '/react/src/js/components/DataTypes/DataTypeLabel';
+import ConfigStore from '/react/src/js/stores/ConfigStore';
 
 describe('<JsonBoolean />', function () {
     const rjvId = 1;

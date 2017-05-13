@@ -2,9 +2,9 @@ import React from 'react';
 import { shallow, render } from 'enzyme';
 import {expect} from 'chai';
 
-import JsonObject from './../../../src/js/components/DataTypes/Object';
-import ConfigStore from './../../../src/js/stores/ConfigStore';
-import AttributeStore from './../../../src/js/stores/ObjectAttributes';
+import JsonObject from '/react/src/js/components/DataTypes/Object';
+import ConfigStore from '/react/src/js/stores/ConfigStore';
+import AttributeStore from '/react/src/js/stores/ObjectAttributes';
 
 describe('<JsonObject />', function () {
     const rjvId = 1;

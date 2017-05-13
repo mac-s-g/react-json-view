@@ -2,8 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import {expect} from 'chai';
 
-import DataTypeLabel from './../../../src/js/components/DataTypes/DataTypeLabel';
-import ConfigStore from './../../../src/js/stores/ConfigStore';
+import DataTypeLabel from '/react/src/js/components/DataTypes/DataTypeLabel';
+import ConfigStore from '/react/src/js/stores/ConfigStore';
 
 describe('<DataTypeLabel />', function () {
     const rjvId = 1;

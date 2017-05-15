@@ -66,10 +66,10 @@ You can specify a `theme` prop when you instantiate your rjv component.
 Check out the [list of supported themes here](https://github.com/gaearon/base16-js/tree/master/src).
 
 #### Monokai theme example
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-monokai-1.png?raw=true "Base-16 Theme Example")
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-monokai-2.png?raw=true "Base-16 Theme Example")
 
 #### Solarized theme example
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-solarized-1.png?raw=true "Base-16 Theme Example")
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-solarized-2.png?raw=true "Base-16 Theme Example")
 
 ### Contributing to the source code:
 #### Standard Workflow

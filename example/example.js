@@ -45,7 +45,7 @@ ReactDom.render(
         <br />
 
         {/*demo array support*/}
-        <JsonViewer src={getExampleArray()} />
+        <JsonViewer src={getExampleArray()} theme='solarized' />
     </div>,
     document.getElementById('app-container')
 );
@@ -61,6 +61,7 @@ function getExampleJson1() {
         another_sibling: 42,
         how_will_array_do: [1, 2, 3, 'test'],
         how_will_floats_do: -2.757,
+        undefined_var: undefined,
         parent: {
             sibling1: true,
             sibling2: false,

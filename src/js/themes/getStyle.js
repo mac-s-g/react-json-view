@@ -15,12 +15,13 @@ const colorMap = theme => ({
     objectBorder: theme.base02,
     dataTypes: {
         boolean: theme.base0E,
-        float: theme.base09,
+        float: theme.base0B,
         function: theme.base0D,
-        integer: theme.base0B,
-        string: theme.base0F,
+        integer: theme.base0F,
+        string: theme.base09,
         nan: theme.base08,
         null: theme.base0A,
+        undefined: theme.base05,
         background: theme.base02
     }
 });
@@ -87,7 +88,6 @@ const getDefaultThemeStyling = theme => {
             display: 'inline-block',
             color: colors.keyColor,
             letterSpacing: styleConstants.keyLetterSpacing,
-            padding: styleConstants.keyPadding,
             fontStyle: styleConstants.keyFontStyle,
             verticalAlign: styleConstants.keyVerticalAlign,
             opacity: styleConstants.keyOpacity,
@@ -99,7 +99,6 @@ const getDefaultThemeStyling = theme => {
             display: 'inline-block',
             color: colors.arrayKeyColor,
             letterSpacing: styleConstants.keyLetterSpacing,
-            padding: styleConstants.keyPadding,
             fontStyle: styleConstants.keyFontStyle,
             verticalAlign: styleConstants.keyVerticalAlign,
             opacity: styleConstants.keyOpacity,
@@ -110,7 +109,8 @@ const getDefaultThemeStyling = theme => {
         'object-size': {
             color: colors.objectSize,
             borderRadius: styleConstants.objectSizeBorderRadius,
-            fontStyle: styleConstants.objectSizeFontStyle
+            fontStyle: styleConstants.objectSizeFontStyle,
+            margin: styleConstants.objectSizeMargin
         },
         'data-type-label': {
             fontSize: styleConstants.dataTypeFontSize,
@@ -156,14 +156,25 @@ const getDefaultThemeStyling = theme => {
             padding: styleConstants.nullPadding,
             borderRadius: styleConstants.nullBorderRadius
         },
+        undefined: {
+            display: 'inline-block',
+            color: colors.dataTypes.undefined,
+            fontSize: styleConstants.undefinedFontSize,
+            padding: styleConstants.undefinedPadding,
+            borderRadius: styleConstants.undefinedBorderRadius,
+            backgroundColor: colors.dataTypes.background,
+        },
         'copy-to-clipboard': {
             color: colors.copyToClipboard,
-            cursor: styleConstants.clipboardCursor,
-            margin: styleConstants.clipboardMargin
+            cursor: styleConstants.clipboardCursor
         },
         'object-meta-data': {
             display: 'inline-block',
             padding: styleConstants.metaDataPadding
+        },
+        'icon-container': {
+            display: 'inline-block',
+            width: styleConstants.iconContainerWidth
         }
     }
 };

@@ -2,21 +2,20 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import {expect} from 'chai';
 
-import JsonFunction from '/react/src/js/components/DataTypes/Function';
+import JsonUndefined from '/react/src/js/components/DataTypes/Undefined';
 import DataTypeLabel from '/react/src/js/components/DataTypes/DataTypeLabel';
 
-describe('<JsonFunction />', function () {
+describe('<JsonUndefined />', function () {
     const rjvId = 1;
 
-    it('function component should have a data type label', function () {
+    it('Undefined component should no data type label', function () {
         const wrapper = shallow(
-            <JsonFunction
-            value={function(){}}
+            <JsonUndefined
             rjvId={rjvId}
             displayDataTypes={true}
             theme='rjv-default'/>
         );
-        expect(wrapper.find(DataTypeLabel)).to.have.length(1);
+        expect(wrapper.find(DataTypeLabel)).to.have.length(0);
     });
 
 });

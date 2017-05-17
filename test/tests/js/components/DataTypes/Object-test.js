@@ -3,16 +3,12 @@ import { shallow, render } from 'enzyme';
 import {expect} from 'chai';
 
 import JsonObject from '/react/src/js/components/DataTypes/Object';
-import ConfigStore from '/react/src/js/stores/ConfigStore';
-import AttributeStore from '/react/src/js/stores/ObjectAttributes';
 
 describe('<JsonObject />', function () {
     const rjvId = 1;
-    ConfigStore.set(rjvId, 'displayDataTypes', true);
 
 
     it('Object component should have a data type label', function () {
-        ConfigStore.set(rjvId, 'displayDataTypes', true);
         let src = {
             test: true
         }
@@ -24,6 +20,7 @@ describe('<JsonObject />', function () {
             theme='rjv-default'
             indentWidth={1}
             depth={1}
+            displayDataTypes={true}
             type='object'/>
         );
         expect(
@@ -33,7 +30,6 @@ describe('<JsonObject />', function () {
 
 
     it('Object mount', function () {
-        ConfigStore.set(rjvId, 'displayDataTypes', true);
         let src = {
             bool: true,         //should have label
             int: 5,             //should have label
@@ -57,6 +53,7 @@ describe('<JsonObject />', function () {
             theme='rjv-default'
             indentWidth={1}
             depth={1}
+            displayDataTypes={true}
             type='object'/>
         );
         expect(
@@ -66,7 +63,6 @@ describe('<JsonObject />', function () {
 
 
     it('Object mount', function () {
-        ConfigStore.set(rjvId, 'displayDataTypes', true);
         let src = {
             bool: true,         //should have label
             int: 5,             //should have label
@@ -90,6 +86,7 @@ describe('<JsonObject />', function () {
             theme='rjv-default'
             indentWidth={1}
             depth={1}
+            displayDataTypes={true}
             type='object'/>
         );
         expect(
@@ -116,6 +113,7 @@ describe('<JsonObject />', function () {
             indentWidth={1}
             collapsed={false}
             depth={1}
+            displayDataTypes={true}
             type='array'/>
         );
         expect(
@@ -128,7 +126,6 @@ describe('<JsonObject />', function () {
 
 
     it('Array mount collapsed', function () {
-        AttributeStore.set(rjvId, 'arr_test', 'expanded', false);
         let src = {
             'arr1' : [
                 'arr2' : [

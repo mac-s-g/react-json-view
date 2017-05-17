@@ -18,7 +18,7 @@ class ObjectAttributes {
             || this.objects[rjvId][name] === undefined
             || this.objects[rjvId][name][key] == undefined
         ) {
-            this.set(rjvId, name, key, default_value);
+            return default_value;
         }
         return this.objects[rjvId][name][key];
     }

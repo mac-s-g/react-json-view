@@ -4,26 +4,28 @@ import {expect} from 'chai';
 
 import JsonString from '/react/src/js/components/DataTypes/String';
 import DataTypeLabel from '/react/src/js/components/DataTypes/DataTypeLabel';
-import ConfigStore from '/react/src/js/stores/ConfigStore';
 
 describe('<JsonString />', function () {
 
     it('string component should have a data type label', function () {
         const rjvId = 1;
-        ConfigStore.set(rjvId, 'displayDataTypes', true);
         const wrapper = shallow(
-            <JsonString value="test" rjvId={rjvId} theme='rjv-default'/>
+            <JsonString
+            value="test"
+            rjvId={rjvId}
+            displayDataTypes={true}
+            theme='rjv-default'/>
         );
         expect(wrapper.find(DataTypeLabel)).to.have.length(1);
     });
 
     it('string with hidden data type', function () {
         const rjvId = 1;
-        ConfigStore.set(rjvId, 'displayDataTypes', false);
         const props = {
             value: 'test',
             rjvId: 1,
-            theme: 'rjv-default'
+            theme: 'rjv-default',
+            displayDataTypes: false
         }
         const component = shallow(
             <JsonString {...props}/>
@@ -37,10 +39,10 @@ describe('<JsonString />', function () {
 
     it('string displaying data type', function () {
         const rjvId = 1;
-        ConfigStore.set(rjvId, 'displayDataTypes', false);
         const props = {
             value: 'test',
             rjvId: 1,
+            displayDataTypes: false,
             theme: 'rjv-default'
         }
         const component = shallow(

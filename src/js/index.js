@@ -1,8 +1,6 @@
 import React from 'react';
 import JsonViewer from './components/JsonViewer';
 import {toType} from './helpers/util';
-//config key-val store
-import ConfigStore from './stores/ConfigStore'
 
 //global theme
 import style from './themes/getStyle';
@@ -34,12 +32,11 @@ export default class extends React.Component {
 
     init = (props) => {
         for (let i in this.defaults) {
-            if (this.props[i] !== undefined) {
-                this.state[i] = this.props[i];
+            if (props[i] !== undefined) {
+                this.state[i] = props[i];
             } else {
                 this.state[i] = this.defaults[i];
             }
-            ConfigStore.set(this.rjvId, i, this.state[i]);
         }
 
         //make sure `src` prop is valid
@@ -63,7 +60,7 @@ export default class extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.init(this.props);
+        this.init(nextProps);
         this.setState(this.state);
     }
 

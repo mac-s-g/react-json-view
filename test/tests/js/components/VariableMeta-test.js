@@ -3,19 +3,18 @@ import { shallow, render } from 'enzyme';
 import {expect} from 'chai';
 
 import VariableMeta from '/react/src/js/components/VariableMeta';
-import ConfigStore from '/react/src/js/stores/ConfigStore';
 
 
 describe('<VariableMeta />', function () {
     const rjvId = 1;
 
     it('VariableMeta clipboard should exist', function () {
-        ConfigStore.set(rjvId, 'enableClipboard', true);
         const wrapper = shallow(
             <VariableMeta
             src={{test:true}}
             size={1}
             theme='rjv-default'
+            enableClipboard={true}
             rjvId={rjvId} />
         );
         expect(
@@ -25,12 +24,12 @@ describe('<VariableMeta />', function () {
 
 
     it('VariableMeta clipboard should not exist', function () {
-        ConfigStore.set(rjvId, 'enableClipboard', false);
         const wrapper = shallow(
             <VariableMeta
             src={{test:true}}
             size={1}
             theme='rjv-default'
+            enableClipboard={false}
             rjvId={rjvId} />
         );
         expect(
@@ -40,12 +39,12 @@ describe('<VariableMeta />', function () {
 
 
     it('VariableMeta size should exist', function () {
-        ConfigStore.set(rjvId, 'displayObjectSize', true);
         const wrapper = shallow(
             <VariableMeta
             src={{test:true}}
             size={1}
             theme='rjv-default'
+            displayObjectSize={true}
             rjvId={rjvId} />
         );
         expect(
@@ -55,12 +54,12 @@ describe('<VariableMeta />', function () {
 
 
     it('VariableMeta size should not exist', function () {
-        ConfigStore.set(rjvId, 'displayObjectSize', false);
         const wrapper = shallow(
             <VariableMeta
             src={{test:true}}
             size={1}
             theme='rjv-default'
+            displayObjectSize={false}
             rjvId={rjvId} />
         );
         expect(

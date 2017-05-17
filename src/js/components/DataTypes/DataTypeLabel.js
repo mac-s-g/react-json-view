@@ -1,5 +1,4 @@
 import React from 'react';
-import ConfigStore from './../../stores/ConfigStore';
 
 //theme
 import Theme from './../../themes/getStyle';
@@ -7,8 +6,8 @@ import Theme from './../../themes/getStyle';
 export default class extends React.Component {
 
     render() {
-        const {rjvId, type_name, theme} = this.props;
-        if (ConfigStore.get(rjvId, 'displayDataTypes', true)) {
+        const {rjvId, type_name, displayDataTypes, theme} = this.props;
+        if (displayDataTypes) {
             return (
                 <span class="data-type-label"
                 {...Theme(theme, 'data-type-label')}>

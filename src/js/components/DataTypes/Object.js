@@ -3,7 +3,7 @@ import React from "react";
 import {toType} from './../../helpers/util';
 import {
     JsonBoolean, JsonFloat, JsonFunction, JsonInteger,
-    JsonNan, JsonNull, JsonObject, JsonString
+    JsonNan, JsonNull, JsonObject, JsonString, JsonUndefined
 } from './DataTypes';
 import VariableMeta from './../VariableMeta';
 
@@ -29,34 +29,47 @@ class rjvObject extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.state.expanded = AttributeStore.get(
-            this.state.rjvId,
-            this.state.state_key,
-            'expanded',
-            !this.props.collapsed
-        );
+        this.init(props);
     }
 
-    state = {
-        rjvId: this.props.rjvId,
-        state_key: this.props.namespace.join('.'),
-        namespace: this.props.namespace,
-        indentWidth: this.props.indentWidth,
-        expanded: null, //set in constructor
-        object_type: (this.props.type == 'array' ? 'array' : 'object'),
-        parent_type: (this.props.type == 'array' ? 'array' : 'object'),
-        display_name: (this.props.name ? this.props.name : '')
+    state = {}
+
+    init = (props) => {
+        const state = {
+            rjvId: props.rjvId,
+            state_key: props.namespace.join('.'),
+            namespace: props.namespace,
+            indentWidth: props.indentWidth,
+            expanded: props.jsvRoot
+                ? !props.collapsed
+                : AttributeStore.get(
+                    props.rjvId,
+                    props.namespace,
+                    'expanded',
+                    !props.collapsed
+                ),
+            object_type: (props.type == 'array' ? 'array' : 'object'),
+            parent_type: (props.type == 'array' ? 'array' : 'object'),
+            display_name: (props.name ? props.name : '')
+        }
+
+        this.state = {...this.state, ...state};
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.init(nextProps);
+        this.setState(this.state);
     }
 
     toggleCollapsed = () => {
         this.state.expanded = !this.state.expanded;
         AttributeStore.set(
             this.state.rjvId,
-            this.state.state_key,
+            this.state.namespace,
             'expanded',
             this.state.expanded
         );
+
         this.setState(this.state);
     }
 
@@ -81,9 +94,8 @@ class rjvObject extends React.Component {
     getObjectMetaData = (src) => {
         const size = Object.keys(src).length;
         const {rjvId, theme} = this.props;
-        const props = {size, rjvId, theme, src};
         return (
-            <VariableMeta {...props}/>
+            <VariableMeta size={size} {...this.props}/>
         );
     }
 
@@ -98,6 +110,7 @@ class rjvObject extends React.Component {
         const {
             object_type, display_name, expanded
         } = this.state;
+
         //expanded/collapsed icon
         let expanded_icon, object_padding_left = 0;
 
@@ -124,7 +137,9 @@ class rjvObject extends React.Component {
             )}>
             <span>
                 <span onClick={this.toggleCollapsed} {...Theme(theme, 'brace-row')}>
-                    <span class="icon-container">{expanded_icon}</span>
+                    <div class="icon-container" {...Theme(theme, 'icon-container')}>
+                        {expanded_icon}
+                    </div>
                     {
                     parent_type == 'array'
                     ? <span {...Theme(theme, 'array-key')} key={namespace}>
@@ -231,6 +246,8 @@ class rjvObject extends React.Component {
                     return <JsonNull {...props} />;
                 case 'nan':
                     return <JsonNan {...props} />;
+                case 'undefined':
+                    return <JsonUndefined {...props} />;
                 default:
                     //catch-all for types that weren't anticipated
                     return <div class="object-value" {...props} >

@@ -17,7 +17,6 @@ export default {
 
   keyMargin: '0px 5px',
   keyLetterSpacing: '0.5px',
-  keyPadding: '0px 0px 0px 4px',
   keyFontStyle: 'none',
   keyBorderRadius: '3px',
   keyColonWeight: 'bold',
@@ -45,6 +44,11 @@ export default {
   nanPadding: '1px 2px',
   nanBorderRadius: '3px',
 
+  undefinedFontSize: '11px',
+  undefinedFontWeight: 'bold',
+  undefinedPadding: '1px 2px',
+  undefinedBorderRadius: '3px',
+
   nullFontSize: '11px',
   nullFontWeight: 'bold',
   nullPadding: '1px 2px',
@@ -56,10 +60,12 @@ export default {
 
   objectSizeBorderRadius: '3px',
   objectSizeFontStyle: 'italic',
+  objectSizeMargin: '0px 6px 0px 0px',
 
   clipboardCursor: 'pointer',
-  clipboardMargin: '0px 0px 0px 6px',
 
-  metaDataPadding: '0px 0px 0px 10px'
+  metaDataPadding: '0px 0px 0px 10px',
+
+  iconContainerWidth: '17px'
 };
 

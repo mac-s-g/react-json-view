@@ -36,7 +36,9 @@ describe('<JsonObject />', function () {
             str: 'test',        //should have label
             nan: NaN,
             null: null,
+            undefined: undefined,
             func: function(){}, //should have label
+            float: 1.325,       //should have label
             arr: [
                 1,              //should have label
                 2               //should have label
@@ -58,7 +60,7 @@ describe('<JsonObject />', function () {
         );
         expect(
             wrapper.find('.data-type-label')
-        ).to.have.length(7);
+        ).to.have.length(8);
     });
 
 
@@ -69,7 +71,9 @@ describe('<JsonObject />', function () {
             str: 'test',        //should have label
             nan: NaN,
             null: null,
+            undefined: undefined,
             func: function(){}, //should have label
+            float: 1.325,       //should have label
             arr: [
                 1,              //should have label
                 2               //should have label

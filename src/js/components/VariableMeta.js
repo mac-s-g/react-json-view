@@ -6,8 +6,6 @@ import Clippy from 'react-icons/lib/go/clippy';
 //https://www.npmjs.com/package/clipboard
 import Clipboard from 'clipboard';
 import ReactTooltip from 'react-tooltip';
-//app config key-val storage
-import ConfigStore from './../stores/ConfigStore';
 
 //theme
 import Theme from './../themes/getStyle';
@@ -22,13 +20,7 @@ export default class extends React.Component {
     state = {
         id: null,
         clipboard: null,
-        copy_state: null,
-        display_clipboard: ConfigStore.get(
-            this.props.rjvId, 'enableClipboard', true
-        ),
-        display_size: ConfigStore.get(
-            this.props.rjvId, 'displayObjectSize', true
-        ),
+        copy_state: null
     }
 
     componentDidMount = () => {
@@ -70,7 +62,7 @@ export default class extends React.Component {
             <span
             class="copy-to-clipboard-container"
             style={{
-                display: this.state.display_clipboard ? 'inline-block' : 'none'
+                display: this.props.enableClipboard ? 'inline-block' : 'none'
             }}>
                 <span
                 style={{
@@ -116,7 +108,7 @@ export default class extends React.Component {
     }
 
     getObjectSize = (size) => {
-        if (this.state.display_size) {
+        if (this.props.displayObjectSize) {
             return (
                 <span class="object-size"
                 {...Theme(this.props.theme, 'object-size')}>

@@ -48,44 +48,43 @@ describe('<Index />', function () {
         ).to.have.length(13);
     });
 
-    // i need to fix attribute mgmt to get this working
-    // it('check object-size labels from index', function () {
-    //     const wrapper = mount(
-    //         <Index
-    //         src={{
-    //             bool: true,
-    //             str: 'test',
-    //             int: 5,
-    //             nan: NaN,
-    //             null: null,
-    //             func: (test) => {},
-    //             obj:{
-    //                 arrChild: [
-    //                     1, 2, 'three'
-    //                 ],
-    //                 objChild: {
-    //                     one: 1,
-    //                     two: 'two'
-    //                 }
-    //             },
-    //             arr: [
-    //                 [1, 'two'], {one: 'one', two: 2}
-    //             ]
-    //         }}
-    //         displayObjectSize={true}
-    //         displayDataTypes={true}
-    //         enableClipboard={false}
-    //         />
-    //     );
-    //     expect(
-    //         wrapper.find('.object-size')
-    //     ).to.have.length(7);
+    it('check object-size labels from index', function () {
+        const wrapper = mount(
+            <Index
+            src={{
+                bool: true,
+                str: 'test',
+                int: 5,
+                nan: NaN,
+                null: null,
+                func: (test) => {},
+                obj:{
+                    arrChild: [
+                        1, 2, 'three'
+                    ],
+                    objChild: {
+                        one: 1,
+                        two: 'two'
+                    }
+                },
+                arr: [
+                    [1, 'two'], {one: 'one', two: 2}
+                ]
+            }}
+            displayObjectSize={true}
+            displayDataTypes={true}
+            enableClipboard={false}
+            />
+        );
+        expect(
+            wrapper.find('.object-size')
+        ).to.have.length(7);
 
-    //     wrapper.setProps({displayObjectSize: false});
-    //     expect(
-    //         wrapper.find('.object-size')
-    //     ).to.have.length(0);
-    // });
+        wrapper.setProps({displayObjectSize: false});
+        expect(
+            wrapper.find('.object-size')
+        ).to.have.length(0);
+    });
 
 
     it('src replaced with error message', function () {

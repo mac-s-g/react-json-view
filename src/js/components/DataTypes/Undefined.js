@@ -7,8 +7,8 @@ export default class extends React.Component {
 
     render() {
         return (
-        <div {...Theme(this.props.theme, 'null')}>
-            NULL
+        <div {...Theme(this.props.theme, 'undefined')}>
+            undefined
         </div>
         );
     }

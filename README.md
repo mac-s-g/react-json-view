@@ -76,15 +76,15 @@ Check out the [list of supported themes here](https://github.com/gaearon/base16-
 ### onEdit Interaction
 Click the pencil icon to initialize an edit
 
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/edit-init.png?raw=true "initialize an edit")
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/edit-init-1.png?raw=true "initialize an edit")
 
 Input a new value.  RJV will attempt to recognize integer and float inputs.
 
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/edit-input.png?raw=true "input variable value")
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/edit-input-1.png?raw=true "input variable value")
 
 Submitting a new value calls your `onEdit` callback method
 
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/edit-complete.png?raw=true "edit submitted")
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/edit-complete-1.png?raw=true "edit submitted")
 
 The `onEdit` is passed an `edit` variable. The edit variable will have the following contents:
 ```

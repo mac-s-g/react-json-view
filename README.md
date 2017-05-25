@@ -87,8 +87,6 @@ npm install
       * navigate to localhost:2000
 
 #### Development within a Docker Container
-*Note:* This workflow is recommended for developers using a linux OS.  Mounting files into a docker container may have issues if you're running docker within a Windows OS.
-
 You can use Docker to run the source code in a local development environment:
   1. Clone this repo
   2. Make sure docker is installed

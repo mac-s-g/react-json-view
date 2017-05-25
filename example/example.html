@@ -15,68 +15,105 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-sham.js"></script>
     <![endif]-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <style>
       .code-comment {
         color: #aaa;
         font-size:14px;
         font-family: monospace;
         margin-left: 6px;
+        margin-bottom: 5px;
       }
       .react-json-view {
         padding: 4px 6px;
         border-radius: 3px;
         display: inline-block;
       }
+      .example {
+        margin-bottom: 25px;
+      }
+      .divider {
+        border-bottom: 1px solid #999;
+        margin-bottom: 35px;
+        width: 100%;
+        text-align: left;
+      }
+      .divider > img {
+        height: 40px;
+        margin-bottom: -25px;
+        margin-left: 25px;
+      }
     </style>
   </head>
   <body>
-  <div id="app-container">
-    <div class="code-comment">// example 1: JSON object</div>
+  <div class="divider">
+    <img src="https://github.com/mac-s-g/react-json-view/blob/master/doc/rjv-icon-alt.png?raw=true" />
+  </div>
+  <div id="example-container">
+    <div class="code-comment">// example 1: JSON object with "rjv-default" theme</div>
+    <div class="example" id="example0"></div>
+    <div class="code-comment">// example 2: JSON object with "ocean" theme</div>
     <div class="example" id="example1"></div>
-    <br />
-    <div class="code-comment">// example 2: array input with "monokai" theme</div>
+    <div class="code-comment">// example 3: array input with "monokai" theme</div>
     <div class="example" id="example2"></div>
-    <br />
-    <div class="code-comment">// example 3: collapsed by default</div>
+    <div class="code-comment">// example 4: collapsed by default</div>
     <div class="example" id="example3"></div>
-    <br />
-    <div class="code-comment">// example 4: JSON with "chalk" theme</div>
+    <div class="code-comment">// example 5: JSON with "chalk" theme</div>
     <div class="example" id="example4"></div>
   </div>
   <script src="https://unpkg.com/react@15/dist/react.js"></script>
   <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
   <script src="https://unpkg.com/react-json-view@latest/dist/main.js"></script>
-  <style>
-    #app-container>div{
-      margin-bottom: 5px;
-    }
-  </style>
+
+
   <script type="text/javascript">
-      /*-----------EXAMPLE 1-----------*/
+
+      /*-----------EXAMPLE 0-----------*/
       //some test JSON
       var test_json = {
-          test: 'this is a test string',
-          another_sibling: 42,
-          how_will_array_do: [1, 2, 3, 'test'],
-          how_will_floats_do: -2.757,
-          parent: {
+          string: 'this is a test string',
+          integer: 42,
+          float: -2.757,
+          array: [1, 2, 3, 'test'],
+          object: {
               sibling1: true,
               sibling2: false,
               sibling3: null,
-              'last-sibling': {
-                  grand_child: NaN,
-                  'grand-child-func': (a) => {
-                      let b = a*a;
-                      return b;
-                  }
-              }
+              sibling4: NaN,
+              sibling5: undefined,
           },
-          string_number: "1234"
       };
 
       // reactJsonView is a global variable
       var jsonView1 = new reactJsonView.default({
         src: test_json
+      });
+      ReactDOM.render(
+        jsonView1.render(),
+        document.getElementById('example0')
+      );
+
+
+      /*-----------EXAMPLE 1-----------*/
+      //some test JSON
+      var test_json = {
+          string: 'this is a test string',
+          integer: 42,
+          float: -2.757,
+          array: [1, 2, 3, 'test'],
+          object: {
+              sibling1: true,
+              sibling2: false,
+              sibling3: null,
+              sibling4: NaN,
+              sibling5: undefined,
+          },
+      };
+
+      // reactJsonView is a global variable
+      var jsonView1 = new reactJsonView.default({
+        src: test_json,
+        theme: 'ocean'
       });
       ReactDOM.render(
         jsonView1.render(),
@@ -125,24 +162,18 @@
       /*-----------EXAMPLE 4-----------*/
       //some test JSON with "chalk" theme
       var test_json = {
-          test: 'this is a test string',
-          another_sibling: 42,
-          how_will_array_do: [1, 2, 3, 'test'],
-          how_will_floats_do: -2.757,
-          parent: {
+          string: 'this is a test string',
+          integer: 42,
+          float: -2.757,
+          array: [1, 2, 3, 'test'],
+          object: {
               sibling1: true,
               sibling2: false,
               sibling3: null,
-              'last-sibling': {
-                  grand_child: NaN,
-                  'grand-child-func': (a) => {
-                      let b = a*a;
-                      return b;
-                  }
-              }
+              sibling4: NaN,
+              sibling5: undefined,
           },
-          string_number: "1234"
-      };
+      }
 
       // reactJsonView is a global variable
       var jsonView4 = new reactJsonView.default({

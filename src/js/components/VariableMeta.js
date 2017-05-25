@@ -53,16 +53,19 @@ export default class extends React.Component {
         this.state.clipboard && this.state.clipboard.destroy();
     }
 
-    getCopyComponent = (src, id, tooltip_id, copy_state) => {
+    getCopyComponent = () => {
+        const {id, copy_state} = this.state;
+        const {src, size, hover, theme, enableClipboard} = this.props;
+        const tooltip_id = 'tooltip-' + id;
         //had to jump through some hoops to get the
         //react-tooltip to act like a react component should.
         //it does not support dynamic content updates
-        let style = Theme(this.props.theme, 'copy-to-clipboard').style;
+        let style = Theme(theme, 'copy-to-clipboard').style;
         return (
             <span
             class="copy-to-clipboard-container"
             style={{
-                display: this.props.enableClipboard ? 'inline-block' : 'none'
+                display: enableClipboard && hover? 'inline-block' : 'none'
             }}>
                 <span
                 style={{
@@ -73,24 +76,23 @@ export default class extends React.Component {
                 id={"clipboard-container-" + id}
                 data-tip='copy to clipboard'
                 data-for={tooltip_id} >
-                    <Clippy />
+                    <Clippy {...Theme(theme, 'copy-icon')} />
                     <ReactTooltip
                     effect="solid"
                     class="rjv-tooltip"
                     id={tooltip_id}
                     place="right"
-                    delayShow={1000} >
-                        copy to clipboard
-                    </ReactTooltip>
+                    delayShow={1000} />
                 </span>
                 <span
                 style={{
                     ...style,
-                    display:copy_state=='success' ? 'inline-block' : 'none'
+                    display:copy_state == 'success' && hover
+                    ? 'inline-block' : 'none'
                 }}
                 data-tip='copied'
                 data-for={tooltip_id + '-success'} >
-                    <Clippy />
+                    <Clippy {...Theme(theme, 'copy-icon')} />
                     <ReactTooltip
                     effect="solid"
                     class="rjv-tooltip"
@@ -99,19 +101,18 @@ export default class extends React.Component {
                     afterHide={()=>{
                         this.setState({copy_state: null});
                     }}
-                    delayShow={0} >
-                        copied
-                    </ReactTooltip>
+                    delayShow={0} />
                 </span>
             </span>
         );
     }
 
-    getObjectSize = (size) => {
-        if (this.props.displayObjectSize) {
+    getObjectSize = () => {
+        const {size, theme, displayObjectSize} = this.props;
+        if (displayObjectSize) {
             return (
                 <span class="object-size"
-                {...Theme(this.props.theme, 'object-size')}>
+                {...Theme(theme, 'object-size')}>
                     {size} item{size == 1 ? '' : 's'}
                 </span>
             );
@@ -119,10 +120,7 @@ export default class extends React.Component {
     }
 
     render = () => {
-        const {id, copy_state} = this.state;
-        const {src, size, theme} = this.props;
-        const tooltip_id = 'tooltip-' + id;
-
+        const {theme} = this.props;
         return (
         <div {...Theme(theme, 'object-meta-data')}
         class='object-meta-data'
@@ -130,11 +128,9 @@ export default class extends React.Component {
             e.stopPropagation();
         }}>
             {/* size badge display */}
-            {this.getObjectSize(size)}
+            {this.getObjectSize()}
             {/* copy to clipboard icon */}
-            {this.getCopyComponent(
-                src, id, tooltip_id, copy_state
-            )}
+            {this.getCopyComponent()}
         </div>
         );
     }

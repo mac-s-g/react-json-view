@@ -33,6 +33,7 @@ export default {
 
   pushedContentMarginLeft: '6px',
 
+  variableValuePaddingRight: '6px',
 
   nullFontSize: '11px',
   nullFontWeight: 'bold',
@@ -66,6 +67,19 @@ export default {
 
   metaDataPadding: '0px 0px 0px 10px',
 
-  iconContainerWidth: '17px'
+  iconContainerWidth: '17px',
+
+  tooltipPadding: '4px',
+
+  editInputMinWidth: '120px',
+  editInputBorder: 'none',
+  editInputBorderRadius: '2px',
+  editInputPadding: '2px',
+  editInputMarginRight: '4px',
+  editInputFontFamily: 'monospace',
+
+  iconCursor: 'pointer',
+  iconFontSize: '15px',
+  iconPaddingRight: '1px'
 };
 

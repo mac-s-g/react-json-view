@@ -11,12 +11,17 @@ import JsonViewer from './../src/js/index';
 ReactDom.render(
     <div>
         {/* just pass in your JSON to the src attribute */}
-        <JsonViewer src={getExampleJson1()} />
+        <JsonViewer
+        src={getExampleJson1()}
+        onEdit={(edit)=>{console.log(edit)}} />
 
         <br />
 
         {/* use a base16 theme */}
-        <JsonViewer src={getExampleJson1()} theme='railscasts' />
+        <JsonViewer
+        src={getExampleJson1()}
+        theme='railscasts'
+        onEdit={()=>{console.log('clicked!')}} />
 
         <br />
 
@@ -45,7 +50,10 @@ ReactDom.render(
         <br />
 
         {/*demo array support*/}
-        <JsonViewer src={getExampleArray()} theme='solarized' />
+        <JsonViewer
+        src={getExampleArray()}
+        theme='solarized'
+        onEdit={(edit)=>{console.log(edit)}} />
     </div>,
     document.getElementById('app-container')
 );

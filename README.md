@@ -10,7 +10,7 @@ This component provides a responsive interface for displaying arrays or JSON in 
   * Check out an [interactive demo here](https://mac-s-g.github.io/react-json-view/example/example.html).
   * Check out a [React implementation example here](https://github.com/mac-s-g/react-json-view/blob/master/example/example.js).
   * Check out an [ES5 implementation example here](https://github.com/mac-s-g/react-json-view/blob/master/example/example.html).
-  * [Installation instructions](#intallation-instructions) are listed below.
+  * [Installation instructions](#installation-instructions) are listed below.
 
 ### Implementation Example:
 ```
@@ -26,7 +26,7 @@ import ReactJson from 'react-json-view'
 
 [See More Examples](https://mac-s-g.github.io/react-json-view/example/example.html)
 
-### Intallation Instructions
+### Installation Instructions
 Install this package with npm:
 ```
 npm install --save react-json-view
@@ -49,7 +49,7 @@ Name|Type|Default|Description
 `enableClipboard`|`boolean`|`true`|When set to `true`, the user can copy objects and arrays to clipboard
 `displayObjectSize`|`boolean`|`true`|When set to `true`, objects and arrays are labeled with size
 `displayDataTypes`|`boolean`|`true`|When set to `true`, data type labels prefix values
-`onEdit`|`(edit) => {}`|`false`|When a callback function is passed in, value edits are enabled.  The callback is invoked when edits are made.
+`onEdit`|`(edit) => {}`|`false`|When a callback function is passed in, value edits are enabled.  The callback is invoked when edits are made. [see: onEdit docs](#onedit-interaction)
 
 ### Features
 * Object and array nodes can be collapsed and expanded
@@ -75,12 +75,15 @@ Check out the [list of supported themes here](https://github.com/gaearon/base16-
 
 ### onEdit Interaction
 Click the pencil icon to initialize an edit
+
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/edit-init.png?raw=true "initialize an edit")
 
 Input a new value.  RJV will attempt to recognize integer and float inputs.
+
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/edit-input.png?raw=true "input variable value")
 
 Submitting a new value calls your `onEdit` callback method
+
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/edit-complete.png?raw=true "edit submitted")
 
 The `onEdit` is passed an `edit` variable. The edit variable will have the following contents:

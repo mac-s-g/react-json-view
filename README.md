@@ -73,6 +73,27 @@ Check out the [list of supported themes here](https://github.com/gaearon/base16-
 #### Solarized theme example
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-solarized-2.png?raw=true "Base-16 Theme Example")
 
+### onEdit Interaction
+Click the pencil icon to initialize an edit
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/edit-init.png?raw=true "initialize an edit")
+
+Input a new value.  RJV will attempt to recognize integer and float inputs.
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/edit-input.png?raw=true "input variable value")
+
+Submitting a new value calls your `onEdit` callback method
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/edit-complete.png?raw=true "edit submitted")
+
+The `onEdit` is passed an `edit` variable. The edit variable will have the following contents:
+```
+const edit = {
+    updated_src: src, //new src value
+    name: name, //new var name
+    namespace: namespace, //list, namespace indicating var location
+    new_value: new_value, //new variable value
+    existing_value: existing_value, //existing variable value
+}
+```
+
 ### Contributing to the source code:
 #### Standard Workflow
   1. Clone this repo

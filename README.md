@@ -86,7 +86,7 @@ Submitting a new value calls your `onEdit` callback method
 
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/edit-complete-1.png?raw=true "edit submitted")
 
-The `onEdit` is passed an `edit` variable. The edit variable will have the following contents:
+The `onEdit` function is passed an `edit` variable. The edit variable will have the following contents:
 ```
 const edit = {
     updated_src: src, //new src value

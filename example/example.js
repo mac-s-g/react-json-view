@@ -65,22 +65,15 @@ ReactDom.render(
 //just a function to get an example JSON object
 function getExampleJson1() {
     return {
-        test: 'this is a test string',
-        another_sibling: 42,
-        how_will_array_do: [1, 2, 3, 'test'],
-        how_will_floats_do: -2.757,
+        string: 'this is a test string',
+        integer: 42,
+        array: [1, 2, 3, 'test'],
+        float: -2.757,
         undefined_var: undefined,
         parent: {
             sibling1: true,
             sibling2: false,
             sibling3: null,
-            'last-sibling': {
-                grand_child: NaN,
-                'grand-child-func': (a) => {
-                    let b = a*a;
-                    return b;
-                }
-            }
         },
         string_number: "1234"
     };

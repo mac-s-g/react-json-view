@@ -1,5 +1,8 @@
+import {EventEmitter} from "events";
+import dispatcher from './../helpers/dispatcher';
+
 //store persistent display attributes for objects and arrays
-class ObjectAttributes {
+class ObjectAttributes extends EventEmitter {
 
     objects = {}
 
@@ -22,8 +25,22 @@ class ObjectAttributes {
         }
         return this.objects[rjvId][name][key];
     }
+
+    handleAction = (action) => {
+        switch (action.name) {
+            case 'VARIABLE_UPDATED':
+                this.set(
+                    action.rjvId,
+                    'action',
+                    'variable-update',
+                    action.data
+                );
+                this.emit('variable-update-' + action.rjvId)
+                break;
+        }
+    }
 }
 
 const attributeStore = new ObjectAttributes;
-
+dispatcher.register(attributeStore.handleAction.bind(attributeStore));
 export default attributeStore;

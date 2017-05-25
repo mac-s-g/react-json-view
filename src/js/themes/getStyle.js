@@ -13,6 +13,13 @@ const colorMap = theme => ({
     objectSize: theme.base04,
     copyToClipboard: theme.base0F,
     objectBorder: theme.base02,
+    editVariable: {
+        editIcon: theme.base0E,
+        cancelIcon: theme.base09,
+        checkIcon: theme.base0E,
+        background: theme.base01,
+        color: theme.base0A
+    },
     dataTypes: {
         boolean: theme.base0E,
         float: theme.base0B,
@@ -83,6 +90,10 @@ const getDefaultThemeStyling = theme => {
         },
         'pushed-content': {
             marginLeft: styleConstants.pushedContentMarginLeft
+        },
+        'variable-value': {
+            display: 'inline-block',
+            paddingRight: styleConstants.variableValuePaddingRight
         },
         'object-name': {
             display: 'inline-block',
@@ -165,8 +176,12 @@ const getDefaultThemeStyling = theme => {
             backgroundColor: colors.dataTypes.background,
         },
         'copy-to-clipboard': {
-            color: colors.copyToClipboard,
             cursor: styleConstants.clipboardCursor
+        },
+        'copy-icon': {
+            color: colors.copyToClipboard,
+            fontSize: styleConstants.iconFontSize,
+            verticalAlign: 'top',
         },
         'object-meta-data': {
             display: 'inline-block',
@@ -175,6 +190,51 @@ const getDefaultThemeStyling = theme => {
         'icon-container': {
             display: 'inline-block',
             width: styleConstants.iconContainerWidth
+        },
+        'tooltip': {
+            padding: styleConstants.tooltipPadding
+        },
+        editVarIcon: (component, hover) => {
+            let style = {
+                verticalAlign: 'top',
+                display: 'none',
+                color: colors.editVariable.editIcon,
+                cursor: styleConstants.iconCursor,
+                fontSize: styleConstants.iconFontSize
+            };
+            if (hover) {
+                style.display = 'inline-block';
+            }
+            return {style: style};
+        },
+        'edit-icon-container': {
+            display: 'inline-block',
+            verticalAlign: 'top'
+        },
+        'check-icon': {
+            display: 'inline-block',
+            cursor: styleConstants.iconCursor,
+            color: colors.editVariable.checkIcon,
+            fontSize: styleConstants.iconFontSize,
+            paddingRight: styleConstants.iconPaddingRight,
+        },
+        'cancel-icon': {
+            display: 'inline-block',
+            cursor: styleConstants.iconCursor,
+            color: colors.editVariable.cancelIcon,
+            fontSize: styleConstants.iconFontSize,
+            paddingRight: styleConstants.iconPaddingRight,
+        },
+        'edit-input': {
+            display: 'inline-block',
+            minWidth: styleConstants.editInputMinWidth,
+            borderRadius: styleConstants.editInputBorderRadius,
+            backgroundColor: colors.editVariable.background,
+            color: colors.editVariable.color,
+            padding: styleConstants.editInputPadding,
+            marginRight: styleConstants.editInputMarginRight,
+            border: styleConstants.editInputBorder,
+            fontFamily: styleConstants.editInputFontFamily
         }
     }
 };

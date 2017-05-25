@@ -43,17 +43,19 @@ Name|Type|Default|Description
 |:---|:---|:---|:---
 `src`|`JSON Object`|None|This property contains your input JSON
 `name`|`string`|"root"|Contains the name of your root node
-`collapsed`|`boolean`|`false`|When set to `true`, all nodes will be collapsed by default
 `theme`|`string`|"rjv-default"|RJV supports base-16 themes.  Check out the [list of supported themes here](https://github.com/gaearon/base16-js/tree/master/src). A custom "rjv-default" theme applies by default.
 `indentWidth`|`integer`|4|Set the indent-width for nested objects
+`collapsed`|`boolean`|`false`|When set to `true`, all nodes will be collapsed by default
 `enableClipboard`|`boolean`|`true`|When set to `true`, the user can copy objects and arrays to clipboard
 `displayObjectSize`|`boolean`|`true`|When set to `true`, objects and arrays are labeled with size
 `displayDataTypes`|`boolean`|`true`|When set to `true`, data type labels prefix values
+`onEdit`|`(edit) => {}`|`false`|When a callback function is passed in, value edits are enabled.  The callback is invoked when edits are made.
 
 ### Features
 * Object and array nodes can be collapsed and expanded
 * Object and array nodes display meta-data
 * Object and array nodes support a "Copy to Clipboard" feature
+* onEdit prop allows users to edit the `src` variable
 * Base-16 Theme Support
 
 ### Customizing Style

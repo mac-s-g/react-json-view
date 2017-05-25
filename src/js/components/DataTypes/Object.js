@@ -1,10 +1,11 @@
 import React from "react";
 
 import {toType} from './../../helpers/util';
-import {
-    JsonBoolean, JsonFloat, JsonFunction, JsonInteger,
-    JsonNan, JsonNull, JsonObject, JsonString, JsonUndefined
-} from './DataTypes';
+
+//data type components
+import {JsonObject} from './DataTypes';
+
+import VariableEditor from './../VariableEditor';
 import VariableMeta from './../VariableMeta';
 
 //attribute store
@@ -50,7 +51,8 @@ class rjvObject extends React.Component {
                 ),
             object_type: (props.type == 'array' ? 'array' : 'object'),
             parent_type: (props.type == 'array' ? 'array' : 'object'),
-            display_name: (props.name ? props.name : '')
+            display_name: (props.name ? props.name : ''),
+            hover: false
         }
 
         this.state = {...this.state, ...state};
@@ -93,9 +95,10 @@ class rjvObject extends React.Component {
 
     getObjectMetaData = (src) => {
         const size = Object.keys(src).length;
+        const {hover} = this.state;
         const {rjvId, theme} = this.props;
         return (
-            <VariableMeta size={size} {...this.props}/>
+            <VariableMeta size={size} hover={hover} {...this.props}/>
         );
     }
 
@@ -134,7 +137,10 @@ class rjvObject extends React.Component {
         return (<div class='object-key-val'
             {...Theme(
                 theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', object_padding_left
-            )}>
+            )}
+            onMouseEnter={()=>{this.setHover(true)}}
+            onMouseLeave={()=>{this.setHover(false)}}
+            >
             <span>
                 <span onClick={this.toggleCollapsed} {...Theme(theme, 'brace-row')}>
                     <div class="icon-container" {...Theme(theme, 'icon-container')}>
@@ -146,7 +152,11 @@ class rjvObject extends React.Component {
                         {display_name}
                     </span>
                     : <span {...Theme(theme, 'object-name')} key={namespace}>
-                        "{display_name}"
+                        <span style={{verticalAlign:'top'}}>"</span>
+                        <div style={{display:'inline-block'}} >
+                            {display_name}
+                        </div>
+                        <span style={{verticalAlign:'top'}}>"</span>
                     </span>
                     }
                     <span {...Theme(theme, 'colon')}>:</span>
@@ -203,58 +213,23 @@ class rjvObject extends React.Component {
                     />);
             } else {
                 elements.push(
-                <div {...Theme(theme, 'objectKeyVal', this.props.indentWidth * SINGLE_INDENT)}
-                key={variable.name}>
-                    {
-                        this.props.type == 'array'
-                        ? (
-                        <div {...Theme(theme, 'array-key')}
-                        key={variable.name + '_' + namespace}>
-                            {variable.name}
-                            <div {...Theme(props.theme, 'colon')}>:</div>
-                        </div>
-                        )
-                        : (
-                        <div {...Theme(props.theme, 'object-name')}
-                        key={variable.name + '_' + namespace}>
-                            "{variable.name}"
-                            <div {...Theme(props.theme, 'colon')}>:</div>
-                        </div>
-                        )
-
-                    }
-                    {getValue(variable, props)}
-                </div>
+                    <VariableEditor
+                    key={variable.name + '_' + namespace}
+                    variable={variable}
+                    singleIndent={SINGLE_INDENT}
+                    namespace={namespace}
+                    type={this.props.type}
+                    {...props}/>
                 );
             }
         }
         return elements;
 
-        function getValue(variable, props) {
-            switch (variable.type) {
-                case 'string':
-                    return <JsonString value={variable.value} {...props} />;
-                case 'integer':
-                    return <JsonInteger value={variable.value} {...props} />;
-                case 'float':
-                    return <JsonFloat value={variable.value} {...props} />;
-                case 'boolean':
-                    return <JsonBoolean value={variable.value} {...props} />;
-                case 'function':
-                    return <JsonFunction value={variable.value} {...props} />;
-                case 'null':
-                    return <JsonNull {...props} />;
-                case 'nan':
-                    return <JsonNan {...props} />;
-                case 'undefined':
-                    return <JsonUndefined {...props} />;
-                default:
-                    //catch-all for types that weren't anticipated
-                    return <div class="object-value" {...props} >
-                        {variable.value}
-                    </div>;
-            }
-        }
+    }
+
+    setHover = (hover) => {
+        this.state.hover = hover;
+        this.setState(this.state);
     }
 }
 

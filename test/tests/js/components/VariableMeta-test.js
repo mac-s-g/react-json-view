@@ -19,7 +19,7 @@ describe('<VariableMeta />', function () {
         );
         expect(
             wrapper.find('.copy-to-clipboard-container').props().style.display
-        ).to.equal('inline-block');
+        ).to.equal('none');
     });
 
 

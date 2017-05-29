@@ -1,5 +1,6 @@
 *.swp
 npm-debug.log
+debug
 docs
 docker
 entrypoints

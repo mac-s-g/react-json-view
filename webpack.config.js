@@ -38,13 +38,12 @@ const config = {
   },
   plugins: [
     new webpack.EnvironmentPlugin(['NODE_ENV']),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ],
   resolve: {
     extensions: [".js", ".json", ".css", ".scss"]
   },
-  devtool: "eval-source-map",
+  devtool: process.env.NODE_ENV == 'production' ? false : 'eval-source-map',
   module: {
     rules: [
       {

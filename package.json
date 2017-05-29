@@ -1,7 +1,7 @@
 {
   "name": "react-json-view",
   "description": "Interactive react component for displaying javascript arrays and JSON objects.",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "main": "dist/main.js",
   "files": [
     "dist/"
@@ -40,12 +40,16 @@
     "react-tooltip": "^3.2.10",
     "sinon": "^2.2.0",
     "webpack": "^2.2.1",
+    "webpack-bundle-size-analyzer": "^2.7.0",
     "webpack-dev-server": "^2.3.0"
   },
   "dependencies": {},
   "scripts": {
-    "build": "webpack --display-error-details --progress",
+    "build": "webpack -p --display-error-details --progress",
     "dev:hot": "webpack-dev-server",
+    "modules:debug": "./docker/debug.sh",
+    "modules:tree": "webpack --json",
+    "modules:size-analyzer": "webpack --json | webpack-bundle-size-analyzer",
     "start": "node server.js",
     "test": "./docker/coverage.sh",
     "test:coverage": "nyc report --reporter=text-lcov | coveralls",

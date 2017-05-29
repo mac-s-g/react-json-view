@@ -1,4 +1,5 @@
 dist
+debug
 npm-debug.log
 example/example-react.js
 webpack.config.template.js

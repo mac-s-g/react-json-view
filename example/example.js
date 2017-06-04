@@ -75,7 +75,8 @@ function getExampleJson1() {
             sibling2: false,
             sibling3: null,
         },
-        string_number: "1234"
+        string_number: "1234",
+        date: new Date()
     };
 }
 
@@ -132,6 +133,7 @@ function getExampleJson3() {
 function getExampleArray() {
     return [
         'you can also display arrays!',
+        new Date(),
         1,
         2,
         3,

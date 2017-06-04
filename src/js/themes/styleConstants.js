@@ -80,6 +80,8 @@ export default {
 
   iconCursor: 'pointer',
   iconFontSize: '15px',
-  iconPaddingRight: '1px'
+  iconPaddingRight: '1px',
+
+  dateValueMarginLeft: '2px'
 };
 

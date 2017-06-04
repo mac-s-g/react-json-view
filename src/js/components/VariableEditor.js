@@ -5,7 +5,7 @@ import dispatcher from './../helpers/dispatcher';
 
 //data type components
 import {
-    JsonBoolean, JsonFloat, JsonFunction, JsonInteger,
+    JsonBoolean, JsonDate, JsonFloat, JsonFunction, JsonInteger,
     JsonNan, JsonNull, JsonObject, JsonString, JsonUndefined
 } from './DataTypes/DataTypes';
 
@@ -133,8 +133,10 @@ class VariableEditor extends React.Component {
                 return <JsonNan {...props} />;
             case 'undefined':
                 return <JsonUndefined {...props} />;
+            case 'date':
+                return <JsonDate {...props} />;
             default:
-                //catch-all for types that weren't anticipated
+                // catch-all for types that weren't anticipated
                 return <div class="object-value" {...props} >
                     {variable.value}
                 </div>;

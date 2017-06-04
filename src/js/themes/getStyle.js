@@ -22,6 +22,7 @@ const colorMap = theme => ({
     },
     dataTypes: {
         boolean: theme.base0E,
+        date: theme.base0D,
         float: theme.base0B,
         function: theme.base0D,
         integer: theme.base0F,
@@ -131,6 +132,13 @@ const getDefaultThemeStyling = theme => {
         'boolean': {
             display: 'inline-block',
             color: colors.dataTypes.boolean
+        },
+        'date': {
+            display: 'inline-block',
+            color: colors.dataTypes.date
+        },
+        'date-value': {
+            marginLeft: styleConstants.dateValueMarginLeft
         },
         'float': {
             display: 'inline-block',

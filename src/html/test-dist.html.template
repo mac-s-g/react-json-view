@@ -61,6 +61,7 @@
           another_sibling: 42,
           how_will_array_do: [1, 2, 3, 'test'],
           how_will_floats_do: -2.757,
+          date: new Date(),
           parent: {
               sibling1: true,
               sibling2: false,

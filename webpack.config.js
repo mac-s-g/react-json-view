@@ -10,6 +10,10 @@ const PATHS = {
     example: path.join(__dirname, 'example')
 };
 
+if (!process.env.NODE_ENV) {
+  process.env.NODE_ENV = 'production';
+}
+
 //example environment points at preloaded example
 //see: react-json-view/example/example.js
 const entrypoint = process.env.NODE_ENV === 'local_example'

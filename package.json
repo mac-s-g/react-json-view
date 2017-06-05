@@ -30,7 +30,7 @@
     "jsdom": "^10.1.0",
     "mocha": "^3.2.0",
     "nyc": "^10.3.2",
-    "radium":"^0.18.2",
+    "radium":"^0.19.1",
     "react": "^15.5.4",
     "react-base16-styling": "^0.5.3",
     "react-dom": "^15.5.4",

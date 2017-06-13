@@ -21,7 +21,7 @@ ReactDom.render(
         <JsonViewer
         src={getExampleJson1()}
         theme='railscasts'
-        onEdit={()=>{console.log('clicked!')}} />
+        onEdit={(e)=>{console.log(e)}} />
 
         <br />
 
@@ -64,6 +64,11 @@ ReactDom.render(
 
 //just a function to get an example JSON object
 function getExampleJson1() {
+    Array.prototype.containsKey = function(obj) {
+        for(var key in this)
+            if (key == obj) return true;
+        return false;
+    }
     return {
         string: 'this is a test string',
         integer: 42,

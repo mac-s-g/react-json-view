@@ -15,7 +15,6 @@ stop_and_remove_container || true
 # run the workbench container
 docker run \
     -v $(pwd)/src:/react/src \
-    -v $(pwd)/test:/react/test \
     -v $(pwd)/dist:/react/dist \
     -v $(pwd)/entrypoints:/react/entrypoints \
     -v $(pwd)/webpack.config.js:/react/webpack.config.js \

@@ -190,7 +190,9 @@ class rjvObject extends React.Component {
 
         for (let name in variables) {
             variable = new JsonVariable(name, variables[name]);
-            if (variable.type == 'object') {
+            if (!variables.hasOwnProperty(name)) {
+                continue;
+            } else if (variable.type == 'object') {
                 elements.push(
                     <JsonObject key={variable.name}
                         depth={depth + DEPTH_INCREMENT}

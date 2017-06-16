@@ -73,7 +73,7 @@ describe('<JsonString />', function () {
                 '.string-value'
             ).text()
         ).to.equal('"123..."');
-        component.find('.string-container').simulate('click');
+        component.find('.string-value').simulate('click');
         expect(
             component.render().find(
                 '.string-value'

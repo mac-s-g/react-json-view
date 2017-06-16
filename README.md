@@ -56,7 +56,7 @@ Name|Type|Default|Description
 * Object and array nodes can be collapsed and expanded
 * Object and array nodes display meta-data
 * Object and array nodes support a "Copy to Clipboard" feature
-* onEdit prop allows users to edit the `src` variable
+* `onEdit` prop allows users to edit the `src` variable
 * String values can be truncated after a specified length
 * Base-16 Theme Support
 

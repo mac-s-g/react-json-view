@@ -37,6 +37,7 @@ describe('<JsonString />', function () {
         ).to.have.length(1);
     });
 
+    //test collapsed string and expand click
     it('string displaying data type', function () {
         const rjvId = 1;
         const props = {
@@ -53,6 +54,31 @@ describe('<JsonString />', function () {
                 '.data-type-label'
             )
         ).to.have.length(1);
+    });
+
+    it('collapsed string content', function () {
+        const rjvId = 1;
+        const props = {
+            value: '123456789',
+            collapseStringsAfterLength: 3,
+            rjvId: 1,
+            displayDataTypes: false,
+            theme: 'rjv-default'
+        }
+        const component = shallow(
+            <JsonString {...props}/>
+        );
+        expect(
+            component.render().find(
+                '.string-value'
+            ).text()
+        ).to.equal('"123..."');
+        component.find('.string-container').simulate('click');
+        expect(
+            component.render().find(
+                '.string-value'
+            ).text()
+        ).to.equal('"123456789"');
     });
 
 });

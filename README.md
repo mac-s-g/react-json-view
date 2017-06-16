@@ -9,7 +9,7 @@ This component provides a responsive interface for displaying arrays or JSON in 
 
   * Check out an [interactive demo here](https://mac-s-g.github.io/react-json-view/example/example.html).
   * Check out a [React implementation example here](https://github.com/mac-s-g/react-json-view/blob/master/example/example.js).
-  * Check out an [ES5 implementation example here](https://github.com/mac-s-g/react-json-view/blob/master/example/example.html).
+  * Check out an [ES5 implementation example here](https://github.com/mac-s-g/react-json-https://github.com/alexkuz/react-json-treeview/blob/master/example/example.html).
   * [Installation instructions](#installation-instructions) are listed below.
 
 ### Implementation Example:
@@ -131,6 +131,11 @@ Your source code will be mounted inside the docker container.  The container is 
 Webpack-dev-server is running in the container and hot-reloading when changes are made locally.
 
 All node modules are installed within the container, so make sure to rebuild your container if you make changes to package.json (see step 3, above).
+
+### Inspiration
+I drew a ton of design ideas from [react-json-tree](https://github.com/alexkuz/react-json-tree).  Thanks to the RJT contributors for putting together an awesome component!
+
+I'm also inspired by my users who come up with interesting feature requests.  Reach out to me with ideas for this project or other projects you want to collaborate on.  My email address is listed on my [github user page](https://github.com/mac-s-g).
 
 ### To-Do's
 1. Support "delete" capability when `onEdit` is enabled

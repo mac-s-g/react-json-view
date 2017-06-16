@@ -25,6 +25,7 @@ export default class extends React.Component {
         name: 'root',
         theme: 'rjv-default', //rjv-default
         collapsed: false,
+        collapseStringsAfterLength: false,
         indentWidth: 4,
         enableClipboard: true,
         displayObjectSize: true,

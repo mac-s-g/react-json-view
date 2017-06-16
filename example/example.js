@@ -13,6 +13,7 @@ ReactDom.render(
         {/* just pass in your JSON to the src attribute */}
         <JsonViewer
         src={getExampleJson1()}
+        collapseStringsAfterLength={2}
         onEdit={(edit)=>{console.log(edit)}} />
 
         <br />
@@ -21,6 +22,7 @@ ReactDom.render(
         <JsonViewer
         src={getExampleJson1()}
         theme='railscasts'
+        collapseStringsAfterLength={15}
         onEdit={(e)=>{console.log(e)}} />
 
         <br />

@@ -46,6 +46,7 @@ Name|Type|Default|Description
 `theme`|`string`|"rjv-default"|RJV supports base-16 themes.  Check out the [list of supported themes here](https://github.com/gaearon/base16-js/tree/master/src). A custom "rjv-default" theme applies by default.
 `indentWidth`|`integer`|4|Set the indent-width for nested objects
 `collapsed`|`boolean`|`false`|When set to `true`, all nodes will be collapsed by default
+`collapseStringsAfterLength`|`integer`|`false`|When an integer value is assigned, strings will be cut off at that length. Collapsed strings are followed by an elipsis. String content can be expanded and collapsed by clicking on the string value.
 `enableClipboard`|`boolean`|`true`|When set to `true`, the user can copy objects and arrays to clipboard
 `displayObjectSize`|`boolean`|`true`|When set to `true`, objects and arrays are labeled with size
 `displayDataTypes`|`boolean`|`true`|When set to `true`, data type labels prefix values
@@ -55,7 +56,8 @@ Name|Type|Default|Description
 * Object and array nodes can be collapsed and expanded
 * Object and array nodes display meta-data
 * Object and array nodes support a "Copy to Clipboard" feature
-* onEdit prop allows users to edit the `src` variable
+* `onEdit` prop allows users to edit the `src` variable
+* String values can be truncated after a specified length
 * Base-16 Theme Support
 
 ### Customizing Style

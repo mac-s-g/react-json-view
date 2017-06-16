@@ -87,7 +87,8 @@
 
       // reactJsonView is a global variable
       var jsonView1 = new reactJsonView.default({
-        src: test_json
+        src: test_json,
+        collapseStringsAfterLength: 18
       });
       ReactDOM.render(
         jsonView1.render(),

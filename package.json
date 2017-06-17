@@ -61,7 +61,8 @@
     "url": "https://github.com/mac-s-g/react-json-view.git"
   },
    "keywords": [
-    "array-viewer",
+     "array-viewer",
+     "base-16",
      "component",
      "interactive",
      "interactive-json",
@@ -71,17 +72,15 @@
      "json-tree",
      "json-view",
      "json-viewer",
-     "pretty",
-     "pretty-print",
-     "print",
-     "print-json",
+     "json-inspector",
+     "json-tree",
      "react",
      "react-component",
      "react-json",
-     "responsive",
-     "responsive-json",
-     "view",
-     "viewer"
+     "theme",
+     "tree",
+     "tree-view",
+     "treeview"
    ],
 
   "license": "MIT",

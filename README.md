@@ -79,6 +79,8 @@ Check out the [list of supported themes here](https://github.com/gaearon/base16-
 #### Use Your Own Theme
 You can supply your own base-16 theme object.
 
+To better understand custom themes, take a look at [my example implementation](https://github.com/mac-s-g/react-json-view/blob/master/example/example.js#L62) and the [base-16 theme styling guidelines](https://github.com/chriskempson/base16/blob/master/styling.md).
+
 ### onEdit Interaction
 Click the pencil icon to initialize an edit
 

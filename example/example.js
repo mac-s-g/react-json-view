@@ -59,7 +59,7 @@ ReactDom.render(
 
         <br />
 
-        {/* just pass in your JSON to the src attribute */}
+        {/* custom theme example */}
         <JsonViewer
         src={getExampleJson1()}
         theme={{

@@ -1,6 +1,6 @@
 import React from 'react';
 import JsonViewer from './components/JsonViewer';
-import {toType} from './helpers/util';
+import {toType, isTheme} from './helpers/util';
 import ObjectAttributes from './stores/ObjectAttributes';
 
 //global theme
@@ -54,11 +54,26 @@ export default class extends React.Component {
             }
         }
 
+        //make sure theme is valid
+        if (toType(this.state.theme) === 'object'
+            && !isTheme(this.state.theme)
+        ) {
+            console.error(
+                'react-json-view error:',
+                'theme prop must be a theme name or valid base-16 theme object.',
+                'defaulting to "rjv-default" theme'
+            );
+            this.state.theme = 'rjv-default';
+        }
+
         //make sure `src` prop is valid
         if (toType(this.state.src) !== 'object'
             && toType(this.state.src) !== 'array'
         ) {
-            console.log('ERROR: src property must be a valid json object');
+            console.error(
+                'react-json-view error:',
+                'src property must be a valid json object'
+            );
             this.state.name = 'ERROR';
             this.state.src = {
                 message: 'src property must be a valid json object'

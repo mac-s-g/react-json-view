@@ -61,9 +61,10 @@ Name|Type|Default|Description
 * Base-16 Theme Support
 
 ### Customizing Style
+#### Stock Themes
 RJV now supports base-16 themes!
 
-You can specify a `theme` prop when you instantiate your rjv component.
+You can specify a `theme` name or object when you instantiate your rjv component.
 ```
 <ReactJson src={my_important_json} theme="monokai" />
 ```
@@ -74,6 +75,9 @@ Check out the [list of supported themes here](https://github.com/gaearon/base16-
 
 #### Solarized theme example
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-solarized-2.png?raw=true "Base-16 Theme Example")
+
+#### Use Your Own Theme
+You can supply your own base-16 theme object.
 
 ### onEdit Interaction
 Click the pencil icon to initialize an edit

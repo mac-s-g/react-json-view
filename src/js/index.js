@@ -60,9 +60,10 @@ export default class extends React.Component {
         ) {
             console.error(
                 'react-json-view error:',
-                'theme prop must be a theme name or valid base-16 theme object'
+                'theme prop must be a theme name or valid base-16 theme object.',
+                'defaulting to "rjv-default" theme'
             );
-            theme = 'rjv-default';
+            this.state.theme = 'rjv-default';
         }
 
         //make sure `src` prop is valid

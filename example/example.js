@@ -62,8 +62,6 @@ ReactDom.render(
         {/* just pass in your JSON to the src attribute */}
         <JsonViewer
         src={getExampleJson1()}
-        collapseStringsAfterLength={12}
-        onEdit={(edit)=>{console.log(edit)}}
         theme={{
           base00: 'white',
           base01: '#ddd',
@@ -74,7 +72,7 @@ ReactDom.render(
           base06: 'black',
           base07: 'black',
           base08: 'black',
-          base09: 'black',
+          base09: 'rgba(20, 150, 20, 1)',
           base0A: 'black',
           base0B: 'black',
           base0C: 'black',

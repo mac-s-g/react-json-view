@@ -11,8 +11,11 @@ import {
 
 //clibboard icon
 import EditIcon from 'react-icons/lib/fa/edit';
-import CheckCircle from 'react-icons/lib/md/check-circle';
-import Cancel from 'react-icons/lib/md/cancel';
+import CheckCircle from 'react-icons/lib/fa/check-circle';
+import Cancel from 'react-icons/lib/fa/times-circle';
+import Remove from 'react-icons/lib/fa/times-circle-o';
+
+//tooltip component
 import ReactTooltip from 'react-tooltip';
 
 //theme
@@ -26,6 +29,10 @@ class VariableEditor extends React.Component {
         hover: false,
         editMode: false,
         editValue: ""
+    }
+
+    componentDidMount() {
+        ReactTooltip.rebuild();
     }
 
     render() {
@@ -67,19 +74,26 @@ class VariableEditor extends React.Component {
             <div {...Theme(theme, 'variable-value')}>
                 {this.getValue(variable, this.props, editMode)}
             </div>
-            {this.getEditIcons(hover)}
+            {onEdit
+                ? <span>
+                    {this.getEditIcon(hover)}
+                    {this.getRemoveIcon(hover)}
+                </span>
+                : null
+            }
         </div>
         );
 
     }
 
-    getEditIcons = (hover) => {
-        const {variable, namespace, theme, onEdit} = this.props;
+    getEditIcon = (hover) => {
+        const {variable, namespace, theme} = this.props;
         const {editMode} = this.state;
-        const tooltip_id = variable.name + '_' + namespace + '-tooltip';
+        const tooltip_id = variable.name + '_'
+            + namespace + '-edit-tooltip';
         let display = 'inline-block';
 
-        if (editMode || toType(onEdit) !== 'function') {
+        if (editMode) {
             display = 'none';
         }
 
@@ -104,7 +118,43 @@ class VariableEditor extends React.Component {
             />
         </div>
         );
+    }
 
+    getRemoveIcon = (hover) => {
+        const {
+            variable, namespace, theme, rjvId
+        } = this.props;
+        const {editMode} = this.state;
+        let display = 'inline-block';
+
+        if (editMode) {
+            display = 'none';
+        }
+
+        return (
+        <div
+        class="click-to-remove"
+        style={{verticalAlign: 'top', display:display}}>
+            <Remove
+            class="click-to-remove-icon"
+            {...Theme(theme, 'removeVarIcon', hover)}
+            onClick={() => {
+                this.state.hover = false;
+                dispatcher.dispatch({
+                    name: 'VARIABLE_REMOVED',
+                    rjvId: rjvId,
+                    data: {
+                        name: variable.name,
+                        namespace: namespace,
+                        existing_value: variable.value,
+                        variable_removed: true
+                    },
+                });
+                this.setState(this.state);
+            }}
+            />
+        </div>
+        );
     }
 
     setHover = (hover) => {
@@ -177,7 +227,8 @@ class VariableEditor extends React.Component {
                         name: variable.name,
                         namespace: namespace,
                         existing_value: variable.value,
-                        new_value: new_value
+                        new_value: new_value,
+                        variable_removed: false
                     },
                 });
             }}

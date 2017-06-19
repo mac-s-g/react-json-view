@@ -61,24 +61,25 @@ ReactDom.render(
 
         {/* custom theme example */}
         <JsonViewer
+        enableClipboard={false}
         src={getExampleJson1()}
         theme={{
           base00: 'white',
           base01: '#ddd',
           base02: '#ddd',
-          base03: 'black',
-          base04: 'black',
-          base05: 'black',
-          base06: 'black',
-          base07: 'black',
-          base08: 'black',
-          base09: 'rgba(20, 150, 20, 1)',
-          base0A: 'black',
-          base0B: 'black',
-          base0C: 'black',
-          base0D: 'black',
-          base0E: 'black',
-          base0F: 'black'
+          base03: '#444',
+          base04: 'purple',
+          base05: '#444',
+          base06: '#444',
+          base07: '#444',
+          base08: '#444',
+          base09: 'rgba(70, 70, 230, 1)',
+          base0A: 'rgba(70, 70, 230, 1)',
+          base0B: 'rgba(70, 70, 230, 1)',
+          base0C: 'rgba(70, 70, 230, 1)',
+          base0D: 'rgba(70, 70, 230, 1)',
+          base0E: 'rgba(70, 70, 230, 1)',
+          base0F: 'rgba(70, 70, 230, 1)'
         }}
         />
 

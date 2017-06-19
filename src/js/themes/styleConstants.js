@@ -82,6 +82,8 @@ export default {
   iconFontSize: '15px',
   iconPaddingRight: '1px',
 
-  dateValueMarginLeft: '2px'
+  dateValueMarginLeft: '2px',
+
+  iconMarginRight: '3px'
 };
 

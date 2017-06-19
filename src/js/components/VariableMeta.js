@@ -1,7 +1,10 @@
 import React from 'react';
+import dispatcher from './../helpers/dispatcher';
 
-//clibboard icon
+//icons
 import Clippy from 'react-icons/lib/go/clippy';
+import Remove from 'react-icons/lib/fa/times-circle-o';
+
 //clipboard library
 //https://www.npmjs.com/package/clipboard
 import Clipboard from 'clipboard';
@@ -119,8 +122,45 @@ export default class extends React.Component {
         }
     }
 
+    getAddAttribute = () => {
+        return null;
+    }
+
+    getRemoveObject = () => {
+        const {
+            theme, hover, namespace, name, src, rjvId
+        } = this.props;
+
+        //don't allow deleting of root node
+        if (namespace.length == 1) {return}
+
+        return (
+        <div
+        class="click-to-remove"
+        style={{verticalAlign: 'top'}}>
+            <Remove
+            class="click-to-remove-icon"
+            {...Theme(theme, 'removeVarIcon', hover)}
+            onClick={() => {
+                dispatcher.dispatch({
+                    name: 'VARIABLE_REMOVED',
+                    rjvId: rjvId,
+                    data: {
+                        name: name,
+                        namespace: namespace.splice(0, (namespace.length-1)),
+                        existing_value: src,
+                        variable_removed: true
+                    },
+                });
+                this.setState(this.state);
+            }}
+            />
+        </div>
+        );
+    }
+
     render = () => {
-        const {theme} = this.props;
+        const {theme, onEdit} = this.props;
         return (
         <div {...Theme(theme, 'object-meta-data')}
         class='object-meta-data'
@@ -131,6 +171,14 @@ export default class extends React.Component {
             {this.getObjectSize()}
             {/* copy to clipboard icon */}
             {this.getCopyComponent()}
+            {/* copy add/remove icons */}
+            {onEdit !== false
+                ? <span style={{display: 'inline-block'}}>
+                    {this.getAddAttribute()}
+                    {this.getRemoveObject()}
+                </span>
+                : null
+            }
         </div>
         );
     }

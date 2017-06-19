@@ -60,6 +60,8 @@
     <div class="example" id="example3"></div>
     <div class="code-comment">// example 5: JSON with "chalk" theme</div>
     <div class="example" id="example4"></div>
+    <div class="code-comment">// example 6: Using a custom theme</div>
+    <div class="example" id="example5"></div>
   </div>
   <script src="https://unpkg.com/react@15/dist/react.js"></script>
   <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
@@ -186,6 +188,36 @@
         jsonView4.render(),
         document.getElementById('example4')
       );
+
+      /*-----------EXAMPLE 5-----------*/
+      // custom theme
+      var jsonView4 = new reactJsonView.default({
+        src: test_json,
+        enableClipboard: false,
+        theme: {
+          base00: 'white',
+          base01: '#ddd',
+          base02: '#ddd',
+          base03: '#444',
+          base04: 'purple',
+          base05: '#444',
+          base06: '#444',
+          base07: '#444',
+          base08: '#444',
+          base09: 'rgba(70, 70, 230, 1)',
+          base0A: 'rgba(70, 70, 230, 1)',
+          base0B: 'rgba(70, 70, 230, 1)',
+          base0C: 'rgba(70, 70, 230, 1)',
+          base0D: 'rgba(70, 70, 230, 1)',
+          base0E: 'rgba(70, 70, 230, 1)',
+          base0F: 'rgba(70, 70, 230, 1)'
+        }
+      });
+      ReactDOM.render(
+        jsonView4.render(),
+        document.getElementById('example5')
+      );
+
   </script>
   </body>
 </html>

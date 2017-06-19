@@ -20,10 +20,11 @@ export default class extends React.Component {
     //reference id for this instance
     rjvId = Date.now().toString()
 
+    //all acceptable props and default values
     defaults = {
         src: {},
         name: 'root',
-        theme: 'rjv-default', //rjv-default
+        theme: 'rjv-default',
         collapsed: false,
         collapseStringsAfterLength: false,
         indentWidth: 4,
@@ -54,6 +55,11 @@ export default class extends React.Component {
             }
         }
 
+        this.validateInput();
+    }
+
+    //make sure props are passed in as expected
+    validateInput = () => {
         //make sure theme is valid
         if (toType(this.state.theme) === 'object'
             && !isTheme(this.state.theme)
@@ -79,6 +85,17 @@ export default class extends React.Component {
                 message: 'src property must be a valid json object'
             }
         }
+
+        //make sure `onEdit` prop is a function when not `false`
+        if (this.state.onEdit !== false
+            && toType(this.state.onEdit) !== 'function'
+        ) {
+            this.state.onEdit = ()=>{};
+            console.error(
+                'react-json-view error:',
+                'onEdit property must be a function when enabled'
+            );
+        }
     }
 
     render() {
@@ -96,7 +113,7 @@ export default class extends React.Component {
 
     updateSrc = () => {
         let {
-            name, namespace, new_value, existing_value
+            name, namespace, new_value, existing_value, variable_removed
         } = ObjectAttributes.get(
             this.rjvId, 'action', 'variable-update'
         );
@@ -106,19 +123,28 @@ export default class extends React.Component {
         for (const idx of namespace) {
             src = src[idx];
         }
-        src[name] = new_value;
+        if (variable_removed) {
+            if (toType(src) == 'array') {
+                src.splice(name, 1);
+            } else {
+                delete src[name];
+            }
+        } else {
+            src[name] = new_value;
+        }
         this.setState(this.state);
 
         const on_edit_payload = {
             updated_src: this.state.src,
             name: name,
             namespace: namespace,
-            new_value: new_value,
             existing_value: existing_value,
         }
-        if (toType(onEdit) === 'function') {
-            onEdit(on_edit_payload);
+        if (!variable_removed) {
+            on_edit_payload['new_value'] = new_value;
         }
+
+        onEdit(on_edit_payload);
 
     }
 }

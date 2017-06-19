@@ -16,6 +16,7 @@ const colorMap = theme => ({
     editVariable: {
         editIcon: theme.base0E,
         cancelIcon: theme.base09,
+        removeIcon: theme.base09,
         checkIcon: theme.base0E,
         background: theme.base01,
         color: theme.base0A
@@ -189,6 +190,7 @@ const getDefaultThemeStyling = theme => {
         'copy-icon': {
             color: colors.copyToClipboard,
             fontSize: styleConstants.iconFontSize,
+            marginRight: styleConstants.iconMarginRight,
             verticalAlign: 'top',
         },
         'object-meta-data': {
@@ -202,13 +204,28 @@ const getDefaultThemeStyling = theme => {
         'tooltip': {
             padding: styleConstants.tooltipPadding
         },
+        removeVarIcon: (component, hover) => {
+            let style = {
+                verticalAlign: 'top',
+                display: 'none',
+                color: colors.editVariable.removeIcon,
+                cursor: styleConstants.iconCursor,
+                fontSize: styleConstants.iconFontSize,
+                marginRight: styleConstants.iconMarginRight
+            };
+            if (hover) {
+                style.display = 'inline-block';
+            }
+            return {style: style};
+        },
         editVarIcon: (component, hover) => {
             let style = {
                 verticalAlign: 'top',
                 display: 'none',
                 color: colors.editVariable.editIcon,
                 cursor: styleConstants.iconCursor,
-                fontSize: styleConstants.iconFontSize
+                fontSize: styleConstants.iconFontSize,
+                marginRight: styleConstants.iconMarginRight
             };
             if (hover) {
                 style.display = 'inline-block';

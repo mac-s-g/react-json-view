@@ -37,6 +37,15 @@ class ObjectAttributes extends EventEmitter {
                 );
                 this.emit('variable-update-' + action.rjvId)
                 break;
+            case 'VARIABLE_REMOVED':
+                this.set(
+                    action.rjvId,
+                    'action',
+                    'variable-update',
+                    action.data
+                );
+                this.emit('variable-update-' + action.rjvId)
+                break;
         }
     }
 }

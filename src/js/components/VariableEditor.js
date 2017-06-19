@@ -38,7 +38,7 @@ class VariableEditor extends React.Component {
     render() {
         const {
             variable, singleIndent, type, theme,
-            namespace, indentWidth, onEdit
+            namespace, indentWidth, onEdit, onDelete
         } = this.props;
         const {hover, editMode} = this.state;
 
@@ -74,13 +74,8 @@ class VariableEditor extends React.Component {
             <div {...Theme(theme, 'variable-value')}>
                 {this.getValue(variable, this.props, editMode)}
             </div>
-            {onEdit
-                ? <span>
-                    {this.getEditIcon(hover)}
-                    {this.getRemoveIcon(hover)}
-                </span>
-                : null
-            }
+            {onEdit !== false ? this.getEditIcon(hover) : null}
+            {onDelete !== false ? this.getRemoveIcon(hover) : null}
         </div>
         );
 
@@ -139,7 +134,6 @@ class VariableEditor extends React.Component {
             class="click-to-remove-icon"
             {...Theme(theme, 'removeVarIcon', hover)}
             onClick={() => {
-                this.state.hover = false;
                 dispatcher.dispatch({
                     name: 'VARIABLE_REMOVED',
                     rjvId: rjvId,
@@ -150,7 +144,6 @@ class VariableEditor extends React.Component {
                         variable_removed: true
                     },
                 });
-                this.setState(this.state);
             }}
             />
         </div>
@@ -218,8 +211,8 @@ class VariableEditor extends React.Component {
                 const new_value = (
                     isNaN(editValue) || !editValue.trim() ? editValue : parseFloat(editValue)
                 );
-                this.state.editMode = false;
                 this.state.hover = false;
+                this.state.editMode = false;
                 dispatcher.dispatch({
                     name: 'VARIABLE_UPDATED',
                     rjvId: rjvId,
@@ -231,6 +224,7 @@ class VariableEditor extends React.Component {
                         variable_removed: false
                     },
                 });
+                this.setState(this.state);
             }}
             />
             </div>

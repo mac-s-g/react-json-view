@@ -3,6 +3,8 @@ import JsonViewer from './components/JsonViewer';
 import {toType, isTheme} from './helpers/util';
 import ObjectAttributes from './stores/ObjectAttributes';
 
+import deepcopy from 'deepcopy';
+
 //global theme
 import style from './themes/getStyle';
 
@@ -31,7 +33,8 @@ export default class extends React.Component {
         enableClipboard: true,
         displayObjectSize: true,
         displayDataTypes: true,
-        onEdit: false
+        onEdit: false,
+        onDelete: false
     }
 
     componentWillMount() {
@@ -117,25 +120,35 @@ export default class extends React.Component {
         } = ObjectAttributes.get(
             this.rjvId, 'action', 'variable-update'
         );
-        let {src, onEdit} = this.state;
+        let {onEdit} = this.state;
+        let src;
         namespace.shift();
 
-        for (const idx of namespace) {
-            src = src[idx];
-        }
-        if (variable_removed) {
-            if (toType(src) == 'array') {
-                src.splice(name, 1);
-            } else {
-                delete src[name];
+        const getUpdatedSrc = () => {
+            //deepy copy src
+            let updated_src = deepcopy(this.state.src);
+            let walk = updated_src;
+            for (const idx of namespace) {
+                walk = walk[idx];
             }
-        } else {
-            src[name] = new_value;
+            if (variable_removed) {
+                if (toType(walk) == 'array') {
+                    walk.splice(name, 1);
+                } else {
+                    delete walk[name];
+                }
+            } else {
+                walk[name] = new_value;
+            }
+
+            return updated_src;
         }
-        this.setState(this.state);
+
+        src = getUpdatedSrc();
 
         const on_edit_payload = {
-            updated_src: this.state.src,
+            existing_src: this.state.src,
+            updated_src: src,
             name: name,
             namespace: namespace,
             existing_value: existing_value,
@@ -144,7 +157,9 @@ export default class extends React.Component {
             on_edit_payload['new_value'] = new_value;
         }
 
-        onEdit(on_edit_payload);
-
+        if (onEdit(on_edit_payload) !== false) {
+            this.state.src = src;
+            this.setState(this.state);
+        }
     }
 }

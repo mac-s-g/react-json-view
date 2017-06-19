@@ -135,7 +135,7 @@ export default class extends React.Component {
         if (namespace.length == 1) {return}
 
         return (
-        <div
+        <span
         class="click-to-remove"
         style={{verticalAlign: 'top'}}>
             <Remove
@@ -152,15 +152,14 @@ export default class extends React.Component {
                         variable_removed: true
                     },
                 });
-                this.setState(this.state);
             }}
             />
-        </div>
+        </span>
         );
     }
 
     render = () => {
-        const {theme, onEdit} = this.props;
+        const {theme, onEdit, onDelete} = this.props;
         return (
         <div {...Theme(theme, 'object-meta-data')}
         class='object-meta-data'
@@ -172,13 +171,8 @@ export default class extends React.Component {
             {/* copy to clipboard icon */}
             {this.getCopyComponent()}
             {/* copy add/remove icons */}
-            {onEdit !== false
-                ? <span style={{display: 'inline-block'}}>
-                    {this.getAddAttribute()}
-                    {this.getRemoveObject()}
-                </span>
-                : null
-            }
+            {onEdit !== false ? this.getAddAttribute() : null}
+            {onDelete !== false ? this.getRemoveObject() : null}
         </div>
         );
     }

@@ -14,7 +14,8 @@ ReactDom.render(
         <JsonViewer
         src={getExampleJson1()}
         collapseStringsAfterLength={12}
-        onEdit={(edit)=>{console.log(edit)}} />
+        onEdit={(e)=>{console.log(e)}}
+        onDelete={(e)=>{console.log(e)}} />
 
         <br />
 
@@ -23,7 +24,8 @@ ReactDom.render(
         src={getExampleJson1()}
         theme='railscasts'
         collapseStringsAfterLength={15}
-        onEdit={(e)=>{console.log(e)}} />
+        onEdit={(e)=>{console.log(e)}}
+        onDelete={(e)=>{console.log(e)}} />
 
         <br />
 

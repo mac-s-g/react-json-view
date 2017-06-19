@@ -13,7 +13,7 @@ ReactDom.render(
         {/* just pass in your JSON to the src attribute */}
         <JsonViewer
         src={getExampleJson1()}
-        collapseStringsAfterLength={2}
+        collapseStringsAfterLength={12}
         onEdit={(edit)=>{console.log(edit)}} />
 
         <br />
@@ -56,6 +56,35 @@ ReactDom.render(
         src={getExampleArray()}
         theme='solarized'
         onEdit={(edit)=>{console.log(edit)}} />
+
+        <br />
+
+        {/* just pass in your JSON to the src attribute */}
+        <JsonViewer
+        src={getExampleJson1()}
+        collapseStringsAfterLength={12}
+        onEdit={(edit)=>{console.log(edit)}}
+        theme={{
+          base00: 'white',
+          base01: '#ddd',
+          base02: '#ddd',
+          base03: 'black',
+          base04: 'black',
+          base05: 'black',
+          base06: 'black',
+          base07: 'black',
+          base08: 'black',
+          base09: 'black',
+          base0A: 'black',
+          base0B: 'black',
+          base0C: 'black',
+          base0D: 'black',
+          base0E: 'black',
+          base0F: 'black'
+        }}
+        />
+
+
     </div>,
     document.getElementById('app-container')
 );

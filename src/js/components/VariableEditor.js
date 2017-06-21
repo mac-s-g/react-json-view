@@ -2,18 +2,19 @@ import React from 'react';
 
 import {toType} from './../helpers/util';
 import dispatcher from './../helpers/dispatcher';
+import parseInput from './../helpers/parseInput';
 
 //data type components
 import {
     JsonBoolean, JsonDate, JsonFloat, JsonFunction, JsonInteger,
-    JsonNan, JsonNull, JsonObject, JsonString, JsonUndefined
+    JsonNan, JsonNull, JsonString, JsonUndefined
 } from './DataTypes/DataTypes';
 
 //clibboard icon
 import EditIcon from 'react-icons/lib/fa/edit';
 import CheckCircle from 'react-icons/lib/fa/check-circle';
 import Cancel from 'react-icons/lib/fa/times-circle';
-import Remove from 'react-icons/lib/fa/times-circle-o';
+import Remove from 'react-icons/lib/fa/times-circle';
 
 //tooltip component
 import ReactTooltip from 'react-tooltip';
@@ -22,13 +23,31 @@ import ReactTooltip from 'react-tooltip';
 import Theme from './../themes/getStyle';
 import Radium from 'radium';
 
+//json parsing web worker
+// const JsonParser = require("worker-loader!./../helpers/json-parse-worker.js");
+
 @Radium
 class VariableEditor extends React.Component {
 
     state = {
         hover: false,
         editMode: false,
-        editValue: ""
+        editValue: "",
+        parsedInput: {
+            type: false,
+            value: null
+        }
+    }
+
+    constructor(props) {
+        super(props);
+        // this.worker = new JsonParser();
+        // this.worker.onmessage = (message) => {
+        //     message = message.data;
+        //     this.state.parsedInput.type  = message.type;
+        //     this.state.parsedInput.value = message.value;
+        //     this.setState(this.state);
+        // }
     }
 
     componentDidMount() {
@@ -177,7 +196,7 @@ class VariableEditor extends React.Component {
             case 'undefined':
                 return <JsonUndefined {...props} />;
             case 'date':
-                return <JsonDate {...props} />;
+                return <JsonDate value={variable.value} {...props} />;
             default:
                 // catch-all for types that weren't anticipated
                 return <div class="object-value" {...props} >
@@ -195,7 +214,15 @@ class VariableEditor extends React.Component {
             value={editValue}
             class="variable-editor"
             onChange={(event)=>{
-                this.setState({'editValue': event.target.value});
+                const value = event.target.value;
+                const detected = parseInput(value);
+                this.setState({
+                    editValue: value,
+                    parsedInput: {
+                        type: detected.type,
+                        value: detected.value
+                    }
+                });
             }}
             placeholder="update this value"
             {...Theme(theme, 'edit-input')}
@@ -208,9 +235,7 @@ class VariableEditor extends React.Component {
             />
             <CheckCircle class="edit-check" {...Theme(theme, 'check-icon')}
             onClick={() => {
-                const new_value = (
-                    isNaN(editValue) || !editValue.trim() ? editValue : parseFloat(editValue)
-                );
+                const new_value = (editValue);
                 this.state.hover = false;
                 this.state.editMode = false;
                 dispatcher.dispatch({
@@ -227,10 +252,88 @@ class VariableEditor extends React.Component {
                 this.setState(this.state);
             }}
             />
+            <div>
+                {this.showDetected()}
+            </div>
             </div>
 
         </div>);
 
+    }
+
+    showDetected = () => {
+        const {theme} = this.props;
+        const {type} = this.state.parsedInput;
+        const detected = this.getDetectedInput();
+        if (detected) {
+            return <div>
+            {/* detected label */
+            /*<div style={{
+                ...Theme(theme, 'object-size').style,
+                ...Theme(theme, 'detected-row').style
+            }}>
+                {type} detected
+            </div>*/
+            }
+            <div {...Theme(theme, 'detected-row')}>
+                {detected}
+                <CheckCircle class="edit-check"
+                style={{
+                    verticalAlign: 'top',
+                    paddingLeft: '5px',
+                    ...Theme(theme, 'check-icon').style
+                }}
+                onClick={() => {
+
+                }}
+                />
+            </div>
+            </div>;
+        }
+    }
+
+    getDetectedInput = () => {
+        const {parsedInput} = this.state;
+        const {type, value} = parsedInput;
+        const {props} = this;
+        const {theme} = this.props;
+
+        if (type !== false) {
+            switch (type.toLowerCase()) {
+                case 'object':
+                    return <span>
+                        <span style={{...Theme(theme, 'brace').style, cursor:'default'}}>{'{'}</span>
+                        <span style={{...Theme(theme, 'ellipsis').style, cursor:'default'}}>...</span>
+                        <span style={{...Theme(theme, 'brace').style, cursor:'default'}}>{'}'}</span>
+                    </span>;
+                    break;
+                case 'array':
+                    return <span>
+                        <span style={{...Theme(theme, 'brace').style, cursor:'default'}}>{'['}</span>
+                        <span style={{...Theme(theme, 'ellipsis').style, cursor:'default'}}>...</span>
+                        <span style={{...Theme(theme, 'brace').style, cursor:'default'}}>{']'}</span>
+                    </span>;
+                    break;
+                case 'string':
+                    return <JsonString value={value} {...props} />;
+                case 'integer':
+                    return <JsonInteger value={value} {...props} />;
+                case 'float':
+                    return <JsonFloat value={value} {...props} />;
+                case 'boolean':
+                    return <JsonBoolean value={value} {...props} />;
+                case 'function':
+                    return <JsonFunction value={value} {...props} />;
+                case 'null':
+                    return <JsonNull {...props} />;
+                case 'nan':
+                    return <JsonNan {...props} />;
+                case 'undefined':
+                    return <JsonUndefined {...props} />;
+                case 'date':
+                    return <JsonDate value={new Date(value)} {...props} />;
+            }
+        }
     }
 
 }

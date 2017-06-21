@@ -34,7 +34,8 @@ export default class extends React.Component {
         displayObjectSize: true,
         displayDataTypes: true,
         onEdit: false,
-        onDelete: false
+        onDelete: false,
+        onAdd: false
     }
 
     componentWillMount() {
@@ -116,7 +117,8 @@ export default class extends React.Component {
 
     updateSrc = () => {
         let {
-            name, namespace, new_value, existing_value, variable_removed
+            name, namespace, new_value, existing_value,
+            variable_removed
         } = ObjectAttributes.get(
             this.rjvId, 'action', 'variable-update'
         );
@@ -128,9 +130,11 @@ export default class extends React.Component {
             //deepy copy src
             let updated_src = deepcopy(this.state.src);
             let walk = updated_src;
+
             for (const idx of namespace) {
                 walk = walk[idx];
             }
+
             if (variable_removed) {
                 if (toType(walk) == 'array') {
                     walk.splice(name, 1);

@@ -3,7 +3,8 @@ import dispatcher from './../helpers/dispatcher';
 
 //icons
 import Clippy from 'react-icons/lib/go/clippy';
-import Remove from 'react-icons/lib/fa/times-circle-o';
+import Remove from 'react-icons/lib/fa/times-circle';
+import Add from 'react-icons/lib/fa/plus-circle';
 
 //clipboard library
 //https://www.npmjs.com/package/clipboard
@@ -123,7 +124,32 @@ export default class extends React.Component {
     }
 
     getAddAttribute = () => {
-        return null;
+        const {
+            theme, hover, namespace, name, src, rjvId
+        } = this.props;
+
+        return (
+        <span
+        class="click-to-add"
+        style={{verticalAlign: 'top'}}>
+            <Add
+            class="click-to-add-icon"
+            {...Theme(theme, 'addVarIcon', hover)}
+            onClick={() => {
+                dispatcher.dispatch({
+                    name: 'VARIABLE_ADDED',
+                    rjvId: rjvId,
+                    data: {
+                        name: name,
+                        namespace: namespace.splice(0, (namespace.length-1)),
+                        existing_value: src,
+                        variable_removed: true
+                    },
+                });
+            }}
+            />
+        </span>
+        );
     }
 
     getRemoveObject = () => {
@@ -159,7 +185,7 @@ export default class extends React.Component {
     }
 
     render = () => {
-        const {theme, onEdit, onDelete} = this.props;
+        const {theme, onEdit, onDelete, onAdd} = this.props;
         return (
         <div {...Theme(theme, 'object-meta-data')}
         class='object-meta-data'
@@ -171,7 +197,7 @@ export default class extends React.Component {
             {/* copy to clipboard icon */}
             {this.getCopyComponent()}
             {/* copy add/remove icons */}
-            {onEdit !== false ? this.getAddAttribute() : null}
+            {onAdd !== false ? this.getAddAttribute() : null}
             {onDelete !== false ? this.getRemoveObject() : null}
         </div>
         );

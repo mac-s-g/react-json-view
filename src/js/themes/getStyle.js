@@ -4,7 +4,7 @@ import {createStyling} from 'react-base16-styling';
 
 const colorMap = theme => ({
     backgroundColor: theme.base00,
-    elipsisColor: theme.base09,
+    ellipsisColor: theme.base09,
     braceColor: theme.base07,
     expandedIcon: theme.base0D,
     collapsedIcon: theme.base0E,
@@ -17,9 +17,11 @@ const colorMap = theme => ({
         editIcon: theme.base0E,
         cancelIcon: theme.base09,
         removeIcon: theme.base09,
+        addIcon: theme.base0E,
         checkIcon: theme.base0E,
         background: theme.base01,
-        color: theme.base0A
+        color: theme.base0A,
+        border: theme.base07
     },
     dataTypes: {
         boolean: theme.base0E,
@@ -44,12 +46,12 @@ const getDefaultThemeStyling = theme => {
             cursor: styleConstants.globalCursor,
             backgroundColor: colors.backgroundColor
         },
-        'elipsis': {
+        'ellipsis': {
             display: 'inline-block',
-            color: colors.elipsisColor,
-            fontSize: styleConstants.elipsisFontSize,
-            lineHeight: styleConstants.elipsisLineHeight,
-            cursor: styleConstants.elipsisCursor
+            color: colors.ellipsisColor,
+            fontSize: styleConstants.ellipsisFontSize,
+            lineHeight: styleConstants.ellipsisLineHeight,
+            cursor: styleConstants.ellipsisCursor
         },
         'brace-row': {
             display: 'inline-block',
@@ -95,7 +97,8 @@ const getDefaultThemeStyling = theme => {
         },
         'variable-value': {
             display: 'inline-block',
-            paddingRight: styleConstants.variableValuePaddingRight
+            paddingRight: styleConstants.variableValuePaddingRight,
+            position: 'relative'
         },
         'object-name': {
             display: 'inline-block',
@@ -218,6 +221,20 @@ const getDefaultThemeStyling = theme => {
             }
             return {style: style};
         },
+        addVarIcon: (component, hover) => {
+            let style = {
+                verticalAlign: 'top',
+                display: 'none',
+                color: colors.editVariable.addIcon,
+                cursor: styleConstants.iconCursor,
+                fontSize: styleConstants.iconFontSize,
+                marginRight: styleConstants.iconMarginRight
+            };
+            if (hover) {
+                style.display = 'inline-block';
+            }
+            return {style: style};
+        },
         editVarIcon: (component, hover) => {
             let style = {
                 verticalAlign: 'top',
@@ -241,7 +258,7 @@ const getDefaultThemeStyling = theme => {
             cursor: styleConstants.iconCursor,
             color: colors.editVariable.checkIcon,
             fontSize: styleConstants.iconFontSize,
-            paddingRight: styleConstants.iconPaddingRight,
+            paddingRight: styleConstants.iconPaddingRight
         },
         'cancel-icon': {
             display: 'inline-block',
@@ -252,14 +269,18 @@ const getDefaultThemeStyling = theme => {
         },
         'edit-input': {
             display: 'inline-block',
+            minHeight: styleConstants.editInputHeight,
             minWidth: styleConstants.editInputMinWidth,
             borderRadius: styleConstants.editInputBorderRadius,
             backgroundColor: colors.editVariable.background,
             color: colors.editVariable.color,
             padding: styleConstants.editInputPadding,
             marginRight: styleConstants.editInputMarginRight,
-            border: styleConstants.editInputBorder,
-            fontFamily: styleConstants.editInputFontFamily
+            // border: '1px solid ' + colors.editVariable.border,
+            fontFamily: styleConstants.editInputFontFamily,
+        },
+        'detected-row': {
+            paddingTop: styleConstants.detectedRowPaddingTop,
         }
     }
 };

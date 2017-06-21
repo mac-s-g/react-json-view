@@ -11,9 +11,9 @@ export default {
   braceFontWeight: 'bold',
   braceCursor: 'pointer',
 
-  elipsisFontSize: '18px',
-  elipsisLineHeight: '10px',
-  elipsisCursor: 'pointer',
+  ellipsisFontSize: '18px',
+  ellipsisLineHeight: '10px',
+  ellipsisCursor: 'pointer',
 
   keyMargin: '0px 5px',
   keyLetterSpacing: '0.5px',
@@ -71,10 +71,10 @@ export default {
 
   tooltipPadding: '4px',
 
-  editInputMinWidth: '120px',
-  editInputBorder: 'none',
+  editInputHeight: '50px',
+  editInputMinWidth: '130px',
   editInputBorderRadius: '2px',
-  editInputPadding: '2px',
+  editInputPadding: '5px',
   editInputMarginRight: '4px',
   editInputFontFamily: 'monospace',
 
@@ -84,6 +84,8 @@ export default {
 
   dateValueMarginLeft: '2px',
 
-  iconMarginRight: '3px'
+  iconMarginRight: '3px',
+
+  detectedRowPaddingTop: '3px'
 };
 

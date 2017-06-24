@@ -143,11 +143,12 @@ export default class extends React.Component {
     updateSrc = () => {
         let {
             name, namespace, new_value, existing_value,
-            variable_removed, updated_src
+            variable_removed, updated_src, type
         } = ObjectAttributes.get(
             this.rjvId, 'action', 'variable-update'
         );
-        let {onEdit} = this.state;
+        let {onEdit, onDelete, onAdd} = this.state;
+        let result;
 
         const on_edit_payload = {
             existing_src: this.state.src,
@@ -157,7 +158,19 @@ export default class extends React.Component {
             existing_value: existing_value,
         }
 
-        if (onEdit(on_edit_payload) !== false) {
+        switch (type) {
+            case 'variable-added':
+                result = onAdd(on_edit_payload);
+                break;
+            case 'variable-edited':
+                result = onEdit(on_edit_payload);
+                break;
+            case 'variable-removed':
+                result = onDelete(on_edit_payload);
+                break
+        }
+
+        if (result !== false) {
             this.state.src = updated_src;
             this.setState(this.state);
         }

@@ -37,21 +37,30 @@ class ObjectAttributes extends EventEmitter {
                 action.data.updated_src = this.updateSrc(
                     rjvId, data
                 );
-                this.set(rjvId, 'action', 'variable-update', data);
+                this.set(
+                    rjvId, 'action', 'variable-update',
+                    {...data, type:'variable-edited'}
+                );
                 this.emit('variable-update-' + rjvId)
                 break;
             case 'VARIABLE_REMOVED':
                 action.data.updated_src = this.updateSrc(
                     rjvId, data
                 );
-                this.set(rjvId, 'action', 'variable-update', data);
+                this.set(
+                    rjvId, 'action', 'variable-update',
+                    {...data, type:'variable-removed'}
+                );
                 this.emit('variable-update-' + rjvId)
                 break;
             case 'VARIABLE_ADDED':
                 action.data.updated_src = this.updateSrc(
                     rjvId, data
                 );
-                this.set(rjvId, 'action', 'variable-update', data);
+                this.set(
+                    rjvId, 'action', 'variable-update',
+                    {...data, type:'variable-added'}
+                );
                 this.emit('variable-update-' + rjvId)
                 break;
             case 'ADD_VARIABLE_KEY_REQUEST':

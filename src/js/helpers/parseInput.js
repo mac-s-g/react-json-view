@@ -10,48 +10,49 @@ export default function parseInput(input) {
             JSON.parse(input)
         );
         if (input[0] == '[') {
-            return (formatResponse('array', input));
+            //array
+            return formatResponse('array', JSON.parse(input));
         } else if (input[0] == '{') {
-            return (formatResponse('object', input));
-        }
-
-        input = input.toLowerCase();
-
-        if (input == 'null') {
-            return (formatResponse('null', 'null'));
-        } else if (input == 'true') {
-            return (formatResponse('boolean', 'true'));
-        } else if (input == 'false') {
-            return (formatResponse('boolean', 'false'));
+            //object
+            return formatResponse('object', JSON.parse(input));
         } else if (
-            input.match(/\d+\.\d+/)
-            && input.match(/\d+\.\d+/)[0] == input
+            input.match(/\-?\d+\.\d+/)
+            && input.match(/\-?\d+\.\d+/)[0] == input
         ) {
-            return (formatResponse('float', parseFloat(input)));
+            //integer
+            return formatResponse('float', parseFloat(input));
         } else if (
-            input.match(/\d+/)
-            && input.match(/\d+/)[0] == input
+            input.match(/\-?\d+/)
+            && input.match(/\-?\d+/)[0] == input
         ) {
-            return (formatResponse('integer', parseInt(input)));
+            //float
+            return formatResponse('integer', parseInt(input));
         }
-    } catch (e) {
-        //run in case input was not serializable
-        input = input.toLowerCase();
-        switch (input) {
-            case 'undefined': {
-                return (formatResponse('undefined', 'undefined'));
-                break;
-            }
-            case 'nan': {
-                return (formatResponse('NaN', 'false'));
-                break;
-            }
-            default: {
-                //check to see if this is a date
-                input = Date.parse(input);
-                if (input) {
-                    return (formatResponse('date', input));
-                }
+    } catch (e) {}
+
+    //run in case input was not serializable
+    input = input.toLowerCase();
+    switch (input) {
+        case 'undefined': {
+            return formatResponse('undefined', undefined);
+        }
+        case 'nan': {
+            return formatResponse('nan', NaN);
+        }
+        case 'null': {
+            return formatResponse('null', null);
+        }
+        case 'true': {
+            return formatResponse('boolean', true);
+        }
+        case 'false': {
+            return formatResponse('boolean', false);
+        }
+        default: {
+            //check to see if this is a date
+            input = Date.parse(input);
+            if (input) {
+                return (formatResponse('date', new Date(input)));
             }
         }
     }

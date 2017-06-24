@@ -1,12 +1,11 @@
 import React from 'react';
 import JsonViewer from './components/JsonViewer';
+import AddKeyRequest from './components/AddKeyRequest';
 import {toType, isTheme} from './helpers/util';
 import ObjectAttributes from './stores/ObjectAttributes';
 
-import deepcopy from 'deepcopy';
-
 //global theme
-import style from './themes/getStyle';
+import Theme from './themes/getStyle';
 
 
 //forward src through to JsonObject component
@@ -15,9 +14,18 @@ export default class extends React.Component {
     constructor(props) {
         super(props);
         this.init(props);
+        ObjectAttributes.set(
+            this.rjvId,
+            'global',
+            'src',
+            this.state.src
+        );
     }
 
-    state = {}
+    state = {
+        //listen to request to add a key to an object
+        addKeyRequest: false
+    }
 
     //reference id for this instance
     rjvId = Date.now().toString()
@@ -38,16 +46,30 @@ export default class extends React.Component {
         onAdd: false
     }
 
+    getListeners = () => {
+        return {
+            'reset': this.resetState,
+            'variable-update': this.updateSrc,
+            'add-key-request': this.addKeyRequest
+        }
+    }
+
     componentWillMount() {
-        ObjectAttributes.on(
-            'variable-update-' + this.rjvId, this.updateSrc
-        );
+        const listeners = this.getListeners();
+        for (const i in listeners) {
+            ObjectAttributes.on(
+                i + '-' + this.rjvId, listeners[i]
+            )
+        }
     }
 
     componentWillUnmount() {
-        ObjectAttributes.removeListener(
-            'variable-update-' + this.rjvId, this.updateSrc
-        );
+        const listeners = this.getListeners();
+        for (const i in listeners) {
+            ObjectAttributes.removeListener(
+                i + '-' + this.rjvId, listeners[i]
+            )
+        }
     }
 
     init = (props) => {
@@ -103,10 +125,13 @@ export default class extends React.Component {
     }
 
     render() {
-        const {...props} = this.state;
+        const {addKeyRequest, ...props} = this.state;
+        //reset key request to false once it's observed
+        this.state.addKeyRequest = false;
         return (<div class="react-json-view"
-            {...style(props.theme, 'app-container')} >
+            {...Theme(props.theme, 'app-container')} >
             <JsonViewer {...props} type={toType(props.src)} rjvId={this.rjvId} />
+            <AddKeyRequest active={addKeyRequest} theme={props.theme} rjvId={this.rjvId} />
         </div>);
     }
 
@@ -118,52 +143,31 @@ export default class extends React.Component {
     updateSrc = () => {
         let {
             name, namespace, new_value, existing_value,
-            variable_removed
+            variable_removed, updated_src
         } = ObjectAttributes.get(
             this.rjvId, 'action', 'variable-update'
         );
         let {onEdit} = this.state;
-        let src;
-        namespace.shift();
-
-        const getUpdatedSrc = () => {
-            //deepy copy src
-            let updated_src = deepcopy(this.state.src);
-            let walk = updated_src;
-
-            for (const idx of namespace) {
-                walk = walk[idx];
-            }
-
-            if (variable_removed) {
-                if (toType(walk) == 'array') {
-                    walk.splice(name, 1);
-                } else {
-                    delete walk[name];
-                }
-            } else {
-                walk[name] = new_value;
-            }
-
-            return updated_src;
-        }
-
-        src = getUpdatedSrc();
 
         const on_edit_payload = {
             existing_src: this.state.src,
-            updated_src: src,
+            updated_src: updated_src,
             name: name,
             namespace: namespace,
             existing_value: existing_value,
         }
-        if (!variable_removed) {
-            on_edit_payload['new_value'] = new_value;
-        }
 
         if (onEdit(on_edit_payload) !== false) {
-            this.state.src = src;
+            this.state.src = updated_src;
             this.setState(this.state);
         }
+    }
+
+    addKeyRequest = () => {
+        this.setState({addKeyRequest: true});
+    }
+
+    resetState = () => {
+        this.setState(this.state);
     }
 }

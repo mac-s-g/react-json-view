@@ -1,6 +1,8 @@
 import React from 'react';
 import dispatcher from './../helpers/dispatcher';
 
+import {toType} from './../helpers/util';
+
 //icons
 import Clippy from 'react-icons/lib/go/clippy';
 import Remove from 'react-icons/lib/fa/times-circle';
@@ -125,7 +127,7 @@ export default class extends React.Component {
 
     getAddAttribute = () => {
         const {
-            theme, hover, namespace, name, src, rjvId
+            theme, hover, namespace, name, src, rjvId, depth
         } = this.props;
 
         return (
@@ -136,16 +138,31 @@ export default class extends React.Component {
             class="click-to-add-icon"
             {...Theme(theme, 'addVarIcon', hover)}
             onClick={() => {
-                dispatcher.dispatch({
-                    name: 'VARIABLE_ADDED',
-                    rjvId: rjvId,
-                    data: {
-                        name: name,
-                        namespace: namespace.splice(0, (namespace.length-1)),
-                        existing_value: src,
-                        variable_removed: true
-                    },
-                });
+                const request = {
+                    name: depth > 0 ? name : null,
+                    namespace: namespace.splice(
+                        0, (namespace.length-1)
+                    ),
+                    existing_value: src,
+                    variable_removed: false,
+                    key_name: null
+                };
+                if (toType(src) == 'object') {
+                    dispatcher.dispatch({
+                        name: 'ADD_VARIABLE_KEY_REQUEST',
+                        rjvId: rjvId,
+                        data: request,
+                    });
+                } else {
+                    dispatcher.dispatch({
+                        name: 'VARIABLE_ADDED',
+                        rjvId: rjvId,
+                        data: {
+                            ...request,
+                            new_value: [...src, null]
+                        }
+                    });
+                }
             }}
             />
         </span>

@@ -40,7 +40,7 @@ export default class extends React.Component {
         const type_name = 'string';
         const {collapsed} = this.state;
         const {props} = this;
-        const {collapseStringsAfterLength} = props;
+        const {collapseStringsAfterLength, theme} = props;
         let {value} = props;
         let collapsible = toType(collapseStringsAfterLength) == 'integer';
         let style = {style: {cursor: 'default'}};
@@ -50,13 +50,16 @@ export default class extends React.Component {
         ) {
             style.style.cursor = 'pointer';
             if (this.state.collapsed) {
-                value = value.substring(0, collapseStringsAfterLength)
-                    + "...";
+                value = (<span>
+                    {value.substring(0, collapseStringsAfterLength)}
+                    <span {...Theme(theme, 'ellipsis')}
+                    > ...</span>
+                </span>);
             }
         }
 
         return (
-        <div {...Theme(props.theme, 'string')} >
+        <div {...Theme(theme, 'string')} >
             <DataTypeLabel type_name={type_name} {...props} />
             <span class="string-value"
             {...style} onClick={this.toggleCollapsed}>

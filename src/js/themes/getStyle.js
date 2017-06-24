@@ -1,5 +1,5 @@
 import {rjv_default, rjv_grey} from './base16/rjv-themes';
-import styleConstants from './styleConstants';
+import constants from './styleConstants';
 import {createStyling} from 'react-base16-styling';
 
 const colorMap = theme => ({
@@ -13,16 +13,6 @@ const colorMap = theme => ({
     objectSize: theme.base04,
     copyToClipboard: theme.base0F,
     objectBorder: theme.base02,
-    editVariable: {
-        editIcon: theme.base0E,
-        cancelIcon: theme.base09,
-        removeIcon: theme.base09,
-        addIcon: theme.base0E,
-        checkIcon: theme.base0E,
-        background: theme.base01,
-        color: theme.base0A,
-        border: theme.base07
-    },
     dataTypes: {
         boolean: theme.base0E,
         date: theme.base0D,
@@ -34,6 +24,22 @@ const colorMap = theme => ({
         null: theme.base0A,
         undefined: theme.base05,
         background: theme.base02
+    },
+    editVariable: {
+        editIcon: theme.base0E,
+        cancelIcon: theme.base09,
+        removeIcon: theme.base09,
+        addIcon: theme.base0E,
+        checkIcon: theme.base0E,
+        background: theme.base01,
+        color: theme.base0A,
+        border: theme.base07
+    },
+    addKeyModal: {
+        background: theme.base05,
+        border: theme.base04,
+        color: theme.base0A,
+        labelColor: theme.base01
     }
 });
 
@@ -42,16 +48,17 @@ const getDefaultThemeStyling = theme => {
 
     return {
         'app-container': {
-            fontFamily: styleConstants.globalFontFamily,
-            cursor: styleConstants.globalCursor,
-            backgroundColor: colors.backgroundColor
+            fontFamily: constants.globalFontFamily,
+            cursor: constants.globalCursor,
+            backgroundColor: colors.backgroundColor,
+            position: 'relative'
         },
         'ellipsis': {
             display: 'inline-block',
             color: colors.ellipsisColor,
-            fontSize: styleConstants.ellipsisFontSize,
-            lineHeight: styleConstants.ellipsisLineHeight,
-            cursor: styleConstants.ellipsisCursor
+            fontSize: constants.ellipsisFontSize,
+            lineHeight: constants.ellipsisLineHeight,
+            cursor: constants.ellipsisCursor
         },
         'brace-row': {
             display: 'inline-block',
@@ -59,8 +66,8 @@ const getDefaultThemeStyling = theme => {
         },
         'brace': {
             display: 'inline-block',
-            cursor: styleConstants.braceCursor,
-            fontWeight: styleConstants.braceFontWeight,
+            cursor: constants.braceCursor,
+            fontWeight: constants.braceFontWeight,
             color: colors.braceColor,
         },
         'expanded-icon': {
@@ -71,67 +78,67 @@ const getDefaultThemeStyling = theme => {
         },
         'colon': {
             display: 'inline-block',
-            margin: styleConstants.keyMargin,
+            margin: constants.keyMargin,
             color: colors.keyColor
         },
         objectKeyVal: (component, paddingLeft) => {
             return {style: {
                 paddingLeft: paddingLeft + 'px',
-                paddingTop: styleConstants.keyValPaddingTop,
-                paddingRight: styleConstants.keyValPaddingRight,
-                paddingBottom: styleConstants.keyValPaddingBottom,
-                borderLeft: styleConstants.keyValBorderLeft
+                paddingTop: constants.keyValPaddingTop,
+                paddingRight: constants.keyValPaddingRight,
+                paddingBottom: constants.keyValPaddingBottom,
+                borderLeft: constants.keyValBorderLeft
                     + ' ' + colors.objectBorder,
                 ':hover': {
                     paddingLeft: (paddingLeft - 1)  + 'px',
-                    borderLeft: styleConstants.keyValBorderHover
+                    borderLeft: constants.keyValBorderHover
                         + ' ' + colors.objectBorder
                 }
             }};
         },
         'object-key-val-no-border': {
-            padding: styleConstants.keyValPadding
+            padding: constants.keyValPadding
         },
         'pushed-content': {
-            marginLeft: styleConstants.pushedContentMarginLeft
+            marginLeft: constants.pushedContentMarginLeft
         },
         'variable-value': {
             display: 'inline-block',
-            paddingRight: styleConstants.variableValuePaddingRight,
+            paddingRight: constants.variableValuePaddingRight,
             position: 'relative'
         },
         'object-name': {
             display: 'inline-block',
             color: colors.keyColor,
-            letterSpacing: styleConstants.keyLetterSpacing,
-            fontStyle: styleConstants.keyFontStyle,
-            verticalAlign: styleConstants.keyVerticalAlign,
-            opacity: styleConstants.keyOpacity,
+            letterSpacing: constants.keyLetterSpacing,
+            fontStyle: constants.keyFontStyle,
+            verticalAlign: constants.keyVerticalAlign,
+            opacity: constants.keyOpacity,
             ':hover': {
-                opacity: styleConstants.keyOpacityHover
+                opacity: constants.keyOpacityHover
             }
         },
         'array-key': {
             display: 'inline-block',
             color: colors.arrayKeyColor,
-            letterSpacing: styleConstants.keyLetterSpacing,
-            fontStyle: styleConstants.keyFontStyle,
-            verticalAlign: styleConstants.keyVerticalAlign,
-            opacity: styleConstants.keyOpacity,
+            letterSpacing: constants.keyLetterSpacing,
+            fontStyle: constants.keyFontStyle,
+            verticalAlign: constants.keyVerticalAlign,
+            opacity: constants.keyOpacity,
             ':hover': {
-                opacity: styleConstants.keyOpacityHover
+                opacity: constants.keyOpacityHover
             }
         },
         'object-size': {
             color: colors.objectSize,
-            borderRadius: styleConstants.objectSizeBorderRadius,
-            fontStyle: styleConstants.objectSizeFontStyle,
-            margin: styleConstants.objectSizeMargin
+            borderRadius: constants.objectSizeBorderRadius,
+            fontStyle: constants.objectSizeFontStyle,
+            margin: constants.objectSizeMargin
         },
         'data-type-label': {
-            fontSize: styleConstants.dataTypeFontSize,
-            marginRight: styleConstants.dataTypeMarginRight,
-            opacity: styleConstants.datatypeOpacity
+            fontSize: constants.dataTypeFontSize,
+            marginRight: constants.dataTypeMarginRight,
+            opacity: constants.datatypeOpacity
         },
         'boolean': {
             display: 'inline-block',
@@ -142,7 +149,7 @@ const getDefaultThemeStyling = theme => {
             color: colors.dataTypes.date
         },
         'date-value': {
-            marginLeft: styleConstants.dateValueMarginLeft
+            marginLeft: constants.dateValueMarginLeft
         },
         'float': {
             display: 'inline-block',
@@ -164,57 +171,57 @@ const getDefaultThemeStyling = theme => {
         'nan': {
             display: 'inline-block',
             color: colors.dataTypes.nan,
-            fontSize: styleConstants.nanFontSize,
-            fontWeight: styleConstants.nanFontWeight,
+            fontSize: constants.nanFontSize,
+            fontWeight: constants.nanFontWeight,
             backgroundColor: colors.dataTypes.background,
-            padding: styleConstants.nanPadding,
-            borderRadius: styleConstants.nanBorderRadius
+            padding: constants.nanPadding,
+            borderRadius: constants.nanBorderRadius
         },
         null: {
             display: 'inline-block',
             color: colors.dataTypes.null,
-            fontSize: styleConstants.nullFontSize,
-            fontWeight: styleConstants.nullFontWeight,
+            fontSize: constants.nullFontSize,
+            fontWeight: constants.nullFontWeight,
             backgroundColor: colors.dataTypes.background,
-            padding: styleConstants.nullPadding,
-            borderRadius: styleConstants.nullBorderRadius
+            padding: constants.nullPadding,
+            borderRadius: constants.nullBorderRadius
         },
         undefined: {
             display: 'inline-block',
             color: colors.dataTypes.undefined,
-            fontSize: styleConstants.undefinedFontSize,
-            padding: styleConstants.undefinedPadding,
-            borderRadius: styleConstants.undefinedBorderRadius,
+            fontSize: constants.undefinedFontSize,
+            padding: constants.undefinedPadding,
+            borderRadius: constants.undefinedBorderRadius,
             backgroundColor: colors.dataTypes.background,
         },
         'copy-to-clipboard': {
-            cursor: styleConstants.clipboardCursor
+            cursor: constants.clipboardCursor
         },
         'copy-icon': {
             color: colors.copyToClipboard,
-            fontSize: styleConstants.iconFontSize,
-            marginRight: styleConstants.iconMarginRight,
+            fontSize: constants.iconFontSize,
+            marginRight: constants.iconMarginRight,
             verticalAlign: 'top',
         },
         'object-meta-data': {
             display: 'inline-block',
-            padding: styleConstants.metaDataPadding
+            padding: constants.metaDataPadding
         },
         'icon-container': {
             display: 'inline-block',
-            width: styleConstants.iconContainerWidth
+            width: constants.iconContainerWidth
         },
         'tooltip': {
-            padding: styleConstants.tooltipPadding
+            padding: constants.tooltipPadding
         },
         removeVarIcon: (component, hover) => {
             let style = {
                 verticalAlign: 'top',
                 display: 'none',
                 color: colors.editVariable.removeIcon,
-                cursor: styleConstants.iconCursor,
-                fontSize: styleConstants.iconFontSize,
-                marginRight: styleConstants.iconMarginRight
+                cursor: constants.iconCursor,
+                fontSize: constants.iconFontSize,
+                marginRight: constants.iconMarginRight
             };
             if (hover) {
                 style.display = 'inline-block';
@@ -226,9 +233,9 @@ const getDefaultThemeStyling = theme => {
                 verticalAlign: 'top',
                 display: 'none',
                 color: colors.editVariable.addIcon,
-                cursor: styleConstants.iconCursor,
-                fontSize: styleConstants.iconFontSize,
-                marginRight: styleConstants.iconMarginRight
+                cursor: constants.iconCursor,
+                fontSize: constants.iconFontSize,
+                marginRight: constants.iconMarginRight
             };
             if (hover) {
                 style.display = 'inline-block';
@@ -240,9 +247,9 @@ const getDefaultThemeStyling = theme => {
                 verticalAlign: 'top',
                 display: 'none',
                 color: colors.editVariable.editIcon,
-                cursor: styleConstants.iconCursor,
-                fontSize: styleConstants.iconFontSize,
-                marginRight: styleConstants.iconMarginRight
+                cursor: constants.iconCursor,
+                fontSize: constants.iconFontSize,
+                marginRight: constants.iconMarginRight
             };
             if (hover) {
                 style.display = 'inline-block';
@@ -255,32 +262,88 @@ const getDefaultThemeStyling = theme => {
         },
         'check-icon': {
             display: 'inline-block',
-            cursor: styleConstants.iconCursor,
+            cursor: constants.iconCursor,
             color: colors.editVariable.checkIcon,
-            fontSize: styleConstants.iconFontSize,
-            paddingRight: styleConstants.iconPaddingRight
+            fontSize: constants.iconFontSize,
+            paddingRight: constants.iconPaddingRight
         },
         'cancel-icon': {
             display: 'inline-block',
-            cursor: styleConstants.iconCursor,
+            cursor: constants.iconCursor,
             color: colors.editVariable.cancelIcon,
-            fontSize: styleConstants.iconFontSize,
-            paddingRight: styleConstants.iconPaddingRight,
+            fontSize: constants.iconFontSize,
+            paddingRight: constants.iconPaddingRight,
         },
         'edit-input': {
             display: 'inline-block',
-            minHeight: styleConstants.editInputHeight,
-            minWidth: styleConstants.editInputMinWidth,
-            borderRadius: styleConstants.editInputBorderRadius,
+            minHeight: constants.editInputHeight,
+            minWidth: constants.editInputMinWidth,
+            borderRadius: constants.editInputBorderRadius,
             backgroundColor: colors.editVariable.background,
             color: colors.editVariable.color,
-            padding: styleConstants.editInputPadding,
-            marginRight: styleConstants.editInputMarginRight,
-            // border: '1px solid ' + colors.editVariable.border,
-            fontFamily: styleConstants.editInputFontFamily,
+            padding: constants.editInputPadding,
+            marginRight: constants.editInputMarginRight,
+            fontFamily: constants.editInputFontFamily,
         },
         'detected-row': {
-            paddingTop: styleConstants.detectedRowPaddingTop,
+            paddingTop: constants.detectedRowPaddingTop,
+        },
+        'add-key-request': {
+            position: constants.addKeyCoverPosition,
+            top: constants.addKeyCoverPositionPx,
+            left: constants.addKeyCoverPositionPx,
+            right: constants.addKeyCoverPositionPx,
+            bottom: constants.addKeyCoverPositionPx,
+            backgroundColor: constants.addKeyCoverBackground
+        },
+        'add-key-modal': {
+            width: constants.addKeyModalWidth,
+            backgroundColor: colors.addKeyModal.background,
+            marginLeft: constants.addKeyModalMargin,
+            marginRight: constants.addKeyModalMargin,
+            padding: constants.addKeyModalPadding,
+            borderRadius: constants.addKeyModalRadius,
+            marginTop: '15px',
+            position: 'relative'
+        },
+        'add-key-label': {
+            color: colors.addKeyModal.labelColor,
+            marginLeft: '2px',
+            marginBottom: '5px',
+            fontSize: '11px'
+        },
+        'add-key-input-container': {
+            overflow: 'hidden'
+        },
+        'add-key-input': {
+            width: '100%',
+            padding: '3px 6px',
+            fontFamily: 'monospace',
+            color: colors.addKeyModal.color,
+            border: 'none',
+            boxSizing: 'border-box',
+            borderRadius: '2px'
+        },
+        'add-key-cancel': {
+            backgroundColor: colors.editVariable.removeIcon,
+            position: 'absolute',
+            top: '0px',
+            right: '0px',
+            borderRadius: '0px 3px 0px 3px',
+            cursor: 'pointer'
+        },
+        'add-key-cancel-icon': {
+            color: colors.addKeyModal.labelColor,
+            fontSize: constants.iconFontSize,
+            transform: "rotate(45deg)"
+        },
+        'add-key-submit': {
+            color: colors.editVariable.addIcon,
+            fontSize: constants.iconFontSize,
+            position: 'absolute',
+            right: '2px',
+            top: '3px',
+            cursor: 'pointer'
         }
     }
 };

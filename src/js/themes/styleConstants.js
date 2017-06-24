@@ -86,6 +86,14 @@ export default {
 
   iconMarginRight: '3px',
 
-  detectedRowPaddingTop: '3px'
+  detectedRowPaddingTop: '3px',
+
+  addKeyCoverBackground: 'rgba(255, 255, 255, 0.3)',
+  addKeyCoverPosition: 'absolute',
+  addKeyCoverPositionPx: '0px',
+  addKeyModalWidth: '200px',
+  addKeyModalMargin: 'auto',
+  addKeyModalPadding: '10px',
+  addKeyModalRadius: '3px'
 };
 

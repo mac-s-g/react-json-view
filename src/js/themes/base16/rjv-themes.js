@@ -1,9 +1,10 @@
 export const rjv_default = {
   scheme: 'rjv-default',
   author: 'mac gainor',
-  base00: 'rgba(1, 1, 1, 0)',
-  base01: 'rgba(0, 0, 0, 0.05)',
-  base02: 'rgba(0, 0, 0, 0.1)',
+  //transparent main background
+  base00: 'rgba(0, 0, 0, 0)',
+  base01: 'rgb(245, 245, 245)',
+  base02: 'rgb(235, 235, 235)',
   base03: '#93a1a1',
   base04: 'rgba(0, 0, 0, 0.3)',
   base05: '#586e75',

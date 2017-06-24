@@ -9,7 +9,7 @@ rm -rf ./debug
 
 mkdir debug
 
-# run the workbench container
+# run the container
 docker run \
     -v $(pwd)/src:/react/src \
     -v $(pwd)/debug:/react/debug \

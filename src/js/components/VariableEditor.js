@@ -23,9 +23,6 @@ import ReactTooltip from 'react-tooltip';
 import Theme from './../themes/getStyle';
 import Radium from 'radium';
 
-//json parsing web worker
-// const JsonParser = require("worker-loader!./../helpers/json-parse-worker.js");
-
 @Radium
 class VariableEditor extends React.Component {
 
@@ -41,13 +38,6 @@ class VariableEditor extends React.Component {
 
     constructor(props) {
         super(props);
-        // this.worker = new JsonParser();
-        // this.worker.onmessage = (message) => {
-        //     message = message.data;
-        //     this.state.parsedInput.type  = message.type;
-        //     this.state.parsedInput.value = message.value;
-        //     this.setState(this.state);
-        // }
     }
 
     componentDidMount() {
@@ -211,6 +201,7 @@ class VariableEditor extends React.Component {
 
         return (<div>
             <textarea type='text'
+            ref={input => input && input.focus()}
             value={editValue}
             class="variable-editor"
             onChange={(event)=>{
@@ -236,7 +227,6 @@ class VariableEditor extends React.Component {
             <CheckCircle class="edit-check" {...Theme(theme, 'check-icon')}
             onClick={() => {
                 const new_value = (editValue);
-                this.state.hover = false;
                 this.state.editMode = false;
                 dispatcher.dispatch({
                     name: 'VARIABLE_UPDATED',
@@ -249,7 +239,6 @@ class VariableEditor extends React.Component {
                         variable_removed: false
                     },
                 });
-                this.setState(this.state);
             }}
             />
             <div>
@@ -262,29 +251,32 @@ class VariableEditor extends React.Component {
     }
 
     showDetected = () => {
-        const {theme} = this.props;
-        const {type} = this.state.parsedInput;
+        const {theme, variable, namespace, rjvId} = this.props;
+        const {type, value} = this.state.parsedInput;
         const detected = this.getDetectedInput();
         if (detected) {
             return <div>
-            {/* detected label */
-            /*<div style={{
-                ...Theme(theme, 'object-size').style,
-                ...Theme(theme, 'detected-row').style
-            }}>
-                {type} detected
-            </div>*/
-            }
             <div {...Theme(theme, 'detected-row')}>
                 {detected}
                 <CheckCircle class="edit-check"
                 style={{
                     verticalAlign: 'top',
-                    paddingLeft: '5px',
+                    paddingLeft: '3px',
                     ...Theme(theme, 'check-icon').style
                 }}
                 onClick={() => {
-
+                    this.state.editMode = false;
+                    dispatcher.dispatch({
+                        name: 'VARIABLE_UPDATED',
+                        rjvId: rjvId,
+                        data: {
+                            name: variable.name,
+                            namespace: namespace,
+                            existing_value: variable.value,
+                            new_value: value,
+                            variable_removed: false
+                        },
+                    });
                 }}
                 />
             </div>
@@ -306,14 +298,12 @@ class VariableEditor extends React.Component {
                         <span style={{...Theme(theme, 'ellipsis').style, cursor:'default'}}>...</span>
                         <span style={{...Theme(theme, 'brace').style, cursor:'default'}}>{'}'}</span>
                     </span>;
-                    break;
                 case 'array':
                     return <span>
                         <span style={{...Theme(theme, 'brace').style, cursor:'default'}}>{'['}</span>
                         <span style={{...Theme(theme, 'ellipsis').style, cursor:'default'}}>...</span>
                         <span style={{...Theme(theme, 'brace').style, cursor:'default'}}>{']'}</span>
                     </span>;
-                    break;
                 case 'string':
                     return <JsonString value={value} {...props} />;
                 case 'integer':

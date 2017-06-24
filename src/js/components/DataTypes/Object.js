@@ -52,7 +52,7 @@ class rjvObject extends React.Component {
             object_type: (props.type == 'array' ? 'array' : 'object'),
             parent_type: (props.type == 'array' ? 'array' : 'object'),
             display_name: (props.name ? props.name : ''),
-            hover: false
+            hover: this.state.hover ? this.state.hover : false
         }
 
         this.state = {...this.state, ...state};

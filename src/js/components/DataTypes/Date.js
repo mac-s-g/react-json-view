@@ -17,7 +17,6 @@ export default class extends React.Component {
             hour: "2-digit",
             minute: "2-digit"
         };
-        console.log(props);
         return (
         <div {...Theme(props.theme, 'date')}>
             <DataTypeLabel type_name={type_name} {...props} />

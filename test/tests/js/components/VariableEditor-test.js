@@ -1,8 +1,10 @@
 import React from 'react';
-import { shallow, render } from 'enzyme';
+import { shallow, render, mount } from 'enzyme';
 import {expect} from 'chai';
 
+import Index from '/react/src/js/index';
 import VariableEditor from '/react/src/js/components/VariableEditor';
+import ObjectAttributes from '/react/src/js/stores/ObjectAttributes';
 
 
 describe('<VariableEditor />', function () {
@@ -37,7 +39,7 @@ describe('<VariableEditor />', function () {
             <VariableEditor
             src={{test:true}}
             theme='rjv-default'
-            onEdit={false}
+            onEdit={(edit)=>{}}
             rjvId={rjvId}
             variable={{
                 name: 'test',
@@ -49,10 +51,14 @@ describe('<VariableEditor />', function () {
         wrapper.instance().setHover(true);
         expect(
             wrapper.find('.click-to-edit').props().style.display
-        ).to.equal('none');
+        ).to.equal('inline-block');
         expect(
             wrapper.state('hover')
         ).to.equal(true);
+        wrapper.setState({'editMode': true});
+        expect(
+            wrapper.find('.click-to-edit').props().style.display
+        ).to.equal('none');
     });
 
     it('VariableEditor test textarea and cancel icon', function () {
@@ -87,34 +93,25 @@ describe('<VariableEditor />', function () {
     });
 
     it('VariableEditor test textarea and submit icon', function () {
-        const wrapper = shallow(
-            <VariableEditor
+        const wrapper = mount(
+            <Index
             src={{test:true}}
             theme='rjv-default'
             onEdit={(edit)=>{}}
             rjvId={rjvId}
-            variable={{
-                name: 'test',
-                value: 5,
-                type: 'int'
-            }}
             />
         );
-        wrapper.instance().setHover(true);
-        expect(
-            wrapper.find('.click-to-edit-icon').length
-        ).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
         expect(
-            wrapper.state('editMode')
-        ).to.equal(true);
+            wrapper.state('onEdit')
+        ).to.not.equal(false);
         expect(
             wrapper.find('.variable-editor').length
         ).to.equal(1);
         wrapper.find('.edit-check').simulate('click');
         expect(
             wrapper.find('.variable-editor').length
-        ).to.equal(1);
+        ).to.equal(0);
     });
 
 });

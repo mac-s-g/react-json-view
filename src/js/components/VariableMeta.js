@@ -202,7 +202,7 @@ export default class extends React.Component {
     }
 
     render = () => {
-        const {theme, onEdit, onDelete, onAdd} = this.props;
+        const {theme, onDelete, onAdd} = this.props;
         return (
         <div {...Theme(theme, 'object-meta-data')}
         class='object-meta-data'

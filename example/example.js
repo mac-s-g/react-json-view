@@ -14,9 +14,9 @@ ReactDom.render(
         <JsonViewer
         src={getExampleJson1()}
         collapseStringsAfterLength={12}
-        onEdit={(e)=>{console.log(e); return false;}}
-        onDelete={(e)=>{console.log(e); return false;}}
-        onAdd={(e)=>{console.log(e); return false;}} />
+        onEdit={(e)=>{console.log(e)}}
+        onDelete={(e)=>{console.log(e)}}
+        onAdd={(e)=>{console.log(e)}} />
 
         <br />
 

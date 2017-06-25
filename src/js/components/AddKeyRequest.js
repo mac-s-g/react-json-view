@@ -38,6 +38,7 @@ export default class extends React.Component {
                 <div {...Theme(theme, 'add-key-label')}>Key Name:</div>
                 <div style={{position: 'relative'}}>
                     <input {...Theme(theme, 'add-key-input')}
+                        class="add-key-input"
                         ref={input => input && input.focus()}
                         spellCheck={false}
                         value={input}
@@ -55,12 +56,14 @@ export default class extends React.Component {
                     />
                     {valid
                         ? <Add {...Theme(theme, 'add-key-submit')}
+                            class="add-key-submit"
                             onClick={e => this.submit()}
                         />
                         : null}
                 </div>
                 <span {...Theme(theme, 'add-key-cancel')}>
                     <Cancel {...Theme(theme, 'add-key-cancel-icon')}
+                    class="add-key-cancel"
                     onClick={()=>{
                         dispatcher.dispatch({
                             rjvId: rjvId,

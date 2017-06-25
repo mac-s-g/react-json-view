@@ -17,7 +17,8 @@ ReactDom.render(
         onEdit={(e)=>{console.log(e)}}
         onDelete={(e)=>{console.log(e)}}
         onAdd={(e)=>{console.log(e)}}
-        displayObjectSize={false} />
+        displayObjectSize={false}
+        enableClipboard={true} />
 
         <br />
 

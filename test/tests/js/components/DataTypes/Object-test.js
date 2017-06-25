@@ -55,6 +55,7 @@ describe('<JsonObject />', function () {
             theme='rjv-default'
             indentWidth={1}
             depth={1}
+            collapsed={false}
             displayDataTypes={true}
             type='object'/>
         );

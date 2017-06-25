@@ -36,18 +36,23 @@ class rjvObject extends React.Component {
     state = {}
 
     init = (props) => {
+        const expanded = (
+            props.collapsed === false
+            || (props.collapsed !== true
+            && props.collapsed > props.depth)
+        );
         const state = {
             rjvId: props.rjvId,
             state_key: props.namespace.join('.'),
             namespace: props.namespace,
             indentWidth: props.indentWidth,
             expanded: props.jsvRoot
-                ? !props.collapsed
+                ? expanded
                 : AttributeStore.get(
                     props.rjvId,
                     props.namespace,
                     'expanded',
-                    !props.collapsed
+                    expanded
                 ),
             object_type: (props.type == 'array' ? 'array' : 'object'),
             parent_type: (props.type == 'array' ? 'array' : 'object'),

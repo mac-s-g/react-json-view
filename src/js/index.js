@@ -111,17 +111,6 @@ export default class extends React.Component {
                 message: 'src property must be a valid json object'
             }
         }
-
-        //make sure `onEdit` prop is a function when not `false`
-        if (this.state.onEdit !== false
-            && toType(this.state.onEdit) !== 'function'
-        ) {
-            this.state.onEdit = ()=>{};
-            console.error(
-                'react-json-view error:',
-                'onEdit property must be a function when enabled'
-            );
-        }
     }
 
     render() {

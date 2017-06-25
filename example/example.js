@@ -44,6 +44,17 @@ ReactDom.render(
 
         <br />
 
+        {/* initialize this one with a name and default collapsed */}
+        <JsonViewer
+        src={getExampleJson2()}
+        collapsed={1}
+        name={'feature_set'}
+        displayDataTypes={false}
+        indentWidth={5}
+        />
+
+        <br />
+
         {/* initialize an example with a long string */}
         <JsonViewer
         src={getExampleJson3()}

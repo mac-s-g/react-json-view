@@ -45,14 +45,14 @@ Name|Type|Default|Description
 `name`|`string`|"root"|Contains the name of your root node
 `theme`|`string`|"rjv-default"|RJV supports base-16 themes.  Check out the [list of supported themes here](https://github.com/gaearon/base16-js/tree/master/src). A custom "rjv-default" theme applies by default.
 `indentWidth`|`integer`|4|Set the indent-width for nested objects
-`collapsed`|`boolean`|`false`|When set to `true`, all nodes will be collapsed by default
+`collapsed`|`boolean` or `integer`|`false`|When set to `true`, all nodes will be collapsed by default.  Use an integer value to collapse at a particular depth.
 `collapseStringsAfterLength`|`integer`|`false`|When an integer value is assigned, strings will be cut off at that length. Collapsed strings are followed by an ellipsis. String content can be expanded and collapsed by clicking on the string value.
 `enableClipboard`|`boolean`|`true`|When set to `true`, the user can copy objects and arrays to clipboard
 `displayObjectSize`|`boolean`|`true`|When set to `true`, objects and arrays are labeled with size
 `displayDataTypes`|`boolean`|`true`|When set to `true`, data type labels prefix values
+`onEdit`|`(edit) => {}`|`false`|When a callback function is passed in, `edit` functionality is enabled.  The callback is invoked before edits are completed. Returning `false` from `onEdit` will prevent the change from being made. [see: onEdit docs](#onedit-interaction)
 `onAdd`|`(add) => {}`|`false`|When a callback function is passed in, `add` functionality is enabled.  The callback is invoked before additions are completed. Returning `false` from `onAdd` will prevent the change from being made.
 `onDelete`|`(delete) => {}`|`false`|When a callback function is passed in, `delete` functionality is enabled.  The callback is invoked before deletions are completed. Returning `false` from `onDelete` will prevent the change from being made.
-`onEdit`|`(edit) => {}`|`false`|When a callback function is passed in, `edit` functionality is enabled.  The callback is invoked before edits are completed. Returning `false` from `onEdit` will prevent the change from being made. [see: onEdit docs](#onedit-interaction)
 
 ### Features
 * Object and array nodes can be collapsed and expanded
@@ -148,4 +148,3 @@ I'm also inspired by users who come up with interesting feature requests.  Reach
 ### To-Do's
 1. Improve documentation for `onAdd` and `onDelete` props
 2. Improve style organization
-3. Support integer input to `collapsed` prop to collapse at a particular depth.

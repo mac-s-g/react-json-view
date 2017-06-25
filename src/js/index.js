@@ -1,10 +1,11 @@
 import React from 'react';
 import JsonViewer from './components/JsonViewer';
+import AddKeyRequest from './components/AddKeyRequest';
 import {toType, isTheme} from './helpers/util';
 import ObjectAttributes from './stores/ObjectAttributes';
 
 //global theme
-import style from './themes/getStyle';
+import Theme from './themes/getStyle';
 
 
 //forward src through to JsonObject component
@@ -13,36 +14,62 @@ export default class extends React.Component {
     constructor(props) {
         super(props);
         this.init(props);
+        ObjectAttributes.set(
+            this.rjvId,
+            'global',
+            'src',
+            this.state.src
+        );
     }
 
-    state = {}
+    state = {
+        //listen to request to add a key to an object
+        addKeyRequest: false
+    }
 
     //reference id for this instance
     rjvId = Date.now().toString()
 
+    //all acceptable props and default values
     defaults = {
         src: {},
         name: 'root',
-        theme: 'rjv-default', //rjv-default
+        theme: 'rjv-default',
         collapsed: false,
         collapseStringsAfterLength: false,
         indentWidth: 4,
         enableClipboard: true,
         displayObjectSize: true,
         displayDataTypes: true,
-        onEdit: false
+        onEdit: false,
+        onDelete: false,
+        onAdd: false
+    }
+
+    getListeners = () => {
+        return {
+            'reset': this.resetState,
+            'variable-update': this.updateSrc,
+            'add-key-request': this.addKeyRequest
+        }
     }
 
     componentWillMount() {
-        ObjectAttributes.on(
-            'variable-update-' + this.rjvId, this.updateSrc
-        );
+        const listeners = this.getListeners();
+        for (const i in listeners) {
+            ObjectAttributes.on(
+                i + '-' + this.rjvId, listeners[i]
+            )
+        }
     }
 
     componentWillUnmount() {
-        ObjectAttributes.removeListener(
-            'variable-update-' + this.rjvId, this.updateSrc
-        );
+        const listeners = this.getListeners();
+        for (const i in listeners) {
+            ObjectAttributes.removeListener(
+                i + '-' + this.rjvId, listeners[i]
+            )
+        }
     }
 
     init = (props) => {
@@ -54,6 +81,11 @@ export default class extends React.Component {
             }
         }
 
+        this.validateInput();
+    }
+
+    //make sure props are passed in as expected
+    validateInput = () => {
         //make sure theme is valid
         if (toType(this.state.theme) === 'object'
             && !isTheme(this.state.theme)
@@ -82,10 +114,13 @@ export default class extends React.Component {
     }
 
     render() {
-        const {...props} = this.state;
+        const {addKeyRequest, ...props} = this.state;
+        //reset key request to false once it's observed
+        this.state.addKeyRequest = false;
         return (<div class="react-json-view"
-            {...style(props.theme, 'app-container')} >
+            {...Theme(props.theme, 'app-container')} >
             <JsonViewer {...props} type={toType(props.src)} rjvId={this.rjvId} />
+            <AddKeyRequest active={addKeyRequest} theme={props.theme} rjvId={this.rjvId} />
         </div>);
     }
 
@@ -96,29 +131,45 @@ export default class extends React.Component {
 
     updateSrc = () => {
         let {
-            name, namespace, new_value, existing_value
+            name, namespace, new_value, existing_value,
+            variable_removed, updated_src, type
         } = ObjectAttributes.get(
             this.rjvId, 'action', 'variable-update'
         );
-        let {src, onEdit} = this.state;
-        namespace.shift();
-
-        for (const idx of namespace) {
-            src = src[idx];
-        }
-        src[name] = new_value;
-        this.setState(this.state);
+        let {onEdit, onDelete, onAdd} = this.state;
+        let result;
 
         const on_edit_payload = {
-            updated_src: this.state.src,
+            existing_src: this.state.src,
+            updated_src: updated_src,
             name: name,
             namespace: namespace,
-            new_value: new_value,
             existing_value: existing_value,
         }
-        if (toType(onEdit) === 'function') {
-            onEdit(on_edit_payload);
+
+        switch (type) {
+            case 'variable-added':
+                result = onAdd(on_edit_payload);
+                break;
+            case 'variable-edited':
+                result = onEdit(on_edit_payload);
+                break;
+            case 'variable-removed':
+                result = onDelete(on_edit_payload);
+                break
         }
 
+        if (result !== false) {
+            this.state.src = updated_src;
+            this.setState(this.state);
+        }
+    }
+
+    addKeyRequest = () => {
+        this.setState({addKeyRequest: true});
+    }
+
+    resetState = () => {
+        this.setState(this.state);
     }
 }

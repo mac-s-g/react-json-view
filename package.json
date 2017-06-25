@@ -37,7 +37,7 @@
     "react-hot-loader": "^3.0.0-beta.6",
     "react-icons": "2.2.5",
     "react-test-renderer": "^15.5.4",
-    "react-tooltip": "^3.2.10",
+    "react-tooltip": "^3.3.0",
     "sinon": "^2.2.0",
     "webpack": "^2.2.1",
     "webpack-bundle-size-analyzer": "^2.7.0",

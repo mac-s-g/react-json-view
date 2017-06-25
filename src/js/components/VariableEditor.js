@@ -2,17 +2,21 @@ import React from 'react';
 
 import {toType} from './../helpers/util';
 import dispatcher from './../helpers/dispatcher';
+import parseInput from './../helpers/parseInput';
 
 //data type components
 import {
     JsonBoolean, JsonDate, JsonFloat, JsonFunction, JsonInteger,
-    JsonNan, JsonNull, JsonObject, JsonString, JsonUndefined
+    JsonNan, JsonNull, JsonString, JsonUndefined
 } from './DataTypes/DataTypes';
 
 //clibboard icon
 import EditIcon from 'react-icons/lib/fa/edit';
-import CheckCircle from 'react-icons/lib/md/check-circle';
-import Cancel from 'react-icons/lib/md/cancel';
+import CheckCircle from 'react-icons/lib/fa/check-circle';
+import Cancel from 'react-icons/lib/fa/times-circle';
+import Remove from 'react-icons/lib/fa/times-circle';
+
+//tooltip component
 import ReactTooltip from 'react-tooltip';
 
 //theme
@@ -25,13 +29,25 @@ class VariableEditor extends React.Component {
     state = {
         hover: false,
         editMode: false,
-        editValue: ""
+        editValue: "",
+        parsedInput: {
+            type: false,
+            value: null
+        }
+    }
+
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        ReactTooltip.rebuild();
     }
 
     render() {
         const {
             variable, singleIndent, type, theme,
-            namespace, indentWidth, onEdit
+            namespace, indentWidth, onEdit, onDelete
         } = this.props;
         const {hover, editMode} = this.state;
 
@@ -67,19 +83,21 @@ class VariableEditor extends React.Component {
             <div {...Theme(theme, 'variable-value')}>
                 {this.getValue(variable, this.props, editMode)}
             </div>
-            {this.getEditIcons(hover)}
+            {onEdit !== false ? this.getEditIcon(hover) : null}
+            {onDelete !== false ? this.getRemoveIcon(hover) : null}
         </div>
         );
 
     }
 
-    getEditIcons = (hover) => {
-        const {variable, namespace, theme, onEdit} = this.props;
+    getEditIcon = (hover) => {
+        const {variable, namespace, theme} = this.props;
         const {editMode} = this.state;
-        const tooltip_id = variable.name + '_' + namespace + '-tooltip';
+        const tooltip_id = variable.name + '_'
+            + namespace + '-edit-tooltip';
         let display = 'inline-block';
 
-        if (editMode || toType(onEdit) !== 'function') {
+        if (editMode) {
             display = 'none';
         }
 
@@ -104,7 +122,41 @@ class VariableEditor extends React.Component {
             />
         </div>
         );
+    }
 
+    getRemoveIcon = (hover) => {
+        const {
+            variable, namespace, theme, rjvId
+        } = this.props;
+        const {editMode} = this.state;
+        let display = 'inline-block';
+
+        if (editMode) {
+            display = 'none';
+        }
+
+        return (
+        <div
+        class="click-to-remove"
+        style={{verticalAlign: 'top', display:display}}>
+            <Remove
+            class="click-to-remove-icon"
+            {...Theme(theme, 'removeVarIcon', hover)}
+            onClick={() => {
+                dispatcher.dispatch({
+                    name: 'VARIABLE_REMOVED',
+                    rjvId: rjvId,
+                    data: {
+                        name: variable.name,
+                        namespace: namespace,
+                        existing_value: variable.value,
+                        variable_removed: true
+                    },
+                });
+            }}
+            />
+        </div>
+        );
     }
 
     setHover = (hover) => {
@@ -134,7 +186,7 @@ class VariableEditor extends React.Component {
             case 'undefined':
                 return <JsonUndefined {...props} />;
             case 'date':
-                return <JsonDate {...props} />;
+                return <JsonDate value={variable.value} {...props} />;
             default:
                 // catch-all for types that weren't anticipated
                 return <div class="object-value" {...props} >
@@ -149,10 +201,19 @@ class VariableEditor extends React.Component {
 
         return (<div>
             <textarea type='text'
+            ref={input => input && input.focus()}
             value={editValue}
             class="variable-editor"
             onChange={(event)=>{
-                this.setState({'editValue': event.target.value});
+                const value = event.target.value;
+                const detected = parseInput(value);
+                this.setState({
+                    editValue: value,
+                    parsedInput: {
+                        type: detected.type,
+                        value: detected.value
+                    }
+                });
             }}
             placeholder="update this value"
             {...Theme(theme, 'edit-input')}
@@ -165,11 +226,8 @@ class VariableEditor extends React.Component {
             />
             <CheckCircle class="edit-check" {...Theme(theme, 'check-icon')}
             onClick={() => {
-                const new_value = (
-                    isNaN(editValue) || !editValue.trim() ? editValue : parseFloat(editValue)
-                );
+                const new_value = (editValue);
                 this.state.editMode = false;
-                this.state.hover = false;
                 dispatcher.dispatch({
                     name: 'VARIABLE_UPDATED',
                     rjvId: rjvId,
@@ -177,15 +235,95 @@ class VariableEditor extends React.Component {
                         name: variable.name,
                         namespace: namespace,
                         existing_value: variable.value,
-                        new_value: new_value
+                        new_value: new_value,
+                        variable_removed: false
                     },
                 });
             }}
             />
+            <div>
+                {this.showDetected()}
+            </div>
             </div>
 
         </div>);
 
+    }
+
+    showDetected = () => {
+        const {theme, variable, namespace, rjvId} = this.props;
+        const {type, value} = this.state.parsedInput;
+        const detected = this.getDetectedInput();
+        if (detected) {
+            return <div>
+            <div {...Theme(theme, 'detected-row')}>
+                {detected}
+                <CheckCircle class="edit-check"
+                style={{
+                    verticalAlign: 'top',
+                    paddingLeft: '3px',
+                    ...Theme(theme, 'check-icon').style
+                }}
+                onClick={() => {
+                    this.state.editMode = false;
+                    dispatcher.dispatch({
+                        name: 'VARIABLE_UPDATED',
+                        rjvId: rjvId,
+                        data: {
+                            name: variable.name,
+                            namespace: namespace,
+                            existing_value: variable.value,
+                            new_value: value,
+                            variable_removed: false
+                        },
+                    });
+                }}
+                />
+            </div>
+            </div>;
+        }
+    }
+
+    getDetectedInput = () => {
+        const {parsedInput} = this.state;
+        const {type, value} = parsedInput;
+        const {props} = this;
+        const {theme} = this.props;
+
+        if (type !== false) {
+            switch (type.toLowerCase()) {
+                case 'object':
+                    return <span>
+                        <span style={{...Theme(theme, 'brace').style, cursor:'default'}}>{'{'}</span>
+                        <span style={{...Theme(theme, 'ellipsis').style, cursor:'default'}}>...</span>
+                        <span style={{...Theme(theme, 'brace').style, cursor:'default'}}>{'}'}</span>
+                    </span>;
+                case 'array':
+                    return <span>
+                        <span style={{...Theme(theme, 'brace').style, cursor:'default'}}>{'['}</span>
+                        <span style={{...Theme(theme, 'ellipsis').style, cursor:'default'}}>...</span>
+                        <span style={{...Theme(theme, 'brace').style, cursor:'default'}}>{']'}</span>
+                    </span>;
+                case 'string':
+                    return <JsonString value={value} {...props} />;
+                case 'integer':
+                    return <JsonInteger value={value} {...props} />;
+                case 'float':
+                    return <JsonFloat value={value} {...props} />;
+                case 'boolean':
+                    return <JsonBoolean value={value} {...props} />;
+                case 'function':
+                    return <JsonFunction value={value} {...props} />;
+                case 'null':
+                    return <JsonNull {...props} />;
+                case 'nan':
+                    return <JsonNan {...props} />;
+                case 'undefined':
+                    return <JsonUndefined {...props} />;
+                case 'date':
+                    return <JsonDate value={new Date(value)} {...props} />;
+            }
+        }
     }
 
 }

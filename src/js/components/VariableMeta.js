@@ -1,7 +1,13 @@
 import React from 'react';
+import dispatcher from './../helpers/dispatcher';
 
-//clibboard icon
+import {toType} from './../helpers/util';
+
+//icons
 import Clippy from 'react-icons/lib/go/clippy';
+import Remove from 'react-icons/lib/fa/times-circle';
+import Add from 'react-icons/lib/fa/plus-circle';
+
 //clipboard library
 //https://www.npmjs.com/package/clipboard
 import Clipboard from 'clipboard';
@@ -119,8 +125,84 @@ export default class extends React.Component {
         }
     }
 
+    getAddAttribute = () => {
+        const {
+            theme, hover, namespace, name, src, rjvId, depth
+        } = this.props;
+
+        return (
+        <span
+        class="click-to-add"
+        style={{verticalAlign: 'top'}}>
+            <Add
+            class="click-to-add-icon"
+            {...Theme(theme, 'addVarIcon', hover)}
+            onClick={() => {
+                const request = {
+                    name: depth > 0 ? name : null,
+                    namespace: namespace.splice(
+                        0, (namespace.length-1)
+                    ),
+                    existing_value: src,
+                    variable_removed: false,
+                    key_name: null
+                };
+                if (toType(src) == 'object') {
+                    dispatcher.dispatch({
+                        name: 'ADD_VARIABLE_KEY_REQUEST',
+                        rjvId: rjvId,
+                        data: request,
+                    });
+                } else {
+                    dispatcher.dispatch({
+                        name: 'VARIABLE_ADDED',
+                        rjvId: rjvId,
+                        data: {
+                            ...request,
+                            new_value: [...src, null]
+                        }
+                    });
+                }
+            }}
+            />
+        </span>
+        );
+    }
+
+    getRemoveObject = () => {
+        const {
+            theme, hover, namespace, name, src, rjvId
+        } = this.props;
+
+        //don't allow deleting of root node
+        if (namespace.length == 1) {return}
+
+        return (
+        <span
+        class="click-to-remove"
+        style={{verticalAlign: 'top'}}>
+            <Remove
+            class="click-to-remove-icon"
+            {...Theme(theme, 'removeVarIcon', hover)}
+            onClick={() => {
+                dispatcher.dispatch({
+                    name: 'VARIABLE_REMOVED',
+                    rjvId: rjvId,
+                    data: {
+                        name: name,
+                        namespace: namespace.splice(0, (namespace.length-1)),
+                        existing_value: src,
+                        variable_removed: true
+                    },
+                });
+            }}
+            />
+        </span>
+        );
+    }
+
     render = () => {
-        const {theme} = this.props;
+        const {theme, onDelete, onAdd} = this.props;
         return (
         <div {...Theme(theme, 'object-meta-data')}
         class='object-meta-data'
@@ -131,6 +213,9 @@ export default class extends React.Component {
             {this.getObjectSize()}
             {/* copy to clipboard icon */}
             {this.getCopyComponent()}
+            {/* copy add/remove icons */}
+            {onAdd !== false ? this.getAddAttribute() : null}
+            {onDelete !== false ? this.getRemoveObject() : null}
         </div>
         );
     }

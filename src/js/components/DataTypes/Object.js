@@ -52,7 +52,7 @@ class rjvObject extends React.Component {
             object_type: (props.type == 'array' ? 'array' : 'object'),
             parent_type: (props.type == 'array' ? 'array' : 'object'),
             display_name: (props.name ? props.name : ''),
-            hover: false
+            hover: this.state.hover ? this.state.hover : false
         }
 
         this.state = {...this.state, ...state};
@@ -84,9 +84,9 @@ class rjvObject extends React.Component {
         </div>);
     }
 
-    getElipsis = () => {
+    getEllipsis = () => {
         return (
-            <div {...Theme(this.props.theme, 'elipsis')}
+            <div {...Theme(this.props.theme, 'ellipsis')}
             onClick={this.toggleCollapsed}>
                 ...
             </div>
@@ -168,7 +168,7 @@ class rjvObject extends React.Component {
             </span>
             {expanded
                 ? this.getObjectContent(depth, src, {theme, ...rest})
-                : this.getElipsis()
+                : this.getEllipsis()
             }
             <span class="brace-row">
                 <span style={{

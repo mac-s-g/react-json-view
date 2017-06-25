@@ -1,5 +1,6 @@
 import {EventEmitter} from "events";
 import dispatcher from './../helpers/dispatcher';
+import {toType} from './../helpers/util';
 
 //store persistent display attributes for objects and arrays
 class ObjectAttributes extends EventEmitter {
@@ -27,17 +28,84 @@ class ObjectAttributes extends EventEmitter {
     }
 
     handleAction = (action) => {
-        switch (action.name) {
-            case 'VARIABLE_UPDATED':
-                this.set(
-                    action.rjvId,
-                    'action',
-                    'variable-update',
-                    action.data
-                );
-                this.emit('variable-update-' + action.rjvId)
+        const {rjvId, data, name} = action;
+        switch (name) {
+            case 'RESET':
+                this.emit('reset-' + rjvId);
                 break;
+            case 'VARIABLE_UPDATED':
+                action.data.updated_src = this.updateSrc(
+                    rjvId, data
+                );
+                this.set(
+                    rjvId, 'action', 'variable-update',
+                    {...data, type:'variable-edited'}
+                );
+                this.emit('variable-update-' + rjvId)
+                break;
+            case 'VARIABLE_REMOVED':
+                action.data.updated_src = this.updateSrc(
+                    rjvId, data
+                );
+                this.set(
+                    rjvId, 'action', 'variable-update',
+                    {...data, type:'variable-removed'}
+                );
+                this.emit('variable-update-' + rjvId)
+                break;
+            case 'VARIABLE_ADDED':
+                action.data.updated_src = this.updateSrc(
+                    rjvId, data
+                );
+                this.set(
+                    rjvId, 'action', 'variable-update',
+                    {...data, type:'variable-added'}
+                );
+                this.emit('variable-update-' + rjvId)
+                break;
+            case 'ADD_VARIABLE_KEY_REQUEST':
+                this.set(rjvId, 'action', 'new-key-request', data);
+                this.emit('add-key-request-' + rjvId);
         }
+    }
+
+    updateSrc = (rjvId, request) => {
+        let {
+            name, namespace, new_value, existing_value,
+            variable_removed, key_name
+        } = request;
+
+        namespace.shift();
+
+        //deepy copy src
+        let updated_src = this.get(
+            rjvId, 'global', 'src'
+        );
+        let walk = updated_src;
+
+        for (const idx of namespace) {
+            walk = walk[idx];
+        }
+
+        if (variable_removed) {
+            if (toType(walk) == 'array') {
+                walk.splice(name, 1);
+            } else {
+                delete walk[name];
+            }
+        } else {
+            if (name !== null) {
+                walk[name] = new_value;
+            } else {
+                updated_src = new_value;
+            }
+        }
+
+        this.set(
+            rjvId, 'global', 'src', updated_src
+        );
+
+        return updated_src;
     }
 }
 

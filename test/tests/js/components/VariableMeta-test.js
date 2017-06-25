@@ -15,6 +15,8 @@ describe('<VariableMeta />', function () {
             size={1}
             theme='rjv-default'
             enableClipboard={true}
+            onAdd={false}
+            onDelete={false}
             rjvId={rjvId} />
         );
         expect(
@@ -30,6 +32,8 @@ describe('<VariableMeta />', function () {
             size={1}
             theme='rjv-default'
             enableClipboard={false}
+            onAdd={false}
+            onDelete={false}
             rjvId={rjvId} />
         );
         expect(
@@ -45,6 +49,8 @@ describe('<VariableMeta />', function () {
             size={1}
             theme='rjv-default'
             displayObjectSize={true}
+            onAdd={false}
+            onDelete={false}
             rjvId={rjvId} />
         );
         expect(
@@ -60,6 +66,8 @@ describe('<VariableMeta />', function () {
             size={1}
             theme='rjv-default'
             displayObjectSize={false}
+            onAdd={false}
+            onDelete={false}
             rjvId={rjvId} />
         );
         expect(

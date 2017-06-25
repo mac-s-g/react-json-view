@@ -50,7 +50,9 @@ Name|Type|Default|Description
 `enableClipboard`|`boolean`|`true`|When set to `true`, the user can copy objects and arrays to clipboard
 `displayObjectSize`|`boolean`|`true`|When set to `true`, objects and arrays are labeled with size
 `displayDataTypes`|`boolean`|`true`|When set to `true`, data type labels prefix values
-`onEdit`|`(edit) => {}`|`false`|When a callback function is passed in, value edits are enabled.  The callback is invoked when edits are made. [see: onEdit docs](#onedit-interaction)
+`onAdd`|`(add) => {}`|`false`|When a callback function is passed in, `add` functionality is enabled.  The callback is invoked before additions are completed. Returning `false` from `onAdd` will prevent the change from being made.
+`onDelete`|`(delete) => {}`|`false`|When a callback function is passed in, `delete` functionality is enabled.  The callback is invoked before deletions are completed. Returning `false` from `onDelete` will prevent the change from being made.
+`onEdit`|`(edit) => {}`|`false`|When a callback function is passed in, `edit` functionality is enabled.  The callback is invoked before edits are completed. Returning `false` from `onEdit` will prevent the change from being made. [see: onEdit docs](#onedit-interaction)
 
 ### Features
 * Object and array nodes can be collapsed and expanded
@@ -144,5 +146,6 @@ I drew a ton of design ideas from [react-json-tree](https://github.com/alexkuz/r
 I'm also inspired by users who come up with interesting feature requests.  Reach out to me with ideas for this project or other projects you want to collaborate on.  My email address is listed on my [github user page](https://github.com/mac-s-g).
 
 ### To-Do's
-1. Support "delete" capability when `onEdit` is enabled
-2. Support "add" capability when `onEdit` is enabled
+1. Improve documentation for `onAdd` and `onDelete` props
+2. Improve style organization
+3. Support integer input to `collapsed` prop to collapse at a particular depth.

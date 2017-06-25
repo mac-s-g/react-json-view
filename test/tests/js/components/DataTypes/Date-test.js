@@ -8,10 +8,10 @@ import DataTypeLabel from '/react/src/js/components/DataTypes/DataTypeLabel';
 describe('<JsonDate />', function () {
     const rjvId = 1;
 
-    it('integer component should have a data type label', function () {
+    it('date component should have a data type label', function () {
         const wrapper = shallow(
             <JsonDate
-            variable={{value: new Date()}}
+            value={new Date()}
             displayDataTypes={true}
             rjvId={rjvId}
             theme='rjv-default'/>

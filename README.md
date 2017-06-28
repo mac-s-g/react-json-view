@@ -44,6 +44,7 @@ Name|Type|Default|Description
 `src`|`JSON Object`|None|This property contains your input JSON
 `name`|`string`|"root"|Contains the name of your root node
 `theme`|`string`|"rjv-default"|RJV supports base-16 themes.  Check out the [list of supported themes here](https://github.com/gaearon/base16-js/tree/master/src). A custom "rjv-default" theme applies by default.
+`style`|`object`|`{}`|style attributes for react-json-view container.  Explicit style attributes will override attributes provided by a theme.
 `indentWidth`|`integer`|4|Set the indent-width for nested objects
 `collapsed`|`boolean` or `integer`|`false`|When set to `true`, all nodes will be collapsed by default.  Use an integer value to collapse at a particular depth.
 `collapseStringsAfterLength`|`integer`|`false`|When an integer value is assigned, strings will be cut off at that length. Collapsed strings are followed by an ellipsis. String content can be expanded and collapsed by clicking on the string value.

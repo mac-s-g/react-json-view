@@ -43,7 +43,8 @@ export default class extends React.Component {
         displayDataTypes: true,
         onEdit: false,
         onDelete: false,
-        onAdd: false
+        onAdd: false,
+        style: {}
     }
 
     getListeners = () => {
@@ -114,11 +115,11 @@ export default class extends React.Component {
     }
 
     render() {
-        const {addKeyRequest, ...props} = this.state;
+        const {addKeyRequest, style, ...props} = this.state;
         //reset key request to false once it's observed
         this.state.addKeyRequest = false;
         return (<div class="react-json-view"
-            {...Theme(props.theme, 'app-container')} >
+            style={{...Theme(props.theme, 'app-container').style, ...style}} >
             <JsonViewer {...props} type={toType(props.src)} rjvId={this.rjvId} />
             <AddKeyRequest active={addKeyRequest} theme={props.theme} rjvId={this.rjvId} />
         </div>);

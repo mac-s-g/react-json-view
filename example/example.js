@@ -12,6 +12,7 @@ ReactDom.render(
     <div>
         {/* just pass in your JSON to the src attribute */}
         <JsonViewer
+        style={{padding:'30px', backgroundColor: 'white'}}
         src={getExampleJson1()}
         collapseStringsAfterLength={12}
         onEdit={(e)=>{console.log(e)}}

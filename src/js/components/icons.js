@@ -1,10 +1,10 @@
-import {Component} from "react";
+import React from "react";
 
 const DEFAULT_WIDTH = 24;
 const DEFAULT_HEIGHT = 24;
 const DEFAULT_COLOR = "#000000";
 
-export class CircleMinus extends Component {
+export class CircleMinus extends React.Component {
     render() {
         const {props} = this;
         const {style, ...rest} = props;
@@ -23,7 +23,7 @@ export class CircleMinus extends Component {
     }
 }
 
-export class CirclePlus extends Component {
+export class CirclePlus extends React.Component {
     render() {
         const {props} = this;
         const {style, ...rest} = props;
@@ -42,7 +42,7 @@ export class CirclePlus extends Component {
     }
 }
 
-export class Clippy extends Component {
+export class Clippy extends React.Component {
     render() {
         const {props} = this;
         const {style, ...rest} = props;
@@ -63,7 +63,7 @@ export class Clippy extends Component {
     }
 }
 
-export class RemoveCircle extends Component {
+export class RemoveCircle extends React.Component {
     render() {
         const {props} = this;
         const {style, ...rest} = props;
@@ -84,7 +84,7 @@ export class RemoveCircle extends Component {
     }
 }
 
-export class AddCircle extends Component {
+export class AddCircle extends React.Component {
     render() {
         const {props} = this;
         const {style, ...rest} = props;
@@ -105,7 +105,7 @@ export class AddCircle extends Component {
     }
 }
 
-export class Add extends Component {
+export class Add extends React.Component {
     render() {
         const {props} = this;
         const {style, ...rest} = props;
@@ -126,7 +126,7 @@ export class Add extends Component {
     }
 }
 
-export class Edit extends Component {
+export class Edit extends React.Component {
     render() {
         const {props} = this;
         const {style, ...rest} = props;
@@ -147,7 +147,7 @@ export class Edit extends Component {
     }
 }
 
-export class CheckCircle extends Component {
+export class CheckCircle extends React.Component {
     render() {
         const {props} = this;
         const {style, ...rest} = props;

@@ -42,7 +42,7 @@ Or add to your package.json config file:
 Name|Type|Default|Description
 |:---|:---|:---|:---
 `src`|`JSON Object`|None|This property contains your input JSON
-`name`|`string`|"root"|Contains the name of your root node
+`name`|`string` or `false`|"root"|Contains the name of your root node.  Use `null` or `false` for no name.
 `theme`|`string`|"rjv-default"|RJV supports base-16 themes.  Check out the [list of supported themes here](https://github.com/gaearon/base16-js/tree/master/src). A custom "rjv-default" theme applies by default.
 `style`|`object`|`{}`|Style attributes for react-json-view container.  Explicit style attributes will override attributes provided by a theme.
 `indentWidth`|`integer`|4|Set the indent-width for nested objects

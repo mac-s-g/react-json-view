@@ -113,6 +113,7 @@ class VariableEditor extends React.Component {
             class="click-to-edit-icon"
             {...Theme(theme, 'editVarIcon', hover)}
             onClick={() => {
+                this.state.editValue = '';
                 this.state.editMode = true;
                 this.setState(this.state);
             }}

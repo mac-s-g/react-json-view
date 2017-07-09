@@ -80,14 +80,14 @@ class VariableEditor extends React.Component {
             <div {...Theme(theme, 'variable-value')}>
                 {this.getValue(variable, this.props, editMode)}
             </div>
-            {onEdit !== false ? this.getEdit(hover) : null}
+            {onEdit !== false ? this.getEditIcon(hover) : null}
             {onDelete !== false ? this.getRemoveIcon(hover) : null}
         </div>
         );
 
     }
 
-    getEdit = (hover) => {
+    getEditIcon = (hover) => {
         const {variable, namespace, theme} = this.props;
         const {editMode} = this.state;
         const tooltip_id = variable.name + '_'

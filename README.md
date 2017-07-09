@@ -149,3 +149,4 @@ I'm also inspired by users who come up with interesting feature requests.  Reach
 ### To-Do's
 1. Improve documentation for `onAdd` and `onDelete` props
 2. Improve style organization
+3. Continue size analysis and remove larger dependencies from build where possible.

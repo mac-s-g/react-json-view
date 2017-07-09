@@ -11,10 +11,7 @@ import {
 } from './DataTypes/DataTypes';
 
 //clibboard icon
-import EditIcon from 'react-icons/lib/fa/edit';
-import CheckCircle from 'react-icons/lib/fa/check-circle';
-import Cancel from 'react-icons/lib/fa/times-circle';
-import Remove from 'react-icons/lib/fa/times-circle';
+import {Edit, CheckCircle, RemoveCircle as Remove} from './icons';
 
 //tooltip component
 import ReactTooltip from 'react-tooltip';
@@ -83,14 +80,14 @@ class VariableEditor extends React.Component {
             <div {...Theme(theme, 'variable-value')}>
                 {this.getValue(variable, this.props, editMode)}
             </div>
-            {onEdit !== false ? this.getEditIcon(hover) : null}
+            {onEdit !== false ? this.getEdit(hover) : null}
             {onDelete !== false ? this.getRemoveIcon(hover) : null}
         </div>
         );
 
     }
 
-    getEditIcon = (hover) => {
+    getEdit = (hover) => {
         const {variable, namespace, theme} = this.props;
         const {editMode} = this.state;
         const tooltip_id = variable.name + '_'
@@ -112,7 +109,7 @@ class VariableEditor extends React.Component {
             id={tooltip_id}
             place="right"
             delayShow={1000} />
-            <EditIcon
+            <Edit
             class="click-to-edit-icon"
             {...Theme(theme, 'editVarIcon', hover)}
             onClick={() => {
@@ -219,7 +216,7 @@ class VariableEditor extends React.Component {
             {...Theme(theme, 'edit-input')}
             />
             <div {...Theme(theme, 'edit-icon-container')}>
-            <Cancel class="edit-cancel" {...Theme(theme, 'cancel-icon')}
+            <Remove class="edit-cancel" {...Theme(theme, 'cancel-icon')}
             onClick={()=>{
                 this.setState({editMode: false, editValue: ""});
             }}

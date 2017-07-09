@@ -12,8 +12,7 @@ import VariableMeta from './../VariableMeta';
 import AttributeStore from './../../stores/ObjectAttributes';
 
 //icons
-import CirclePlus from 'react-icons/lib/md/add-circle-outline';
-import CircleMinus from 'react-icons/lib/md/remove-circle-outline';
+import {CircleMinus, CirclePlus} from './../icons';
 
 //theme
 import Theme from './../../themes/getStyle';

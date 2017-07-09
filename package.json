@@ -1,11 +1,19 @@
 {
   "name": "react-json-view",
   "description": "Interactive react component for displaying javascript arrays and JSON objects.",
-  "version": "1.10.3",
+  "version": "1.10.4",
   "main": "dist/main.js",
   "files": [
     "dist/"
   ],
+  "dependencies": {
+    "clipboard": "^1.6.1",
+    "flux": "^3.1.2",
+    "radium":"^0.19.1",
+    "react-base16-styling": "^0.5.3",
+    "react-icons": "2.2.5",
+    "react-tooltip": "^3.3.0"
+  },
   "devDependencies": {
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
@@ -19,31 +27,26 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.24.1",
+    "html-webpack-plugin": "2.28.0",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0"
+  },
+  "peerDependencies": {
     "chai": "^3.5.0",
-    "clipboard": "^1.6.1",
     "coveralls": "^2.13.1",
     "enzyme": "^2.8.2",
-    "flux": "^3.1.2",
-    "html-webpack-plugin": "2.28.0",
     "ignore-styles": "^5.0.1",
     "istanbul": "^0.4.5",
     "jsdom": "^10.1.0",
     "mocha": "^3.2.0",
     "nyc": "^10.3.2",
-    "radium":"^0.19.1",
     "react": "^15.5.4",
-    "react-base16-styling": "^0.5.3",
     "react-dom": "^15.5.4",
-    "react-hot-loader": "^3.0.0-beta.6",
-    "react-icons": "2.2.5",
     "react-test-renderer": "^15.5.4",
-    "react-tooltip": "^3.3.0",
     "sinon": "^2.2.0",
-    "webpack": "^2.2.1",
-    "webpack-bundle-size-analyzer": "^2.7.0",
-    "webpack-dev-server": "^2.3.0"
+    "webpack-bundle-size-analyzer": "^2.7.0"
   },
-  "dependencies": {},
   "scripts": {
     "build": "webpack -p --display-error-details --progress",
     "dev:hot": "webpack-dev-server",

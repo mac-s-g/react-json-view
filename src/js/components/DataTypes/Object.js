@@ -231,7 +231,7 @@ class rjvObject extends React.Component {
         const {display_name} = this.state;
 
         if (jsvRoot && (name === false || name === null)) {
-            return <span />
+            return (<span />);
         } else if (parent_type == 'array') {
             return (
                 <span {...Theme(theme, 'array-key')} key={namespace}>

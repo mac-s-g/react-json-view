@@ -1,4 +1,4 @@
-FROM node
+FROM node:8.1.2-slim
 MAINTAINER mac <mac.gainor@gmail.com>
 
 # install the node modules at container build time

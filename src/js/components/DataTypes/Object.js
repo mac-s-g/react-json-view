@@ -137,7 +137,6 @@ class rjvObject extends React.Component {
             object_padding_left = this.props.indentWidth * SINGLE_INDENT;
         }
 
-
         return (<div class='object-key-val'
             {...Theme(
                 theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', object_padding_left
@@ -150,20 +149,7 @@ class rjvObject extends React.Component {
                     <div class="icon-container" {...Theme(theme, 'icon-container')}>
                         {expanded_icon}
                     </div>
-                    {
-                    parent_type == 'array'
-                    ? <span {...Theme(theme, 'array-key')} key={namespace}>
-                        {display_name}
-                    </span>
-                    : <span {...Theme(theme, 'object-name')} key={namespace}>
-                        <span style={{verticalAlign:'top'}}>"</span>
-                        <div style={{display:'inline-block'}} >
-                            {display_name}
-                        </div>
-                        <span style={{verticalAlign:'top'}}>"</span>
-                    </span>
-                    }
-                    <span {...Theme(theme, 'colon')}>:</span>
+                    {this.getObjectName()}
                     <span {...Theme(theme, 'brace')}>
                         {object_type == 'array' ? '[' : '{'}
                     </span>
@@ -236,6 +222,35 @@ class rjvObject extends React.Component {
     setHover = (hover) => {
         this.state.hover = hover;
         this.setState(this.state);
+    }
+
+    getObjectName = () => {
+        const {
+            parent_type, namespace, theme, jsvRoot, name
+        } = this.props;
+        const {display_name} = this.state;
+
+        if (jsvRoot && (name === false || name === null)) {
+            return <span />
+        } else if (parent_type == 'array') {
+            return (
+                <span {...Theme(theme, 'array-key')} key={namespace}>
+                    {display_name}
+                    <span {...Theme(theme, 'colon')}>:</span>
+                </span>
+            );
+        } else {
+            return (
+                <span {...Theme(theme, 'object-name')} key={namespace}>
+                    <span style={{verticalAlign:'top'}}>"</span>
+                    <div style={{display:'inline-block'}} >
+                        {display_name}
+                    </div>
+                    <span style={{verticalAlign:'top'}}>"</span>
+                    <span {...Theme(theme, 'colon')}>:</span>
+                </span>
+            );
+        }
     }
 }
 

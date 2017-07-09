@@ -30,7 +30,8 @@ ReactDom.render(
         collapseStringsAfterLength={15}
         onEdit={(e)=>{console.log(e)}}
         onDelete={(e)=>{console.log(e)}}
-        onAdd={(e)=>{console.log(e)}} />
+        onAdd={(e)=>{console.log(e)}}
+        name={false} />
 
         <br />
 

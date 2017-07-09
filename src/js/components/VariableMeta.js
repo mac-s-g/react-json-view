@@ -4,9 +4,9 @@ import dispatcher from './../helpers/dispatcher';
 import {toType} from './../helpers/util';
 
 //icons
-import Clippy from 'react-icons/lib/go/clippy';
-import Remove from 'react-icons/lib/fa/times-circle';
-import Add from 'react-icons/lib/fa/plus-circle';
+import {
+    Clippy, RemoveCircle as Remove, AddCircle as Add
+} from './icons';
 
 //clipboard library
 //https://www.npmjs.com/package/clipboard

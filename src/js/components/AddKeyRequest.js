@@ -2,8 +2,7 @@ import React from 'react';
 import dispatcher from './../helpers/dispatcher';
 import ObjectAttributes from './../stores/ObjectAttributes';
 
-import Cancel from 'react-icons/lib/md/add';
-import Add from 'react-icons/lib/fa/check-circle';
+import {CheckCircle, Add as Cancel} from './icons';
 
 //global theme
 import Theme from './../themes/getStyle';
@@ -55,7 +54,7 @@ export default class extends React.Component {
                         }}
                     />
                     {valid
-                        ? <Add {...Theme(theme, 'add-key-submit')}
+                        ? <CheckCircle {...Theme(theme, 'add-key-submit')}
                             class="add-key-submit"
                             onClick={e => this.submit()}
                         />

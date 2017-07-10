@@ -56,7 +56,7 @@ export default class extends React.Component {
         if (collapsed) {
             return (<span>
                 {this.props.value.toString().slice(9, -1).replace(/\{[\s\S]+/, '')}
-                <span style={{fontWeight: 'bold'}}>
+                <span class='function-collapsed' style={{fontWeight: 'bold'}}>
                     <span>{"{"}</span>
                     <span {...Theme(props.theme, 'ellipsis')}>...</span>
                     <span>{"}"}</span>

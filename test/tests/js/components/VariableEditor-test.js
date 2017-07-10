@@ -108,7 +108,7 @@ describe('<VariableEditor />', function () {
         expect(
             wrapper.find('.variable-editor').length
         ).to.equal(1);
-        wrapper.find('.edit-check').simulate('click');
+        wrapper.find('.edit-check.string-value').simulate('click');
         expect(
             wrapper.find('.variable-editor').length
         ).to.equal(0);

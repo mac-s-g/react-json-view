@@ -229,7 +229,8 @@ class VariableEditor extends React.Component {
                 this.setState({editMode: false, editValue: ""});
             }}
             />
-            <CheckCircle class="edit-check" {...Theme(theme, 'check-icon')}
+            <CheckCircle class="edit-check string-value"
+            {...Theme(theme, 'check-icon')}
             onClick={() => {
                 const new_value = (editValue);
                 this.state.editMode = false;
@@ -263,7 +264,7 @@ class VariableEditor extends React.Component {
             return <div>
             <div {...Theme(theme, 'detected-row')}>
                 {detected}
-                <CheckCircle class="edit-check"
+                <CheckCircle class="edit-check detected"
                 style={{
                     verticalAlign: 'top',
                     paddingLeft: '3px',

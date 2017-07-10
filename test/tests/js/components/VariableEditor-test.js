@@ -108,10 +108,253 @@ describe('<VariableEditor />', function () {
         expect(
             wrapper.find('.variable-editor').length
         ).to.equal(1);
-        wrapper.find('.edit-check').simulate('click');
+        wrapper.find('.edit-check.string-value').simulate('click');
         expect(
             wrapper.find('.variable-editor').length
         ).to.equal(0);
+    });
+
+    it('VariableEditor detected null', function () {
+        const wrapper = shallow(
+            <VariableEditor
+            src={{test:true}}
+            theme='rjv-default'
+            onEdit={(edit)=>{}}
+            rjvId={rjvId}
+            variable={{
+                name: 'test',
+                value: 'null',
+                type: 'null'
+            }}
+            />
+        );
+        wrapper.instance().setHover(true);
+        expect(
+            wrapper.find('.click-to-edit-icon').length
+        ).to.equal(1);
+        wrapper.find('.click-to-edit-icon').simulate('click');
+        expect(
+            wrapper.state('editMode')
+        ).to.equal(true);
+        expect(
+            wrapper.find('.variable-editor textarea').props().value
+        ).to.equal('null');
+    });
+
+    it('VariableEditor detected undefined', function () {
+        const wrapper = shallow(
+            <VariableEditor
+            src={{test:true}}
+            theme='rjv-default'
+            onEdit={(edit)=>{}}
+            rjvId={rjvId}
+            variable={{
+                name: 'test',
+                value: 'undefined',
+                type: 'undefined'
+            }}
+            />
+        );
+        wrapper.instance().setHover(true);
+        expect(
+            wrapper.find('.click-to-edit-icon').length
+        ).to.equal(1);
+        wrapper.find('.click-to-edit-icon').simulate('click');
+        expect(
+            wrapper.state('editMode')
+        ).to.equal(true);
+        expect(
+            wrapper.find('.variable-editor textarea').props().value
+        ).to.equal('undefined');
+    });
+
+    it('VariableEditor detected NaN', function () {
+        const wrapper = shallow(
+            <VariableEditor
+            src={{test:true}}
+            theme='rjv-default'
+            onEdit={(edit)=>{}}
+            rjvId={rjvId}
+            variable={{
+                name: 'test',
+                value: 'NaN',
+                type: 'nan'
+            }}
+            />
+        );
+        wrapper.instance().setHover(true);
+        expect(
+            wrapper.find('.click-to-edit-icon').length
+        ).to.equal(1);
+        wrapper.find('.click-to-edit-icon').simulate('click');
+        expect(
+            wrapper.state('editMode')
+        ).to.equal(true);
+        expect(
+            wrapper.find('.variable-editor textarea').props().value
+        ).to.equal('NaN');
+    });
+
+    it('VariableEditor detected string', function () {
+        const wrapper = shallow(
+            <VariableEditor
+            src={{test:true}}
+            theme='rjv-default'
+            onEdit={(edit)=>{}}
+            rjvId={rjvId}
+            variable={{
+                name: 'test',
+                value: 'test',
+                type: 'string'
+            }}
+            />
+        );
+        wrapper.instance().setHover(true);
+        expect(
+            wrapper.find('.click-to-edit-icon').length
+        ).to.equal(1);
+        wrapper.find('.click-to-edit-icon').simulate('click');
+        expect(
+            wrapper.state('editMode')
+        ).to.equal(true);
+        expect(
+            wrapper.find('.variable-editor textarea').props().value
+        ).to.equal('test');
+    });
+
+    it('VariableEditor detected function', function () {
+        const wrapper = shallow(
+            <VariableEditor
+            src={{test:true}}
+            theme='rjv-default'
+            onEdit={(edit)=>{}}
+            rjvId={rjvId}
+            variable={{
+                name: 'test',
+                value: 'function test() {}',
+                type: 'function'
+            }}
+            />
+        );
+        wrapper.instance().setHover(true);
+        expect(
+            wrapper.find('.click-to-edit-icon').length
+        ).to.equal(1);
+        wrapper.find('.click-to-edit-icon').simulate('click');
+        expect(
+            wrapper.state('editMode')
+        ).to.equal(true);
+        expect(
+            wrapper.find('.variable-editor textarea').props().value
+        ).to.equal('function test() {}');
+    });
+
+    it('VariableEditor detected object', function () {
+        const wrapper = shallow(
+            <VariableEditor
+            src={{test:true}}
+            theme='rjv-default'
+            onEdit={(edit)=>{}}
+            rjvId={rjvId}
+            variable={{
+                name: 'test',
+                value: '{}',
+                type: 'object'
+            }}
+            />
+        );
+        wrapper.instance().setHover(true);
+        expect(
+            wrapper.find('.click-to-edit-icon').length
+        ).to.equal(1);
+        wrapper.find('.click-to-edit-icon').simulate('click');
+        expect(
+            wrapper.state('editMode')
+        ).to.equal(true);
+        expect(
+            wrapper.find('.variable-editor textarea').props().value
+        ).to.equal('{}');
+    });
+
+    it('VariableEditor detected array', function () {
+        const wrapper = shallow(
+            <VariableEditor
+            src={{test:true}}
+            theme='rjv-default'
+            onEdit={(edit)=>{}}
+            rjvId={rjvId}
+            variable={{
+                name: 'test',
+                value: '[1,2,3]',
+                type: 'array'
+            }}
+            />
+        );
+        wrapper.instance().setHover(true);
+        expect(
+            wrapper.find('.click-to-edit-icon').length
+        ).to.equal(1);
+        wrapper.find('.click-to-edit-icon').simulate('click');
+        expect(
+            wrapper.state('editMode')
+        ).to.equal(true);
+        expect(
+            wrapper.find('.variable-editor textarea').props().value
+        ).to.equal('[1,2,3]');
+    });
+
+    it('VariableEditor detected float', function () {
+        const wrapper = shallow(
+            <VariableEditor
+            src={{test:true}}
+            theme='rjv-default'
+            onEdit={(edit)=>{}}
+            rjvId={rjvId}
+            variable={{
+                name: 'test',
+                value: '-5.2',
+                type: 'float'
+            }}
+            />
+        );
+        wrapper.instance().setHover(true);
+        expect(
+            wrapper.find('.click-to-edit-icon').length
+        ).to.equal(1);
+        wrapper.find('.click-to-edit-icon').simulate('click');
+        expect(
+            wrapper.state('editMode')
+        ).to.equal(true);
+        expect(
+            wrapper.find('.variable-editor textarea').props().value
+        ).to.equal('-5.2');
+    });
+
+    it('VariableEditor detected integer', function () {
+        const wrapper = shallow(
+            <VariableEditor
+            src={{test:true}}
+            theme='rjv-default'
+            onEdit={(edit)=>{}}
+            rjvId={rjvId}
+            variable={{
+                name: 'test',
+                value: '5',
+                type: 'integer'
+            }}
+            />
+        );
+        wrapper.instance().setHover(true);
+        expect(
+            wrapper.find('.click-to-edit-icon').length
+        ).to.equal(1);
+        wrapper.find('.click-to-edit-icon').simulate('click');
+        expect(
+            wrapper.state('editMode')
+        ).to.equal(true);
+        expect(
+            wrapper.find('.variable-editor textarea').props().value
+        ).to.equal('5');
     });
 
 });

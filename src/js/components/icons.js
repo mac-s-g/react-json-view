@@ -170,6 +170,9 @@ export class CheckCircle extends React.Component {
 
 
 function getIconStyle(style) {
+    if (!style) {
+        style = {};
+    }
     return {style:{
         verticalAlign: "middle",
         ...style,

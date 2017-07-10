@@ -17,7 +17,7 @@ export default class extends React.Component {
             props.namespace,
             'collapsed',
             true
-        )
+        );
     }
 
     state = {

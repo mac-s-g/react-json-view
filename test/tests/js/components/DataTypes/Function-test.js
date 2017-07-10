@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import {expect} from 'chai';
 
 import JsonFunction from '/react/src/js/components/DataTypes/Function';
@@ -58,6 +58,31 @@ describe('<JsonFunction />', function () {
         );
 
         expect(wrapper.find('.function-collapsed')).to.have.length(1);
+    });
+
+    it('function component click to expand', function () {
+        AttributeStore.set(
+            rjvId,
+            'function-test',
+            'collapsed',
+            true
+        );
+
+        const wrapper = shallow(
+            <JsonFunction
+            value={function(){}}
+            namespace='function-test'
+            rjvId={rjvId}
+            displayDataTypes={true}
+            theme='rjv-default'/>
+        );
+
+        expect(wrapper.find('.function-collapsed')).to.have.length(1);
+
+        wrapper.simulate('click');
+
+        expect(wrapper.find('.function-collapsed')).to.have.length(0);
+
     });
 
 });

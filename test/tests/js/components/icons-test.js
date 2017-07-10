@@ -89,4 +89,13 @@ describe('svg icons', function () {
         ).to.equal(1);
     });
 
+    it('icon with color', function () {
+        const wrapper = shallow(
+            <CheckCircle style={{color: 'green'}} />
+        );
+        expect(
+            wrapper.find('svg').length
+        ).to.equal(1);
+    });
+
 });

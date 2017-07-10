@@ -3,6 +3,8 @@ export default function parseInput(input) {
     //following code is to make a best guess at
     //the type for a variable being submitted.
 
+    console.log(input);
+
     //we are working with a serialized data representation
     input = input.trim();
     try {

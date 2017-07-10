@@ -128,6 +128,13 @@ function getExampleJson1() {
             sibling1: true,
             sibling2: false,
             sibling3: null,
+            isString: (value) => {
+                if (typeof value == 'string') {
+                    return 'string';
+                } else {
+                    return 'other';
+                }
+            }
         },
         string_number: "1234",
         date: new Date()

@@ -78,7 +78,7 @@ export default class extends React.Component {
                     ...style,
                     display:copy_state=='success' ? 'none' : 'inline-block'
                 }}
-                data-clipboard-text={JSON.stringify(src)}
+                data-clipboard-text={JSON.stringify(src, null, '  ')}
                 id={"clipboard-container-" + id}
                 data-tip='copy to clipboard'
                 data-for={tooltip_id} >

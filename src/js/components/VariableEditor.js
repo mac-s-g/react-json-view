@@ -3,6 +3,7 @@ import React from 'react';
 import {toType} from './../helpers/util';
 import dispatcher from './../helpers/dispatcher';
 import parseInput from './../helpers/parseInput';
+import stringifyVariable from './../helpers/stringifyVariable';
 
 //data type components
 import {
@@ -113,8 +114,14 @@ class VariableEditor extends React.Component {
             class="click-to-edit-icon"
             {...Theme(theme, 'editVarIcon', hover)}
             onClick={() => {
-                this.state.editValue = '';
+                let detected;
                 this.state.editMode = true;
+                this.state.editValue = stringifyVariable(variable.value);
+                detected = parseInput(this.state.editValue);
+                this.state.parsedInput = {
+                    type: detected.type,
+                    value: detected.value
+                };
                 this.setState(this.state);
             }}
             />

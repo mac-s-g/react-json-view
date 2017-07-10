@@ -158,6 +158,7 @@ const getDefaultThemeStyling = theme => {
         'function': {
             display: 'inline-block',
             color: colors.dataTypes['function'],
+            cursor: 'pointer',
             whiteSpace: 'pre-line'
         },
         'integer': {
@@ -344,6 +345,13 @@ const getDefaultThemeStyling = theme => {
             right: '2px',
             top: '3px',
             cursor: 'pointer'
+        },
+        'function-ellipsis': {
+            display: 'inline-block',
+            color: colors.ellipsisColor,
+            fontSize: constants.ellipsisFontSize,
+            lineHeight: constants.ellipsisLineHeight,
+            cursor: constants.ellipsisCursor
         }
     }
 };

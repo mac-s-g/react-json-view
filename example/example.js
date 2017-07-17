@@ -15,9 +15,9 @@ ReactDom.render(
         style={{padding:'30px', backgroundColor: 'white'}}
         src={getExampleJson1()}
         collapseStringsAfterLength={12}
-        onEdit={(e)=>{console.log(e)}}
-        onDelete={(e)=>{console.log(e)}}
-        onAdd={(e)=>{console.log(e)}}
+        onEdit={(e)=>{console.log(e); if (e.new_value == 'error'){return false;}}}
+        onDelete={(e)=>{console.log(e);}}
+        onAdd={(e)=>{console.log(e); if (e.new_value == 'error'){return false;}}}
         displayObjectSize={false}
         enableClipboard={true} />
 
@@ -28,9 +28,9 @@ ReactDom.render(
         src={getExampleJson1()}
         theme='railscasts'
         collapseStringsAfterLength={15}
-        onEdit={(e)=>{console.log(e)}}
-        onDelete={(e)=>{console.log(e)}}
-        onAdd={(e)=>{console.log(e)}}
+        onEdit={(e)=>{console.log(e); if (e.new_value == 'error'){return false;}}}
+        onDelete={(e)=>{console.log(e);}}
+        onAdd={(e)=>{console.log(e); if (e.new_value == 'error'){return false;}}}
         name={false} />
 
         <br />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import {expect} from 'chai';
 
 import Index from '/react/src/js/index';
@@ -33,6 +33,21 @@ describe('<ValidationFailure />', function () {
         expect(
             wrapper.find('.validation-failure').length
         ).to.equal(0);
+    });
+
+    it('ValidationFailure touch click event', function () {
+        const wrapper = mount(
+            <ValidationFailure
+            active={true}
+            theme='rjv-default'
+            rjvId={rjvId}
+            />
+        );
+        expect(
+            wrapper.find('.validation-failure').length
+        ).to.equal(1);
+
+        wrapper.find('.validation-failure').simulate('click');
     });
 
 });

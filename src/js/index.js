@@ -154,6 +154,7 @@ export default class extends React.Component {
 
         const on_edit_payload = {
             existing_src: this.state.src,
+            new_value: new_value,
             updated_src: updated_src,
             name: name,
             namespace: namespace,

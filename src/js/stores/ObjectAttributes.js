@@ -85,7 +85,6 @@ class ObjectAttributes extends EventEmitter {
         //deep copy of src variable
         for (const idx of namespace) {
             if (src[idx].length) {
-                console.log("it's an array")
                 updated_src[idx] = [...src[idx]];
             } else {
                 updated_src[idx] = {...src[idx]};

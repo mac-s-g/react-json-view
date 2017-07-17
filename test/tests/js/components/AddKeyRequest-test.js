@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow, render, mount } from 'enzyme';
 import {expect} from 'chai';
 
-import Index from '/react/src/js/index';
 import AddKeyRequest from '/react/src/js/components/AddKeyRequest';
 import ObjectAttributes from '/react/src/js/stores/ObjectAttributes';
 

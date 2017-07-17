@@ -40,6 +40,11 @@ const colorMap = theme => ({
         border: theme.base04,
         color: theme.base0A,
         labelColor: theme.base01
+    },
+    validationFailure: {
+        background: theme.base09,
+        iconColor: theme.base01,
+        fontColor: theme.base01
     }
 });
 
@@ -352,6 +357,25 @@ const getDefaultThemeStyling = theme => {
             fontSize: constants.ellipsisFontSize,
             lineHeight: constants.ellipsisLineHeight,
             cursor: constants.ellipsisCursor
+        },
+        'validation-failure': {
+            float: 'right',
+            padding: '3px 6px',
+            borderRadius: '2px',
+            cursor: 'pointer',
+            color: colors.validationFailure.fontColor,
+            backgroundColor: colors.validationFailure.background
+        },
+        'validation-failure-label': {
+            marginRight: '6px'
+        },
+        'validation-failure-clear': {
+            position: 'relative',
+            verticalAlign: 'top',
+            cursor: 'pointer',
+            color: colors.validationFailure.iconColor,
+            fontSize: constants.iconFontSize,
+            transform: "rotate(45deg)"
         }
     }
 };

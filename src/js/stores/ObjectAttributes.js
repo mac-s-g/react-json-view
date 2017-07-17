@@ -78,11 +78,21 @@ class ObjectAttributes extends EventEmitter {
         namespace.shift();
 
         //deepy copy src
-        let updated_src = this.get(
-            rjvId, 'global', 'src'
-        );
-        let walk = updated_src;
+        let src = this.get(rjvId, 'global', 'src');
+        let updated_src = {...src};
+        let walk;
 
+        //deep copy of src variable
+        for (const idx of namespace) {
+            if (src[idx].length) {
+                updated_src[idx] = [...src[idx]];
+            } else {
+                updated_src[idx] = {...src[idx]};
+            }
+        }
+
+        //point at current index
+        walk = updated_src;
         for (const idx of namespace) {
             walk = walk[idx];
         }
@@ -94,6 +104,7 @@ class ObjectAttributes extends EventEmitter {
                 delete walk[name];
             }
         } else {
+            //update copied variable at specified namespace
             if (name !== null) {
                 walk[name] = new_value;
             } else {

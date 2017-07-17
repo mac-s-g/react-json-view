@@ -1,6 +1,7 @@
 import React from 'react';
 import JsonViewer from './components/JsonViewer';
 import AddKeyRequest from './components/AddKeyRequest';
+import ValidationFailure from './components/ValidationFailure';
 import {toType, isTheme} from './helpers/util';
 import ObjectAttributes from './stores/ObjectAttributes';
 
@@ -24,7 +25,8 @@ export default class extends React.Component {
 
     state = {
         //listen to request to add a key to an object
-        addKeyRequest: false
+        addKeyRequest: false,
+        validationFailure: false
     }
 
     //reference id for this instance
@@ -115,13 +117,23 @@ export default class extends React.Component {
     }
 
     render() {
-        const {addKeyRequest, style, ...props} = this.state;
+        const {addKeyRequest, style, validationFailure, ...props} = this.state;
         //reset key request to false once it's observed
         this.state.addKeyRequest = false;
         return (<div class="react-json-view"
             style={{...Theme(props.theme, 'app-container').style, ...style}} >
-            <JsonViewer {...props} type={toType(props.src)} rjvId={this.rjvId} />
-            <AddKeyRequest active={addKeyRequest} theme={props.theme} rjvId={this.rjvId} />
+            <ValidationFailure
+                active={validationFailure}
+                theme={props.theme}
+                rjvId={this.rjvId} />
+            <JsonViewer
+                {...props}
+                type={toType(props.src)}
+                rjvId={this.rjvId} />
+            <AddKeyRequest
+                active={addKeyRequest}
+                theme={props.theme}
+                rjvId={this.rjvId} />
         </div>);
     }
 
@@ -161,9 +173,12 @@ export default class extends React.Component {
         }
 
         if (result !== false) {
+            ObjectAttributes.set(this.rjvId, 'global', 'src', updated_src);
             this.state.src = updated_src;
-            this.setState(this.state);
+        } else {
+            this.state.validationFailure = true;
         }
+        this.setState(this.state);
     }
 
     addKeyRequest = () => {
@@ -171,6 +186,7 @@ export default class extends React.Component {
     }
 
     resetState = () => {
+        this.state.validationFailure = false;
         this.setState(this.state);
     }
 }

@@ -8,6 +8,8 @@ import ObjectAttributes from './stores/ObjectAttributes';
 //global theme
 import Theme from './themes/getStyle';
 
+//some style behavior requires css
+import './../style/scss/global.scss';
 
 //forward src through to JsonObject component
 export default class extends React.Component {

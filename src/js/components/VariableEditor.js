@@ -25,7 +25,6 @@ import Radium from 'radium';
 class VariableEditor extends React.Component {
 
     state = {
-        hover: false,
         editMode: false,
         editValue: "",
         parsedInput: {
@@ -47,14 +46,13 @@ class VariableEditor extends React.Component {
             variable, singleIndent, type, theme,
             namespace, indentWidth, onEdit, onDelete
         } = this.props;
-        const {hover, editMode} = this.state;
+        const {editMode} = this.state;
 
         return (
         <div {...Theme(
             theme, 'objectKeyVal', indentWidth * singleIndent
         )}
-        onMouseEnter={()=>{this.setHover(true)}}
-        onMouseLeave={()=>{this.setHover(false)}}
+        class="variable-row"
         key={variable.name}>
             {
                 type == 'array'
@@ -81,14 +79,14 @@ class VariableEditor extends React.Component {
             <div {...Theme(theme, 'variable-value')}>
                 {this.getValue(variable, this.props, editMode)}
             </div>
-            {onEdit !== false ? this.getEditIcon(hover) : null}
-            {onDelete !== false ? this.getRemoveIcon(hover) : null}
+            {onEdit !== false && editMode == false ? this.getEditIcon() : null}
+            {onDelete !== false && editMode == false ? this.getRemoveIcon() : null}
         </div>
         );
 
     }
 
-    getEditIcon = (hover) => {
+    getEditIcon = () => {
         const {variable, namespace, theme} = this.props;
         const {editMode} = this.state;
         const tooltip_id = variable.name + '_'
@@ -102,7 +100,6 @@ class VariableEditor extends React.Component {
         return (
         <div
         class="click-to-edit"
-        style={{verticalAlign: 'top', display:display}}
         data-tip='edit this value'
         data-for={tooltip_id} >
             <ReactTooltip
@@ -112,7 +109,7 @@ class VariableEditor extends React.Component {
             delayShow={1000} />
             <Edit
             class="click-to-edit-icon"
-            {...Theme(theme, 'editVarIcon', hover)}
+            {...Theme(theme, 'editVarIcon')}
             onClick={() => {
                 let detected;
                 this.state.editMode = true;
@@ -129,7 +126,7 @@ class VariableEditor extends React.Component {
         );
     }
 
-    getRemoveIcon = (hover) => {
+    getRemoveIcon = () => {
         const {
             variable, namespace, theme, rjvId
         } = this.props;
@@ -141,12 +138,10 @@ class VariableEditor extends React.Component {
         }
 
         return (
-        <div
-        class="click-to-remove"
-        style={{verticalAlign: 'top', display:display}}>
+        <div class="click-to-remove" >
             <Remove
             class="click-to-remove-icon"
-            {...Theme(theme, 'removeVarIcon', hover)}
+            {...Theme(theme, 'removeVarIcon')}
             onClick={() => {
                 dispatcher.dispatch({
                     name: 'VARIABLE_REMOVED',
@@ -162,11 +157,6 @@ class VariableEditor extends React.Component {
             />
         </div>
         );
-    }
-
-    setHover = (hover) => {
-        this.state.hover = hover;
-        this.setState(this.state);
     }
 
     getValue = (variable, props, editMode) => {

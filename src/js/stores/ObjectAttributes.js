@@ -79,20 +79,11 @@ class ObjectAttributes extends EventEmitter {
 
         //deepy copy src
         let src = this.get(rjvId, 'global', 'src');
-        let updated_src = {...src};
-        let walk;
-
         //deep copy of src variable
-        for (const idx of namespace) {
-            if (Array.isArray(src[idx])) {
-                updated_src[idx] = [...src[idx]];
-            } else {
-                updated_src[idx] = {...src[idx]};
-            }
-        }
+        let updated_src = this.deepCopy(src, [...namespace]);
 
         //point at current index
-        walk = updated_src;
+        let walk = updated_src;
         for (const idx of namespace) {
             walk = walk[idx];
         }
@@ -117,6 +108,21 @@ class ObjectAttributes extends EventEmitter {
         );
 
         return updated_src;
+    }
+
+    deepCopy = (src, copy_namespace) => {
+        const type = toType(src);
+        let result;
+        let idx = copy_namespace.shift();
+        if (type == 'array') {
+            result = [...src];
+        } else if (type == 'object') {
+            result = {...src};
+        }
+        if (copy_namespace.length > 0) {
+            result[idx] = this.deepCopy(src[idx], copy_namespace);
+        }
+        return result;
     }
 }
 

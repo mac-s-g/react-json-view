@@ -55,8 +55,7 @@ class rjvObject extends React.Component {
                 ),
             object_type: (props.type == 'array' ? 'array' : 'object'),
             parent_type: (props.type == 'array' ? 'array' : 'object'),
-            display_name: (props.name ? props.name : ''),
-            hover: this.state.hover ? this.state.hover : false
+            display_name: (props.name ? props.name : '')
         }
 
         this.state = {...this.state, ...state};
@@ -99,10 +98,9 @@ class rjvObject extends React.Component {
 
     getObjectMetaData = (src) => {
         const size = Object.keys(src).length;
-        const {hover} = this.state;
         const {rjvId, theme} = this.props;
         return (
-            <VariableMeta size={size} hover={hover} {...this.props}/>
+            <VariableMeta size={size} {...this.props}/>
         );
     }
 
@@ -141,8 +139,6 @@ class rjvObject extends React.Component {
             {...Theme(
                 theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', object_padding_left
             )}
-            onMouseEnter={()=>{this.setHover(true)}}
-            onMouseLeave={()=>{this.setHover(false)}}
             >
             <span>
                 <span onClick={this.toggleCollapsed} {...Theme(theme, 'brace-row')}>
@@ -217,11 +213,6 @@ class rjvObject extends React.Component {
         }
         return elements;
 
-    }
-
-    setHover = (hover) => {
-        this.state.hover = hover;
-        this.setState(this.state);
     }
 
     getObjectName = () => {

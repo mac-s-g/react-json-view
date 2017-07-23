@@ -1,7 +1,7 @@
 #!/bin/bash
 # builds component output files
 
-export NODE_ENV=${NODE_ENV:-local}
+export NODE_ENV=${NODE_ENV:-production}
 
 echo Building react app...
 

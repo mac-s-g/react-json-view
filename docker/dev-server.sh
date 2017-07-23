@@ -1,7 +1,7 @@
 #!/bin/bash
 # runs webpack in react container
 
-NODE_ENV=${1:-local_example}
+NODE_ENV=${1:-dev-server}
 echo "Running with NODE_ENV=$NODE_ENV"
 
 # stop and remove the containers if they are running
@@ -15,7 +15,7 @@ stop_and_remove_container || true
 # run the workbench container
 docker run \
     -v $(pwd)/src:/react/src \
-    -v $(pwd)/example:/react/example \
+    -v $(pwd)/dev-server:/react/dev-server \
     -v $(pwd)/entrypoints:/react/entrypoints \
     -v $(pwd)/webpack.config.js:/react/webpack.config.js \
     --name=react-json-view \

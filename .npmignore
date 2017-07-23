@@ -4,12 +4,11 @@ debug
 docs
 docker
 entrypoints
-example
+dev-server
+demo
 .git
 .gitignore
 test
-example/example-react.js
-webpack.config.template.js
 
 # Coverage directory used by tools like istanbul
 coverage

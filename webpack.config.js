@@ -7,17 +7,21 @@ const PATHS = {
     js: path.join(__dirname, 'src/js'),
     style: path.join(__dirname, 'src/style'),
     build: path.join(__dirname, 'dist'),
-    example: path.join(__dirname, 'example')
+    devServer: path.join(__dirname, 'dev-server')
 };
 
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = 'production';
 }
 
-//example environment points at preloaded example
-//see: react-json-view/example/example.js
-const entrypoint = process.env.NODE_ENV === 'local_example'
-  ? PATHS.example + '/example.js' : PATHS.js + '/index.js';
+let includes = [PATHS.js, PATHS.devServer];
+let entrypoint = PATHS.devServer + '/dev-server.js';
+let devtool = 'eval-source-map';
+if (process.env.NODE_ENV === 'production') {
+  includes = [PATHS.js];
+  entrypoint = PATHS.js + '/index.js';
+  devtool = false;
+}
 
 const config = {
   entry: [entrypoint],
@@ -59,7 +63,7 @@ const config = {
   resolve: {
     extensions: [".js", ".json", ".css", ".scss"]
   },
-  devtool: process.env.NODE_ENV == 'production' ? false : 'eval-source-map',
+  devtool: devtool,
   module: {
     rules: [
       {
@@ -69,7 +73,7 @@ const config = {
             loader: 'babel-loader'
           }
         ],
-        include: [PATHS.js, PATHS.example]
+        include: includes
       },
     ]
   }

@@ -3,12 +3,13 @@
 [![npm](https://img.shields.io/npm/v/react-json-view.svg)](https://www.npmjs.com/package/react-json-view) [![npm](https://img.shields.io/npm/l/react-json-view.svg)](https://github.com/mac-s-g/react-json-view/blob/master/LISCENSE) [![Build Status](https://travis-ci.org/mac-s-g/react-json-view.svg)](https://travis-ci.org/mac-s-g/react-json-view) [![Coverage Status](https://coveralls.io/repos/github/mac-s-g/react-json-view/badge.svg?branch=master)](https://coveralls.io/github/mac-s-g/react-json-view?branch=master)
 
 # react-json-view
-Interactive react component for displaying javascript **arrays** and **JSON objects**.
+Interactive react component for displaying and editing javascript **arrays** and **JSON objects**.
 
 This component provides a responsive interface for displaying arrays or JSON in a web browser.  NPM offers a distribution of the source that's transpiled to ES5; so you can include this component with *any web-based javascript application*.
 
-  * Check out the [interactive demo here](https://mac-s-g.github.io/react-json-view/demo/).
+  * Check out the [interactive demo](https://mac-s-g.github.io/react-json-view/demo/).
   * [Installation instructions](#installation-instructions) are listed below.
+  * Add this component to your project using [NPM](https://www.npmjs.com/search?q=react-json-view).
 
 ### Implementation Example:
 ```
@@ -21,8 +22,6 @@ import ReactJson from 'react-json-view'
 
 ### Example Component Display:
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-12.png?raw=true "Output Example")
-
-[See More Examples](https://mac-s-g.github.io/react-json-view/example/example.html)
 
 ### Installation Instructions
 Install this package with npm:
@@ -54,10 +53,10 @@ Name|Type|Default|Description
 `onDelete`|`(delete) => {}`|`false`|When a callback function is passed in, `delete` functionality is enabled.  The callback is invoked before deletions are completed. Returning `false` from `onDelete` will prevent the change from being made.
 
 ### Features
-* Object and array nodes can be collapsed and expanded
-* Object and array nodes display meta-data
+* `onEdit`, `onAdd` and `onDelete` props allow users to edit the `src` variable
+* Object, array, string and function values can be collapsed and expanded
+* Object and array nodes display length
 * Object and array nodes support a "Copy to Clipboard" feature
-* `onEdit` prop allows users to edit the `src` variable
 * String values can be truncated after a specified length
 * Base-16 Theme Support
 
@@ -82,22 +81,12 @@ You can supply your own base-16 theme object.
 
 To better understand custom themes, take a look at [my example implementation](https://github.com/mac-s-g/react-json-view/blob/master/example/example.js#L62) and the [base-16 theme styling guidelines](https://github.com/chriskempson/base16/blob/master/styling.md).
 
-### onEdit Interaction
-Click the pencil icon to initialize an edit
+### onEdit, onAdd and onDelete Interaction
+Pass callback methods to `onEdit`, `onAdd` and `onDelete` props.  Your method will be invoked when a user attempts to update your `src` object.
 
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/edit-init-1.png?raw=true "initialize an edit")
-
-Input a new value.  RJV will attempt to recognize integer and float inputs.
-
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/edit-input-1.png?raw=true "input variable value")
-
-Submitting a new value calls your `onEdit` callback method
-
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/edit-complete-1.png?raw=true "edit submitted")
-
-The `onEdit` function is passed an `edit` variable. The edit variable will have the following contents:
+The following object will be passed to your method:
 ```
-const edit = {
+{
     updated_src: src, //new src value
     name: name, //new var name
     namespace: namespace, //list, namespace indicating var location
@@ -106,8 +95,25 @@ const edit = {
 }
 ```
 
+Returning `false` from a callback method will prevent the src from being affected.
+
 ### Contributing to the source code:
+#### Linux and Docker (Recommended)
+Use Docker to run the source code in a local development environment:
+  1. Clone this repo
+  2. Build the docker image
+      * `docker build -t react-json-view .`
+      * *note:* you may need to use `sudo` to run docker commands
+  3. Run the docker container on port 2000.  This will run the webpack-dev-server with hot-reloading enabled.
+      * `cd react-json-view`
+      * `./docker/dev-server.sh`
+      * *note:* you may need to use `sudo` to run the server file
+  4. Open port 2000 in your browser
+      * navigate to localhost:2000
+
 #### Standard Workflow
+Development workflow is setup for linux users with Docker installed.  You can contribute with other configurations but I have not tested them.  
+
   1. Clone this repo
   2. Install npm dependencies
 ```
@@ -119,25 +125,11 @@ npm install
   4. Open port 2000 in your browser
       * navigate to localhost:2000
 
-#### Development within a Docker Container
-You can use Docker to run the source code in a local development environment:
-  1. Clone this repo
-  2. Make sure docker is installed
-  3. Build the docker image
-      * `docker build -t react-json-view .`
-      * *note:* you may need to use `sudo` to run docker commands
-  4. Run the docker container on port 2000.  This will run the webpack-dev-server with hot-reloading enabled.
-      * `cd react-json-view`
-      * `./docker/dev-server.sh`
-      * *note:* you may need to use `sudo` to run the server file
-  5. Open port 2000 in your browser
-      * navigate to localhost:2000
-
-Your source code will be mounted inside the docker container.  The container is built on the standard Node image.
+Your source code will be mounted inside the docker container.  The container is built on the latest `Node:slim` image.
 
 Webpack-dev-server is running in the container and hot-reloading when changes are made locally.
 
-All node modules are installed within the container, so make sure to rebuild your container if you make changes to package.json (see step 3, above).
+All node modules are installed within the container, so make sure to rebuild your container if you make changes to package.json (see step 2, above).
 
 ### Inspiration
 I drew a ton of design ideas from [react-json-tree](https://github.com/alexkuz/react-json-tree).  Thanks to the RJT contributors for putting together an awesome component!
@@ -145,7 +137,7 @@ I drew a ton of design ideas from [react-json-tree](https://github.com/alexkuz/r
 I'm also inspired by users who come up with interesting feature requests.  Reach out to me with ideas for this project or other projects you want to collaborate on.  My email address is listed on my [github user page](https://github.com/mac-s-g).
 
 ### To-Do's
-1. Improve documentation for `onAdd` and `onDelete` props
+1. Improve documentation for `onEdit`, `onAdd` and `onDelete` props
 2. Improve style organization
 3. Continue size analysis and remove larger dependencies from build where possible
 4. As always, improve test quality and coverage

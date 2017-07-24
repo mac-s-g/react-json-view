@@ -78,7 +78,7 @@ Check out the [list of supported themes here](https://github.com/gaearon/base16-
 #### Use Your Own Theme
 You can supply your own base-16 theme object.
 
-To better understand custom themes, take a look at [my example implementation](https://github.com/mac-s-g/react-json-view/blob/master/example/example.js#L62) and the [base-16 theme styling guidelines](https://github.com/chriskempson/base16/blob/master/styling.md).
+To better understand custom themes, take a look at [my example implementation](https://github.com/mac-s-g/react-json-view/blob/master/dev-server/dev-server.js#L81) and the [base-16 theme styling guidelines](https://github.com/chriskempson/base16/blob/master/styling.md).
 
 ### onEdit, onAdd and onDelete Interaction
 Pass callback methods to `onEdit`, `onAdd` and `onDelete` props.  Your method will be invoked when a user attempts to update your `src` object.

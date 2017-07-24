@@ -8,8 +8,6 @@ Interactive react component for displaying javascript **arrays** and **JSON obje
 This component provides a responsive interface for displaying arrays or JSON in a web browser.  NPM offers a distribution of the source that's transpiled to ES5; so you can include this component with *any web-based javascript application*.
 
   * Check out the [interactive demo here](https://mac-s-g.github.io/react-json-view/demo/).
-  * Check out a [React implementation example here](https://github.com/mac-s-g/react-json-view/blob/master/example/example.js).
-  * Check out an [ES5 implementation example here](https://github.com/mac-s-g/react-json-https://github.com/alexkuz/react-json-treeview/blob/master/example/example.html).
   * [Installation instructions](#installation-instructions) are listed below.
 
 ### Implementation Example:

@@ -20,8 +20,8 @@ describe('<VariableMeta />', function () {
             rjvId={rjvId} />
         );
         expect(
-            wrapper.find('.copy-to-clipboard-container').props().style.display
-        ).to.equal('none');
+            wrapper.find('.copy-to-clipboard-container')
+        ).to.have.length(1);
     });
 
 
@@ -37,8 +37,8 @@ describe('<VariableMeta />', function () {
             rjvId={rjvId} />
         );
         expect(
-            wrapper.find('.copy-to-clipboard-container').props().style.display
-        ).to.equal('none');
+            wrapper.find('.copy-to-clipboard-container')
+        ).to.have.length(0);
     });
 
 

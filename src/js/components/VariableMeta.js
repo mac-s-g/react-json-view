@@ -61,18 +61,15 @@ export default class extends React.Component {
 
     getCopyComponent = () => {
         const {id, copy_state} = this.state;
-        const {src, size, hover, theme, enableClipboard} = this.props;
+        const {src, size, theme, enableClipboard} = this.props;
         const tooltip_id = 'tooltip-' + id;
         //had to jump through some hoops to get the
         //react-tooltip to act like a react component should.
         //it does not support dynamic content updates
         let style = Theme(theme, 'copy-to-clipboard').style;
         return (
-            <span
-            class="copy-to-clipboard-container"
-            style={{
-                display: enableClipboard && hover? 'inline-block' : 'none'
-            }}>
+            enableClipboard ?
+            <span class="copy-to-clipboard-container" >
                 <span
                 style={{
                     ...style,
@@ -93,7 +90,7 @@ export default class extends React.Component {
                 <span
                 style={{
                     ...style,
-                    display:copy_state == 'success' && hover
+                    display:copy_state == 'success'
                     ? 'inline-block' : 'none'
                 }}
                 data-tip='copied'
@@ -110,6 +107,7 @@ export default class extends React.Component {
                     delayShow={0} />
                 </span>
             </span>
+            : null
         );
     }
 
@@ -127,7 +125,7 @@ export default class extends React.Component {
 
     getAddAttribute = () => {
         const {
-            theme, hover, namespace, name, src, rjvId, depth
+            theme, namespace, name, src, rjvId, depth
         } = this.props;
 
         return (
@@ -136,7 +134,7 @@ export default class extends React.Component {
         style={{verticalAlign: 'top'}}>
             <Add
             class="click-to-add-icon"
-            {...Theme(theme, 'addVarIcon', hover)}
+            {...Theme(theme, 'addVarIcon')}
             onClick={() => {
                 const request = {
                     name: depth > 0 ? name : null,
@@ -178,12 +176,10 @@ export default class extends React.Component {
         if (namespace.length == 1) {return}
 
         return (
-        <span
-        class="click-to-remove"
-        style={{verticalAlign: 'top'}}>
+        <span class="click-to-remove" >
             <Remove
             class="click-to-remove-icon"
-            {...Theme(theme, 'removeVarIcon', hover)}
+            {...Theme(theme, 'removeVarIcon')}
             onClick={() => {
                 dispatcher.dispatch({
                     name: 'VARIABLE_REMOVED',

@@ -220,47 +220,29 @@ const getDefaultThemeStyling = theme => {
         'tooltip': {
             padding: constants.tooltipPadding
         },
-        removeVarIcon: (component, hover) => {
-            let style = {
-                verticalAlign: 'top',
-                display: 'none',
-                color: colors.editVariable.removeIcon,
-                cursor: constants.iconCursor,
-                fontSize: constants.iconFontSize,
-                marginRight: constants.iconMarginRight
-            };
-            if (hover) {
-                style.display = 'inline-block';
-            }
-            return {style: style};
+        removeVarIcon: {
+            verticalAlign: 'top',
+            display: 'inline-block',
+            color: colors.editVariable.removeIcon,
+            cursor: constants.iconCursor,
+            fontSize: constants.iconFontSize,
+            marginRight: constants.iconMarginRight
         },
-        addVarIcon: (component, hover) => {
-            let style = {
-                verticalAlign: 'top',
-                display: 'none',
-                color: colors.editVariable.addIcon,
-                cursor: constants.iconCursor,
-                fontSize: constants.iconFontSize,
-                marginRight: constants.iconMarginRight
-            };
-            if (hover) {
-                style.display = 'inline-block';
-            }
-            return {style: style};
+        addVarIcon: {
+            verticalAlign: 'top',
+            display: 'inline-block',
+            color: colors.editVariable.addIcon,
+            cursor: constants.iconCursor,
+            fontSize: constants.iconFontSize,
+            marginRight: constants.iconMarginRight,
         },
-        editVarIcon: (component, hover) => {
-            let style = {
-                verticalAlign: 'top',
-                display: 'none',
-                color: colors.editVariable.editIcon,
-                cursor: constants.iconCursor,
-                fontSize: constants.iconFontSize,
-                marginRight: constants.iconMarginRight
-            };
-            if (hover) {
-                style.display = 'inline-block';
-            }
-            return {style: style};
+        editVarIcon: {
+            verticalAlign: 'top',
+            display: 'inline-block',
+            color: colors.editVariable.editIcon,
+            cursor: constants.iconCursor,
+            fontSize: constants.iconFontSize,
+            marginRight: constants.iconMarginRight
         },
         'edit-icon-container': {
             display: 'inline-block',

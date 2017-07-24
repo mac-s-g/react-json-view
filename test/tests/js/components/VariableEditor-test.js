@@ -25,16 +25,31 @@ describe('<VariableEditor />', function () {
             }}
             />
         );
-        wrapper.instance().setHover(true);
         expect(
-            wrapper.find('.click-to-edit').props().style.display
-        ).to.equal('inline-block');
-        expect(
-            wrapper.state('hover')
-        ).to.equal(true);
+            wrapper.find('.click-to-edit')
+        ).to.have.length(1);
     });
 
-    it('VariableEditor click-to-edit should be hidden', function () {
+    it('VariableEditor click-to-edit should be hidden when onEdit disabled', function () {
+        const wrapper = shallow(
+            <VariableEditor
+            src={{test:true}}
+            theme='rjv-default'
+            onEdit={false}
+            rjvId={rjvId}
+            variable={{
+                name: 'test',
+                value: 5,
+                type: 'int'
+            }}
+            />
+        );
+        expect(
+            wrapper.find('.click-to-edit')
+        ).to.have.length(0);
+    });
+
+    it('VariableEditor click-to-edit should be hidden when editMode is active', function () {
         const wrapper = shallow(
             <VariableEditor
             src={{test:true}}
@@ -48,17 +63,10 @@ describe('<VariableEditor />', function () {
             }}
             />
         );
-        wrapper.instance().setHover(true);
+        wrapper.instance().setState({editMode: true});
         expect(
-            wrapper.find('.click-to-edit').props().style.display
-        ).to.equal('inline-block');
-        expect(
-            wrapper.state('hover')
-        ).to.equal(true);
-        wrapper.setState({'editMode': true});
-        expect(
-            wrapper.find('.click-to-edit').props().style.display
-        ).to.equal('none');
+            wrapper.find('.click-to-edit')
+        ).to.have.length(0);
     });
 
     it('VariableEditor test textarea and cancel icon', function () {
@@ -75,7 +83,6 @@ describe('<VariableEditor />', function () {
             }}
             />
         );
-        wrapper.instance().setHover(true);
         expect(
             wrapper.find('.click-to-edit-icon').length
         ).to.equal(1);
@@ -128,7 +135,6 @@ describe('<VariableEditor />', function () {
             }}
             />
         );
-        wrapper.instance().setHover(true);
         expect(
             wrapper.find('.click-to-edit-icon').length
         ).to.equal(1);
@@ -155,7 +161,6 @@ describe('<VariableEditor />', function () {
             }}
             />
         );
-        wrapper.instance().setHover(true);
         expect(
             wrapper.find('.click-to-edit-icon').length
         ).to.equal(1);
@@ -182,7 +187,6 @@ describe('<VariableEditor />', function () {
             }}
             />
         );
-        wrapper.instance().setHover(true);
         expect(
             wrapper.find('.click-to-edit-icon').length
         ).to.equal(1);
@@ -209,7 +213,6 @@ describe('<VariableEditor />', function () {
             }}
             />
         );
-        wrapper.instance().setHover(true);
         expect(
             wrapper.find('.click-to-edit-icon').length
         ).to.equal(1);
@@ -236,7 +239,6 @@ describe('<VariableEditor />', function () {
             }}
             />
         );
-        wrapper.instance().setHover(true);
         expect(
             wrapper.find('.click-to-edit-icon').length
         ).to.equal(1);
@@ -263,7 +265,6 @@ describe('<VariableEditor />', function () {
             }}
             />
         );
-        wrapper.instance().setHover(true);
         expect(
             wrapper.find('.click-to-edit-icon').length
         ).to.equal(1);
@@ -290,7 +291,6 @@ describe('<VariableEditor />', function () {
             }}
             />
         );
-        wrapper.instance().setHover(true);
         expect(
             wrapper.find('.click-to-edit-icon').length
         ).to.equal(1);
@@ -317,7 +317,6 @@ describe('<VariableEditor />', function () {
             }}
             />
         );
-        wrapper.instance().setHover(true);
         expect(
             wrapper.find('.click-to-edit-icon').length
         ).to.equal(1);
@@ -344,7 +343,6 @@ describe('<VariableEditor />', function () {
             }}
             />
         );
-        wrapper.instance().setHover(true);
         expect(
             wrapper.find('.click-to-edit-icon').length
         ).to.equal(1);

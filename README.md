@@ -67,7 +67,7 @@ You can specify a `theme` name or object when you instantiate your rjv component
 ```
 <ReactJson src={my_important_json} theme="monokai" />
 ```
-Check out the [list of supported themes here](https://github.com/gaearon/base16-js/tree/master/src).
+Check out the list of supported themes [in the component demo](https://mac-s-g.github.io/react-json-view/demo/).
 
 #### Monokai theme example
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-monokai-2.png?raw=true "Base-16 Theme Example")

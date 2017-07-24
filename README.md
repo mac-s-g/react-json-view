@@ -23,7 +23,7 @@ import ReactJson from 'react-json-view'
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-12.png?raw=true "Output Example")
 
 ### Installation Instructions
-Install this component with [NPM](https://www.npmjs.com/search?q=react-json-view).
+Install this component with [NPM](https://www.npmjs.com/package/react-json-view).
 ```
 npm install --save react-json-view
 ```

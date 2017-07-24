@@ -7,9 +7,8 @@ Interactive react component for displaying and editing javascript **arrays** and
 
 This component provides a responsive interface for displaying arrays or JSON in a web browser.  NPM offers a distribution of the source that's transpiled to ES5; so you can include this component with *any web-based javascript application*.
 
-  * Check out the [interactive demo](https://mac-s-g.github.io/react-json-view/demo/).
-  * [Installation instructions](#installation-instructions) are listed below.
-  * Add this component to your project using [NPM](https://www.npmjs.com/search?q=react-json-view).
+[Check out the Interactive Demo](https://mac-s-g.github.io/react-json-view/demo/)
+
 
 ### Implementation Example:
 ```
@@ -24,7 +23,7 @@ import ReactJson from 'react-json-view'
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-12.png?raw=true "Output Example")
 
 ### Installation Instructions
-Install this package with npm:
+Install this component with [NPM](https://www.npmjs.com/search?q=react-json-view).
 ```
 npm install --save react-json-view
 ```
@@ -110,6 +109,12 @@ Use Docker to run the source code in a local development environment:
       * *note:* you may need to use `sudo` to run the server file
   4. Open port 2000 in your browser
       * navigate to localhost:2000
+      
+Your source code will be mounted inside the docker container.  The container is built on the latest `Node:slim` image.
+
+Webpack-dev-server is running in the container and hot-reloading when changes are made locally.
+
+All node modules are installed within the container, so make sure to rebuild your container if you make changes to package.json (see step 2, above).
 
 #### Standard Workflow
 Development workflow is setup for linux users with Docker installed.  You can contribute with other configurations but I have not tested them.  
@@ -124,12 +129,6 @@ npm install
       * `npm run dev:hot`
   4. Open port 2000 in your browser
       * navigate to localhost:2000
-
-Your source code will be mounted inside the docker container.  The container is built on the latest `Node:slim` image.
-
-Webpack-dev-server is running in the container and hot-reloading when changes are made locally.
-
-All node modules are installed within the container, so make sure to rebuild your container if you make changes to package.json (see step 2, above).
 
 ### Inspiration
 I drew a ton of design ideas from [react-json-tree](https://github.com/alexkuz/react-json-tree).  Thanks to the RJT contributors for putting together an awesome component!

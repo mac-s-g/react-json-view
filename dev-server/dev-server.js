@@ -121,7 +121,7 @@ function getExampleJson1() {
     return {
         string: 'this is a test string',
         integer: 42,
-        array: [1, 2, [1,2,3,4,5], 3, 'test'],
+        array: [1, 2, 3, 'test'],
         float: -2.757,
         undefined_var: undefined,
         parent: {

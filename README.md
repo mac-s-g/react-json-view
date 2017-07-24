@@ -3,11 +3,11 @@
 [![npm](https://img.shields.io/npm/v/react-json-view.svg)](https://www.npmjs.com/package/react-json-view) [![npm](https://img.shields.io/npm/l/react-json-view.svg)](https://github.com/mac-s-g/react-json-view/blob/master/LISCENSE) [![Build Status](https://travis-ci.org/mac-s-g/react-json-view.svg)](https://travis-ci.org/mac-s-g/react-json-view) [![Coverage Status](https://coveralls.io/repos/github/mac-s-g/react-json-view/badge.svg?branch=master)](https://coveralls.io/github/mac-s-g/react-json-view?branch=master)
 
 # react-json-view
-Interactive react component for displaying and editing javascript **arrays** and **JSON objects**.
+RJV is a react component for displaying and editing javascript **arrays** and **JSON objects**.
 
 This component provides a responsive interface for displaying arrays or JSON in a web browser.  NPM offers a distribution of the source that's transpiled to ES5; so you can include this component with *any web-based javascript application*.
 
-[Check out the Live Demo](https://mac-s-g.github.io/react-json-view/demo/)
+[Check out the Interactive Demo](https://mac-s-g.github.io/react-json-view/demo/)
 
 
 ### Implementation Example:

@@ -19,10 +19,11 @@ import ReactJson from 'react-json-view'
 <ReactJson src={my_json_object} />
 ```
 
-### Example Component Display:
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-15.png?raw=true "Output Example")
-
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-14.png?raw=true "Output Example")
+### Output Examples:
+#### Default Theme:
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-15.png?raw=true "Output Example 1")
+#### Hopscotch Theme, with Triangle Icons:
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-14.png?raw=true "Output Example 2")
 
 ### Installation Instructions
 Install this component with [NPM](https://www.npmjs.com/package/react-json-view).

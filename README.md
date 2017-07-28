@@ -20,7 +20,7 @@ import ReactJson from 'react-json-view'
 ```
 
 ### Example Component Display:
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-13.png?raw=true "Output Example")
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-15.png?raw=true "Output Example")
 
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-14.png?raw=true "Output Example")
 

@@ -20,7 +20,9 @@ import ReactJson from 'react-json-view'
 ```
 
 ### Example Component Display:
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-12.png?raw=true "Output Example")
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-13.png?raw=true "Output Example")
+
+![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-14.png?raw=true "Output Example")
 
 ### Installation Instructions
 Install this component with [NPM](https://www.npmjs.com/package/react-json-view).

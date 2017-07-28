@@ -10,7 +10,7 @@ This component provides a responsive interface for displaying arrays or JSON in 
 [Check out the Interactive Demo](https://mac-s-g.github.io/react-json-view/demo/)
 
 
-### Implementation Example:
+### Implementation Example
 ```
 // import the react-json-view component
 import ReactJson from 'react-json-view'
@@ -19,8 +19,8 @@ import ReactJson from 'react-json-view'
 <ReactJson src={my_json_object} />
 ```
 
-### Output Examples:
-#### Default Theme:
+### Output Examples
+#### Default Theme
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-15.png?raw=true "Output Example 1")
 #### Hopscotch Theme, with Triangle Icons:
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-14.png?raw=true "Output Example 2")
@@ -100,7 +100,7 @@ The following object will be passed to your method:
 
 Returning `false` from a callback method will prevent the src from being affected.
 
-### Contributing to the source code:
+### Contributing to the source code
 #### Linux and Docker (Recommended)
 Use Docker to run the source code in a local development environment:
   1. Clone this repo

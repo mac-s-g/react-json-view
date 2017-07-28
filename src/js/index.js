@@ -48,7 +48,7 @@ export default class extends React.Component {
         onEdit: false,
         onDelete: false,
         onAdd: false,
-        iconStyle: "triangle",
+        iconStyle: "circle",
         style: {}
     }
 

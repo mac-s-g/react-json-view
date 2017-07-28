@@ -31,7 +31,8 @@ ReactDom.render(
         onEdit={(e)=>{console.log(e); if (e.new_value == 'error'){return false;}}}
         onDelete={(e)=>{console.log(e);}}
         onAdd={(e)=>{console.log(e); if (e.new_value == 'error'){return false;}}}
-        name={false} />
+        name={false}
+        iconStyle="triangle" />
 
         <br />
 

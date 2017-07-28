@@ -158,4 +158,90 @@ describe('<JsonObject />', function () {
         ).to.have.length(1);
     });
 
+    it('Array mount collapsed circle', function () {
+        let src = {
+            'arr1' : [
+                'arr2' : [
+                    'test'
+                ]
+            ]
+        }
+        const wrapper = render(
+            <JsonObject
+            src={src}
+            namespace={['arr_test']}
+            name='test'
+            rjvId={rjvId}
+            theme='rjv-default'
+            collapsed={true}
+            indentWidth={1}
+            depth={1}
+            type='array'/>
+        );
+        expect(
+            wrapper.find('.expanded-icon')
+        ).to.have.length(0);
+                expect(
+            wrapper.find('.collapsed-icon')
+        ).to.have.length(1);
+    });
+
+    it('Array mount collapsed square', function () {
+        let src = {
+            'arr1' : [
+                'arr2' : [
+                    'test'
+                ]
+            ]
+        }
+        const wrapper = render(
+            <JsonObject
+            src={src}
+            namespace={['arr_test']}
+            name='test'
+            rjvId={rjvId}
+            theme='rjv-default'
+            collapsed={true}
+            indentWidth={1}
+            depth={1}
+            iconStyle="square"
+            type='array'/>
+        );
+        expect(
+            wrapper.find('.expanded-icon')
+        ).to.have.length(0);
+                expect(
+            wrapper.find('.collapsed-icon')
+        ).to.have.length(1);
+    });
+
+    it('Array mount collapsed triangle', function () {
+        let src = {
+            'arr1' : [
+                'arr2' : [
+                    'test'
+                ]
+            ]
+        }
+        const wrapper = render(
+            <JsonObject
+            src={src}
+            namespace={['arr_test']}
+            name='test'
+            rjvId={rjvId}
+            theme='rjv-default'
+            collapsed={true}
+            indentWidth={1}
+            depth={1}
+            iconStyle="triangle"
+            type='array'/>
+        );
+        expect(
+            wrapper.find('.expanded-icon')
+        ).to.have.length(0);
+                expect(
+            wrapper.find('.collapsed-icon')
+        ).to.have.length(1);
+    });
+
 });

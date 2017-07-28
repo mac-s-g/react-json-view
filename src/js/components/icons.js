@@ -42,6 +42,82 @@ export class CirclePlus extends React.Component {
     }
 }
 
+export class SquareMinus extends React.Component {
+    render() {
+        const {props} = this;
+        const {style, ...rest} = props;
+        const svgStyle = getIconStyle(style).style;
+
+        return (
+            <span {...rest}>
+            <svg fill={svgStyle.color}
+            width={svgStyle.height} height={svgStyle.width}
+            style={svgStyle}
+            viewBox="0 0 1792 1792">
+            <path d="M1344 800v64q0 14-9 23t-23 9h-832q-14 0-23-9t-9-23v-64q0-14 9-23t23-9h832q14 0 23 9t9 23zm128 448v-832q0-66-47-113t-113-47h-832q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113zm128-832v832q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h832q119 0 203.5 84.5t84.5 203.5z"/>
+            </svg>
+            </span>
+        );
+    }
+}
+
+export class SquarePlus extends React.Component {
+    render() {
+        const {props} = this;
+        const {style, ...rest} = props;
+        const svgStyle = getIconStyle(style).style;
+
+        return (
+            <span {...rest}>
+            <svg fill={svgStyle.color}
+            width={svgStyle.height} height={svgStyle.width}
+            style={svgStyle}
+            viewBox="0 0 1792 1792">
+            <path d="M1344 800v64q0 14-9 23t-23 9h-352v352q0 14-9 23t-23 9h-64q-14 0-23-9t-9-23v-352h-352q-14 0-23-9t-9-23v-64q0-14 9-23t23-9h352v-352q0-14 9-23t23-9h64q14 0 23 9t9 23v352h352q14 0 23 9t9 23zm128 448v-832q0-66-47-113t-113-47h-832q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113zm128-832v832q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h832q119 0 203.5 84.5t84.5 203.5z"/>
+            </svg>
+            </span>
+        );
+    }
+}
+
+export class ArrowRight extends React.Component {
+    render() {
+        const {props} = this;
+        const {style, ...rest} = props;
+
+        return (
+            <span {...rest}>
+            <svg
+            style={{...getIconStyle(style).style, paddingLeft: '2px', verticalAlign: 'top'}}
+            viewBox="0 0 15 15"
+            fill="currentColor"
+            >
+                <path d="M0 14l6-6-6-6z"></path>
+            </svg>
+            </span>
+        );
+    }
+}
+
+export class ArrowDown extends React.Component {
+    render() {
+        const {props} = this;
+        const {style, ...rest} = props;
+
+        return (
+            <span {...rest}>
+            <svg
+            style={{...getIconStyle(style).style, paddingLeft: '2px', verticalAlign: 'top'}}
+            viewBox="0 0 15 15"
+            fill="currentColor"
+            >
+                <path d="M0 5l6 6 6-6z"></path>
+            </svg>
+            </span>
+        );
+    }
+}
+
 export class Clippy extends React.Component {
     render() {
         const {props} = this;

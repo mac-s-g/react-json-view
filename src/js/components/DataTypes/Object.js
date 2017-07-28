@@ -12,7 +12,11 @@ import VariableMeta from './../VariableMeta';
 import AttributeStore from './../../stores/ObjectAttributes';
 
 //icons
-import {CircleMinus, CirclePlus} from './../icons';
+import {
+    CircleMinus, CirclePlus,
+    SquareMinus, SquarePlus,
+    ArrowRight, ArrowDown
+} from './../icons';
 
 //theme
 import Theme from './../../themes/getStyle';
@@ -120,15 +124,9 @@ class rjvObject extends React.Component {
         let expanded_icon, object_padding_left = 0;
 
         if (expanded) {
-            expanded_icon = <CircleMinus
-                {...Theme(theme, 'expanded-icon')}
-                class="expanded-icon"
-            />
+            expanded_icon = this.getExpandedIcon();
         } else {
-            expanded_icon = <CirclePlus
-                {...Theme(theme, 'collapsed-icon')}
-                class="collapsed-icon"
-            />
+            expanded_icon = this.getCollapsedIcon();
         }
 
         if (!jsvRoot) {
@@ -241,6 +239,48 @@ class rjvObject extends React.Component {
                     <span {...Theme(theme, 'colon')}>:</span>
                 </span>
             );
+        }
+    }
+
+    getCollapsedIcon = () => {
+        const {theme, iconStyle} = this.props;
+        switch (iconStyle) {
+            case "triangle":
+                return <ArrowRight
+                    {...Theme(theme, 'collapsed-icon')}
+                    class="collapsed-icon"
+                />
+            case "square":
+                return <SquarePlus
+                    {...Theme(theme, 'collapsed-icon')}
+                    class="collapsed-icon"
+                />
+            default:
+                return <CirclePlus
+                    {...Theme(theme, 'collapsed-icon')}
+                    class="collapsed-icon"
+                />
+        }
+    }
+
+    getExpandedIcon = () => {
+        const {theme, iconStyle} = this.props;
+        switch (iconStyle) {
+            case "triangle":
+                return <ArrowDown
+                    {...Theme(theme, 'expanded-icon')}
+                    class="expanded-icon"
+                />
+            case "square":
+                return <SquareMinus
+                    {...Theme(theme, 'expanded-icon')}
+                    class="expanded-icon"
+                />
+            default:
+                return <CircleMinus
+                    {...Theme(theme, 'expanded-icon')}
+                    class="expanded-icon"
+                />
         }
     }
 }

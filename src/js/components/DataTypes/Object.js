@@ -49,14 +49,12 @@ class rjvObject extends React.Component {
             state_key: props.namespace.join('.'),
             namespace: props.namespace,
             indentWidth: props.indentWidth,
-            expanded: props.jsvRoot
-                ? expanded
-                : AttributeStore.get(
-                    props.rjvId,
-                    props.namespace,
-                    'expanded',
-                    expanded
-                ),
+            expanded: AttributeStore.get(
+                props.rjvId,
+                props.namespace,
+                'expanded',
+                expanded
+            ),
             object_type: (props.type == 'array' ? 'array' : 'object'),
             parent_type: (props.type == 'array' ? 'array' : 'object'),
             display_name: (props.name ? props.name : '')

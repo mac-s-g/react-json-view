@@ -121,6 +121,36 @@ describe('<VariableEditor />', function () {
         ).to.equal(0);
     });
 
+    it('VariableEditor edit after src change should respect current src', function () {
+        const oldSrc = {edited: true, other: 'old'};
+        const currentSrc = {edited: true, other: 'current'};
+
+        const wrapper = mount(
+            <Index
+                src={oldSrc}
+                theme='rjv-default'
+                onEdit={(edit) => {
+                    expect(edit.updated_src.other).to.equal(currentSrc.other);
+                    return true;
+                }}
+                rjvId={rjvId}
+            />
+        );
+        wrapper.setProps({src: currentSrc});
+
+        wrapper.find('.click-to-edit-icon').first().simulate('click');
+        expect(
+            wrapper.state('onEdit')
+        ).to.not.equal(false);
+        expect(
+            wrapper.find('.variable-editor').length
+        ).to.equal(1);
+        wrapper.find('.edit-check.string-value').simulate('click');
+        expect(
+            wrapper.find('.variable-editor').length
+        ).to.equal(0);
+    });
+
     it('VariableEditor detected null', function () {
         const wrapper = shallow(
             <VariableEditor

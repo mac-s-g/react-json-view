@@ -78,6 +78,15 @@ export default class extends React.Component {
         }
     }
 
+    componentDidUpdate() {
+        ObjectAttributes.set(
+            this.rjvId,
+            'global',
+            'src',
+            this.props.src
+        );
+    }
+
     init = (props) => {
         for (let i in this.defaults) {
             if (props[i] !== undefined) {

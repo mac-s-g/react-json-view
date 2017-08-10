@@ -88,6 +88,7 @@ class ObjectAttributes extends EventEmitter {
             walk = walk[idx];
         }
 
+
         if (variable_removed) {
             if (toType(walk) == 'array') {
                 walk.splice(name, 1);
@@ -116,9 +117,10 @@ class ObjectAttributes extends EventEmitter {
         let idx = copy_namespace.shift();
         if (type == 'array') {
             result = [...src];
-            result[idx] = this.deepCopy(src[idx], copy_namespace);
         } else if (type == 'object') {
             result = {...src};
+        }
+        if (idx !== undefined) {
             result[idx] = this.deepCopy(src[idx], copy_namespace);
         }
         return result;

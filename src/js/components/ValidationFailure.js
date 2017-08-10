@@ -12,7 +12,7 @@ import Theme from './../themes/getStyle';
 export default class extends React.Component {
 
     render() {
-        const {active, theme, rjvId} = this.props;
+        const {message, active, theme, rjvId} = this.props;
 
         return active ? (
         <div
@@ -25,7 +25,9 @@ export default class extends React.Component {
             });
         }}
         >
-            <span {...Theme(theme, 'validation-failure-label')}>Validation Error</span>
+            <span {...Theme(theme, 'validation-failure-label')}>
+                {message}
+            </span>
             <Clear
             {...Theme(theme, 'validation-failure-clear')} />
         </div>

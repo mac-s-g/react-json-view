@@ -49,7 +49,8 @@ export default class extends React.Component {
         onDelete: false,
         onAdd: false,
         iconStyle: "triangle",
-        style: {}
+        style: {},
+        validationMessage: "Validation Error"
     }
 
     getListeners = () => {
@@ -98,6 +99,13 @@ export default class extends React.Component {
         }
 
         this.validateInput();
+
+        ObjectAttributes.set(
+            this.rjvId,
+            'global',
+            'src',
+            this.state.src
+        );
     }
 
     //make sure props are passed in as expected
@@ -130,12 +138,16 @@ export default class extends React.Component {
     }
 
     render() {
-        const {addKeyRequest, style, validationFailure, ...props} = this.state;
+        const {
+            validationFailure, validationMessage,
+            addKeyRequest, style, ...props
+        } = this.state;
         //reset key request to false once it's observed
         this.state.addKeyRequest = false;
         return (<div class="react-json-view"
             style={{...Theme(props.theme, 'app-container').style, ...style}} >
             <ValidationFailure
+                message={validationMessage}
                 active={validationFailure}
                 theme={props.theme}
                 rjvId={this.rjvId} />

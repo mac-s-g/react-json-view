@@ -98,6 +98,13 @@ export default class extends React.Component {
         }
 
         this.validateInput();
+
+        ObjectAttributes.set(
+            this.rjvId,
+            'global',
+            'src',
+            this.state.src
+        );
     }
 
     //make sure props are passed in as expected

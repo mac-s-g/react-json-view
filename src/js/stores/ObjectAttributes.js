@@ -116,10 +116,9 @@ class ObjectAttributes extends EventEmitter {
         let idx = copy_namespace.shift();
         if (type == 'array') {
             result = [...src];
+            result[idx] = this.deepCopy(src[idx], copy_namespace);
         } else if (type == 'object') {
             result = {...src};
-        }
-        if (copy_namespace.length > 0) {
             result[idx] = this.deepCopy(src[idx], copy_namespace);
         }
         return result;

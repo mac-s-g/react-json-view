@@ -27,6 +27,7 @@ ReactDom.render(
         <JsonViewer
         src={getExampleJson1()}
         theme='railscasts'
+        validationMessage="You're doing something wrong."
         collapseStringsAfterLength={15}
         onEdit={(e)=>{console.log(e); if (e.new_value == 'error'){return false;}}}
         onDelete={(e)=>{console.log(e);}}

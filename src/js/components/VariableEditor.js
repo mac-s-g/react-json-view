@@ -14,9 +14,6 @@ import {
 //clibboard icon
 import {Edit, CheckCircle, RemoveCircle as Remove} from './icons';
 
-//tooltip component
-import ReactTooltip from 'react-tooltip';
-
 //theme
 import Theme from './../themes/getStyle';
 import Radium from 'radium';
@@ -35,10 +32,6 @@ class VariableEditor extends React.Component {
 
     constructor(props) {
         super(props);
-    }
-
-    componentDidMount() {
-        ReactTooltip.rebuild();
     }
 
     render() {
@@ -89,8 +82,6 @@ class VariableEditor extends React.Component {
     getEditIcon = () => {
         const {variable, namespace, theme} = this.props;
         const {editMode} = this.state;
-        const tooltip_id = variable.name + '_'
-            + namespace + '-edit-tooltip';
         let display = 'inline-block';
 
         if (editMode) {
@@ -98,15 +89,7 @@ class VariableEditor extends React.Component {
         }
 
         return (
-        <div
-        class="click-to-edit"
-        data-tip='edit this value'
-        data-for={tooltip_id} >
-            <ReactTooltip
-            effect="solid"
-            id={tooltip_id}
-            place="right"
-            delayShow={1000} />
+        <div class="click-to-edit" >
             <Edit
             class="click-to-edit-icon"
             {...Theme(theme, 'editVarIcon')}

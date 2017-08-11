@@ -11,7 +11,6 @@ import {
 //clipboard library
 //https://www.npmjs.com/package/clipboard
 import Clipboard from 'clipboard';
-import ReactTooltip from 'react-tooltip';
 
 //theme
 import Theme from './../themes/getStyle';
@@ -62,10 +61,7 @@ export default class extends React.Component {
     getCopyComponent = () => {
         const {id, copy_state} = this.state;
         const {src, size, theme, enableClipboard} = this.props;
-        const tooltip_id = 'tooltip-' + id;
-        //had to jump through some hoops to get the
-        //react-tooltip to act like a react component should.
-        //it does not support dynamic content updates
+
         let style = Theme(theme, 'copy-to-clipboard').style;
         return (
             enableClipboard ?
@@ -76,35 +72,16 @@ export default class extends React.Component {
                     display:copy_state=='success' ? 'none' : 'inline-block'
                 }}
                 data-clipboard-text={JSON.stringify(src, null, '  ')}
-                id={"clipboard-container-" + id}
-                data-tip='copy to clipboard'
-                data-for={tooltip_id} >
+                id={"clipboard-container-" + id} >
                     <Clippy {...Theme(theme, 'copy-icon')} />
-                    <ReactTooltip
-                    effect="solid"
-                    class="rjv-tooltip"
-                    id={tooltip_id}
-                    place="right"
-                    delayShow={1000} />
                 </span>
                 <span
                 style={{
                     ...style,
                     display:copy_state == 'success'
                     ? 'inline-block' : 'none'
-                }}
-                data-tip='copied'
-                data-for={tooltip_id + '-success'} >
+                }} >
                     <Clippy {...Theme(theme, 'copy-icon')} />
-                    <ReactTooltip
-                    effect="solid"
-                    class="rjv-tooltip"
-                    id={tooltip_id + '-success'}
-                    place="right"
-                    afterHide={()=>{
-                        this.setState({copy_state: null});
-                    }}
-                    delayShow={0} />
                 </span>
             </span>
             : null

@@ -102,14 +102,16 @@ class VariableEditor extends React.Component {
 
     prepopInput = (variable) => {
         let detected;
-        this.state.editMode = true;
-        this.state.editValue = stringifyVariable(variable.value);
-        detected = parseInput(this.state.editValue);
-        this.state.parsedInput = {
-            type: detected.type,
-            value: detected.value
-        };
-        this.setState(this.state);
+        if (this.props.onEdit !== false) {
+            this.state.editMode = true;
+            this.state.editValue = stringifyVariable(variable.value);
+            detected = parseInput(this.state.editValue);
+            this.state.parsedInput = {
+                type: detected.type,
+                value: detected.value
+            };
+            this.setState(this.state);
+        }
     }
 
     getRemoveIcon = () => {

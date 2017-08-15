@@ -58,7 +58,8 @@ const config = {
   },
   plugins: [
     new webpack.EnvironmentPlugin(['NODE_ENV']),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.UglifyJsPlugin()
   ],
   resolve: {
     extensions: [".js", ".json", ".css", ".scss"]

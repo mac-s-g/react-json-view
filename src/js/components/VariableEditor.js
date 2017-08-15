@@ -16,9 +16,8 @@ import {Edit, CheckCircle, RemoveCircle as Remove} from './icons';
 
 //theme
 import Theme from './../themes/getStyle';
-import Radium from 'radium';
 
-@Radium
+
 class VariableEditor extends React.Component {
 
     state = {

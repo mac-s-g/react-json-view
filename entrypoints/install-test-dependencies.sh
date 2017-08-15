@@ -1,6 +1,7 @@
 npm install --silent \
     react@15.5.4 \
     react-dom@15.5.4  \
+    babel-register@6.24.1 \
     chai@3.5.0 \
     coveralls@2.13.1 \
     enzyme@2.8.2 \

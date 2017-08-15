@@ -79,16 +79,6 @@ export default class extends React.Component {
         }
     }
 
-    // PR 96 - removed until major version update occurs
-    // componentDidUpdate() {
-    //     ObjectAttributes.set(
-    //         this.rjvId,
-    //         'global',
-    //         'src',
-    //         this.props.src
-    //     );
-    // }
-
     init = (props) => {
         for (let i in this.defaults) {
             if (props[i] !== undefined) {

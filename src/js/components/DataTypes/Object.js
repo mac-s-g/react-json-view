@@ -20,7 +20,6 @@ import {
 
 //theme
 import Theme from './../../themes/getStyle';
-import Radium from 'radium';
 
 //increment 1 with each nested object & array
 const DEPTH_INCREMENT = 1
@@ -28,7 +27,6 @@ const DEPTH_INCREMENT = 1
 const SINGLE_INDENT = 5;
 
 
-@Radium
 class rjvObject extends React.Component {
 
     constructor(props) {

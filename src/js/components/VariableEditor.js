@@ -68,7 +68,9 @@ class VariableEditor extends React.Component {
                 )
 
             }
-            <div {...Theme(theme, 'variable-value')}>
+            <div class="variable-value"
+            onDoubleClick={()=>{this.prepopInput(variable)}}
+            {...Theme(theme, 'variable-value')}>
                 {this.getValue(variable, this.props, editMode)}
             </div>
             {onEdit !== false && editMode == false ? this.getEditIcon() : null}
@@ -92,20 +94,24 @@ class VariableEditor extends React.Component {
             <Edit
             class="click-to-edit-icon"
             {...Theme(theme, 'editVarIcon')}
-            onClick={() => {
-                let detected;
-                this.state.editMode = true;
-                this.state.editValue = stringifyVariable(variable.value);
-                detected = parseInput(this.state.editValue);
-                this.state.parsedInput = {
-                    type: detected.type,
-                    value: detected.value
-                };
-                this.setState(this.state);
-            }}
+            onClick={() => {this.prepopInput(variable)}}
             />
         </div>
         );
+    }
+
+    prepopInput = (variable) => {
+        let detected;
+        if (this.props.onEdit !== false) {
+            this.state.editMode = true;
+            this.state.editValue = stringifyVariable(variable.value);
+            detected = parseInput(this.state.editValue);
+            this.state.parsedInput = {
+                type: detected.type,
+                value: detected.value
+            };
+            this.setState(this.state);
+        }
     }
 
     getRemoveIcon = () => {
@@ -192,6 +198,21 @@ class VariableEditor extends React.Component {
                     }
                 });
             }}
+            onKeyDown={(e)=>{
+                switch (e.key) {
+                    case 'Escape': {
+                        this.setState({editMode: false, editValue: ""});
+                        break;
+                    }
+                    case 'Enter': {
+                        if (e.ctrlKey) {
+                            this.submitEdit(true);
+                        }
+                        break;
+                    }
+                }
+                e.stopPropagation();
+            }}
             placeholder="update this value"
             {...Theme(theme, 'edit-input')}
             />
@@ -203,21 +224,7 @@ class VariableEditor extends React.Component {
             />
             <CheckCircle class="edit-check string-value"
             {...Theme(theme, 'check-icon')}
-            onClick={() => {
-                const new_value = (editValue);
-                this.state.editMode = false;
-                dispatcher.dispatch({
-                    name: 'VARIABLE_UPDATED',
-                    rjvId: rjvId,
-                    data: {
-                        name: variable.name,
-                        namespace: namespace,
-                        existing_value: variable.value,
-                        new_value: new_value,
-                        variable_removed: false
-                    },
-                });
-            }}
+            onClick={() => {this.submitEdit()}}
             />
             <div>
                 {this.showDetected()}
@@ -226,6 +233,27 @@ class VariableEditor extends React.Component {
 
         </div>);
 
+    }
+
+    submitEdit = (submit_detected) => {
+        const {variable, namespace, rjvId} = this.props;
+        const {editValue, parsedInput} = this.state;
+        let new_value = editValue;
+        if (submit_detected && parsedInput.type) {
+            new_value = parsedInput.value;
+        }
+        this.state.editMode = false;
+        dispatcher.dispatch({
+            name: 'VARIABLE_UPDATED',
+            rjvId: rjvId,
+            data: {
+                name: variable.name,
+                namespace: namespace,
+                existing_value: variable.value,
+                new_value: new_value,
+                variable_removed: false
+            },
+        });
     }
 
     showDetected = () => {
@@ -242,20 +270,7 @@ class VariableEditor extends React.Component {
                     paddingLeft: '3px',
                     ...Theme(theme, 'check-icon').style
                 }}
-                onClick={() => {
-                    this.state.editMode = false;
-                    dispatcher.dispatch({
-                        name: 'VARIABLE_UPDATED',
-                        rjvId: rjvId,
-                        data: {
-                            name: variable.name,
-                            namespace: namespace,
-                            existing_value: variable.value,
-                            new_value: value,
-                            variable_removed: false
-                        },
-                    });
-                }}
+                onClick={() => {this.submitEdit(true)}}
                 />
             </div>
             </div>;

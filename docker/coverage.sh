@@ -6,7 +6,7 @@ echo "Running with NODE_ENV=$NODE_ENV"
 
 rm -rf ./coverage/*
 
-# run the workbench container
+# run the container
 docker run \
     -v $(pwd)/src:/react/src \
     -v $(pwd)/dev-server:/react/dev-server \

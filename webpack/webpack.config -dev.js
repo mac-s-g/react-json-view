@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const wds_port = 2000;
 
 const PATHS = {
     src: path.join(__dirname, 'src'),
@@ -10,21 +9,8 @@ const PATHS = {
     devServer: path.join(__dirname, 'dev-server')
 };
 
-if (!process.env.NODE_ENV) {
-  process.env.NODE_ENV = 'production';
-}
-
-let includes = [PATHS.js, PATHS.devServer];
-let entrypoint = PATHS.devServer + '/dev-server.js';
-let devtool = 'eval-source-map';
-if (process.env.NODE_ENV === 'production') {
-  includes = [PATHS.js];
-  entrypoint = PATHS.js + '/index.js';
-  devtool = false;
-}
-
 const config = {
-  entry: [entrypoint],
+  entry: [PATHS.devServer + '/dev-server.js'],
   externals: {
     'cheerio': 'window',
     react: {
@@ -44,18 +30,18 @@ const config = {
   },
   devServer: {
     host: '0.0.0.0',
-    port: wds_port,
+    port: 2000,
     hot: true,
     inline: true,
     historyApiFallback: true,
     contentBase: PATHS.build
   },
-  output: {
-    path: PATHS.build,
-    filename: 'main.js',
-    library: 'reactJsonView',
-    libraryTarget: 'umd'
-  },
+  // output: {
+  //   path: PATHS.build,
+  //   filename: 'main.js',
+  //   library: 'reactJsonView',
+  //   libraryTarget: 'umd'
+  // },
   plugins: [
     new webpack.EnvironmentPlugin(['NODE_ENV']),
     new webpack.HotModuleReplacementPlugin(),
@@ -64,7 +50,7 @@ const config = {
   resolve: {
     extensions: [".js", ".json", ".css", ".scss"]
   },
-  devtool: devtool,
+  devtool: 'eval-source-map',
   module: {
     rules: [
       {
@@ -74,7 +60,7 @@ const config = {
             loader: 'babel-loader'
           }
         ],
-        include: includes
+        include: [PATHS.js, PATHS.devServer]
       },
       {
         test: /\.s?css$/,

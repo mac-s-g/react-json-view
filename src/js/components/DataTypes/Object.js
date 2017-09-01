@@ -31,12 +31,12 @@ class rjvObject extends React.Component {
 
     constructor(props) {
         super(props);
-        this.init(props);
+        this.state = this.initializeState(props);
     }
 
     state = {}
 
-    init = (props) => {
+    initializeState = (props) => {
         const expanded = (
             props.collapsed === false
             || (props.collapsed !== true
@@ -58,12 +58,11 @@ class rjvObject extends React.Component {
             display_name: (props.name ? props.name : '')
         }
 
-        this.state = {...this.state, ...state};
+        return {...this.state, ...state};
     }
 
     componentWillReceiveProps(nextProps) {
-        this.init(nextProps);
-        this.setState(this.state);
+        this.setState(this.initializeState(nextProps));
     }
 
     toggleCollapsed = () => {

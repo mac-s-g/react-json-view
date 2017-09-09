@@ -18,7 +18,7 @@ ReactDom.render(
         onEdit={(e)=>{console.log(e); if (e.new_value == 'error'){return false;}}}
         onDelete={(e)=>{console.log(e);}}
         onAdd={(e)=>{console.log(e); if (e.new_value == 'error'){return false;}}}
-        displayObjectSize={false}
+        displayObjectSize={true}
         enableClipboard={true} />
 
         <br />
@@ -123,6 +123,8 @@ function getExampleJson1() {
     return {
         string: 'this is a test string',
         integer: 42,
+        empty_array: [],
+        empty_object: {},
         array: [1, 2, 3, 'test'],
         float: -2.757,
         undefined_var: undefined,

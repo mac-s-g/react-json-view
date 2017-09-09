@@ -241,7 +241,7 @@ describe('<JsonObject />', function () {
         expect(
             wrapper.find('.expanded-icon')
         ).to.have.length(0);
-                expect(
+        expect(
             wrapper.find('.collapsed-icon')
         ).to.have.length(1);
     });
@@ -253,12 +253,6 @@ describe('<JsonObject />', function () {
             <JsonObject
             src={src}
             namespace={['root']}
-            rjvId={rjvId}
-            theme='rjv-default'
-            indentWidth={1}
-            depth={1}
-            displayDataTypes={true}
-            type='object'
             collapsed={false} />
         );
         expect(
@@ -274,11 +268,6 @@ describe('<JsonObject />', function () {
             src={src}
             namespace={['root']}
             rjvId={rjvId}
-            theme='rjv-default'
-            indentWidth={1}
-            depth={1}
-            displayDataTypes={true}
-            type='object'
             collapsed={false} />
         );
         expect(
@@ -294,11 +283,6 @@ describe('<JsonObject />', function () {
             src={src}
             namespace={['root']}
             rjvId={rjvId}
-            theme='rjv-default'
-            indentWidth={1}
-            depth={1}
-            displayDataTypes={true}
-            type='object'
             collapsed={false} />
         );
         expect(
@@ -313,17 +297,43 @@ describe('<JsonObject />', function () {
             <JsonObject
             src={src}
             namespace={['root']}
-            rjvId={rjvId}
-            theme='rjv-default'
-            indentWidth={1}
-            depth={1}
-            displayDataTypes={true}
-            type='object'
             collapsed={false} />
         );
         expect(
             wrapper.state('expanded')
         ).to.equal(false);
+    });
+
+    it('non-empty array should have ellipsis', function () {
+        let src = [1,2,3]
+
+        const wrapper = render(
+            <JsonObject
+            src={src}
+            namespace={['root']}
+            rjvId={rjvId}
+            collapsed={true} />
+        );
+
+        expect(
+            wrapper.find('.node-ellipsis')
+        ).to.have.length(1);
+    });
+
+    it('empty array should not have ellipsis', function () {
+        let src = []
+
+        const wrapper = render(
+            <JsonObject
+            src={src}
+            namespace={['root']}
+            rjvId={rjvId}
+            collapsed={true} />
+        );
+
+        expect(
+            wrapper.find('.node-ellipsis')
+        ).to.have.length(0);
     });
 
 });

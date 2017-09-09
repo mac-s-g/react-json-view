@@ -101,6 +101,7 @@ class rjvObject extends React.Component {
         } else {
             return (
                 <div {...Theme(this.props.theme, 'ellipsis')}
+                class="node-ellipsis"
                 onClick={this.toggleCollapsed}>
                     ...
                 </div>

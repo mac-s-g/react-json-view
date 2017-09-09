@@ -265,13 +265,14 @@ const getDefaultThemeStyling = theme => {
         'edit-input': {
             display: 'inline-block',
             minHeight: constants.editInputHeight,
-            minWidth: constants.editInputMinWidth,
+            // minWidth: constants.editInputMinWidth,
             borderRadius: constants.editInputBorderRadius,
             backgroundColor: colors.editVariable.background,
             color: colors.editVariable.color,
             padding: constants.editInputPadding,
             marginRight: constants.editInputMarginRight,
             fontFamily: constants.editInputFontFamily,
+            width: "auto"
         },
         'detected-row': {
             paddingTop: constants.detectedRowPaddingTop,

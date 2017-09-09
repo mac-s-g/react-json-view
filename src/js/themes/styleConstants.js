@@ -71,8 +71,8 @@ export default {
 
   tooltipPadding: '4px',
 
-  editInputHeight: '50px',
-  editInputMinWidth: '130px',
+  editInputHeight: '25px',
+  editInputMinWidth: '1px',
   editInputBorderRadius: '2px',
   editInputPadding: '5px',
   editInputMarginRight: '4px',

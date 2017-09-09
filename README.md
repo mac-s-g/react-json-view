@@ -107,7 +107,7 @@ Use Docker to run the source code in a local development environment:
   1. Clone this repo
   2. Build the docker image
       * `cd react-json-view`
-      * `docker build -t react-json-view .`
+      * `./docker/build-container.sh`
       * *note:* you may need to use `sudo` to run docker commands
   3. Run the docker container on port 2000.  This will run the webpack-dev-server with hot-reloading enabled.
       * `./docker/dev-server.sh`

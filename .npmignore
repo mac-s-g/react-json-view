@@ -1,15 +1,23 @@
 *.swp
 npm-debug.log
-debug
-docs
-docker
-entrypoints
-dev-server
-demo
-.git
-.gitignore
-test
 
-# Coverage directory used by tools like istanbul
-coverage
-.nyc_output
+/.git
+/.nyc_output
+/coverage
+/debug
+/demo
+/dev-server
+/doc
+/docker
+/entrypoints
+/src
+/test
+/webpack
+
+Dockerfile
+.babelrc
+.coveralls.yml
+.gitignore
+.nycrc
+.travis.yml
+

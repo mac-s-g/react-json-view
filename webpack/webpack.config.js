@@ -1,30 +1,15 @@
 const path = require('path');
 const webpack = require('webpack');
-const wds_port = 2000;
 
 const PATHS = {
-    src: path.join(__dirname, 'src'),
-    js: path.join(__dirname, 'src/js'),
-    style: path.join(__dirname, 'src/style'),
-    build: path.join(__dirname, 'dist'),
-    devServer: path.join(__dirname, 'dev-server')
+    src: '/react/src',
+    js: '/react/src/js',
+    style: '/react/src/style',
+    build: '/react/dist'
 };
 
-if (!process.env.NODE_ENV) {
-  process.env.NODE_ENV = 'production';
-}
-
-let includes = [PATHS.js, PATHS.devServer];
-let entrypoint = PATHS.devServer + '/dev-server.js';
-let devtool = 'eval-source-map';
-if (process.env.NODE_ENV === 'production') {
-  includes = [PATHS.js];
-  entrypoint = PATHS.js + '/index.js';
-  devtool = false;
-}
-
 const config = {
-  entry: [entrypoint],
+  entry: [PATHS.js + '/index.js'],
   externals: {
     'cheerio': 'window',
     react: {
@@ -42,14 +27,6 @@ const config = {
       umd: 'react-dom',
     },
   },
-  devServer: {
-    host: '0.0.0.0',
-    port: wds_port,
-    hot: true,
-    inline: true,
-    historyApiFallback: true,
-    contentBase: PATHS.build
-  },
   output: {
     path: PATHS.build,
     filename: 'main.js',
@@ -57,14 +34,11 @@ const config = {
     libraryTarget: 'umd'
   },
   plugins: [
-    new webpack.EnvironmentPlugin(['NODE_ENV']),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.UglifyJsPlugin()
   ],
   resolve: {
     extensions: [".js", ".json", ".css", ".scss"]
   },
-  devtool: devtool,
   module: {
     rules: [
       {
@@ -74,7 +48,7 @@ const config = {
             loader: 'babel-loader'
           }
         ],
-        include: includes
+        include: [PATHS.js]
       },
       {
         test: /\.s?css$/,

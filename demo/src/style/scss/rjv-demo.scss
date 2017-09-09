@@ -1,0 +1,32 @@
+
+.rjv-demo {
+    .rjv-settings, .rjv-source {
+        vertical-align: top;
+        display: inline-block;
+        margin-top: 5px;
+        margin-right: 10px;
+        min-width: 300px;
+        max-width: 400px;
+        .rjv-input {
+            margin-bottom: 5px;
+            .rjv-label {
+                font-size: 14px;
+                font-weight: bold;
+                // font-style: italic;
+            }
+        }
+    }
+
+    .rjv-header {
+        position: relative;
+
+        .rjv-logo {
+            width: 100px;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            cursor: pointer;
+        }
+    }
+
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>RJV Demo</title>
+    <meta charset="UTF-8">
+    <link rel="icon"
+          type="image/ico"
+          href="./../src/style/images/favicon.ico">
+    <!--[if lt IE 9]>
+    <script>
+    (function(){
+      var ef = function(){};
+      window.console = window.console || {log:ef,warn:ef,error:ef,dir:ef};
+    }());
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv-printshiv.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-sham.js"></script>
+    <![endif]-->
+    <script src="https://unpkg.com/react@15.6.1/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <style>
+      body {margin:0px;}
+      #references {
+        text-align: right;
+        padding: 20px 20px 0 0;
+        margin-bottom: 10px;
+      }
+      #references > .link-container {
+        text-decoration: none;
+        display: inline-block;
+        border-radius: 3px;
+        transition: ease-out 0.1s;
+        padding: 4px 4px 1px 4px;
+      }
+      #references .link-container:hover {
+        background-color: #ccc;
+      }
+      #references > .link-container > a {
+        text-decoration: none;
+        display: inline-block;
+      }
+      #references .link-container img {
+        height: 40px;
+        cursor: pointer;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+  <div id="mac-react-container"></div>
+  <div id="references">
+    <div class="link-container">
+    <a id="npm-link" target="_blank"
+    href="https://www.npmjs.com/package/react-json-view">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/d/db/Npm-logo.svg"/>
+    </a>
+    </div>
+    <div class="link-container">
+    <a id="github-link" target="_blank"
+    href="https://github.com/mac-s-g/react-json-view">
+      <img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png"/>
+    </a>
+    </div>
+  </div>
+  <script type="text/javascript" src="./main.js"></script>
+  </body>
+</html>

@@ -5,7 +5,7 @@ import React from "react";
 import ReactDom from "react-dom";
 
 //import the react-json-view component (installed with npm)
-import JsonViewer from './../src/js/index';
+import JsonViewer from './../../src/js/index';
 
 //render 2 different examples of the react-json-view component
 ReactDom.render(

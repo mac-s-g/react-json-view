@@ -1,7 +1,8 @@
-dist
-debug
+*.swp
 npm-debug.log
 
-# Coverage directory used by tools like istanbul
-coverage
+/coverage
+/dist
+/debug
+
 .nyc_output

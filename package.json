@@ -1,7 +1,7 @@
 {
   "name": "react-json-view",
   "description": "Interactive react component for displaying javascript arrays and JSON objects.",
-  "version": "1.12.1",
+  "version": "1.12.2",
   "main": "dist/main.js",
   "files": [
     "dist/"
@@ -21,33 +21,34 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "css-loader": "^0.28.4",
-    "html-webpack-plugin": "2.30.1",
-    "node-sass": "^4.5.3",
-    "react-hot-loader": "^3.0.0-beta.6",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.18.2",
-    "webpack": "^3.5.4",
-    "webpack-dev-server": "^2.7.0"
-  },
-  "peerDependencies": {
     "chai": "^3.5.0",
     "coveralls": "^2.13.1",
+    "css-loader": "^0.28.4",
     "enzyme": "^2.8.2",
+    "html-webpack-plugin": "2.30.1",
     "ignore-styles": "^5.0.1",
     "istanbul": "^0.4.5",
     "jsdom": "^10.1.0",
     "mocha": "^3.2.0",
+    "node-sass": "^4.5.3",
     "nyc": "^10.3.2",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
+    "react-hot-loader": "^3.0.0-beta.6",
     "react-test-renderer": "^15.5.4",
+    "sass-loader": "^6.0.6",
     "sinon": "^2.2.0",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.5.4",
+    "webpack-dev-server": "^2.7.0",
     "webpack-bundle-size-analyzer": "^2.7.0"
   },
+  "peerDependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  },
   "scripts": {
-    "build": "webpack -p --display-error-details --progress --optimize-minimize",
-    "dev:hot": "webpack-dev-server",
+    "build": "webpack --config /react/webpack/webpack.config.js -p --display-error-details --progress --optimize-minimize",
+    "build:demo": "webpack --config /react/webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
+    "dev:hot": "webpack-dev-server --config /react/webpack/webpack.config-dev.js",
     "modules:debug": "./docker/debug.sh",
     "modules:tree": "webpack --json",
     "modules:size-analyzer": "webpack --json | webpack-bundle-size-analyzer",

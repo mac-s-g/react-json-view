@@ -110,7 +110,6 @@ Use Docker to run the source code in a local development environment:
       * `./docker/build-container.sh`
       * *note:* you may need to use `sudo` to run docker commands
   3. Run the docker container on port 2000.  This will run the webpack-dev-server with hot-reloading enabled.
-      * `cd react-json-view`
       * `./docker/dev-server.sh`
       * *note:* you may need to use `sudo` to run the server file
   4. Open port 2000 in your browser

@@ -1,4 +1,5 @@
 import React from 'react';
+import AutosizeTextarea from 'react-textarea-autosize';
 
 import {toType} from './../helpers/util';
 import dispatcher from './../helpers/dispatcher';
@@ -90,7 +91,7 @@ class VariableEditor extends React.Component {
         }
 
         return (
-        <div class="click-to-edit" >
+        <div class="click-to-edit" style={{verticalAlign: 'top'}}>
             <Edit
             class="click-to-edit-icon"
             {...Theme(theme, 'editVarIcon')}
@@ -126,7 +127,7 @@ class VariableEditor extends React.Component {
         }
 
         return (
-        <div class="click-to-remove" >
+        <div class="click-to-remove" style={{verticalAlign: 'top'}}>
             <Remove
             class="click-to-remove-icon"
             {...Theme(theme, 'removeVarIcon')}
@@ -183,8 +184,8 @@ class VariableEditor extends React.Component {
         const {editValue} = this.state;
 
         return (<div>
-            <textarea type='text'
-            ref={input => input && input.focus()}
+            <AutosizeTextarea type='text'
+            inputRef={input => input && input.focus()}
             value={editValue}
             class="variable-editor"
             onChange={(event)=>{

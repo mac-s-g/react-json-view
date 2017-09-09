@@ -1,18 +1,18 @@
 *.swp
 npm-debug.log
 
-.git
-.nyc_output
-coverage
-debug
-demo
-dev-server
-doc
-docker
-entrypoints
-src
-test
-webpack
+/.git
+/.nyc_output
+/coverage
+/debug
+/demo
+/dev-server
+/doc
+/docker
+/entrypoints
+/src
+/test
+/webpack
 
 Dockerfile
 .babelrc

@@ -1,8 +1,8 @@
 *.swp
 npm-debug.log
 
-coverage
-dist
-debug
+/coverage
+/dist
+/debug
 
 .nyc_output

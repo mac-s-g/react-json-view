@@ -12,7 +12,7 @@ docker run \
     -v $(pwd)/dev-server:/react/dev-server \
     -v $(pwd)/entrypoints:/react/entrypoints \
     -v $(pwd)/coverage:/react/coverage \
-    -v $(pwd)/webpack.config.js:/react/webpack.config.js \
+    -v $(pwd)/webpack/webpack.config.js:/react/webpack.config.js \
     -v $(pwd)/.nyc_output:/react/.nyc_output \
     -v $(pwd)/test:/react/test \
     --rm \

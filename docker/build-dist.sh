@@ -17,8 +17,8 @@ docker run \
     -v $(pwd)/src:/react/src \
     -v $(pwd)/dist:/react/dist \
     -v $(pwd)/entrypoints:/react/entrypoints \
-    -v $(pwd)/webpack/webpack.config.js:/react/webpack.config.js \
+    -v $(pwd)/webpack:/react/webpack \
     --name=react-json-view \
     -e NODE_ENV=$NODE_ENV \
-    --entrypoint=/react/entrypoints/prepublish.sh \
+    --entrypoint=/react/entrypoints/publish.sh \
     -t react-json-view

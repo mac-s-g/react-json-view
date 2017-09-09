@@ -2,31 +2,18 @@ const path = require('path');
 const webpack = require('webpack');
 
 const PATHS = {
-    src: path.join(__dirname, 'src'),
-    js: path.join(__dirname, 'src/js'),
-    style: path.join(__dirname, 'src/style'),
-    build: path.join(__dirname, 'dist'),
-    devServer: path.join(__dirname, 'dev-server')
+    src: '/react/src',
+    js: '/react/src/js',
+    style: '/react/src/style',
+    build: '/react/dev-server/dist',
+    devServer: '/react/dev-server',
 };
 
 const config = {
-  entry: [PATHS.devServer + '/dev-server.js'],
+  entry: [PATHS.devServer + '/src/index.js'],
   externals: {
-    'cheerio': 'window',
-    react: {
-      root: 'React',
-      commonjs2: 'react',
-      commonjs: 'react',
-      amd: 'react',
-      umd: 'react',
-    },
-    'react-dom': {
-      root: 'ReactDOM',
-      commonjs2: 'react-dom',
-      commonjs: 'react-dom',
-      amd: 'react-dom',
-      umd: 'react-dom',
-    },
+    'react': 'React',
+    'react-dom': 'ReactDOM',
   },
   devServer: {
     host: '0.0.0.0',
@@ -36,14 +23,13 @@ const config = {
     historyApiFallback: true,
     contentBase: PATHS.build
   },
-  // output: {
-  //   path: PATHS.build,
-  //   filename: 'main.js',
-  //   library: 'reactJsonView',
-  //   libraryTarget: 'umd'
-  // },
+  output: {
+    path: PATHS.build,
+    filename: 'main.js',
+    library: 'reactJsonView',
+    libraryTarget: 'umd'
+  },
   plugins: [
-    new webpack.EnvironmentPlugin(['NODE_ENV']),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.UglifyJsPlugin()
   ],

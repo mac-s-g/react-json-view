@@ -2,10 +2,10 @@ const path = require('path');
 const webpack = require('webpack');
 
 const PATHS = {
-    src: path.join(__dirname, 'src'),
-    js: path.join(__dirname, 'src/js'),
-    style: path.join(__dirname, 'src/style'),
-    build: path.join(__dirname, 'dist')
+    src: '/react/src',
+    js: '/react/src/js',
+    style: '/react/src/style',
+    build: '/react/dist'
 };
 
 const config = {
@@ -34,7 +34,6 @@ const config = {
     libraryTarget: 'umd'
   },
   plugins: [
-    new webpack.EnvironmentPlugin(['NODE_ENV']),
     new webpack.optimize.UglifyJsPlugin()
   ],
   resolve: {

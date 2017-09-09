@@ -1,8 +1,8 @@
 import React from 'react';
-import ReactJson from 'react-json-view';
 import ReactSelect from 'react-select';
+import ReactJson from '/react/src/js/index';
 
-import './../../../style/scss/rjv-demo.scss';
+import './../../style/scss/rjv-demo.scss';
 import '/react/node_modules/react-select/dist/react-select.css';
 
 //index entrypoint component
@@ -341,12 +341,9 @@ export default class extends React.Component {
     }
 
     set = (field, value) => {
-        if (value) {
-            this.state[field] = value.value;
-        } else {
-            this.state[field] = this.defaults[field];
-        }
-        this.setState(this.state)
+        let state = {};
+        state[field] = value.value;
+        this.setState(state)
     }
 
     //just a function to get an example JSON object

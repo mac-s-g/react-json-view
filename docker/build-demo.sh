@@ -15,11 +15,10 @@ stop_and_remove_container || true
 # run the workbench container
 docker run \
     -v $(pwd)/src:/react/src \
-    -v $(pwd)/dev-server:/react/dev-server \
+    -v $(pwd)/demo:/react/demo \
     -v $(pwd)/entrypoints:/react/entrypoints \
-    -v $(pwd)/webpack.config.js:/react/webpack.config.js \
+    -v $(pwd)/webpack:/react/webpack \
     --name=react-json-view \
     -e NODE_ENV=$NODE_ENV \
-    --publish 2000:2000 \
-    --entrypoint=/react/entrypoints/dev-server.sh \
+    --entrypoint=/react/entrypoints/demo.sh \
     -t react-json-view

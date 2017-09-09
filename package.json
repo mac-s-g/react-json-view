@@ -46,8 +46,9 @@
     "react-dom": "^15.5.4"
   },
   "scripts": {
-    "build": "webpack -p --display-error-details --progress --optimize-minimize",
-    "dev:hot": "webpack-dev-server",
+    "build": "webpack --config /react/webpack/webpack.config.js -p --display-error-details --progress --optimize-minimize",
+    "build:demo": "webpack --config /react/webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
+    "dev:hot": "webpack-dev-server --config /react/webpack/webpack.config-dev.js",
     "modules:debug": "./docker/debug.sh",
     "modules:tree": "webpack --json",
     "modules:size-analyzer": "webpack --json | webpack-bundle-size-analyzer",

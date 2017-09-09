@@ -17,7 +17,7 @@ docker run \
     -v $(pwd)/src:/react/src \
     -v $(pwd)/dev-server:/react/dev-server \
     -v $(pwd)/entrypoints:/react/entrypoints \
-    -v $(pwd)/webpack/webpack.config-dev.js:/react \
+    -v $(pwd)/webpack:/react/webpack \
     --name=react-json-view \
     -e NODE_ENV=$NODE_ENV \
     --publish 2000:2000 \

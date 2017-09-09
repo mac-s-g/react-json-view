@@ -7,7 +7,7 @@ RJV is a react component for displaying and editing javascript **arrays** and **
 
 This component provides a responsive interface for displaying arrays or JSON in a web browser.  NPM offers a distribution of the source that's transpiled to ES5; so you can include this component with *any web-based javascript application*.
 
-[Check out the Interactive Demo](https://mac-s-g.github.io/react-json-view/demo/)
+[Check out the Interactive Demo](https://mac-s-g.github.io/react-json-view/demo/dist/)
 
 
 ### Implementation Example

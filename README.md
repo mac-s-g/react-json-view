@@ -63,6 +63,9 @@ Name|Type|Default|Description
 * Object and array nodes support a "Copy to Clipboard" feature
 * String values can be truncated after a specified length
 * Base-16 Theme Support
+* When `onEdit` is enabled:
+   * Double-Click Edit Mode
+   * `Ctrl+Enter` Submit
 
 ### Customizing Style
 #### Stock Themes

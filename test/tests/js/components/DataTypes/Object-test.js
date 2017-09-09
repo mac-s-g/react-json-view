@@ -10,7 +10,7 @@ describe('<JsonObject />', function () {
 
     it('Object component should have a data type label', function () {
         let src = {
-            test: true
+            test: true,
         }
         const wrapper = shallow(
             <JsonObject
@@ -45,7 +45,9 @@ describe('<JsonObject />', function () {
             ],
             obj: {
                 test: true      //should have label
-            }
+            },
+            empty_arr: [],
+            empty_obj: {}
         }
         const wrapper = render(
             <JsonObject
@@ -239,9 +241,99 @@ describe('<JsonObject />', function () {
         expect(
             wrapper.find('.expanded-icon')
         ).to.have.length(0);
-                expect(
+        expect(
             wrapper.find('.collapsed-icon')
         ).to.have.length(1);
+    });
+
+    it('non-empty object should be expanded', function () {
+        let src = {test:true}
+
+        const wrapper = shallow(
+            <JsonObject
+            src={src}
+            namespace={['root']}
+            collapsed={false} />
+        );
+        expect(
+            wrapper.state('expanded')
+        ).to.equal(true);
+    });
+
+    it('empty object should not be expanded', function () {
+        let src = {}
+
+        const wrapper = shallow(
+            <JsonObject
+            src={src}
+            namespace={['root']}
+            rjvId={rjvId}
+            collapsed={false} />
+        );
+        expect(
+            wrapper.state('expanded')
+        ).to.equal(false);
+    });
+
+    it('non-empty array should be expanded', function () {
+        let src = [1,2,3]
+
+        const wrapper = shallow(
+            <JsonObject
+            src={src}
+            namespace={['root']}
+            rjvId={rjvId}
+            collapsed={false} />
+        );
+        expect(
+            wrapper.state('expanded')
+        ).to.equal(true);
+    });
+
+    it('empty array should not be expanded', function () {
+        let src = []
+
+        const wrapper = shallow(
+            <JsonObject
+            src={src}
+            namespace={['root']}
+            collapsed={false} />
+        );
+        expect(
+            wrapper.state('expanded')
+        ).to.equal(false);
+    });
+
+    it('non-empty array should have ellipsis', function () {
+        let src = [1,2,3]
+
+        const wrapper = render(
+            <JsonObject
+            src={src}
+            namespace={['root']}
+            rjvId={rjvId}
+            collapsed={true} />
+        );
+
+        expect(
+            wrapper.find('.node-ellipsis')
+        ).to.have.length(1);
+    });
+
+    it('empty array should not have ellipsis', function () {
+        let src = []
+
+        const wrapper = render(
+            <JsonObject
+            src={src}
+            namespace={['root']}
+            rjvId={rjvId}
+            collapsed={true} />
+        );
+
+        expect(
+            wrapper.find('.node-ellipsis')
+        ).to.have.length(0);
     });
 
 });

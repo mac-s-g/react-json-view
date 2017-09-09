@@ -37,10 +37,15 @@ class rjvObject extends React.Component {
     state = {}
 
     initializeState = (props) => {
+        const size = Object.keys(props.src).length;
         const expanded = (
-            props.collapsed === false
-            || (props.collapsed !== true
-            && props.collapsed > props.depth)
+            (
+                props.collapsed === false
+                || (props.collapsed !== true
+                && props.collapsed > props.depth)
+            )
+            //initialize closed if object has no items
+            && size !== 0
         );
         const state = {
             rjvId: props.rjvId,
@@ -55,7 +60,8 @@ class rjvObject extends React.Component {
             ),
             object_type: (props.type == 'array' ? 'array' : 'object'),
             parent_type: (props.type == 'array' ? 'array' : 'object'),
-            display_name: (props.name ? props.name : '')
+            display_name: (props.name ? props.name : ''),
+            size: size
         }
 
         return {...this.state, ...state};
@@ -87,17 +93,25 @@ class rjvObject extends React.Component {
     }
 
     getEllipsis = () => {
-        return (
-            <div {...Theme(this.props.theme, 'ellipsis')}
-            onClick={this.toggleCollapsed}>
-                ...
-            </div>
-        );
+        const {size} = this.state;
+
+        if (size === 0) {
+            //don't render an ellipsis when an object has no items
+            return null
+        } else {
+            return (
+                <div {...Theme(this.props.theme, 'ellipsis')}
+                class="node-ellipsis"
+                onClick={this.toggleCollapsed}>
+                    ...
+                </div>
+            )
+        }
     }
 
     getObjectMetaData = (src) => {
-        const size = Object.keys(src).length;
         const {rjvId, theme} = this.props;
+        const {size} = this.state;
         return (
             <VariableMeta size={size} {...this.props}/>
         );

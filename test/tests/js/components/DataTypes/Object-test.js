@@ -10,7 +10,7 @@ describe('<JsonObject />', function () {
 
     it('Object component should have a data type label', function () {
         let src = {
-            test: true
+            test: true,
         }
         const wrapper = shallow(
             <JsonObject
@@ -45,7 +45,9 @@ describe('<JsonObject />', function () {
             ],
             obj: {
                 test: true      //should have label
-            }
+            },
+            empty_arr: [],
+            empty_obj: {}
         }
         const wrapper = render(
             <JsonObject
@@ -242,6 +244,86 @@ describe('<JsonObject />', function () {
                 expect(
             wrapper.find('.collapsed-icon')
         ).to.have.length(1);
+    });
+
+    it('non-empty object should be expanded', function () {
+        let src = {test:true}
+
+        const wrapper = shallow(
+            <JsonObject
+            src={src}
+            namespace={['root']}
+            rjvId={rjvId}
+            theme='rjv-default'
+            indentWidth={1}
+            depth={1}
+            displayDataTypes={true}
+            type='object'
+            collapsed={false} />
+        );
+        expect(
+            wrapper.state('expanded')
+        ).to.equal(true);
+    });
+
+    it('empty object should not be expanded', function () {
+        let src = {}
+
+        const wrapper = shallow(
+            <JsonObject
+            src={src}
+            namespace={['root']}
+            rjvId={rjvId}
+            theme='rjv-default'
+            indentWidth={1}
+            depth={1}
+            displayDataTypes={true}
+            type='object'
+            collapsed={false} />
+        );
+        expect(
+            wrapper.state('expanded')
+        ).to.equal(false);
+    });
+
+    it('non-empty array should be expanded', function () {
+        let src = [1,2,3]
+
+        const wrapper = shallow(
+            <JsonObject
+            src={src}
+            namespace={['root']}
+            rjvId={rjvId}
+            theme='rjv-default'
+            indentWidth={1}
+            depth={1}
+            displayDataTypes={true}
+            type='object'
+            collapsed={false} />
+        );
+        expect(
+            wrapper.state('expanded')
+        ).to.equal(true);
+    });
+
+    it('empty array should not be expanded', function () {
+        let src = []
+
+        const wrapper = shallow(
+            <JsonObject
+            src={src}
+            namespace={['root']}
+            rjvId={rjvId}
+            theme='rjv-default'
+            indentWidth={1}
+            depth={1}
+            displayDataTypes={true}
+            type='object'
+            collapsed={false} />
+        );
+        expect(
+            wrapper.state('expanded')
+        ).to.equal(false);
     });
 
 });

@@ -4,7 +4,7 @@ services:
   - docker
 
 before_install:
-  - ./docker/build-dist.sh
+  - ./docker/build-container.sh
 
 language: node_js
 node_js:

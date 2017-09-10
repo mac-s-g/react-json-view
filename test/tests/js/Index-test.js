@@ -87,7 +87,7 @@ describe('<Index />', function () {
     });
 
 
-    it('src replaced with error message', function () {
+    it('src replaced with error message (ERROR OUTPUT EXPECTED)', function () {
         const wrapper = render(
             <Index src={'{jsonEncodedString:true, createError:true}'} />
         );

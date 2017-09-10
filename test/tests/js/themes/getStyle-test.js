@@ -23,7 +23,7 @@ describe('getStyle', function () {
         expect(style.style).to.exist;
     });
 
-    it('test theme not set', function () {
+    it('test theme not set (NOTICE OUTPUT EXPECTED)', function () {
         let style = getStyle(false, 'app-container');
         expect(style.style).to.exist;
     });

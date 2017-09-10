@@ -4,7 +4,6 @@ import {expect} from 'chai';
 
 import Index from '/react/src/js/index';
 import VariableEditor from '/react/src/js/components/VariableEditor';
-import ObjectAttributes from '/react/src/js/stores/ObjectAttributes';
 
 
 describe('<VariableEditor />', function () {
@@ -100,55 +99,101 @@ describe('<VariableEditor />', function () {
     });
 
     it('VariableEditor test textarea and submit icon', function () {
-        const wrapper = mount(
-            <Index
-            src={{test:true}}
+        const existing_value = 'existing_value';
+        const new_value = 'new_value';
+        const wrapper = shallow(
+            <VariableEditor
+            src={{test:existing_value}}
             theme='rjv-default'
-            onEdit={(edit)=>{}}
+            onEdit={(edit)=>{
+                expect(edit.updated_src.test).to.equal(new_value);
+            }}
+            namespace={['test']}
             rjvId={rjvId}
+            variable={{
+                name: 'test',
+                value: existing_value,
+                type: 'string'
+            }}
             />
         );
+
+        //editMode defaluts to off
+        expect(
+            wrapper.state('editMode')
+        ).to.equal(false)
+        //click to open textarea
         wrapper.find('.click-to-edit-icon').simulate('click');
+        //verify editMode is on
         expect(
-            wrapper.state('onEdit')
-        ).to.not.equal(false);
+            wrapper.state('editMode')
+        ).to.equal(true)
+        //make sure default textarea value is correct
         expect(
-            wrapper.find('.variable-editor').length
-        ).to.equal(1);
-        wrapper.find('.edit-check.string-value').simulate('click');
+            wrapper.find('.variable-editor').props().value
+        ).to.equal(existing_value)
+        //update edit value
+        wrapper.setState({editValue: new_value})
+        //submit new value
+        wrapper.find('.edit-check').simulate('click');
+        //make sure editMode is off after submit
         expect(
-            wrapper.find('.variable-editor').length
-        ).to.equal(0);
+            wrapper.state('editMode')
+        ).to.equal(false)
     });
 
     it('VariableEditor edit after src change should respect current src', function () {
-        const oldSrc = {edited: true, other: 'old'};
-        const currentSrc = {edited: true, other: 'current'};
-
-        const wrapper = mount(
-            <Index
-                src={oldSrc}
-                theme='rjv-default'
-                onEdit={(edit) => {
-                    expect(edit.updated_src.other).to.equal(currentSrc.other);
-                    return true;
-                }}
-                rjvId={rjvId}
+        const existing_value = 'existing_value';
+        const new_value = 'new_value';
+        const wrapper = shallow(
+            <VariableEditor
+            src={{test:existing_value}}
+            theme='rjv-default'
+            onEdit={(edit)=>{
+                expect(edit.updated_src.test).to.equal(new_value);
+            }}
+            namespace={['test']}
+            rjvId={rjvId}
+            variable={{
+                name: 'test',
+                value: existing_value,
+                type: 'string'
+            }}
             />
         );
-        wrapper.setProps({src: currentSrc});
 
-        wrapper.find('.click-to-edit-icon').first().simulate('click');
+        //editMode defaluts to off
         expect(
-            wrapper.state('onEdit')
-        ).to.not.equal(false);
+            wrapper.state('editMode')
+        ).to.equal(false)
+        //click to open textarea
+        wrapper.find('.click-to-edit-icon').simulate('click');
+        //verify editMode is on
         expect(
-            wrapper.find('.variable-editor').length
-        ).to.equal(1);
-        wrapper.find('.edit-check.string-value').simulate('click');
+            wrapper.state('editMode')
+        ).to.equal(true)
+        //make sure default textarea value is correct
         expect(
-            wrapper.find('.variable-editor').length
-        ).to.equal(0);
+            wrapper.find('.variable-editor').props().value
+        ).to.equal(existing_value)
+        //update edit value
+        wrapper.setState({editValue: new_value})
+        //cancel update
+        wrapper.find('.edit-cancel').simulate('click');
+        //make sure editMode is off after cancel
+        expect(
+            wrapper.state('editMode')
+        ).to.equal(false)
+        //pop open textarea again
+        wrapper.find('.click-to-edit-icon').simulate('click');
+        //make sure editMode is on
+        expect(
+            wrapper.state('editMode')
+        ).to.equal(true)
+        //make sure that textarea still contains original value
+        expect(
+            wrapper.find('.variable-editor').props().value
+        ).to.equal(existing_value)
     });
 
     it('VariableEditor detected null', function () {
@@ -173,7 +218,7 @@ describe('<VariableEditor />', function () {
             wrapper.state('editMode')
         ).to.equal(true);
         expect(
-            wrapper.find('.variable-editor textarea').props().value
+            wrapper.find('.variable-editor').props().value
         ).to.equal('null');
     });
 
@@ -199,7 +244,7 @@ describe('<VariableEditor />', function () {
             wrapper.state('editMode')
         ).to.equal(true);
         expect(
-            wrapper.find('.variable-editor textarea').props().value
+            wrapper.find('.variable-editor').props().value
         ).to.equal('undefined');
     });
 
@@ -225,7 +270,7 @@ describe('<VariableEditor />', function () {
             wrapper.state('editMode')
         ).to.equal(true);
         expect(
-            wrapper.find('.variable-editor textarea').props().value
+            wrapper.find('.variable-editor').props().value
         ).to.equal('NaN');
     });
 
@@ -251,7 +296,7 @@ describe('<VariableEditor />', function () {
             wrapper.state('editMode')
         ).to.equal(true);
         expect(
-            wrapper.find('.variable-editor textarea').props().value
+            wrapper.find('.variable-editor').props().value
         ).to.equal('test');
     });
 
@@ -277,7 +322,7 @@ describe('<VariableEditor />', function () {
             wrapper.state('editMode')
         ).to.equal(true);
         expect(
-            wrapper.find('.variable-editor textarea').props().value
+            wrapper.find('.variable-editor').props().value
         ).to.equal('function test() {}');
     });
 
@@ -303,7 +348,7 @@ describe('<VariableEditor />', function () {
             wrapper.state('editMode')
         ).to.equal(true);
         expect(
-            wrapper.find('.variable-editor textarea').props().value
+            wrapper.find('.variable-editor').props().value
         ).to.equal('{}');
     });
 
@@ -329,7 +374,7 @@ describe('<VariableEditor />', function () {
             wrapper.state('editMode')
         ).to.equal(true);
         expect(
-            wrapper.find('.variable-editor textarea').props().value
+            wrapper.find('.variable-editor').props().value
         ).to.equal('[1,2,3]');
     });
 
@@ -355,7 +400,7 @@ describe('<VariableEditor />', function () {
             wrapper.state('editMode')
         ).to.equal(true);
         expect(
-            wrapper.find('.variable-editor textarea').props().value
+            wrapper.find('.variable-editor').props().value
         ).to.equal('-5.2');
     });
 
@@ -381,7 +426,7 @@ describe('<VariableEditor />', function () {
             wrapper.state('editMode')
         ).to.equal(true);
         expect(
-            wrapper.find('.variable-editor textarea').props().value
+            wrapper.find('.variable-editor').props().value
         ).to.equal('5');
     });
 

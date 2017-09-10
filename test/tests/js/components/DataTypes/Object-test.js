@@ -252,6 +252,7 @@ describe('<JsonObject />', function () {
         const wrapper = shallow(
             <JsonObject
             src={src}
+            theme="rjv-default"
             namespace={['root']}
             collapsed={false} />
         );
@@ -266,6 +267,7 @@ describe('<JsonObject />', function () {
         const wrapper = shallow(
             <JsonObject
             src={src}
+            theme="rjv-default"
             namespace={['root']}
             rjvId={rjvId}
             collapsed={false} />
@@ -281,6 +283,7 @@ describe('<JsonObject />', function () {
         const wrapper = shallow(
             <JsonObject
             src={src}
+            theme="rjv-default"
             namespace={['root']}
             rjvId={rjvId}
             collapsed={false} />
@@ -296,6 +299,7 @@ describe('<JsonObject />', function () {
         const wrapper = shallow(
             <JsonObject
             src={src}
+            theme="rjv-default"
             namespace={['root']}
             collapsed={false} />
         );
@@ -310,6 +314,7 @@ describe('<JsonObject />', function () {
         const wrapper = render(
             <JsonObject
             src={src}
+            theme="rjv-default"
             namespace={['root']}
             rjvId={rjvId}
             collapsed={true} />
@@ -326,6 +331,7 @@ describe('<JsonObject />', function () {
         const wrapper = render(
             <JsonObject
             src={src}
+            theme="rjv-default"
             namespace={['root']}
             rjvId={rjvId}
             collapsed={true} />

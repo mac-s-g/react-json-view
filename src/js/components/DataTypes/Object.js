@@ -209,12 +209,13 @@ class rjvObject extends React.Component {
             } else {
                 elements.push(
                     <VariableEditor
-                    key={variable.name + '_' + namespace}
-                    variable={variable}
-                    singleIndent={SINGLE_INDENT}
-                    namespace={namespace}
-                    type={this.props.type}
-                    {...props}/>
+                        key={variable.name + '_' + namespace}
+                        variable={variable}
+                        singleIndent={SINGLE_INDENT}
+                        namespace={namespace}
+                        type={this.props.type}
+                        {...props}
+                    />
                 );
             }
         }
@@ -233,18 +234,18 @@ class rjvObject extends React.Component {
         } else if (parent_type == 'array') {
             return (
                 <span {...Theme(theme, 'array-key')} key={namespace}>
-                    {display_name}
+                    <span class="array-key">{display_name}</span>
                     <span {...Theme(theme, 'colon')}>:</span>
                 </span>
             );
         } else {
             return (
                 <span {...Theme(theme, 'object-name')} key={namespace}>
-                    <span style={{verticalAlign:'top'}}>"</span>
-                    <div style={{display:'inline-block'}} >
-                        {display_name}
-                    </div>
-                    <span style={{verticalAlign:'top'}}>"</span>
+                    <span class="object-key">
+                        <span style={{verticalAlign:'top'}}>"</span>
+                        <span>{display_name}</span>
+                        <span style={{verticalAlign:'top'}}>"</span>
+                    </span>
                     <span {...Theme(theme, 'colon')}>:</span>
                 </span>
             );

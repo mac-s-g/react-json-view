@@ -1,6 +1,7 @@
 import React from 'react';
 import AutosizeTextarea from 'react-textarea-autosize';
 
+import EditKeyRequest from './ObjectKeyModal/EditKeyRequest';
 import {toType} from './../helpers/util';
 import dispatcher from './../helpers/dispatcher';
 import parseInput from './../helpers/parseInput';
@@ -24,6 +25,7 @@ class VariableEditor extends React.Component {
     state = {
         editMode: false,
         editValue: "",
+        renameKey: false,
         parsedInput: {
             type: false,
             value: null
@@ -39,7 +41,7 @@ class VariableEditor extends React.Component {
             variable, singleIndent, type, theme,
             namespace, indentWidth, onEdit, onDelete
         } = this.props;
-        const {editMode} = this.state;
+        const {editMode, renameKey} = this.state;
 
         return (
         <div {...Theme(
@@ -47,25 +49,30 @@ class VariableEditor extends React.Component {
         )}
         class="variable-row"
         key={variable.name}>
+            {renameKey ? <EditKeyRequest /> : null}
             {
                 type == 'array'
                 ? (
-                <div {...Theme(theme, 'array-key')}
+                <span {...Theme(theme, 'array-key')}
                 key={variable.name + '_' + namespace}>
                     {variable.name}
                     <div {...Theme(theme, 'colon')}>:</div>
-                </div>
+                </span>
                 )
                 : (
-                <div {...Theme(theme, 'object-name')}
-                key={variable.name + '_' + namespace}>
-                    <span style={{verticalAlign:'top'}}>"</span>
-                    <div style={{display:'inline-block'}} >
-                        {variable.name}
-                    </div>
-                    <span style={{verticalAlign:'top'}}>"</span>
-                    <div {...Theme(theme, 'colon')}>:</div>
-                </div>
+                <span>
+                    <span {...Theme(theme, 'object-name')}
+                    class="object-key"
+                    onDoubleClick={()=>{
+                        this.setState({renameKey: true})
+                    }}
+                    key={variable.name + '_' + namespace}>
+                        <span style={{verticalAlign:'top'}}>"</span>
+                        <span style={{display:'inline-block'}} >{variable.name}</span>
+                        <span style={{verticalAlign:'top'}}>"</span>
+                    </span>
+                    <span {...Theme(theme, 'colon')}>:</span>
+                </span>
                 )
 
             }

@@ -1,11 +1,10 @@
 import React from 'react';
-import dispatcher from './../helpers/dispatcher';
-import ObjectAttributes from './../stores/ObjectAttributes';
+import dispatcher from './../../helpers/dispatcher';
 
-import {CheckCircle, Add as Cancel} from './icons';
+import {CheckCircle, Add as Cancel} from './../icons';
 
 //global theme
-import Theme from './../themes/getStyle';
+import Theme from './../../themes/getStyle';
 
 
 //this input appears when adding a new value to an object
@@ -16,14 +15,15 @@ export default class extends React.Component {
     }
 
     render() {
-        const {active, theme, rjvId} = this.props;
+        const {theme, rjvId, isValid} = this.props;
         const {input} = this.state;
-        const valid = this.isValid(rjvId, input);
 
-        return active ? (
+        const valid = isValid(input);
+
+        return (
         <div
-        class="add-key-request"
-        {...Theme(theme, 'add-key-request')}
+        class="key-modal-request"
+        {...Theme(theme, 'key-modal-request')}
         onClick={()=>{
             dispatcher.dispatch({
                 rjvId: rjvId,
@@ -32,12 +32,14 @@ export default class extends React.Component {
             this.state.input = '';
         }}
         >
-            <div {...Theme(theme, 'add-key-modal')}
+            <div {...Theme(theme, 'key-modal')}
             onClick={(e)=>{e.stopPropagation();}}>
-                <div {...Theme(theme, 'add-key-label')}>Key Name:</div>
+                <div {...Theme(theme, 'key-modal-label')}>
+                    Key Name:
+                </div>
                 <div style={{position: 'relative'}}>
-                    <input {...Theme(theme, 'add-key-input')}
-                        class="add-key-input"
+                    <input {...Theme(theme, 'key-modal-input')}
+                        class="key-modal-input"
                         ref={input => input && input.focus()}
                         spellCheck={false}
                         value={input}
@@ -54,15 +56,15 @@ export default class extends React.Component {
                         }}
                     />
                     {valid
-                        ? <CheckCircle {...Theme(theme, 'add-key-submit')}
-                            class="add-key-submit"
+                        ? <CheckCircle {...Theme(theme, 'key-modal-submit')}
+                            class="key-modal-submit"
                             onClick={e => this.submit()}
                         />
                         : null}
                 </div>
-                <span {...Theme(theme, 'add-key-cancel')}>
-                    <Cancel {...Theme(theme, 'add-key-cancel-icon')}
-                    class="add-key-cancel"
+                <span {...Theme(theme, 'key-modal-cancel')}>
+                    <Cancel {...Theme(theme, 'key-modal-cancel-icon')}
+                    class="key-modal-cancel"
                     onClick={()=>{
                         dispatcher.dispatch({
                             rjvId: rjvId,
@@ -73,33 +75,11 @@ export default class extends React.Component {
                 </span>
             </div>
         </div>
-        ) : null;
-    }
-
-
-    isValid = (rjvId, input) => {
-        const request = ObjectAttributes.get(
-            rjvId, 'action', 'new-key-request'
-        );
-        return (
-            input != ''
-            && Object.keys(request.existing_value).indexOf(input) === -1
         );
     }
 
     submit = () => {
-        const {input} = this.state;
-        const {rjvId} = this.props;
-        let request = ObjectAttributes.get(
-            rjvId, 'action', 'new-key-request'
-        );
-        request.new_value = {...request.existing_value};
-        request.new_value[input] = null;
-        dispatcher.dispatch({
-            name: 'VARIABLE_ADDED',
-            rjvId: rjvId,
-            data: {...request, key_name: input}
-        });
+        this.props.submit(this.state.input);
         this.state.input = '';
     }
 

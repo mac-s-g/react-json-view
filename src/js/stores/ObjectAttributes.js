@@ -66,6 +66,10 @@ class ObjectAttributes extends EventEmitter {
             case 'ADD_VARIABLE_KEY_REQUEST':
                 this.set(rjvId, 'action', 'new-key-request', data);
                 this.emit('add-key-request-' + rjvId);
+                break;
+            case 'EDIT_VARIABLE_KEY_REQUEST':
+                this.set(rjvId, 'action', 'edit-key-request', data);
+                this.emit('edit-key-request-' + rjvId);
         }
     }
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import AutosizeTextarea from 'react-textarea-autosize';
 
-import EditKeyRequest from './ObjectKeyModal/EditKeyRequest';
 import {toType} from './../helpers/util';
 import dispatcher from './../helpers/dispatcher';
 import parseInput from './../helpers/parseInput';
 import stringifyVariable from './../helpers/stringifyVariable';
+import signalEditKey from './../helpers/signalEditKey';
 
 //data type components
 import {
@@ -38,10 +38,10 @@ class VariableEditor extends React.Component {
 
     render() {
         const {
-            variable, singleIndent, type, theme,
+            variable, singleIndent, type, theme, rjvId,
             namespace, indentWidth, onEdit, onDelete
         } = this.props;
-        const {editMode, renameKey} = this.state;
+        const {editMode} = this.state;
 
         return (
         <div {...Theme(
@@ -49,7 +49,6 @@ class VariableEditor extends React.Component {
         )}
         class="variable-row"
         key={variable.name}>
-            {renameKey ? <EditKeyRequest /> : null}
             {
                 type == 'array'
                 ? (
@@ -64,7 +63,12 @@ class VariableEditor extends React.Component {
                     <span {...Theme(theme, 'object-name')}
                     class="object-key"
                     onDoubleClick={()=>{
-                        this.setState({renameKey: true})
+                        if (onEdit) {
+                            signalEditKey(
+                                rjvId,
+
+                            )
+                        }
                     }}
                     key={variable.name + '_' + namespace}>
                         <span style={{verticalAlign:'top'}}>"</span>

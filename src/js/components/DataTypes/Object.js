@@ -1,6 +1,7 @@
 import React from "react";
 
 import {toType} from './../../helpers/util';
+import signalEditKey from './../../helpers/signalEditKey';
 
 //data type components
 import {JsonObject} from './DataTypes';
@@ -241,7 +242,10 @@ class rjvObject extends React.Component {
         } else {
             return (
                 <span {...Theme(theme, 'object-name')} key={namespace}>
-                    <span class="object-key">
+                    <span class="object-key"
+                    onDoubleClick={() => {
+                        if (this.props.onEdit) {signalEditKey()}
+                    }}>
                         <span style={{verticalAlign:'top'}}>"</span>
                         <span>{display_name}</span>
                         <span style={{verticalAlign:'top'}}>"</span>

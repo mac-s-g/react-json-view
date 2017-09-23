@@ -19,4 +19,4 @@ fi
 cd /react
 npm run build:demo
 
-echo Copied distribution to /dist
+echo Copied distribution to /demo/dist

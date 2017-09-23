@@ -72,20 +72,35 @@ export default class extends React.Component {
                     display:copy_state=='success' ? 'none' : 'inline-block'
                 }}
                 data-clipboard-text={JSON.stringify(src, null, '  ')}
-                id={"clipboard-container-" + id} >
-                    <Clippy {...Theme(theme, 'copy-icon')} />
-                </span>
+                id={"clipboard-container-" + id} >{this.getClippyIcon()}</span>
                 <span
                 style={{
                     ...style,
                     display:copy_state == 'success'
                     ? 'inline-block' : 'none'
-                }} >
-                    <Clippy {...Theme(theme, 'copy-icon')} />
-                </span>
+                }} >{this.getClippyIcon()}</span>
             </span>
             : null
         );
+    }
+
+    getClippyIcon = () => {
+        const {enableClipboard, theme, src, namespace} = this.props;
+        if (typeof enableClipboard === "function") {
+            return <Clippy class="copy-icon"
+                {...Theme(theme, 'copy-icon')}
+                onClick={() => {
+                    enableClipboard({
+                        src:src,
+                        namespace: namespace,
+                        name: namespace[namespace.length - 1]
+                    })
+                }}
+            />
+        } else {
+            return <Clippy class="copy-icon" {...Theme(theme, 'copy-icon')} />
+        }
+
     }
 
     getObjectSize = () => {

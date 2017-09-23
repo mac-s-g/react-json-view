@@ -19,7 +19,10 @@ ReactDom.render(
         onDelete={(e)=>{console.log(e);}}
         onAdd={(e)=>{console.log(e); if (e.new_value == 'error'){return false;}}}
         displayObjectSize={true}
-        enableClipboard={true} />
+        name={false}
+        enableClipboard={(src) => {
+            console.log('you copied to clipboard!', src)
+        }} />
 
         <br />
 

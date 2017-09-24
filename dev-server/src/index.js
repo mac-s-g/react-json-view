@@ -15,11 +15,15 @@ ReactDom.render(
         style={{padding:'30px', backgroundColor: 'white'}}
         src={getExampleJson1()}
         collapseStringsAfterLength={12}
-        onEdit={(e)=>{console.log(e); if (e.new_value == 'error'){return false;}}}
-        onDelete={(e)=>{console.log(e);}}
-        onAdd={(e)=>{console.log(e); if (e.new_value == 'error'){return false;}}}
+        onEdit={(e)=>{console.log('edit callback', e); if (e.new_value == 'error'){return false;}}}
+        onDelete={(e)=>{console.log('delete callback', e);}}
+        onAdd={(e)=>{console.log('add callback', e); if (e.new_value == 'error'){return false;}}}
+        onSelect={(e)=>{console.log('select callback', e); console.log(e.namespace)}}
         displayObjectSize={true}
-        enableClipboard={true} />
+        name={"dev-server"}
+        enableClipboard={(copy) => {
+            console.log('you copied to clipboard!', copy)
+        }} />
 
         <br />
 

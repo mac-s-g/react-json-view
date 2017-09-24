@@ -41,11 +41,11 @@ export default class extends React.Component {
         const {collapsed} = this.state;
 
         return (
-        <div {...Theme(props.theme, 'function')}
-        onClick={()=>{this.toggleCollapsed()}}
-        >
+        <div {...Theme(props.theme, 'function')} >
             <DataTypeLabel type_name={type_name} {...props} />
+            <span onClick={()=>{this.toggleCollapsed()}} >
             {this.getFunctionDisplay(collapsed)}
+            </span>
         </div>
         );
     }
@@ -54,7 +54,7 @@ export default class extends React.Component {
         const {props} = this;
 
         if (collapsed) {
-            return (<span>
+            return (<span >
                 {this.props.value.toString().slice(9, -1).replace(/\{[\s\S]+/, '')}
                 <span class='function-collapsed' style={{fontWeight: 'bold'}}>
                     <span>{"{"}</span>

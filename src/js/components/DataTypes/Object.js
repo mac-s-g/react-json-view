@@ -144,7 +144,7 @@ class rjvObject extends React.Component {
 
         return (<div class='object-key-val'
             {...Theme(
-                theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', object_padding_left
+                theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', {paddingLeft: object_padding_left}
             )}
             >
             <span>

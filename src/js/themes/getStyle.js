@@ -86,19 +86,19 @@ const getDefaultThemeStyling = theme => {
             margin: constants.keyMargin,
             color: colors.keyColor
         },
-        objectKeyVal: (component, paddingLeft) => {
+        objectKeyVal: (component, variable_style) => {
             return {style: {
-                paddingLeft: paddingLeft + 'px',
                 paddingTop: constants.keyValPaddingTop,
                 paddingRight: constants.keyValPaddingRight,
                 paddingBottom: constants.keyValPaddingBottom,
                 borderLeft: constants.keyValBorderLeft
                     + ' ' + colors.objectBorder,
                 ':hover': {
-                    paddingLeft: (paddingLeft - 1)  + 'px',
+                    paddingLeft: (variable_style.paddingLeft - 1)  + 'px',
                     borderLeft: constants.keyValBorderHover
                         + ' ' + colors.objectBorder
-                }
+                },
+                ...variable_style
             }};
         },
         'object-key-val-no-border': {
@@ -107,10 +107,13 @@ const getDefaultThemeStyling = theme => {
         'pushed-content': {
             marginLeft: constants.pushedContentMarginLeft
         },
-        'variable-value': {
-            display: 'inline-block',
-            paddingRight: constants.variableValuePaddingRight,
-            position: 'relative'
+        variableValue: (component, variable_style) => {
+            return {style: {
+                display: 'inline-block',
+                paddingRight: constants.variableValuePaddingRight,
+                position: 'relative',
+                ...variable_style
+            }}
         },
         'object-name': {
             display: 'inline-block',

@@ -36,14 +36,15 @@ class VariableEditor extends React.Component {
 
     render() {
         const {
-            variable, singleIndent, type, theme,
-            namespace, indentWidth, onEdit, onDelete
+            variable, singleIndent, type, theme, namespace,
+            indentWidth, onEdit, onDelete, onSelect
         } = this.props;
         const {editMode} = this.state;
 
         return (
         <div {...Theme(
-            theme, 'objectKeyVal', indentWidth * singleIndent
+            theme, 'objectKeyVal',
+            {paddingLeft: indentWidth * singleIndent}
         )}
         class="variable-row"
         key={variable.name}>
@@ -70,8 +71,17 @@ class VariableEditor extends React.Component {
 
             }
             <div class="variable-value"
-            onDoubleClick={()=>{this.prepopInput(variable)}}
-            {...Theme(theme, 'variable-value')}>
+
+            onClick={onSelect === false && onEdit === false ? undefined : (e)=>{
+                let location = [...namespace]
+                if (e.ctrlKey) {
+                    this.prepopInput(variable);
+                } else if (editMode === false) {
+                    location.shift()
+                    onSelect({...variable, namespace: location})
+                }
+            }}
+            {...Theme(theme, 'variableValue', {cursor: onSelect === false ? 'default' : 'pointer'})}>
                 {this.getValue(variable, this.props, editMode)}
             </div>
             {onEdit !== false && editMode == false ? this.getEditIcon() : null}

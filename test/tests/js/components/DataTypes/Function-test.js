@@ -79,7 +79,7 @@ describe('<JsonFunction />', function () {
 
         expect(wrapper.find('.function-collapsed')).to.have.length(1);
 
-        wrapper.simulate('click');
+        wrapper.find('.rjv-function-container').simulate('click');
 
         expect(wrapper.find('.function-collapsed')).to.have.length(0);
 

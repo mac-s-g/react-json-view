@@ -1,6 +1,6 @@
 import React from 'react';
 import JsonViewer from './components/JsonViewer';
-import AddKeyRequest from './components/AddKeyRequest';
+import AddKeyRequest from './components/ObjectKeyModal/AddKeyRequest';
 import ValidationFailure from './components/ValidationFailure';
 import {toType, isTheme} from './helpers/util';
 import ObjectAttributes from './stores/ObjectAttributes';
@@ -26,7 +26,7 @@ export default class extends React.Component {
     }
 
     state = {
-        //listen to request to add a key to an object
+        //listen to request to add/edit a key to an object
         addKeyRequest: false,
         validationFailure: false
     }
@@ -48,6 +48,7 @@ export default class extends React.Component {
         onEdit: false,
         onDelete: false,
         onAdd: false,
+        onSelect: false,
         iconStyle: "triangle",
         style: {},
         validationMessage: "Validation Error"
@@ -134,6 +135,7 @@ export default class extends React.Component {
         } = this.state;
         //reset key request to false once it's observed
         this.state.addKeyRequest = false;
+        this.state.editKeyRequest = false;
         return (<div class="react-json-view"
             style={{...Theme(props.theme, 'app-container').style, ...style}} >
             <ValidationFailure

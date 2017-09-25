@@ -86,19 +86,19 @@ const getDefaultThemeStyling = theme => {
             margin: constants.keyMargin,
             color: colors.keyColor
         },
-        objectKeyVal: (component, paddingLeft) => {
+        objectKeyVal: (component, variable_style) => {
             return {style: {
-                paddingLeft: paddingLeft + 'px',
                 paddingTop: constants.keyValPaddingTop,
                 paddingRight: constants.keyValPaddingRight,
                 paddingBottom: constants.keyValPaddingBottom,
                 borderLeft: constants.keyValBorderLeft
                     + ' ' + colors.objectBorder,
                 ':hover': {
-                    paddingLeft: (paddingLeft - 1)  + 'px',
+                    paddingLeft: (variable_style.paddingLeft - 1)  + 'px',
                     borderLeft: constants.keyValBorderHover
                         + ' ' + colors.objectBorder
-                }
+                },
+                ...variable_style
             }};
         },
         'object-key-val-no-border': {
@@ -107,10 +107,13 @@ const getDefaultThemeStyling = theme => {
         'pushed-content': {
             marginLeft: constants.pushedContentMarginLeft
         },
-        'variable-value': {
-            display: 'inline-block',
-            paddingRight: constants.variableValuePaddingRight,
-            position: 'relative'
+        variableValue: (component, variable_style) => {
+            return {style: {
+                display: 'inline-block',
+                paddingRight: constants.variableValuePaddingRight,
+                position: 'relative',
+                ...variable_style
+            }}
         },
         'object-name': {
             display: 'inline-block',
@@ -276,7 +279,7 @@ const getDefaultThemeStyling = theme => {
         'detected-row': {
             paddingTop: constants.detectedRowPaddingTop,
         },
-        'add-key-request': {
+        'key-modal-request': {
             position: constants.addKeyCoverPosition,
             top: constants.addKeyCoverPositionPx,
             left: constants.addKeyCoverPositionPx,
@@ -284,7 +287,7 @@ const getDefaultThemeStyling = theme => {
             bottom: constants.addKeyCoverPositionPx,
             backgroundColor: constants.addKeyCoverBackground
         },
-        'add-key-modal': {
+        'key-modal': {
             width: constants.addKeyModalWidth,
             backgroundColor: colors.addKeyModal.background,
             marginLeft: constants.addKeyModalMargin,
@@ -294,16 +297,16 @@ const getDefaultThemeStyling = theme => {
             marginTop: '15px',
             position: 'relative'
         },
-        'add-key-label': {
+        'key-modal-label': {
             color: colors.addKeyModal.labelColor,
             marginLeft: '2px',
             marginBottom: '5px',
             fontSize: '11px'
         },
-        'add-key-input-container': {
+        'key-modal-input-container': {
             overflow: 'hidden'
         },
-        'add-key-input': {
+        'key-modal-input': {
             width: '100%',
             padding: '3px 6px',
             fontFamily: 'monospace',
@@ -312,7 +315,7 @@ const getDefaultThemeStyling = theme => {
             boxSizing: 'border-box',
             borderRadius: '2px'
         },
-        'add-key-cancel': {
+        'key-modal-cancel': {
             backgroundColor: colors.editVariable.removeIcon,
             position: 'absolute',
             top: '0px',
@@ -320,12 +323,12 @@ const getDefaultThemeStyling = theme => {
             borderRadius: '0px 3px 0px 3px',
             cursor: 'pointer'
         },
-        'add-key-cancel-icon': {
+        'key-modal-cancel-icon': {
             color: colors.addKeyModal.labelColor,
             fontSize: constants.iconFontSize,
             transform: "rotate(45deg)"
         },
-        'add-key-submit': {
+        'key-modal-submit': {
             color: colors.editVariable.addIcon,
             fontSize: constants.iconFontSize,
             position: 'absolute',

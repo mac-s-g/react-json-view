@@ -66,13 +66,13 @@ class ObjectAttributes extends EventEmitter {
             case 'ADD_VARIABLE_KEY_REQUEST':
                 this.set(rjvId, 'action', 'new-key-request', data);
                 this.emit('add-key-request-' + rjvId);
+                break;
         }
     }
 
     updateSrc = (rjvId, request) => {
         let {
-            name, namespace, new_value, existing_value,
-            variable_removed, key_name
+            name, namespace, new_value, existing_value, variable_removed
         } = request;
 
         namespace.shift();

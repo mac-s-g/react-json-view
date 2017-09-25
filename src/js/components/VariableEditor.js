@@ -24,6 +24,7 @@ class VariableEditor extends React.Component {
     state = {
         editMode: false,
         editValue: "",
+        renameKey: false,
         parsedInput: {
             type: false,
             value: null
@@ -36,42 +37,53 @@ class VariableEditor extends React.Component {
 
     render() {
         const {
-            variable, singleIndent, type, theme,
-            namespace, indentWidth, onEdit, onDelete
+            variable, singleIndent, type, theme, namespace,
+            indentWidth, onEdit, onDelete, onSelect, rjvId
         } = this.props;
         const {editMode} = this.state;
 
         return (
         <div {...Theme(
-            theme, 'objectKeyVal', indentWidth * singleIndent
+            theme, 'objectKeyVal',
+            {paddingLeft: indentWidth * singleIndent}
         )}
         class="variable-row"
         key={variable.name}>
             {
                 type == 'array'
                 ? (
-                <div {...Theme(theme, 'array-key')}
+                <span {...Theme(theme, 'array-key')}
                 key={variable.name + '_' + namespace}>
                     {variable.name}
                     <div {...Theme(theme, 'colon')}>:</div>
-                </div>
+                </span>
                 )
                 : (
-                <div {...Theme(theme, 'object-name')}
-                key={variable.name + '_' + namespace}>
-                    <span style={{verticalAlign:'top'}}>"</span>
-                    <div style={{display:'inline-block'}} >
-                        {variable.name}
-                    </div>
-                    <span style={{verticalAlign:'top'}}>"</span>
-                    <div {...Theme(theme, 'colon')}>:</div>
-                </div>
+                <span>
+                    <span {...Theme(theme, 'object-name')}
+                    class="object-key"
+                    key={variable.name + '_' + namespace}>
+                        <span style={{verticalAlign:'top'}}>"</span>
+                        <span style={{display:'inline-block'}} >{variable.name}</span>
+                        <span style={{verticalAlign:'top'}}>"</span>
+                    </span>
+                    <span {...Theme(theme, 'colon')}>:</span>
+                </span>
                 )
 
             }
             <div class="variable-value"
-            onDoubleClick={()=>{this.prepopInput(variable)}}
-            {...Theme(theme, 'variable-value')}>
+
+            onClick={onSelect === false && onEdit === false ? undefined : (e)=>{
+                let location = [...namespace]
+                if (e.ctrlKey) {
+                    this.prepopInput(variable);
+                } else if (editMode === false) {
+                    location.shift()
+                    onSelect({...variable, namespace: location})
+                }
+            }}
+            {...Theme(theme, 'variableValue', {cursor: onSelect === false ? 'default' : 'pointer'})}>
                 {this.getValue(variable, this.props, editMode)}
             </div>
             {onEdit !== false && editMode == false ? this.getEditIcon() : null}

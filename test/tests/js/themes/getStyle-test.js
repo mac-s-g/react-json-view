@@ -14,7 +14,9 @@ describe('getStyle', function () {
     });
 
     it('test objectKeyVal return', function () {
-        let style = getStyle('rjv-default', 'objectKeyVal');
+        let style = getStyle(
+            'rjv-default', 'objectKeyVal', {paddingLeft: 10}
+        );
         expect(style.style).to.exist;
     });
 

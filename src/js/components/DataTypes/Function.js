@@ -43,7 +43,8 @@ export default class extends React.Component {
         return (
         <div {...Theme(props.theme, 'function')} >
             <DataTypeLabel type_name={type_name} {...props} />
-            <span onClick={()=>{this.toggleCollapsed()}} >
+            <span class="rjv-function-container"
+            onClick={()=>{this.toggleCollapsed()}} >
             {this.getFunctionDisplay(collapsed)}
             </span>
         </div>

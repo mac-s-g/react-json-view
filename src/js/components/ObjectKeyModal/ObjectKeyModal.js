@@ -40,7 +40,6 @@ export default class extends React.Component {
                 </div>
                 <div style={{position: 'relative'}}>
                     <input {...Theme(theme, 'key-modal-input')}
-                        id={'rjv-modal-input-' + rjvId}
                         class="key-modal-input"
                         ref={el => el && el.focus()}
                         spellCheck={false}
@@ -77,23 +76,6 @@ export default class extends React.Component {
             </div>
         </div>
         );
-    }
-
-    componentDidMount() {
-        const {rjvId} = this.props;
-        moveCursorToEnd(
-            document.getElementById('rjv-modal-input-' + rjvId)
-        );
-        function moveCursorToEnd(el) {
-            if (typeof el.selectionStart == "number") {
-                el.selectionStart = el.selectionEnd = el.value.length;
-            } else if (typeof el.createTextRange != "undefined") {
-                el.focus();
-                var range = el.createTextRange();
-                range.collapse(false);
-                range.select();
-            }
-        }
     }
 
     submit = () => {

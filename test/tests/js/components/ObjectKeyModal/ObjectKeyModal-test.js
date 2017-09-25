@@ -172,4 +172,33 @@ describe('<ObjectKeyModal />', function () {
         ).to.equal('test');
     });
 
+
+    it('ObjectKeyModal close with Escape', function () {
+        let submit_counter = 0;
+        const wrapper = mount(
+            <ObjectKeyModal
+            input='test'
+            isValid={()=>{return true}}
+            submit={()=>{
+                submit_counter++;
+                return true
+            }}
+            theme='rjv-default'
+            rjvId={rjvId}
+            />
+        );
+        wrapper.setState({input: 'test'})
+
+        expect(
+            wrapper.find('.key-modal-input').length
+        ).to.equal(1);
+        wrapper.find('.key-modal-input').simulate(
+            'keyPress', {key: 'Escape'}
+        );
+        expect(submit_counter).to.equal(0);
+        expect(
+            wrapper.state('input')
+        ).to.equal('test');
+    });
+
 });

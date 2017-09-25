@@ -2,6 +2,7 @@ import React from 'react';
 import ReactSelect from 'react-select';
 import ReactJson from '/react/src/js/index';
 
+import Code from './../helpers/Code';
 import './../../style/scss/rjv-demo.scss';
 import '/react/node_modules/react-select/dist/react-select.css';
 
@@ -133,7 +134,31 @@ export default class extends React.Component {
                 </div>
             </div>
 
+            {this.getNotes(onEdit, onAdd)}
+
         </div>);
+    }
+
+    getNotes = (on_edit_enabled, on_add_enabled) => {
+        let notes = [];
+        if (on_edit_enabled) {
+            notes.push(<span>To edit a value, try <Code>ctrl + click</Code> enter edit mode</span>)
+            notes.push(<span>When editing a value, try <Code>ctrl + Enter</Code> to submit changes</span>)
+            notes.push(<span>When editing a value, try <Code>Escape</Code> key to cancel</span>)
+        }
+        if (on_add_enabled) {
+            notes.push(<span>When adding a new key, try <Code>Enter</Code> will submit</span>)
+            notes.push(<span>When adding a new key, try <Code>Escape</Code> to cancel</span>)
+        }
+
+        if (notes.length === 0) {return null}
+
+        return <div style={{marginTop:"20px", fontStyle: 'italic'}}>
+            Keyboard Shortcuts
+            <ul>
+                {notes.map((note) => {return <li>{note}</li>})}
+            </ul>
+        </div>
     }
 
     getIconStyleInput = (iconStyle) => {

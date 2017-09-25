@@ -26,12 +26,7 @@ export default class extends React.Component {
         <div
         class="key-modal-request"
         {...Theme(theme, 'key-modal-request')}
-        onClick={()=>{
-            dispatcher.dispatch({
-                rjvId: rjvId,
-                name: 'RESET'
-            });
-        }}
+        onClick={()=>{this.closeModal()}}
         >
             <div {...Theme(theme, 'key-modal')}
             onClick={(e)=>{e.stopPropagation();}}>
@@ -53,6 +48,8 @@ export default class extends React.Component {
                         onKeyPress={(e)=>{
                             if (valid && e.key === 'Enter') {
                                 this.submit();
+                            } else if (e.key === 'Escape') {
+                                this.closeModal();
                             }
                         }}
                     />
@@ -76,6 +73,13 @@ export default class extends React.Component {
             </div>
         </div>
         );
+    }
+
+    closeModal = () => {
+        dispatcher.dispatch({
+            rjvId: this.props.rjvId,
+            name: 'RESET'
+        });
     }
 
     submit = () => {

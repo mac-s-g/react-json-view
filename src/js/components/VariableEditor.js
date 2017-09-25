@@ -5,7 +5,6 @@ import {toType} from './../helpers/util';
 import dispatcher from './../helpers/dispatcher';
 import parseInput from './../helpers/parseInput';
 import stringifyVariable from './../helpers/stringifyVariable';
-import signalEditKey from './../helpers/signalEditKey';
 
 //data type components
 import {
@@ -39,7 +38,7 @@ class VariableEditor extends React.Component {
     render() {
         const {
             variable, singleIndent, type, theme, namespace,
-            indentWidth, onEdit, onDelete, onSelect
+            indentWidth, onEdit, onDelete, onSelect, rjvId
         } = this.props;
         const {editMode} = this.state;
 
@@ -63,14 +62,6 @@ class VariableEditor extends React.Component {
                 <span>
                     <span {...Theme(theme, 'object-name')}
                     class="object-key"
-                    onDoubleClick={()=>{
-                        if (onEdit) {
-                            signalEditKey(
-                                rjvId,
-
-                            )
-                        }
-                    }}
                     key={variable.name + '_' + namespace}>
                         <span style={{verticalAlign:'top'}}>"</span>
                         <span style={{display:'inline-block'}} >{variable.name}</span>

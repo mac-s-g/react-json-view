@@ -1,7 +1,6 @@
 import React from "react";
 
 import {toType} from './../../helpers/util';
-import signalEditKey from './../../helpers/signalEditKey';
 
 //data type components
 import {JsonObject} from './DataTypes';
@@ -149,7 +148,8 @@ class rjvObject extends React.Component {
             )}
             >
             <span>
-                <span onClick={this.toggleCollapsed} {...Theme(theme, 'brace-row')}>
+                <span onClick={(e) => {this.toggleCollapsed()}}
+                    {...Theme(theme, 'brace-row')}>
                     <div class="icon-container" {...Theme(theme, 'icon-container')}>
                         {expanded_icon}
                     </div>
@@ -242,10 +242,7 @@ class rjvObject extends React.Component {
         } else {
             return (
                 <span {...Theme(theme, 'object-name')} key={namespace}>
-                    <span class="object-key"
-                    onDoubleClick={() => {
-                        if (this.props.onEdit) {signalEditKey()}
-                    }}>
+                    <span class="object-key">
                         <span style={{verticalAlign:'top'}}>"</span>
                         <span>{display_name}</span>
                         <span style={{verticalAlign:'top'}}>"</span>

@@ -9,9 +9,11 @@ import Theme from './../../themes/getStyle';
 
 //this input appears when adding a new value to an object
 export default class extends React.Component {
-
-    state = {
-        input: ''
+    constructor(props) {
+        super(props);
+        this.state = {
+            input: props.input ? props.input : ''
+        }
     }
 
     render() {
@@ -29,7 +31,6 @@ export default class extends React.Component {
                 rjvId: rjvId,
                 name: 'RESET'
             });
-            this.state.input = '';
         }}
         >
             <div {...Theme(theme, 'key-modal')}
@@ -39,8 +40,9 @@ export default class extends React.Component {
                 </div>
                 <div style={{position: 'relative'}}>
                     <input {...Theme(theme, 'key-modal-input')}
+                        id={'rjv-modal-input-' + rjvId}
                         class="key-modal-input"
-                        ref={input => input && input.focus()}
+                        ref={el => el && el.focus()}
                         spellCheck={false}
                         value={input}
                         placeholder="..."
@@ -70,7 +72,6 @@ export default class extends React.Component {
                             rjvId: rjvId,
                             name: 'RESET'
                         });
-                        this.state.input = '';
                     }} />
                 </span>
             </div>
@@ -78,9 +79,25 @@ export default class extends React.Component {
         );
     }
 
+    componentDidMount() {
+        const {rjvId} = this.props;
+        moveCursorToEnd(
+            document.getElementById('rjv-modal-input-' + rjvId)
+        );
+        function moveCursorToEnd(el) {
+            if (typeof el.selectionStart == "number") {
+                el.selectionStart = el.selectionEnd = el.value.length;
+            } else if (typeof el.createTextRange != "undefined") {
+                el.focus();
+                var range = el.createTextRange();
+                range.collapse(false);
+                range.select();
+            }
+        }
+    }
+
     submit = () => {
         this.props.submit(this.state.input);
-        this.state.input = '';
     }
 
 }

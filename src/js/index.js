@@ -26,7 +26,7 @@ export default class extends React.Component {
     }
 
     state = {
-        //listen to request to add a key to an object
+        //listen to request to add/edit a key to an object
         addKeyRequest: false,
         validationFailure: false
     }
@@ -135,6 +135,7 @@ export default class extends React.Component {
         } = this.state;
         //reset key request to false once it's observed
         this.state.addKeyRequest = false;
+        this.state.editKeyRequest = false;
         return (<div class="react-json-view"
             style={{...Theme(props.theme, 'app-container').style, ...style}} >
             <ValidationFailure

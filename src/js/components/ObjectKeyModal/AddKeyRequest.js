@@ -46,9 +46,8 @@ export default class extends React.Component {
         dispatcher.dispatch({
             name: 'VARIABLE_ADDED',
             rjvId: rjvId,
-            data: {...request, key_name: input}
+            data: request
         });
-        this.state.input = '';
     }
 
 }

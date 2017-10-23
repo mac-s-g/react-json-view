@@ -108,6 +108,13 @@ ReactDom.render(
         }}
         />
 
+        <JsonViewer
+            style={{padding:'30px', backgroundColor: 'white'}}
+            src={getExampleString()}
+            collapseStringsAfterLength={12}
+            name={"json-string"}
+        />
+
 
     </div>,
     document.getElementById('app-container')
@@ -198,6 +205,9 @@ function getExampleJson3() {
     };
 }
 
+function getExampleString() {
+    return "this is a json-string"
+}
 
 function getExampleArray() {
     return [

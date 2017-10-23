@@ -112,20 +112,6 @@ export default class extends React.Component {
             );
             this.state.theme = 'rjv-default';
         }
-
-        //make sure `src` prop is valid
-        if (toType(this.state.src) !== 'object'
-            && toType(this.state.src) !== 'array'
-        ) {
-            console.error(
-                'react-json-view error:',
-                'src property must be a valid json object'
-            );
-            this.state.name = 'ERROR';
-            this.state.src = {
-                message: 'src property must be a valid json object'
-            }
-        }
     }
 
     render() {

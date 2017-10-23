@@ -147,7 +147,7 @@ export default class extends React.Component {
             notes.push(<span>When editing a value, try <Code>Escape</Code> key to cancel</span>)
         }
         if (on_add_enabled) {
-            notes.push(<span>When adding a new key, try <Code>Enter</Code> will submit</span>)
+            notes.push(<span>When adding a new key, try <Code>Enter</Code> to submit</span>)
             notes.push(<span>When adding a new key, try <Code>Escape</Code> to cancel</span>)
         }
 

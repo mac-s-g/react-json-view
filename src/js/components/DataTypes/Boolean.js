@@ -13,7 +13,7 @@ export default class extends React.Component {
 
         return <div {...Theme(props.theme, 'boolean')}>
             <DataTypeLabel type_name={type_name} {...props} />
-            {props.value ? "True" : "False"}
+            {props.value ? "true" : "false"}
         </div>;
     }
 

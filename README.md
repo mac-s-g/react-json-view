@@ -42,7 +42,7 @@ Name|Type|Default|Description
 |:---|:---|:---|:---
 `src`|`JSON Object`|None|This property contains your input JSON
 `name`|`string` or `false`|"root"|Contains the name of your root node.  Use `null` or `false` for no name.
-`theme`|`string`|"rjv-default"|RJV supports base-16 themes.  Check out the list of supported themes [in the demo](https://mac-s-g.github.io/react-json-view/demo/). A custom "rjv-default" theme applies by default.
+`theme`|`string`|"rjv-default"|RJV supports base-16 themes.  Check out the list of supported themes [in the demo](https://mac-s-g.github.io/react-json-view/demo/dist/). A custom "rjv-default" theme applies by default.
 `style`|`object`|`{}`|Style attributes for react-json-view container.  Explicit style attributes will override attributes provided by a theme.
 `iconStyle`|`string`|"circle"| Style of expand/collapse icons.  Accepted values are "circle", triangle" or "square".
 `indentWidth`|`integer`|4|Set the indent-width for nested objects
@@ -76,7 +76,7 @@ You can specify a `theme` name or object when you instantiate your rjv component
 ```
 <ReactJson src={my_important_json} theme="monokai" />
 ```
-Check out the list of supported themes [in the component demo](https://mac-s-g.github.io/react-json-view/demo/).
+Check out the list of supported themes [in the component demo](https://mac-s-g.github.io/react-json-view/demo/dist/).
 
 #### Monokai theme example
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-monokai-2.png?raw=true "Base-16 Theme Example")

@@ -212,6 +212,10 @@ const getDefaultThemeStyling = theme => {
             marginRight: constants.iconMarginRight,
             verticalAlign: 'top',
         },
+        'array-group-meta-data': {
+            display: 'inline-block',
+            padding: constants.arrayGroupMetaPadding
+        },
         'object-meta-data': {
             display: 'inline-block',
             padding: constants.metaDataPadding

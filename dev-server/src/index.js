@@ -10,6 +10,7 @@ import JsonViewer from './../../src/js/index';
 //render 2 different examples of the react-json-view component
 ReactDom.render(
     <div>
+        
         {/* just pass in your JSON to the src attribute */}
         <JsonViewer
         style={{padding:'30px', backgroundColor: 'white'}}
@@ -59,7 +60,7 @@ ReactDom.render(
         name={'feature_set'}
         displayDataTypes={false}
         indentWidth={5}
-        />
+        /> 
 
         <br />
 
@@ -106,7 +107,17 @@ ReactDom.render(
           base0E: 'rgba(70, 70, 230, 1)',
           base0F: 'rgba(70, 70, 230, 1)'
         }}
+    /> 
+
+
+    <JsonViewer
+        theme="hopscotch"
+        collapsed={false}
+        name="large_array"
+        groupArraysAfterLength={50}
+        src={getExampleJson4()}
         />
+
 
 
     </div>,
@@ -196,6 +207,17 @@ function getExampleJson3() {
             }
         ]
     };
+}
+
+
+function getExampleJson4() {
+    const large_array = new Array(225).fill('this is a large array full of items')
+
+    large_array.push(getExampleArray())
+
+    large_array.push(new Array(75).fill(Math.random()))
+
+    return large_array
 }
 
 

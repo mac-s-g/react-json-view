@@ -67,6 +67,8 @@ export default {
 
   metaDataPadding: '0px 0px 0px 10px',
 
+  arrayGroupMetaPadding: '0px 0px 0px 4px',
+
   iconContainerWidth: '17px',
 
   tooltipPadding: '4px',

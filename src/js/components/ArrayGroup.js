@@ -1,14 +1,13 @@
 import React from 'react';
 import Theme from './../themes/getStyle';
 
+import VariableMeta from './VariableMeta';
 import ObjectName from './ObjectName'
 import ObjectComponent from './DataTypes/Object'
 
 //icons
 import { CollapsedIcon, ExpandedIcon } from './ToggleIcons';
 
-//increment 1 with each nested object & array
-const DEPTH_INCREMENT = 1
 //single indent is 5px
 const SINGLE_INDENT = 5;
 
@@ -59,8 +58,13 @@ export default class extends React.Component {
                     {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', {paddingLeft: object_padding_left})}
                 >
             <ObjectName {...this.props} />
+
+            <VariableMeta size={src.length} {...this.props}/>
             {[...Array(groups)].map((_, i) => 
-                <div key={i} class='object-key-val' {...Theme(theme, 'objectKeyVal', {paddingLeft: array_group_padding_left})} >
+                <div key={i} class='object-key-val' {...Theme(theme, 'objectKeyVal', {
+                    marginLeft: 6,
+                    paddingLeft: array_group_padding_left
+                    })} >
                 <span {...Theme(theme, 'brace-row')}>
 
                     <div class="icon-container" {...Theme(theme, 'icon-container')}

@@ -1,3 +1,4 @@
+import React from "react";
 import Theme from './../themes/getStyle';
 
 export default function getObjectName(props) {

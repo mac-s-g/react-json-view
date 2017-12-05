@@ -61,13 +61,13 @@ export default class extends React.Component {
 
             <VariableMeta size={src.length} {...this.props}/>
             {[...Array(groups)].map((_, i) => 
-                <div key={i} class='object-key-val' {...Theme(theme, 'objectKeyVal', {
+                <div key={i} class='object-key-val array-group' {...Theme(theme, 'objectKeyVal', {
                     marginLeft: 6,
                     paddingLeft: array_group_padding_left
                     })} >
                 <span {...Theme(theme, 'brace-row')}>
 
-                    <div class="icon-container" {...Theme(theme, 'icon-container')}
+                    <div class='icon-container' {...Theme(theme, 'icon-container')}
                          onClick={(e) => {this.toggleCollapsed(i)}}>
                         {this.getExpandedIcon(i)}
                     </div>
@@ -85,10 +85,10 @@ export default class extends React.Component {
                             theme={theme}
                             {...rest}
                         />
-                    :   <span {...Theme(theme, 'brace')}  onClick={(e) => {this.toggleCollapsed(i)}}>
+                    :   <span {...Theme(theme, 'brace')}  onClick={(e) => {this.toggleCollapsed(i)}} class='array-group-brace'>
                             [
                             <div {...Theme(theme, 'array-group-meta-data')} class='array-group-meta-data'>
-                                <span class="object-size"
+                                <span class='object-size'
                                 {...Theme(theme, 'object-size')}>
                                 {i * size}
                                 {' - '}

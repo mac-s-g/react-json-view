@@ -125,4 +125,16 @@ describe('<Index />', function () {
         ).to.equal(true);
     });
 
+
+    it('index can have ArrayGroup root component', function() {
+        const wrapper = render(
+            <Index
+            name='test'
+            groupArraysAfterLength={5}
+            src={new Array(15).fill(0)}
+            />
+        );
+        expect(wrapper.find('.array-group')).to.have.length(3);
+    });
+
 });

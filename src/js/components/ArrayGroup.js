@@ -59,7 +59,9 @@ export default class extends React.Component {
                 >
             <ObjectName {...this.props} />
 
-            <VariableMeta size={src.length} {...this.props}/>
+            <span>
+                <VariableMeta size={src.length} {...this.props}/>
+            </span>
             {[...Array(groups)].map((_, i) => 
                 <div key={i} class='object-key-val array-group' {...Theme(theme, 'objectKeyVal', {
                     marginLeft: 6,

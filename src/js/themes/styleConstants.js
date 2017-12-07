@@ -64,6 +64,7 @@ export default {
   objectSizeMargin: '0px 6px 0px 0px',
 
   clipboardCursor: 'pointer',
+  clipboardCheckMarginLeft: '-12px',
 
   metaDataPadding: '0px 0px 0px 10px',
 

@@ -101,8 +101,9 @@ describe('<VariableMeta />', function () {
         ).to.have.length(1);
         expect(
             wrapper.find('.copy-icon')
-        ).to.have.length(2);
+        ).to.have.length(1);
 
+        document.execCommand = (mock) => {};
         wrapper.find('.copy-icon').first().simulate('click');
         //verify that callback was called
         expect(callback_counter).to.equal(1);
@@ -125,7 +126,7 @@ describe('<VariableMeta />', function () {
         ).to.have.length(1);
         expect(
             wrapper.find('.copy-icon')
-        ).to.have.length(2);
+        ).to.have.length(1);
 
         wrapper.find('.copy-icon').first().simulate('click');
     });

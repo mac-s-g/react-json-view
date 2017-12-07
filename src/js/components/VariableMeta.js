@@ -8,10 +8,6 @@ import {
     Clippy, RemoveCircle as Remove, AddCircle as Add
 } from './icons';
 
-//clipboard library
-//https://www.npmjs.com/package/clipboard
-import Clipboard from 'clipboard';
-
 //theme
 import Theme from './../themes/getStyle';
 
@@ -19,88 +15,80 @@ import Theme from './../themes/getStyle';
 export default class extends React.Component {
     constructor(props) {
         super(props);
-        this.state.id = Date.now().toString();
+
+        this.state = { copied: false };
+
+        this.copiedTimer = null;
     }
 
-    state = {
-        id: null,
-        clipboard: null,
-        copy_state: null
-    }
-
-    componentDidMount = () => {
-        const {id} = this.state;
-        const {src} = this.props;
-        let clipboard_container = document.getElementById(
-            'clipboard-container-' + id
-        );
-
-        //cant figure out why document.getElementById
-        //is not working for tests
-        if (clipboard_container) {
-            this.state.clipboard = new Clipboard(
-                clipboard_container
-            );
-
-            this.state.clipboard.on('success', (e) => {
-                this.setState({copy_state: 'success'});
-            });
-
-            this.state.clipboard.on('error', (e) => {
-                this.setState({copy_state: 'error'});
-            });
+    componentWillUnmount() {
+        if (this.copiedTimer) {
+            clearTimeout(this.copiedTimer);
+            this.copiedTimer = null;
         }
-
-        this.state.copy_state = null;
     }
 
-    componentWillUnmount = () => {
-        this.state.clipboard && this.state.clipboard.destroy();
+    handleCopy = () => {
+        const container = document.createElement('textarea');
+        const {enableClipboard, src, namespace} = this.props;
+
+        container.innerHTML = JSON.stringify(src, null, '  ');
+
+        document.body.appendChild(container);
+        container.select();
+        document.execCommand('copy');
+
+        document.body.removeChild(container);
+
+        this.copiedTimer = setTimeout(() => {
+            this.setState({
+                copied: false
+            });
+        }, 5500)
+
+        this.setState({ copied: true }, () => {
+            if (typeof enableClipboard !== "function") {
+                return;
+            }
+
+            enableClipboard({
+                src:src,
+                namespace: namespace,
+                name: namespace[namespace.length - 1]
+            });
+        })
     }
 
     getCopyComponent = () => {
-        const {id, copy_state} = this.state;
         const {src, size, theme, enableClipboard} = this.props;
-
         let style = Theme(theme, 'copy-to-clipboard').style;
+        
         return (
             enableClipboard ?
             <span class="copy-to-clipboard-container" >
                 <span
                 style={{
                     ...style,
-                    display:copy_state=='success' ? 'none' : 'inline-block'
+                    display: 'inline-block'
                 }}
-                data-clipboard-text={JSON.stringify(src, null, '  ')}
-                id={"clipboard-container-" + id} >{this.getClippyIcon()}</span>
-                <span
-                style={{
-                    ...style,
-                    display:copy_state == 'success'
-                    ? 'inline-block' : 'none'
-                }} >{this.getClippyIcon()}</span>
+                onClick={this.handleCopy}
+                >{this.getClippyIcon()}</span>
             </span>
             : null
         );
     }
 
     getClippyIcon = () => {
-        const {enableClipboard, theme, src, namespace} = this.props;
-        if (typeof enableClipboard === "function") {
-            return <Clippy class="copy-icon"
-                {...Theme(theme, 'copy-icon')}
-                onClick={() => {
-                    enableClipboard({
-                        src:src,
-                        namespace: namespace,
-                        name: namespace[namespace.length - 1]
-                    })
-                }}
-            />
-        } else {
-            return <Clippy class="copy-icon" {...Theme(theme, 'copy-icon')} />
+        const {theme} = this.props;
+
+        if (this.state.copied) {
+            return (<span>
+                <Clippy class="copy-icon" {...Theme(theme, 'copy-icon')} />
+                <span {...Theme(theme, 'copy-icon-copied')}>✔</span>
+            </span>)
         }
 
+        return <Clippy class="copy-icon" {...Theme(theme, 'copy-icon')} />
     }
 
     getObjectSize = () => {

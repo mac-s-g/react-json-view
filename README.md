@@ -48,6 +48,7 @@ Name|Type|Default|Description
 `indentWidth`|`integer`|4|Set the indent-width for nested objects
 `collapsed`|`boolean` or `integer`|`false`|When set to `true`, all nodes will be collapsed by default.  Use an integer value to collapse at a particular depth.
 `collapseStringsAfterLength`|`integer`|`false`|When an integer value is assigned, strings will be cut off at that length. Collapsed strings are followed by an ellipsis. String content can be expanded and collapsed by clicking on the string value.
+`groupArraysAfterLength`|`integer`|`100`|When an integer value is assigned, arrays will be displayed in groups by count of the value. Groups are displayed with brakcet notation and can be expanded and collapsed by clickong on the brackets. 
 `enableClipboard`|`boolean` or `(copy)=>{}`|`true`|When prop is not `false`, the user can copy objects and arrays to clipboard by clicking on the clipboard icon.  Copy callbacks are supported.
 `displayObjectSize`|`boolean`|`true`|When set to `true`, objects and arrays are labeled with size
 `displayDataTypes`|`boolean`|`true`|When set to `true`, data type labels prefix values
@@ -63,6 +64,7 @@ Name|Type|Default|Description
 * Object and array nodes display length
 * Object and array nodes support a "Copy to Clipboard" feature
 * String values can be truncated after a specified length
+* Arrays can be subgrouped after a specified length
 * Base-16 Theme Support
 * When `onEdit` is enabled:
    * Double-Click Edit Mode

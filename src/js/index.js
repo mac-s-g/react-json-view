@@ -41,6 +41,7 @@ export default class extends React.Component {
         theme: 'rjv-default',
         collapsed: false,
         collapseStringsAfterLength: false,
+        groupArraysAfterLength: 100,
         indentWidth: 4,
         enableClipboard: true,
         displayObjectSize: true,

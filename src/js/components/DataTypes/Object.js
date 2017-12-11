@@ -7,16 +7,14 @@ import {JsonObject} from './DataTypes';
 
 import VariableEditor from './../VariableEditor';
 import VariableMeta from './../VariableMeta';
+import ArrayGroup from './../ArrayGroup'
+import ObjectName from './../ObjectName'
 
 //attribute store
 import AttributeStore from './../../stores/ObjectAttributes';
 
 //icons
-import {
-    CircleMinus, CirclePlus,
-    SquareMinus, SquarePlus,
-    ArrowRight, ArrowDown
-} from './../icons';
+import { CollapsedIcon, ExpandedIcon } from './../ToggleIcons';
 
 //theme
 import Theme from './../../themes/getStyle';
@@ -60,7 +58,6 @@ class rjvObject extends React.Component {
             ),
             object_type: (props.type == 'array' ? 'array' : 'object'),
             parent_type: (props.type == 'array' ? 'array' : 'object'),
-            display_name: (props.name ? props.name : ''),
             size: size
         }
 
@@ -117,73 +114,97 @@ class rjvObject extends React.Component {
         );
     }
 
-    render() {
-        // `indentWidth` and `collapsed` props will
-        // perpetuate to children via `...rest`
+    getBraceStart(object_type, expanded) {
         const {
-            depth, src, namespace, name, type,
-            parent_type, theme, jsvRoot,
-            ...rest
-        } = this.props;
-        const {
-            object_type, display_name, expanded
-        } = this.state;
+            src, theme, iconStyle, parent_type
+        } = this.props
 
-        //expanded/collapsed icon
-        let expanded_icon, object_padding_left = 0;
+        if (parent_type == 'array_group') {
+            return (
+                <span>
+                    <span {...Theme(theme, 'brace')}>
+                        {object_type == 'array' ? '[' : '{'}
+                    </span>
+                    {expanded ? this.getObjectMetaData(src) : null}
+                </span>
+            )
+        }        
 
-        if (expanded) {
-            expanded_icon = this.getExpandedIcon();
-        } else {
-            expanded_icon = this.getCollapsedIcon();
-        }
+        const IconComponent = expanded ? ExpandedIcon : CollapsedIcon
 
-        if (!jsvRoot) {
-            object_padding_left = this.props.indentWidth * SINGLE_INDENT;
-        }
-
-        return (<div class='object-key-val'
-            {...Theme(
-                theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', {paddingLeft: object_padding_left}
-            )}
-            >
+        return (
             <span>
                 <span onClick={(e) => {this.toggleCollapsed()}}
                     {...Theme(theme, 'brace-row')}>
                     <div class="icon-container" {...Theme(theme, 'icon-container')}>
-                        {expanded_icon}
+                        <IconComponent {...{theme, iconStyle}}/>
                     </div>
-                    {this.getObjectName()}
+                    <ObjectName {...this.props} />
                     <span {...Theme(theme, 'brace')}>
                         {object_type == 'array' ? '[' : '{'}
                     </span>
                 </span>
                 {expanded ? this.getObjectMetaData(src) : null}
             </span>
-            {expanded
-                ? this.getObjectContent(depth, src, {theme, ...rest})
-                : this.getEllipsis()
-            }
-            <span class="brace-row">
-                <span style={{
-                    ...Theme(theme, 'brace').style,
-                    paddingLeft:(expanded ? '3px' : '0px')
-                }} >
-                    {object_type == 'array' ? ']' : '}'}
+        )
+    }
+
+    render() {
+        // `indentWidth` and `collapsed` props will
+        // perpetuate to children via `...rest`
+        const {
+            depth, src, namespace, name, type,
+            parent_type, theme, jsvRoot, iconStyle,
+            ...rest
+        } = this.props;
+
+        const {
+            object_type, expanded
+        } = this.state;
+
+        let styles = {};
+        if (!jsvRoot && parent_type !== 'array_group') {
+            styles.paddingLeft = this.props.indentWidth * SINGLE_INDENT;
+        } else if (parent_type === 'array_group') {
+            styles.borderLeft = 0;
+            styles.display = 'inline';
+        }
+
+        return (<div class='object-key-val'
+                {...Theme(
+                    theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', styles
+                )}
+                >
+                {this.getBraceStart(object_type, expanded)}
+                {expanded
+                    ? this.getObjectContent(depth, src, {theme, iconStyle, ...rest})
+                    : this.getEllipsis()
+                }
+                <span class="brace-row">
+                    <span style={{
+                        ...Theme(theme, 'brace').style,
+                        paddingLeft:(expanded ? '3px' : '0px')
+                    }} >
+                        {object_type == 'array' ? ']' : '}'}
+                    </span>
+                    {expanded ? null : this.getObjectMetaData(src)}
                 </span>
-                {expanded ? null : this.getObjectMetaData(src)}
-            </span>
-        </div>);
+            </div>
+        );
     }
 
     renderObjectContents = (variables, props) => {
-        const {depth, parent_type} = this.props;
+        const {depth, parent_type, index_offset, groupArraysAfterLength} = this.props;
         const {namespace, object_type} = this.state;
         let theme = props.theme;
         let elements = [], variable;
 
         for (let name in variables) {
             variable = new JsonVariable(name, variables[name]);
+
+            if (parent_type == 'array_group' && index_offset) {
+                variable.name = parseInt(variable.name) + index_offset
+            }
             if (!variables.hasOwnProperty(name)) {
                 continue;
             } else if (variable.type == 'object') {
@@ -195,10 +216,16 @@ class rjvObject extends React.Component {
                         namespace={namespace.concat(variable.name)}
                         parent_type={object_type}
                         {...props}
-                    />);
+                    />);  
             } else if (variable.type == 'array') {
+                let ObjectComponent = JsonObject
+
+                if (groupArraysAfterLength && variable.value.length > groupArraysAfterLength) {
+                    ObjectComponent = ArrayGroup
+                }
+
                 elements.push(
-                    <JsonObject key={variable.name}
+                    <ObjectComponent key={variable.name}
                         depth={depth + DEPTH_INCREMENT}
                         name={variable.name}
                         src={variable.value}
@@ -221,78 +248,6 @@ class rjvObject extends React.Component {
             }
         }
         return elements;
-
-    }
-
-    getObjectName = () => {
-        const {
-            parent_type, namespace, theme, jsvRoot, name
-        } = this.props;
-        const {display_name} = this.state;
-
-        if (jsvRoot && (name === false || name === null)) {
-            return (<span />);
-        } else if (parent_type == 'array') {
-            return (
-                <span {...Theme(theme, 'array-key')} key={namespace}>
-                    <span class="array-key">{display_name}</span>
-                    <span {...Theme(theme, 'colon')}>:</span>
-                </span>
-            );
-        } else {
-            return (
-                <span {...Theme(theme, 'object-name')} key={namespace}>
-                    <span class="object-key">
-                        <span style={{verticalAlign:'top'}}>"</span>
-                        <span>{display_name}</span>
-                        <span style={{verticalAlign:'top'}}>"</span>
-                    </span>
-                    <span {...Theme(theme, 'colon')}>:</span>
-                </span>
-            );
-        }
-    }
-
-    getCollapsedIcon = () => {
-        const {theme, iconStyle} = this.props;
-        switch (iconStyle) {
-            case "triangle":
-                return <ArrowRight
-                    {...Theme(theme, 'collapsed-icon')}
-                    class="collapsed-icon"
-                />
-            case "square":
-                return <SquarePlus
-                    {...Theme(theme, 'collapsed-icon')}
-                    class="collapsed-icon"
-                />
-            default:
-                return <CirclePlus
-                    {...Theme(theme, 'collapsed-icon')}
-                    class="collapsed-icon"
-                />
-        }
-    }
-
-    getExpandedIcon = () => {
-        const {theme, iconStyle} = this.props;
-        switch (iconStyle) {
-            case "triangle":
-                return <ArrowDown
-                    {...Theme(theme, 'expanded-icon')}
-                    class="expanded-icon"
-                />
-            case "square":
-                return <SquareMinus
-                    {...Theme(theme, 'expanded-icon')}
-                    class="expanded-icon"
-                />
-            default:
-                return <CircleMinus
-                    {...Theme(theme, 'expanded-icon')}
-                    class="expanded-icon"
-                />
-        }
     }
 }
 

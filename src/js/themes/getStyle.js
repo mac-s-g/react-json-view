@@ -12,6 +12,7 @@ const colorMap = theme => ({
     arrayKeyColor: theme.base0C,
     objectSize: theme.base04,
     copyToClipboard: theme.base0F,
+    copyToClipboardCheck: theme.base0D,
     objectBorder: theme.base02,
     dataTypes: {
         boolean: theme.base0E,
@@ -141,7 +142,8 @@ const getDefaultThemeStyling = theme => {
             color: colors.objectSize,
             borderRadius: constants.objectSizeBorderRadius,
             fontStyle: constants.objectSizeFontStyle,
-            margin: constants.objectSizeMargin
+            margin: constants.objectSizeMargin,
+            cursor: 'default'
         },
         'data-type-label': {
             fontSize: constants.dataTypeFontSize,
@@ -211,6 +213,14 @@ const getDefaultThemeStyling = theme => {
             fontSize: constants.iconFontSize,
             marginRight: constants.iconMarginRight,
             verticalAlign: 'top',
+        },
+        'copy-icon-copied': {
+            color: colors.copyToClipboardCheck,
+            marginLeft: constants.clipboardCheckMarginLeft
+        },
+        'array-group-meta-data': {
+            display: 'inline-block',
+            padding: constants.arrayGroupMetaPadding
         },
         'object-meta-data': {
             display: 'inline-block',

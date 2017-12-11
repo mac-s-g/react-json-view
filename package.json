@@ -1,11 +1,10 @@
 {
   "name": "react-json-view",
-  "description": "Interactive react component for displaying javascript arrays and JSON objects.",
-  "version": "1.13.3",
+  "description":
+    "Interactive react component for displaying javascript arrays and JSON objects.",
+  "version": "1.14.0",
   "main": "dist/main.js",
-  "files": [
-    "dist/"
-  ],
+  "files": ["dist/"],
   "dependencies": {
     "flux": "^3.1.3",
     "react-base16-styling": "^0.5.3",
@@ -46,44 +45,49 @@
     "react-dom": "^16.0.0 || ^15.5.4"
   },
   "scripts": {
-    "build": "webpack --config /react/webpack/webpack.config.js -p --display-error-details --progress --optimize-minimize",
-    "build:demo": "webpack --config /react/webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
-    "dev:hot": "webpack-dev-server --config /react/webpack/webpack.config-dev.js",
+    "build":
+      "webpack --config /react/webpack/webpack.config.js -p --display-error-details --progress --optimize-minimize",
+    "build:demo":
+      "webpack --config /react/webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
+    "dev:hot":
+      "webpack-dev-server --config /react/webpack/webpack.config-dev.js",
     "modules:debug": "./docker/debug.sh",
     "modules:tree": "webpack --json",
     "modules:size-analyzer": "webpack --json | webpack-bundle-size-analyzer",
     "start": "node server.js",
     "test": "./docker/coverage.sh",
     "test:coverage": "nyc report --reporter=text-lcov | coveralls",
-    "test:unit": "nyc --reporter=html --reporter=text-lcov --reporter=text mocha /react/test/**/*-test.js",
-    "test:watch": "nyc --reporter=html --reporter=text-lcov --reporter=text mocha -w /react/test/**/*-test.js"
+    "test:unit":
+      "nyc --reporter=html --reporter=text-lcov --reporter=text mocha /react/test/**/*-test.js",
+    "test:watch":
+      "nyc --reporter=html --reporter=text-lcov --reporter=text mocha -w /react/test/**/*-test.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/mac-s-g/react-json-view.git"
   },
-   "keywords": [
-     "array-viewer",
-     "base-16",
-     "component",
-     "interactive",
-     "interactive-json",
-     "json",
-     "json-component",
-     "json-display",
-     "json-tree",
-     "json-view",
-     "json-viewer",
-     "json-inspector",
-     "json-tree",
-     "react",
-     "react-component",
-     "react-json",
-     "theme",
-     "tree",
-     "tree-view",
-     "treeview"
-   ],
+  "keywords": [
+    "array-viewer",
+    "base-16",
+    "component",
+    "interactive",
+    "interactive-json",
+    "json",
+    "json-component",
+    "json-display",
+    "json-tree",
+    "json-view",
+    "json-viewer",
+    "json-inspector",
+    "json-tree",
+    "react",
+    "react-component",
+    "react-json",
+    "theme",
+    "tree",
+    "tree-view",
+    "treeview"
+  ],
 
   "license": "MIT",
   "author": "Mac Gainor",

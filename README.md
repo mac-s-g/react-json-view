@@ -11,7 +11,7 @@ This component provides a responsive interface for displaying arrays or JSON in 
 
 
 ### Implementation Example
-```
+```js
 // import the react-json-view component
 import ReactJson from 'react-json-view'
 
@@ -27,11 +27,11 @@ import ReactJson from 'react-json-view'
 
 ### Installation Instructions
 Install this component with [NPM](https://www.npmjs.com/package/react-json-view).
-```
+```shell
 npm install --save react-json-view
 ```
 Or add to your package.json config file:
-```
+```json
 "dependencies": {
     "react-json-view": "latest"
 }
@@ -75,7 +75,7 @@ Name|Type|Default|Description
 RJV now supports base-16 themes!
 
 You can specify a `theme` name or object when you instantiate your rjv component.
-```
+```jsx
 <ReactJson src={my_important_json} theme="monokai" />
 ```
 Check out the list of supported themes [in the component demo](https://mac-s-g.github.io/react-json-view/demo/dist/).
@@ -95,7 +95,7 @@ To better understand custom themes, take a look at [my example implementation](h
 Pass callback methods to `onEdit`, `onAdd` and `onDelete` props.  Your method will be invoked when a user attempts to update your `src` object.
 
 The following object will be passed to your method:
-```
+```js
 {
     updated_src: src, //new src value
     name: name, //new var name

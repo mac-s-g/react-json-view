@@ -1,6 +1,6 @@
 ### Motivation for adding Docker to your Development Stack
 
-You can contribute to this project with our without using Docker.  This README is here to describe the benefits of adding docker to your development stack.
+You can contribute to this project with or without using Docker.  This README is here to describe _how_ to use Docker when contributing and _why_ you would benefit.
 
 #### What is Docker?
 

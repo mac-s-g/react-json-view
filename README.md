@@ -127,6 +127,8 @@ Webpack-dev-server is running in the container and hot-reloading when changes ar
 
 All node modules are installed within the container, so make sure to rebuild your container if you make changes to package.json (see step 2, above).
 
+For more information about contributing with Docker, see the [README in ./docker](https://github.com/mac-s-g/react-json-view/blob/master/docker/README.md).
+
 #### Standard Workflow
 Development workflow is setup for linux users with Docker installed.  You can contribute with other configurations but I have not tested them.
 

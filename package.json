@@ -54,9 +54,8 @@
     "modules:tree": "webpack --config webpack/webpack.config.js --json ",
     "modules:size-analyzer": "webpack --config webpack/webpack.config.js --json | webpack-bundle-size-analyzer",
     "start": "node server.js",
-    "test": "./docker/coverage.sh",
+    "test": "nyc --reporter=html --reporter=text-lcov --reporter=text mocha test/**/*-test.js",
     "test:coverage": "nyc report --reporter=text-lcov | coveralls",
-    "test:unit": "nyc --reporter=html --reporter=text-lcov --reporter=text mocha test/**/*-test.js",
     "test:watch": "nyc --reporter=html --reporter=text-lcov --reporter=text mocha -w test/**/*-test.js"
   },
   "repository": {

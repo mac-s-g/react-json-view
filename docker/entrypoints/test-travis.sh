@@ -5,4 +5,4 @@ cd /react
 echo Installing Test Dependencies
 sh ./docker/entrypoints/install-test-dependencies.sh
 
-exec npm run test:watch
+exec npm run test

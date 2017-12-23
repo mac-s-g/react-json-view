@@ -4,12 +4,10 @@
 NODE_ENV=${1:-local}
 echo "Running with NODE_ENV=$NODE_ENV"
 
-rm -rf ./coverage/*
-
 # run the workbench container
 docker run \
     -v $(pwd)/src:/react/src \
-    -v $(pwd)/coverage:/react/coverage \
+    -v $(pwd)/dev-server:/react/dev-server \
     -v $(pwd)/webpack/webpack.config.js:/react/webpack.config.js \
     -v $(pwd)/test:/react/test \
     -v $(pwd)/docker:/react/docker \

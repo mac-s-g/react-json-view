@@ -1,10 +1,11 @@
 {
   "name": "react-json-view",
-  "description":
-    "Interactive react component for displaying javascript arrays and JSON objects.",
+  "description": "Interactive react component for displaying javascript arrays and JSON objects.",
   "version": "1.14.1",
   "main": "dist/main.js",
-  "files": ["dist/"],
+  "files": [
+    "dist/"
+  ],
   "dependencies": {
     "flux": "^3.1.3",
     "react-base16-styling": "^0.5.3",
@@ -13,10 +14,10 @@
   "devDependencies": {
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
+    "babel-plugin-react-html-attrs": "^2.0.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-function-bind": "^6.22.0",
     "babel-plugin-transform-node-env-inline": "^0.2.0",
-    "babel-plugin-react-html-attrs": "^2.0.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
@@ -38,30 +39,25 @@
     "sinon": "^2.2.0",
     "style-loader": "^0.18.2",
     "webpack": "^3.5.4",
-    "webpack-dev-server": "^2.7.0",
-    "webpack-bundle-size-analyzer": "^2.7.0"
+    "webpack-bundle-size-analyzer": "^2.7.0",
+    "webpack-dev-server": "^2.7.0"
   },
   "peerDependencies": {
     "react": "^16.0.0 || ^15.5.4",
     "react-dom": "^16.0.0 || ^15.5.4"
   },
   "scripts": {
-    "build":
-      "webpack --config webpack/webpack.config.js -p --display-error-details --progress --optimize-minimize",
-    "build:demo":
-      "webpack --config webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
+    "build": "webpack --config webpack/webpack.config.js -p --display-error-details --progress --optimize-minimize",
+    "build:demo": "webpack --config webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
     "dev:hot": "webpack-dev-server --config webpack/webpack.config-dev.js",
     "modules:debug": "./docker/debug.sh",
     "modules:tree": "webpack --config webpack/webpack.config.js --json ",
-    "modules:size-analyzer":
-      "webpack --config webpack/webpack.config.js --json | webpack-bundle-size-analyzer",
+    "modules:size-analyzer": "webpack --config webpack/webpack.config.js --json | webpack-bundle-size-analyzer",
     "start": "node server.js",
     "test": "./docker/coverage.sh",
     "test:coverage": "nyc report --reporter=text-lcov | coveralls",
-    "test:unit":
-      "nyc --reporter=html --reporter=text-lcov --reporter=text mocha test/**/*-test.js",
-    "test:watch":
-      "nyc --reporter=html --reporter=text-lcov --reporter=text mocha -w test/**/*-test.js"
+    "test:unit": "nyc --reporter=html --reporter=text-lcov --reporter=text mocha test/**/*-test.js",
+    "test:watch": "nyc --reporter=html --reporter=text-lcov --reporter=text mocha -w test/**/*-test.js"
   },
   "repository": {
     "type": "git",

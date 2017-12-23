@@ -50,7 +50,7 @@ here is a workflow comparison with and without  docker:
 
 Task|Without Docker|With Docker
 |:---|:---|:---
-install node modules|update package.json<br/>`npm install`|update package.json<br/>`./docker/build-container.sh`
+install node modules|update package.json<br/>`npm install --save-dev`|update package.json<br/>`./docker/build-container.sh`
 run dev server|`npm run dev:hot`|`./docker/dev-server.sh`
 run build|`npm run build`|`./docker/build.sh`
 

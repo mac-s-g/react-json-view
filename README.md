@@ -136,7 +136,7 @@ Development workflow is setup for linux users with Docker installed.  You can co
   2. Install npm dependencies
 ```
 cd react-json-view
-npm install
+npm install --save-dev
 ```
   3. Run webpack to start webpack-dev-server with hot-reloading enabled
       * `npm run dev:hot`

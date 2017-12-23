@@ -1,5 +1,7 @@
 ### Motivation for adding Docker to your Development Stack
 
+**PSA:** You do not need to use Docker to contribute to this project.  If you're not interested in using a container for development, you can ignore this directory.
+
 You can contribute to this project with or without using Docker.  This README is here to describe _how_ to use Docker when contributing and _why_ you would benefit.
 
 #### What is Docker?
@@ -48,7 +50,7 @@ here is a workflow comparison with and without  docker:
 
 Task|Without Docker|With Docker
 |:---|:---|:---
-install node modules|update package.json<br/>`npm install`|update package.json<br/>`./docker/build-container.sh`
+install node modules|update package.json<br/>`npm install --save-dev`|update package.json<br/>`./docker/build-container.sh`
 run dev server|`npm run dev:hot`|`./docker/dev-server.sh`
 run build|`npm run build`|`./docker/build.sh`
 

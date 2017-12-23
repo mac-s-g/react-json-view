@@ -12,6 +12,7 @@ docker run \
     -v $(pwd)/coverage:/react/coverage \
     -v $(pwd)/webpack/webpack.config.js:/react/webpack.config.js \
     -v $(pwd)/test:/react/test \
+    -v $(pwd)/docker:/react/docker \
     --rm \
     -e NODE_ENV=$NODE_ENV \
     --entrypoint=/react/docker/entrypoints/test.sh \

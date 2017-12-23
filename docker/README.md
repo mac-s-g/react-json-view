@@ -1,5 +1,7 @@
 ### Motivation for adding Docker to your Development Stack
 
+*PSA:* You do not need to use Docker to contribute to this project.  If you're not interested in using a container for development, you can ignore this directory.
+
 You can contribute to this project with or without using Docker.  This README is here to describe _how_ to use Docker when contributing and _why_ you would benefit.
 
 #### What is Docker?

@@ -51,8 +51,9 @@
       "webpack --config webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
     "dev:hot": "webpack-dev-server --config webpack/webpack.config-dev.js",
     "modules:debug": "./docker/debug.sh",
-    "modules:tree": "webpack --json",
-    "modules:size-analyzer": "webpack --json | webpack-bundle-size-analyzer",
+    "modules:tree": "webpack --config webpack/webpack.config.js --json ",
+    "modules:size-analyzer":
+      "webpack --config webpack/webpack.config.js --json | webpack-bundle-size-analyzer",
     "start": "node server.js",
     "test": "./docker/coverage.sh",
     "test:coverage": "nyc report --reporter=text-lcov | coveralls",

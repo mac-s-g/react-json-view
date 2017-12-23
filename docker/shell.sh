@@ -11,6 +11,7 @@ docker run \
     -v $(pwd)/dev-server:/react/dev-server \
     -v $(pwd)/test:/react/test \
     -v $(pwd)/webpack:/react/webpack \
+    -v $(pwd)/docker:/react/docker \
     -e NODE_ENV=$NODE_ENV \
     --entrypoint=/bin/bash \
     -ti react-json-view

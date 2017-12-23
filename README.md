@@ -147,10 +147,3 @@ npm install --save-dev
 I drew a ton of design ideas from [react-json-tree](https://github.com/alexkuz/react-json-tree).  Thanks to the RJT contributors for putting together an awesome component!
 
 I'm also inspired by users who come up with interesting feature requests.  Reach out to me with ideas for this project or other projects you want to collaborate on.  My email address is listed on my [github user page](https://github.com/mac-s-g).
-
-### To-Do's
-1. Improve documentation for `onEdit`, `onAdd` and `onDelete` props
-2. Improve style organization
-3. Continue size analysis and remove larger dependencies from build where possible
-4. As always, improve test quality and coverage
-5. update screenshots and docs in README

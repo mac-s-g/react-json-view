@@ -8,10 +8,9 @@ echo "Running with NODE_ENV=$NODE_ENV"
 docker run \
     -v $(pwd)/src:/react/src \
     -v $(pwd)/dev-server:/react/dev-server \
-    -v $(pwd)/entrypoints:/react/entrypoints \
     -v $(pwd)/webpack/webpack.config.js:/react/webpack.config.js \
     -v $(pwd)/test:/react/test \
     --rm \
     -e NODE_ENV=$NODE_ENV \
-    --entrypoint=/react/entrypoints/test_watch.sh \
+    --entrypoint=/react/docker/entrypoints/test_watch.sh \
     -t react-json-view

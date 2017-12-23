@@ -13,10 +13,9 @@ mkdir debug
 docker run \
     -v $(pwd)/src:/react/src \
     -v $(pwd)/debug:/react/debug \
-    -v $(pwd)/entrypoints:/react/entrypoints \
     -v $(pwd)/webpack/webpack.config.js:/react/webpack.config.js \
     --rm \
     -e NODE_ENV=$NODE_ENV \
-    --entrypoint=/react/entrypoints/debug.sh \
+    --entrypoint=/react/docker/entrypoints/debug.sh \
     -t react-json-view
 

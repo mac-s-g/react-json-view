@@ -9,11 +9,10 @@ rm -rf ./coverage/*
 # run the workbench container
 docker run \
     -v $(pwd)/src:/react/src \
-    -v $(pwd)/entrypoints:/react/entrypoints \
     -v $(pwd)/coverage:/react/coverage \
     -v $(pwd)/webpack/webpack.config.js:/react/webpack.config.js \
     -v $(pwd)/test:/react/test \
     --rm \
     -e NODE_ENV=$NODE_ENV \
-    --entrypoint=/react/entrypoints/test.sh \
+    --entrypoint=/react/docker/entrypoints/test.sh \
     -t react-json-view

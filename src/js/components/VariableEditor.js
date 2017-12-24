@@ -51,6 +51,8 @@ class VariableEditor extends React.Component {
             onEdit,
             onDelete,
             onSelect,
+            onMouseEnter,
+            onMouseLeave,
             rjvId
         } = this.props
         const { editMode } = this.state
@@ -60,6 +62,30 @@ class VariableEditor extends React.Component {
                 {...Theme(theme, "objectKeyVal", {
                     paddingLeft: indentWidth * singleIndent
                 })}
+                onMouseEnter={
+                    !onMouseEnter 
+                        ? null 
+                        : () => { 
+                            const location = [...namespace]
+                            location.shift()
+                            onMouseEnter({
+                                ...variable, 
+                                namespace: location
+                            }) 
+                        }
+                }
+                onMouseLeave={
+                    !onMouseLeave
+                        ? null
+                        : () => { 
+                            const location = [...namespace]
+                            location.shift()
+                            onMouseLeave({
+                                ...variable, 
+                                namespace: location
+                            }) 
+                        }
+                }
                 class="variable-row"
                 key={variable.name}
             >

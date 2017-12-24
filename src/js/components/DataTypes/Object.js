@@ -155,6 +155,7 @@ class rjvObject extends React.Component {
         const {
             depth, src, namespace, name, type,
             parent_type, theme, jsvRoot, iconStyle,
+            onMouseEnter, onMouseLeave,
             ...rest
         } = this.props;
 
@@ -174,10 +175,42 @@ class rjvObject extends React.Component {
                 {...Theme(
                     theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', styles
                 )}
+                onMouseEnter={
+                    !onMouseEnter 
+                        ? null 
+                        : () => { 
+                            let location = [...namespace]
+                            location.shift()
+                            location.pop()
+                            const variable = new JsonVariable(name, src)
+                            onMouseEnter({
+                                ...variable, 
+                                namespace: location
+                            }) 
+                        }
+                }
+                onMouseLeave={
+                    !onMouseLeave
+                        ? null
+                        : () => { 
+                            let location = [...namespace]
+                            location.shift()
+                            location.pop()
+                            const variable = new JsonVariable(name, src)
+                            onMouseEnter({
+                                ...variable, 
+                                namespace: location
+                            }) 
+                        }
+                }
                 >
                 {this.getBraceStart(object_type, expanded)}
                 {expanded
-                    ? this.getObjectContent(depth, src, {theme, iconStyle, ...rest})
+                    ? this.getObjectContent(
+                        depth, 
+                        src, 
+                        {theme, iconStyle, onMouseEnter, onMouseLeave, ...rest}
+                    )
                     : this.getEllipsis()
                 }
                 <span class="brace-row">

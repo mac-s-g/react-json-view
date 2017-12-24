@@ -34,6 +34,12 @@ ReactDom.render(
                 console.log("select callback", e)
                 console.log(e.namespace)
             }}
+            onMouseEnter={v => {
+                console.log("mouseenter callback", v)
+            }}
+            onMouseLeave={v => {
+                console.log("mouseleave callback", v)
+            }}
             displayObjectSize={true}
             name={"dev-server"}
             enableClipboard={copy => {

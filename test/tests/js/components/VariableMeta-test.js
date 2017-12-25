@@ -87,7 +87,7 @@ describe("<VariableMeta />", function() {
             />
         )
         expect(wrapper.find(".copy-to-clipboard-container")).to.have.length(1)
-        expect(wrapper.find(".copy-icon")).to.have.length(1)
+        expect(wrapper.find(".copy-icon")).to.have.length(2)
 
         document.execCommand = mock => {}
         wrapper
@@ -111,11 +111,6 @@ describe("<VariableMeta />", function() {
             />
         )
         expect(wrapper.find(".copy-to-clipboard-container")).to.have.length(1)
-        expect(wrapper.find(".copy-icon")).to.have.length(1)
-
-        wrapper
-            .find(".copy-icon")
-            .first()
-            .simulate("click")
+        expect(wrapper.find(".copy-icon")).to.have.length(2)
     })
 })

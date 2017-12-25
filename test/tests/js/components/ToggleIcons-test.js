@@ -18,12 +18,12 @@ import {
 
 describe("<ToggleIcons />", function() {
     it("ExpandedIcon mount", function() {
-        const wrapper = render(<ExpandedIcon theme="rjv-default" />)
+        const wrapper = shallow(<ExpandedIcon theme="rjv-default" />)
         expect(wrapper.find(".expanded-icon")).to.have.length(1)
     })
 
     it("CollapsedIcon mount", function() {
-        const wrapper = render(<CollapsedIcon theme="rjv-default" />)
+        const wrapper = shallow(<CollapsedIcon theme="rjv-default" />)
         expect(wrapper.find(".collapsed-icon")).to.have.length(1)
     })
 

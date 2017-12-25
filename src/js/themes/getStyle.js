@@ -85,7 +85,8 @@ const getDefaultThemeStyling = theme => {
         'colon': {
             display: 'inline-block',
             margin: constants.keyMargin,
-            color: colors.keyColor
+            color: colors.keyColor,
+            verticalAlign: 'top'
         },
         objectKeyVal: (component, variable_style) => {
             return {style: {

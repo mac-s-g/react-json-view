@@ -1,4 +1,4 @@
-### Contrubiting to this Project
+### Contributing to this Project Using Docker
 #### Run the Dev Server
 To use Docker to run the source code in a local development environment:
   1. Clone this repo
@@ -26,6 +26,7 @@ cd react-json-view
 # run the build within your docker container
 ./docker/build-dist.sh
 ```
+
 
 ### Motivation for adding Docker to your Development Stack
 

@@ -2,4 +2,4 @@
 echo Running Tests
 cd /react
 
-exec npm run test:watch
+exec npm run test

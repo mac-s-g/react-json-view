@@ -3,4 +3,4 @@
 
 mkdir -p /react/dist || true
 cd /react
-exec npm run dev:hot
+exec npm run dev

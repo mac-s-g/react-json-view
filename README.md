@@ -134,7 +134,7 @@ You can run the test suite with `npm run test` or `npm run test:watch` to automa
 
 I recommend using docker for development because it enforces environmental consistency.
 
-For information about contributing with Docker, see the [README in ./docker](https://github.com/mac-s-g/react-json-view/blob/master/docker/README.md#contributing-to-this-project).
+For information about contributing with Docker, see the [README in ./docker](https://github.com/mac-s-g/react-json-view/blob/master/docker/README.md#contributing-to-this-project-using-docker).
 
 
 ### Inspiration

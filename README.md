@@ -126,7 +126,9 @@ Webpack Dev Server should automatically open up http://localhost:2000 in your we
 # run the build (note: you may need to use `sudo` priveledges to run the build successfully)
 npm run build
 ```
-Please add tests for your code before posting a pull request.  You can run the test suite in with hot-reloading with `npm run test:watch`.
+Please add tests for your code before posting a pull request.
+
+You can run the test suite with `npm run test` or `npm run test:watch` to automatically reload when files are modified.
 
 #### Docker Tools
 

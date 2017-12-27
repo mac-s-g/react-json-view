@@ -39,6 +39,7 @@ ReactDom.render(
             enableClipboard={copy => {
                 console.log("you copied to clipboard!", copy)
             }}
+            shouldCollapse={({src, type}) => type === 'array' && src.indexOf('test') > -1}
         />
 
         <br />

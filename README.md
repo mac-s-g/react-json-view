@@ -48,7 +48,8 @@ Name|Type|Default|Description
 `indentWidth`|`integer`|4|Set the indent-width for nested objects
 `collapsed`|`boolean` or `integer`|`false`|When set to `true`, all nodes will be collapsed by default.  Use an integer value to collapse at a particular depth.
 `collapseStringsAfterLength`|`integer`|`false`|When an integer value is assigned, strings will be cut off at that length. Collapsed strings are followed by an ellipsis. String content can be expanded and collapsed by clicking on the string value.
-`groupArraysAfterLength`|`integer`|`100`|When an integer value is assigned, arrays will be displayed in groups by count of the value. Groups are displayed with brakcet notation and can be expanded and collapsed by clickong on the brackets.
+`collapseObjectsAtPropertyLength`|`integer`|false|When an integer value is assigned, objects will automatically be collapsed by default if the number of properties of that object exceed this value.
+`groupArraysAfterLength`|`integer`|`100`|When an integer value is assigned, arrays will be displayed in groups by count of the value. Groups are displayed with bracket notation and can be expanded and collapsed by clicking on the brackets.
 `enableClipboard`|`boolean` or `(copy)=>{}`|`true`|When prop is not `false`, the user can copy objects and arrays to clipboard by clicking on the clipboard icon.  Copy callbacks are supported.
 `displayObjectSize`|`boolean`|`true`|When set to `true`, objects and arrays are labeled with size
 `displayDataTypes`|`boolean`|`true`|When set to `true`, data type labels prefix values

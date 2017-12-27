@@ -44,6 +44,10 @@ class rjvObject extends React.Component {
             )
             //initialize closed if object has no items
             && size !== 0
+            && (
+                !props.collapseObjectsAtPropertyLength
+                || (size < props.collapseObjectsAtPropertyLength)
+            )
         );
         const state = {
             rjvId: props.rjvId,

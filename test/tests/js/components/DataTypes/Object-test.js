@@ -292,4 +292,19 @@ describe("<JsonObject />", function() {
 
         expect(wrapper.find(".node-ellipsis")).to.have.length(0)
     })
+
+    it("should collapse at collapseObjectsAtPropertyLength value", function() {
+        let src = { prop1: 1, prop2: 2, prop3: 3}
+
+        const wrapper = shallow(
+            <JsonObject
+                src={src}
+                theme="rjv-default"
+                namespace={["root"]}
+                collapseObjectsAtPropertyLength={2}
+            />
+        )
+
+        expect(wrapper.state("expanded")).to.equal(false)
+    })
 })

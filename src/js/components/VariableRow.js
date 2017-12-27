@@ -4,12 +4,14 @@ export default ({
   onMouseEnter,
   onMouseLeave,
   namespace,
-  name,
-  src,
   children,
-  ...rest
+  variable,
+  ...props
 }) => (
   <div
+    style={props.style}
+    class={props.class}
+    key={props.key}
     onMouseEnter={
       !onMouseEnter
         ? null
@@ -17,7 +19,6 @@ export default ({
             let location = [...namespace];
             location.shift();
             location.pop();
-            const variable = new JsonVariable(name, src);
             onMouseEnter({
               ...variable,
               namespace: location
@@ -31,14 +32,13 @@ export default ({
             let location = [...namespace];
             location.shift();
             location.pop();
-            const variable = new JsonVariable(name, src);
-            onMouseEnter({
+            onMouseLeave({
               ...variable,
               namespace: location
             });
           }
     }
   >
-    {props.children}
+    {children}
   </div>
 );

@@ -19,6 +19,8 @@ import {
   JsonUndefined
 } from "./DataTypes/DataTypes";
 
+import VariableRow from "./VariableRow";
+
 //clibboard icon
 import { Edit, CheckCircle, RemoveCircle as Remove } from "./icons";
 
@@ -47,41 +49,16 @@ class VariableEditor extends React.Component {
       onEdit,
       onDelete,
       onSelect,
-      onMouseEnter,
-      onMouseLeave,
       rjvId
     } = this.props;
     const { editMode } = this.state;
 
     return (
-      <div
+      <VariableRow
+        {...this.props}
         {...Theme(theme, "objectKeyVal", {
           paddingLeft: indentWidth * singleIndent
         })}
-        onMouseEnter={
-          !onMouseEnter
-            ? null
-            : () => {
-                const location = [...namespace];
-                location.shift();
-                onMouseEnter({
-                  ...variable,
-                  namespace: location
-                });
-              }
-        }
-        onMouseLeave={
-          !onMouseLeave
-            ? null
-            : () => {
-                const location = [...namespace];
-                location.shift();
-                onMouseLeave({
-                  ...variable,
-                  namespace: location
-                });
-              }
-        }
         class="variable-row"
         key={variable.name}
       >
@@ -133,7 +110,7 @@ class VariableEditor extends React.Component {
         </div>
         {onEdit !== false && editMode == false ? this.getEditIcon() : null}
         {onDelete !== false && editMode == false ? this.getRemoveIcon() : null}
-      </div>
+      </VariableRow>
     );
   }
 

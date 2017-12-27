@@ -9,6 +9,7 @@ import VariableEditor from "./../VariableEditor";
 import VariableMeta from "./../VariableMeta";
 import ArrayGroup from "./../ArrayGroup";
 import ObjectName from "./../ObjectName";
+import VariableRow from "./../VariableRow";
 
 //attribute store
 import AttributeStore from "./../../stores/ObjectAttributes";
@@ -162,8 +163,6 @@ class rjvObject extends React.Component {
       theme,
       jsvRoot,
       iconStyle,
-      onMouseEnter,
-      onMouseLeave,
       ...rest
     } = this.props;
 
@@ -178,45 +177,17 @@ class rjvObject extends React.Component {
     }
 
     return (
-      <div
+      <VariableRow
+        {...this.props}
         class="object-key-val"
         {...Theme(theme, jsvRoot ? "jsv-root" : "objectKeyVal", styles)}
-        onMouseEnter={
-          !onMouseEnter
-            ? null
-            : () => {
-                let location = [...namespace];
-                location.shift();
-                location.pop();
-                const variable = new JsonVariable(name, src);
-                onMouseEnter({
-                  ...variable,
-                  namespace: location
-                });
-              }
-        }
-        onMouseLeave={
-          !onMouseLeave
-            ? null
-            : () => {
-                let location = [...namespace];
-                location.shift();
-                location.pop();
-                const variable = new JsonVariable(name, src);
-                onMouseEnter({
-                  ...variable,
-                  namespace: location
-                });
-              }
-        }
+        variable={new JsonVariable(name, src)}
       >
         {this.getBraceStart(object_type, expanded)}
         {expanded
           ? this.getObjectContent(depth, src, {
               theme,
               iconStyle,
-              onMouseEnter,
-              onMouseLeave,
               ...rest
             })
           : this.getEllipsis()}
@@ -231,7 +202,7 @@ class rjvObject extends React.Component {
           </span>
           {expanded ? null : this.getObjectMetaData(src)}
         </span>
-      </div>
+      </VariableRow>
     );
   }
 

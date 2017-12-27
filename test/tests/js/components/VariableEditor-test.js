@@ -57,7 +57,7 @@ describe("<VariableEditor />", function() {
                 }}
             />
         )
-        wrapper.instance().setState({ editMode: true })
+        wrapper.setState({ editMode: true })
         expect(wrapper.find(".click-to-edit")).to.have.length(0)
     })
 

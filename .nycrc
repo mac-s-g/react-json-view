@@ -2,6 +2,6 @@
   "plugins": ["transform-decorators-legacy"],
   "require": [
     "babel-register",
-    "/react/test/testHelpers/requireSources.js"
+    "./test/testHelpers/requireSources.js"
   ]
 }

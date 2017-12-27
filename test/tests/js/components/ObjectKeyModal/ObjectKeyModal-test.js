@@ -48,7 +48,7 @@ describe("<ObjectKeyModal />", function() {
             />
         )
 
-        expect(wrapper.find(".key-modal-submit").length).to.equal(1)
+        expect(wrapper.find(".key-modal-submit").length).to.equal(2)
         expect(wrapper.find(".key-modal-input").props().value).to.equal("test")
         wrapper
             .find(".key-modal-input")
@@ -80,8 +80,8 @@ describe("<ObjectKeyModal />", function() {
             />
         )
 
-        expect(wrapper.find(".key-modal-submit").length).to.equal(1)
-        wrapper.find(".key-modal-submit").simulate("click")
+        expect(wrapper.find(".key-modal-submit").length).to.equal(2)
+        wrapper.find(".key-modal-submit").first().simulate("click")
         expect(submit_counter).to.equal(1)
     })
 
@@ -101,7 +101,7 @@ describe("<ObjectKeyModal />", function() {
         )
 
         expect(wrapper.find(".key-modal-input").length).to.equal(1)
-        wrapper.find(".key-modal-cancel").simulate("click")
+        wrapper.find(".key-modal-cancel").first().simulate("click")
     })
 
     it("ObjectKeyModal non-Enter key press", function() {

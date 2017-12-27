@@ -1,3 +1,33 @@
+### Contributing to this Project Using Docker
+#### Run the Dev Server
+To use Docker to run the source code in a local development environment:
+  1. Clone this repo
+  2. Build the docker image
+      * `cd react-json-view`
+      * `./docker/build-container.sh`
+      * *note:* you may need to use `sudo` to run docker commands
+  3. Run the docker container on port 2000.  This will run the webpack-dev-server with hot-reloading enabled.
+      * `./docker/dev-server.sh`
+      * *note:* you may need to use `sudo` to run the server file
+  4. Open port 2000 in your browser
+      * navigate to localhost:2000
+
+Your source code will be mounted inside the docker container.  The container is built on the latest `Node:slim` image.
+
+Webpack-dev-server is running in the container and hot-reloading when changes are made locally.
+
+All node modules are installed within the container, so make sure to rebuild your container if you make changes to package.json (see step 2, above).
+
+#### Run the Production Build
+```bash
+cd react-json-view
+# build the rjv container
+./docker/build-container.sh
+# run the build within your docker container
+./docker/build-dist.sh
+```
+
+
 ### Motivation for adding Docker to your Development Stack
 
 **PSA:** You do not need to use Docker to contribute to this project.  If you're not interested in using a container for development, you can ignore this directory.

@@ -1,6 +1,6 @@
-import {rjv_default, rjv_grey} from './base16/rjv-themes';
-import constants from './styleConstants';
-import {createStyling} from 'react-base16-styling';
+import { rjv_default, rjv_grey } from "./base16/rjv-themes"
+import constants from "./styleConstants"
+import { createStyling } from "react-base16-styling"
 
 const colorMap = theme => ({
     backgroundColor: theme.base00,
@@ -47,141 +47,147 @@ const colorMap = theme => ({
         iconColor: theme.base01,
         fontColor: theme.base01
     }
-});
+})
 
 const getDefaultThemeStyling = theme => {
-    const colors = colorMap(theme);
+    const colors = colorMap(theme)
 
     return {
-        'app-container': {
+        "app-container": {
             fontFamily: constants.globalFontFamily,
             cursor: constants.globalCursor,
             backgroundColor: colors.backgroundColor,
-            position: 'relative'
+            position: "relative"
         },
-        'ellipsis': {
-            display: 'inline-block',
+        ellipsis: {
+            display: "inline-block",
             color: colors.ellipsisColor,
             fontSize: constants.ellipsisFontSize,
             lineHeight: constants.ellipsisLineHeight,
             cursor: constants.ellipsisCursor
         },
-        'brace-row': {
-            display: 'inline-block',
-            cursor: 'pointer'
+        "brace-row": {
+            display: "inline-block",
+            cursor: "pointer"
         },
-        'brace': {
-            display: 'inline-block',
+        brace: {
+            display: "inline-block",
             cursor: constants.braceCursor,
             fontWeight: constants.braceFontWeight,
-            color: colors.braceColor,
+            color: colors.braceColor
         },
-        'expanded-icon': {
+        "expanded-icon": {
             color: colors.expandedIcon
         },
-        'collapsed-icon': {
+        "collapsed-icon": {
             color: colors.collapsedIcon
         },
-        'colon': {
-            display: 'inline-block',
+        colon: {
+            display: "inline-block",
             margin: constants.keyMargin,
             color: colors.keyColor,
             verticalAlign: 'top'
         },
         objectKeyVal: (component, variable_style) => {
-            return {style: {
-                paddingTop: constants.keyValPaddingTop,
-                paddingRight: constants.keyValPaddingRight,
-                paddingBottom: constants.keyValPaddingBottom,
-                borderLeft: constants.keyValBorderLeft
-                    + ' ' + colors.objectBorder,
-                ':hover': {
-                    paddingLeft: (variable_style.paddingLeft - 1)  + 'px',
-                    borderLeft: constants.keyValBorderHover
-                        + ' ' + colors.objectBorder
-                },
-                ...variable_style
-            }};
+            return {
+                style: {
+                    paddingTop: constants.keyValPaddingTop,
+                    paddingRight: constants.keyValPaddingRight,
+                    paddingBottom: constants.keyValPaddingBottom,
+                    borderLeft:
+                        constants.keyValBorderLeft + " " + colors.objectBorder,
+                    ":hover": {
+                        paddingLeft: variable_style.paddingLeft - 1 + "px",
+                        borderLeft:
+                            constants.keyValBorderHover +
+                            " " +
+                            colors.objectBorder
+                    },
+                    ...variable_style
+                }
+            }
         },
-        'object-key-val-no-border': {
+        "object-key-val-no-border": {
             padding: constants.keyValPadding
         },
-        'pushed-content': {
+        "pushed-content": {
             marginLeft: constants.pushedContentMarginLeft
         },
         variableValue: (component, variable_style) => {
-            return {style: {
-                display: 'inline-block',
-                paddingRight: constants.variableValuePaddingRight,
-                position: 'relative',
-                ...variable_style
-            }}
+            return {
+                style: {
+                    display: "inline-block",
+                    paddingRight: constants.variableValuePaddingRight,
+                    position: "relative",
+                    ...variable_style
+                }
+            }
         },
-        'object-name': {
-            display: 'inline-block',
+        "object-name": {
+            display: "inline-block",
             color: colors.keyColor,
             letterSpacing: constants.keyLetterSpacing,
             fontStyle: constants.keyFontStyle,
             verticalAlign: constants.keyVerticalAlign,
             opacity: constants.keyOpacity,
-            ':hover': {
+            ":hover": {
                 opacity: constants.keyOpacityHover
             }
         },
-        'array-key': {
-            display: 'inline-block',
+        "array-key": {
+            display: "inline-block",
             color: colors.arrayKeyColor,
             letterSpacing: constants.keyLetterSpacing,
             fontStyle: constants.keyFontStyle,
             verticalAlign: constants.keyVerticalAlign,
             opacity: constants.keyOpacity,
-            ':hover': {
+            ":hover": {
                 opacity: constants.keyOpacityHover
             }
         },
-        'object-size': {
+        "object-size": {
             color: colors.objectSize,
             borderRadius: constants.objectSizeBorderRadius,
             fontStyle: constants.objectSizeFontStyle,
             margin: constants.objectSizeMargin,
-            cursor: 'default'
+            cursor: "default"
         },
-        'data-type-label': {
+        "data-type-label": {
             fontSize: constants.dataTypeFontSize,
             marginRight: constants.dataTypeMarginRight,
             opacity: constants.datatypeOpacity
         },
-        'boolean': {
-            display: 'inline-block',
+        boolean: {
+            display: "inline-block",
             color: colors.dataTypes.boolean
         },
-        'date': {
-            display: 'inline-block',
+        date: {
+            display: "inline-block",
             color: colors.dataTypes.date
         },
-        'date-value': {
+        "date-value": {
             marginLeft: constants.dateValueMarginLeft
         },
-        'float': {
-            display: 'inline-block',
+        float: {
+            display: "inline-block",
             color: colors.dataTypes.float
         },
-        'function': {
-            display: 'inline-block',
-            color: colors.dataTypes['function'],
-            cursor: 'pointer',
-            whiteSpace: 'pre-line'
+        function: {
+            display: "inline-block",
+            color: colors.dataTypes["function"],
+            cursor: "pointer",
+            whiteSpace: "pre-line"
         },
-        'integer': {
-            display: 'inline-block',
+        integer: {
+            display: "inline-block",
             color: colors.dataTypes.integer
         },
-        'string': {
-            display: 'inline-block',
+        string: {
+            display: "inline-block",
             color: colors.dataTypes.string
         },
-        'nan': {
-            display: 'inline-block',
+        nan: {
+            display: "inline-block",
             color: colors.dataTypes.nan,
             fontSize: constants.nanFontSize,
             fontWeight: constants.nanFontWeight,
@@ -190,7 +196,7 @@ const getDefaultThemeStyling = theme => {
             borderRadius: constants.nanBorderRadius
         },
         null: {
-            display: 'inline-block',
+            display: "inline-block",
             color: colors.dataTypes.null,
             fontSize: constants.nullFontSize,
             fontWeight: constants.nullFontWeight,
@@ -199,85 +205,85 @@ const getDefaultThemeStyling = theme => {
             borderRadius: constants.nullBorderRadius
         },
         undefined: {
-            display: 'inline-block',
+            display: "inline-block",
             color: colors.dataTypes.undefined,
             fontSize: constants.undefinedFontSize,
             padding: constants.undefinedPadding,
             borderRadius: constants.undefinedBorderRadius,
-            backgroundColor: colors.dataTypes.background,
+            backgroundColor: colors.dataTypes.background
         },
-        'copy-to-clipboard': {
+        "copy-to-clipboard": {
             cursor: constants.clipboardCursor
         },
-        'copy-icon': {
+        "copy-icon": {
             color: colors.copyToClipboard,
             fontSize: constants.iconFontSize,
             marginRight: constants.iconMarginRight,
-            verticalAlign: 'top',
+            verticalAlign: "top"
         },
-        'copy-icon-copied': {
+        "copy-icon-copied": {
             color: colors.copyToClipboardCheck,
             marginLeft: constants.clipboardCheckMarginLeft
         },
-        'array-group-meta-data': {
-            display: 'inline-block',
+        "array-group-meta-data": {
+            display: "inline-block",
             padding: constants.arrayGroupMetaPadding
         },
-        'object-meta-data': {
-            display: 'inline-block',
+        "object-meta-data": {
+            display: "inline-block",
             padding: constants.metaDataPadding
         },
-        'icon-container': {
-            display: 'inline-block',
+        "icon-container": {
+            display: "inline-block",
             width: constants.iconContainerWidth
         },
-        'tooltip': {
+        tooltip: {
             padding: constants.tooltipPadding
         },
         removeVarIcon: {
-            verticalAlign: 'top',
-            display: 'inline-block',
+            verticalAlign: "top",
+            display: "inline-block",
             color: colors.editVariable.removeIcon,
             cursor: constants.iconCursor,
             fontSize: constants.iconFontSize,
             marginRight: constants.iconMarginRight
         },
         addVarIcon: {
-            verticalAlign: 'top',
-            display: 'inline-block',
+            verticalAlign: "top",
+            display: "inline-block",
             color: colors.editVariable.addIcon,
             cursor: constants.iconCursor,
             fontSize: constants.iconFontSize,
-            marginRight: constants.iconMarginRight,
+            marginRight: constants.iconMarginRight
         },
         editVarIcon: {
-            verticalAlign: 'top',
-            display: 'inline-block',
+            verticalAlign: "top",
+            display: "inline-block",
             color: colors.editVariable.editIcon,
             cursor: constants.iconCursor,
             fontSize: constants.iconFontSize,
             marginRight: constants.iconMarginRight
         },
-        'edit-icon-container': {
-            display: 'inline-block',
-            verticalAlign: 'top'
+        "edit-icon-container": {
+            display: "inline-block",
+            verticalAlign: "top"
         },
-        'check-icon': {
-            display: 'inline-block',
+        "check-icon": {
+            display: "inline-block",
             cursor: constants.iconCursor,
             color: colors.editVariable.checkIcon,
             fontSize: constants.iconFontSize,
             paddingRight: constants.iconPaddingRight
         },
-        'cancel-icon': {
-            display: 'inline-block',
+        "cancel-icon": {
+            display: "inline-block",
             cursor: constants.iconCursor,
             color: colors.editVariable.cancelIcon,
             fontSize: constants.iconFontSize,
-            paddingRight: constants.iconPaddingRight,
+            paddingRight: constants.iconPaddingRight
         },
-        'edit-input': {
-            display: 'inline-block',
+        "edit-input": {
+            display: "inline-block",
             minHeight: constants.editInputHeight,
             minWidth: constants.editInputMinWidth,
             borderRadius: constants.editInputBorderRadius,
@@ -285,12 +291,12 @@ const getDefaultThemeStyling = theme => {
             color: colors.editVariable.color,
             padding: constants.editInputPadding,
             marginRight: constants.editInputMarginRight,
-            fontFamily: constants.editInputFontFamily,
+            fontFamily: constants.editInputFontFamily
         },
-        'detected-row': {
-            paddingTop: constants.detectedRowPaddingTop,
+        "detected-row": {
+            paddingTop: constants.detectedRowPaddingTop
         },
-        'key-modal-request': {
+        "key-modal-request": {
             position: constants.addKeyCoverPosition,
             top: constants.addKeyCoverPositionPx,
             left: constants.addKeyCoverPositionPx,
@@ -298,100 +304,99 @@ const getDefaultThemeStyling = theme => {
             bottom: constants.addKeyCoverPositionPx,
             backgroundColor: constants.addKeyCoverBackground
         },
-        'key-modal': {
+        "key-modal": {
             width: constants.addKeyModalWidth,
             backgroundColor: colors.addKeyModal.background,
             marginLeft: constants.addKeyModalMargin,
             marginRight: constants.addKeyModalMargin,
             padding: constants.addKeyModalPadding,
             borderRadius: constants.addKeyModalRadius,
-            marginTop: '15px',
-            position: 'relative'
+            marginTop: "15px",
+            position: "relative"
         },
-        'key-modal-label': {
+        "key-modal-label": {
             color: colors.addKeyModal.labelColor,
-            marginLeft: '2px',
-            marginBottom: '5px',
-            fontSize: '11px'
+            marginLeft: "2px",
+            marginBottom: "5px",
+            fontSize: "11px"
         },
-        'key-modal-input-container': {
-            overflow: 'hidden'
+        "key-modal-input-container": {
+            overflow: "hidden"
         },
-        'key-modal-input': {
-            width: '100%',
-            padding: '3px 6px',
-            fontFamily: 'monospace',
+        "key-modal-input": {
+            width: "100%",
+            padding: "3px 6px",
+            fontFamily: "monospace",
             color: colors.addKeyModal.color,
-            border: 'none',
-            boxSizing: 'border-box',
-            borderRadius: '2px'
+            border: "none",
+            boxSizing: "border-box",
+            borderRadius: "2px"
         },
-        'key-modal-cancel': {
+        "key-modal-cancel": {
             backgroundColor: colors.editVariable.removeIcon,
-            position: 'absolute',
-            top: '0px',
-            right: '0px',
-            borderRadius: '0px 3px 0px 3px',
-            cursor: 'pointer'
+            position: "absolute",
+            top: "0px",
+            right: "0px",
+            borderRadius: "0px 3px 0px 3px",
+            cursor: "pointer"
         },
-        'key-modal-cancel-icon': {
+        "key-modal-cancel-icon": {
             color: colors.addKeyModal.labelColor,
             fontSize: constants.iconFontSize,
             transform: "rotate(45deg)"
         },
-        'key-modal-submit': {
+        "key-modal-submit": {
             color: colors.editVariable.addIcon,
             fontSize: constants.iconFontSize,
-            position: 'absolute',
-            right: '2px',
-            top: '3px',
-            cursor: 'pointer'
+            position: "absolute",
+            right: "2px",
+            top: "3px",
+            cursor: "pointer"
         },
-        'function-ellipsis': {
-            display: 'inline-block',
+        "function-ellipsis": {
+            display: "inline-block",
             color: colors.ellipsisColor,
             fontSize: constants.ellipsisFontSize,
             lineHeight: constants.ellipsisLineHeight,
             cursor: constants.ellipsisCursor
         },
-        'validation-failure': {
-            float: 'right',
-            padding: '3px 6px',
-            borderRadius: '2px',
-            cursor: 'pointer',
+        "validation-failure": {
+            float: "right",
+            padding: "3px 6px",
+            borderRadius: "2px",
+            cursor: "pointer",
             color: colors.validationFailure.fontColor,
             backgroundColor: colors.validationFailure.background
         },
-        'validation-failure-label': {
-            marginRight: '6px'
+        "validation-failure-label": {
+            marginRight: "6px"
         },
-        'validation-failure-clear': {
-            position: 'relative',
-            verticalAlign: 'top',
-            cursor: 'pointer',
+        "validation-failure-clear": {
+            position: "relative",
+            verticalAlign: "top",
+            cursor: "pointer",
             color: colors.validationFailure.iconColor,
             fontSize: constants.iconFontSize,
             transform: "rotate(45deg)"
         }
     }
-};
+}
 
-const getStyle = (theme) => {
-    let rjv_theme = rjv_default;
-    if (theme === false || theme === 'none') {
-        rjv_theme = rjv_grey;
+const getStyle = theme => {
+    let rjv_theme = rjv_default
+    if (theme === false || theme === "none") {
+        rjv_theme = rjv_grey
     }
 
-    return createStyling(
-        getDefaultThemeStyling,
-        {defaultBase16: rjv_theme}
-    )(theme);
+    return createStyling(getDefaultThemeStyling, { defaultBase16: rjv_theme })(
+        theme
+    )
 }
 
 export default function style(theme, component, args) {
     if (!theme) {
-        console.error('theme has not been set')
+        console.error("theme has not been set")
     }
 
-    return getStyle(theme)(component, args);
+    return getStyle(theme)(component, args)
 }

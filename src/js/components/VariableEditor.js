@@ -5,6 +5,7 @@ import { toType } from "./../helpers/util"
 import dispatcher from "./../helpers/dispatcher"
 import parseInput from "./../helpers/parseInput"
 import stringifyVariable from "./../helpers/stringifyVariable"
+import CopyToClipboard from './CopyToClipboard'
 
 //data type components
 import {
@@ -39,11 +40,13 @@ class VariableEditor extends React.Component {
     render() {
         const {
             variable,
+            src,
             singleIndent,
             type,
             theme,
             namespace,
             indentWidth,
+            enableClipboard,
             onEdit,
             onDelete,
             onSelect,
@@ -107,6 +110,14 @@ class VariableEditor extends React.Component {
                 >
                     {this.getValue(variable, this.props, editMode)}
                 </div>
+                {enableClipboard
+                    ? (<CopyToClipboard
+                        hidden={editMode}
+                        src={variable.value}
+                        clickCallback={enableClipboard}
+                        {...{theme, namespace}} />)
+                    : null
+                }
                 {onEdit !== false && editMode == false
                     ? this.getEditIcon()
                     : null}

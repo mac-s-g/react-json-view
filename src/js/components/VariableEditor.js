@@ -5,6 +5,7 @@ import { toType } from "./../helpers/util"
 import dispatcher from "./../helpers/dispatcher"
 import parseInput from "./../helpers/parseInput"
 import stringifyVariable from "./../helpers/stringifyVariable"
+import CopyToClipboard from './CopyToClipboard'
 
 //data type components
 import {
@@ -20,7 +21,7 @@ import {
 } from "./DataTypes/DataTypes"
 
 //clibboard icon
-import { Edit, CheckCircle, RemoveCircle as Remove, Clippy } from "./icons"
+import { Edit, CheckCircle, RemoveCircle as Remove } from "./icons"
 
 //theme
 import Theme from "./../themes/getStyle"
@@ -33,84 +34,13 @@ class VariableEditor extends React.Component {
         parsedInput: {
             type: false,
             value: null
-        },
-        copied: false
-    }
-
-    handleCopy = () => {
-        const container = document.createElement("textarea")
-        const { enableClipboard, variable, namespace } = this.props
-
-        container.innerHTML = JSON.stringify(variable.value, null, "  ")
-
-        document.body.appendChild(container)
-        container.select()
-        document.execCommand("copy")
-
-        document.body.removeChild(container)
-
-        this.copiedTimer = setTimeout(() => {
-            this.setState({
-                copied: false
-            })
-        }, 5500)
-
-        this.setState({ copied: true }, () => {
-            if (typeof enableClipboard !== "function") {
-                return
-            }
-
-            enableClipboard({
-                src: variable.value,
-                namespace: namespace,
-                name: namespace[namespace.length - 1]
-            })
-        })
-    }
-
-    getCopyComponent = () => {
-        const { src, size, theme } = this.props
-        const { editMode } = this.state
-        let style = Theme(theme, "copy-to-clipboard").style
-        let display = "inline"
-
-        if (editMode) {
-            display = "none"
         }
-
-        return (
-            <span class="copy-to-clipboard-container">
-                <span
-                    style={{
-                        ...style,
-                        display: display
-                    }}
-                    onClick={this.handleCopy}
-                >
-                    {this.getClippyIcon()}
-                </span>
-            </span>
-        )
-    }
-
-    getClippyIcon = () => {
-        const { theme } = this.props
-
-        if (this.state.copied) {
-            return (
-                <span>
-                    <Clippy class="copy-icon" {...Theme(theme, "copy-icon")} />
-                    <span {...Theme(theme, "copy-icon-copied")}>✔</span>
-                </span>
-            )
-        }
-
-        return <Clippy class="copy-icon" {...Theme(theme, "copy-icon")} />
     }
 
     render() {
         const {
             variable,
+            src,
             singleIndent,
             type,
             theme,
@@ -180,7 +110,14 @@ class VariableEditor extends React.Component {
                 >
                     {this.getValue(variable, this.props, editMode)}
                 </div>
-                {enableClipboard !== false ? this.getCopyComponent() : null}
+                {enableClipboard
+                    ? (<CopyToClipboard
+                        hidden={editMode}
+                        src={variable.value}
+                        clickCallback={enableClipboard}
+                        {...{theme, namespace}} />)
+                    : null
+                }
                 {onEdit !== false && editMode == false
                     ? this.getEditIcon()
                     : null}

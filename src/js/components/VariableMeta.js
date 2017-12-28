@@ -107,7 +107,6 @@ export default class extends React.Component {
             onAdd,
             enableClipboard,
             src,
-            variable,
             namespace
         } = this.props;
         return (

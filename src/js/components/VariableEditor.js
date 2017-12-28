@@ -37,10 +37,6 @@ class VariableEditor extends React.Component {
         copied: false
     }
 
-    constructor(props) {
-        super(props)
-    }
-
     handleCopy = () => {
         const container = document.createElement("textarea")
         const { enableClipboard, variable, namespace } = this.props
@@ -196,13 +192,7 @@ class VariableEditor extends React.Component {
     }
 
     getEditIcon = () => {
-        const { variable, namespace, theme } = this.props
-        const { editMode } = this.state
-        let display = "inline-block"
-
-        if (editMode) {
-            display = "none"
-        }
+        const { variable, theme } = this.props
 
         return (
             <div class="click-to-edit" style={{ verticalAlign: "top" }}>
@@ -215,6 +205,7 @@ class VariableEditor extends React.Component {
                 />
             </div>
         )
+
     }
 
     prepopInput = variable => {
@@ -233,12 +224,6 @@ class VariableEditor extends React.Component {
 
     getRemoveIcon = () => {
         const { variable, namespace, theme, rjvId } = this.props
-        const { editMode } = this.state
-        let display = "inline-block"
-
-        if (editMode) {
-            display = "none"
-        }
 
         return (
             <div class="click-to-remove" style={{ verticalAlign: "top" }}>
@@ -296,7 +281,7 @@ class VariableEditor extends React.Component {
     }
 
     getEditInput = () => {
-        const { variable, namespace, theme, rjvId } = this.props
+        const { theme } = this.props
         const { editValue } = this.state
 
         return (

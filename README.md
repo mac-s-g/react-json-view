@@ -1,6 +1,6 @@
 ![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/rjv-icon-alt.png?raw=true)
 
-[![npm](https://img.shields.io/npm/v/react-json-view.svg)](https://www.npmjs.com/package/react-json-view) [![npm](https://img.shields.io/npm/l/react-json-view.svg)](https://github.com/mac-s-g/react-json-view/blob/master/LISCENSE) [![Build Status](https://travis-ci.org/mac-s-g/react-json-view.svg)](https://travis-ci.org/mac-s-g/react-json-view) [![Coverage Status](https://coveralls.io/repos/github/mac-s-g/react-json-view/badge.svg?branch=master)](https://coveralls.io/github/mac-s-g/react-json-view?branch=master)
+[![npm](https://img.shields.io/npm/v/react-json-view.svg)](https://www.npmjs.com/package/react-json-view) [![npm](https://img.shields.io/npm/l/react-json-view.svg)](https://github.com/mac-s-g/react-json-view/blob/master/LISCENSE) [![Build Status](https://travis-ci.org/mac-s-g/react-json-view.svg)](https://travis-ci.org/mac-s-g/react-json-view) [![Coverage Status](https://coveralls.io/repos/github/mac-s-g/react-json-view/badge.svg?branch=master)](https://coveralls.io/github/mac-s-g/react-json-view?branch=master) [![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/react-json-view)
 
 # react-json-view
 RJV is a react component for displaying and editing javascript **arrays** and **JSON objects**.
@@ -48,6 +48,7 @@ Name|Type|Default|Description
 `indentWidth`|`integer`|4|Set the indent-width for nested objects
 `collapsed`|`boolean` or `integer`|`false`|When set to `true`, all nodes will be collapsed by default.  Use an integer value to collapse at a particular depth.
 `collapseStringsAfterLength`|`integer`|`false`|When an integer value is assigned, strings will be cut off at that length. Collapsed strings are followed by an ellipsis. String content can be expanded and collapsed by clicking on the string value.
+`shouldCollapse`|`(field)=>{}`|`false`|Callback function to provide control over what objects and arrays should be collapsed by default.  An object is passed to the callback containing `name`, `src`, `type` ("array" or "object") and `namespace`.
 `groupArraysAfterLength`|`integer`|`100`|When an integer value is assigned, arrays will be displayed in groups by count of the value. Groups are displayed with brakcet notation and can be expanded and collapsed by clickong on the brackets.
 `enableClipboard`|`boolean` or `(copy)=>{}`|`true`|When prop is not `false`, the user can copy objects and arrays to clipboard by clicking on the clipboard icon.  Copy callbacks are supported.
 `displayObjectSize`|`boolean`|`true`|When set to `true`, objects and arrays are labeled with size
@@ -108,47 +109,36 @@ The following object will be passed to your method:
 Returning `false` from a callback method will prevent the src from being affected.
 
 ### Contributing to the source code
-#### Linux and Docker (Recommended)
-Use Docker to run the source code in a local development environment:
-  1. Clone this repo
-  2. Build the docker image
-      * `cd react-json-view`
-      * `./docker/build-container.sh`
-      * *note:* you may need to use `sudo` to run docker commands
-  3. Run the docker container on port 2000.  This will run the webpack-dev-server with hot-reloading enabled.
-      * `./docker/dev-server.sh`
-      * *note:* you may need to use `sudo` to run the server file
-  4. Open port 2000 in your browser
-      * navigate to localhost:2000
+#### Run the Dev Server
 
-Your source code will be mounted inside the docker container.  The container is built on the latest `Node:slim` image.
-
-Webpack-dev-server is running in the container and hot-reloading when changes are made locally.
-
-All node modules are installed within the container, so make sure to rebuild your container if you make changes to package.json (see step 2, above).
-
-#### Standard Workflow
-Development workflow is setup for linux users with Docker installed.  You can contribute with other configurations but I have not tested them.
-
-  1. Clone this repo
-  2. Install npm dependencies
+```bash
+# clone this repository
+git clone git@github.com:mac-s-g/react-json-view.git && cd react-json-view
+# install dependencies
+npm install --save-dev
+# run the dev server with hot reloading
+npm run dev
 ```
-cd react-json-view
-npm install
+Webpack Dev Server should automatically open up http://localhost:2000 in your web browser.  If it does not, open a browser and navigate to port 2000. The hot reloader will automatically reload when files are modified in the `/src/` directory.
+
+#### Run the Production Build
+
+```bash
+# run the build (note: you may need to use `sudo` priveledges to run the build successfully)
+npm run build
 ```
-  3. Run webpack to start webpack-dev-server with hot-reloading enabled
-      * `npm run dev:hot`
-  4. Open port 2000 in your browser
-      * navigate to localhost:2000
+Please add tests for your code before posting a pull request.
+
+You can run the test suite with `npm run test` or `npm run test:watch` to automatically reload when files are modified.
+
+#### Docker Tools
+
+I recommend using docker for development because it enforces environmental consistency.
+
+For information about contributing with Docker, see the [README in ./docker](https://github.com/mac-s-g/react-json-view/blob/master/docker/README.md#contributing-to-this-project-using-docker).
+
 
 ### Inspiration
 I drew a ton of design ideas from [react-json-tree](https://github.com/alexkuz/react-json-tree).  Thanks to the RJT contributors for putting together an awesome component!
 
 I'm also inspired by users who come up with interesting feature requests.  Reach out to me with ideas for this project or other projects you want to collaborate on.  My email address is listed on my [github user page](https://github.com/mac-s-g).
-
-### To-Do's
-1. Improve documentation for `onEdit`, `onAdd` and `onDelete` props
-2. Improve style organization
-3. Continue size analysis and remove larger dependencies from build where possible
-4. As always, improve test quality and coverage
-5. update screenshots and docs in README

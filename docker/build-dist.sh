@@ -16,9 +16,9 @@ stop_and_remove_container || true
 docker run \
     -v $(pwd)/src:/react/src \
     -v $(pwd)/dist:/react/dist \
-    -v $(pwd)/entrypoints:/react/entrypoints \
     -v $(pwd)/webpack:/react/webpack \
+    -v $(pwd)/docker:/react/docker \
     --name=react-json-view \
     -e NODE_ENV=$NODE_ENV \
-    --entrypoint=/react/entrypoints/publish.sh \
+    --entrypoint=/react/docker/entrypoints/build.sh \
     -t react-json-view

@@ -42,6 +42,15 @@ class rjvObject extends React.Component {
                 || (props.collapsed !== true
                 && props.collapsed > props.depth)
             )
+            && (
+                !props.shouldCollapse
+                || props.shouldCollapse({
+                    name: props.name,
+                    src: props.src,
+                    type: toType(props.src),
+                    namespace: props.namespace
+                }) === false
+            )
             //initialize closed if object has no items
             && size !== 0
         );
@@ -128,7 +137,7 @@ class rjvObject extends React.Component {
                     {expanded ? this.getObjectMetaData(src) : null}
                 </span>
             )
-        }        
+        }
 
         const IconComponent = expanded ? ExpandedIcon : CollapsedIcon
 
@@ -216,7 +225,7 @@ class rjvObject extends React.Component {
                         namespace={namespace.concat(variable.name)}
                         parent_type={object_type}
                         {...props}
-                    />);  
+                    />);
             } else if (variable.type == 'array') {
                 let ObjectComponent = JsonObject
 

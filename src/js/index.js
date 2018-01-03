@@ -51,6 +51,8 @@ export default class extends React.Component {
         onDelete: false,
         onAdd: false,
         onSelect: false,
+        onMouseEnter: false,
+        onMouseLeave: false,
         iconStyle: "triangle",
         style: {},
         validationMessage: "Validation Error"

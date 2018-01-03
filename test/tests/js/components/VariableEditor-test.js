@@ -121,6 +121,36 @@ describe("<VariableEditor />", function() {
         expect(wrapper.state("editMode")).to.equal(false)
     })
 
+    it("VariableEditor callbacks trigger for onMouseEnter and onMouseLeave", function() {
+        let entered = false, left = false
+
+        const wrapper = shallow(
+            <VariableEditor
+                src={{ test: 'value' }}
+                theme="rjv-default"
+                onMouseEnter={e => {
+                    entered = true
+                }} 
+                onMouseLeave={e => {
+                    left = true
+                }}
+                variable={{
+                    name: "test",
+                    value: "value",
+                    type: "string"
+                }}
+                namespace={["test"]}
+                rjvId={rjvId}
+            />
+        )
+
+        wrapper.find('.variable-row').simulate('mouseenter')
+        expect(entered).to.equal(true)
+
+        wrapper.find('.variable-row').simulate('mouseleave')
+        expect(left).to.equal(true)
+    })
+
     it("VariableEditor edit after src change should respect current src", function() {
         const existing_value = "existing_value"
         const new_value = "new_value"

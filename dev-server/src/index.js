@@ -4,6 +4,8 @@
 import React from "react"
 import ReactDom from "react-dom"
 
+import Moment from "moment"
+
 //import the react-json-view component (installed with npm)
 import JsonViewer from "./../../src/js/index"
 
@@ -39,7 +41,14 @@ ReactDom.render(
             enableClipboard={copy => {
                 console.log("you copied to clipboard!", copy)
             }}
-            shouldCollapse={({src, type}) => type === 'array' && src.indexOf('test') > -1}
+            shouldCollapse={({ src, namespace, type }) => {
+                if (type === "array" && src.indexOf("test") > -1) {
+                    return true
+                } else if (namespace.indexOf("moment") > -1) {
+                    return true
+                }
+                return false
+            }}
         />
 
         <br />
@@ -67,6 +76,8 @@ ReactDom.render(
             }}
             name={false}
             iconStyle="triangle"
+            shouldCollapse={({ src, namespace, type }) =>
+                namespace.indexOf("moment") > -1}
         />
 
         <br />
@@ -121,6 +132,8 @@ ReactDom.render(
         <JsonViewer
             enableClipboard={false}
             src={getExampleJson1()}
+            shouldCollapse={({ src, namespace, type }) =>
+                namespace.indexOf("moment") > -1}
             theme={{
                 base00: "white",
                 base01: "#ddd",
@@ -183,7 +196,8 @@ function getExampleJson1() {
             }
         },
         string_number: "1234",
-        date: new Date()
+        date: new Date(),
+        moment: Moment()
     }
 }
 

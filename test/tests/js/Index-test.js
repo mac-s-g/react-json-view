@@ -30,12 +30,13 @@ describe("<Index />", function() {
                             two: "two"
                         }
                     },
-                    arr: [[1, "two"], { one: "one", two: 2 }]
+                    arr: [[1, "two"], { one: "one", two: 2 }],
+                    regexp: /[0-9]/gi
                 }}
             />
         )
-        expect(wrapper.find(".data-type-label")).to.have.length(13)
-        expect(wrapper.find(".data-type-label")).to.have.length(13)
+        expect(wrapper.find(".data-type-label")).to.have.length(14)
+        expect(wrapper.find(".data-type-label")).to.have.length(14)
     })
 
     it("check object-size labels from index", function() {
@@ -55,7 +56,8 @@ describe("<Index />", function() {
                             two: "two"
                         }
                     },
-                    arr: [[1, "two"], { one: "one", two: 2 }]
+                    arr: [[1, "two"], { one: "one", two: 2 }],
+                    regexp: /[0-9]/gi
                 }}
                 displayObjectSize={true}
                 displayDataTypes={true}
@@ -75,18 +77,19 @@ describe("<Index />", function() {
         expect(wrapper.find(".data-type-label")).to.have.length(1)
     })
 
-    it("make sure copy to clipboard is displayed for objects and arrays", function() {
+    it("make sure copy to clipboard is displayed all properties", function() {
         const wrapper = render(
             <Index
                 src={{
                     test: true,
                     passing: "hopefully",
-                    arr: [],
-                    obj: {}
+                    arr: [5],
+                    obj: {},
+                    regexp: /[0-9]/gi
                 }}
             />
         )
-        expect(wrapper.find(".copy-to-clipboard-container")).to.have.length(3)
+        expect(wrapper.find(".copy-to-clipboard-container")).to.have.length(7)
     })
 
     it("index test componentWillReceiveProps", function() {

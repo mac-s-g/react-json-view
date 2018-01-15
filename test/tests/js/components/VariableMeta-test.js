@@ -7,21 +7,6 @@ import VariableMeta from "./../../../../src/js/components/VariableMeta"
 describe("<VariableMeta />", function() {
     const rjvId = 1
 
-    it("VariableMeta clipboard should exist", function() {
-        const wrapper = shallow(
-            <VariableMeta
-                src={{ test: true }}
-                size={1}
-                theme="rjv-default"
-                enableClipboard={true}
-                onAdd={false}
-                onDelete={false}
-                rjvId={rjvId}
-            />
-        )
-        expect(wrapper.find(".copy-to-clipboard-container")).to.have.length(1)
-    })
-
     it("VariableMeta clipboard should not exist", function() {
         const wrapper = shallow(
             <VariableMeta

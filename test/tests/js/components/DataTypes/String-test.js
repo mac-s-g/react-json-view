@@ -1,14 +1,13 @@
 import React from "react"
-import { shallow } from "enzyme"
+import { shallow, mount } from "enzyme"
 import { expect } from "chai"
 
 import JsonString from "./../../../../../src/js/components/DataTypes/String"
-import DataTypeLabel from "./../../../../../src/js/components/DataTypes/DataTypeLabel"
 
 describe("<JsonString />", function() {
     it("string component should have a data type label", function() {
         const rjvId = 1
-        const wrapper = shallow(
+        const wrapper = mount(
             <JsonString
                 value="test"
                 rjvId={rjvId}
@@ -16,7 +15,7 @@ describe("<JsonString />", function() {
                 theme="rjv-default"
             />
         )
-        expect(wrapper.find(DataTypeLabel)).to.have.length(1)
+        expect(wrapper.find(".data-type-label")).to.have.length(1)
     })
 
     it("string with hidden data type", function() {
@@ -27,8 +26,8 @@ describe("<JsonString />", function() {
             theme: "rjv-default",
             displayDataTypes: false
         }
-        const component = shallow(<JsonString {...props} />).render()
-        expect(component.find(".data-type-label.hidden")).to.have.length(1)
+        const component = mount(<JsonString {...props} />).render()
+        expect(component.find(".data-type-label")).to.have.length(0)
     })
 
     //test collapsed string and expand click
@@ -40,8 +39,8 @@ describe("<JsonString />", function() {
             displayDataTypes: false,
             theme: "rjv-default"
         }
-        const component = shallow(<JsonString {...props} />).render()
-        expect(component.find(".data-type-label")).to.have.length(1)
+        const component = mount(<JsonString {...props} />).render()
+        expect(component.find(".data-type-label")).to.have.length(0)
     })
 
     it("collapsed string content", function() {

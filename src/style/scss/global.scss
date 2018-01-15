@@ -1,6 +1,6 @@
 .react-json-view {
-
     .copy-to-clipboard-container {
+        vertical-align: top;
         display: none;
     }
     .click-to-add {
@@ -24,7 +24,14 @@
             & > .click-to-remove {
                 display: inline-block;
             }
+        }
+    }
 
+    .variable-row {
+        &:hover {
+            & .copy-to-clipboard-container {
+                display: inline-block;
+            }
         }
     }
 
@@ -36,5 +43,4 @@
             display: inline-block;
         }
     }
-
 }

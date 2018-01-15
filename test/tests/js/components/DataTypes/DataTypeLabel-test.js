@@ -16,7 +16,7 @@ describe("<DataTypeLabel />", function() {
                 theme="rjv-default"
             />
         )
-        expect(wrapper.find(".data-type-label.hidden")).to.have.length(0)
+        expect(wrapper.find(".data-type-label")).to.have.length(1)
     })
 
     it("DataTypeLabel should not exist when displayDataTypes is false", function() {
@@ -28,6 +28,6 @@ describe("<DataTypeLabel />", function() {
                 theme="rjv-default"
             />
         )
-        expect(wrapper.find(".data-type-label.hidden")).to.have.length(1)
+        expect(wrapper.find(".data-type-label")).to.have.length(0)
     })
 })

@@ -1,15 +1,14 @@
 import React from "react"
-import { shallow } from "enzyme"
+import { mount } from "enzyme"
 import { expect } from "chai"
 
 import JsonFloat from "./../../../../../src/js/components/DataTypes/Float"
-import DataTypeLabel from "./../../../../../src/js/components/DataTypes/DataTypeLabel"
 
 describe("<JsonFloat />", function() {
     const rjvId = 1
 
     it("float component should have a data type label", function() {
-        const wrapper = shallow(
+        const wrapper = mount(
             <JsonFloat
                 value={1.25}
                 displayDataTypes={true}
@@ -17,6 +16,18 @@ describe("<JsonFloat />", function() {
                 theme="rjv-default"
             />
         )
-        expect(wrapper.find(DataTypeLabel)).to.have.length(1)
+        expect(wrapper.find(".data-type-label")).to.have.length(1)
+    })
+
+    it("float component should not have a data type label", function() {
+        const wrapper = mount(
+            <JsonFloat
+                value={1.25}
+                displayDataTypes={false}
+                rjvId={rjvId}
+                theme="rjv-default"
+            />
+        )
+        expect(wrapper.find(".data-type-label")).to.have.length(0)
     })
 })

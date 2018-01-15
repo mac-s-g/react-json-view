@@ -1,15 +1,14 @@
 import React from "react"
-import { shallow } from "enzyme"
+import { mount } from "enzyme"
 import { expect } from "chai"
 
 import JsonDate from "./../../../../../src/js/components/DataTypes/Date"
-import DataTypeLabel from "./../../../../../src/js/components/DataTypes/DataTypeLabel"
 
 describe("<JsonDate />", function() {
     const rjvId = 1
 
     it("date component should have a data type label", function() {
-        const wrapper = shallow(
+        const wrapper = mount(
             <JsonDate
                 value={new Date()}
                 displayDataTypes={true}
@@ -17,6 +16,18 @@ describe("<JsonDate />", function() {
                 theme="rjv-default"
             />
         )
-        expect(wrapper.find(DataTypeLabel)).to.have.length(1)
+        expect(wrapper.find(".data-type-label")).to.have.length(1)
+    })
+
+    it("date component should not have a data type label", function() {
+        const wrapper = mount(
+            <JsonDate
+                value={new Date()}
+                displayDataTypes={false}
+                rjvId={rjvId}
+                theme="rjv-default"
+            />
+        )
+        expect(wrapper.find(".data-type-label")).to.have.length(0)
     })
 })

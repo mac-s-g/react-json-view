@@ -26,7 +26,7 @@ describe("<JsonObject />", function() {
         expect(wrapper.find(".object-key-val")).to.have.length(1)
     })
 
-    it("Object mount", function() {
+    it("Object mount, multiple data type labels", function() {
         let src = {
             bool: true, //should have label
             int: 5, //should have label
@@ -62,7 +62,7 @@ describe("<JsonObject />", function() {
         expect(wrapper.find(".data-type-label")).to.have.length(8)
     })
 
-    it("Object mount", function() {
+    it("Object mount, no data type labels when collapsed", function() {
         let src = {
             bool: true, //should have label
             int: 5, //should have label
@@ -89,10 +89,11 @@ describe("<JsonObject />", function() {
                 indentWidth={1}
                 depth={1}
                 displayDataTypes={true}
+                collapsed={true}
                 type="object"
             />
         )
-        expect(wrapper.find(".data-type-label.hidden")).to.have.length(0)
+        expect(wrapper.find(".data-type-label")).to.have.length(0)
     })
 
     it("Array mount expanded", function() {
@@ -294,7 +295,7 @@ describe("<JsonObject />", function() {
     })
 
     it("should collapse at shouldCollapse logic", function() {
-        let src = { prop1: 1, prop2: 2, prop3: 3}
+        let src = { prop1: 1, prop2: 2, prop3: 3 }
 
         const wrapper = shallow(
             <JsonObject
@@ -310,7 +311,7 @@ describe("<JsonObject />", function() {
     })
 
     it("should expand based on shouldCollapse logic", function() {
-        let src = { prop1: 1, prop2: 2, prop3: 3}
+        let src = { prop1: 1, prop2: 2, prop3: 3 }
 
         const wrapper = shallow(
             <JsonObject
@@ -324,5 +325,4 @@ describe("<JsonObject />", function() {
 
         expect(wrapper.state("expanded")).to.equal(true)
     })
-
 })

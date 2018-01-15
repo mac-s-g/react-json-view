@@ -51,4 +51,8 @@ describe("parseInput", function() {
     it("parseInput string", function() {
         expect(parseInput("test").type).to.equal(false)
     })
+
+    it("parseInput regex", function() {
+        expect(parseInput("/[0-9]/").type).to.equal(false)
+    })
 })

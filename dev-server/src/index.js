@@ -76,8 +76,10 @@ ReactDom.render(
             }}
             name={false}
             iconStyle="triangle"
-            shouldCollapse={({ src, namespace, type }) =>
-                namespace.indexOf("moment") > -1}
+            shouldCollapse={({ src, type }) =>
+                type === "object" &&
+                src.constructor &&
+                src.constructor.name === "Moment"}
         />
 
         <br />
@@ -197,7 +199,8 @@ function getExampleJson1() {
         },
         string_number: "1234",
         date: new Date(),
-        moment: Moment()
+        moment: Moment(),
+        regexp: /[0-9]/gi
     }
 }
 

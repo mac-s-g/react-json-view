@@ -179,6 +179,9 @@ const getDefaultThemeStyling = theme => {
             cursor: "pointer",
             whiteSpace: "pre-line"
         },
+        "function-value": {
+            fontStyle: "italic"
+        },
         integer: {
             display: "inline-block",
             color: colors.dataTypes.integer

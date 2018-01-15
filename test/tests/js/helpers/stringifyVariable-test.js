@@ -80,4 +80,9 @@ describe("stringifyVariable", function() {
         let test = new Date()
         expect(stringifyVariable(test)).to.equal(test.toString())
     })
+
+    it("stringifyVariable regex", function() {
+        let regex = /[0-9]/gi
+        expect(stringifyVariable(regex)).to.equal(regex.toString())
+    })
 })

@@ -24,6 +24,7 @@ const colorMap = theme => ({
         nan: theme.base08,
         null: theme.base0A,
         undefined: theme.base05,
+        regexp: theme.base0A,
         background: theme.base02
     },
     editVariable: {
@@ -86,7 +87,7 @@ const getDefaultThemeStyling = theme => {
             display: "inline-block",
             margin: constants.keyMargin,
             color: colors.keyColor,
-            verticalAlign: 'top'
+            verticalAlign: "top"
         },
         objectKeyVal: (component, variable_style) => {
             return {
@@ -178,6 +179,9 @@ const getDefaultThemeStyling = theme => {
             cursor: "pointer",
             whiteSpace: "pre-line"
         },
+        "function-value": {
+            fontStyle: "italic"
+        },
         integer: {
             display: "inline-block",
             color: colors.dataTypes.integer
@@ -211,6 +215,10 @@ const getDefaultThemeStyling = theme => {
             padding: constants.undefinedPadding,
             borderRadius: constants.undefinedBorderRadius,
             backgroundColor: colors.dataTypes.background
+        },
+        regexp: {
+            display: "inline-block",
+            color: colors.dataTypes.regexp
         },
         "copy-to-clipboard": {
             cursor: constants.clipboardCursor

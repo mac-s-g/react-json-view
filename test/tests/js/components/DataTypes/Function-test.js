@@ -3,7 +3,6 @@ import { shallow, mount } from "enzyme"
 import { expect } from "chai"
 
 import JsonFunction from "./../../../../../src/js/components/DataTypes/Function"
-import DataTypeLabel from "./../../../../../src/js/components/DataTypes/DataTypeLabel"
 
 import AttributeStore from "./../../../../../src/js/stores/ObjectAttributes"
 
@@ -11,7 +10,7 @@ describe("<JsonFunction />", function() {
     const rjvId = 1
 
     it("function component should have a data type label", function() {
-        const wrapper = shallow(
+        const wrapper = mount(
             <JsonFunction
                 value={function() {}}
                 rjvId={rjvId}
@@ -19,7 +18,19 @@ describe("<JsonFunction />", function() {
                 theme="rjv-default"
             />
         )
-        expect(wrapper.find(DataTypeLabel)).to.have.length(1)
+        expect(wrapper.find(".data-type-label")).to.have.length(1)
+    })
+
+    it("function component should not have a data type label", function() {
+        const wrapper = mount(
+            <JsonFunction
+                value={function() {}}
+                rjvId={rjvId}
+                displayDataTypes={false}
+                theme="rjv-default"
+            />
+        )
+        expect(wrapper.find(".data-type-label")).to.have.length(0)
     })
 
     it("function component expanded", function() {

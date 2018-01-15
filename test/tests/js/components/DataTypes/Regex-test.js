@@ -2,25 +2,29 @@ import React from "react"
 import { mount } from "enzyme"
 import { expect } from "chai"
 
-import JsonNull from "./../../../../../src/js/components/DataTypes/Null"
+import JsonRegex from "./../../../../../src/js/components/DataTypes/Function"
 
-describe("<JsonNull />", function() {
+import AttributeStore from "./../../../../../src/js/stores/ObjectAttributes"
+
+describe("<JsonRegex />", function() {
     const rjvId = 1
 
-    it("Null component should no data type label (type labels enabled)", function() {
+    it("regex component should have a data type label", function() {
         const wrapper = mount(
-            <JsonNull
+            <JsonRegex
+                value={/[0-9]/gi}
                 rjvId={rjvId}
                 displayDataTypes={true}
                 theme="rjv-default"
             />
         )
-        expect(wrapper.find(".data-type-label")).to.have.length(0)
+        expect(wrapper.find(".data-type-label")).to.have.length(1)
     })
 
-    it("Null component should no data type label (type labels disabled)", function() {
+    it("regex component should not have a data type label", function() {
         const wrapper = mount(
-            <JsonNull
+            <JsonRegex
+                value={/[0-9]/gi}
                 rjvId={rjvId}
                 displayDataTypes={false}
                 theme="rjv-default"

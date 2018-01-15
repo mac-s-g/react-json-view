@@ -5,7 +5,7 @@ import { toType } from "./../helpers/util"
 import dispatcher from "./../helpers/dispatcher"
 import parseInput from "./../helpers/parseInput"
 import stringifyVariable from "./../helpers/stringifyVariable"
-import CopyToClipboard from './CopyToClipboard'
+import CopyToClipboard from "./CopyToClipboard"
 
 //data type components
 import {
@@ -16,6 +16,7 @@ import {
     JsonInteger,
     JsonNan,
     JsonNull,
+    JsonRegexp,
     JsonString,
     JsonUndefined
 } from "./DataTypes/DataTypes"
@@ -108,16 +109,16 @@ class VariableEditor extends React.Component {
                         cursor: onSelect === false ? "default" : "pointer"
                     })}
                 >
-                    {this.getValue(variable, this.props, editMode)}
+                    {this.getValue(variable, editMode)}
                 </div>
-                {enableClipboard
-                    ? (<CopyToClipboard
+                {enableClipboard ? (
+                    <CopyToClipboard
                         hidden={editMode}
                         src={variable.value}
                         clickCallback={enableClipboard}
-                        {...{theme, namespace}} />)
-                    : null
-                }
+                        {...{ theme, namespace }}
+                    />
+                ) : null}
                 {onEdit !== false && editMode == false
                     ? this.getEditIcon()
                     : null}
@@ -142,7 +143,6 @@ class VariableEditor extends React.Component {
                 />
             </div>
         )
-
     }
 
     prepopInput = variable => {
@@ -184,8 +184,9 @@ class VariableEditor extends React.Component {
         )
     }
 
-    getValue = (variable, props, editMode) => {
+    getValue = (variable, editMode) => {
         const type = editMode ? false : variable.type
+        const { props } = this
         switch (type) {
             case false:
                 return this.getEditInput()
@@ -207,11 +208,13 @@ class VariableEditor extends React.Component {
                 return <JsonUndefined {...props} />
             case "date":
                 return <JsonDate value={variable.value} {...props} />
+            case "regexp":
+                return <JsonRegexp value={variable.value} {...props} />
             default:
                 // catch-all for types that weren't anticipated
                 return (
-                    <div class="object-value" {...props}>
-                        {variable.value}
+                    <div class="object-value">
+                        {JSON.stringify(variable.value)}
                     </div>
                 )
         }

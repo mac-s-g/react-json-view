@@ -1,4 +1,7 @@
-import React from 'react'
+import React from "react"
+
+import { toType } from "./../helpers/util"
+import stringifyVariable from "./../helpers/stringifyVariable"
 
 //clibboard icon
 import { Clippy } from "./icons"
@@ -8,16 +11,16 @@ import Theme from "./../themes/getStyle"
 
 export default class extends React.Component {
     constructor(props) {
-        super(props);
-        this.copiedTimer = null;
+        super(props)
+        this.copiedTimer = null
     }
 
-    state = {copied: false}
+    state = { copied: false }
 
     componentWillUnmount() {
         if (this.copiedTimer) {
-            clearTimeout(this.copiedTimer);
-            this.copiedTimer = null;
+            clearTimeout(this.copiedTimer)
+            this.copiedTimer = null
         }
     }
 
@@ -25,7 +28,11 @@ export default class extends React.Component {
         const container = document.createElement("textarea")
         const { clickCallback, src, namespace } = this.props
 
-        container.innerHTML = JSON.stringify(src, null, "  ")
+        container.innerHTML = JSON.stringify(
+            this.clipboardValue(src),
+            null,
+            "  "
+        )
 
         document.body.appendChild(container)
         container.select()
@@ -65,6 +72,18 @@ export default class extends React.Component {
         }
 
         return <Clippy class="copy-icon" {...Theme(theme, "copy-icon")} />
+    }
+
+    clipboardValue = value => {
+        const type = toType(value)
+        switch (type) {
+            case "function":
+                return value.toString()
+            case "regexp":
+                return value.toString()
+            default:
+                return value
+        }
     }
 
     render() {

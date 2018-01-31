@@ -1,6 +1,6 @@
-
 .rjv-demo {
-    .rjv-settings, .rjv-source {
+    .rjv-settings,
+    .rjv-source {
         vertical-align: top;
         display: inline-block;
         margin-top: 5px;
@@ -27,6 +27,12 @@
             top: 0px;
             cursor: pointer;
         }
-    }
 
+        .github-btn {
+            display: block;
+            position: absolute;
+            right: 0px;
+            top: 48px;
+        }
+    }
 }

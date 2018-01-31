@@ -1,10 +1,12 @@
 import React from "react"
 import ReactSelect from "react-select"
 import ReactJson from "./../../../../src/js/index"
+import GitHubButton from "react-github-button"
 
 import Code from "./../helpers/Code"
 import "./../../style/scss/rjv-demo.scss"
 import "react-select/dist/react-select.css"
+import "react-github-button/assets/style.css"
 
 //index entrypoint component
 export default class extends React.Component {
@@ -68,6 +70,11 @@ export default class extends React.Component {
                                 "_blank"
                             )
                         }}
+                    />
+                    <GitHubButton
+                        type="stargazers"
+                        namespace="mac-s-g"
+                        repo="react-json-view"
                     />
                 </div>
                 <ReactJson

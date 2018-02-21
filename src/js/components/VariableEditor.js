@@ -94,7 +94,7 @@ class VariableEditor extends React.Component {
                             ? null
                             : e => {
                                   let location = [...namespace]
-                                  if (e.ctrlKey && onEdit !== false) {
+                                  if ((e.ctrlKey || e.metaKey) && onEdit !== false) {
                                       this.prepopInput(variable)
                                   } else if (onSelect !== false) {
                                       location.shift()
@@ -252,7 +252,7 @@ class VariableEditor extends React.Component {
                                 break
                             }
                             case "Enter": {
-                                if (e.ctrlKey) {
+                                if (e.ctrlKey || e.metaKey) {
                                     this.submitEdit(true)
                                 }
                                 break

@@ -78,11 +78,9 @@ class VariableEditor extends React.Component {
                             class="object-key"
                             key={variable.name + "_" + namespace}
                         >
-                            <span style={{ verticalAlign: "top" }}>"</span>
                             <span style={{ display: "inline-block" }}>
                                 {variable.name}
                             </span>
-                            <span style={{ verticalAlign: "top" }}>"</span>
                         </span>
                         <span {...Theme(theme, "colon")}>:</span>
                     </span>

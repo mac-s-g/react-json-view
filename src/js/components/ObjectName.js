@@ -21,9 +21,7 @@ export default function getObjectName(props) {
         return (
             <span {...Theme(theme, 'object-name')} key={namespace}>
                 <span class="object-key">
-                    <span style={{verticalAlign:'top'}}>"</span>
                     <span>{display_name}</span>
-                    <span style={{verticalAlign:'top'}}>"</span>
                 </span>
                 <span {...Theme(theme, 'colon')}>:</span>
             </span>

@@ -68,8 +68,8 @@ Name|Type|Default|Description
 * Arrays can be subgrouped after a specified length
 * Base-16 Theme Support
 * When `onEdit` is enabled:
-   * `Ctrl+Click` Edit Mode
-   * `Ctrl+Enter` Submit
+   * `Ctrl/Cmd+Click` Edit Mode
+   * `Ctrl/Cmd+Enter` Submit
 
 ### Customizing Style
 #### Stock Themes

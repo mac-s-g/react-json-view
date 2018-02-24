@@ -177,13 +177,13 @@ export default class extends React.Component {
         if (on_edit_enabled) {
             notes.push(
                 <span>
-                    To edit a value, try <Code>ctrl + click</Code> enter edit
+                    To edit a value, try <Code>ctrl/cmd + click</Code> enter edit
                     mode
                 </span>
             )
             notes.push(
                 <span>
-                    When editing a value, try <Code>ctrl + Enter</Code> to
+                    When editing a value, try <Code>ctrl/cmd + Enter</Code> to
                     submit changes
                 </span>
             )

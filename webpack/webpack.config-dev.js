@@ -16,7 +16,7 @@ const config = {
     "react-dom": "ReactDOM"
   },
   devServer: {
-    host: "0.0.0.0",
+    host: "localhost",
     port: 2000,
     hot: true,
     inline: true,

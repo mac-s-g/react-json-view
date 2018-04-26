@@ -6,7 +6,7 @@ export interface ReactJsonViewProps {
    *
    * Required.
    */
-  src: any;
+  src: object;
   /**
    * Contains the name of your root node. Use null or false for no name.
    *

@@ -45,7 +45,7 @@ export interface ReactJsonViewProps {
    *
    * Default: false
    */
-  collpased?: boolean | number;
+  collapsed?: boolean | number;
   /**
    * When an integer value is assigned, strings will be cut off at that length.
    * Collapsed strings are followed by an ellipsis.

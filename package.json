@@ -2,7 +2,7 @@
   "name": "react-json-view",
   "description":
     "Interactive react component for displaying javascript arrays and JSON objects.",
-  "version": "1.16.2",
+  "version": "1.16.3",
   "main": "dist/main.js",
   "files": ["dist/"],
   "dependencies": {
@@ -55,6 +55,7 @@
     "build":
       "webpack --config webpack/webpack.config.js -p --display-error-details --progress --optimize-minimize",
     "prebuild": "npm run test:unit",
+    "postbuild": "cp -a README.md LICENSE index.d.ts ./dist/",
     "build:demo":
       "webpack --config webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
     "dev": "webpack-dev-server --config webpack/webpack.config-dev.js --open",

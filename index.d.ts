@@ -265,5 +265,5 @@ export type ThemeKeys =
   | 'tube'
   | 'twilight';
 
-const ReactJson: React.ComponentType<ReactJsonViewProps>;
+declare const ReactJson: React.ComponentType<ReactJsonViewProps>;
 export default ReactJson;

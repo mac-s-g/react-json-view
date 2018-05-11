@@ -57,6 +57,8 @@ Name|Type|Default|Description
 `onAdd`|`(add)=>{}`|`false`|When a callback function is passed in, `add` functionality is enabled.  The callback is invoked before additions are completed. Returning `false` from `onAdd` will prevent the change from being made. [see: onAdd docs](#onedit-onadd-and-ondelete-interaction)
 `onDelete`|`(delete)=>{}`|`false`|When a callback function is passed in, `delete` functionality is enabled.  The callback is invoked before deletions are completed. Returning `false` from `onDelete` will prevent the change from being made. [see: onDelete docs](#onedit-onadd-and-ondelete-interaction)
 `onSelect`|`(select)=>{}`|`false`|When a function is passed in, clicking a value triggers the `onSelect` method to be called.
+`onMouseEnter`|`(variable)=>{}`|`false`|When a function is passed in, hovering on a property or value triggers the `onMouseEnter` method to be called.
+`onMouseLeave`|`(variable)=>{}`|`false`|When a function is passed in, hovering on a property or value triggers the `onMouseLeave` method to be called.
 `validationMessage`|`string`|"Validation Error"|Custom message for validation failures to `onEdit`, `onAdd`, or `onDelete` callbacks
 
 ### Features

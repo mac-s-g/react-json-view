@@ -9,6 +9,7 @@ import VariableEditor from "./../VariableEditor"
 import VariableMeta from "./../VariableMeta"
 import ArrayGroup from "./../ArrayGroup"
 import ObjectName from "./../ObjectName"
+import VariableRow from "./../VariableRow"
 
 //attribute store
 import AttributeStore from "./../../stores/ObjectAttributes"
@@ -186,9 +187,11 @@ class rjvObject extends React.Component {
         }
 
         return (
-            <div
+            <VariableRow
+                {...this.props}
                 class="object-key-val"
                 {...Theme(theme, jsvRoot ? "jsv-root" : "objectKeyVal", styles)}
+                variable={new JsonVariable(name, src)}
             >
                 {this.getBraceStart(object_type, expanded)}
                 {expanded
@@ -209,7 +212,7 @@ class rjvObject extends React.Component {
                     </span>
                     {expanded ? null : this.getObjectMetaData(src)}
                 </span>
-            </div>
+            </VariableRow>
         )
     }
 

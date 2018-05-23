@@ -42,6 +42,7 @@ export default class extends React.Component {
         collapsed: false,
         collapseStringsAfterLength: false,
         shouldCollapse: false,
+        sortKeys: false,
         groupArraysAfterLength: 100,
         indentWidth: 4,
         enableClipboard: true,

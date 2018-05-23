@@ -1,5 +1,5 @@
 import React from "react"
-import { shallow, render } from "enzyme"
+import { shallow, render, mount } from "enzyme"
 import { expect } from "chai"
 
 import JsonObject from "./../../../../../src/js/components/DataTypes/Object"
@@ -324,5 +324,45 @@ describe("<JsonObject />", function() {
         )
 
         expect(wrapper.state("expanded")).to.equal(true)
+    })
+    it("sort object keys", () => {
+        let src = {
+            d: 'd',
+            b: 'b',
+            a: 'a',
+            c: 'c',
+         }
+
+        const wrapper = render(
+            <JsonObject
+                src={src}
+                theme="rjv-default"
+                namespace={["root"]}
+                sortKeys={true}
+                collapsed={false}
+                shouldCollapse={() => false}
+            />
+        )
+        expect(wrapper.text()).to.equal('"":{"a":"a""b":"b""c":"c""d":"d"}');
+    })
+
+    it("do not sort object keys", () => {
+        let src = {
+            d: 'd',
+            b: 'b',
+            a: 'a',
+            c: 'c',
+         }
+
+        const wrapper = render(
+            <JsonObject
+                src={src}
+                theme="rjv-default"
+                namespace={["root"]}
+                collapsed={false}
+                shouldCollapse={() => false}
+            />
+        )
+        expect(wrapper.text()).to.equal('"":{"d":"d""b":"b""a":"a""c":"c"}');
     })
 })

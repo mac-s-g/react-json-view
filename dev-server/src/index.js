@@ -14,6 +14,7 @@ ReactDom.render(
     <div>
         {/* just pass in your JSON to the src attribute */}
         <JsonViewer
+            sortKeys
             style={{ padding: "30px", backgroundColor: "white" }}
             src={getExampleJson1()}
             collapseStringsAfterLength={12}
@@ -79,7 +80,8 @@ ReactDom.render(
             shouldCollapse={({ src, type }) =>
                 type === "object" &&
                 src.constructor &&
-                src.constructor.name === "Moment"}
+                src.constructor.name === "Moment"
+            }
         />
 
         <br />
@@ -135,7 +137,8 @@ ReactDom.render(
             enableClipboard={false}
             src={getExampleJson1()}
             shouldCollapse={({ src, namespace, type }) =>
-                namespace.indexOf("moment") > -1}
+                namespace.indexOf("moment") > -1
+            }
             theme={{
                 base00: "white",
                 base01: "#ddd",

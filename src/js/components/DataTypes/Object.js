@@ -224,15 +224,18 @@ class rjvObject extends React.Component {
         let theme = props.theme
         let elements = [],
             variable
-
-        for (let name in variables) {
+        let keys = Object.keys(variables || {});
+        if (this.props.sortKeys) {
+            keys = keys.sort();
+        }
+        keys.forEach(name => {
             variable = new JsonVariable(name, variables[name])
 
             if (parent_type == "array_group" && index_offset) {
                 variable.name = parseInt(variable.name) + index_offset
             }
             if (!variables.hasOwnProperty(name)) {
-                continue
+                return
             } else if (variable.type == "object") {
                 elements.push(
                     <JsonObject
@@ -279,7 +282,7 @@ class rjvObject extends React.Component {
                     />
                 )
             }
-        }
+        })
         return elements
     }
 }

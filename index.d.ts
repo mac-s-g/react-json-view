@@ -123,6 +123,12 @@ export interface ReactJsonViewProps {
    * Default: "Validation Error"
    */
   validationMessage?: string;
+  /**
+   * Set to true to sort object keys.
+   *
+   * Default: false
+   */
+  sortKeys?: boolean;
 }
 
 export interface OnCopyProps {

@@ -9,18 +9,15 @@ import "react-select/dist/react-select.css"
 import "react-github-button/assets/style.css"
 
 //index entrypoint component
-export default class extends React.Component {
+export default class extends React.PureComponent {
     constructor(props) {
-        super(props)
-        for (var i in this.defaults) {
-            this.state[i] = this.defaults[i]
-        }
-        this.state.src = this.getExampleJson()
+        super(props);
+        this.state = {
+            src: this.getExampleJson()
+        };
     }
 
-    state = {}
-
-    defaults = {
+    static defaultProps = {
         theme: "monokai",
         src: null,
         collapsed: false,
@@ -37,7 +34,6 @@ export default class extends React.Component {
 
     render() {
         const {
-            src,
             collapseStringsAfter,
             onAdd,
             onEdit,
@@ -49,7 +45,8 @@ export default class extends React.Component {
             collapsed,
             indentWidth,
             displayDataTypes
-        } = this.state
+        } = this.props;
+        const { src } = this.state;
         const style = {
             padding: "10px",
             borderRadius: "3px",
@@ -465,10 +462,6 @@ export default class extends React.Component {
 
     //just a function to get an example JSON object
     getExampleJson = () => {
-        Array.prototype.containsKey = function(obj) {
-            for (var key in this) if (key == obj) return true
-            return false
-        }
         return {
             string: "this is a test string",
             integer: 42,

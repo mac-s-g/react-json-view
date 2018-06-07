@@ -4,7 +4,7 @@ import DataTypeLabel from "./DataTypeLabel"
 //theme
 import Theme from "./../../themes/getStyle"
 
-export default class extends React.Component {
+export default class extends React.PureComponent {
     render() {
         const type_name = "date"
         const { props } = this

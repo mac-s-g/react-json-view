@@ -8,9 +8,7 @@ import Theme from './../../themes/getStyle';
 
 
 //this input appears when adding a new value to an object
-export default class extends React.Component {
-
-    state = {}
+export default class extends React.PureComponent {
 
     render() {
         const {active, theme, rjvId} = this.props;

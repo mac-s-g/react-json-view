@@ -2,7 +2,7 @@
 export function toType(obj) {
     let type = getType(obj)
     // some extra disambiguation for numbers
-    if (type == "number") {
+    if (type === "number") {
         if (isNaN(obj)) {
             type = "nan"
         } else if ((obj | 0) != obj) {
@@ -43,7 +43,7 @@ export function isTheme(theme) {
         "base0E",
         "base0F"
     ]
-    if (toType(theme) == "object") {
+    if (toType(theme) === "object") {
         for (var i = 0; i < theme_keys.length; i++) {
             if (!(theme_keys[i] in theme)) {
                 return false

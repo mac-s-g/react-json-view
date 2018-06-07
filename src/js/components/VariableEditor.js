@@ -27,15 +27,18 @@ import { Edit, CheckCircle, RemoveCircle as Remove } from "./icons"
 //theme
 import Theme from "./../themes/getStyle"
 
-class VariableEditor extends React.Component {
-    state = {
-        editMode: false,
-        editValue: "",
-        renameKey: false,
-        parsedInput: {
-            type: false,
-            value: null
-        }
+class VariableEditor extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            editMode: false,
+            editValue: "",
+            renameKey: false,
+            parsedInput: {
+                type: false,
+                value: null
+            }
+        };
     }
 
     render() {
@@ -53,7 +56,7 @@ class VariableEditor extends React.Component {
             onSelect,
             rjvId
         } = this.props
-        const { editMode } = this.state
+        const { editMode } = this.state;
 
         return (
             <div
@@ -146,16 +149,17 @@ class VariableEditor extends React.Component {
     }
 
     prepopInput = variable => {
-        let detected
         if (this.props.onEdit !== false) {
-            this.state.editMode = true
-            this.state.editValue = stringifyVariable(variable.value)
-            detected = parseInput(this.state.editValue)
-            this.state.parsedInput = {
-                type: detected.type,
-                value: detected.value
-            }
-            this.setState(this.state)
+            const stringifiedValue = stringifyVariable(variable.value);
+            const detected = parseInput(stringifiedValue);
+            this.setState({
+                editMode: true,
+                editValue: stringifiedValue,
+                parsedInput: {
+                    type: detected.type,
+                    value: detected.value
+                }
+            });
         }
     }
 
@@ -221,8 +225,8 @@ class VariableEditor extends React.Component {
     }
 
     getEditInput = () => {
-        const { theme } = this.props
-        const { editValue } = this.state
+        const { theme } = this.props;
+        const { editValue } = this.state;
 
         return (
             <div>
@@ -285,13 +289,15 @@ class VariableEditor extends React.Component {
     }
 
     submitEdit = submit_detected => {
-        const { variable, namespace, rjvId } = this.props
-        const { editValue, parsedInput } = this.state
-        let new_value = editValue
+        const { variable, namespace, rjvId } = this.props;
+        const { editValue, parsedInput } = this.state;
+        let new_value = editValue;
         if (submit_detected && parsedInput.type) {
-            new_value = parsedInput.value
+            new_value = parsedInput.value;
         }
-        this.state.editMode = false
+        this.setState({
+            editMode: false
+        });
         dispatcher.dispatch({
             name: "VARIABLE_UPDATED",
             rjvId: rjvId,
@@ -306,8 +312,8 @@ class VariableEditor extends React.Component {
     }
 
     showDetected = () => {
-        const { theme, variable, namespace, rjvId } = this.props
-        const { type, value } = this.state.parsedInput
+        const { theme, variable, namespace, rjvId } = this.props;
+        const { type, value } = this.state.parsedInput;
         const detected = this.getDetectedInput()
         if (detected) {
             return (
@@ -332,10 +338,10 @@ class VariableEditor extends React.Component {
     }
 
     getDetectedInput = () => {
-        const { parsedInput } = this.state
-        const { type, value } = parsedInput
-        const { props } = this
-        const { theme } = this.props
+        const { parsedInput } = this.state;
+        const { type, value } = parsedInput;
+        const { props } = this;
+        const { theme } = props;
 
         if (type !== false) {
             switch (type.toLowerCase()) {
@@ -421,4 +427,4 @@ class VariableEditor extends React.Component {
 }
 
 //export component
-export default VariableEditor
+export default VariableEditor;

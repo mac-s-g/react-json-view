@@ -13,14 +13,14 @@ import {
 import Theme from './../themes/getStyle';
 
 
-export default class extends React.Component {
+export default class extends React.PureComponent {
     getObjectSize = () => {
         const {size, theme, displayObjectSize} = this.props;
         if (displayObjectSize) {
             return (
                 <span class="object-size"
                 {...Theme(theme, 'object-size')}>
-                    {size} item{size == 1 ? '' : 's'}
+                    {size} item{size === 1 ? '' : 's'}
                 </span>
             );
         }
@@ -36,35 +36,35 @@ export default class extends React.Component {
         class="click-to-add"
         style={{verticalAlign: 'top'}}>
             <Add
-            class="click-to-add-icon"
-            {...Theme(theme, 'addVarIcon')}
-            onClick={() => {
-                const request = {
-                    name: depth > 0 ? name : null,
-                    namespace: namespace.splice(
-                        0, (namespace.length-1)
-                    ),
-                    existing_value: src,
-                    variable_removed: false,
-                    key_name: null
-                };
-                if (toType(src) == 'object') {
-                    dispatcher.dispatch({
-                        name: 'ADD_VARIABLE_KEY_REQUEST',
-                        rjvId: rjvId,
-                        data: request,
-                    });
-                } else {
-                    dispatcher.dispatch({
-                        name: 'VARIABLE_ADDED',
-                        rjvId: rjvId,
-                        data: {
-                            ...request,
-                            new_value: [...src, null]
-                        }
-                    });
-                }
-            }}
+                class="click-to-add-icon"
+                {...Theme(theme, 'addVarIcon')}
+                onClick={() => {
+                    const request = {
+                        name: depth > 0 ? name : null,
+                        namespace: namespace.splice(
+                            0, (namespace.length-1)
+                        ),
+                        existing_value: src,
+                        variable_removed: false,
+                        key_name: null
+                    };
+                    if (toType(src) === 'object') {
+                        dispatcher.dispatch({
+                            name: 'ADD_VARIABLE_KEY_REQUEST',
+                            rjvId: rjvId,
+                            data: request,
+                        });
+                    } else {
+                        dispatcher.dispatch({
+                            name: 'VARIABLE_ADDED',
+                            rjvId: rjvId,
+                            data: {
+                                ...request,
+                                new_value: [...src, null]
+                            }
+                        });
+                    }
+                }}
             />
         </span>
         );
@@ -76,27 +76,28 @@ export default class extends React.Component {
         } = this.props;
 
         //don't allow deleting of root node
-        if (namespace.length == 1) {return}
-
+        if (namespace.length === 1) {
+            return;
+        }
         return (
-        <span class="click-to-remove" >
-            <Remove
-            class="click-to-remove-icon"
-            {...Theme(theme, 'removeVarIcon')}
-            onClick={() => {
-                dispatcher.dispatch({
-                    name: 'VARIABLE_REMOVED',
-                    rjvId: rjvId,
-                    data: {
-                        name: name,
-                        namespace: namespace.splice(0, (namespace.length-1)),
-                        existing_value: src,
-                        variable_removed: true
-                    },
-                });
-            }}
-            />
-        </span>
+            <span class="click-to-remove" >
+                <Remove
+                class="click-to-remove-icon"
+                {...Theme(theme, 'removeVarIcon')}
+                onClick={() => {
+                    dispatcher.dispatch({
+                        name: 'VARIABLE_REMOVED',
+                        rjvId: rjvId,
+                        data: {
+                            name: name,
+                            namespace: namespace.splice(0, (namespace.length-1)),
+                            existing_value: src,
+                            variable_removed: true
+                        },
+                    });
+                }}
+                />
+            </span>
         );
     }
 
@@ -110,24 +111,26 @@ export default class extends React.Component {
             namespace
         } = this.props;
         return (
-        <div {...Theme(theme, 'object-meta-data')}
-        class='object-meta-data'
-        onClick={(e)=>{
-            e.stopPropagation();
-        }}>
-            {/* size badge display */}
-            {this.getObjectSize()}
-            {/* copy to clipboard icon */}
-            {enableClipboard
-                ? (<CopyToClipboard
-                    clickCallback={enableClipboard}
-                    {...{src, theme, namespace}} />)
-                : null
-            }
-            {/* copy add/remove icons */}
-            {onAdd !== false ? this.getAddAttribute() : null}
-            {onDelete !== false ? this.getRemoveObject() : null}
-        </div>
+            <div
+                {...Theme(theme, 'object-meta-data')}
+                class='object-meta-data'
+                onClick={(e)=>{
+                    e.stopPropagation();
+                }}
+            >
+                {/* size badge display */}
+                {this.getObjectSize()}
+                {/* copy to clipboard icon */}
+                {enableClipboard
+                    ? (<CopyToClipboard
+                        clickCallback={enableClipboard}
+                        {...{src, theme, namespace}} />)
+                    : null
+                }
+                {/* copy add/remove icons */}
+                {onAdd !== false ? this.getAddAttribute() : null}
+                {onDelete !== false ? this.getRemoveObject() : null}
+            </div>
         );
     }
 

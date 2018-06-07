@@ -1,4 +1,5 @@
 import React from 'react';
+import {polyfill} from 'react-lifecycles-compat';
 import JsonViewer from './components/JsonViewer';
 import AddKeyRequest from './components/ObjectKeyModal/AddKeyRequest';
 import ValidationFailure from './components/ValidationFailure';
@@ -12,30 +13,31 @@ import Theme from './themes/getStyle';
 import './../style/scss/global.scss';
 
 //forward src through to JsonObject component
-export default class extends React.Component {
+class ReactJsonView extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        this.init(props);
-        ObjectAttributes.set(
-            this.rjvId,
-            'global',
-            'src',
-            this.state.src
-        );
-    }
-
-    state = {
-        //listen to request to add/edit a key to an object
-        addKeyRequest: false,
-        validationFailure: false
+        this.state = {
+            //listen to request to add/edit a key to an object
+            addKeyRequest: false,
+            editKeyRequest: false,
+            validationFailure: false,
+            src: ReactJsonView.defaultProps.src,
+            name: ReactJsonView.defaultProps.name,
+            theme: ReactJsonView.defaultProps.theme,
+            // the state object also needs to remember the prev prop values, because we need to compare
+            // old and new props in getDerivedStateFromProps().
+            prevSrc: ReactJsonView.defaultProps.src,
+            prevName: ReactJsonView.defaultProps.name,
+            prevTheme: ReactJsonView.defaultProps.theme,
+        };
     }
 
     //reference id for this instance
     rjvId = Date.now().toString()
 
     //all acceptable props and default values
-    defaults = {
+    static defaultProps = {
         src: {},
         name: 'root',
         theme: 'rjv-default',
@@ -57,20 +59,59 @@ export default class extends React.Component {
         validationMessage: "Validation Error"
     }
 
-    getListeners = () => {
-        return {
-            'reset': this.resetState,
-            'variable-update': this.updateSrc,
-            'add-key-request': this.addKeyRequest
+    // will trigger whenever setState() is called, or parent passes in new props.
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.src !== prevState.prevSrc ||
+            nextProps.name !== prevState.prevName ||
+            nextProps.theme !== prevState.prevTheme
+        ) {
+            // if we pass in new props, we re-validate
+            const newPartialState = {
+                src: nextProps.src,
+                name: nextProps.name,
+                theme: nextProps.theme,
+                prevSrc: nextProps.src,
+                prevName: nextProps.name,
+                prevTheme: nextProps.theme
+            };
+            return ReactJsonView.validateState(newPartialState);
         }
+        return null;
     }
 
-    componentWillMount() {
+    componentDidMount() {
+        // initialize
+        ObjectAttributes.set(
+            this.rjvId,
+            'global',
+            'src',
+            this.state.src
+        );
+        // bind to events
         const listeners = this.getListeners();
         for (const i in listeners) {
             ObjectAttributes.on(
                 i + '-' + this.rjvId, listeners[i]
             )
+        }
+        //reset key request to false once it's observed
+        this.setState({
+            addKeyRequest: false,
+            editKeyRequest: false
+        });
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        //reset key request to false once it's observed
+        if (prevState.addKeyRequest !== false) {
+            this.setState({
+                addKeyRequest: false
+            });
+        }
+        if (prevState.editKeyRequest !== false) {
+            this.setState({
+                editKeyRequest: false
+            })
         }
     }
 
@@ -83,97 +124,100 @@ export default class extends React.Component {
         }
     }
 
-    init = (props) => {
-        for (let i in this.defaults) {
-            if (props[i] !== undefined) {
-                this.state[i] = props[i];
-            } else {
-                this.state[i] = this.defaults[i];
-            }
+    getListeners = () => {
+        return {
+            'reset': this.resetState,
+            'variable-update': this.updateSrc,
+            'add-key-request': this.addKeyRequest
         }
-
-        this.validateInput();
-
-        ObjectAttributes.set(
-            this.rjvId,
-            'global',
-            'src',
-            this.state.src
-        );
     }
-
     //make sure props are passed in as expected
-    validateInput = () => {
+    static validateState = (state) => {
+        const validatedState = {};
         //make sure theme is valid
-        if (toType(this.state.theme) === 'object'
-            && !isTheme(this.state.theme)
+        if (toType(state.theme) === 'object'
+            && !isTheme(state.theme)
         ) {
             console.error(
                 'react-json-view error:',
                 'theme prop must be a theme name or valid base-16 theme object.',
                 'defaulting to "rjv-default" theme'
             );
-            this.state.theme = 'rjv-default';
+            validatedState.theme = 'rjv-default';
         }
-
         //make sure `src` prop is valid
-        if (toType(this.state.src) !== 'object'
-            && toType(this.state.src) !== 'array'
+        if (toType(state.src) !== 'object'
+            && toType(state.src) !== 'array'
         ) {
             console.error(
                 'react-json-view error:',
                 'src property must be a valid json object'
             );
-            this.state.name = 'ERROR';
-            this.state.src = {
+            validatedState.name = 'ERROR';
+            validatedState.src = {
                 message: 'src property must be a valid json object'
             }
         }
+        return {
+            // get the original state
+            ...state,
+            // override the original state
+            ...validatedState
+        };
     }
 
     render() {
         const {
-            validationFailure, validationMessage,
-            addKeyRequest, style, ...props
+            validationFailure,
+            validationMessage,
+            addKeyRequest,
+            theme,
+            src,
+            name
         } = this.state;
-        //reset key request to false once it's observed
-        this.state.addKeyRequest = false;
-        this.state.editKeyRequest = false;
-        return (<div class="react-json-view"
-            style={{...Theme(props.theme, 'app-container').style, ...style}} >
-            <ValidationFailure
-                message={validationMessage}
-                active={validationFailure}
-                theme={props.theme}
-                rjvId={this.rjvId} />
-            <JsonViewer
-                {...props}
-                type={toType(props.src)}
-                rjvId={this.rjvId} />
-            <AddKeyRequest
-                active={addKeyRequest}
-                theme={props.theme}
-                rjvId={this.rjvId} />
-        </div>);
-    }
 
-    componentWillReceiveProps(nextProps) {
-        this.init(nextProps);
-        this.setState(this.state);
+        const { style } = this.props;
+
+        return (
+            <div
+                class="react-json-view"
+                style={{...Theme(theme, 'app-container').style, ...style}}
+            >
+                <ValidationFailure
+                    message={validationMessage}
+                    active={validationFailure}
+                    theme={theme}
+                    rjvId={this.rjvId} />
+                <JsonViewer
+                    {...this.props}
+                    src={src}
+                    name={name}
+                    theme={theme}
+                    type={toType(src)}
+                    rjvId={this.rjvId} />
+                <AddKeyRequest
+                    active={addKeyRequest}
+                    theme={theme}
+                    rjvId={this.rjvId} />
+             </div>
+        );
     }
 
     updateSrc = () => {
-        let {
+        const {
             name, namespace, new_value, existing_value,
             variable_removed, updated_src, type
         } = ObjectAttributes.get(
             this.rjvId, 'action', 'variable-update'
         );
-        let {onEdit, onDelete, onAdd} = this.state;
+        const { onEdit, onDelete, onAdd } = this.props;
+
+        const { src } = this.state;
+
         let result;
 
         const on_edit_payload = {
-            existing_src: this.state.src,
+            existing_src: src,
             new_value: new_value,
             updated_src: updated_src,
             name: name,
@@ -195,19 +239,29 @@ export default class extends React.Component {
 
         if (result !== false) {
             ObjectAttributes.set(this.rjvId, 'global', 'src', updated_src);
-            this.state.src = updated_src;
+            this.setState({
+                src: updated_src
+            });
         } else {
-            this.state.validationFailure = true;
+            this.setState({
+                validationFailure: true
+            });
         }
-        this.setState(this.state);
     }
 
     addKeyRequest = () => {
-        this.setState({addKeyRequest: true});
+        this.setState({
+            addKeyRequest: true
+        });
     }
 
     resetState = () => {
-        this.state.validationFailure = false;
-        this.setState(this.state);
+        this.setState({
+            validationFailure: false
+        });
     }
 }
+
+polyfill(ReactJsonView);
+
+export default ReactJsonView;

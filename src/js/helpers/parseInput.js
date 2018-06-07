@@ -9,21 +9,21 @@ export default function parseInput(input) {
         input = JSON.stringify(
             JSON.parse(input)
         );
-        if (input[0] == '[') {
+        if (input[0] === '[') {
             //array
             return formatResponse('array', JSON.parse(input));
-        } else if (input[0] == '{') {
+        } else if (input[0] === '{') {
             //object
             return formatResponse('object', JSON.parse(input));
         } else if (
             input.match(/\-?\d+\.\d+/)
-            && input.match(/\-?\d+\.\d+/)[0] == input
+            && input.match(/\-?\d+\.\d+/)[0] === input
         ) {
             //integer
             return formatResponse('float', parseFloat(input));
         } else if (
             input.match(/\-?\d+/)
-            && input.match(/\-?\d+/)[0] == input
+            && input.match(/\-?\d+/)[0] === input
         ) {
             //float
             return formatResponse('integer', parseInt(input));

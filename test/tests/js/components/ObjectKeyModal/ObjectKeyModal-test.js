@@ -38,7 +38,7 @@ describe("<ObjectKeyModal />", function() {
                 input="test"
                 isValid={input => {
                     valid_counter++
-                    return input == "invalid" ? false : true
+                    return input === "invalid" ? false : true
                 }}
                 submit={() => {
                     return true

@@ -62,7 +62,7 @@ ReactDom.render(
             collapseStringsAfterLength={15}
             onEdit={e => {
                 console.log(e)
-                if (e.new_value == "error") {
+                if (e.new_value === "error") {
                     return false
                 }
             }}
@@ -71,7 +71,7 @@ ReactDom.render(
             }}
             onAdd={e => {
                 console.log(e)
-                if (e.new_value == "error") {
+                if (e.new_value === "error") {
                     return false
                 }
             }}
@@ -176,10 +176,6 @@ ReactDom.render(
 
 //just a function to get an example JSON object
 function getExampleJson1() {
-    Array.prototype.containsKey = function(obj) {
-        for (var key in this) if (key == obj) return true
-        return false
-    }
     return {
         string: "this is a test string",
         integer: 42,
@@ -193,7 +189,7 @@ function getExampleJson1() {
             sibling2: false,
             sibling3: null,
             isString: value => {
-                if (typeof value == "string") {
+                if (typeof value === "string") {
                     return "string"
                 } else {
                     return "other"

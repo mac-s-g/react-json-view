@@ -3,9 +3,9 @@ import React from "react"
 //theme
 import Theme from "./../../themes/getStyle"
 
-export default class extends React.Component {
+export default class extends React.PureComponent {
     render() {
-        const { rjvId, type_name, displayDataTypes, theme } = this.props
+        const { rjvId, type_name, displayDataTypes, theme } = this.props;
         if (displayDataTypes) {
             return (
                 <span
@@ -14,9 +14,8 @@ export default class extends React.Component {
                 >
                     {type_name}
                 </span>
-            )
-        } else {
-            return null
+            );
         }
+        return null;
     }
 }

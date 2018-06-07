@@ -4,7 +4,7 @@ const DEFAULT_WIDTH = 24;
 const DEFAULT_HEIGHT = 24;
 const DEFAULT_COLOR = "#000000";
 
-export class CircleMinus extends React.Component {
+export class CircleMinus extends React.PureComponent {
     render() {
         const {props} = this;
         const {style, ...rest} = props;
@@ -23,7 +23,7 @@ export class CircleMinus extends React.Component {
     }
 }
 
-export class CirclePlus extends React.Component {
+export class CirclePlus extends React.PureComponent {
     render() {
         const {props} = this;
         const {style, ...rest} = props;
@@ -42,7 +42,7 @@ export class CirclePlus extends React.Component {
     }
 }
 
-export class SquareMinus extends React.Component {
+export class SquareMinus extends React.PureComponent {
     render() {
         const {props} = this;
         const {style, ...rest} = props;
@@ -61,7 +61,7 @@ export class SquareMinus extends React.Component {
     }
 }
 
-export class SquarePlus extends React.Component {
+export class SquarePlus extends React.PureComponent {
     render() {
         const {props} = this;
         const {style, ...rest} = props;
@@ -80,7 +80,7 @@ export class SquarePlus extends React.Component {
     }
 }
 
-export class ArrowRight extends React.Component {
+export class ArrowRight extends React.PureComponent {
     render() {
         const {props} = this;
         const {style, ...rest} = props;
@@ -99,7 +99,7 @@ export class ArrowRight extends React.Component {
     }
 }
 
-export class ArrowDown extends React.Component {
+export class ArrowDown extends React.PureComponent {
     render() {
         const {props} = this;
         const {style, ...rest} = props;
@@ -118,7 +118,7 @@ export class ArrowDown extends React.Component {
     }
 }
 
-export class Clippy extends React.Component {
+export class Clippy extends React.PureComponent {
     render() {
         const {props} = this;
         const {style, ...rest} = props;
@@ -139,7 +139,7 @@ export class Clippy extends React.Component {
     }
 }
 
-export class RemoveCircle extends React.Component {
+export class RemoveCircle extends React.PureComponent {
     render() {
         const {props} = this;
         const {style, ...rest} = props;
@@ -160,7 +160,7 @@ export class RemoveCircle extends React.Component {
     }
 }
 
-export class AddCircle extends React.Component {
+export class AddCircle extends React.PureComponent {
     render() {
         const {props} = this;
         const {style, ...rest} = props;
@@ -181,7 +181,7 @@ export class AddCircle extends React.Component {
     }
 }
 
-export class Add extends React.Component {
+export class Add extends React.PureComponent {
     render() {
         const {props} = this;
         const {style, ...rest} = props;
@@ -202,7 +202,7 @@ export class Add extends React.Component {
     }
 }
 
-export class Edit extends React.Component {
+export class Edit extends React.PureComponent {
     render() {
         const {props} = this;
         const {style, ...rest} = props;
@@ -223,7 +223,7 @@ export class Edit extends React.Component {
     }
 }
 
-export class CheckCircle extends React.Component {
+export class CheckCircle extends React.PureComponent {
     render() {
         const {props} = this;
         const {style, ...rest} = props;

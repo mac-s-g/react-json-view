@@ -8,12 +8,12 @@ import Theme from './../../themes/getStyle';
 
 
 //this input appears when adding a new value to an object
-export default class extends React.Component {
+export default class extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
             input: props.input ? props.input : ''
-        }
+        };
     }
 
     render() {
@@ -24,12 +24,14 @@ export default class extends React.Component {
 
         return (
         <div
-        class="key-modal-request"
-        {...Theme(theme, 'key-modal-request')}
-        onClick={()=>{this.closeModal()}}
+            class="key-modal-request"
+            {...Theme(theme, 'key-modal-request')}
+            onClick={this.closeModal}
         >
-            <div {...Theme(theme, 'key-modal')}
-            onClick={(e)=>{e.stopPropagation();}}>
+            <div
+                {...Theme(theme, 'key-modal')}
+                onClick={(e)=>{e.stopPropagation();}}
+            >
                 <div {...Theme(theme, 'key-modal-label')}>
                     Key Name:
                 </div>
@@ -85,5 +87,4 @@ export default class extends React.Component {
     submit = () => {
         this.props.submit(this.state.input);
     }
-
 }

@@ -11,10 +11,10 @@ export function ExpandedIcon(props) {
     const {theme, iconStyle} = props;
     switch (iconStyle) {
         case "triangle":
-            return <ArrowDown
+            return (<ArrowDown
                 {...Theme(theme, 'expanded-icon')}
                 class="expanded-icon"
-            />
+            />)
         case "square":
             return <SquareMinus
                 {...Theme(theme, 'expanded-icon')}
@@ -48,4 +48,3 @@ export function CollapsedIcon(props) {
             />
     }
 }
-

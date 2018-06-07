@@ -9,24 +9,26 @@ import { Clippy } from "./icons"
 //theme
 import Theme from "./../themes/getStyle"
 
-export default class extends React.Component {
+export default class extends React.PureComponent {
     constructor(props) {
-        super(props)
-        this.copiedTimer = null
+        super(props);
+        this.state = {
+            copied: false
+        };
     }
 
-    state = { copied: false }
+    copiedTimer = null;
 
     componentWillUnmount() {
         if (this.copiedTimer) {
-            clearTimeout(this.copiedTimer)
-            this.copiedTimer = null
+            clearTimeout(this.copiedTimer);
+            this.copiedTimer = null;
         }
     }
 
     handleCopy = () => {
-        const container = document.createElement("textarea")
-        const { clickCallback, src, namespace } = this.props
+        const container = document.createElement("textarea");
+        const { clickCallback, src, namespace } = this.props;
 
         container.innerHTML = JSON.stringify(
             this.clipboardValue(src),
@@ -38,29 +40,29 @@ export default class extends React.Component {
         container.select()
         document.execCommand("copy")
 
-        document.body.removeChild(container)
+        document.body.removeChild(container);
 
         this.copiedTimer = setTimeout(() => {
             this.setState({
                 copied: false
-            })
+            });
         }, 5500)
 
         this.setState({ copied: true }, () => {
             if (typeof clickCallback !== "function") {
-                return
+                return;
             }
 
             clickCallback({
                 src: src,
                 namespace: namespace,
                 name: namespace[namespace.length - 1]
-            })
+            });
         })
     }
 
     getClippyIcon = () => {
-        const { theme } = this.props
+        const { theme } = this.props;
 
         if (this.state.copied) {
             return (
@@ -71,28 +73,27 @@ export default class extends React.Component {
             )
         }
 
-        return <Clippy class="copy-icon" {...Theme(theme, "copy-icon")} />
+        return <Clippy class="copy-icon" {...Theme(theme, "copy-icon")} />;
     }
 
     clipboardValue = value => {
         const type = toType(value)
         switch (type) {
             case "function":
-                return value.toString()
             case "regexp":
-                return value.toString()
+                return value.toString();
             default:
-                return value
+                return value;
         }
     }
 
     render() {
-        const { src, theme, hidden } = this.props
-        let style = Theme(theme, "copy-to-clipboard").style
-        let display = "inline"
+        const { src, theme, hidden } = this.props;
+        let style = Theme(theme, "copy-to-clipboard").style;
+        let display = "inline";
 
         if (hidden) {
-            display = "none"
+            display = "none";
         }
 
         return (
@@ -107,6 +108,6 @@ export default class extends React.Component {
                     {this.getClippyIcon()}
                 </span>
             </span>
-        )
+        );
     }
 }

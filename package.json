@@ -2,7 +2,7 @@
   "name": "react-json-view",
   "description":
     "Interactive react component for displaying javascript arrays and JSON objects.",
-  "version": "1.17.0",
+  "version": "1.17.1",
   "main": "dist/main.js",
   "dependencies": {
     "flux": "^3.1.3",

@@ -1,7 +1,7 @@
 import React from 'react';
 import dispatcher from './../helpers/dispatcher';
 
-import CopyToClipboard from './CopyToClipboard'
+import CopyToClipboard from './CopyToClipboard';
 import {toType} from './../helpers/util';
 
 //icons
@@ -19,7 +19,7 @@ export default class extends React.PureComponent {
         if (displayObjectSize) {
             return (
                 <span class="object-size"
-                {...Theme(theme, 'object-size')}>
+                    {...Theme(theme, 'object-size')}>
                     {size} item{size === 1 ? '' : 's'}
                 </span>
             );
@@ -32,41 +32,41 @@ export default class extends React.PureComponent {
         } = this.props;
 
         return (
-        <span
-        class="click-to-add"
-        style={{verticalAlign: 'top'}}>
-            <Add
-                class="click-to-add-icon"
-                {...Theme(theme, 'addVarIcon')}
-                onClick={() => {
-                    const request = {
-                        name: depth > 0 ? name : null,
-                        namespace: namespace.splice(
-                            0, (namespace.length-1)
-                        ),
-                        existing_value: src,
-                        variable_removed: false,
-                        key_name: null
-                    };
-                    if (toType(src) === 'object') {
-                        dispatcher.dispatch({
-                            name: 'ADD_VARIABLE_KEY_REQUEST',
-                            rjvId: rjvId,
-                            data: request,
-                        });
-                    } else {
-                        dispatcher.dispatch({
-                            name: 'VARIABLE_ADDED',
-                            rjvId: rjvId,
-                            data: {
-                                ...request,
-                                new_value: [...src, null]
-                            }
-                        });
-                    }
-                }}
-            />
-        </span>
+            <span
+                class="click-to-add"
+                style={{verticalAlign: 'top'}}>
+                <Add
+                    class="click-to-add-icon"
+                    {...Theme(theme, 'addVarIcon')}
+                    onClick={() => {
+                        const request = {
+                            name: depth > 0 ? name : null,
+                            namespace: namespace.splice(
+                                0, (namespace.length-1)
+                            ),
+                            existing_value: src,
+                            variable_removed: false,
+                            key_name: null
+                        };
+                        if (toType(src) === 'object') {
+                            dispatcher.dispatch({
+                                name: 'ADD_VARIABLE_KEY_REQUEST',
+                                rjvId: rjvId,
+                                data: request,
+                            });
+                        } else {
+                            dispatcher.dispatch({
+                                name: 'VARIABLE_ADDED',
+                                rjvId: rjvId,
+                                data: {
+                                    ...request,
+                                    new_value: [...src, null]
+                                }
+                            });
+                        }
+                    }}
+                />
+            </span>
         );
     }
 
@@ -82,20 +82,20 @@ export default class extends React.PureComponent {
         return (
             <span class="click-to-remove" >
                 <Remove
-                class="click-to-remove-icon"
-                {...Theme(theme, 'removeVarIcon')}
-                onClick={() => {
-                    dispatcher.dispatch({
-                        name: 'VARIABLE_REMOVED',
-                        rjvId: rjvId,
-                        data: {
-                            name: name,
-                            namespace: namespace.splice(0, (namespace.length-1)),
-                            existing_value: src,
-                            variable_removed: true
-                        },
-                    });
-                }}
+                    class="click-to-remove-icon"
+                    {...Theme(theme, 'removeVarIcon')}
+                    onClick={() => {
+                        dispatcher.dispatch({
+                            name: 'VARIABLE_REMOVED',
+                            rjvId: rjvId,
+                            data: {
+                                name: name,
+                                namespace: namespace.splice(0, (namespace.length-1)),
+                                existing_value: src,
+                                variable_removed: true
+                            },
+                        });
+                    }}
                 />
             </span>
         );

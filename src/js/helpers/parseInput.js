@@ -33,37 +33,37 @@ export default function parseInput(input) {
     //run in case input was not serializable
     input = input.toLowerCase();
     switch (input) {
-        case 'undefined': {
-            return formatResponse('undefined', undefined);
+    case 'undefined': {
+        return formatResponse('undefined', undefined);
+    }
+    case 'nan': {
+        return formatResponse('nan', NaN);
+    }
+    case 'null': {
+        return formatResponse('null', null);
+    }
+    case 'true': {
+        return formatResponse('boolean', true);
+    }
+    case 'false': {
+        return formatResponse('boolean', false);
+    }
+    default: {
+        //check to see if this is a date
+        input = Date.parse(input);
+        if (input) {
+            return (formatResponse('date', new Date(input)));
         }
-        case 'nan': {
-            return formatResponse('nan', NaN);
-        }
-        case 'null': {
-            return formatResponse('null', null);
-        }
-        case 'true': {
-            return formatResponse('boolean', true);
-        }
-        case 'false': {
-            return formatResponse('boolean', false);
-        }
-        default: {
-            //check to see if this is a date
-            input = Date.parse(input);
-            if (input) {
-                return (formatResponse('date', new Date(input)));
-            }
-        }
+    }
     }
 
     return formatResponse(false, null);
 
-};
+}
 
 function formatResponse(type, value) {
     return {
         type: type,
         value: value
-    }
+    };
 }

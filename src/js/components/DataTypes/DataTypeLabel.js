@@ -1,7 +1,7 @@
-import React from "react"
+import React from 'react';
 
 //theme
-import Theme from "./../../themes/getStyle"
+import Theme from './../../themes/getStyle';
 
 export default class extends React.PureComponent {
     render() {
@@ -10,7 +10,7 @@ export default class extends React.PureComponent {
             return (
                 <span
                     class="data-type-label"
-                    {...Theme(theme, "data-type-label")}
+                    {...Theme(theme, 'data-type-label')}
                 >
                     {type_name}
                 </span>

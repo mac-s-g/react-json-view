@@ -1,11 +1,11 @@
-import React from "react"
-import AutosizeTextarea from "react-textarea-autosize"
+import React from 'react';
+import AutosizeTextarea from 'react-textarea-autosize';
 
-import { toType } from "./../helpers/util"
-import dispatcher from "./../helpers/dispatcher"
-import parseInput from "./../helpers/parseInput"
-import stringifyVariable from "./../helpers/stringifyVariable"
-import CopyToClipboard from "./CopyToClipboard"
+import { toType } from './../helpers/util';
+import dispatcher from './../helpers/dispatcher';
+import parseInput from './../helpers/parseInput';
+import stringifyVariable from './../helpers/stringifyVariable';
+import CopyToClipboard from './CopyToClipboard';
 
 //data type components
 import {
@@ -19,20 +19,20 @@ import {
     JsonRegexp,
     JsonString,
     JsonUndefined
-} from "./DataTypes/DataTypes"
+} from './DataTypes/DataTypes';
 
 //clibboard icon
-import { Edit, CheckCircle, RemoveCircle as Remove } from "./icons"
+import { Edit, CheckCircle, RemoveCircle as Remove } from './icons';
 
 //theme
-import Theme from "./../themes/getStyle"
+import Theme from './../themes/getStyle';
 
 class VariableEditor extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
             editMode: false,
-            editValue: "",
+            editValue: '',
             renameKey: false,
             parsedInput: {
                 type: false,
@@ -55,39 +55,39 @@ class VariableEditor extends React.PureComponent {
             onDelete,
             onSelect,
             rjvId
-        } = this.props
+        } = this.props;
         const { editMode } = this.state;
 
         return (
             <div
-                {...Theme(theme, "objectKeyVal", {
+                {...Theme(theme, 'objectKeyVal', {
                     paddingLeft: indentWidth * singleIndent
                 })}
                 class="variable-row"
                 key={variable.name}
             >
-                {type == "array" ? (
+                {type == 'array' ? (
                     <span
-                        {...Theme(theme, "array-key")}
-                        key={variable.name + "_" + namespace}
+                        {...Theme(theme, 'array-key')}
+                        key={variable.name + '_' + namespace}
                     >
                         {variable.name}
-                        <div {...Theme(theme, "colon")}>:</div>
+                        <div {...Theme(theme, 'colon')}>:</div>
                     </span>
                 ) : (
                     <span>
                         <span
-                            {...Theme(theme, "object-name")}
+                            {...Theme(theme, 'object-name')}
                             class="object-key"
-                            key={variable.name + "_" + namespace}
+                            key={variable.name + '_' + namespace}
                         >
-                            <span style={{ verticalAlign: "top" }}>"</span>
-                            <span style={{ display: "inline-block" }}>
+                            <span style={{ verticalAlign: 'top' }}>"</span>
+                            <span style={{ display: 'inline-block' }}>
                                 {variable.name}
                             </span>
-                            <span style={{ verticalAlign: "top" }}>"</span>
+                            <span style={{ verticalAlign: 'top' }}>"</span>
                         </span>
-                        <span {...Theme(theme, "colon")}>:</span>
+                        <span {...Theme(theme, 'colon')}>:</span>
                     </span>
                 )}
                 <div
@@ -96,20 +96,20 @@ class VariableEditor extends React.PureComponent {
                         onSelect === false && onEdit === false
                             ? null
                             : e => {
-                                  let location = [...namespace]
-                                  if ((e.ctrlKey || e.metaKey) && onEdit !== false) {
-                                      this.prepopInput(variable)
-                                  } else if (onSelect !== false) {
-                                      location.shift()
-                                      onSelect({
-                                          ...variable,
-                                          namespace: location
-                                      })
-                                  }
-                              }
+                                let location = [...namespace];
+                                if ((e.ctrlKey || e.metaKey) && onEdit !== false) {
+                                    this.prepopInput(variable);
+                                } else if (onSelect !== false) {
+                                    location.shift();
+                                    onSelect({
+                                        ...variable,
+                                        namespace: location
+                                    });
+                                }
+                            }
                     }
-                    {...Theme(theme, "variableValue", {
-                        cursor: onSelect === false ? "default" : "pointer"
+                    {...Theme(theme, 'variableValue', {
+                        cursor: onSelect === false ? 'default' : 'pointer'
                     })}
                 >
                     {this.getValue(variable, editMode)}
@@ -129,23 +129,23 @@ class VariableEditor extends React.PureComponent {
                     ? this.getRemoveIcon()
                     : null}
             </div>
-        )
+        );
     }
 
     getEditIcon = () => {
-        const { variable, theme } = this.props
+        const { variable, theme } = this.props;
 
         return (
-            <div class="click-to-edit" style={{ verticalAlign: "top" }}>
+            <div class="click-to-edit" style={{ verticalAlign: 'top' }}>
                 <Edit
                     class="click-to-edit-icon"
-                    {...Theme(theme, "editVarIcon")}
+                    {...Theme(theme, 'editVarIcon')}
                     onClick={() => {
-                        this.prepopInput(variable)
+                        this.prepopInput(variable);
                     }}
                 />
             </div>
-        )
+        );
     }
 
     prepopInput = variable => {
@@ -164,16 +164,16 @@ class VariableEditor extends React.PureComponent {
     }
 
     getRemoveIcon = () => {
-        const { variable, namespace, theme, rjvId } = this.props
+        const { variable, namespace, theme, rjvId } = this.props;
 
         return (
-            <div class="click-to-remove" style={{ verticalAlign: "top" }}>
+            <div class="click-to-remove" style={{ verticalAlign: 'top' }}>
                 <Remove
                     class="click-to-remove-icon"
-                    {...Theme(theme, "removeVarIcon")}
+                    {...Theme(theme, 'removeVarIcon')}
                     onClick={() => {
                         dispatcher.dispatch({
-                            name: "VARIABLE_REMOVED",
+                            name: 'VARIABLE_REMOVED',
                             rjvId: rjvId,
                             data: {
                                 name: variable.name,
@@ -181,46 +181,46 @@ class VariableEditor extends React.PureComponent {
                                 existing_value: variable.value,
                                 variable_removed: true
                             }
-                        })
+                        });
                     }}
                 />
             </div>
-        )
+        );
     }
 
     getValue = (variable, editMode) => {
-        const type = editMode ? false : variable.type
-        const { props } = this
+        const type = editMode ? false : variable.type;
+        const { props } = this;
         switch (type) {
-            case false:
-                return this.getEditInput()
-            case "string":
-                return <JsonString value={variable.value} {...props} />
-            case "integer":
-                return <JsonInteger value={variable.value} {...props} />
-            case "float":
-                return <JsonFloat value={variable.value} {...props} />
-            case "boolean":
-                return <JsonBoolean value={variable.value} {...props} />
-            case "function":
-                return <JsonFunction value={variable.value} {...props} />
-            case "null":
-                return <JsonNull {...props} />
-            case "nan":
-                return <JsonNan {...props} />
-            case "undefined":
-                return <JsonUndefined {...props} />
-            case "date":
-                return <JsonDate value={variable.value} {...props} />
-            case "regexp":
-                return <JsonRegexp value={variable.value} {...props} />
-            default:
-                // catch-all for types that weren't anticipated
-                return (
-                    <div class="object-value">
-                        {JSON.stringify(variable.value)}
-                    </div>
-                )
+        case false:
+            return this.getEditInput();
+        case 'string':
+            return <JsonString value={variable.value} {...props} />;
+        case 'integer':
+            return <JsonInteger value={variable.value} {...props} />;
+        case 'float':
+            return <JsonFloat value={variable.value} {...props} />;
+        case 'boolean':
+            return <JsonBoolean value={variable.value} {...props} />;
+        case 'function':
+            return <JsonFunction value={variable.value} {...props} />;
+        case 'null':
+            return <JsonNull {...props} />;
+        case 'nan':
+            return <JsonNan {...props} />;
+        case 'undefined':
+            return <JsonUndefined {...props} />;
+        case 'date':
+            return <JsonDate value={variable.value} {...props} />;
+        case 'regexp':
+            return <JsonRegexp value={variable.value} {...props} />;
+        default:
+            // catch-all for types that weren't anticipated
+            return (
+                <div class="object-value">
+                    {JSON.stringify(variable.value)}
+                </div>
+            );
         }
     }
 
@@ -236,56 +236,56 @@ class VariableEditor extends React.PureComponent {
                     value={editValue}
                     class="variable-editor"
                     onChange={event => {
-                        const value = event.target.value
-                        const detected = parseInput(value)
+                        const value = event.target.value;
+                        const detected = parseInput(value);
                         this.setState({
                             editValue: value,
                             parsedInput: {
                                 type: detected.type,
                                 value: detected.value
                             }
-                        })
+                        });
                     }}
                     onKeyDown={e => {
                         switch (e.key) {
-                            case "Escape": {
-                                this.setState({
-                                    editMode: false,
-                                    editValue: ""
-                                })
-                                break
-                            }
-                            case "Enter": {
-                                if (e.ctrlKey || e.metaKey) {
-                                    this.submitEdit(true)
-                                }
-                                break
-                            }
+                        case 'Escape': {
+                            this.setState({
+                                editMode: false,
+                                editValue: ''
+                            });
+                            break;
                         }
-                        e.stopPropagation()
+                        case 'Enter': {
+                            if (e.ctrlKey || e.metaKey) {
+                                this.submitEdit(true);
+                            }
+                            break;
+                        }
+                        }
+                        e.stopPropagation();
                     }}
                     placeholder="update this value"
-                    {...Theme(theme, "edit-input")}
+                    {...Theme(theme, 'edit-input')}
                 />
-                <div {...Theme(theme, "edit-icon-container")}>
+                <div {...Theme(theme, 'edit-icon-container')}>
                     <Remove
                         class="edit-cancel"
-                        {...Theme(theme, "cancel-icon")}
+                        {...Theme(theme, 'cancel-icon')}
                         onClick={() => {
-                            this.setState({ editMode: false, editValue: "" })
+                            this.setState({ editMode: false, editValue: '' });
                         }}
                     />
                     <CheckCircle
                         class="edit-check string-value"
-                        {...Theme(theme, "check-icon")}
+                        {...Theme(theme, 'check-icon')}
                         onClick={() => {
-                            this.submitEdit()
+                            this.submitEdit();
                         }}
                     />
                     <div>{this.showDetected()}</div>
                 </div>
             </div>
-        )
+        );
     }
 
     submitEdit = submit_detected => {
@@ -299,7 +299,7 @@ class VariableEditor extends React.PureComponent {
             editMode: false
         });
         dispatcher.dispatch({
-            name: "VARIABLE_UPDATED",
+            name: 'VARIABLE_UPDATED',
             rjvId: rjvId,
             data: {
                 name: variable.name,
@@ -308,32 +308,32 @@ class VariableEditor extends React.PureComponent {
                 new_value: new_value,
                 variable_removed: false
             }
-        })
+        });
     }
 
     showDetected = () => {
         const { theme, variable, namespace, rjvId } = this.props;
         const { type, value } = this.state.parsedInput;
-        const detected = this.getDetectedInput()
+        const detected = this.getDetectedInput();
         if (detected) {
             return (
                 <div>
-                    <div {...Theme(theme, "detected-row")}>
+                    <div {...Theme(theme, 'detected-row')}>
                         {detected}
                         <CheckCircle
                             class="edit-check detected"
                             style={{
-                                verticalAlign: "top",
-                                paddingLeft: "3px",
-                                ...Theme(theme, "check-icon").style
+                                verticalAlign: 'top',
+                                paddingLeft: '3px',
+                                ...Theme(theme, 'check-icon').style
                             }}
                             onClick={() => {
-                                this.submitEdit(true)
+                                this.submitEdit(true);
                             }}
                         />
                     </div>
                 </div>
-            )
+            );
         }
     }
 
@@ -345,82 +345,82 @@ class VariableEditor extends React.PureComponent {
 
         if (type !== false) {
             switch (type.toLowerCase()) {
-                case "object":
-                    return (
-                        <span>
-                            <span
-                                style={{
-                                    ...Theme(theme, "brace").style,
-                                    cursor: "default"
-                                }}
-                            >
-                                {"{"}
-                            </span>
-                            <span
-                                style={{
-                                    ...Theme(theme, "ellipsis").style,
-                                    cursor: "default"
-                                }}
-                            >
-                                ...
-                            </span>
-                            <span
-                                style={{
-                                    ...Theme(theme, "brace").style,
-                                    cursor: "default"
-                                }}
-                            >
-                                {"}"}
-                            </span>
+            case 'object':
+                return (
+                    <span>
+                        <span
+                            style={{
+                                ...Theme(theme, 'brace').style,
+                                cursor: 'default'
+                            }}
+                        >
+                            {'{'}
                         </span>
-                    )
-                case "array":
-                    return (
-                        <span>
-                            <span
-                                style={{
-                                    ...Theme(theme, "brace").style,
-                                    cursor: "default"
-                                }}
-                            >
-                                {"["}
-                            </span>
-                            <span
-                                style={{
-                                    ...Theme(theme, "ellipsis").style,
-                                    cursor: "default"
-                                }}
-                            >
+                        <span
+                            style={{
+                                ...Theme(theme, 'ellipsis').style,
+                                cursor: 'default'
+                            }}
+                        >
                                 ...
-                            </span>
-                            <span
-                                style={{
-                                    ...Theme(theme, "brace").style,
-                                    cursor: "default"
-                                }}
-                            >
-                                {"]"}
-                            </span>
                         </span>
-                    )
-                case "string":
-                    return <JsonString value={value} {...props} />
-                case "integer":
-                    return <JsonInteger value={value} {...props} />
-                case "float":
-                    return <JsonFloat value={value} {...props} />
-                case "boolean":
-                    return <JsonBoolean value={value} {...props} />
-                case "function":
-                    return <JsonFunction value={value} {...props} />
-                case "null":
-                    return <JsonNull {...props} />
-                case "nan":
-                    return <JsonNan {...props} />
-                case "undefined":
-                    return <JsonUndefined {...props} />
-                case "date":
-                    return <JsonDate value={new Date(value)} {...props} />
+                        <span
+                            style={{
+                                ...Theme(theme, 'brace').style,
+                                cursor: 'default'
+                            }}
+                        >
+                            {'}'}
+                        </span>
+                    </span>
+                );
+            case 'array':
+                return (
+                    <span>
+                        <span
+                            style={{
+                                ...Theme(theme, 'brace').style,
+                                cursor: 'default'
+                            }}
+                        >
+                            {'['}
+                        </span>
+                        <span
+                            style={{
+                                ...Theme(theme, 'ellipsis').style,
+                                cursor: 'default'
+                            }}
+                        >
+                                ...
+                        </span>
+                        <span
+                            style={{
+                                ...Theme(theme, 'brace').style,
+                                cursor: 'default'
+                            }}
+                        >
+                            {']'}
+                        </span>
+                    </span>
+                );
+            case 'string':
+                return <JsonString value={value} {...props} />;
+            case 'integer':
+                return <JsonInteger value={value} {...props} />;
+            case 'float':
+                return <JsonFloat value={value} {...props} />;
+            case 'boolean':
+                return <JsonBoolean value={value} {...props} />;
+            case 'function':
+                return <JsonFunction value={value} {...props} />;
+            case 'null':
+                return <JsonNull {...props} />;
+            case 'nan':
+                return <JsonNan {...props} />;
+            case 'undefined':
+                return <JsonUndefined {...props} />;
+            case 'date':
+                return <JsonDate value={new Date(value)} {...props} />;
             }
         }
     }

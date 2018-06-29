@@ -29,7 +29,7 @@ export default class extends React.PureComponent {
                     {message}
                 </span>
                 <Clear
-                {...Theme(theme, 'validation-failure-clear')} />
+                    {...Theme(theme, 'validation-failure-clear')} />
             </div>
         ) : null;
     }

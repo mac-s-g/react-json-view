@@ -1,28 +1,28 @@
-import React from "react"
+import React from 'react';
 import {polyfill} from 'react-lifecycles-compat';
-import { toType } from "./../../helpers/util"
+import { toType } from './../../helpers/util';
 
 //data type components
-import { JsonObject } from "./DataTypes"
+import { JsonObject } from './DataTypes';
 
-import VariableEditor from "./../VariableEditor"
-import VariableMeta from "./../VariableMeta"
-import ArrayGroup from "./../ArrayGroup"
-import ObjectName from "./../ObjectName"
+import VariableEditor from './../VariableEditor';
+import VariableMeta from './../VariableMeta';
+import ArrayGroup from './../ArrayGroup';
+import ObjectName from './../ObjectName';
 
 //attribute store
-import AttributeStore from "./../../stores/ObjectAttributes"
+import AttributeStore from './../../stores/ObjectAttributes';
 
 //icons
-import { CollapsedIcon, ExpandedIcon } from "./../ToggleIcons"
+import { CollapsedIcon, ExpandedIcon } from './../ToggleIcons';
 
 //theme
-import Theme from "./../../themes/getStyle"
+import Theme from './../../themes/getStyle';
 
 //increment 1 with each nested object & array
-const DEPTH_INCREMENT = 1
+const DEPTH_INCREMENT = 1;
 //single indent is 5px
-const SINGLE_INDENT = 5
+const SINGLE_INDENT = 5;
 
 class RjvObject extends React.PureComponent {
     constructor(props) {
@@ -52,11 +52,11 @@ class RjvObject extends React.PureComponent {
             expanded: AttributeStore.get(
                 props.rjvId,
                 props.namespace,
-                "expanded",
+                'expanded',
                 expanded
             ),
-            object_type: props.type === "array" ? "array" : "object",
-            parent_type: props.type === "array" ? "array" : "object",
+            object_type: props.type === 'array' ? 'array' : 'object',
+            parent_type: props.type === 'array' ? 'array' : 'object',
             size
         };
         return state;
@@ -86,9 +86,9 @@ class RjvObject extends React.PureComponent {
             AttributeStore.set(
                 this.props.rjvId,
                 this.props.namespace,
-                "expanded",
+                'expanded',
                 this.state.expanded
-            )
+            );
         });
     }
 
@@ -97,12 +97,12 @@ class RjvObject extends React.PureComponent {
             <div class="pushed-content object-container">
                 <div
                     class="object-content"
-                    {...Theme(this.props.theme, "pushed-content")}
+                    {...Theme(this.props.theme, 'pushed-content')}
                 >
                     {this.renderObjectContents(src, props)}
                 </div>
             </div>
-        )
+        );
     }
 
     getEllipsis = () => {
@@ -110,34 +110,34 @@ class RjvObject extends React.PureComponent {
 
         if (size === 0) {
             //don't render an ellipsis when an object has no items
-            return null
+            return null;
         } else {
             return (
                 <div
-                    {...Theme(this.props.theme, "ellipsis")}
+                    {...Theme(this.props.theme, 'ellipsis')}
                     class="node-ellipsis"
                     onClick={this.toggleCollapsed}
                 >
                     ...
                 </div>
-            )
+            );
         }
     }
 
     getObjectMetaData = src => {
         const { rjvId, theme } = this.props;
         const { size } = this.state;
-        return <VariableMeta size={size} {...this.props} />
+        return <VariableMeta size={size} {...this.props} />;
     }
 
     getBraceStart(object_type, expanded) {
         const { src, theme, iconStyle, parent_type } = this.props;
 
-        if (parent_type === "array_group") {
+        if (parent_type === 'array_group') {
             return (
                 <span>
-                    <span {...Theme(theme, "brace")}>
-                        {object_type === "array" ? "[" : "{"}
+                    <span {...Theme(theme, 'brace')}>
+                        {object_type === 'array' ? '[' : '{'}
                     </span>
                     {expanded ? this.getObjectMetaData(src) : null}
                 </span>
@@ -150,24 +150,24 @@ class RjvObject extends React.PureComponent {
             <span>
                 <span
                     onClick={e => {
-                        this.toggleCollapsed()
+                        this.toggleCollapsed();
                     }}
-                    {...Theme(theme, "brace-row")}
+                    {...Theme(theme, 'brace-row')}
                 >
                     <div
                         class="icon-container"
-                        {...Theme(theme, "icon-container")}
+                        {...Theme(theme, 'icon-container')}
                     >
                         <IconComponent {...{ theme, iconStyle }} />
                     </div>
                     <ObjectName {...this.props} />
-                    <span {...Theme(theme, "brace")}>
-                        {object_type === "array" ? "[" : "{"}
+                    <span {...Theme(theme, 'brace')}>
+                        {object_type === 'array' ? '[' : '{'}
                     </span>
                 </span>
                 {expanded ? this.getObjectMetaData(src) : null}
             </span>
-        )
+        );
     }
 
     render() {
@@ -189,39 +189,39 @@ class RjvObject extends React.PureComponent {
         const { object_type, expanded } = this.state;
 
         let styles = {};
-        if (!jsvRoot && parent_type !== "array_group") {
+        if (!jsvRoot && parent_type !== 'array_group') {
             styles.paddingLeft = this.props.indentWidth * SINGLE_INDENT;
-        } else if (parent_type === "array_group") {
+        } else if (parent_type === 'array_group') {
             styles.borderLeft = 0;
-            styles.display = "inline";
+            styles.display = 'inline';
         }
 
         return (
             <div
                 class="object-key-val"
-                {...Theme(theme, jsvRoot ? "jsv-root" : "objectKeyVal", styles)}
+                {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', styles)}
             >
                 {this.getBraceStart(object_type, expanded)}
                 {expanded
                     ? this.getObjectContent(depth, src, {
-                          theme,
-                          iconStyle,
-                          ...rest
-                      })
+                        theme,
+                        iconStyle,
+                        ...rest
+                    })
                     : this.getEllipsis()}
                 <span class="brace-row">
                     <span
                         style={{
-                            ...Theme(theme, "brace").style,
-                            paddingLeft: expanded ? "3px" : "0px"
+                            ...Theme(theme, 'brace').style,
+                            paddingLeft: expanded ? '3px' : '0px'
                         }}
                     >
-                        {object_type === "array" ? "]" : "}"}
+                        {object_type === 'array' ? ']' : '}'}
                     </span>
                     {expanded ? null : this.getObjectMetaData(src)}
                 </span>
             </div>
-        )
+        );
     }
 
     renderObjectContents = (variables, props) => {
@@ -231,24 +231,24 @@ class RjvObject extends React.PureComponent {
             index_offset,
             groupArraysAfterLength,
             namespace
-        } = this.props
+        } = this.props;
         const { object_type } = this.state;
-        let theme = props.theme
+        let theme = props.theme;
         let elements = [],
-            variable
+            variable;
         let keys = Object.keys(variables || {});
         if (this.props.sortKeys) {
             keys = keys.sort();
         }
         keys.forEach(name => {
-            variable = new JsonVariable(name, variables[name])
+            variable = new JsonVariable(name, variables[name]);
 
-            if (parent_type === "array_group" && index_offset) {
-                variable.name = parseInt(variable.name) + index_offset
+            if (parent_type === 'array_group' && index_offset) {
+                variable.name = parseInt(variable.name) + index_offset;
             }
             if (!variables.hasOwnProperty(name)) {
-                return
-            } else if (variable.type === "object") {
+                return;
+            } else if (variable.type === 'object') {
                 elements.push(
                     <JsonObject
                         key={variable.name}
@@ -259,8 +259,8 @@ class RjvObject extends React.PureComponent {
                         parent_type={object_type}
                         {...props}
                     />
-                )
-            } else if (variable.type === "array") {
+                );
+            } else if (variable.type === 'array') {
                 let ObjectComponent = JsonObject;
 
                 if (
@@ -281,21 +281,21 @@ class RjvObject extends React.PureComponent {
                         parent_type={object_type}
                         {...props}
                     />
-                )
+                );
             } else {
                 elements.push(
                     <VariableEditor
-                        key={variable.name + "_" + namespace}
+                        key={variable.name + '_' + namespace}
                         variable={variable}
                         singleIndent={SINGLE_INDENT}
                         namespace={namespace}
                         type={this.props.type}
                         {...props}
                     />
-                )
+                );
             }
-        })
-        return elements
+        });
+        return elements;
     }
 }
 

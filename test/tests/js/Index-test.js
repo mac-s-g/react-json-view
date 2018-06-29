@@ -101,7 +101,6 @@ describe("<Index />", function() {
         expect(wrapper.find(".data-type-label")).to.have.length(1)
         // setProps() will cause getDerivedStateFromProps to be called once.
         wrapper.setProps({ src: { test1: true, test2: false } })
-        console.log(Index.getDerivedStateFromProps);
         // in total, it was called thrice.
         expect(Index.getDerivedStateFromProps.calledThrice).to.equal(
             true

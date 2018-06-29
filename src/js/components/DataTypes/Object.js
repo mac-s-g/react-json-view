@@ -1,5 +1,5 @@
 import React from "react"
-
+import {polyfill} from 'react-lifecycles-compat';
 import { toType } from "./../../helpers/util"
 
 //data type components
@@ -24,16 +24,18 @@ const DEPTH_INCREMENT = 1
 //single indent is 5px
 const SINGLE_INDENT = 5
 
-class rjvObject extends React.Component {
+class RjvObject extends React.PureComponent {
     constructor(props) {
-        super(props)
-        this.state = this.initializeState(props)
+        super(props);
+        const state = RjvObject.getState(props);
+        this.state = {
+            ...state,
+            prevProps: {}
+        };
     }
 
-    state = {}
-
-    initializeState = props => {
-        const size = Object.keys(props.src).length
+    static getState = props => {
+        const size = Object.keys(props.src).length;
         const expanded =
             (props.collapsed === false ||
                 (props.collapsed !== true && props.collapsed > props.depth)) &&
@@ -45,40 +47,49 @@ class rjvObject extends React.Component {
                     namespace: props.namespace
                 }) === false) &&
             //initialize closed if object has no items
-            size !== 0
+            size !== 0;
         const state = {
-            rjvId: props.rjvId,
-            state_key: props.namespace.join("."),
-            namespace: props.namespace,
-            indentWidth: props.indentWidth,
             expanded: AttributeStore.get(
                 props.rjvId,
                 props.namespace,
                 "expanded",
                 expanded
             ),
-            object_type: props.type == "array" ? "array" : "object",
-            parent_type: props.type == "array" ? "array" : "object",
-            size: size
-        }
-
-        return { ...this.state, ...state }
+            object_type: props.type === "array" ? "array" : "object",
+            parent_type: props.type === "array" ? "array" : "object",
+            size
+        };
+        return state;
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState(this.initializeState(nextProps))
+    static getDerivedStateFromProps(nextProps, prevState) {
+        const { prevProps } = prevState;
+        if (nextProps.src !== prevProps.src ||
+            nextProps.collapsed !== prevProps.collapsed ||
+            nextProps.name !== prevProps.name ||
+            nextProps.namespace !== prevProps.namespace ||
+            nextProps.rjvId !== prevProps.rjvId
+        ) {
+            const newState = RjvObject.getState(nextProps);
+            return {
+                ...newState,
+                prevProps: nextProps
+            };
+        }
+        return null;
     }
 
     toggleCollapsed = () => {
-        this.state.expanded = !this.state.expanded
-        AttributeStore.set(
-            this.state.rjvId,
-            this.state.namespace,
-            "expanded",
-            this.state.expanded
-        )
-
-        this.setState(this.state)
+        this.setState({
+            expanded: !this.state.expanded
+        }, () => {
+            AttributeStore.set(
+                this.props.rjvId,
+                this.props.namespace,
+                "expanded",
+                this.state.expanded
+            )
+        });
     }
 
     getObjectContent = (depth, src, props) => {
@@ -95,7 +106,7 @@ class rjvObject extends React.Component {
     }
 
     getEllipsis = () => {
-        const { size } = this.state
+        const { size } = this.state;
 
         if (size === 0) {
             //don't render an ellipsis when an object has no items
@@ -114,26 +125,26 @@ class rjvObject extends React.Component {
     }
 
     getObjectMetaData = src => {
-        const { rjvId, theme } = this.props
-        const { size } = this.state
+        const { rjvId, theme } = this.props;
+        const { size } = this.state;
         return <VariableMeta size={size} {...this.props} />
     }
 
     getBraceStart(object_type, expanded) {
-        const { src, theme, iconStyle, parent_type } = this.props
+        const { src, theme, iconStyle, parent_type } = this.props;
 
-        if (parent_type == "array_group") {
+        if (parent_type === "array_group") {
             return (
                 <span>
                     <span {...Theme(theme, "brace")}>
-                        {object_type == "array" ? "[" : "{"}
+                        {object_type === "array" ? "[" : "{"}
                     </span>
                     {expanded ? this.getObjectMetaData(src) : null}
                 </span>
-            )
+            );
         }
 
-        const IconComponent = expanded ? ExpandedIcon : CollapsedIcon
+        const IconComponent = expanded ? ExpandedIcon : CollapsedIcon;
 
         return (
             <span>
@@ -151,7 +162,7 @@ class rjvObject extends React.Component {
                     </div>
                     <ObjectName {...this.props} />
                     <span {...Theme(theme, "brace")}>
-                        {object_type == "array" ? "[" : "{"}
+                        {object_type === "array" ? "[" : "{"}
                     </span>
                 </span>
                 {expanded ? this.getObjectMetaData(src) : null}
@@ -173,16 +184,16 @@ class rjvObject extends React.Component {
             jsvRoot,
             iconStyle,
             ...rest
-        } = this.props
+        } = this.props;
 
-        const { object_type, expanded } = this.state
+        const { object_type, expanded } = this.state;
 
-        let styles = {}
+        let styles = {};
         if (!jsvRoot && parent_type !== "array_group") {
-            styles.paddingLeft = this.props.indentWidth * SINGLE_INDENT
+            styles.paddingLeft = this.props.indentWidth * SINGLE_INDENT;
         } else if (parent_type === "array_group") {
-            styles.borderLeft = 0
-            styles.display = "inline"
+            styles.borderLeft = 0;
+            styles.display = "inline";
         }
 
         return (
@@ -205,7 +216,7 @@ class rjvObject extends React.Component {
                             paddingLeft: expanded ? "3px" : "0px"
                         }}
                     >
-                        {object_type == "array" ? "]" : "}"}
+                        {object_type === "array" ? "]" : "}"}
                     </span>
                     {expanded ? null : this.getObjectMetaData(src)}
                 </span>
@@ -218,9 +229,10 @@ class rjvObject extends React.Component {
             depth,
             parent_type,
             index_offset,
-            groupArraysAfterLength
+            groupArraysAfterLength,
+            namespace
         } = this.props
-        const { namespace, object_type } = this.state
+        const { object_type } = this.state;
         let theme = props.theme
         let elements = [],
             variable
@@ -231,12 +243,12 @@ class rjvObject extends React.Component {
         keys.forEach(name => {
             variable = new JsonVariable(name, variables[name])
 
-            if (parent_type == "array_group" && index_offset) {
+            if (parent_type === "array_group" && index_offset) {
                 variable.name = parseInt(variable.name) + index_offset
             }
             if (!variables.hasOwnProperty(name)) {
                 return
-            } else if (variable.type == "object") {
+            } else if (variable.type === "object") {
                 elements.push(
                     <JsonObject
                         key={variable.name}
@@ -248,14 +260,14 @@ class rjvObject extends React.Component {
                         {...props}
                     />
                 )
-            } else if (variable.type == "array") {
-                let ObjectComponent = JsonObject
+            } else if (variable.type === "array") {
+                let ObjectComponent = JsonObject;
 
                 if (
                     groupArraysAfterLength &&
                     variable.value.length > groupArraysAfterLength
                 ) {
-                    ObjectComponent = ArrayGroup
+                    ObjectComponent = ArrayGroup;
                 }
 
                 elements.push(
@@ -290,11 +302,13 @@ class rjvObject extends React.Component {
 //just store name, value and type with a variable
 class JsonVariable {
     constructor(name, value) {
-        this.name = name
-        this.value = value
-        this.type = toType(value)
+        this.name = name;
+        this.value = value;
+        this.type = toType(value);
     }
 }
 
+polyfill(RjvObject);
+
 //export component
-export default rjvObject
+export default RjvObject;

@@ -7,37 +7,37 @@ import Theme from "./../../themes/getStyle"
 //attribute store for storing collapsed state
 import AttributeStore from "./../../stores/ObjectAttributes"
 
-export default class extends React.Component {
+export default class extends React.PureComponent {
     constructor(props) {
         super(props)
-
-        this.state.collapsed = AttributeStore.get(
-            props.rjvId,
-            props.namespace,
-            "collapsed",
-            true
-        )
-    }
-
-    state = {
-        collapsed: true
+        this.state = {
+            collapsed: AttributeStore.get(
+                props.rjvId,
+                props.namespace,
+                "collapsed",
+                true
+            )
+        };
     }
 
     toggleCollapsed = () => {
-        this.state.collapsed = !this.state.collapsed
-        AttributeStore.set(
-            this.props.rjvId,
-            this.props.namespace,
-            "collapsed",
-            this.state.collapsed
-        )
-        this.setState(this.state)
-    }
+        this.setState({
+            collapsed: !this.state.collapsed
+        }, () => {
+            // will be called after setState takes effect.
+            AttributeStore.set(
+                this.props.rjvId,
+                this.props.namespace,
+                "collapsed",
+                this.state.collapsed
+            );
+        })
+    };
 
     render() {
         const type_name = "function"
-        const { props } = this
-        const { collapsed } = this.state
+        const { props } = this;
+        const { collapsed } = this.state;
 
         return (
             <div {...Theme(props.theme, "function")}>
@@ -45,9 +45,7 @@ export default class extends React.Component {
                 <span
                     {...Theme(props.theme, "function-value")}
                     class="rjv-function-container"
-                    onClick={() => {
-                        this.toggleCollapsed()
-                    }}
+                    onClick={this.toggleCollapsed}
                 >
                     {this.getFunctionDisplay(collapsed)}
                 </span>
@@ -56,8 +54,7 @@ export default class extends React.Component {
     }
 
     getFunctionDisplay = collapsed => {
-        const { props } = this
-
+        const { props } = this;
         if (collapsed) {
             return (
                 <span>
@@ -74,9 +71,9 @@ export default class extends React.Component {
                         <span>{"}"}</span>
                     </span>
                 </span>
-            )
+            );
         } else {
-            return this.props.value.toString().slice(9, -1)
+            return this.props.value.toString().slice(9, -1);
         }
-    }
+    };
 }

@@ -11,19 +11,23 @@ import { CollapsedIcon, ExpandedIcon } from './ToggleIcons';
 //single indent is 5px
 const SINGLE_INDENT = 5;
 
-export default class extends React.Component {
+export default class extends React.PureComponent {
     constructor(props) {
         super(props)
-
         this.state = {
-            expanded: {}
+            expanded: []
         }
     }
 
     toggleCollapsed = (i) => {
-        this.state.expanded[i] = !this.state.expanded[i]
-
-        this.setState(this.state);
+        const newExpanded = [];
+        for (const j in this.state.expanded) {
+            newExpanded.push(this.state.expanded[j]);
+        }
+        newExpanded[i] = !newExpanded[i];
+        this.setState({
+            expanded: newExpanded
+        });
     }
 
     getExpandedIcon(i) {
@@ -31,17 +35,17 @@ export default class extends React.Component {
 
         if (!!this.state.expanded[i]) {
             return <ExpandedIcon {...{theme, iconStyle}}/>
-        } 
+        }
 
         return <CollapsedIcon {...{theme, iconStyle}} />
     }
 
     render() {
-        const { 
-            src, groupArraysAfterLength, depth, 
+        const {
+            src, groupArraysAfterLength, depth,
             name, theme, jsvRoot, namespace, parent_type,
             ...rest
-        } = this.props
+        } = this.props;
 
         let expanded_icon, object_padding_left = 0;
 
@@ -51,8 +55,8 @@ export default class extends React.Component {
             object_padding_left = this.props.indentWidth * SINGLE_INDENT;
         }
 
-        const size = groupArraysAfterLength
-        const groups = Math.ceil(src.length / size)
+        const size = groupArraysAfterLength;
+        const groups = Math.ceil(src.length / size);
 
         return (<div class='object-key-val'
                     {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', {paddingLeft: object_padding_left})}
@@ -62,7 +66,7 @@ export default class extends React.Component {
             <span>
                 <VariableMeta size={src.length} {...this.props}/>
             </span>
-            {[...Array(groups)].map((_, i) => 
+            {[...Array(groups)].map((_, i) =>
                 <div key={i} class='object-key-val array-group' {...Theme(theme, 'objectKeyVal', {
                     marginLeft: 6,
                     paddingLeft: array_group_padding_left
@@ -73,7 +77,7 @@ export default class extends React.Component {
                          onClick={(e) => {this.toggleCollapsed(i)}}>
                         {this.getExpandedIcon(i)}
                     </div>
-                    {!!this.state.expanded[i] ? 
+                    {!!this.state.expanded[i] ?
                         <ObjectComponent key={name + i}
                             depth={0}
                             name={false}
@@ -100,7 +104,7 @@ export default class extends React.Component {
                             ]
                         </span>
                     }
-                    
+
                 </span>
                 </div>
             )}

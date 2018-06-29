@@ -2,14 +2,14 @@ import React from "react";
 import JsonObject from './DataTypes/Object';
 import ArrayGroup from './ArrayGroup';
 
-export default class extends React.Component {
+export default class extends React.PureComponent {
     render = () => {
         const {props} = this;
         const namespace = [props.name];
-        let ObjectComponent = JsonObject
+        let ObjectComponent = JsonObject;
 
         if (props.groupArraysAfterLength && props.src.length > props.groupArraysAfterLength) {
-            ObjectComponent = ArrayGroup
+            ObjectComponent = ArrayGroup;
         }
 
         return (

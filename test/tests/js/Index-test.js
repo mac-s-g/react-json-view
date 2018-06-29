@@ -92,12 +92,17 @@ describe("<Index />", function() {
         expect(wrapper.find(".copy-to-clipboard-container")).to.have.length(7)
     })
 
-    it("index test componentWillReceiveProps", function() {
-        sinon.spy(Index.prototype, "componentWillReceiveProps")
+    it("index test getDerivedStateFromProps", function() {
+        sinon.spy(Index, "getDerivedStateFromProps")
+        // mount() will cause getDerivedStateFromProps to be called twice.
+        // 1. before first render()
+        // 2. result of setState() in componentDidMount()
         const wrapper = mount(<Index src={{ test: true }} />)
         expect(wrapper.find(".data-type-label")).to.have.length(1)
+        // setProps() will cause getDerivedStateFromProps to be called once.
         wrapper.setProps({ src: { test1: true, test2: false } })
-        expect(Index.prototype.componentWillReceiveProps.calledOnce).to.equal(
+        // in total, it was called thrice.
+        expect(Index.getDerivedStateFromProps.calledThrice).to.equal(
             true
         )
     })

@@ -99,4 +99,3 @@ export default {
   addKeyModalPadding: '10px',
   addKeyModalRadius: '3px'
 };
-

@@ -78,7 +78,8 @@ export default class extends React.PureComponent {
                             {this.getExpandedIcon(i)}
                         </div>
                         {this.state.expanded[i] ?
-                            <ObjectComponent key={name + i}
+                            <ObjectComponent 
+                                key={name + i}
                                 depth={0}
                                 name={false}
                                 collapsed={false}

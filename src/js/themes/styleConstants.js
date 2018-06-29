@@ -50,11 +50,6 @@ export default {
     undefinedPadding: '1px 2px',
     undefinedBorderRadius: '3px',
 
-    nullFontSize: '11px',
-    nullFontWeight: 'bold',
-    nullPadding: '1px 2px',
-    nullBorderRadius: '3px',
-
     dataTypeFontSize: '11px',
     dataTypeMarginRight: '4px',
     datatypeOpacity: '0.8',

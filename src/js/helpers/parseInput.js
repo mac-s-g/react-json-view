@@ -28,7 +28,9 @@ export default function parseInput(input) {
             //float
             return formatResponse('integer', parseInt(input));
         }
-    } catch (e) {}
+    } catch (e) {
+        // no-op
+    }
 
     //run in case input was not serializable
     input = input.toLowerCase();

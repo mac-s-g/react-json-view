@@ -54,9 +54,9 @@ class ReactJsonView extends React.PureComponent {
         onDelete: false,
         onAdd: false,
         onSelect: false,
-        iconStyle: "triangle",
+        iconStyle: 'triangle',
         style: {},
-        validationMessage: "Validation Error"
+        validationMessage: 'Validation Error'
     }
 
     // will trigger whenever setState() is called, or parent passes in new props.
@@ -92,7 +92,7 @@ class ReactJsonView extends React.PureComponent {
         for (const i in listeners) {
             ObjectAttributes.on(
                 i + '-' + this.rjvId, listeners[i]
-            )
+            );
         }
         //reset key request to false once it's observed
         this.setState({
@@ -111,7 +111,7 @@ class ReactJsonView extends React.PureComponent {
         if (prevState.editKeyRequest !== false) {
             this.setState({
                 editKeyRequest: false
-            })
+            });
         }
     }
 
@@ -120,7 +120,7 @@ class ReactJsonView extends React.PureComponent {
         for (const i in listeners) {
             ObjectAttributes.removeListener(
                 i + '-' + this.rjvId, listeners[i]
-            )
+            );
         }
     }
 
@@ -129,7 +129,7 @@ class ReactJsonView extends React.PureComponent {
             'reset': this.resetState,
             'variable-update': this.updateSrc,
             'add-key-request': this.addKeyRequest
-        }
+        };
     }
     //make sure props are passed in as expected
     static validateState = (state) => {
@@ -156,7 +156,7 @@ class ReactJsonView extends React.PureComponent {
             validatedState.name = 'ERROR';
             validatedState.src = {
                 message: 'src property must be a valid json object'
-            }
+            };
         }
         return {
             // get the original state
@@ -199,7 +199,7 @@ class ReactJsonView extends React.PureComponent {
                     active={addKeyRequest}
                     theme={theme}
                     rjvId={this.rjvId} />
-             </div>
+            </div>
         );
     }
 
@@ -223,18 +223,18 @@ class ReactJsonView extends React.PureComponent {
             name: name,
             namespace: namespace,
             existing_value: existing_value,
-        }
+        };
 
         switch (type) {
-            case 'variable-added':
-                result = onAdd(on_edit_payload);
-                break;
-            case 'variable-edited':
-                result = onEdit(on_edit_payload);
-                break;
-            case 'variable-removed':
-                result = onDelete(on_edit_payload);
-                break
+        case 'variable-added':
+            result = onAdd(on_edit_payload);
+            break;
+        case 'variable-edited':
+            result = onEdit(on_edit_payload);
+            break;
+        case 'variable-removed':
+            result = onDelete(on_edit_payload);
+            break;
         }
 
         if (result !== false) {

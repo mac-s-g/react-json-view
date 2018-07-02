@@ -1,13 +1,13 @@
-import React from "react"
+import React from 'react';
 
-import { toType } from "./../helpers/util"
-import stringifyVariable from "./../helpers/stringifyVariable"
+import { toType } from './../helpers/util';
+import stringifyVariable from './../helpers/stringifyVariable';
 
 //clibboard icon
-import { Clippy } from "./icons"
+import { Clippy } from './icons';
 
 //theme
-import Theme from "./../themes/getStyle"
+import Theme from './../themes/getStyle';
 
 export default class extends React.PureComponent {
     constructor(props) {
@@ -27,18 +27,18 @@ export default class extends React.PureComponent {
     }
 
     handleCopy = () => {
-        const container = document.createElement("textarea");
+        const container = document.createElement('textarea');
         const { clickCallback, src, namespace } = this.props;
 
         container.innerHTML = JSON.stringify(
             this.clipboardValue(src),
             null,
-            "  "
-        )
+            '  '
+        );
 
-        document.body.appendChild(container)
-        container.select()
-        document.execCommand("copy")
+        document.body.appendChild(container);
+        container.select();
+        document.execCommand('copy');
 
         document.body.removeChild(container);
 
@@ -46,10 +46,10 @@ export default class extends React.PureComponent {
             this.setState({
                 copied: false
             });
-        }, 5500)
+        }, 5500);
 
         this.setState({ copied: true }, () => {
-            if (typeof clickCallback !== "function") {
+            if (typeof clickCallback !== 'function') {
                 return;
             }
 
@@ -58,7 +58,7 @@ export default class extends React.PureComponent {
                 namespace: namespace,
                 name: namespace[namespace.length - 1]
             });
-        })
+        });
     }
 
     getClippyIcon = () => {
@@ -67,33 +67,33 @@ export default class extends React.PureComponent {
         if (this.state.copied) {
             return (
                 <span>
-                    <Clippy class="copy-icon" {...Theme(theme, "copy-icon")} />
-                    <span {...Theme(theme, "copy-icon-copied")}>✔</span>
+                    <Clippy class="copy-icon" {...Theme(theme, 'copy-icon')} />
+                    <span {...Theme(theme, 'copy-icon-copied')}>✔</span>
                 </span>
-            )
+            );
         }
 
-        return <Clippy class="copy-icon" {...Theme(theme, "copy-icon")} />;
+        return <Clippy class="copy-icon" {...Theme(theme, 'copy-icon')} />;
     }
 
     clipboardValue = value => {
-        const type = toType(value)
+        const type = toType(value);
         switch (type) {
-            case "function":
-            case "regexp":
-                return value.toString();
-            default:
-                return value;
+        case 'function':
+        case 'regexp':
+            return value.toString();
+        default:
+            return value;
         }
     }
 
     render() {
         const { src, theme, hidden } = this.props;
-        let style = Theme(theme, "copy-to-clipboard").style;
-        let display = "inline";
+        let style = Theme(theme, 'copy-to-clipboard').style;
+        let display = 'inline';
 
         if (hidden) {
-            display = "none";
+            display = 'none';
         }
 
         return (

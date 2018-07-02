@@ -23,57 +23,57 @@ export default class extends React.PureComponent {
         const valid = isValid(input);
 
         return (
-        <div
-            class="key-modal-request"
-            {...Theme(theme, 'key-modal-request')}
-            onClick={this.closeModal}
-        >
             <div
-                {...Theme(theme, 'key-modal')}
-                onClick={(e)=>{e.stopPropagation();}}
+                class="key-modal-request"
+                {...Theme(theme, 'key-modal-request')}
+                onClick={this.closeModal}
             >
-                <div {...Theme(theme, 'key-modal-label')}>
+                <div
+                    {...Theme(theme, 'key-modal')}
+                    onClick={(e)=>{e.stopPropagation();}}
+                >
+                    <div {...Theme(theme, 'key-modal-label')}>
                     Key Name:
-                </div>
-                <div style={{position: 'relative'}}>
-                    <input {...Theme(theme, 'key-modal-input')}
-                        class="key-modal-input"
-                        ref={el => el && el.focus()}
-                        spellCheck={false}
-                        value={input}
-                        placeholder="..."
-                        onChange={(e)=>{
-                            this.setState({
-                                input: e.target.value
-                            })
-                        }}
-                        onKeyPress={(e)=>{
-                            if (valid && e.key === 'Enter') {
-                                this.submit();
-                            } else if (e.key === 'Escape') {
-                                this.closeModal();
-                            }
-                        }}
-                    />
-                    {valid
-                        ? <CheckCircle {...Theme(theme, 'key-modal-submit')}
-                            class="key-modal-submit"
-                            onClick={e => this.submit()}
+                    </div>
+                    <div style={{position: 'relative'}}>
+                        <input {...Theme(theme, 'key-modal-input')}
+                            class="key-modal-input"
+                            ref={el => el && el.focus()}
+                            spellCheck={false}
+                            value={input}
+                            placeholder="..."
+                            onChange={(e)=>{
+                                this.setState({
+                                    input: e.target.value
+                                });
+                            }}
+                            onKeyPress={(e)=>{
+                                if (valid && e.key === 'Enter') {
+                                    this.submit();
+                                } else if (e.key === 'Escape') {
+                                    this.closeModal();
+                                }
+                            }}
                         />
-                        : null}
+                        {valid
+                            ? <CheckCircle {...Theme(theme, 'key-modal-submit')}
+                                class="key-modal-submit"
+                                onClick={e => this.submit()}
+                            />
+                            : null}
+                    </div>
+                    <span {...Theme(theme, 'key-modal-cancel')}>
+                        <Cancel {...Theme(theme, 'key-modal-cancel-icon')}
+                            class="key-modal-cancel"
+                            onClick={()=>{
+                                dispatcher.dispatch({
+                                    rjvId: rjvId,
+                                    name: 'RESET'
+                                });
+                            }} />
+                    </span>
                 </div>
-                <span {...Theme(theme, 'key-modal-cancel')}>
-                    <Cancel {...Theme(theme, 'key-modal-cancel-icon')}
-                    class="key-modal-cancel"
-                    onClick={()=>{
-                        dispatcher.dispatch({
-                            rjvId: rjvId,
-                            name: 'RESET'
-                        });
-                    }} />
-                </span>
             </div>
-        </div>
         );
     }
 

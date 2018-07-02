@@ -11,6 +11,7 @@
     },
     "devDependencies": {
         "babel-core": "^6.26.3",
+        "babel-eslint": "^8.2.5",
         "babel-loader": "^7.1.4",
         "babel-plugin-react-html-attrs": "^2.0.0",
         "babel-plugin-transform-class-properties": "^6.24.1",
@@ -24,6 +25,9 @@
         "css-loader": "^0.28.11",
         "enzyme": "^3.2.0",
         "enzyme-adapter-react-16": "^1.1.1",
+        "eslint": "^5.0.1",
+        "eslint-plugin-babel": "^5.1.0",
+        "eslint-plugin-react": "^7.10.0",
         "html-webpack-plugin": "2.30.1",
         "ignore-styles": "^5.0.1",
         "istanbul": "^0.4.5",
@@ -61,7 +65,9 @@
         "test": "npm run test:unit && npm run test:coverage",
         "test:unit": "nyc mocha test/**/*-test.js",
         "test:coverage": "nyc report --reporter=text-lcov | coveralls",
-        "test:watch": "nyc mocha -w test/**/*-test.js"
+        "test:watch": "nyc mocha -w test/**/*-test.js",
+        "lint": "./node_modules/.bin/eslint src",
+        "lint-fixup": "./node_modules/.bin/eslint src --ext .js,.jsx --fix"
     },
     "repository": {
         "type": "git",

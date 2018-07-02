@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import JsonObject from './DataTypes/Object';
 import ArrayGroup from './ArrayGroup';
 
@@ -16,10 +16,10 @@ export default class extends React.PureComponent {
             <div class="pretty-json-container object-container" >
                 <div class="object-content">
                     <ObjectComponent
-                    namespace={namespace}
-                    depth={0}
-                    jsvRoot={true}
-                    {...props} />
+                        namespace={namespace}
+                        depth={0}
+                        jsvRoot={true}
+                        {...props} />
                 </div>
             </div>
         );

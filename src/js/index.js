@@ -257,7 +257,8 @@ class ReactJsonView extends React.PureComponent {
 
     resetState = () => {
         this.setState({
-            validationFailure: false
+            validationFailure: false,
+            addKeyRequest: false
         });
     }
 }

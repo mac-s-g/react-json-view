@@ -74,7 +74,7 @@ class ReactJsonView extends React.PureComponent {
                 validationMessage: nextProps.validationMessage,
                 prevSrc: nextProps.src,
                 prevName: nextProps.name,
-                prevTheme: nextProps.theme,
+                prevTheme: nextProps.theme
             };
             return ReactJsonView.validateState(newPartialState);
         }

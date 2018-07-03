@@ -129,6 +129,12 @@ export interface ReactJsonViewProps {
    * Default: false
    */
   sortKeys?: boolean;
+  /**
+   * Set to a value to be used as defaultValue when adding new key to json
+   *
+   * Default: null
+   */
+  defaultValue?: string | number | boolean | null | undefined | string[] | number[] | boolean[] | {}[] | {};
 }
 
 export interface OnCopyProps {

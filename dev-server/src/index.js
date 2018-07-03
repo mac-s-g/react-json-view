@@ -50,6 +50,7 @@ ReactDom.render(
                 }
                 return false
             }}
+            defaultValue=''
         />
 
         <br />

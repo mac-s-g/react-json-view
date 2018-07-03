@@ -25,6 +25,7 @@ class ReactJsonView extends React.PureComponent {
             src: ReactJsonView.defaultProps.src,
             name: ReactJsonView.defaultProps.name,
             theme: ReactJsonView.defaultProps.theme,
+            validationMessage: ReactJsonView.defaultProps.validationMessage,
             // the state object also needs to remember the prev prop values, because we need to compare
             // old and new props in getDerivedStateFromProps().
             prevSrc: ReactJsonView.defaultProps.src,
@@ -70,9 +71,10 @@ class ReactJsonView extends React.PureComponent {
                 src: nextProps.src,
                 name: nextProps.name,
                 theme: nextProps.theme,
+                validationMessage: nextProps.validationMessage,
                 prevSrc: nextProps.src,
                 prevName: nextProps.name,
-                prevTheme: nextProps.theme
+                prevTheme: nextProps.theme,
             };
             return ReactJsonView.validateState(newPartialState);
         }

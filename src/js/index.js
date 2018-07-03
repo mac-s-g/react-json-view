@@ -56,7 +56,8 @@ class ReactJsonView extends React.PureComponent {
         onSelect: false,
         iconStyle: 'triangle',
         style: {},
-        validationMessage: 'Validation Error'
+        validationMessage: 'Validation Error',
+        defaultValue: null,
     }
 
     // will trigger whenever setState() is called, or parent passes in new props.
@@ -176,7 +177,7 @@ class ReactJsonView extends React.PureComponent {
             name
         } = this.state;
 
-        const { style } = this.props;
+        const { style, defaultValue } = this.props;
 
         return (
             <div
@@ -198,7 +199,8 @@ class ReactJsonView extends React.PureComponent {
                 <AddKeyRequest
                     active={addKeyRequest}
                     theme={theme}
-                    rjvId={this.rjvId} />
+                    rjvId={this.rjvId}
+                    defaultValue={defaultValue} />
             </div>
         );
     }

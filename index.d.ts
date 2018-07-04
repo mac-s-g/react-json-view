@@ -134,7 +134,7 @@ export interface ReactJsonViewProps {
    *
    * Default: null
    */
-  defaultValue?: string | number | boolean | null | undefined | string[] | number[] | boolean[] | {}[] | {};
+  defaultValue?: TypeDefaultValue | TypeDefaultValue[] | null;
 }
 
 export interface OnCopyProps {
@@ -218,6 +218,8 @@ export interface OnSelectProps {
   namespace: Array<string | null>;
 
 }
+
+export type TypeDefaultValue = string | number | boolean | object;
 
 export interface ThemeObject {
   base00: string;

@@ -55,7 +55,7 @@ Name|Type|Default|Description
 `displayDataTypes`|`boolean`|`true`|When set to `true`, data type labels prefix values
 `onEdit`|`(edit)=>{}`|`false`|When a callback function is passed in, `edit` functionality is enabled.  The callback is invoked before edits are completed. Returning `false` from `onEdit` will prevent the change from being made. [see: onEdit docs](#onedit-onadd-and-ondelete-interaction)
 `onAdd`|`(add)=>{}`|`false`|When a callback function is passed in, `add` functionality is enabled.  The callback is invoked before additions are completed. Returning `false` from `onAdd` will prevent the change from being made. [see: onAdd docs](#onedit-onadd-and-ondelete-interaction)
-`defaultValue`|`string | number | boolean | array | object`|`null`|Sets the default value to be used when adding an item to json
+`defaultValue`|`string \|number \|boolean \|array \|object`|`null`|Sets the default value to be used when adding an item to json
 `onDelete`|`(delete)=>{}`|`false`|When a callback function is passed in, `delete` functionality is enabled.  The callback is invoked before deletions are completed. Returning `false` from `onDelete` will prevent the change from being made. [see: onDelete docs](#onedit-onadd-and-ondelete-interaction)
 `onSelect`|`(select)=>{}`|`false`|When a function is passed in, clicking a value triggers the `onSelect` method to be called.
 `sortKeys`|`boolean`|`false`|set to true to sort object keys

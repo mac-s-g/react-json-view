@@ -40,7 +40,7 @@ export default class extends React.PureComponent {
             rjvId, 'action', 'new-key-request'
         );
         request.new_value = {...request.existing_value};
-        request.new_value[input] = null;
+        request.new_value[input] = this.props.defaultValue;
         dispatcher.dispatch({
             name: 'VARIABLE_ADDED',
             rjvId: rjvId,

@@ -129,6 +129,12 @@ export interface ReactJsonViewProps {
    * Default: false
    */
   sortKeys?: boolean;
+  /**
+   * Set to a value to be used as defaultValue when adding new key to json
+   *
+   * Default: null
+   */
+  defaultValue?: TypeDefaultValue | TypeDefaultValue[] | null;
 }
 
 export interface OnCopyProps {
@@ -212,6 +218,8 @@ export interface OnSelectProps {
   namespace: Array<string | null>;
 
 }
+
+export type TypeDefaultValue = string | number | boolean | object;
 
 export interface ThemeObject {
   base00: string;

@@ -116,6 +116,14 @@ class ReactJsonView extends React.PureComponent {
                 editKeyRequest: false
             });
         }
+        if (prevProps.src !== this.state.src) {
+            ObjectAttributes.set(
+                this.rjvId,
+                'global',
+                'src',
+                this.state.src
+            );
+        }
     }
 
     componentWillUnmount() {

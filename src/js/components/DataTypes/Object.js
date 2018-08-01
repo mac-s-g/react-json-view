@@ -48,8 +48,9 @@ class RjvObject extends React.PureComponent {
                 }) === false) &&
             //initialize closed if object has no items
             size !== 0;
+        const searchExpanded = JSON.stringify(props.src).indexOf(props.search);
         const state = {
-            expanded: AttributeStore.get(
+            expanded: searchExpanded > 0 || AttributeStore.get(
                 props.rjvId,
                 props.namespace,
                 'expanded',

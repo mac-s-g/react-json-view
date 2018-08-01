@@ -190,6 +190,9 @@ const getDefaultThemeStyling = theme => {
             display: 'inline-block',
             color: colors.dataTypes.string
         },
+        highlighted: {
+            background: 'tomato'
+        },
         nan: {
             display: 'inline-block',
             color: colors.dataTypes.nan,

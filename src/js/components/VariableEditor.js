@@ -6,6 +6,7 @@ import dispatcher from './../helpers/dispatcher';
 import parseInput from './../helpers/parseInput';
 import stringifyVariable from './../helpers/stringifyVariable';
 import CopyToClipboard from './CopyToClipboard';
+import highlightedString from './../helpers/highlightedString';
 
 //data type components
 import {
@@ -54,9 +55,18 @@ class VariableEditor extends React.PureComponent {
             onEdit,
             onDelete,
             onSelect,
-            rjvId
+            rjvId,
+            search
         } = this.props;
         const { editMode } = this.state;
+
+        let variableName = variable.name;
+        if (typeof variableName === 'string' && search && type !== 'array') {
+            const start = (variableName).indexOf(search);
+            if (start > -1) {
+                variableName = highlightedString(variable.name, start, search.length, theme);
+            }
+        }
 
         return (
             <div
@@ -71,7 +81,7 @@ class VariableEditor extends React.PureComponent {
                         {...Theme(theme, 'array-key')}
                         key={variable.name + '_' + namespace}
                     >
-                        {variable.name}
+                        {variableName}
                         <div {...Theme(theme, 'colon')}>:</div>
                     </span>
                 ) : (
@@ -83,7 +93,7 @@ class VariableEditor extends React.PureComponent {
                         >
                             <span style={{ verticalAlign: 'top' }}>"</span>
                             <span style={{ display: 'inline-block' }}>
-                                {variable.name}
+                                {variableName}
                             </span>
                             <span style={{ verticalAlign: 'top' }}>"</span>
                         </span>

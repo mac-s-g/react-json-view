@@ -10,6 +10,7 @@ import VariableMeta from './../VariableMeta';
 import ArrayGroup from './../ArrayGroup';
 import ObjectName from './../ObjectName';
 
+import searchStringIndex from './../../helpers/searchStringIndex';
 //attribute store
 import AttributeStore from './../../stores/ObjectAttributes';
 
@@ -48,7 +49,7 @@ class RjvObject extends React.PureComponent {
                 }) === false) &&
             //initialize closed if object has no items
             size !== 0;
-        const searchExpanded = JSON.stringify(props.src).indexOf(props.search);
+        const searchExpanded = searchStringIndex(JSON.stringify(props.src), props.search);
         const state = {
             expanded: searchExpanded > 0 || AttributeStore.get(
                 props.rjvId,

@@ -1,6 +1,7 @@
 import React from 'react';
 import Theme from './../themes/getStyle';
 import highlightedString from './../helpers/highlightedString';
+import searchStringIndex from './../helpers/searchStringIndex';
 
 export default function getObjectName(props) {
     const {
@@ -9,7 +10,7 @@ export default function getObjectName(props) {
 
     let display_name = props.name ? props.name : '';
 
-    const start = (display_name).indexOf(search);
+    const start = searchStringIndex(display_name, search);
     if (start > -1) {
         display_name = highlightedString(display_name, start, search.length, theme);
     }

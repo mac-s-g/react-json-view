@@ -97,7 +97,7 @@ export default class extends React.PureComponent {
         }
 
         return (
-            <span class="copy-to-clipboard-container">
+            <span class="copy-to-clipboard-container" title="Copy to clipboard">
                 <span
                     style={{
                         ...style,

@@ -33,10 +33,10 @@ const config = {
     library: "reactJsonView",
     libraryTarget: "umd"
   },
-  plugins: [new webpack.optimize.UglifyJsPlugin()],
   resolve: {
     extensions: [".js", ".json", ".css", ".scss"]
   },
+  devtool: "source-map",
   module: {
     rules: [
       {

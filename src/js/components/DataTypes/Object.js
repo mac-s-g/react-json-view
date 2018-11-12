@@ -1,6 +1,7 @@
 import React from 'react';
 import {polyfill} from 'react-lifecycles-compat';
 import { toType } from './../../helpers/util';
+import dispatcher from './../../helpers/dispatcher';
 
 //data type components
 import { JsonObject } from './DataTypes';
@@ -15,6 +16,7 @@ import AttributeStore from './../../stores/ObjectAttributes';
 
 //icons
 import { CollapsedIcon, ExpandedIcon } from './../ToggleIcons';
+import { Edit } from './../icons';
 
 //theme
 import Theme from './../../themes/getStyle';
@@ -130,6 +132,32 @@ class RjvObject extends React.PureComponent {
         return <VariableMeta size={size} {...this.props} />;
     }
 
+    getEditIcon = () => {
+        const { theme, name, namespace, src, rjvId } = this.props;        
+        return (
+            <div class="click-to-edit" style={{ verticalAlign: 'top' }} title={"Edit Key"}>
+                <Edit
+                    class="click-to-edit-icon"
+                    {...Theme(theme, 'editVarIcon')}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        dispatcher.dispatch({
+                            name: 'UPDATE_VARIABLE_KEY_REQUEST',
+                            rjvId: rjvId,
+                            data: {
+                                name,
+                                namespace: namespace.splice(0, namespace.length -1),
+                                existing_value: src,
+                                _removed: false,
+                                key_name: name
+                            }
+                        });
+                    }}
+                />
+            </div>
+        );
+    }
+
     getBraceStart(object_type, expanded) {
         const { src, theme, iconStyle, parent_type } = this.props;
 
@@ -154,6 +182,7 @@ class RjvObject extends React.PureComponent {
                     }}
                     {...Theme(theme, 'brace-row')}
                 >
+                    {this.getEditIcon()}
                     <div
                         class="icon-container"
                         {...Theme(theme, 'icon-container')}

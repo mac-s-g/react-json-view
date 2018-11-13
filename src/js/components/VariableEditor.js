@@ -66,7 +66,7 @@ class VariableEditor extends React.PureComponent {
                 class="variable-row"
                 key={variable.name}
             >
-                {onEdit !== false && editMode == false
+                {isNaN(Number(variable.name)) && onEdit !== false && editMode == false
                     ? this.getEditKeyIcon()
                     : null}
                 {type == 'array' ? (

@@ -63,16 +63,27 @@ class ObjectAttributes extends EventEmitter {
             );
             this.emit('variable-update-' + rjvId);
             break;
+        case 'VARIABLE_KEY_UPDATED':
+            action.data.updated_src = this.updateSrc(
+                rjvId, data
+            );
+            this.set(rjvId, 'action', 'variable-update',{...data, type:'variable-key-added'});
+            this.emit('variable-update-' + rjvId);
+            break;
         case 'ADD_VARIABLE_KEY_REQUEST':
             this.set(rjvId, 'action', 'new-key-request', data);
             this.emit('add-key-request-' + rjvId);
+            break;
+        case 'UPDATE_VARIABLE_KEY_REQUEST':
+            this.set(rjvId, 'action', 'edit-key-request', data);
+            this.emit('edit-key-request-' + rjvId);
             break;
         }
     }
 
     updateSrc = (rjvId, request) => {
         let {
-            name, namespace, new_value, existing_value, variable_removed
+            name, namespace, new_value, existing_value, variable_key_updated, variable_removed, key_name
         } = request;
 
         namespace.shift();
@@ -88,19 +99,26 @@ class ObjectAttributes extends EventEmitter {
             walk = walk[idx];
         }
 
-
-        if (variable_removed) {
+        if(variable_key_updated) {
             if (toType(walk) == 'array') {
                 walk.splice(name, 1);
             } else {
+                walk[key_name] = existing_value;
                 delete walk[name];
+            }
+        } else if (variable_removed) {
+            if (toType(walk) == 'array') {
+                walk.splice(name, 1);
+            } else {
+                if(walk) delete walk[name];
             }
         } else {
             //update copied variable at specified namespace
             if (name !== null) {
                 walk[name] = new_value;
             } else {
-                updated_src = new_value;
+                walk[new_value] = existing_value;
+                //updated_src = new_value;
             }
         }
 

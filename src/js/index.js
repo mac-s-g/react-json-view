@@ -2,6 +2,7 @@ import React from 'react';
 import {polyfill} from 'react-lifecycles-compat';
 import JsonViewer from './components/JsonViewer';
 import AddKeyRequest from './components/ObjectKeyModal/AddKeyRequest';
+import EditKeyRequest from './components/ObjectKeyModal/EditKeyRequest';
 import ValidationFailure from './components/ValidationFailure';
 import {toType, isTheme} from './helpers/util';
 import ObjectAttributes from './stores/ObjectAttributes';
@@ -139,7 +140,8 @@ class ReactJsonView extends React.PureComponent {
         return {
             'reset': this.resetState,
             'variable-update': this.updateSrc,
-            'add-key-request': this.addKeyRequest
+            'add-key-request': this.addKeyRequest,
+            'edit-key-request': this.editKeyRequest
         };
     }
     //make sure props are passed in as expected
@@ -182,6 +184,7 @@ class ReactJsonView extends React.PureComponent {
             validationFailure,
             validationMessage,
             addKeyRequest,
+            editKeyRequest,
             theme,
             src,
             name
@@ -211,6 +214,11 @@ class ReactJsonView extends React.PureComponent {
                     theme={theme}
                     rjvId={this.rjvId}
                     defaultValue={defaultValue} />
+                <EditKeyRequest
+                    active={editKeyRequest}
+                    theme={theme}
+                    rjvId={this.rjvId}
+                    defaultValue={defaultValue} />
             </div>
         );
     }
@@ -230,16 +238,19 @@ class ReactJsonView extends React.PureComponent {
 
         const on_edit_payload = {
             existing_src: src,
-            new_value: new_value,
-            updated_src: updated_src,
-            name: name,
-            namespace: namespace,
-            existing_value: existing_value,
+            new_value,
+            updated_src,
+            name,
+            namespace,
+            existing_value,
         };
 
         switch (type) {
         case 'variable-added':
             result = onAdd(on_edit_payload);
+            break;
+        case 'variable-update-key':
+            result = onEdit(on_edit_payload);
             break;
         case 'variable-edited':
             result = onEdit(on_edit_payload);
@@ -267,10 +278,17 @@ class ReactJsonView extends React.PureComponent {
         });
     }
 
+    editKeyRequest = () => {
+        this.setState({
+            editKeyRequest: true
+        });
+    }
+
     resetState = () => {
         this.setState({
             validationFailure: false,
-            addKeyRequest: false
+            addKeyRequest: false,
+            editKeyRequest: false
         });
     }
 }

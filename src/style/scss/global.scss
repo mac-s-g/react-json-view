@@ -14,7 +14,7 @@
     }
 
     .object-key-val {
-        &:hover > span > .object-meta-data {
+        &:hover > span > .object-meta-data, &:hover > span > span {
             & > .copy-to-clipboard-container {
                 display: inline-block;
             }
@@ -22,6 +22,9 @@
                 display: inline-block;
             }
             & > .click-to-remove {
+                display: inline-block;
+            }
+            & > .click-to-edit {
                 display: inline-block;
             }
         }

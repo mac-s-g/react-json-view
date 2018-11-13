@@ -12,8 +12,12 @@ export default class extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            input: props.input ? props.input : ''
+            input: ''
         };
+    }
+
+    componentDidMount() {
+        this.setState({ input: this.props.input });
     }
 
     render() {

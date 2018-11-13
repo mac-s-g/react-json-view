@@ -66,6 +66,9 @@ class VariableEditor extends React.PureComponent {
                 class="variable-row"
                 key={variable.name}
             >
+                {isNaN(Number(variable.name)) && onEdit !== false && editMode == false
+                    ? this.getEditKeyIcon()
+                    : null}
                 {type == 'array' ? (
                     <span
                         {...Theme(theme, 'array-key')}
@@ -136,12 +139,38 @@ class VariableEditor extends React.PureComponent {
         const { variable, theme } = this.props;
 
         return (
-            <div class="click-to-edit" style={{ verticalAlign: 'top' }}>
+            <div class="click-to-edit" style={{ verticalAlign: 'top' }} title={"Edit Value"}>
                 <Edit
                     class="click-to-edit-icon"
                     {...Theme(theme, 'editVarIcon')}
                     onClick={() => {
                         this.prepopInput(variable);
+                    }}
+                />
+            </div>
+        );
+    }
+
+    getEditKeyIcon = () => {
+        const { variable: { name, value }, theme, namespace, rjvId } = this.props;        
+        return (
+            <div class="click-to-edit" style={{ verticalAlign: 'top' }} title={"Edit Key"}>
+                <Edit
+                    class="click-to-edit-icon"
+                    {...Theme(theme, 'editVarIcon')}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        dispatcher.dispatch({
+                            name: 'UPDATE_VARIABLE_KEY_REQUEST',
+                            rjvId: rjvId,
+                            data: {
+                                name,
+                                namespace: namespace,
+                                existing_value: value,
+                                variable_removed: false,
+                                key_name: name
+                            }
+                        });
                     }}
                 />
             </div>

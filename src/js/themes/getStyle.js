@@ -256,6 +256,14 @@ const getDefaultThemeStyling = theme => {
             fontSize: constants.iconFontSize,
             marginRight: constants.iconMarginRight
         },
+        selectVarIcon: {
+            verticalAlign: 'top',
+            display: 'inline-block',
+            color: colors.editVariable.addIcon,
+            cursor: constants.iconCursor,
+            fontSize: constants.iconFontSize,
+            marginRight: constants.iconMarginRight
+        },
         addVarIcon: {
             verticalAlign: 'top',
             display: 'inline-block',

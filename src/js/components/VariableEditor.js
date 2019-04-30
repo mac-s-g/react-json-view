@@ -22,7 +22,7 @@ import {
 } from './DataTypes/DataTypes';
 
 //clibboard icon
-import { Edit, CheckCircle, RemoveCircle as Remove } from './icons';
+import { Edit, CheckCircle, RemoveCircle as Remove, SelectCircle as Select } from './icons';
 
 //theme
 import Theme from './../themes/getStyle';
@@ -128,7 +128,29 @@ class VariableEditor extends React.PureComponent {
                 {onDelete !== false && editMode == false
                     ? this.getRemoveIcon()
                     : null}
+                {onSelect !== false ? this.getSelectObject() : null}
             </div>
+        );
+    }
+
+    getSelectObject = () => {
+        const { variable, namespace, theme, onSelect } = this.props;
+
+        return (
+            <span class="click-to-select" title="Select Object">
+                <Select
+                    class="click-to-select-icon"
+                    {...Theme(theme, 'selectVarIcon')}
+                    onClick={() => {
+                        onSelect({
+                            name: variable.name,
+                            type: variable.type,
+                            namespace,
+                            value: variable.value
+                        });
+                    }}
+                />
+            </span>
         );
     }
 

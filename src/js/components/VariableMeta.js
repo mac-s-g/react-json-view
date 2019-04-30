@@ -6,7 +6,7 @@ import {toType} from './../helpers/util';
 
 //icons
 import {
-    RemoveCircle as Remove, AddCircle as Add
+    RemoveCircle as Remove, AddCircle as Add, SelectCircle as Select
 } from './icons';
 
 //theme
@@ -101,11 +101,35 @@ export default class extends React.PureComponent {
         );
     }
 
+    getSelectObject = () => {
+        const {
+            theme, namespace, name, src, onSelect
+        } = this.props;
+
+        return (
+            <span class="click-to-select" title="Select Object">
+                <Select
+                    class="click-to-select-icon"
+                    {...Theme(theme, 'selectVarIcon')}
+                    onClick={() => {
+                        onSelect({
+                            name,
+                            type: typeof src,
+                            namespace,
+                            value: src
+                        });
+                    }}
+                />
+            </span>
+        );
+    }
+
     render = () => {
         const {
             theme,
             onDelete,
             onAdd,
+            onSelect,
             enableClipboard,
             src,
             namespace
@@ -130,6 +154,7 @@ export default class extends React.PureComponent {
                 {/* copy add/remove icons */}
                 {onAdd !== false ? this.getAddAttribute() : null}
                 {onDelete !== false ? this.getRemoveObject() : null}
+                {onSelect !== false ? this.getSelectObject() : null}
             </div>
         );
     }

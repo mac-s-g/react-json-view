@@ -35,7 +35,7 @@ const config = {
   },
   plugins: [new webpack.optimize.UglifyJsPlugin()],
   resolve: {
-    extensions: [".js", ".json", ".css", ".scss"]
+    extensions: [".js", ".jsx", ".json", ".css", ".scss"]
   },
   module: {
     rules: [

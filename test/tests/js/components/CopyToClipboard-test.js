@@ -4,8 +4,8 @@ import { expect } from "chai"
 
 import CopyToClipboard from "./../../../../src/js/components/CopyToClipboard"
 
-describe("<CopyToClipboard />", function() {
-    it("CopyToClipboard clipboard should exist", function() {
+describe("<CopyToClipboard />", function () {
+    it("CopyToClipboard clipboard should exist", function () {
         const wrapper = shallow(
             <CopyToClipboard
                 src={{ test: true }}
@@ -14,10 +14,10 @@ describe("<CopyToClipboard />", function() {
                 hidden={false}
             />
         )
-        expect(wrapper.find(".copy-to-clipboard-container")).to.have.length(1)
+        expect(wrapper.find(".click-to-copy")).to.have.length(1)
     })
 
-    it("CopyToClipboard clipboard should be hidden", function() {
+    it("CopyToClipboard clipboard should be hidden", function () {
         const wrapper = shallow(
             <CopyToClipboard
                 src={{ test: true }}
@@ -27,6 +27,6 @@ describe("<CopyToClipboard />", function() {
             />
         )
         //not sure how to test css attribute
-        expect(wrapper.find(".copy-to-clipboard-container")).to.have.length(1)
+        expect(wrapper.find(".click-to-copy")).to.have.length(1)
     })
 })

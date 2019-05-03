@@ -59,19 +59,7 @@ class ReactJsonView extends React.PureComponent {
         style: {},
         validationMessage: 'Validation Error',
         defaultValue: null,
-        disableDetectDatatypes: {
-            object: true,
-            array: true,
-            string: true,
-            integer: true,
-            float: true,
-            boolean: true,
-            date: true,
-            function: true,
-            null: true,
-            nan: true,
-            undefined: true
-        }
+        disableDetectDatatypes: {}
     }
 
     // will trigger whenever setState() is called, or parent passes in new props.

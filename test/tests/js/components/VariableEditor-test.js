@@ -7,19 +7,7 @@ import VariableEditor from "./../../../../src/js/components/VariableEditor"
 
 describe("<VariableEditor />", function () {
     const rjvId = 1
-    const detectDatatypesTrue = {
-        object: true,
-        array: true,
-        string: true,
-        integer: true,
-        float: true,
-        boolean: true,
-        date: true,
-        function: true,
-        null: true,
-        nan: true,
-        undefined: true
-    }
+    const disableDetectDatatypes = {}
 
     it("VariableEditor click-to-edit should be visible", function () {
         const wrapper = shallow(
@@ -63,7 +51,7 @@ describe("<VariableEditor />", function () {
                 theme="rjv-default"
                 onEdit={edit => { }}
                 rjvId={rjvId}
-                detectDatatypes={detectDatatypesTrue}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: 5,
@@ -82,7 +70,7 @@ describe("<VariableEditor />", function () {
                 theme="rjv-default"
                 onEdit={edit => { }}
                 rjvId={rjvId}
-                detectDatatypes={detectDatatypesTrue}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: 5,
@@ -110,7 +98,7 @@ describe("<VariableEditor />", function () {
                 }}
                 namespace={["test"]}
                 rjvId={rjvId}
-                detectDatatypes={detectDatatypesTrue}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: existing_value,
@@ -149,7 +137,7 @@ describe("<VariableEditor />", function () {
                 }}
                 namespace={["test"]}
                 rjvId={rjvId}
-                detectDatatypes={detectDatatypesTrue}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: existing_value,
@@ -191,7 +179,7 @@ describe("<VariableEditor />", function () {
                 theme="rjv-default"
                 onEdit={edit => { }}
                 rjvId={rjvId}
-                detectDatatypes={detectDatatypesTrue}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: "null",
@@ -212,7 +200,7 @@ describe("<VariableEditor />", function () {
                 theme="rjv-default"
                 onEdit={edit => { }}
                 rjvId={rjvId}
-                detectDatatypes={detectDatatypesTrue}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: "undefined",
@@ -235,7 +223,7 @@ describe("<VariableEditor />", function () {
                 theme="rjv-default"
                 onEdit={edit => { }}
                 rjvId={rjvId}
-                detectDatatypes={detectDatatypesTrue}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: "NaN",
@@ -256,7 +244,7 @@ describe("<VariableEditor />", function () {
                 theme="rjv-default"
                 onEdit={edit => { }}
                 rjvId={rjvId}
-                detectDatatypes={detectDatatypesTrue}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: "test",
@@ -277,7 +265,7 @@ describe("<VariableEditor />", function () {
                 theme="rjv-default"
                 onEdit={edit => { }}
                 rjvId={rjvId}
-                detectDatatypes={detectDatatypesTrue}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: "function test() {}",
@@ -300,7 +288,7 @@ describe("<VariableEditor />", function () {
                 theme="rjv-default"
                 onEdit={edit => { }}
                 rjvId={rjvId}
-                detectDatatypes={detectDatatypesTrue}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: "{}",
@@ -321,7 +309,7 @@ describe("<VariableEditor />", function () {
                 theme="rjv-default"
                 onEdit={edit => { }}
                 rjvId={rjvId}
-                detectDatatypes={detectDatatypesTrue}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: "[1,2,3]",
@@ -344,7 +332,7 @@ describe("<VariableEditor />", function () {
                 theme="rjv-default"
                 onEdit={edit => { }}
                 rjvId={rjvId}
-                detectDatatypes={detectDatatypesTrue}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: "-5.2",
@@ -365,7 +353,7 @@ describe("<VariableEditor />", function () {
                 theme="rjv-default"
                 onEdit={edit => { }}
                 rjvId={rjvId}
-                detectDatatypes={detectDatatypesTrue}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: "5",

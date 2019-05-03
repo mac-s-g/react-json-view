@@ -19,7 +19,7 @@ describe("<VariableMeta />", function() {
                 rjvId={rjvId}
             />
         )
-        expect(wrapper.find(".copy-to-clipboard-container")).to.have.length(0)
+        expect(wrapper.find(".click-to-copy")).to.have.length(0)
     })
 
     it("VariableMeta size should exist", function() {
@@ -71,7 +71,7 @@ describe("<VariableMeta />", function() {
                 rjvId={rjvId}
             />
         )
-        expect(wrapper.find(".copy-to-clipboard-container")).to.have.length(1)
+        expect(wrapper.find(".click-to-copy")).to.have.length(1)
         expect(wrapper.find(".copy-icon")).to.have.length(2)
 
         document.execCommand = mock => {}
@@ -95,7 +95,7 @@ describe("<VariableMeta />", function() {
                 rjvId={rjvId}
             />
         )
-        expect(wrapper.find(".copy-to-clipboard-container")).to.have.length(1)
+        expect(wrapper.find(".click-to-copy")).to.have.length(1)
         expect(wrapper.find(".copy-icon")).to.have.length(2)
     })
 })

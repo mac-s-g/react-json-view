@@ -60,6 +60,7 @@ Name|Type|Default|Description
 `onSelect`|`(select)=>{}`|`false`|When a function is passed in, clicking a value triggers the `onSelect` method to be called.
 `sortKeys`|`boolean`|`false`|set to true to sort object keys
 `validationMessage`|`string`|"Validation Error"|Custom message for validation failures to `onEdit`, `onAdd`, or `onDelete` callbacks
+`disableDetectDatatypes`|`object`|`{}`| Sets which datatypes shouldn't be detected, any that are set as `true` will make it so editing won't detect the datatype
 
 ### Features
 * `onEdit`, `onAdd` and `onDelete` props allow users to edit the `src` variable
@@ -139,8 +140,12 @@ I recommend using docker for development because it enforces environmental consi
 
 For information about contributing with Docker, see the [README in ./docker](https://github.com/mac-s-g/react-json-view/blob/master/docker/README.md#contributing-to-this-project-using-docker).
 
-
 ### Inspiration
+
 I drew a ton of design ideas from [react-json-tree](https://github.com/alexkuz/react-json-tree).  Thanks to the RJT contributors for putting together an awesome component!
 
 I'm also inspired by users who come up with interesting feature requests.  Reach out to me with ideas for this project or other projects you want to collaborate on.  My email address is listed on my [github user page](https://github.com/mac-s-g).
+
+### Credit
+
+Bin icon made by [Dave Gandy](https://www.flaticon.com/authors/dave-gandy) from [flaticon.com](https://www.flaticon.com/) is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/)

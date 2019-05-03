@@ -5,15 +5,16 @@ import { expect } from "chai"
 import Index from "./../../../../src/js/index"
 import VariableEditor from "./../../../../src/js/components/VariableEditor"
 
-describe("<VariableEditor />", function() {
+describe("<VariableEditor />", function () {
     const rjvId = 1
+    const disableDetectDatatypes = {}
 
-    it("VariableEditor click-to-edit should be visible", function() {
+    it("VariableEditor click-to-edit should be visible", function () {
         const wrapper = shallow(
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={edit => { }}
                 rjvId={rjvId}
                 singleIndent={1}
                 variable={{
@@ -26,7 +27,7 @@ describe("<VariableEditor />", function() {
         expect(wrapper.find(".click-to-edit")).to.have.length(1)
     })
 
-    it("VariableEditor click-to-edit should be hidden when onEdit disabled", function() {
+    it("VariableEditor click-to-edit should be hidden when onEdit disabled", function () {
         const wrapper = shallow(
             <VariableEditor
                 src={{ test: true }}
@@ -43,13 +44,14 @@ describe("<VariableEditor />", function() {
         expect(wrapper.find(".click-to-edit")).to.have.length(0)
     })
 
-    it("VariableEditor click-to-edit should be hidden when editMode is active", function() {
+    it("VariableEditor click-to-edit should be hidden when editMode is active", function () {
         const wrapper = shallow(
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={edit => { }}
                 rjvId={rjvId}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: 5,
@@ -61,13 +63,14 @@ describe("<VariableEditor />", function() {
         expect(wrapper.find(".click-to-edit")).to.have.length(0)
     })
 
-    it("VariableEditor test textarea and cancel icon", function() {
+    it("VariableEditor test textarea and cancel icon", function () {
         const wrapper = shallow(
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={edit => { }}
                 rjvId={rjvId}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: 5,
@@ -83,7 +86,7 @@ describe("<VariableEditor />", function() {
         expect(wrapper.find(".variable-editor").length).to.equal(0)
     })
 
-    it("VariableEditor test textarea and submit icon", function() {
+    it("VariableEditor test textarea and submit icon", function () {
         const existing_value = "existing_value"
         const new_value = "new_value"
         const wrapper = shallow(
@@ -95,6 +98,7 @@ describe("<VariableEditor />", function() {
                 }}
                 namespace={["test"]}
                 rjvId={rjvId}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: existing_value,
@@ -121,7 +125,7 @@ describe("<VariableEditor />", function() {
         expect(wrapper.state("editMode")).to.equal(false)
     })
 
-    it("VariableEditor edit after src change should respect current src", function() {
+    it("VariableEditor edit after src change should respect current src", function () {
         const existing_value = "existing_value"
         const new_value = "new_value"
         const wrapper = shallow(
@@ -133,6 +137,7 @@ describe("<VariableEditor />", function() {
                 }}
                 namespace={["test"]}
                 rjvId={rjvId}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: existing_value,
@@ -167,13 +172,14 @@ describe("<VariableEditor />", function() {
         )
     })
 
-    it("VariableEditor detected null", function() {
+    it("VariableEditor detected null", function () {
         const wrapper = shallow(
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={edit => { }}
                 rjvId={rjvId}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: "null",
@@ -187,13 +193,14 @@ describe("<VariableEditor />", function() {
         expect(wrapper.find(".variable-editor").props().value).to.equal("null")
     })
 
-    it("VariableEditor detected undefined", function() {
+    it("VariableEditor detected undefined", function () {
         const wrapper = shallow(
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={edit => { }}
                 rjvId={rjvId}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: "undefined",
@@ -209,13 +216,14 @@ describe("<VariableEditor />", function() {
         )
     })
 
-    it("VariableEditor detected NaN", function() {
+    it("VariableEditor detected NaN", function () {
         const wrapper = shallow(
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={edit => { }}
                 rjvId={rjvId}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: "NaN",
@@ -229,13 +237,14 @@ describe("<VariableEditor />", function() {
         expect(wrapper.find(".variable-editor").props().value).to.equal("NaN")
     })
 
-    it("VariableEditor detected string", function() {
+    it("VariableEditor detected string", function () {
         const wrapper = shallow(
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={edit => { }}
                 rjvId={rjvId}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: "test",
@@ -249,13 +258,14 @@ describe("<VariableEditor />", function() {
         expect(wrapper.find(".variable-editor").props().value).to.equal("test")
     })
 
-    it("VariableEditor detected function", function() {
+    it("VariableEditor detected function", function () {
         const wrapper = shallow(
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={edit => { }}
                 rjvId={rjvId}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: "function test() {}",
@@ -271,13 +281,14 @@ describe("<VariableEditor />", function() {
         )
     })
 
-    it("VariableEditor detected object", function() {
+    it("VariableEditor detected object", function () {
         const wrapper = shallow(
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={edit => { }}
                 rjvId={rjvId}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: "{}",
@@ -291,13 +302,14 @@ describe("<VariableEditor />", function() {
         expect(wrapper.find(".variable-editor").props().value).to.equal("{}")
     })
 
-    it("VariableEditor detected array", function() {
+    it("VariableEditor detected array", function () {
         const wrapper = shallow(
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={edit => { }}
                 rjvId={rjvId}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: "[1,2,3]",
@@ -313,13 +325,14 @@ describe("<VariableEditor />", function() {
         )
     })
 
-    it("VariableEditor detected float", function() {
+    it("VariableEditor detected float", function () {
         const wrapper = shallow(
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={edit => { }}
                 rjvId={rjvId}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: "-5.2",
@@ -333,13 +346,14 @@ describe("<VariableEditor />", function() {
         expect(wrapper.find(".variable-editor").props().value).to.equal("-5.2")
     })
 
-    it("VariableEditor detected integer", function() {
+    it("VariableEditor detected integer", function () {
         const wrapper = shallow(
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={edit => { }}
                 rjvId={rjvId}
+                disableDetectDatatypes={disableDetectDatatypes}
                 variable={{
                     name: "test",
                     value: "5",

@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { toType } from './../helpers/util';
-import stringifyVariable from './../helpers/stringifyVariable';
+import { toType } from '../helpers/util';
+import stringifyVariable from '../helpers/stringifyVariable';
 
 //clibboard icon
 import { Clippy } from './icons';
 
 //theme
-import Theme from './../themes/getStyle';
+import Theme from '../themes/getStyle';
 
 export default class extends React.PureComponent {
     constructor(props) {
@@ -79,11 +79,11 @@ export default class extends React.PureComponent {
     clipboardValue = value => {
         const type = toType(value);
         switch (type) {
-        case 'function':
-        case 'regexp':
-            return value.toString();
-        default:
-            return value;
+            case 'function':
+            case 'regexp':
+                return value.toString();
+            default:
+                return value;
         }
     }
 
@@ -97,7 +97,7 @@ export default class extends React.PureComponent {
         }
 
         return (
-            <span class="copy-to-clipboard-container" title="Copy to clipboard">
+            <span class="click-to-copy" title={this.state.copied ? 'Copied' : 'Copy'}>
                 <span
                     style={{
                         ...style,

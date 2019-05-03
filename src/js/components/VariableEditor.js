@@ -1,10 +1,10 @@
 import React from 'react';
 import AutosizeTextarea from 'react-textarea-autosize';
 
-import { toType } from './../helpers/util';
-import dispatcher from './../helpers/dispatcher';
-import parseInput from './../helpers/parseInput';
-import stringifyVariable from './../helpers/stringifyVariable';
+import { toType } from '../helpers/util';
+import dispatcher from '../helpers/dispatcher';
+import parseInput from '../helpers/parseInput';
+import stringifyVariable from '../helpers/stringifyVariable';
 import CopyToClipboard from './CopyToClipboard';
 
 //data type components
@@ -22,10 +22,10 @@ import {
 } from './DataTypes/DataTypes';
 
 //clibboard icon
-import { Edit, CheckCircle, RemoveCircle as Remove } from './icons';
+import { Bin, Edit, CheckCircle, RemoveCircle as Remove } from './icons';
 
 //theme
-import Theme from './../themes/getStyle';
+import Theme from '../themes/getStyle';
 
 class VariableEditor extends React.PureComponent {
     constructor(props) {
@@ -136,7 +136,7 @@ class VariableEditor extends React.PureComponent {
         const { variable, theme } = this.props;
 
         return (
-            <div class="click-to-edit" style={{ verticalAlign: 'top' }}>
+            <div class="click-to-edit" title="Edit">
                 <Edit
                     class="click-to-edit-icon"
                     {...Theme(theme, 'editVarIcon')}
@@ -167,8 +167,8 @@ class VariableEditor extends React.PureComponent {
         const { variable, namespace, theme, rjvId } = this.props;
 
         return (
-            <div class="click-to-remove" style={{ verticalAlign: 'top' }}>
-                <Remove
+            <div class="click-to-remove" title="Remove">
+                <Bin
                     class="click-to-remove-icon"
                     {...Theme(theme, 'removeVarIcon')}
                     onClick={() => {
@@ -189,38 +189,39 @@ class VariableEditor extends React.PureComponent {
     }
 
     getValue = (variable, editMode) => {
-        const type = editMode ? false : variable.type;
         const { props } = this;
+        const type = editMode ? false : variable.type;
+
         switch (type) {
-        case false:
-            return this.getEditInput();
-        case 'string':
-            return <JsonString value={variable.value} {...props} />;
-        case 'integer':
-            return <JsonInteger value={variable.value} {...props} />;
-        case 'float':
-            return <JsonFloat value={variable.value} {...props} />;
-        case 'boolean':
-            return <JsonBoolean value={variable.value} {...props} />;
-        case 'function':
-            return <JsonFunction value={variable.value} {...props} />;
-        case 'null':
-            return <JsonNull {...props} />;
-        case 'nan':
-            return <JsonNan {...props} />;
-        case 'undefined':
-            return <JsonUndefined {...props} />;
-        case 'date':
-            return <JsonDate value={variable.value} {...props} />;
-        case 'regexp':
-            return <JsonRegexp value={variable.value} {...props} />;
-        default:
-            // catch-all for types that weren't anticipated
-            return (
-                <div class="object-value">
-                    {JSON.stringify(variable.value)}
-                </div>
-            );
+            case false:
+                return this.getEditInput();
+            case 'string':
+                return <JsonString value={variable.value} {...props} />;
+            case 'integer':
+                return <JsonInteger value={variable.value} {...props} />;
+            case 'float':
+                return <JsonFloat value={variable.value} {...props} />;
+            case 'boolean':
+                return <JsonBoolean value={variable.value} {...props} />;
+            case 'function':
+                return <JsonFunction value={variable.value} {...props} />;
+            case 'null':
+                return <JsonNull {...props} />;
+            case 'nan':
+                return <JsonNan {...props} />;
+            case 'undefined':
+                return <JsonUndefined {...props} />;
+            case 'date':
+                return <JsonDate value={variable.value} {...props} />;
+            case 'regexp':
+                return <JsonRegexp value={variable.value} {...props} />;
+            default:
+                // catch-all for types that weren't anticipated
+                return (
+                    <div class="object-value">
+                        {JSON.stringify(variable.value)}
+                    </div>
+                );
         }
     }
 
@@ -248,19 +249,19 @@ class VariableEditor extends React.PureComponent {
                     }}
                     onKeyDown={e => {
                         switch (e.key) {
-                        case 'Escape': {
-                            this.setState({
-                                editMode: false,
-                                editValue: ''
-                            });
-                            break;
-                        }
-                        case 'Enter': {
-                            if (e.ctrlKey || e.metaKey) {
-                                this.submitEdit(true);
+                            case 'Escape': {
+                                this.setState({
+                                    editMode: false,
+                                    editValue: ''
+                                });
+                                break;
                             }
-                            break;
-                        }
+                            case 'Enter': {
+                                if (e.ctrlKey || e.metaKey) {
+                                    this.submitEdit(true);
+                                }
+                                break;
+                            }
                         }
                         e.stopPropagation();
                     }}
@@ -274,6 +275,7 @@ class VariableEditor extends React.PureComponent {
                         onClick={() => {
                             this.setState({ editMode: false, editValue: '' });
                         }}
+                        title="Cancel"
                     />
                     <CheckCircle
                         class="edit-check string-value"
@@ -281,6 +283,7 @@ class VariableEditor extends React.PureComponent {
                         onClick={() => {
                             this.submitEdit();
                         }}
+                        title="Submit as String"
                     />
                     <div>{this.showDetected()}</div>
                 </div>
@@ -312,13 +315,16 @@ class VariableEditor extends React.PureComponent {
     }
 
     showDetected = () => {
-        const { theme, variable, namespace, rjvId } = this.props;
+        const { theme, variable, namespace, rjvId, disableDetectDatatypes } = this.props;
         const { type, value } = this.state.parsedInput;
-        const detected = this.getDetectedInput();
-        if (detected) {
-            return (
-                <div>
-                    <div {...Theme(theme, 'detected-row')}>
+
+        // check if props allow for detection parsed type
+
+        if (!disableDetectDatatypes[type]) {
+            const detected = this.getDetectedInput();
+            if (detected) {
+                return (
+                    <div {...Theme(theme, 'detected-row')} title="Submit as Datatype">
                         {detected}
                         <CheckCircle
                             class="edit-check detected"
@@ -332,8 +338,8 @@ class VariableEditor extends React.PureComponent {
                             }}
                         />
                     </div>
-                </div>
-            );
+                );
+            }
         }
     }
 
@@ -345,82 +351,82 @@ class VariableEditor extends React.PureComponent {
 
         if (type !== false) {
             switch (type.toLowerCase()) {
-            case 'object':
-                return (
-                    <span>
-                        <span
-                            style={{
-                                ...Theme(theme, 'brace').style,
-                                cursor: 'default'
-                            }}
-                        >
-                            {'{'}
-                        </span>
-                        <span
-                            style={{
-                                ...Theme(theme, 'ellipsis').style,
-                                cursor: 'default'
-                            }}
-                        >
+                case 'object':
+                    return (
+                        <span>
+                            <span
+                                style={{
+                                    ...Theme(theme, 'brace').style,
+                                    cursor: 'default'
+                                }}
+                            >
+                                {'{'}
+                            </span>
+                            <span
+                                style={{
+                                    ...Theme(theme, 'ellipsis').style,
+                                    cursor: 'default'
+                                }}
+                            >
                                 ...
+                            </span>
+                            <span
+                                style={{
+                                    ...Theme(theme, 'brace').style,
+                                    cursor: 'default'
+                                }}
+                            >
+                                {'}'}
+                            </span>
                         </span>
-                        <span
-                            style={{
-                                ...Theme(theme, 'brace').style,
-                                cursor: 'default'
-                            }}
-                        >
-                            {'}'}
-                        </span>
-                    </span>
-                );
-            case 'array':
-                return (
-                    <span>
-                        <span
-                            style={{
-                                ...Theme(theme, 'brace').style,
-                                cursor: 'default'
-                            }}
-                        >
-                            {'['}
-                        </span>
-                        <span
-                            style={{
-                                ...Theme(theme, 'ellipsis').style,
-                                cursor: 'default'
-                            }}
-                        >
+                    );
+                case 'array':
+                    return (
+                        <span>
+                            <span
+                                style={{
+                                    ...Theme(theme, 'brace').style,
+                                    cursor: 'default'
+                                }}
+                            >
+                                {'['}
+                            </span>
+                            <span
+                                style={{
+                                    ...Theme(theme, 'ellipsis').style,
+                                    cursor: 'default'
+                                }}
+                            >
                                 ...
+                            </span>
+                            <span
+                                style={{
+                                    ...Theme(theme, 'brace').style,
+                                    cursor: 'default'
+                                }}
+                            >
+                                {']'}
+                            </span>
                         </span>
-                        <span
-                            style={{
-                                ...Theme(theme, 'brace').style,
-                                cursor: 'default'
-                            }}
-                        >
-                            {']'}
-                        </span>
-                    </span>
-                );
-            case 'string':
-                return <JsonString value={value} {...props} />;
-            case 'integer':
-                return <JsonInteger value={value} {...props} />;
-            case 'float':
-                return <JsonFloat value={value} {...props} />;
-            case 'boolean':
-                return <JsonBoolean value={value} {...props} />;
-            case 'function':
-                return <JsonFunction value={value} {...props} />;
-            case 'null':
-                return <JsonNull {...props} />;
-            case 'nan':
-                return <JsonNan {...props} />;
-            case 'undefined':
-                return <JsonUndefined {...props} />;
-            case 'date':
-                return <JsonDate value={new Date(value)} {...props} />;
+                    );
+                case 'string':
+                    return <JsonString value={value} {...props} />;
+                case 'integer':
+                    return <JsonInteger value={value} {...props} />;
+                case 'float':
+                    return <JsonFloat value={value} {...props} />;
+                case 'boolean':
+                    return <JsonBoolean value={value} {...props} />;
+                case 'date':
+                    return <JsonDate value={new Date(value)} {...props} />;
+                case 'function':
+                    return <JsonFunction value={value} {...props} />;
+                case 'null':
+                    return <JsonNull {...props} />;
+                case 'nan':
+                    return <JsonNan {...props} />;
+                case 'undefined':
+                    return <JsonUndefined {...props} />;
             }
         }
     }

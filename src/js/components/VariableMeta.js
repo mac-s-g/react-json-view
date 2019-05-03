@@ -2,11 +2,11 @@ import React from 'react';
 import dispatcher from './../helpers/dispatcher';
 
 import CopyToClipboard from './CopyToClipboard';
-import {toType} from './../helpers/util';
+import { toType } from './../helpers/util';
 
 //icons
 import {
-    RemoveCircle as Remove, AddCircle as Add
+    Bin, RemoveCircle as Remove, AddCircle as Add
 } from './icons';
 
 //theme
@@ -15,7 +15,7 @@ import Theme from './../themes/getStyle';
 
 export default class extends React.PureComponent {
     getObjectSize = () => {
-        const {size, theme, displayObjectSize} = this.props;
+        const { size, theme, displayObjectSize } = this.props;
         if (displayObjectSize) {
             return (
                 <span class="object-size"
@@ -32,9 +32,7 @@ export default class extends React.PureComponent {
         } = this.props;
 
         return (
-            <span
-                class="click-to-add"
-                style={{verticalAlign: 'top'}}>
+            <span class="click-to-add" title="Add Node">
                 <Add
                     class="click-to-add-icon"
                     {...Theme(theme, 'addVarIcon')}
@@ -42,7 +40,7 @@ export default class extends React.PureComponent {
                         const request = {
                             name: depth > 0 ? name : null,
                             namespace: namespace.splice(
-                                0, (namespace.length-1)
+                                0, (namespace.length - 1)
                             ),
                             existing_value: src,
                             variable_removed: false,
@@ -80,8 +78,8 @@ export default class extends React.PureComponent {
             return;
         }
         return (
-            <span class="click-to-remove" >
-                <Remove
+            <span class="click-to-remove" title="Remove">
+                <Bin
                     class="click-to-remove-icon"
                     {...Theme(theme, 'removeVarIcon')}
                     onClick={() => {
@@ -90,7 +88,7 @@ export default class extends React.PureComponent {
                             rjvId: rjvId,
                             data: {
                                 name: name,
-                                namespace: namespace.splice(0, (namespace.length-1)),
+                                namespace: namespace.splice(0, (namespace.length - 1)),
                                 existing_value: src,
                                 variable_removed: true
                             },
@@ -114,7 +112,7 @@ export default class extends React.PureComponent {
             <div
                 {...Theme(theme, 'object-meta-data')}
                 class='object-meta-data'
-                onClick={(e)=>{
+                onClick={(e) => {
                     e.stopPropagation();
                 }}
             >
@@ -124,7 +122,7 @@ export default class extends React.PureComponent {
                 {enableClipboard
                     ? (<CopyToClipboard
                         clickCallback={enableClipboard}
-                        {...{src, theme, namespace}} />)
+                        {...{ src, theme, namespace }} />)
                     : null
                 }
                 {/* copy add/remove icons */}

@@ -1,27 +1,35 @@
 .react-json-view {
-    .copy-to-clipboard-container {
+    .click-to-copy {
         vertical-align: top;
         display: none;
     }
+
     .click-to-add {
+        vertical-align: top;
         display: none;
     }
+
     .click-to-remove {
+        vertical-align: top;
         display: none;
     }
+
     .click-to-edit {
+        vertical-align: top;
         display: none;
     }
 
     .object-key-val {
-        &:hover > span > .object-meta-data {
-            & > .copy-to-clipboard-container {
+        &:hover>span>.object-meta-data {
+            &>.click-to-copy {
                 display: inline-block;
             }
-            & > .click-to-add {
+
+            &>.click-to-add {
                 display: inline-block;
             }
-            & > .click-to-remove {
+
+            &>.click-to-remove {
                 display: inline-block;
             }
         }
@@ -29,7 +37,7 @@
 
     .variable-row {
         &:hover {
-            & .copy-to-clipboard-container {
+            & .click-to-copy {
                 display: inline-block;
             }
         }
@@ -39,6 +47,7 @@
         &:hover .click-to-remove {
             display: inline-block;
         }
+
         &:hover .click-to-edit {
             display: inline-block;
         }

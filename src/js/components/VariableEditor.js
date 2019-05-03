@@ -315,12 +315,12 @@ class VariableEditor extends React.PureComponent {
     }
 
     showDetected = () => {
-        const { theme, variable, namespace, rjvId, detectDatatypes } = this.props;
+        const { theme, variable, namespace, rjvId, disableDetectDatatypes } = this.props;
         const { type, value } = this.state.parsedInput;
 
         // check if props allow for detection parsed type
 
-        if (detectDatatypes[type]) {
+        if (!disableDetectDatatypes[type]) {
             const detected = this.getDetectedInput();
             if (detected) {
                 return (

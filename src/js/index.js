@@ -59,7 +59,7 @@ class ReactJsonView extends React.PureComponent {
         style: {},
         validationMessage: 'Validation Error',
         defaultValue: null,
-        detectDatatypes: {
+        disableDetectDatatypes: {
             object: true,
             array: true,
             string: true,

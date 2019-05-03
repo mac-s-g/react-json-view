@@ -60,6 +60,7 @@ Name|Type|Default|Description
 `onSelect`|`(select)=>{}`|`false`|When a function is passed in, clicking a value triggers the `onSelect` method to be called.
 `sortKeys`|`boolean`|`false`|set to true to sort object keys
 `validationMessage`|`string`|"Validation Error"|Custom message for validation failures to `onEdit`, `onAdd`, or `onDelete` callbacks
+`detectDatatypes`|`object`|`{ object: true, array: true, string: true, integer: true, float: true, boolean: true, date: true, function: true, null: true, nan: true, undefined: true}`|Sets which datatypes should be detected, any that are set as `false` will make it so editing won't detect the datatype
 
 ### Features
 * `onEdit`, `onAdd` and `onDelete` props allow users to edit the `src` variable

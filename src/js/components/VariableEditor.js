@@ -75,21 +75,21 @@ class VariableEditor extends React.PureComponent {
                         <div {...Theme(theme, 'colon')}>:</div>
                     </span>
                 ) : (
-                        <span>
-                            <span
-                                {...Theme(theme, 'object-name')}
-                                class="object-key"
-                                key={variable.name + '_' + namespace}
-                            >
-                                <span style={{ verticalAlign: 'top' }}>"</span>
-                                <span style={{ display: 'inline-block' }}>
-                                    {variable.name}
-                                </span>
-                                <span style={{ verticalAlign: 'top' }}>"</span>
+                    <span>
+                        <span
+                            {...Theme(theme, 'object-name')}
+                            class="object-key"
+                            key={variable.name + '_' + namespace}
+                        >
+                            <span style={{ verticalAlign: 'top' }}>"</span>
+                            <span style={{ display: 'inline-block' }}>
+                                {variable.name}
                             </span>
-                            <span {...Theme(theme, 'colon')}>:</span>
+                            <span style={{ verticalAlign: 'top' }}>"</span>
                         </span>
-                    )}
+                        <span {...Theme(theme, 'colon')}>:</span>
+                    </span>
+                )}
                 <div
                     class="variable-value"
                     onClick={
@@ -189,8 +189,9 @@ class VariableEditor extends React.PureComponent {
     }
 
     getValue = (variable, editMode) => {
-        const type = editMode ? false : variable.type;
         const { props } = this;
+        const type = editMode ? false : variable.type;
+
         switch (type) {
             case false:
                 return this.getEditInput();
@@ -314,12 +315,15 @@ class VariableEditor extends React.PureComponent {
     }
 
     showDetected = () => {
-        const { theme, variable, namespace, rjvId } = this.props;
+        const { theme, variable, namespace, rjvId, detectDatatypes } = this.props;
         const { type, value } = this.state.parsedInput;
-        const detected = this.getDetectedInput();
-        if (detected) {
-            return (
-                <div>
+
+        // check if props allow for detection parsed type
+
+        if (detectDatatypes[type]) {
+            const detected = this.getDetectedInput();
+            if (detected) {
+                return (
                     <div {...Theme(theme, 'detected-row')} title="Submit as Datatype">
                         {detected}
                         <CheckCircle
@@ -334,8 +338,8 @@ class VariableEditor extends React.PureComponent {
                             }}
                         />
                     </div>
-                </div>
-            );
+                );
+            }
         }
     }
 
@@ -365,7 +369,7 @@ class VariableEditor extends React.PureComponent {
                                 }}
                             >
                                 ...
-                        </span>
+                            </span>
                             <span
                                 style={{
                                     ...Theme(theme, 'brace').style,
@@ -394,7 +398,7 @@ class VariableEditor extends React.PureComponent {
                                 }}
                             >
                                 ...
-                        </span>
+                            </span>
                             <span
                                 style={{
                                     ...Theme(theme, 'brace').style,

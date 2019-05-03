@@ -10,10 +10,10 @@ const { window } = new JSDOM()
 global.window = window
 global.document = window.document
 
-describe("<Index />", function() {
+describe("<Index />", function () {
     const rjvId = 1
 
-    it("check data type labels from index", function() {
+    it("check data type labels from index", function () {
         const wrapper = render(
             <Index
                 src={{
@@ -22,7 +22,7 @@ describe("<Index />", function() {
                     int: 5,
                     nan: NaN,
                     null: null,
-                    func: test => {},
+                    func: test => { },
                     obj: {
                         arrChild: [1, 2, "three"],
                         objChild: {
@@ -39,7 +39,7 @@ describe("<Index />", function() {
         expect(wrapper.find(".data-type-label")).to.have.length(14)
     })
 
-    it("check object-size labels from index", function() {
+    it("check object-size labels from index", function () {
         const wrapper = mount(
             <Index
                 src={{
@@ -48,7 +48,7 @@ describe("<Index />", function() {
                     int: 5,
                     nan: NaN,
                     null: null,
-                    func: test => {},
+                    func: test => { },
                     obj: {
                         arrChild: [1, 2, "three"],
                         objChild: {
@@ -70,14 +70,14 @@ describe("<Index />", function() {
         expect(wrapper.find(".object-size")).to.have.length(0)
     })
 
-    it("src replaced with error message (ERROR OUTPUT EXPECTED)", function() {
+    it("src replaced with error message (ERROR OUTPUT EXPECTED)", function () {
         const wrapper = render(
             <Index src={"{jsonEncodedString:true, createError:true}"} />
         )
         expect(wrapper.find(".data-type-label")).to.have.length(1)
     })
 
-    it("make sure copy to clipboard is displayed all properties", function() {
+    it("make sure copy to clipboard is displayed all properties", function () {
         const wrapper = render(
             <Index
                 src={{
@@ -92,7 +92,7 @@ describe("<Index />", function() {
         expect(wrapper.find(".click-to-copy")).to.have.length(7)
     })
 
-    it("index test getDerivedStateFromProps", function() {
+    it("index test getDerivedStateFromProps", function () {
         sinon.spy(Index, "getDerivedStateFromProps")
         // mount() will cause getDerivedStateFromProps to be called twice.
         // 1. before first render()
@@ -107,7 +107,7 @@ describe("<Index />", function() {
         )
     })
 
-    it("index can have ArrayGroup root component", function() {
+    it("index can have ArrayGroup root component", function () {
         const wrapper = render(
             <Index
                 name="test"

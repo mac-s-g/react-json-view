@@ -97,7 +97,7 @@ export default class extends React.PureComponent {
         }
 
         return (
-            <span class="click-to-copy" title={this.state.copied ? "Copied" : "Copy"}>
+            <span class="click-to-copy" title={this.state.copied ? 'Copied' : 'Copy'}>
                 <span
                     style={{
                         ...style,

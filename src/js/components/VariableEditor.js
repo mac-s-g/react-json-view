@@ -10,6 +10,7 @@ import CopyToClipboard from './CopyToClipboard';
 //data type components
 import {
     JsonBoolean,
+    JsonDate,
     JsonFloat,
     JsonFunction,
     JsonInteger,
@@ -209,6 +210,8 @@ class VariableEditor extends React.PureComponent {
                 return <JsonNan {...props} />;
             case 'undefined':
                 return <JsonUndefined {...props} />;
+            case 'date':
+                return <JsonDate value={variable.value} {...props} />;
             case 'regexp':
                 return <JsonRegexp value={variable.value} {...props} />;
             default:
@@ -410,6 +413,8 @@ class VariableEditor extends React.PureComponent {
                     return <JsonFloat value={value} {...props} />;
                 case 'boolean':
                     return <JsonBoolean value={value} {...props} />;
+                case 'date':
+                    return <JsonDate value={new Date(value)} {...props} />;
                 case 'function':
                     return <JsonFunction value={value} {...props} />;
                 case 'null':

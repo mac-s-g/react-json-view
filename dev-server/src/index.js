@@ -167,6 +167,13 @@ ReactDom.render(
             groupArraysAfterLength={50}
             src={getExampleJson4()}
         />
+
+        <JsonViewer
+            theme="bright:inverted"
+            collapsed={false}
+            name="non_array_with_length"
+            src={getExampleJson5()}
+        />
     </div>,
     document.getElementById("app-container")
 )
@@ -282,4 +289,14 @@ function getExampleArray() {
             pretty_cool: true
         }
     ]
+}
+
+function getExampleJson5() {
+    const non_array_with_length = {
+        message: "request too long",
+        length: 9999999,
+        limit: 1000
+    }
+
+    return non_array_with_length
 }

@@ -67,4 +67,45 @@ describe("<JsonString />", function() {
                 .text()
         ).to.equal('"123456789"')
     })
+    
+    it("linked string content - http url", function() {
+        const props = {
+            value: "http://website.com",
+            rjvId: 1,
+            theme: "rjv-default",
+            autoLinkStrings: true
+        }
+        const component = shallow(<JsonString {...props} />)
+        const linkTag = component.render().find(".string-value a")
+        expect(linkTag.text()).to.equal('http://website.com');
+        expect(linkTag.attr('target')).to.equal('_blank');
+        expect(linkTag.attr('href')).to.equal('http://website.com');
+    })
+    
+    it("linked string content - email address", function() {
+        const props = {
+            value: "email.address@gmail.com",
+            rjvId: 1,
+            theme: "rjv-default",
+            autoLinkStrings: true
+        }
+        const component = shallow(<JsonString {...props} />)
+        const linkTag = component.render().find(".string-value a")
+        expect(linkTag.text()).to.equal('email.address@gmail.com');
+        expect(linkTag.attr('target')).to.equal('_blank');
+        expect(linkTag.attr('href')).to.equal('email.address@gmail.com');
+    })
+    
+    it("linked string content - not a link", function() {
+        const props = {
+            value: "not a link",
+            rjvId: 1,
+            theme: "rjv-default",
+            autoLinkStrings: true
+        }
+        const component = shallow(<JsonString {...props} />)
+        const renderedComponent = component.render()
+        expect(renderedComponent.find(".string-value").text()).to.equal('"not a link"')
+        expect(renderedComponent.find(".string-value a").length).to.equal(0)
+    })
 })

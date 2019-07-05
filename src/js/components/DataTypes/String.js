@@ -33,15 +33,21 @@ export default class extends React.PureComponent {
             );
         });
     }
-
+    
+    isEmailAddress(str) {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(str.toLowerCase());
+    }
+    
     render() {
         const type_name = 'string';
         const { collapsed } = this.state;
         const { props } = this;
         const { collapseStringsAfterLength, theme } = props;
-        let { value } = props;
+        let { value, autoLinkStrings } = props;
         let collapsible = toType(collapseStringsAfterLength) === 'integer';
         let style = { style: { cursor: 'default' } };
+        const valueString = value;
 
         if (collapsible && value.length > collapseStringsAfterLength) {
             style.style.cursor = 'pointer';
@@ -53,6 +59,10 @@ export default class extends React.PureComponent {
                     </span>
                 );
             }
+        }
+        
+        if (autoLinkStrings && (valueString.startsWith('http') || this.isEmailAddress(valueString))) {
+            value = <a href={valueString} target={'_blank'}>{valueString}</a>;
         }
 
         return (

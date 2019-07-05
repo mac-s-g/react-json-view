@@ -92,8 +92,21 @@ describe("<JsonString />", function() {
         const component = shallow(<JsonString {...props} />)
         const linkTag = component.render().find(".string-value a")
         expect(linkTag.text()).to.equal('email.address@gmail.com');
-        expect(linkTag.attr('target')).to.equal('_blank');
         expect(linkTag.attr('href')).to.equal('mailto:email.address@gmail.com');
+    })
+    
+    it("linked string content - manual href supplied", function() {
+        const props = {
+            value: "some text|href=website.com",
+            rjvId: 1,
+            theme: "rjv-default",
+            autoLinkStrings: true
+        }
+        const component = shallow(<JsonString {...props} />)
+        const linkTag = component.render().find(".string-value a")
+        expect(linkTag.text()).to.equal('some text');
+        expect(linkTag.attr('target')).to.equal('_blank');
+        expect(linkTag.attr('href')).to.equal('website.com');
     })
     
     it("linked string content - not a link", function() {

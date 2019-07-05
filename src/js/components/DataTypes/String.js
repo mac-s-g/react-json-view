@@ -61,9 +61,15 @@ export default class extends React.PureComponent {
             }
         }
         
-        const valueIsEmailAddress = this.isEmailAddress(valueString);
-        if (autoLinkStrings && (valueString.startsWith('http') || valueIsEmailAddress)) {
-            value = <a href={`${valueIsEmailAddress ? 'mailto:' : ''}${valueString}`} target={'_blank'}>{valueString}</a>;
+        if (autoLinkStrings) {
+            if (valueString.startsWith('http') && valueString.includes('://')) {
+                value = <a href={valueString} target={'_blank'}>{valueString}</a>;
+            } else if (this.isEmailAddress(valueString)) {
+                value = <a href={`mailto:${valueString}`}>{valueString}</a>;
+            } else if (valueString.includes('|href=')) {
+                const tokens = valueString.split('|href=');
+                value = <a href={tokens[1]} target={'_blank'}>{tokens[0]}</a>
+            }
         }
 
         return (

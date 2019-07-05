@@ -93,7 +93,7 @@ describe("<JsonString />", function() {
         const linkTag = component.render().find(".string-value a")
         expect(linkTag.text()).to.equal('email.address@gmail.com');
         expect(linkTag.attr('target')).to.equal('_blank');
-        expect(linkTag.attr('href')).to.equal('email.address@gmail.com');
+        expect(linkTag.attr('href')).to.equal('mailto:email.address@gmail.com');
     })
     
     it("linked string content - not a link", function() {

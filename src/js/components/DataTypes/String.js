@@ -8,6 +8,19 @@ import Theme from './../../themes/getStyle';
 //attribute store for storing collapsed state
 import AttributeStore from './../../stores/ObjectAttributes';
 
+/**
+ * https://github.com/facebook/react/issues/9678#issuecomment-301126758
+ * Used to suppress click events for text selection.
+ * @example <div {...OnClick(onClick)}/>
+ */
+export const OnClick = (() => {
+    let pos = {x: 0, y: 0};
+    return onClick => ({
+        onMouseDown: ({nativeEvent: e}) => {pos.x = e.x; pos.y = e.y;},
+        onMouseUp: ({nativeEvent: e}) => {onClick && Math.abs(pos.x - e.x) < 8 && Math.abs(pos.y - e.y) < 8 && onClick();},
+    });
+})();
+
 export default class extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -61,7 +74,7 @@ export default class extends React.PureComponent {
                 <span
                     class="string-value"
                     {...style}
-                    onClick={this.toggleCollapsed}
+                    {...OnClick(this.toggleCollapsed)}
                 >
                     "{value}"
                 </span>

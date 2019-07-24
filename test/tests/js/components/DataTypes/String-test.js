@@ -53,18 +53,13 @@ describe("<JsonString />", function() {
             theme: "rjv-default"
         }
         const component = shallow(<JsonString {...props} />)
-        expect(
-            component
-                .render()
-                .find(".string-value")
-                .text()
-        ).to.equal('"123 ..."')
-        component.find(".string-value").simulate("click")
-        expect(
-            component
-                .render()
-                .find(".string-value")
-                .text()
-        ).to.equal('"123456789"')
+        const beforeClickedValue = component.render().find(".string-value").text()
+        expect(beforeClickedValue).to.equal('"123 ..."')
+        component.find(".string-value").prop('onMouseDown')({ nativeEvent: { x: 0, y: 0} })
+        component.find(".string-value").prop('onMouseUp')({ nativeEvent: { x: 0, y: 0} })
+        component.update()
+        component.render()
+        const afterClickedValue = component.find(".string-value").text()
+        expect(afterClickedValue).to.equal('"123456789"')
     })
 })

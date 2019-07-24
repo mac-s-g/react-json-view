@@ -13,54 +13,34 @@
         display: none;
     }
 
-    .object-key-val {
-        .object-meta-data {
-            .copy-to-clipboard-container {
-                display: inline-block;
-                opacity: 0.1;
-            }
-            .click-to-add {
-                display: inline-block;
-                opacity: 0.1;
-            }
-            .click-to-remove {
-                display: inline-block;
-                opacity: 0.1;
-            }
-        }
-        &:hover {
-            .object-meta-data {
-                .copy-to-clipboard-container {
-                    opacity: 1.0;
-                }
-                .click-to-add {
-                    opacity: 1.0;
-                }
-                .click-to-remove {
-                    opacity: 1.0;
-                }
-            }
-        }
-    }
-
-    .variable-row {
+    .object-meta-data {
         .copy-to-clipboard-container {
             display: inline-block;
-            opacity: 0.1;
+            opacity: 0.25;
         }
-        &:hover {
-            .copy-to-clipboard-container {
-                opacity: 1.0;
-            }
+        .copy-to-clipboard-container:hover {
+            opacity: 1.0;
         }
-    }
-
-    .object-content .variable-row {
-        &:hover .click-to-remove {
+        .click-to-add {
             display: inline-block;
+            opacity: 0.25;
         }
-        &:hover .click-to-edit {
+        .click-to-add:hover {
+          opacity: 1.0;
+        }
+        .click-to-remove {
             display: inline-block;
+            opacity: 0.25;
+        }
+        .click-to-remove:hover {
+          opacity: 1.0;
+        }
+        .click-to-edit {
+            display: inline-block;
+            opacity: 0.25;
+        }
+        .click-to-edit:hover {
+          opacity: 1.0;
         }
     }
 }

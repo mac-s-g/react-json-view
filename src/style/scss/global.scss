@@ -14,40 +14,42 @@
     }
 
     .object-key-val {
-        & > span > .object-meta-data {
-            & > .copy-to-clipboard-container {
+        .object-meta-data {
+            .copy-to-clipboard-container {
                 display: inline-block;
                 opacity: 0.1;
             }
-            & > .click-to-add {
+            .click-to-add {
                 display: inline-block;
                 opacity: 0.1;
             }
-            & > .click-to-remove {
+            .click-to-remove {
                 display: inline-block;
                 opacity: 0.1;
             }
         }
-        &:hover > span > .object-meta-data {
-            & > .copy-to-clipboard-container {
-                opacity: 1.0;
-            }
-            & > .click-to-add {
-                opacity: 1.0;
-            }
-            & > .click-to-remove {
-                opacity: 1.0;
+        &:hover {
+            .object-meta-data {
+                .copy-to-clipboard-container {
+                    opacity: 1.0;
+                }
+                .click-to-add {
+                    opacity: 1.0;
+                }
+                .click-to-remove {
+                    opacity: 1.0;
+                }
             }
         }
     }
 
     .variable-row {
-        & .copy-to-clipboard-container {
+        .copy-to-clipboard-container {
             display: inline-block;
             opacity: 0.1;
         }
         &:hover {
-            & .copy-to-clipboard-container {
+            .copy-to-clipboard-container {
                 opacity: 1.0;
             }
         }

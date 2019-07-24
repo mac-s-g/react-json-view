@@ -136,10 +136,10 @@ class RjvObject extends React.PureComponent {
         if (parent_type === 'array_group') {
             return (
                 <span>
+                    {expanded ? this.getObjectMetaData(src) : null}
                     <span {...Theme(theme, 'brace')}>
                         {object_type === 'array' ? '[' : '{'}
                     </span>
-                    {expanded ? this.getObjectMetaData(src) : null}
                 </span>
             );
         }
@@ -161,11 +161,11 @@ class RjvObject extends React.PureComponent {
                         <IconComponent {...{ theme, iconStyle }} />
                     </div>
                     <ObjectName {...this.props} />
+                    {expanded ? this.getObjectMetaData(src) : null}
                     <span {...Theme(theme, 'brace')}>
                         {object_type === 'array' ? '[' : '{'}
                     </span>
                 </span>
-                {expanded ? this.getObjectMetaData(src) : null}
             </span>
         );
     }
@@ -201,6 +201,7 @@ class RjvObject extends React.PureComponent {
                 class="object-key-val"
                 {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', styles)}
             >
+                {expanded ? null : this.getObjectMetaData(src)}
                 {this.getBraceStart(object_type, expanded)}
                 {expanded
                     ? this.getObjectContent(depth, src, {
@@ -218,7 +219,6 @@ class RjvObject extends React.PureComponent {
                     >
                         {object_type === 'array' ? ']' : '}'}
                     </span>
-                    {expanded ? null : this.getObjectMetaData(src)}
                 </span>
             </div>
         );

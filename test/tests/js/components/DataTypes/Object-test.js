@@ -341,6 +341,7 @@ describe("<JsonObject />", function() {
                 sortKeys={true}
                 collapsed={false}
                 shouldCollapse={() => false}
+                quotesOnKeys={true}
             />
         )
         expect(wrapper.text()).to.equal('"":{"a":"a""b":"b""c":"c""d":"d"}');
@@ -361,6 +362,7 @@ describe("<JsonObject />", function() {
                 namespace={["root"]}
                 collapsed={false}
                 shouldCollapse={() => false}
+                quotesOnKeys={true}
             />
         )
         expect(wrapper.text()).to.equal('"":{"d":"d""b":"b""a":"a""c":"c"}');

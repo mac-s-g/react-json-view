@@ -41,4 +41,30 @@ describe("<ObjectName />", function() {
         )
         expect(wrapper.find("span").children()).to.have.length(0)
     })
+
+    it("ObjectName with quotesOnKeys enabled (default)", function() {
+        const wrapper = render(
+            <ObjectName
+                namespace={"test"}
+                name="test"
+                theme="rjv-default"
+                jsvRoot={false}
+                quotesOnKeys={true}
+            />
+        )
+        expect(wrapper.find(".object-key").children('span')).to.have.length(3)
+    })
+
+    it("ObjectName with quotesOnKeys disabled", function() {
+        const wrapper = render(
+            <ObjectName
+                namespace={"test"}
+                name="test"
+                theme="rjv-default"
+                jsvRoot={false}
+                quotesOnKeys={false}
+            />
+        )
+        expect(wrapper.find(".object-key").children('span')).to.have.length(1)
+    })
 })

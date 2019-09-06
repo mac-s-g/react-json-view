@@ -3,7 +3,7 @@ import Theme from './../themes/getStyle';
 
 export default function getObjectName(props) {
     const {
-        parent_type, namespace, theme, jsvRoot, name
+        parent_type, namespace, quotesOnKeys, theme, jsvRoot, name
     } = props;
 
     const display_name = props.name ? props.name : '';
@@ -21,9 +21,13 @@ export default function getObjectName(props) {
         return (
             <span {...Theme(theme, 'object-name')} key={namespace}>
                 <span class="object-key">
-                    <span style={{verticalAlign:'top'}}>"</span>
+                    { quotesOnKeys &&
+                      <span style={{verticalAlign:'top'}}>"</span>
+                    }
                     <span>{display_name}</span>
-                    <span style={{verticalAlign:'top'}}>"</span>
+                    { quotesOnKeys &&
+                      <span style={{verticalAlign:'top'}}>"</span>
+                    }
                 </span>
                 <span {...Theme(theme, 'colon')}>:</span>
             </span>

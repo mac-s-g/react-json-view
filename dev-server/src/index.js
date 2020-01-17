@@ -37,6 +37,9 @@ ReactDom.render(
                 console.log("select callback", e)
                 console.log(e.namespace)
             }}
+            onToggleCollapse={e => {
+                console.log("toggle collapse callback", e)
+            }}
             displayObjectSize={true}
             name={"dev-server"}
             enableClipboard={copy => {

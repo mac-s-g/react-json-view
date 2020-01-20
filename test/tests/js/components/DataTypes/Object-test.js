@@ -1,5 +1,6 @@
 import React from "react"
 import { shallow, render, mount } from "enzyme"
+import sinon from "sinon"
 import { expect } from "chai"
 
 import JsonObject from "./../../../../../src/js/components/DataTypes/Object"
@@ -325,6 +326,7 @@ describe("<JsonObject />", function() {
 
         expect(wrapper.state("expanded")).to.equal(true)
     })
+
     it("sort object keys", () => {
         let src = {
             d: 'd',
@@ -364,5 +366,60 @@ describe("<JsonObject />", function() {
             />
         )
         expect(wrapper.text()).to.equal('"":{"d":"d""b":"b""a":"a""c":"c"}');
+    })
+
+    describe("callbacks", function() {
+        let sandbox;
+
+        beforeEach(function() {
+            sandbox = sinon.sandbox.create()
+        })
+
+        afterEach(function() {
+            sandbox.restore()
+        })
+
+        it("should call onToggleCollapse callback when collapsing", function() {
+            let src = { prop1: 1, prop2: 2, prop3: 3 }
+            const mockToggleCollapseCallback = sandbox.spy();
+
+            const wrapper = mount(
+                <JsonObject
+                    src={src}
+                    theme="rjv-default"
+                    namespace={["root"]}
+                    onToggleCollapse={mockToggleCollapseCallback}
+                />
+            )
+
+            expect(wrapper.state("expanded"), "should start collapsed").to.equal(false)
+            expect(wrapper.find("CollapsedIcon").length, "should have one collapsed icon").to.equal(1)
+          
+            wrapper.find("CollapsedIcon").simulate("click");
+            expect(mockToggleCollapseCallback.calledWithMatch({ expanded: true }),
+                "should call callback with object with property expanded as true").to.equal(true)
+        })
+
+        it("should call onToggleCollapse callback when expanding", function() {
+            let src = { prop1: 1, prop2: 2, prop3: 3 }
+            const mockToggleCollapseCallback = sandbox.spy();
+
+            const wrapper = mount(
+                <JsonObject
+                    src={src}
+                    theme="rjv-default"
+                    namespace={["root"]}
+                    collapsed={false}
+                    onToggleCollapse={mockToggleCollapseCallback}
+                />
+            )
+
+            expect(wrapper.state("expanded"), "should start expanded").to.equal(true)
+            expect(wrapper.find("ExpandedIcon").length, "should have one expanded icon").to.equal(1)
+
+            wrapper.find("ExpandedIcon").simulate("click");
+            expect(mockToggleCollapseCallback.calledWithMatch({ expanded: false }),
+                "should call callback with object with property expanded as false").to.equal(true)
+        })
     })
 })

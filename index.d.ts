@@ -118,6 +118,12 @@ export interface ReactJsonViewProps {
    */
   onSelect?: ((select: OnSelectProps) => void) | false;
   /**
+   * When a function is passed in, toggling an expand/collapse object triggers the onToggleCollapse method to be called.
+   *
+   * Default: false
+   */
+  onToggleCollapse?: ((collapse: onToggleCollapseProps) => void) | false;
+  /**
    * Custom message for validation failures to onEdit, onAdd, or onDelete callbacks.
    *
    * Default: "Validation Error"
@@ -212,6 +218,22 @@ export interface OnSelectProps {
    * accurate types: "float", "integer", or "nan".
    */
   type: string;
+  /**
+   * List of keys representing the scopes above the selected entry.
+   */
+  namespace: Array<string | null>;
+
+}
+
+export interface onToggleCollapseProps {
+  /**
+   * The name of the currently selected entry.
+   */
+  name: string | null;
+  /**
+   * The new expanded state of the expandable/collapsable object.
+   */
+  expanded: boolean;
   /**
    * List of keys representing the scopes above the selected entry.
    */

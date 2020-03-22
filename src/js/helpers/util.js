@@ -1,3 +1,5 @@
+import colorString from 'color-string';
+
 //returns a string "type" of input object
 export function toType(obj) {
     let type = getType(obj);
@@ -10,6 +12,12 @@ export function toType(obj) {
             type = 'float';
         } else {
             type = 'integer';
+        }
+    }
+    if (type === 'string') {
+        const color = colorString.get(obj);
+        if (color) {
+            type = 'color';
         }
     }
     return type;

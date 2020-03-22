@@ -179,6 +179,8 @@ ReactDom.render(
 function getExampleJson1() {
     return {
         string: "this is a test string",
+        colorHash: '#00ff33',
+        colorRgb: 'rgba(255,0,0,0.5)',
         integer: 42,
         empty_array: [],
         empty_object: {},

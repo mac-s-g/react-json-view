@@ -18,6 +18,7 @@ import {
     JsonNull,
     JsonRegexp,
     JsonString,
+    JsonColor,
     JsonUndefined
 } from './DataTypes/DataTypes';
 
@@ -196,6 +197,8 @@ class VariableEditor extends React.PureComponent {
             return this.getEditInput();
         case 'string':
             return <JsonString value={variable.value} {...props} />;
+        case 'color':
+            return <JsonColor value={variable.value} {...props} />;
         case 'integer':
             return <JsonInteger value={variable.value} {...props} />;
         case 'float':

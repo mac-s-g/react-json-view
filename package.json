@@ -72,7 +72,8 @@
         "test:coverage": "nyc report --reporter=text-lcov | coveralls",
         "test:watch": "nyc mocha -w test/**/*-test.js",
         "lint": "./node_modules/.bin/eslint src",
-        "lint-fixup": "./node_modules/.bin/eslint src --ext .js,.jsx --fix"
+        "lint-fixup": "./node_modules/.bin/eslint src --ext .js,.jsx --fix",
+        "prepare": "npm run build"
     },
     "repository": {
         "type": "git",

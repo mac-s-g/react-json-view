@@ -19,7 +19,7 @@ export default class extends React.PureComponent {
         if (displayObjectSize) {
             return (
                 <span class="object-size"
-                    {...Theme(theme, 'object-size')}>
+                      {...Theme(theme, 'object-size')}>
                     {size} item{size === 1 ? '' : 's'}
                 </span>
             );
@@ -124,7 +124,8 @@ export default class extends React.PureComponent {
                 {enableClipboard
                     ? (<CopyToClipboard
                         clickCallback={enableClipboard}
-                        {...{src, theme, namespace}} />)
+                        src={this.getKeyValuePair(src, namespace)}
+                        {...{theme, namespace}} />)
                     : null
                 }
                 {/* copy add/remove icons */}
@@ -134,4 +135,16 @@ export default class extends React.PureComponent {
         );
     }
 
+    getKeyValuePair = (src, namespace) => {
+        let json = {};
+        if (namespace !== undefined) {
+            const key = namespace[namespace.length-1];
+            if (key) {
+                json[namespace[namespace.length-1]] = src;
+            } else {
+                json = src;
+            }
+        }
+        return json;
+    };
 }

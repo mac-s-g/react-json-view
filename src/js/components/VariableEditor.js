@@ -117,7 +117,7 @@ class VariableEditor extends React.PureComponent {
                 {enableClipboard ? (
                     <CopyToClipboard
                         hidden={editMode}
-                        src={variable.value}
+                        src={this.getKeyValuePair(variable)}
                         clickCallback={enableClipboard}
                         {...{ theme, namespace }}
                     />
@@ -131,6 +131,17 @@ class VariableEditor extends React.PureComponent {
             </div>
         );
     }
+
+    getKeyValuePair = (variable) => {
+        const {name, value} = variable;
+        if (name) {
+            const json = {};
+            json[name] = value;
+            return json;
+        } else {
+            return value;
+        }
+    };
 
     getEditIcon = () => {
         const { variable, theme } = this.props;

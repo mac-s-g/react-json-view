@@ -62,7 +62,7 @@ describe("<VariableMeta />", function() {
                 theme="rjv-default"
                 namespace={["test"]}
                 enableClipboard={copy => {
-                    expect(copy.src.test).to.equal(input_src.test)
+                    expect(copy.src.test).to.equal(input_src)
                     //increment counter to assert that callback was called
                     callback_counter++
                 }}

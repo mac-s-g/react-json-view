@@ -60,6 +60,7 @@ Name|Type|Default|Description
 `onSelect`|`(select)=>{}`|`false`|When a function is passed in, clicking a value triggers the `onSelect` method to be called.
 `sortKeys`|`boolean`|`false`|set to true to sort object keys
 `validationMessage`|`string`|"Validation Error"|Custom message for validation failures to `onEdit`, `onAdd`, or `onDelete` callbacks
+`displayArrayKey`|`boolean`|`true`|When set to `true`, the index of the elements prefix values
 
 ### Features
 * `onEdit`, `onAdd` and `onDelete` props allow users to edit the `src` variable

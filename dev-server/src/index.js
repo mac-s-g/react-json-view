@@ -83,6 +83,7 @@ ReactDom.render(
                 src.constructor &&
                 src.constructor.name === "Moment"
             }
+            selectOnFocus
         />
 
         <br />

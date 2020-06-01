@@ -225,14 +225,18 @@ class VariableEditor extends React.PureComponent {
     }
 
     getEditInput = () => {
-        const { theme } = this.props;
+        const { selectOnFocus, theme } = this.props;
         const { editValue } = this.state;
 
         return (
             <div>
                 <AutosizeTextarea
                     type="text"
-                    inputRef={input => input && input.focus()}
+                    inputRef={input => {
+                        if (input) {
+                            input[!selectOnFocus ? 'focus' : 'select']();
+                        }
+                    }}
                     value={editValue}
                     class="variable-editor"
                     onChange={event => {

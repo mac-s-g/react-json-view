@@ -54,7 +54,8 @@ class VariableEditor extends React.PureComponent {
             onEdit,
             onDelete,
             onSelect,
-            rjvId
+            rjvId,
+            keyModifier
         } = this.props;
         const { editMode } = this.state;
 
@@ -97,7 +98,7 @@ class VariableEditor extends React.PureComponent {
                             ? null
                             : e => {
                                 let location = [...namespace];
-                                if ((e.ctrlKey || e.metaKey) && onEdit !== false) {
+                                if (keyModifier(e) && onEdit !== false) {
                                     this.prepopInput(variable);
                                 } else if (onSelect !== false) {
                                     location.shift();

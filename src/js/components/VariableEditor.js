@@ -98,7 +98,7 @@ class VariableEditor extends React.PureComponent {
                             ? null
                             : e => {
                                 let location = [...namespace];
-                                if (keyModifier(e) && onEdit !== false) {
+                                if (keyModifier(e, 'edit') && onEdit !== false) {
                                     this.prepopInput(variable);
                                 } else if (onSelect !== false) {
                                     location.shift();
@@ -226,7 +226,7 @@ class VariableEditor extends React.PureComponent {
     }
 
     getEditInput = () => {
-        const { selectOnFocus, theme } = this.props;
+        const { keyModifier, selectOnFocus, theme } = this.props;
         const { editValue } = this.state;
 
         return (
@@ -261,7 +261,7 @@ class VariableEditor extends React.PureComponent {
                             break;
                         }
                         case 'Enter': {
-                            if (e.ctrlKey || e.metaKey) {
+                            if (keyModifier(e, 'submit')) {
                                 this.submitEdit(true);
                             }
                             break;
@@ -276,14 +276,22 @@ class VariableEditor extends React.PureComponent {
                     <Remove
                         class="edit-cancel"
                         {...Theme(theme, 'cancel-icon')}
-                        onClick={() => {
+                        onClick={(e) => {
+                            if (e) {
+                                e.stopPropagation();
+                            }
+
                             this.setState({ editMode: false, editValue: '' });
                         }}
                     />
                     <CheckCircle
                         class="edit-check string-value"
                         {...Theme(theme, 'check-icon')}
-                        onClick={() => {
+                        onClick={(e) => {
+                            if (e) {
+                                e.stopPropagation();
+                            }
+
                             this.submitEdit();
                         }}
                     />
@@ -332,7 +340,11 @@ class VariableEditor extends React.PureComponent {
                                 paddingLeft: '3px',
                                 ...Theme(theme, 'check-icon').style
                             }}
-                            onClick={() => {
+                            onClick={(e) => {
+                                if (e) {
+                                    e.stopPropagation();
+                                }
+
                                 this.submitEdit(true);
                             }}
                         />

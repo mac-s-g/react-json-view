@@ -146,7 +146,7 @@ export interface ReactJsonViewProps {
    *
    * Default: (e) => e.metaKey || e.ctrlKey
    */
-  keyModifier?: (event: Event) => boolean;
+  keyModifier?: (event: Event, type: 'edit' | 'submit') => boolean;
 }
 
 export interface OnCopyProps {

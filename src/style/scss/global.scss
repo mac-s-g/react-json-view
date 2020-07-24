@@ -1,46 +1,31 @@
 .react-json-view {
-    .copy-to-clipboard-container {
-        vertical-align: top;
-        display: none;
-    }
-    .click-to-add {
-        display: none;
-    }
-    .click-to-remove {
-        display: none;
-    }
-    .click-to-edit {
-        display: none;
-    }
-
-    .object-key-val {
-        &:hover > span > .object-meta-data {
-            & > .copy-to-clipboard-container {
-                display: inline-block;
-            }
-            & > .click-to-add {
-                display: inline-block;
-            }
-            & > .click-to-remove {
-                display: inline-block;
-            }
-        }
-    }
-
-    .variable-row {
-        &:hover {
-            & .copy-to-clipboard-container {
-                display: inline-block;
-            }
-        }
-    }
-
-    .object-content .variable-row {
-        &:hover .click-to-remove {
-            display: inline-block;
-        }
-        &:hover .click-to-edit {
-            display: inline-block;
-        }
-    }
+      .copy-to-clipboard-container {
+          vertical-align: top;
+          display: inline-block;
+          opacity: 0.25;
+      }
+      .copy-to-clipboard-container:hover {
+          opacity: 1.0;
+      }
+      .click-to-add {
+          display: inline-block;
+          opacity: 0.25;
+      }
+      .click-to-add:hover {
+        opacity: 1.0;
+      }
+      .click-to-remove {
+          display: inline-block;
+          opacity: 0.25;
+      }
+      .click-to-remove:hover {
+        opacity: 1.0;
+      }
+      .click-to-edit {
+          display: inline-block;
+          opacity: 0.25;
+      }
+      .click-to-edit:hover {
+        opacity: 1.0;
+      }
 }

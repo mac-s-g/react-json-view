@@ -401,10 +401,17 @@ const getStyle = theme => {
     );
 };
 
+let decorator;
+
+export const setStyleDecorator = fn => {
+    decorator = fn;
+};
+
 export default function style(theme, component, args) {
     if (!theme) {
         console.error('theme has not been set');
     }
 
-    return getStyle(theme)(component, args);
+    const s = getStyle(theme)(component, args);
+    return decorator ? (decorator(s, component, args) || s) : s;
 }

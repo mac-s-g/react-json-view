@@ -77,20 +77,20 @@ describe("<Index />", function() {
         expect(wrapper.find(".data-type-label")).to.have.length(1)
     })
 
-    it("make sure copy to clipboard is displayed all properties", function() {
-        const wrapper = render(
-            <Index
-                src={{
-                    test: true,
-                    passing: "hopefully",
-                    arr: [5],
-                    obj: {},
-                    regexp: /[0-9]/gi
-                }}
-            />
-        )
-        expect(wrapper.find(".copy-to-clipboard-container")).to.have.length(7)
-    })
+    // it("make sure copy to clipboard is displayed all properties", function() {
+    //     const wrapper = render(
+    //         <Index
+    //             src={{
+    //                 test: true,
+    //                 passing: "hopefully",
+    //                 arr: [5],
+    //                 obj: {},
+    //                 regexp: /[0-9]/gi
+    //             }}
+    //         />
+    //     )
+    //     expect(wrapper.find(".copy-to-clipboard-container")).to.have.length(7)
+    // })
 
     it("index test getDerivedStateFromProps", function() {
         sinon.spy(Index, "getDerivedStateFromProps")

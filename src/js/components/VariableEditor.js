@@ -90,6 +90,21 @@ class VariableEditor extends React.PureComponent {
                         <span {...Theme(theme, 'colon')}>:</span>
                     </span>
                 )}
+                {/*enableClipboard ? (
+                    <CopyToClipboard
+                        hidden={editMode}
+                        src={variable.value}
+                        clickCallback={enableClipboard}
+                        {...{ theme, namespace }}
+                    />
+                ) : null}
+                {onEdit !== false && editMode == false
+                    ? this.getEditIcon()
+                    : null}
+                {onDelete !== false && editMode == false
+                    ? this.getRemoveIcon()
+                    : null}
+                */}
                 <div
                     class="variable-value"
                     onClick={
@@ -114,20 +129,6 @@ class VariableEditor extends React.PureComponent {
                 >
                     {this.getValue(variable, editMode)}
                 </div>
-                {enableClipboard ? (
-                    <CopyToClipboard
-                        hidden={editMode}
-                        src={variable.value}
-                        clickCallback={enableClipboard}
-                        {...{ theme, namespace }}
-                    />
-                ) : null}
-                {onEdit !== false && editMode == false
-                    ? this.getEditIcon()
-                    : null}
-                {onDelete !== false && editMode == false
-                    ? this.getRemoveIcon()
-                    : null}
             </div>
         );
     }

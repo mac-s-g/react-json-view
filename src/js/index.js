@@ -278,3 +278,5 @@ class ReactJsonView extends React.PureComponent {
 polyfill(ReactJsonView);
 
 export default ReactJsonView;
+
+export {setStyleDecorator} from './themes/getStyle';

@@ -31,7 +31,8 @@ const config = {
     path: PATHS.build,
     filename: "main.js",
     library: "reactJsonView",
-    libraryTarget: "umd"
+    libraryTarget: "umd",
+    globalObject: "this"
   },
   plugins: [],
   optimization: {

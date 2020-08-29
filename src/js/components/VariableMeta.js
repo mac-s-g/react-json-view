@@ -130,6 +130,7 @@ export default class extends React.PureComponent {
                 {/* copy to clipboard icon */}
                 {enableClipboard
                     ? (<CopyToClipboard
+                        rowHovered={rowHovered}
                         clickCallback={enableClipboard}
                         {...{src, theme, namespace}} />)
                     : null

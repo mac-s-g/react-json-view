@@ -35,20 +35,6 @@ const config = {
           }
         ],
         include: [PATHS.js, PATHS.demo]
-      },
-      {
-        test: /\.s?css$/,
-        use: [
-          {
-            loader: "style-loader"
-          },
-          {
-            loader: "css-loader"
-          },
-          {
-            loader: "sass-loader"
-          }
-        ]
       }
     ]
   }

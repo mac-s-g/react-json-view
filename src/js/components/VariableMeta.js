@@ -26,7 +26,7 @@ export default class extends React.PureComponent {
         }
     }
 
-    getAddAttribute = () => {
+    getAddAttribute = (rowHovered) => {
         const {
             theme, namespace, name, src, rjvId, depth
         } = this.props;
@@ -34,7 +34,10 @@ export default class extends React.PureComponent {
         return (
             <span
                 class="click-to-add"
-                style={{verticalAlign: 'top'}}>
+                style={{
+                    verticalAlign: 'top',
+                    display: rowHovered ? 'inline-block' : 'none'
+                }}>
                 <Add
                     class="click-to-add-icon"
                     {...Theme(theme, 'addVarIcon')}
@@ -70,7 +73,7 @@ export default class extends React.PureComponent {
         );
     }
 
-    getRemoveObject = () => {
+    getRemoveObject = (rowHovered) => {
         const {
             theme, hover, namespace, name, src, rjvId
         } = this.props;
@@ -80,7 +83,10 @@ export default class extends React.PureComponent {
             return;
         }
         return (
-            <span class="click-to-remove" >
+            <span class="click-to-remove"
+                  style={{
+                      display: rowHovered ? 'inline-block' : 'none'
+                  }}>
                 <Remove
                     class="click-to-remove-icon"
                     {...Theme(theme, 'removeVarIcon')}
@@ -108,7 +114,8 @@ export default class extends React.PureComponent {
             onAdd,
             enableClipboard,
             src,
-            namespace
+            namespace,
+            rowHovered,
         } = this.props;
         return (
             <div
@@ -128,8 +135,8 @@ export default class extends React.PureComponent {
                     : null
                 }
                 {/* copy add/remove icons */}
-                {onAdd !== false ? this.getAddAttribute() : null}
-                {onDelete !== false ? this.getRemoveObject() : null}
+                {onAdd !== false ? this.getAddAttribute(rowHovered) : null}
+                {onDelete !== false ? this.getRemoveObject(rowHovered) : null}
             </div>
         );
     }

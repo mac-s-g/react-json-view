@@ -33,6 +33,7 @@ class VariableEditor extends React.PureComponent {
         this.state = {
             editMode: false,
             editValue: '',
+            hovered: false,
             renameKey: false,
             parsedInput: {
                 type: false,
@@ -63,6 +64,8 @@ class VariableEditor extends React.PureComponent {
                 {...Theme(theme, 'objectKeyVal', {
                     paddingLeft: indentWidth * singleIndent
                 })}
+                onMouseEnter={() => this.setState({...this.state, hovered: true})}
+                onMouseLeave={() => this.setState({...this.state, hovered: false})}
                 class="variable-row"
                 key={variable.name}
             >
@@ -116,6 +119,7 @@ class VariableEditor extends React.PureComponent {
                 </div>
                 {enableClipboard ? (
                     <CopyToClipboard
+                        rowHovered={this.state.hovered}
                         hidden={editMode}
                         src={variable.value}
                         clickCallback={enableClipboard}
@@ -136,7 +140,11 @@ class VariableEditor extends React.PureComponent {
         const { variable, theme } = this.props;
 
         return (
-            <div class="click-to-edit" style={{ verticalAlign: 'top' }}>
+            <div class="click-to-edit"
+                 style={{
+                     verticalAlign: 'top',
+                     display: this.state.hovered ? "inline-block" : "none"
+                 }}>
                 <Edit
                     class="click-to-edit-icon"
                     {...Theme(theme, 'editVarIcon')}
@@ -167,7 +175,11 @@ class VariableEditor extends React.PureComponent {
         const { variable, namespace, theme, rjvId } = this.props;
 
         return (
-            <div class="click-to-remove" style={{ verticalAlign: 'top' }}>
+            <div class="click-to-remove"
+                 style={{
+                     verticalAlign: 'top',
+                     display: this.state.hovered ? "inline-block" : "none"
+                 }}>
                 <Remove
                     class="click-to-remove-icon"
                     {...Theme(theme, 'removeVarIcon')}

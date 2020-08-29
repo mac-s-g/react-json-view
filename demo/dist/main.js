@@ -3601,6 +3601,7 @@ var _class = function (_React$PureComponent) {
                 }),
                 _this.getObjectSize(),
                 enableClipboard ? _react2.default.createElement(_CopyToClipboard2.default, _extends({
+                    rowHovered: rowHovered,
                     clickCallback: enableClipboard
                 }, { src: src, theme: theme, namespace: namespace })) : null,
                 onAdd !== false ? _this.getAddAttribute(rowHovered) : null,

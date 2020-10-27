@@ -1,6 +1,4 @@
 import React from 'react';
-import clipboardy from 'clipboardy';
-
 import { toType } from './../helpers/util';
 
 //clibboard icon
@@ -28,7 +26,7 @@ export default class extends React.PureComponent {
 
     handleCopy = () => {
         const { clickCallback, src, namespace } = this.props;
-        clipboardy.writeSync(JSON.stringify(this.clipboardValue(src), null, '  '));
+        navigator.clipboard.writeText(JSON.stringify(this.clipboardValue(src), null, '  '));
 
         this.copiedTimer = setTimeout(() => {
             this.setState({

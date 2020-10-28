@@ -1,3 +1,5 @@
+import regeneratorRuntime from 'regenerator-runtime';
+
 //returns a string "type" of input object
 export function toType(obj) {
     let type = getType(obj);
@@ -53,3 +55,11 @@ export function isTheme(theme) {
     }
     return false;
 }
+
+/**
+ * Converts the namespace to a path and copies to clipboard
+ * @param {[String]} namespace
+ */
+export const copyNamespace = async (namespace) => {
+    navigator.clipboard.writeText(namespace.join('.'));
+};

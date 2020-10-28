@@ -1,4 +1,5 @@
 import React from 'react';
+import { copyNamespace } from '../helpers/util';
 import Theme from './../themes/getStyle';
 
 export default function getObjectName(props) {
@@ -8,10 +9,6 @@ export default function getObjectName(props) {
 
     const display_name = props.name ? props.name : '';
 
-    const copyNamespace = async () => {
-        navigator.clipboard.writeText(namespace.join('.'));
-    };
-
     if (jsvRoot && (name === false || name === null)) {
         return (<span />);
     } else if (parent_type == 'array') {
@@ -19,7 +16,7 @@ export default function getObjectName(props) {
             <span {...Theme(theme, 'array-key')} key={namespace}>
                 <span
                     class="array-key"
-                    onClick={copyNamespace}
+                    onClick={() => copyNamespace(namespace)}
                 >
                     {display_name}
                 </span>
@@ -31,7 +28,7 @@ export default function getObjectName(props) {
             <span {...Theme(theme, 'object-name')} key={namespace}>
                 <span class="object-key">
                     <span style={{ verticalAlign: 'top' }}>"</span>
-                    <span onClick={copyNamespace}>
+                    <span onClick={() => copyNamespace(namespace)}>
                         {display_name}
                     </span>
                     <span style={{ verticalAlign: 'top' }}>"</span>

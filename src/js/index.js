@@ -5,7 +5,6 @@ import AddKeyRequest from './components/ObjectKeyModal/AddKeyRequest';
 import ValidationFailure from './components/ValidationFailure';
 import {toType, isTheme} from './helpers/util';
 import ObjectAttributes from './stores/ObjectAttributes';
-import regeneratorRuntime from 'regenerator-runtime';
 
 //global theme
 import Theme from './themes/getStyle';

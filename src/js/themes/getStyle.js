@@ -127,6 +127,7 @@ const getDefaultThemeStyling = theme => {
         'object-name': {
             display: 'inline-block',
             color: colors.keyColor,
+            cursor: 'pointer',
             letterSpacing: constants.keyLetterSpacing,
             fontStyle: constants.keyFontStyle,
             verticalAlign: constants.keyVerticalAlign,

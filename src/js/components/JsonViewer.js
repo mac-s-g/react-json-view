@@ -4,7 +4,7 @@ import ArrayGroup from './ArrayGroup';
 
 export default class extends React.PureComponent {
     render = () => {
-        const {props} = this;
+        const { props } = this;
         const namespace = [props.name];
         let ObjectComponent = JsonObject;
 

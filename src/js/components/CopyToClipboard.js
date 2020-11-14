@@ -1,7 +1,5 @@
 import React from 'react';
-
 import { toType } from './../helpers/util';
-import stringifyVariable from './../helpers/stringifyVariable';
 
 //clibboard icon
 import { Clippy } from './icons';
@@ -27,26 +25,15 @@ export default class extends React.PureComponent {
     }
 
     handleCopy = () => {
-        const container = document.createElement('textarea');
         const { clickCallback, src, namespace } = this.props;
-
-        container.innerHTML = JSON.stringify(
-            this.clipboardValue(src),
-            null,
-            '  '
-        );
-
-        document.body.appendChild(container);
-        container.select();
-        document.execCommand('copy');
-
-        document.body.removeChild(container);
+        navigator.clipboard.writeText(JSON.stringify(this.clipboardValue(src), null, '  '));
 
         this.copiedTimer = setTimeout(() => {
             this.setState({
                 copied: false
             });
         }, 5500);
+
 
         this.setState({ copied: true }, () => {
             if (typeof clickCallback !== 'function') {

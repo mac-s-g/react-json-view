@@ -1,7 +1,8 @@
 import React from 'react';
 import AutosizeTextarea from 'react-textarea-autosize';
+import _ from 'lodash';
 
-import { toType } from './../helpers/util';
+import { copyNamespace, toType } from './../helpers/util';
 import dispatcher from './../helpers/dispatcher';
 import parseInput from './../helpers/parseInput';
 import stringifyVariable from './../helpers/stringifyVariable';
@@ -61,7 +62,7 @@ class VariableEditor extends React.PureComponent {
         return (
             <div
                 {...Theme(theme, 'objectKeyVal', {
-                    paddingLeft: indentWidth * singleIndent
+                    paddingLeft: indentWidth * singleIndent,
                 })}
                 class="variable-row"
                 key={variable.name}
@@ -80,6 +81,7 @@ class VariableEditor extends React.PureComponent {
                             {...Theme(theme, 'object-name')}
                             class="object-key"
                             key={variable.name + '_' + namespace}
+                            onClick={() => copyNamespace(_.concat(namespace, variable.name))}
                         >
                             <span style={{ verticalAlign: 'top' }}>"</span>
                             <span style={{ display: 'inline-block' }}>
@@ -110,7 +112,7 @@ class VariableEditor extends React.PureComponent {
                     onClick={
                         onSelect === false && onEdit === false
                             ? null
-                            : e => {
+                            : (e) => {
                                 let location = [...namespace];
                                 if ((e.ctrlKey || e.metaKey) && onEdit !== false) {
                                     this.prepopInput(variable);
@@ -118,13 +120,13 @@ class VariableEditor extends React.PureComponent {
                                     location.shift();
                                     onSelect({
                                         ...variable,
-                                        namespace: location
+                                        namespace: location,
                                     });
                                 }
                             }
                     }
                     {...Theme(theme, 'variableValue', {
-                        cursor: onSelect === false ? 'default' : 'pointer'
+                        cursor: onSelect === false ? 'default' : 'pointer',
                     })}
                 >
                     {this.getValue(variable, editMode)}

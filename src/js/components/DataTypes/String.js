@@ -1,6 +1,8 @@
 import React from 'react';
 import DataTypeLabel from './DataTypeLabel';
 import { toType } from './../../helpers/util';
+import highlightedString from './../../helpers/highlightedString';
+import searchStringIndex from './../../helpers/searchStringIndex';
 
 //theme
 import Theme from './../../themes/getStyle';
@@ -42,6 +44,11 @@ export default class extends React.PureComponent {
         let { value } = props;
         let collapsible = toType(collapseStringsAfterLength) === 'integer';
         let style = { style: { cursor: 'default' } };
+
+        const start = searchStringIndex(value, props.search);
+        if (start > -1) {
+            value = highlightedString(value, start, props.search.length, theme);
+        }
 
         if (collapsible && value.length > collapseStringsAfterLength) {
             style.style.cursor = 'pointer';

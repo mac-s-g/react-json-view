@@ -210,7 +210,7 @@ class ReactJsonView extends React.PureComponent {
                     active={addKeyRequest}
                     theme={theme}
                     rjvId={this.rjvId}
-                    defaultValue={defaultValue} />
+                    defaultValue={defaultValue}/>
             </div>
         );
     }

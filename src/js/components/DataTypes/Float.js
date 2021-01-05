@@ -10,16 +10,19 @@ export default class extends React.PureComponent {
 
     render() {
         const type_name = 'float';
-        const {props} = this;
-        const valueStr = stringifyVariable(props.value);
-        const start = (valueStr).indexOf(props.search);
-        let value = props.value;
+        let {
+            value,
+            search,
+            theme
+        } = this.props;
+        const valueStr = stringifyVariable(value);
+        const start = (valueStr).indexOf(search);
         if (start > -1) {
-            value = highlightedString(valueStr, start, props.search.length, props.theme);
+            value = highlightedString(valueStr, start, search.length, theme);
         }
         return (
-            <div {...Theme(props.theme, 'float')}>
-                <DataTypeLabel type_name={type_name} {...props} />
+            <div {...Theme(theme, 'float')}>
+                <DataTypeLabel type_name={type_name} {...this.props} />
                 {value}
             </div>
         );

@@ -1,12 +1,19 @@
 import React from 'react';
 import Theme from './../themes/getStyle';
+import highlightedString from './../helpers/highlightedString';
+import searchStringIndex from './../helpers/searchStringIndex';
 
 export default function getObjectName(props) {
     const {
-        parent_type, namespace, theme, jsvRoot, name
+        parent_type, namespace, theme, jsvRoot, name, search
     } = props;
 
-    const display_name = props.name ? props.name : '';
+    let display_name = props.name ? props.name : '';
+
+    const start = searchStringIndex(display_name, search);
+    if (start > -1) {
+        display_name = highlightedString(display_name, start, search.length, theme);
+    }
 
     if (jsvRoot && (name === false || name === null)) {
         return (<span />);

@@ -31,6 +31,7 @@ class ReactJsonView extends React.PureComponent {
             prevSrc: ReactJsonView.defaultProps.src,
             prevName: ReactJsonView.defaultProps.name,
             prevTheme: ReactJsonView.defaultProps.theme,
+            searchValue: ''
         };
     }
 
@@ -177,6 +178,12 @@ class ReactJsonView extends React.PureComponent {
         };
     }
 
+    handleChange = (e) => {
+        this.setState({
+            searchValue: e.target.value
+        });
+    }
+
     render() {
         const {
             validationFailure,
@@ -184,7 +191,8 @@ class ReactJsonView extends React.PureComponent {
             addKeyRequest,
             theme,
             src,
-            name
+            name,
+            searchValue
         } = this.state;
 
         const { style, defaultValue } = this.props;
@@ -194,6 +202,10 @@ class ReactJsonView extends React.PureComponent {
                 class="react-json-view"
                 style={{...Theme(theme, 'app-container').style, ...style}}
             >
+                <input
+                    type="text"
+                    placeholder="Search..."
+                    onChange={(e) => this.handleChange(e)} />
                 <ValidationFailure
                     message={validationMessage}
                     active={validationFailure}
@@ -205,7 +217,9 @@ class ReactJsonView extends React.PureComponent {
                     name={name}
                     theme={theme}
                     type={toType(src)}
-                    rjvId={this.rjvId} />
+                    rjvId={this.rjvId}
+                    search={searchValue}
+                />
                 <AddKeyRequest
                     active={addKeyRequest}
                     theme={theme}

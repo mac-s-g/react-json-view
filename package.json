@@ -1,7 +1,6 @@
 {
     "name": "react-json-view",
-    "description":
-        "Interactive react component for displaying javascript arrays and JSON objects.",
+    "description": "Interactive react component for displaying javascript arrays and JSON objects.",
     "version": "1.19.1",
     "main": "dist/main.js",
     "dependencies": {
@@ -47,8 +46,9 @@
         "sass-loader": "^6.0.7",
         "sinon": "^4.5.0",
         "style-loader": "^0.18.2",
-        "webpack": "^3.12.0",
+        "webpack": "4.28.3",
         "webpack-bundle-size-analyzer": "^2.7.0",
+        "webpack-cli": "^4.3.1",
         "webpack-dev-server": "^2.11.2"
     },
     "peerDependencies": {
@@ -56,17 +56,13 @@
         "react-dom": "^16.0.0 || ^15.5.4"
     },
     "scripts": {
-        "build":
-            "webpack --config webpack/webpack.config.js -p --display-error-details --progress --optimize-minimize",
+        "build": "webpack --config webpack/webpack.config.js -p --display-error-details --progress --optimize-minimize",
         "prebuild": "npm run test:unit",
-        "build:demo":
-            "webpack --config webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
-        "dev":
-            "webpack-dev-server --config webpack/webpack.config-dev.js --open",
+        "build:demo": "webpack --config webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
+        "dev": "webpack-dev-server --config webpack/webpack.config-dev.js --open",
         "modules:debug": "./docker/debug.sh",
         "modules:tree": "webpack --config webpack/webpack.config.js --json ",
-        "modules:size-analyzer":
-            "webpack --config webpack/webpack.config.js --json | webpack-bundle-size-analyzer",
+        "modules:size-analyzer": "webpack --config webpack/webpack.config.js --json | webpack-bundle-size-analyzer",
         "test": "npm run test:unit && npm run test:coverage",
         "test:unit": "nyc mocha test/**/*-test.js",
         "test:coverage": "nyc report --reporter=text-lcov | coveralls",

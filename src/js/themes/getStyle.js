@@ -191,7 +191,7 @@ const getDefaultThemeStyling = theme => {
             color: colors.dataTypes.string
         },
         highlighted: {
-            background: 'tomato'
+            background: 'lightpink'
         },
         nan: {
             display: 'inline-block',

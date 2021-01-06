@@ -31,6 +31,7 @@ class ReactJsonView extends React.PureComponent {
             prevSrc: ReactJsonView.defaultProps.src,
             prevName: ReactJsonView.defaultProps.name,
             prevTheme: ReactJsonView.defaultProps.theme,
+            searchValue: ''
         };
     }
 
@@ -59,6 +60,7 @@ class ReactJsonView extends React.PureComponent {
         style: {},
         validationMessage: 'Validation Error',
         defaultValue: null,
+        displaySearch: true
     }
 
     // will trigger whenever setState() is called, or parent passes in new props.
@@ -177,6 +179,11 @@ class ReactJsonView extends React.PureComponent {
         };
     }
 
+    handleSearch = (e) => {
+        this.setState({
+            searchValue: e.target.value
+        });
+    }
 
     render() {
         const {
@@ -186,16 +193,29 @@ class ReactJsonView extends React.PureComponent {
             theme,
             src,
             name,
-            searchValue
+            searchValue,
         } = this.state;
 
-        const { style, defaultValue } = this.props;
+        const {
+            style,
+            defaultValue,
+            displaySearch
+        } = this.props;
 
         return (
             <div
                 class="react-json-view"
                 style={{...Theme(theme, 'app-container').style, ...style}}
             >
+                { displaySearch ?
+                    <input
+                        className="searchbox"
+                        type="text"
+                        placeholder="Search..."
+                        onChange={ (e) => this.handleSearch(e) }>
+                    </input>
+                    : null
+                }
                 <ValidationFailure
                     message={validationMessage}
                     active={validationFailure}
@@ -208,6 +228,7 @@ class ReactJsonView extends React.PureComponent {
                     theme={theme}
                     type={toType(src)}
                     rjvId={this.rjvId}
+                    search={searchValue}
                 />
                 <AddKeyRequest
                     active={addKeyRequest}

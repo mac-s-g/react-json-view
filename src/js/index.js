@@ -209,7 +209,7 @@ class ReactJsonView extends React.PureComponent {
             >
                 { displaySearch ?
                     <input
-                        className="searchbox"
+                        className="config-editor-search-box"
                         type="text"
                         placeholder="Search..."
                         onChange={ (e) => this.handleSearch(e) }>

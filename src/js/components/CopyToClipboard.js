@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { toType } from './../helpers/util';
-import stringifyVariable from './../helpers/stringifyVariable';
 
 //clibboard icon
 import { Clippy } from './icons';

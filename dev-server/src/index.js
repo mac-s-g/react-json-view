@@ -37,11 +37,9 @@ ReactDom.render(
                 console.log('select callback', e);
                 console.log(e.namespace);
             }}
-            displayObjectSize={true}
+            displayObjectSize={false}
             name={'dev-server'}
-            enableClipboard={copy => {
-                console.log('you copied to clipboard!', copy);
-            }}
+            enableClipboard={false}
             shouldCollapse={({ src, namespace, type }) => {
                 if (type === 'array' && src.indexOf('test') > -1) {
                     return true;
@@ -51,6 +49,8 @@ ReactDom.render(
                 return false;
             }}
             defaultValue=""
+            displayDataTypes={false}
+            displaySearch={true}
         />
 
     </div>,

@@ -6,7 +6,7 @@ import {toType} from './../helpers/util';
 
 //icons
 import {
-    RemoveCircle as Remove, AddCircle as Add
+    RemoveIcon as Remove, AddCircle as Add
 } from './icons';
 
 //theme

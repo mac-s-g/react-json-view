@@ -1,7 +1,6 @@
 import React from 'react';
 import AutosizeTextarea from 'react-textarea-autosize';
 
-import { toType } from './../helpers/util';
 import dispatcher from './../helpers/dispatcher';
 import parseInput from './../helpers/parseInput';
 import stringifyVariable from './../helpers/stringifyVariable';
@@ -23,7 +22,7 @@ import {
 } from './DataTypes/DataTypes';
 
 //clibboard icon
-import { Edit, CheckCircle, RemoveCircle as Remove } from './icons';
+import { Edit, CheckCircle, RemoveIcon as Remove, CancelIcon as Cancel } from './icons';
 
 //theme
 import Theme from './../themes/getStyle';
@@ -278,7 +277,7 @@ class VariableEditor extends React.PureComponent {
                     {...Theme(theme, 'edit-input')}
                 />
                 <div {...Theme(theme, 'edit-icon-container')}>
-                    <Remove
+                    <Cancel
                         class="edit-cancel"
                         {...Theme(theme, 'cancel-icon')}
                         onClick={() => {
@@ -292,7 +291,6 @@ class VariableEditor extends React.PureComponent {
                             this.submitEdit();
                         }}
                     />
-                    <div>{this.showDetected()}</div>
                 </div>
             </div>
         );
@@ -319,32 +317,6 @@ class VariableEditor extends React.PureComponent {
                 variable_removed: false
             }
         });
-    }
-
-    showDetected = () => {
-        const { theme, variable, namespace, rjvId } = this.props;
-        const { type, value } = this.state.parsedInput;
-        const detected = this.getDetectedInput();
-        if (detected) {
-            return (
-                <div>
-                    <div {...Theme(theme, 'detected-row')}>
-                        {detected}
-                        <CheckCircle
-                            class="edit-check detected"
-                            style={{
-                                verticalAlign: 'top',
-                                paddingLeft: '3px',
-                                ...Theme(theme, 'check-icon').style
-                            }}
-                            onClick={() => {
-                                this.submitEdit(true);
-                            }}
-                        />
-                    </div>
-                </div>
-            );
-        }
     }
 
     getDetectedInput = () => {

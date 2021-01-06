@@ -44,7 +44,15 @@
         }
     }
 
-    .searchbox {
+    .config-editor-search-box {
+        border: 2px solid #cccccc;
+        border-radius: 32px;
+        padding: 8px;
+        outline: none;
         margin-bottom: 8px;
+
+        &:hover, &:focus {
+            border: 2px solid #999999;
+        }
     }
 }

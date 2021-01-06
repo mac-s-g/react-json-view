@@ -15,8 +15,8 @@ import {
     SquarePlus,
     SquareMinus,
     ArrowDown,
-    ArrowRight
-} from "./../../../../src/js/components/icons"
+    ArrowRight, CancelIcon, RemoveIcon
+} from './../../../../src/js/components/icons';
 
 describe("svg icons", function() {
     it("<CircleMinus /> sanity check", function() {
@@ -54,8 +54,13 @@ describe("svg icons", function() {
         expect(wrapper.find("svg").length).to.equal(1)
     })
 
-    it("<RemoveCircle /> sanity check", function() {
-        const wrapper = shallow(<RemoveCircle />)
+    it("<RemoveIcon /> sanity check", function() {
+        const wrapper = shallow(<RemoveIcon />)
+        expect(wrapper.find("svg").length).to.equal(1)
+    })
+
+    it("<CancelIcon /> sanity check", function() {
+        const wrapper = shallow(<CancelIcon />)
         expect(wrapper.find("svg").length).to.equal(1)
     })
 

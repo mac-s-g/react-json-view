@@ -31,6 +31,7 @@ class ReactJsonView extends React.PureComponent {
             prevSrc: ReactJsonView.defaultProps.src,
             prevName: ReactJsonView.defaultProps.name,
             prevTheme: ReactJsonView.defaultProps.theme,
+            typingTimeout: 0,
             searchValue: ''
         };
     }
@@ -180,9 +181,16 @@ class ReactJsonView extends React.PureComponent {
     }
 
     handleSearch = (e) => {
-        this.setState({
-            searchValue: e.target.value
-        });
+        const { value } = e.target;
+        let { typingTimeout } = this.state;
+        if (typingTimeout) {
+            clearTimeout(typingTimeout);
+        }
+        setTimeout(() => {
+            this.setState({
+                searchValue: value
+            });
+        }, 500);
     }
 
     render() {

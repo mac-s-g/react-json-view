@@ -6,4 +6,4 @@ export default (value, search) => {
     const lowerCaseSearch = search.toLowerCase();
 
     return lowerCaseValue.indexOf(lowerCaseSearch);
-}
+};

@@ -216,11 +216,6 @@ class ReactJsonView extends React.PureComponent {
                     </input>
                     : null
                 }
-                <ValidationFailure
-                    message={validationMessage}
-                    active={validationFailure}
-                    theme={theme}
-                    rjvId={this.rjvId} />
                 <JsonViewer
                     {...this.props}
                     src={src}

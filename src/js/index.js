@@ -31,10 +31,10 @@ class ReactJsonView extends React.PureComponent {
             prevSrc: ReactJsonView.defaultProps.src,
             prevName: ReactJsonView.defaultProps.name,
             prevTheme: ReactJsonView.defaultProps.theme,
-            typingTimeout: 0,
-            searchValue: ''
+            searchKey: ''
         };
     }
+    timeout = null;
 
     //reference id for this instance
     rjvId = Date.now().toString()
@@ -182,14 +182,9 @@ class ReactJsonView extends React.PureComponent {
 
     handleSearch = (e) => {
         const { value } = e.target;
-        let { typingTimeout } = this.state;
-        if (typingTimeout) {
-            clearTimeout(typingTimeout);
-        }
-        setTimeout(() => {
-            this.setState({
-                searchValue: value
-            });
+        if (this.timeout) clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => {
+            this.setState({ searchKey: value });
         }, 500);
     }
 
@@ -201,7 +196,7 @@ class ReactJsonView extends React.PureComponent {
             theme,
             src,
             name,
-            searchValue,
+            searchKey
         } = this.state;
 
         const {
@@ -231,7 +226,7 @@ class ReactJsonView extends React.PureComponent {
                     theme={theme}
                     type={toType(src)}
                     rjvId={this.rjvId}
-                    search={searchValue}
+                    search={searchKey}
                 />
                 <AddKeyRequest
                     active={addKeyRequest}

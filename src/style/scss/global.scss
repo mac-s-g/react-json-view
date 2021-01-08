@@ -1,7 +1,4 @@
 .react-json-view {
-    min-height: 400px;
-    max-height: 780px;
-    overflow: auto;
 
     .copy-to-clipboard-container {
         vertical-align: top;
@@ -47,7 +44,6 @@
             display: inline-block;
         }
     }
-
 }
 
 .react-json-view-search-box {

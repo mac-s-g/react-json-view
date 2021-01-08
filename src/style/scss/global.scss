@@ -1,4 +1,8 @@
 .react-json-view {
+    min-height: 400px;
+    max-height: 780px;
+    overflow: auto;
+
     .copy-to-clipboard-container {
         vertical-align: top;
         display: none;
@@ -44,12 +48,15 @@
         }
     }
 
-    .config-editor-search-box {
+}
+
+.react-json-view-search-box {
+    .search-box {
         border: 2px solid #cccccc;
         border-radius: 32px;
         padding: 8px;
         outline: none;
-        margin-bottom: 8px;
+        margin-bottom: 4px;
 
         &:hover, &:focus {
             border: 2px solid #999999;

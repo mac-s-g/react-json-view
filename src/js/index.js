@@ -206,33 +206,39 @@ class ReactJsonView extends React.PureComponent {
         } = this.props;
 
         return (
-            <div
-                class="react-json-view"
-                style={{...Theme(theme, 'app-container').style, ...style}}
-            >
-                { displaySearch ?
-                    <input
-                        className="config-editor-search-box"
-                        type="text"
-                        placeholder="Search..."
-                        onChange={ (e) => this.handleSearch(e) }>
-                    </input>
-                    : null
-                }
-                <JsonViewer
-                    {...this.props}
-                    src={src}
-                    name={name}
-                    theme={theme}
-                    type={toType(src)}
-                    rjvId={this.rjvId}
-                    search={searchKey}
-                />
-                <AddKeyRequest
-                    active={addKeyRequest}
-                    theme={theme}
-                    rjvId={this.rjvId}
-                    defaultValue={defaultValue} />
+            <div>
+                <div
+                    className="react-json-view-search-box">
+                    { displaySearch ?
+                        <input
+                            className="search-box"
+                            type="text"
+                            placeholder="Search..."
+                            onChange={ (e) => this.handleSearch(e) }>
+                        </input>
+                        : null
+                    }
+                </div>
+                <div
+                    className="react-json-view"
+                    style={{...Theme(theme, 'app-container').style, ...style}}
+                >
+                
+                    <JsonViewer
+                        {...this.props}
+                        src={src}
+                        name={name}
+                        theme={theme}
+                        type={toType(src)}
+                        rjvId={this.rjvId}
+                        search={searchKey}
+                    />
+                    <AddKeyRequest
+                        active={addKeyRequest}
+                        theme={theme}
+                        rjvId={this.rjvId}
+                        defaultValue={defaultValue} />
+                </div>
             </div>
         );
     }

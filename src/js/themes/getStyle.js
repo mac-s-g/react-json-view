@@ -344,7 +344,7 @@ const getDefaultThemeStyling = theme => {
             borderRadius: '2px'
         },
         'key-modal-cancel': {
-            backgroundColor: colors.editVariable.removeIcon,
+            backgroundColor: colors.editVariable.cancelIcon,
             position: 'absolute',
             top: '0px',
             right: '0px',

@@ -27,16 +27,12 @@ function getType(obj) {
 }
 
 function isColor(strColor) {
-    let s = new Option().style;
-    s.color = strColor;
-    let checkColor = s.color === strColor;
+    let checkHex = /^#(?:[A-Fa-f0-9]{3}){1,2}$/i.test(strColor);
     let checkRGB = /^(rgb)\(([0-29]{1,3},?){3}\)$/i.test(strColor);
     let checkRGBA = /^(rgba)\(([0-9]{1,3},?\s?){3}(\d?\.?(\d{1,2})?)\)$/i.test(strColor);
-    let checkHex = /^#(?:[A-Fa-f0-9]{3}){1,2}$/i.test(strColor);
     // let checkHSL = /^hsl[(]\s*0*(?:[12]?\d{1,2}|3(?:[0-5]\d|60))\s*(?:\s*,\s*0*(?:\d\d?(?:\.\d+)?\s*%|\.\d+\s*%|100(?:\.0*)?\s*%)){2}\s*[)]$/i.test(strColor);
     // let checkHSLA = /^hsla[(]\s*0*(?:[12]?\d{1,2}|3(?:[0-5]\d|60))\s*(?:\s*,\s*0*(?:\d\d?(?:\.\d+)?\s*%|\.\d+\s*%|100(?:\.0*)?\s*%)){2}\s*,\s*0*(?:\.\d+|1(?:\.0*)?)\s*[)]$/i.test(strColor);
-    return checkColor === true
-        || checkRGB === true
+    return checkRGB === true
         || checkRGBA === true
         || checkHex === true;
 }

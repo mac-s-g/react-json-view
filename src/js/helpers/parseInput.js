@@ -6,6 +6,13 @@ export default function parseInput(input) {
     //we are working with a serialized data representation
     input = input.trim();
     try {
+        if (
+            input[0] === '#'
+            || input.substring(0,3) ==='rgb'
+            || input.substring(0,4) === 'rgba'
+        ) {
+            return formatResponse('color', input);
+        }
         input = JSON.stringify(
             JSON.parse(input)
         );

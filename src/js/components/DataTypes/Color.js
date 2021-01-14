@@ -31,28 +31,25 @@ class JsonColor extends React.PureComponent {
         });
     }
 
-    hexToRGB = (color) => {
+    findColor = (color) => {
+        const { colorType } = this.props;
         let r = color.rgb.r;
         let g = color.rgb.g;
         let b = color.rgb.b;
         let alpha = color.rgb.a;
-        if (this.props.colorType === 'rgb') {
+        if (colorType === 'hex') {
+            return color.hex;
+        }
+        else if (colorType === 'rgb') {
             return 'rgb(' + r + ', ' + g + ', ' + b + ')';
         }
         return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
     }
 
     handleColorPickerChange = (color, event) => {
-        let { colorType } = this.props;
-        if (colorType === 'hex') {
-            this.setState({
-                value: color.hex
-            });
-        } else {
-            this.setState({
-                value: this.hexToRGB(color)
-            });
-        }
+        this.setState({
+            value: this.findColor(color)
+        });
     }
 
     renderColorPicker = () => {

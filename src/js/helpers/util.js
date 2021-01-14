@@ -17,13 +17,14 @@ export function toType(obj) {
 
 //source: http://stackoverflow.com/questions/7390426/better-way-to-get-type-of-a-javascript-variable/7390612#7390612
 function getType(obj) {
-    if (isColor(obj)) {
-        return 'color';
-    }
-    return {}.toString
+    let type = {}.toString
         .call(obj)
         .match(/\s([a-zA-Z]+)/)[1]
         .toLowerCase();
+    if (type === 'string' && isColor(obj)) {
+        type = 'color';
+    }
+    return type;
 }
 
 function isColor(strColor) {

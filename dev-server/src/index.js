@@ -17,7 +17,7 @@ ReactDom.render(
             sortKeys={false}
             style={{ padding: '30px', backgroundColor: 'white' }}
             src={getExampleJson1()}
-            collapseStringsAfterLength={100}
+            collapseStringsAfterLength={45}
             onEdit={e => {
                 if (e.new_value == 'error') {
                     return false;

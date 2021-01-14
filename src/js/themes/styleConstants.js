@@ -92,5 +92,7 @@ export default {
     addKeyModalWidth: '200px',
     addKeyModalMargin: 'auto',
     addKeyModalPadding: '10px',
-    addKeyModalRadius: '3px'
+    addKeyModalRadius: '3px',
+
+    colorPickerMarginLeft: '5px'
 };

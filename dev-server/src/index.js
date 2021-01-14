@@ -17,7 +17,7 @@ ReactDom.render(
             sortKeys={false}
             style={{ padding: '30px', backgroundColor: 'white' }}
             src={getExampleJson1()}
-            collapseStringsAfterLength={12}
+            collapseStringsAfterLength={100}
             onEdit={e => {
                 console.log('edit callback', e);
                 if (e.new_value == 'error') {
@@ -35,7 +35,6 @@ ReactDom.render(
             }}
             onSelect={e => {
                 console.log('select callback', e);
-                console.log(e.namespace);
             }}
             displayObjectSize={false}
             name={'dev-server'}
@@ -83,7 +82,15 @@ function getExampleJson1() {
                 }
             }
         },
-        string_number: '1234',
+        string_number: '#ffffff',
+        string_numbershort: '#ccc',
+        string_numberrgb: 'rgb(255,125,0)',
+        string_numberrgb2: 'rgb(0, 0, 0)',
+        string_numberrgba: [
+            'rgba(0, 0, 0, .2)',
+            'rgba(125, 255, 0, .66)'
+        ],
+        string_numberrgba2: 'rgba(0,0,0,0.5)',
         date: new Date(),
         moment: Moment(),
         regexp: /[0-9]/gi,

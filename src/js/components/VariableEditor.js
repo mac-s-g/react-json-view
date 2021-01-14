@@ -18,7 +18,8 @@ import {
     JsonNull,
     JsonRegexp,
     JsonString,
-    JsonUndefined
+    JsonUndefined,
+    JsonColor
 } from './DataTypes/DataTypes';
 
 //clibboard icon
@@ -223,6 +224,12 @@ class VariableEditor extends React.PureComponent {
             return <JsonDate value={variable.value} {...props} />;
         case 'regexp':
             return <JsonRegexp value={variable.value} {...props} />;
+        case 'color':
+            return <JsonColor
+                onValueChange={this.handleColorEdit}
+                value={variable.value}
+                colorType={this.chooseColorCodeType(variable.value)}
+                {...props}/>;
         default:
             // catch-all for types that weren't anticipated
             return (
@@ -295,6 +302,32 @@ class VariableEditor extends React.PureComponent {
                 </div>
             </div>
         );
+    }
+
+    handleColorEdit = (value) => {
+        this.setState({
+            editValue: value,
+            parsedInput: {
+                type: 'color',
+                value: value
+            }
+        });
+        this.submitEdit(true);
+    }
+
+    chooseColorCodeType = (colorCode) => {
+        if (colorCode.substring(0,1) === '#') {
+            return 'hex';
+        } else if (colorCode.substring(0,4) === 'rgba') {
+            return 'rgba';
+        } else if (colorCode.substring(0,3) === 'rgb') {
+            return 'rgb';
+        } else if (colorCode.substring(0,4) === 'hsla') {
+            return 'hsla';
+        } else if (colorCode.substring(0,3) === 'hsl') {
+            return 'hsl';
+        }
+        return 'hex';
     }
 
     submitEdit = submit_detected => {

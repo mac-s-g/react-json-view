@@ -317,17 +317,16 @@ class VariableEditor extends React.PureComponent {
     chooseColorCodeType = (colorCode) => {
         if (colorCode.substring(0,1) === '#') {
             return 'hex';
-        } else if (colorCode.substring(0,3) === 'rgb' && colorCode.substring(0,4) !== 'rgba') {
-            return 'rgb';
         } else if (colorCode.substring(0,4) === 'rgba') {
             return 'rgba';
-        } else if (colorCode.substring(0,3) === 'hsl' && colorCode.substring(0,4) !== 'hsla') {
-            return 'hsl';
+        } else if (colorCode.substring(0,3) === 'rgb') {
+            return 'rgb';
         } else if (colorCode.substring(0,4) === 'hsla') {
             return 'hsla';
-        } else {
-            return 'hex';
+        } else if (colorCode.substring(0,3) === 'hsl') {
+            return 'hsl';
         }
+        return 'hex';
     }
 
     submitEdit = submit_detected => {

@@ -31,10 +31,11 @@ class JsonColor extends React.PureComponent {
         });
     }
 
-    hexToRGB = (hex, alpha) => {
-        let r = parseInt(hex.slice(1, 3), 16);
-        let g = parseInt(hex.slice(3, 5), 16);
-        let b = parseInt(hex.slice(5, 7), 16);
+    hexToRGB = (color) => {
+        let r = color.rgb.r;
+        let g = color.rgb.g;
+        let b = color.rgb.b;
+        let alpha = color.rgb.a;
         if (this.props.colorType === 'rgb') {
             return 'rgb(' + r + ', ' + g + ', ' + b + ')';
         }
@@ -47,22 +48,24 @@ class JsonColor extends React.PureComponent {
             this.setState({
                 value: color.hex
             });
-        } else if (colorType === 'rgba') {
-            this.setState({
-                value: this.hexToRGB(color.hex, color.rgb.a)
-            });
         } else {
             this.setState({
-                value: this.hexToRGB(color.hex, color.rgb.a)
+                value: this.hexToRGB(color)
             });
         }
     }
 
     renderColorPicker = () => {
-        let { theme } = this.props;
+        let { theme, value, colorType } = this.props;
+        if (colorType === 'rgb') {
+            value = 'rgba' + value.slice(3, value.length - 1) + ', 0)';
+        }
+        console.log(value);
         return (
             <span {...Theme(theme, 'color-picker')}>
-                <ReactColorPicker onChangeComplete={this.handleColorPickerChange}/>
+                <ReactColorPicker
+                    color={ value }
+                    onChangeComplete={ this.handleColorPickerChange }/>
             </span>
         );
     }
@@ -79,9 +82,8 @@ class JsonColor extends React.PureComponent {
     }
     render() {
         const type_name = 'color';
-        let { value } = this.state;
+        let { value, showColorPicker } = this.state;
         let { search, theme } = this.props;
-        const { showColorPicker } = this.state;
         const valueStr = stringifyVariable(value);
         const start = (valueStr).indexOf(search);
         if (start > -1) {
@@ -94,7 +96,7 @@ class JsonColor extends React.PureComponent {
                     { value }
                     { this.renderColorBox() }
                 </div>
-                { showColorPicker ? this.renderColorPicker() : null }
+                { showColorPicker && this.renderColorPicker() }
             </div>
         );
     }

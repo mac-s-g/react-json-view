@@ -10,6 +10,8 @@ export default function parseInput(input) {
             input[0] === '#'
             || input.substring(0,3) ==='rgb'
             || input.substring(0,4) === 'rgba'
+            || input.substring(0,3) === 'hsl'
+            || input.substring(0,4) === 'hsla'
         ) {
             return formatResponse('color', input);
         }

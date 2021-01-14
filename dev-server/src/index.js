@@ -35,7 +35,6 @@ ReactDom.render(
             }}
             onSelect={e => {
                 console.log('select callback', e);
-                console.log(e.namespace);
             }}
             displayObjectSize={false}
             name={'dev-server'}
@@ -85,9 +84,9 @@ function getExampleJson1() {
         },
         string_number: '#ffffff',
         string_numbershort: '#ccc',
-        string_numberrgb: 'rgb(0,0,0)',
+        string_numberrgb: 'rgb(255,125,0)',
         string_numberrgb2: 'rgb(0, 0, 0)',
-        string_numberrgba: 'rgba(0, 0, 0, 0.3)',
+        string_numberrgba: 'rgba(0, 0, 0, .2)',
         string_numberrgba2: 'rgba(0,0,0,0.5)',
         date: new Date(),
         moment: Moment(),

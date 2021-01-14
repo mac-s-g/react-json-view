@@ -17,10 +17,22 @@ export function toType(obj) {
 
 //source: http://stackoverflow.com/questions/7390426/better-way-to-get-type-of-a-javascript-variable/7390612#7390612
 function getType(obj) {
+    if (isColor(obj)) {
+        return 'color';
+    }
     return {}.toString
         .call(obj)
         .match(/\s([a-zA-Z]+)/)[1]
         .toLowerCase();
+}
+
+function isColor(strColor) {
+    let isHex = /^#(?:[A-Fa-f0-9]{3}){1,2}$/i.test(strColor);
+    let isRGB = /^(rgb)\(([0-9]{1,3},?\s?){3}\)$/i.test(strColor);
+    let isRGBA = /^(rgba)\(([0-9]{1,3},?\s?){3}(\d?\.?(\d{1,2})?)\)$/i.test(strColor);
+    let isHSL = /^hsl[(]\s*0*(?:[12]?\d{1,2}|3(?:[0-5]\d|60))\s*(?:\s*,\s*0*(?:\d\d?(?:\.\d+)?\s*%|\.\d+\s*%|100(?:\.0*)?\s*%)){2}\s*[)]$/i.test(strColor);
+    let isHSLA = /^hsla[(]\s*0*(?:[12]?\d{1,2}|3(?:[0-5]\d|60))\s*(?:\s*,\s*0*(?:\d\d?(?:\.\d+)?\s*%|\.\d+\s*%|100(?:\.0*)?\s*%)){2}\s*,\s*0*(?:\.\d+|1(?:\.0*)?)\s*[)]$/i.test(strColor);
+    return isHex || isRGB || isRGBA || isHSL || isHSLA;
 }
 
 //validation for base-16 themes

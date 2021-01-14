@@ -20,6 +20,7 @@ const colorMap = theme => ({
         float: theme.base0B,
         function: theme.base0D,
         integer: theme.base0F,
+        color: theme.base0A,
         string: theme.base09,
         nan: theme.base08,
         null: theme.base0A,
@@ -88,6 +89,20 @@ const getDefaultThemeStyling = theme => {
             margin: constants.keyMargin,
             color: colors.keyColor,
             verticalAlign: 'top'
+        },
+        'color-picker-row': {
+            display: 'flex'
+        },
+        'color-picker': {
+            marginLeft: constants.colorPickerMarginLeft,
+            position: 'absolute',
+            zIndex: 10,
+            top: '20px',
+            left: '65px'
+        },
+        'color-box': {
+            width: '10px',
+            height: '10px',
         },
         objectKeyVal: (component, variable_style) => {
             return {
@@ -185,6 +200,10 @@ const getDefaultThemeStyling = theme => {
         integer: {
             display: 'inline-block',
             color: colors.dataTypes.integer
+        },
+        color: {
+            display: 'inline-block',
+            color: colors.dataTypes.color
         },
         string: {
             display: 'inline-block',

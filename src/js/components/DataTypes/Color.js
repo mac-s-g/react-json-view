@@ -60,7 +60,6 @@ class JsonColor extends React.PureComponent {
         if (colorType === 'rgb') {
             value = 'rgba' + value.slice(3, value.length - 1) + ', 0)';
         }
-        console.log(value);
         return (
             <span {...Theme(theme, 'color-picker')}>
                 <ReactColorPicker

@@ -177,10 +177,10 @@ class VariableEditor extends React.PureComponent {
         const { variable, namespace, theme, rjvId } = this.props;
 
         return (
-            <div class="click-to-remove" style={{ verticalAlign: 'top' }}>
+            <div class="click-to-remove" style={ { verticalAlign: 'top' } }>
                 <Remove
                     class="click-to-remove-icon"
-                    {...Theme(theme, 'removeVarIcon')}
+                    { ...Theme(theme, 'removeVarIcon') }
                     onClick={() => {
                         dispatcher.dispatch({
                             name: 'VARIABLE_REMOVED',
@@ -205,36 +205,35 @@ class VariableEditor extends React.PureComponent {
         case false:
             return this.getEditInput();
         case 'string':
-            return <JsonString value={variable.value} {...props} />;
+            return <JsonString value={ variable.value } { ...props } />;
         case 'integer':
-            return <JsonInteger value={variable.value} {...props} />;
+            return <JsonInteger value={ variable.value } { ...props } />;
         case 'float':
-            return <JsonFloat value={variable.value} {...props} />;
+            return <JsonFloat value={ variable.value } { ...props } />;
         case 'boolean':
-            return <JsonBoolean value={variable.value} {...props} />;
+            return <JsonBoolean value={ variable.value } { ...props } />;
         case 'function':
-            return <JsonFunction value={variable.value} {...props} />;
+            return <JsonFunction value={ variable.value } { ...props } />;
         case 'null':
-            return <JsonNull {...props} />;
+            return <JsonNull { ...props } />;
         case 'nan':
-            return <JsonNan {...props} />;
+            return <JsonNan { ...props } />;
         case 'undefined':
-            return <JsonUndefined {...props} />;
+            return <JsonUndefined { ...props } />;
         case 'date':
-            return <JsonDate value={variable.value} {...props} />;
+            return <JsonDate value={ variable.value } { ...props } />;
         case 'regexp':
-            return <JsonRegexp value={variable.value} {...props} />;
+            return <JsonRegexp value={ variable.value } { ...props } />;
         case 'color':
             return <JsonColor
-                onValueChange={this.handleColorEdit}
-                value={variable.value}
-                colorType={this.chooseColorCodeType(variable.value)}
+                value={ variable.value }
+                colorType={ this.chooseColorCodeType(variable.value) }
                 {...props}/>;
         default:
             // catch-all for types that weren't anticipated
             return (
                 <div class="object-value">
-                    {JSON.stringify(variable.value)}
+                    { JSON.stringify(variable.value) }
                 </div>
             );
         }
@@ -281,38 +280,27 @@ class VariableEditor extends React.PureComponent {
                         e.stopPropagation();
                     }}
                     placeholder="update this value"
-                    {...Theme(theme, 'edit-input')}
+                    { ...Theme(theme, 'edit-input') }
                 />
-                <div {...Theme(theme, 'edit-icon-container')}>
+                <div { ...Theme(theme, 'edit-icon-container') }>
                     <Cancel
                         class="edit-cancel"
-                        {...Theme(theme, 'cancel-icon')}
+                        { ...Theme(theme, 'cancel-icon') }
                         onClick={() => {
                             this.setState({ editMode: false, editValue: '' });
                         }}
                     />
                     <CheckCircle
                         class="edit-check string-value"
-                        {...Theme(theme, 'check-icon')}
+                        { ...Theme(theme, 'check-icon') }
                         onClick={() => {
                             this.submitEdit();
                         }}
                     />
-                    <div>{this.showDetected()}</div>
+                    <div>{ this.showDetected() }</div>
                 </div>
             </div>
         );
-    }
-
-    handleColorEdit = (value) => {
-        this.setState({
-            editValue: value,
-            parsedInput: {
-                type: 'color',
-                value: value
-            }
-        });
-        this.submitEdit(true);
     }
 
     chooseColorCodeType = (colorCode) => {

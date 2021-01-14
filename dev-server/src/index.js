@@ -19,7 +19,6 @@ ReactDom.render(
             src={getExampleJson1()}
             collapseStringsAfterLength={100}
             onEdit={e => {
-                console.log('edit callback', e);
                 if (e.new_value == 'error') {
                     return false;
                 }
@@ -28,7 +27,6 @@ ReactDom.render(
                 console.log('delete callback', e);
             }}
             onAdd={e => {
-                console.log('add callback', e);
                 if (e.new_value == 'error') {
                     return false;
                 }

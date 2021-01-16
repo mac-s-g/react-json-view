@@ -19,14 +19,26 @@ export default function parseInput(input) {
             input.match(/\-?\d+\.\d+/)
             && input.match(/\-?\d+\.\d+/)[0] === input
         ) {
-            //integer
+            //float
             return formatResponse('float', parseFloat(input));
+        } else if (
+            input.match(/\-?\d+e-\d+/)
+            && input.match(/\-?\d+e-\d+/)[0] === input
+        ) {
+            //scientific float
+            return formatResponse('float', Number(input));
         } else if (
             input.match(/\-?\d+/)
             && input.match(/\-?\d+/)[0] === input
         ) {
-            //float
+            //integer
             return formatResponse('integer', parseInt(input));
+        } else if (
+            input.match(/\-?\d+e\+\d+/)
+            && input.match(/\-?\d+e\+\d+/)[0] === input
+        ) {
+            //scientific integer
+            return formatResponse('integer', Number(input));
         }
     } catch (e) {
         // no-op

@@ -57,7 +57,8 @@ class RjvObject extends React.PureComponent {
             ),
             object_type: props.type === 'array' ? 'array' : 'object',
             parent_type: props.type === 'array' ? 'array' : 'object',
-            size
+            size,
+            hovered: false
         };
         return state;
     }
@@ -126,8 +127,8 @@ class RjvObject extends React.PureComponent {
 
     getObjectMetaData = src => {
         const { rjvId, theme } = this.props;
-        const { size } = this.state;
-        return <VariableMeta size={size} {...this.props} />;
+        const { size, hovered } = this.state;
+        return <VariableMeta rowHovered={hovered} size={size} {...this.props} />;
     }
 
     getBraceStart(object_type, expanded) {
@@ -199,6 +200,8 @@ class RjvObject extends React.PureComponent {
         return (
             <div
                 class="object-key-val"
+                onMouseEnter={() => this.setState({...this.state, hovered: true})}
+                onMouseLeave={() => this.setState({...this.state, hovered: false})}
                 {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', styles)}
             >
                 {this.getBraceStart(object_type, expanded)}

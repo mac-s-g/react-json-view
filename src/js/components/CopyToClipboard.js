@@ -88,7 +88,7 @@ export default class extends React.PureComponent {
     }
 
     render() {
-        const { src, theme, hidden } = this.props;
+        const { src, theme, hidden, rowHovered } = this.props;
         let style = Theme(theme, 'copy-to-clipboard').style;
         let display = 'inline';
 
@@ -97,7 +97,12 @@ export default class extends React.PureComponent {
         }
 
         return (
-            <span class="copy-to-clipboard-container" title="Copy to clipboard">
+            <span className="copy-to-clipboard-container"
+                  title="Copy to clipboard"
+                  style={{
+                      verticalAlign: 'top',
+                      display: rowHovered ? 'inline-block' : 'none'
+                  }}>
                 <span
                     style={{
                         ...style,

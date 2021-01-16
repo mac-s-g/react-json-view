@@ -59,6 +59,7 @@ Name|Type|Default|Description
 `onDelete`|`(delete)=>{}`|`false`|When a callback function is passed in, `delete` functionality is enabled.  The callback is invoked before deletions are completed. Returning `false` from `onDelete` will prevent the change from being made. [see: onDelete docs](#onedit-onadd-and-ondelete-interaction)
 `onSelect`|`(select)=>{}`|`false`|When a function is passed in, clicking a value triggers the `onSelect` method to be called.
 `sortKeys`|`boolean`|`false`|set to true to sort object keys
+`quotesOnKeys`|`boolean`|`true`|set to false to remove quotes from keys (eg. `"name":` vs. `name:`)
 `validationMessage`|`string`|"Validation Error"|Custom message for validation failures to `onEdit`, `onAdd`, or `onDelete` callbacks
 
 ### Features

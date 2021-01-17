@@ -3,6 +3,7 @@
   "plugins": [
     "@babel/plugin-syntax-class-properties",
     "@babel/plugin-syntax-jsx",
-    "react-html-attrs"
+    "react-html-attrs",
+    "istanbul"
   ]
 }

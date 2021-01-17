@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { toType } from './../helpers/util';
-import stringifyVariable from './../helpers/stringifyVariable';
 
 //clibboard icon
 import { Clippy } from './icons';
@@ -59,7 +58,7 @@ export default class extends React.PureComponent {
                 name: namespace[namespace.length - 1]
             });
         });
-    }
+    };
 
     getClippyIcon = () => {
         const { theme } = this.props;
@@ -74,21 +73,21 @@ export default class extends React.PureComponent {
         }
 
         return <Clippy class="copy-icon" {...Theme(theme, 'copy-icon')} />;
-    }
+    };
 
     clipboardValue = value => {
         const type = toType(value);
         switch (type) {
-        case 'function':
-        case 'regexp':
-            return value.toString();
-        default:
-            return value;
+            case 'function':
+            case 'regexp':
+                return value.toString();
+            default:
+                return value;
         }
-    }
+    };
 
     render() {
-        const { src, theme, hidden } = this.props;
+        const { src, theme, hidden, rowHovered } = this.props;
         let style = Theme(theme, 'copy-to-clipboard').style;
         let display = 'inline';
 
@@ -97,7 +96,14 @@ export default class extends React.PureComponent {
         }
 
         return (
-            <span class="copy-to-clipboard-container" title="Copy to clipboard">
+            <span
+                className="copy-to-clipboard-container"
+                title="Copy to clipboard"
+                style={{
+                    verticalAlign: 'top',
+                    display: rowHovered ? 'inline-block' : 'none'
+                }}
+            >
                 <span
                     style={{
                         ...style,

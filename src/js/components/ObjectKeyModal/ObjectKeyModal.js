@@ -1,11 +1,10 @@
 import React from 'react';
 import dispatcher from './../../helpers/dispatcher';
 
-import {CheckCircle, Add as Cancel} from './../icons';
+import { CheckCircle, Add as Cancel } from './../icons';
 
 //global theme
 import Theme from './../../themes/getStyle';
-
 
 //this input appears when adding a new value to an object
 export default class extends React.PureComponent {
@@ -17,8 +16,8 @@ export default class extends React.PureComponent {
     }
 
     render() {
-        const {theme, rjvId, isValid} = this.props;
-        const {input} = this.state;
+        const { theme, rjvId, isValid } = this.props;
+        const { input } = this.state;
 
         const valid = isValid(input);
 
@@ -30,24 +29,25 @@ export default class extends React.PureComponent {
             >
                 <div
                     {...Theme(theme, 'key-modal')}
-                    onClick={(e)=>{e.stopPropagation();}}
+                    onClick={e => {
+                        e.stopPropagation();
+                    }}
                 >
-                    <div {...Theme(theme, 'key-modal-label')}>
-                    Key Name:
-                    </div>
-                    <div style={{position: 'relative'}}>
-                        <input {...Theme(theme, 'key-modal-input')}
+                    <div {...Theme(theme, 'key-modal-label')}>Key Name:</div>
+                    <div style={{ position: 'relative' }}>
+                        <input
+                            {...Theme(theme, 'key-modal-input')}
                             class="key-modal-input"
                             ref={el => el && el.focus()}
                             spellCheck={false}
                             value={input}
                             placeholder="..."
-                            onChange={(e)=>{
+                            onChange={e => {
                                 this.setState({
                                     input: e.target.value
                                 });
                             }}
-                            onKeyPress={(e)=>{
+                            onKeyPress={e => {
                                 if (valid && e.key === 'Enter') {
                                     this.submit();
                                 } else if (e.key === 'Escape') {
@@ -55,22 +55,25 @@ export default class extends React.PureComponent {
                                 }
                             }}
                         />
-                        {valid
-                            ? <CheckCircle {...Theme(theme, 'key-modal-submit')}
+                        {valid ? (
+                            <CheckCircle
+                                {...Theme(theme, 'key-modal-submit')}
                                 class="key-modal-submit"
                                 onClick={e => this.submit()}
                             />
-                            : null}
+                        ) : null}
                     </div>
                     <span {...Theme(theme, 'key-modal-cancel')}>
-                        <Cancel {...Theme(theme, 'key-modal-cancel-icon')}
+                        <Cancel
+                            {...Theme(theme, 'key-modal-cancel-icon')}
                             class="key-modal-cancel"
-                            onClick={()=>{
+                            onClick={() => {
                                 dispatcher.dispatch({
                                     rjvId: rjvId,
                                     name: 'RESET'
                                 });
-                            }} />
+                            }}
+                        />
                     </span>
                 </div>
             </div>
@@ -82,9 +85,9 @@ export default class extends React.PureComponent {
             rjvId: this.props.rjvId,
             name: 'RESET'
         });
-    }
+    };
 
     submit = () => {
         this.props.submit(this.state.input);
-    }
+    };
 }

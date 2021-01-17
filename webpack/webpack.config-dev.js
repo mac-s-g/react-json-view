@@ -30,9 +30,11 @@ const config = {
     libraryTarget: "umd"
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.optimize.UglifyJsPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ],
+  optimization: {
+    minimize: false
+  },
   resolve: {
     extensions: [".js", ".json", ".css", ".scss"]
   },
@@ -47,20 +49,6 @@ const config = {
           }
         ],
         include: [PATHS.js, PATHS.devServer]
-      },
-      {
-        test: /\.s?css$/,
-        use: [
-          {
-            loader: "style-loader"
-          },
-          {
-            loader: "css-loader"
-          },
-          {
-            loader: "sass-loader"
-          }
-        ]
       }
     ]
   }

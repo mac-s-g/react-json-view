@@ -2,6 +2,7 @@
   "presets": ["react-app"],
   "plugins": [
     "@babel/plugin-syntax-class-properties",
-    "@babel/plugin-syntax-jsx"
+    "@babel/plugin-syntax-jsx",
+    "react-html-attrs"
   ]
 }

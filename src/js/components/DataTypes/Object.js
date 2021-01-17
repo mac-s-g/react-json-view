@@ -246,20 +246,20 @@ class RjvObject extends React.PureComponent {
             namespace
         } = this.props;
         const { object_type } = this.state;
-        let theme = props.theme;
         let elements = [],
             variable;
         let keys = Object.keys(variables || {});
         if (this.props.sortKeys) {
             keys = keys.sort();
         }
+
         keys.forEach(name => {
             variable = new JsonVariable(name, variables[name]);
 
             if (parent_type === 'array_group' && index_offset) {
                 variable.name = parseInt(variable.name) + index_offset;
             }
-            if (!Object.prototype.hasOwnProperty(variables, name)) {
+            if (!variables.hasOwnProperty(name)) {
                 return;
             } else if (variable.type === 'object') {
                 elements.push(
@@ -308,6 +308,7 @@ class RjvObject extends React.PureComponent {
                 );
             }
         });
+
         return elements;
     };
 }

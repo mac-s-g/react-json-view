@@ -53,8 +53,7 @@ export default class extends React.PureComponent {
             ...rest
         } = this.props;
 
-        let expanded_icon,
-            object_padding_left = 0;
+        let object_padding_left = 0;
 
         const array_group_padding_left = this.props.indentWidth * SINGLE_INDENT;
 

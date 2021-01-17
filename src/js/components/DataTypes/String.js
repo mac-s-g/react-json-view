@@ -22,17 +22,20 @@ export default class extends React.PureComponent {
     }
 
     toggleCollapsed = () => {
-        this.setState({
-            collapsed: !this.state.collapsed
-        }, () => {
-            AttributeStore.set(
-                this.props.rjvId,
-                this.props.namespace,
-                'collapsed',
-                this.state.collapsed
-            );
-        });
-    }
+        this.setState(
+            {
+                collapsed: !this.state.collapsed
+            },
+            () => {
+                AttributeStore.set(
+                    this.props.rjvId,
+                    this.props.namespace,
+                    'collapsed',
+                    this.state.collapsed
+                );
+            }
+        );
+    };
 
     render() {
         const type_name = 'string';

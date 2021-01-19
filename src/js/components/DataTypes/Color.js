@@ -22,7 +22,6 @@ class JsonColor extends React.PureComponent {
         if (this.state.showColorPicker) {
             this.toggleColorPicker();
         }
-        this.props.onValueChange(this.state.value);
     }
 
     toggleColorPicker = () => {
@@ -53,7 +52,8 @@ class JsonColor extends React.PureComponent {
     }
 
     renderColorPicker = () => {
-        let { theme, value, colorType } = this.props;
+        const { theme, colorType } = this.props;
+        let { value } = this.state;
         if (colorType === 'rgb') {
             value = 'rgba' + value.slice(3, value.length - 1) + ', 0)';
         }
@@ -76,6 +76,7 @@ class JsonColor extends React.PureComponent {
             </div>
         );
     }
+
     render() {
         const type_name = 'color';
         let { value, showColorPicker } = this.state;

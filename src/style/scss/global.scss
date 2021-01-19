@@ -46,6 +46,10 @@
     }
 }
 
+.react-json-editor {
+    height: 100%;
+}
+
 .react-json-view-search-box {
     .search-box {
         border: 2px solid #cccccc;
@@ -65,4 +69,5 @@
     height: 10px;
     border: 1px solid black;
     margin: 3px 0 0 2px;
+    cursor: pointer;
 }

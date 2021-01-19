@@ -206,7 +206,8 @@ class ReactJsonView extends React.PureComponent {
         } = this.props;
 
         return (
-            <div>
+            <div
+                className="react-json-editor">
                 <div
                     className="react-json-view-search-box">
                     { displaySearch ?
@@ -227,7 +228,7 @@ class ReactJsonView extends React.PureComponent {
                     <JsonViewer
                         {...this.props}
                         src={src}
-                        name={name}
+                        name={false}
                         theme={theme}
                         type={toType(src)}
                         rjvId={this.rjvId}

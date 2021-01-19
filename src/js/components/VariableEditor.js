@@ -1,6 +1,5 @@
 import React from 'react';
 import AutosizeTextarea from 'react-textarea-autosize';
-import Draggable from 'react-draggable';
 
 import dispatcher from './../helpers/dispatcher';
 import parseInput from './../helpers/parseInput';
@@ -70,80 +69,76 @@ class VariableEditor extends React.PureComponent {
         }
 
         return (
-            <Draggable
-                axis='y'
-                handle='.variable-row'>
-                <div
-                    {...Theme(theme, 'objectKeyVal', {
-                        paddingLeft: indentWidth * singleIndent
-                    })}
-                    class="variable-row"
-                    key={variable.name}
-                >
-                    {type == 'array' ? (
+            <div
+                {...Theme(theme, 'objectKeyVal', {
+                    paddingLeft: indentWidth * singleIndent
+                })}
+                class="variable-row"
+                key={variable.name}
+            >
+                {type == 'array' ? (
+                    <span
+                        {...Theme(theme, 'array-key')}
+                        key={variable.name + '_' + namespace}
+                    >
+                        {variableName}
+                        <div {...Theme(theme, 'colon')}>:</div>
+                    </span>
+                ) : (
+                    <span>
                         <span
-                            {...Theme(theme, 'array-key')}
+                            {...Theme(theme, 'object-name')}
+                            class="object-key"
                             key={variable.name + '_' + namespace}
                         >
-                            {variableName}
-                            <div {...Theme(theme, 'colon')}>:</div>
-                        </span>
-                    ) : (
-                        <span>
-                            <span
-                                {...Theme(theme, 'object-name')}
-                                class="object-key"
-                                key={variable.name + '_' + namespace}
-                            >
-                                <span style={{ verticalAlign: 'top' }}>"</span>
-                                <span style={{ display: 'inline-block' }}>
-                                    {variableName}
-                                </span>
-                                <span style={{ verticalAlign: 'top' }}>"</span>
+                            <span style={{ verticalAlign: 'top' }}>"</span>
+                            <span style={{ display: 'inline-block' }}>
+                                {variableName}
                             </span>
-                            <span {...Theme(theme, 'colon')}>:</span>
+                            <span style={{ verticalAlign: 'top' }}>"</span>
                         </span>
-                    )}
-                    <div
-                        class="variable-value"
-                        onClick={
-                            onSelect === false && onEdit === false
-                                ? null
-                                : e => {
-                                    let location = [...namespace];
-                                    if ((e.ctrlKey || e.metaKey) && onEdit !== false) {
-                                        this.prepopInput(variable);
-                                    } else if (onSelect !== false) {
-                                        location.shift();
-                                        onSelect({
-                                            ...variable,
-                                            namespace: location
-                                        });
-                                    }
+                        <span {...Theme(theme, 'colon')}>:</span>
+                    </span>
+                )}
+                <div
+                    class="variable-value"
+                    onClick={
+                        onSelect === false && onEdit === false
+                            ? null
+                            : e => {
+                                let location = [...namespace];
+                                if ((e.ctrlKey || e.metaKey) && onEdit !== false) {
+                                    this.prepopInput(variable);
+                                } else if (onSelect !== false) {
+                                    location.shift();
+                                    onSelect({
+                                        ...variable,
+                                        namespace: location
+                                    });
                                 }
-                        }
-                        {...Theme(theme, 'variableValue', {
-                            cursor: onSelect === false ? 'default' : 'pointer'
-                        })}
-                    >
-                        {this.getValue(variable, editMode)}
-                    </div>
-                    {enableClipboard ? (
-                        <CopyToClipboard
-                            hidden={editMode}
-                            src={variable.value}
-                            clickCallback={enableClipboard}
-                            {...{ theme, namespace }}
-                        />
-                    ) : null}
-                    {onEdit !== false && editMode == false
-                        ? this.getEditIcon()
-                        : null}
-                    {onDelete !== false && editMode == false
-                        ? this.getRemoveIcon()
-                        : null}
+                            }
+                    }
+                    {...Theme(theme, 'variableValue', {
+                        cursor: onSelect === false ? 'default' : 'pointer'
+                    })}
+                >
+                    {this.getValue(variable, editMode)}
                 </div>
-            </Draggable>
+                {enableClipboard ? (
+                    <CopyToClipboard
+                        hidden={editMode}
+                        src={variable.value}
+                        clickCallback={enableClipboard}
+                        {...{ theme, namespace }}
+                    />
+                ) : null}
+                {onEdit !== false && editMode == false
+                    ? this.getEditIcon()
+                    : null}
+                {onDelete !== false && editMode == false
+                    ? this.getRemoveIcon()
+                    : null}
+            </div>
 
         );
     }

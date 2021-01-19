@@ -89,6 +89,8 @@ function getExampleJson1() {
             'rgba(125, 255, 0, .66)'
         ],
         string_numberrgba2: 'rgba(0,0,0,0.5)',
+        string_number_hsl: 'hsl(180, 50%, 50%)',
+        string_number_hsla: 'hsla(170, 45%, 45%, 1)',
         date: new Date(),
         moment: Moment(),
         regexp: /[0-9]/gi,

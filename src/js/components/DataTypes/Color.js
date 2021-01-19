@@ -36,13 +36,21 @@ class JsonColor extends React.PureComponent {
         let g = color.rgb.g;
         let b = color.rgb.b;
         let alpha = color.rgb.a;
-        if (colorType === 'hex') {
-            return color.hex;
-        }
-        else if (colorType === 'rgb') {
+        let h = Math.round(color.hsl.h);
+        let s = Math.round(color.hsl.s*100);
+        let l = Math.round(color.hsl.l*100);
+        let a = color.hsl.a;
+        if (colorType === 'rgb') {
             return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+        } else if (colorType === 'rgba') {
+            return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
         }
-        return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
+        else if (colorType === 'hsl') {
+            return 'hsl(' + h + ', ' + s + '%, ' + l + '%)';
+        } else if (colorType === 'hsla') {
+            return 'hsla(' + h + ', ' + s + '%, ' + l + '%, ' + a + ')';
+        }
+        return color.hex;
     }
 
     handleColorPickerChange = (color, event) => {
@@ -54,13 +62,17 @@ class JsonColor extends React.PureComponent {
     renderColorPicker = () => {
         const { theme, colorType } = this.props;
         let { value } = this.state;
-        if (colorType === 'rgb') {
-            value = 'rgba' + value.slice(3, value.length - 1) + ', 0)';
+        let view = 'hex';
+        if (colorType === 'rgb' || colorType === 'rgba') {
+            view = 'rgb';
+        } else if (colorType === 'hsl' || colorType === 'hsla') {
+            view = 'hsl';
         }
         return (
             <span {...Theme(theme, 'color-picker')}>
                 <ReactColorPicker
                     color={ value }
+                    defaultView={ view }
                     onChangeComplete={ this.handleColorPickerChange }/>
             </span>
         );

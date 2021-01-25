@@ -1,24 +1,25 @@
-import React from "react"
-import ReactSelect from "react-select"
-import ReactJson from "./../../../../src/js/index"
-import GitHubButton from "react-github-button"
+import React from 'react';
+import ReactSelect from 'react-select';
+import ReactJson from './../../../../src/js/index';
+import GitHubButton from 'react-github-button';
 
-import Code from "./../helpers/Code"
-import "./../../style/scss/rjv-demo.scss"
-import "react-select/dist/react-select.css"
-import "react-github-button/assets/style.css"
+import Code from './../helpers/Code';
+import './../../style/scss/rjv-demo.scss';
+import 'react-select/dist/react-select.css';
+import 'react-github-button/assets/style.css';
 
 //index entrypoint component
-export default class extends React.PureComponent {
+class Demo extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
+            ...Demo.defaultProps,
             src: this.getExampleJson()
         };
     }
 
     static defaultProps = {
-        theme: "monokai",
+        theme: 'monokai',
         src: null,
         collapsed: false,
         collapseStringsAfter: 15,
@@ -29,11 +30,12 @@ export default class extends React.PureComponent {
         enableClipboard: true,
         indentWidth: 4,
         displayDataTypes: true,
-        iconStyle: "triangle"
-    }
+        iconStyle: 'triangle'
+    };
 
     render() {
         const {
+            src,
             collapseStringsAfter,
             onAdd,
             onEdit,
@@ -45,13 +47,12 @@ export default class extends React.PureComponent {
             collapsed,
             indentWidth,
             displayDataTypes
-        } = this.props;
-        const { src } = this.state;
+        } = this.state;
         const style = {
-            padding: "10px",
-            borderRadius: "3px",
-            margin: "10px 0px"
-        }
+            padding: '10px',
+            borderRadius: '3px',
+            margin: '10px 0px'
+        };
 
         return (
             <div class="rjv-demo">
@@ -63,9 +64,9 @@ export default class extends React.PureComponent {
                         src="https://github.com/mac-s-g/react-json-view/blob/master/doc/rjv-icon-alt.png?raw=true"
                         onClick={() => {
                             window.open(
-                                "https://github.com/mac-s-g/react-json-view",
-                                "_blank"
-                            )
+                                'https://github.com/mac-s-g/react-json-view',
+                                '_blank'
+                            );
                         }}
                     />
                     <GitHubButton
@@ -84,24 +85,24 @@ export default class extends React.PureComponent {
                     onEdit={
                         onEdit
                             ? e => {
-                                  console.log(e)
-                                  this.setState({ src: e.updated_src })
+                                  console.log(e);
+                                  this.setState({ src: e.updated_src });
                               }
                             : false
                     }
                     onDelete={
                         onDelete
                             ? e => {
-                                  console.log(e)
-                                  this.setState({ src: e.updated_src })
+                                  console.log(e);
+                                  this.setState({ src: e.updated_src });
                               }
                             : false
                     }
                     onAdd={
                         onAdd
                             ? e => {
-                                  console.log(e)
-                                  this.setState({ src: e.updated_src })
+                                  console.log(e);
+                                  this.setState({ src: e.updated_src });
                               }
                             : false
                     }
@@ -166,58 +167,58 @@ export default class extends React.PureComponent {
 
                 {this.getNotes(onEdit, onAdd)}
             </div>
-        )
+        );
     }
 
     getNotes = (on_edit_enabled, on_add_enabled) => {
-        let notes = []
+        let notes = [];
         if (on_edit_enabled) {
             notes.push(
                 <span>
-                    To edit a value, try <Code>ctrl/cmd + click</Code> enter edit
-                    mode
+                    To edit a value, try <Code>ctrl/cmd + click</Code> enter
+                    edit mode
                 </span>
-            )
+            );
             notes.push(
                 <span>
                     When editing a value, try <Code>ctrl/cmd + Enter</Code> to
                     submit changes
                 </span>
-            )
+            );
             notes.push(
                 <span>
                     When editing a value, try <Code>Escape</Code> key to cancel
                 </span>
-            )
+            );
         }
         if (on_add_enabled) {
             notes.push(
                 <span>
                     When adding a new key, try <Code>Enter</Code> to submit
                 </span>
-            )
+            );
             notes.push(
                 <span>
                     When adding a new key, try <Code>Escape</Code> to cancel
                 </span>
-            )
+            );
         }
 
         if (notes.length === 0) {
-            return null
+            return null;
         }
 
         return (
-            <div style={{ marginTop: "20px", fontStyle: "italic" }}>
+            <div style={{ marginTop: '20px', fontStyle: 'italic' }}>
                 Keyboard Shortcuts
                 <ul>
                     {notes.map(note => {
-                        return <li>{note}</li>
+                        return <li>{note}</li>;
                     })}
                 </ul>
             </div>
-        )
-    }
+        );
+    };
 
     getIconStyleInput = iconStyle => {
         return (
@@ -225,16 +226,16 @@ export default class extends React.PureComponent {
                 name="icon-style"
                 value={iconStyle}
                 options={[
-                    { value: "circle", label: "circle" },
-                    { value: "square", label: "square" },
-                    { value: "triangle", label: "triangle" }
+                    { value: 'circle', label: 'circle' },
+                    { value: 'square', label: 'square' },
+                    { value: 'triangle', label: 'triangle' }
                 ]}
                 onChange={val => {
-                    this.set("iconStyle", val)
+                    this.set('iconStyle', val);
                 }}
             />
-        )
-    }
+        );
+    };
 
     getEditInput = onEdit => {
         return (
@@ -242,15 +243,15 @@ export default class extends React.PureComponent {
                 name="enable-edit"
                 value={onEdit}
                 options={[
-                    { value: true, label: "true" },
-                    { value: false, label: "false" }
+                    { value: true, label: 'true' },
+                    { value: false, label: 'false' }
                 ]}
                 onChange={val => {
-                    this.set("onEdit", val)
+                    this.set('onEdit', val);
                 }}
             />
-        )
-    }
+        );
+    };
 
     getAddInput = onAdd => {
         return (
@@ -258,15 +259,15 @@ export default class extends React.PureComponent {
                 name="enable-add"
                 value={onAdd}
                 options={[
-                    { value: true, label: "true" },
-                    { value: false, label: "false" }
+                    { value: true, label: 'true' },
+                    { value: false, label: 'false' }
                 ]}
                 onChange={val => {
-                    this.set("onAdd", val)
+                    this.set('onAdd', val);
                 }}
             />
-        )
-    }
+        );
+    };
 
     getDeleteInput = onDelete => {
         return (
@@ -274,15 +275,15 @@ export default class extends React.PureComponent {
                 name="enable-delete"
                 value={onDelete}
                 options={[
-                    { value: true, label: "true" },
-                    { value: false, label: "false" }
+                    { value: true, label: 'true' },
+                    { value: false, label: 'false' }
                 ]}
                 onChange={val => {
-                    this.set("onDelete", val)
+                    this.set('onDelete', val);
                 }}
             />
-        )
-    }
+        );
+    };
 
     getEnableClipboardInput = enableClipboard => {
         return (
@@ -290,15 +291,15 @@ export default class extends React.PureComponent {
                 name="enable-clipboard"
                 value={enableClipboard}
                 options={[
-                    { value: true, label: "true" },
-                    { value: false, label: "false" }
+                    { value: true, label: 'true' },
+                    { value: false, label: 'false' }
                 ]}
                 onChange={val => {
-                    this.set("enableClipboard", val)
+                    this.set('enableClipboard', val);
                 }}
             />
-        )
-    }
+        );
+    };
 
     getObjectSizeInput = displayObjectSize => {
         return (
@@ -306,15 +307,15 @@ export default class extends React.PureComponent {
                 name="display-object-size"
                 value={displayObjectSize}
                 options={[
-                    { value: true, label: "true" },
-                    { value: false, label: "false" }
+                    { value: true, label: 'true' },
+                    { value: false, label: 'false' }
                 ]}
                 onChange={val => {
-                    this.set("displayObjectSize", val)
+                    this.set('displayObjectSize', val);
                 }}
             />
-        )
-    }
+        );
+    };
 
     getDataTypesInput = displayDataTypes => {
         return (
@@ -322,15 +323,15 @@ export default class extends React.PureComponent {
                 name="display-data-types"
                 value={displayDataTypes}
                 options={[
-                    { value: true, label: "true" },
-                    { value: false, label: "false" }
+                    { value: true, label: 'true' },
+                    { value: false, label: 'false' }
                 ]}
                 onChange={val => {
-                    this.set("displayDataTypes", val)
+                    this.set('displayDataTypes', val);
                 }}
             />
-        )
-    }
+        );
+    };
 
     getCollapsedStringsInput = collapseStringsAfter => {
         return (
@@ -338,18 +339,18 @@ export default class extends React.PureComponent {
                 name="collapse-strings"
                 value={collapseStringsAfter}
                 options={[
-                    { value: false, label: "false" },
+                    { value: false, label: 'false' },
                     { value: 5, label: 5 },
                     { value: 10, label: 10 },
                     { value: 15, label: 15 },
                     { value: 20, label: 20 }
                 ]}
                 onChange={val => {
-                    this.set("collapseStringsAfter", val)
+                    this.set('collapseStringsAfter', val);
                 }}
             />
-        )
-    }
+        );
+    };
 
     getCollapsedInput = collapsed => {
         return (
@@ -357,17 +358,17 @@ export default class extends React.PureComponent {
                 name="collapsed"
                 value={collapsed}
                 options={[
-                    { value: true, label: "true" },
-                    { value: false, label: "false" },
+                    { value: true, label: 'true' },
+                    { value: false, label: 'false' },
                     { value: 1, label: 1 },
                     { value: 2, label: 2 }
                 ]}
                 onChange={val => {
-                    this.set("collapsed", val)
+                    this.set('collapsed', val);
                 }}
             />
-        )
-    }
+        );
+    };
 
     getIndentWidthInput = indentWidth => {
         return (
@@ -388,11 +389,11 @@ export default class extends React.PureComponent {
                     { value: 10, label: 10 }
                 ]}
                 onChange={val => {
-                    this.set("indentWidth", val)
+                    this.set('indentWidth', val);
                 }}
             />
-        )
-    }
+        );
+    };
 
     getThemeInput = theme => {
         return (
@@ -400,81 +401,83 @@ export default class extends React.PureComponent {
                 name="theme-select"
                 value={theme}
                 options={[
-                    { value: "apathy", label: "apathy" },
-                    { value: "apathy:inverted", label: "apathy:inverted" },
-                    { value: "ashes", label: "ashes" },
-                    { value: "bespin", label: "bespin" },
-                    { value: "brewer", label: "brewer" },
-                    { value: "bright:inverted", label: "bright:inverted" },
-                    { value: "bright", label: "bright" },
-                    { value: "chalk", label: "chalk" },
-                    { value: "codeschool", label: "codeschool" },
-                    { value: "colors", label: "colors" },
-                    { value: "eighties", label: "eighties" },
-                    { value: "embers", label: "embers" },
-                    { value: "flat", label: "flat" },
-                    { value: "google", label: "google" },
-                    { value: "grayscale", label: "grayscale" },
+                    { value: 'apathy', label: 'apathy' },
+                    { value: 'apathy:inverted', label: 'apathy:inverted' },
+                    { value: 'ashes', label: 'ashes' },
+                    { value: 'bespin', label: 'bespin' },
+                    { value: 'brewer', label: 'brewer' },
+                    { value: 'bright:inverted', label: 'bright:inverted' },
+                    { value: 'bright', label: 'bright' },
+                    { value: 'chalk', label: 'chalk' },
+                    { value: 'codeschool', label: 'codeschool' },
+                    { value: 'colors', label: 'colors' },
+                    { value: 'eighties', label: 'eighties' },
+                    { value: 'embers', label: 'embers' },
+                    { value: 'flat', label: 'flat' },
+                    { value: 'google', label: 'google' },
+                    { value: 'grayscale', label: 'grayscale' },
                     {
-                        value: "grayscale:inverted",
-                        label: "grayscale:inverted"
+                        value: 'grayscale:inverted',
+                        label: 'grayscale:inverted'
                     },
-                    { value: "greenscreen", label: "greenscreen" },
-                    { value: "harmonic", label: "harmonic" },
-                    { value: "hopscotch", label: "hopscotch" },
-                    { value: "isotope", label: "isotope" },
-                    { value: "marrakesh", label: "marrakesh" },
-                    { value: "mocha", label: "mocha" },
-                    { value: "monokai", label: "monokai" },
-                    { value: "ocean", label: "ocean" },
-                    { value: "paraiso", label: "paraiso" },
-                    { value: "pop", label: "pop" },
-                    { value: "railscasts", label: "railscasts" },
-                    { value: "rjv-default", label: "rjv-default" },
-                    { value: "shapeshifter", label: "shapeshifter" },
+                    { value: 'greenscreen', label: 'greenscreen' },
+                    { value: 'harmonic', label: 'harmonic' },
+                    { value: 'hopscotch', label: 'hopscotch' },
+                    { value: 'isotope', label: 'isotope' },
+                    { value: 'marrakesh', label: 'marrakesh' },
+                    { value: 'mocha', label: 'mocha' },
+                    { value: 'monokai', label: 'monokai' },
+                    { value: 'ocean', label: 'ocean' },
+                    { value: 'paraiso', label: 'paraiso' },
+                    { value: 'pop', label: 'pop' },
+                    { value: 'railscasts', label: 'railscasts' },
+                    { value: 'rjv-default', label: 'rjv-default' },
+                    { value: 'shapeshifter', label: 'shapeshifter' },
                     {
-                        value: "shapeshifter:inverted",
-                        label: "shapeshifter:inverted"
+                        value: 'shapeshifter:inverted',
+                        label: 'shapeshifter:inverted'
                     },
-                    { value: "solarized", label: "solarized" },
-                    { value: "summerfruit", label: "summerfruit" },
+                    { value: 'solarized', label: 'solarized' },
+                    { value: 'summerfruit', label: 'summerfruit' },
                     {
-                        value: "summerfruit:inverted",
-                        label: "summerfruit:inverted"
+                        value: 'summerfruit:inverted',
+                        label: 'summerfruit:inverted'
                     },
-                    { value: "threezerotwofour", label: "threezerotwofour" },
-                    { value: "tomorrow", label: "tomorrow" },
-                    { value: "tube", label: "tube" },
-                    { value: "twilight", label: "twilight" }
+                    { value: 'threezerotwofour', label: 'threezerotwofour' },
+                    { value: 'tomorrow', label: 'tomorrow' },
+                    { value: 'tube', label: 'tube' },
+                    { value: 'twilight', label: 'twilight' }
                 ]}
                 onChange={val => {
-                    this.set("theme", val)
+                    this.set('theme', val);
                 }}
             />
-        )
-    }
+        );
+    };
 
     set = (field, value) => {
-        let state = {}
-        state[field] = value.value
-        this.setState(state)
+        let state = {};
+        state[field] = value.value;
+        this.setState(state);
     };
 
     //just a function to get an example JSON object
     getExampleJson = () => {
         return {
-            string: "this is a test string",
+            string: 'this is a test string',
             integer: 42,
-            array: [1, 2, 3, "test", NaN],
+            array: [1, 2, 3, 'test', NaN],
             float: 3.14159,
             undefined: undefined,
             object: {
-                "first-child": true,
-                "second-child": false,
-                "last-child": null
+                'first-child': true,
+                'second-child': false,
+                'last-child': null
             },
-            string_number: "1234",
+            string_number: '1234',
             date: new Date()
-        }
-    }
+        };
+    };
 }
+
+export default Demo;

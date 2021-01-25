@@ -45,7 +45,6 @@ class VariableEditor extends React.PureComponent {
     render() {
         const {
             variable,
-            src,
             singleIndent,
             type,
             theme,
@@ -54,8 +53,7 @@ class VariableEditor extends React.PureComponent {
             enableClipboard,
             onEdit,
             onDelete,
-            onSelect,
-            rjvId
+            onSelect
         } = this.props;
         const { editMode } = this.state;
 
@@ -130,7 +128,7 @@ class VariableEditor extends React.PureComponent {
                         hidden={editMode}
                         src={variable.value}
                         clickCallback={enableClipboard}
-                        {...{ theme, namespace }}
+                        {...{ theme, namespace: [...namespace, variable.name] }}
                     />
                 ) : null}
                 {onEdit !== false && editMode == false

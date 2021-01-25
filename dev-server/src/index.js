@@ -12,16 +12,6 @@ import JsonViewer from './../../src/js/index';
 //render 2 different examples of the react-json-view component
 ReactDom.render(
     <div>
-        <JsonViewer
-            name="root"
-            src={{
-                key1: 8,
-                key2: []
-            }}
-            enableClipboard={copy => console.log(copy)}
-        />
-        <br />
-
         {/* just pass in your JSON to the src attribute */}
         <JsonViewer
             sortKeys

@@ -36,6 +36,10 @@
         }
     }
 
+    .drag-wrapper {
+        width: fit-content;
+    }
+
     .object-content .variable-row {
         &:hover .click-to-remove {
             display: inline-block;
@@ -70,4 +74,18 @@
     border: 1px solid black;
     margin: 3px 0 0 2px;
     cursor: pointer;
+}
+
+.config-editor.drag-container {
+    position: absolute;
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+}
+
+.drop-marker {
+    position: relative;
+    height: 10px;
+    pointer-events: none;
+    background: rgba(255, 128, 0, 0.3);
+    border-radius: 5px;
 }

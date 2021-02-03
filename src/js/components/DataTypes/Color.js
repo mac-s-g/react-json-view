@@ -25,6 +25,9 @@ class JsonColor extends React.PureComponent {
     }
 
     toggleColorPicker = () => {
+        this.props.colorEditorToggle({
+            toggleState: this.state.showColorPicker
+        });
         this.setState({
             showColorPicker: !this.state.showColorPicker
         });

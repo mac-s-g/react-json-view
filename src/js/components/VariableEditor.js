@@ -71,14 +71,16 @@ class VariableEditor extends React.PureComponent {
                 class="variable-row"
                 key={variable.name}
             >
-                {(type == 'array') ? ((displayArrayKey ?
-                    (<span
-                        {...Theme(theme, 'array-key')}
-                        key={variable.name + '_' + namespace}>
-                        {variable.name}
-                        <div {...Theme(theme, 'colon')}>:</div>
-                    </span>)
-                    : null)
+                {type == 'array' ? (
+                    displayArrayKey ? (
+                        <span
+                            {...Theme(theme, 'array-key')}
+                            key={variable.name + '_' + namespace}
+                        >
+                            {variable.name}
+                            <div {...Theme(theme, 'colon')}>:</div>
+                        </span>
+                    ) : null
                 ) : (
                     <span>
                         <span

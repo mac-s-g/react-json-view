@@ -22,7 +22,9 @@ export default function getObjectName(props) {
                 <span class="array-key">{display_name}</span>
                 <span {...Theme(theme, 'colon')}>:</span>
             </span>
-        ) : (<span />);
+        ) : (
+            <span />
+        );
     } else {
         return (
             <span {...Theme(theme, 'object-name')} key={namespace}>

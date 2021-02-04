@@ -8,7 +8,8 @@ export default function getObjectName(props) {
         quotesOnKeys,
         theme,
         jsvRoot,
-        name
+        name,
+        displayArrayKey
     } = props;
 
     const display_name = props.name ? props.name : '';

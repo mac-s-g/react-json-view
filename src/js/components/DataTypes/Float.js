@@ -5,10 +5,9 @@ import DataTypeLabel from './DataTypeLabel';
 import Theme from './../../themes/getStyle';
 
 export default class extends React.PureComponent {
-
     render() {
         const type_name = 'float';
-        const {props} = this;
+        const { props } = this;
         return (
             <div {...Theme(props.theme, 'float')}>
                 <DataTypeLabel type_name={type_name} {...props} />
@@ -16,5 +15,4 @@ export default class extends React.PureComponent {
             </div>
         );
     }
-
 }

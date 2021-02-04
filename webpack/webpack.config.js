@@ -31,9 +31,13 @@ const config = {
     path: PATHS.build,
     filename: "main.js",
     library: "reactJsonView",
-    libraryTarget: "umd"
+    libraryTarget: "umd",
+    globalObject: "this"
   },
-  plugins: [new webpack.optimize.UglifyJsPlugin()],
+  plugins: [],
+  optimization: {
+    minimize: true
+  },
   resolve: {
     extensions: [".js", ".json", ".css", ".scss"]
   },
@@ -47,20 +51,6 @@ const config = {
           }
         ],
         include: [PATHS.js]
-      },
-      {
-        test: /\.s?css$/,
-        use: [
-          {
-            loader: "style-loader"
-          },
-          {
-            loader: "css-loader"
-          },
-          {
-            loader: "sass-loader"
-          }
-        ]
       }
     ]
   }

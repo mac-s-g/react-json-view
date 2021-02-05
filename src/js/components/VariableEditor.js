@@ -54,7 +54,8 @@ class VariableEditor extends React.PureComponent {
             onEdit,
             onDelete,
             onSelect,
-            displayArrayKey
+            displayArrayKey,
+            quotesOnKeys
         } = this.props;
         const { editMode } = this.state;
         return (
@@ -88,11 +89,15 @@ class VariableEditor extends React.PureComponent {
                             class="object-key"
                             key={variable.name + '_' + namespace}
                         >
-                            <span style={{ verticalAlign: 'top' }}>"</span>
+                            {!!quotesOnKeys && (
+                                <span style={{ verticalAlign: 'top' }}>"</span>
+                            )}
                             <span style={{ display: 'inline-block' }}>
                                 {variable.name}
                             </span>
-                            <span style={{ verticalAlign: 'top' }}>"</span>
+                            {!!quotesOnKeys && (
+                                <span style={{ verticalAlign: 'top' }}>"</span>
+                            )}
                         </span>
                         <span {...Theme(theme, 'colon')}>:</span>
                     </span>

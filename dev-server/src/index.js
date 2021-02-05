@@ -17,6 +17,7 @@ ReactDom.render(
             sortKeys
             style={{ padding: '30px', backgroundColor: 'white' }}
             src={getExampleJson1()}
+            quotesOnKeys={false}
             collapseStringsAfterLength={12}
             onEdit={e => {
                 console.log('edit callback', e);

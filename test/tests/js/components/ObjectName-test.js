@@ -25,6 +25,7 @@ describe("<ObjectName />", function() {
                 parent_type="array"
                 theme="rjv-default"
                 jsvRoot={false}
+                displayArrayKey={true}
             />
         )
         expect(wrapper.find(".array-key")).to.have.length(1)
@@ -66,5 +67,19 @@ describe("<ObjectName />", function() {
             />
         )
         expect(wrapper.find(".object-key").children('span')).to.have.length(1)
+    })
+  
+    it("ObjectName array hides key", function() {
+      const wrapper = render(
+          <ObjectName
+              namespace={"test"}
+              name="test"
+              parent_type="array"
+              theme="rjv-default"
+              jsvRoot={false}
+              displayArrayKey={false}
+          />
+      )
+      expect(wrapper.find(".array-key")).to.have.length(0)
     })
 })

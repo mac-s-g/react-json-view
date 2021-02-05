@@ -8,7 +8,8 @@ export default function getObjectName(props) {
         quotesOnKeys,
         theme,
         jsvRoot,
-        name
+        name,
+        displayArrayKey
     } = props;
 
     const display_name = props.name ? props.name : '';
@@ -16,11 +17,13 @@ export default function getObjectName(props) {
     if (jsvRoot && (name === false || name === null)) {
         return <span />;
     } else if (parent_type == 'array') {
-        return (
+        return displayArrayKey ? (
             <span {...Theme(theme, 'array-key')} key={namespace}>
                 <span class="array-key">{display_name}</span>
                 <span {...Theme(theme, 'colon')}>:</span>
             </span>
+        ) : (
+            <span />
         );
     } else {
         return (

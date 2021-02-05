@@ -55,7 +55,8 @@ class ReactJsonView extends React.PureComponent {
         iconStyle: 'triangle',
         style: {},
         validationMessage: 'Validation Error',
-        defaultValue: null
+        defaultValue: null,
+        displayArrayKey: true
     };
 
     // will trigger whenever setState() is called, or parent passes in new props.

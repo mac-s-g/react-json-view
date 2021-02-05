@@ -53,10 +53,10 @@ class VariableEditor extends React.PureComponent {
             enableClipboard,
             onEdit,
             onDelete,
-            onSelect
+            onSelect,
+            displayArrayKey
         } = this.props;
         const { editMode } = this.state;
-
         return (
             <div
                 {...Theme(theme, 'objectKeyVal', {
@@ -72,13 +72,15 @@ class VariableEditor extends React.PureComponent {
                 key={variable.name}
             >
                 {type == 'array' ? (
-                    <span
-                        {...Theme(theme, 'array-key')}
-                        key={variable.name + '_' + namespace}
-                    >
-                        {variable.name}
-                        <div {...Theme(theme, 'colon')}>:</div>
-                    </span>
+                    displayArrayKey ? (
+                        <span
+                            {...Theme(theme, 'array-key')}
+                            key={variable.name + '_' + namespace}
+                        >
+                            {variable.name}
+                            <div {...Theme(theme, 'colon')}>:</div>
+                        </span>
+                    ) : null
                 ) : (
                     <span>
                         <span

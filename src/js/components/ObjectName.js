@@ -30,7 +30,7 @@ export default function getObjectName(props) {
                 <span class="object-key">
                     { quotesOnKeys && <span style={{verticalAlign:'top'}}>"</span> }
                     <span>{ display_name }</span>
-                    {quotesOnKeys && <span style={{verticalAlign:'top'}}>"</span> }
+                    { quotesOnKeys && <span style={{verticalAlign:'top'}}>"</span> }
                 </span>
                 <span {...Theme(theme, 'colon')}>:</span>
             </span>

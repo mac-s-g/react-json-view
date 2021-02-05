@@ -161,9 +161,7 @@ class VariableEditor extends React.PureComponent {
     }
 
     prepopInput = variable => {
-        this.props.isDragAllowed({
-            allowToDrag: false
-        });
+        this.props.isDragAllowed(false);
         if (this.props.onEdit !== false) {
             const stringifiedValue = stringifyVariable(variable.value);
             const detected = parseInput(stringifiedValue);
@@ -233,7 +231,7 @@ class VariableEditor extends React.PureComponent {
             return <JsonColor
                 value={ variable.value }
                 handleChange={ this.submitEdit }
-                colorEditorToggle={ this.toggleColorEditor }
+                isOneColorPickerOpen={ this.toggleColorEditor }
                 colorType={ this.chooseColorCodeType(variable.value) }
                 { ...props }/>;
         default:
@@ -275,18 +273,14 @@ class VariableEditor extends React.PureComponent {
                                 editMode: false,
                                 editValue: ''
                             });
-                            this.props.isDragAllowed({
-                                allowToDrag: true
-                            });
+                            this.props.isDragAllowed(true);
                             break;
                         }
                         case 'Enter': {
                             if (e.ctrlKey || e.metaKey) {
                                 this.submitEdit(true);
                             }
-                            this.props.isDragAllowed({
-                                allowToDrag: true
-                            });
+                            this.props.isDragAllowed(true);
                             break;
                         }
                         }
@@ -301,10 +295,7 @@ class VariableEditor extends React.PureComponent {
                         { ...Theme(theme, 'cancel-icon') }
                         onClick={() => {
                             this.setState({ editMode: false, editValue: '' });
-                            this.props.isDragAllowed({
-                                allowToDrag: true
-                            });
-
+                            this.props.isDragAllowed(true);
                         }}
                     />
                     <CheckCircle
@@ -320,12 +311,10 @@ class VariableEditor extends React.PureComponent {
         );
     }
 
-    toggleColorEditor = (colorEditor) => {
-        this.props.isDragAllowed({
-            allowToDrag: colorEditor.toggleState
-        });
+    toggleColorEditor = (isColorPickerOpen) => {
+        this.props.isDragAllowed(isColorPickerOpen);
         this.setState({
-            allowDragging: colorEditor.toggleState
+            allowDragging: isColorPickerOpen
         });
     }
 
@@ -363,9 +352,7 @@ class VariableEditor extends React.PureComponent {
             editMode: false
         });
         if (allowDragging) {
-            this.props.isDragAllowed({
-                allowToDrag: true
-            });
+            this.props.isDragAllowed(true);
         }
         dispatcher.dispatch({
             name: 'VARIABLE_UPDATED',

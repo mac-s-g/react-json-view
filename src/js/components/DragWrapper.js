@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import dispatcher from '../helpers/dispatcher';
 
-
 const dragThreshold = 8; // Required movement before drag starts
 const dropBorderPx = 5;
+
+const borderTransparent = '3px solid transparent';
+const borderColor = '3px solid rgba(255, 128, 0, 0.3)';
 
 class DragWrapper extends Component {
     constructor(props) {
@@ -61,10 +63,10 @@ class DragWrapper extends Component {
 
     clearBorders = (target) => {
         if (target && target.getAttribute('data-drop-marker') === 'drop-before') {
-            target.style.borderTop = '3px solid transparent';
+            target.style.borderTop = borderTransparent;
         } else if (target && target.getAttribute('data-drop-marker') === 'drop-after') {
-            target.style.borderTop = '3px solid transparent';
-            target.style.borderBottom = '3px solid transparent';
+            target.style.borderTop = borderTransparent;
+            target.style.borderBottom = borderTransparent;
         }
     }
 
@@ -117,55 +119,11 @@ class DragWrapper extends Component {
         const dropTargetParent = dropTarget.parentNode.closest('.tree-node-container');
         //rearranging node in array
         if (dropTargetParent && dropTargetParent.getAttribute('data-isarray') === 'true') {
-            let copy = src[droppableNodeId];
-            if (dropPosition === 'before' || dropPosition === 'inside') {
-                if (+droppableNodeId + 1 === +targetNodeId) {
-                    new_value = src;
-                } else {
-                    //remove droppable element from array
-                    src.splice(droppableNodeId, 1);
-                    //dropped upwards
-                    if (+targetNodeId < +droppableNodeId) {
-                        src.splice(targetNodeId, 0, copy);
-                    }
-                    //dropped downwards
-                    else {
-                        //add removed element to the dropped position in array
-                        src.splice(targetNodeId - 1, 0, copy);
-                    }
-                }
-            } else {
-                //remove droppable element from array
-                src.splice(droppableNodeId, 1);
-                //add removed element to the dropped position in array
-                src.splice(targetNodeId, 0, copy);
-            }
-            new_value = src;
+            new_value = this.changeArrayOrder(dropPosition, src, droppableNodeId, targetNodeId);
         }
         //rearranging node in object
         else {
-            let newObject = {};
-            let copy = Object.entries(src).find(([key, value]) => key === droppableNodeId);
-            delete src[droppableNodeId];
-            const dropTargetIdx = Object.keys(src).findIndex(key => key === targetNodeId);
-            if (dropPosition === 'after' && dropTargetIdx === Object.keys(src).length - 1) {
-                Object.keys(src).forEach((key, idx) => {
-                    newObject[key] = src[key];
-                    if (idx === dropTargetIdx) {
-                        newObject[copy[0]] = copy[1];
-                    }
-                });
-                new_value = newObject;
-            } else {
-                const shift = dropPosition === 'before' || dropPosition === 'inside' ? 0 : 1;
-                Object.keys(src).forEach((key, idx) => {
-                    if (idx === dropTargetIdx + shift) {
-                        newObject[copy[0]] = copy[1];
-                    }
-                    newObject[key] = src[key];
-                });
-                new_value = newObject;
-            }
+            new_value = this.changeObjectOrder(dropPosition, src, droppableNodeId, targetNodeId);
         }
         dispatcher.dispatch({
             name: 'VARIABLE_ADDED',
@@ -175,6 +133,58 @@ class DragWrapper extends Component {
                 new_value: new_value
             }
         });
+    }
+    
+    changeArrayOrder = (dropPosition, src, droppableNodeId, targetNodeId) => {
+        let copy = src[droppableNodeId];
+        if (dropPosition === 'before' || dropPosition === 'inside') {
+            if (+droppableNodeId + 1 === +targetNodeId) {
+                return src;
+            } else {
+                //remove droppable element from array
+                src.splice(droppableNodeId, 1);
+                //dropped upwards
+                if (+targetNodeId < +droppableNodeId) {
+                    src.splice(targetNodeId, 0, copy);
+                }
+                //dropped downwards
+                else {
+                    //add removed element to the dropped position in array
+                    src.splice(targetNodeId - 1, 0, copy);
+                }
+            }
+        } else {
+            //remove droppable element from array
+            src.splice(droppableNodeId, 1);
+            //add removed element to the dropped position in array
+            src.splice(targetNodeId, 0, copy);
+        }
+        return src;
+    }
+    
+    changeObjectOrder = (dropPosition, src, droppableNodeId, targetNodeId, ) => {
+        let newObject = {};
+        let copy = Object.entries(src).find(([key, value]) => key === droppableNodeId);
+        delete src[droppableNodeId];
+        const dropTargetIdx = Object.keys(src).findIndex(key => key === targetNodeId);
+        if (dropPosition === 'after' && dropTargetIdx === Object.keys(src).length - 1) {
+            Object.keys(src).forEach((key, idx) => {
+                newObject[key] = src[key];
+                if (idx === dropTargetIdx) {
+                    newObject[copy[0]] = copy[1];
+                }
+            });
+            return newObject;
+        } else {
+            const shift = dropPosition === 'before' || dropPosition === 'inside' ? 0 : 1;
+            Object.keys(src).forEach((key, idx) => {
+                if (idx === dropTargetIdx + shift) {
+                    newObject[copy[0]] = copy[1];
+                }
+                newObject[key] = src[key];
+            });
+            return newObject;
+        }
     }
 
     handleDragEnd = event => {
@@ -218,13 +228,13 @@ class DragWrapper extends Component {
         let dropPosition = this.getDropPosition(dropTarget, x, y);
         //disable drop inside for variable editor and display drop before marker when trying to drop inside
         if ((dropPosition === 'before' || dropPosition === 'inside') && dropTarget.getAttribute('data-drop-marker') === 'drop-before') {
-            dropTarget.style.borderTop = '3px solid rgba(255, 128, 0, 0.3)';
+            dropTarget.style.borderTop = borderColor;
         } else if (dropPosition === 'after' && dropTarget.getAttribute('data-drop-marker') === 'drop-after') {
-            dropTarget.style.borderBottom = '3px solid rgba(255, 128, 0, 0.3)';
-            dropTarget.style.borderTop = '3px solid transparent';
+            dropTarget.style.borderBottom = borderColor;
+            dropTarget.style.borderTop = borderTransparent;
         } else if ((dropPosition === 'before' || dropPosition === 'inside') && dropTarget.getAttribute('data-drop-marker') === 'drop-after') {
-            dropTarget.style.borderTop = '3px solid rgba(255, 128, 0, 0.3)';
-            dropTarget.style.borderBottom = '3px solid transparent';
+            dropTarget.style.borderTop = borderColor;
+            dropTarget.style.borderBottom = borderTransparent;
         }
         this.setState({
             prevDropTarget: dropTarget
@@ -248,12 +258,12 @@ class DragWrapper extends Component {
         } = this.props;
 
         let borders = {
-            'borderTop': '3px solid transparent'
+            'borderTop': borderTransparent
         };
         if (dropMarker === 'drop-after') {
             borders = {
-                'borderTop': '3px solid transparent',
-                'borderBottom': '3px solid transparent'
+                'borderTop': borderTransparent,
+                'borderBottom': borderTransparent
             };
         }
         return (

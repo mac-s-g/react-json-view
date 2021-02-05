@@ -1,60 +1,88 @@
 'use strict';
 
 //import react and reactDom for browser rendering
-import React from 'react';
-import ReactDom from 'react-dom';
+import React, {Component} from 'react';
 
 import Moment from 'moment';
+import ReactDom from 'react-dom';
 
 //import the react-json-view component (installed with npm)
 import JsonViewer from './../../src/js/index';
 
-//render 2 different examples of the react-json-view component
-ReactDom.render(
-    <div>
-        {/* just pass in your JSON to the src attribute */}
-        <JsonViewer
-            sortKeys={false}
-            style={{ padding: '30px', backgroundColor: 'white' }}
-            src={getExampleJson1()}
-            collapseStringsAfterLength={45}
-            quotesOnKeys={false}
-            onEdit={e => {
-                if (e.new_value == 'error') {
-                    return false;
-                }
-            }}
-            onDelete={e => {
-                console.log('delete callback', e);
-            }}
-            onAdd={e => {
-                if (e.new_value == 'error') {
-                    return false;
-                }
-            }}
-            onSelect={e => {
-                console.log('select callback', e);
-            }}
-            displayObjectSize={false}
-            name={'dev-server'}
-            enableClipboard={false}
-            shouldCollapse={({ src, namespace, type }) => {
-                if (type === 'array' && src.indexOf('test') > -1) {
-                    return true;
-                } else if (namespace.indexOf('moment') > -1) {
-                    return true;
-                }
-                return false;
-            }}
-            defaultValue=""
-            displayDataTypes={false}
-            displaySearch={true}
-            collapsed={ 1 }
-        />
+class DevDemo extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            collapsedState: 1,
+        };
+    }
 
-    </div>,
-    document.getElementById('app-container')
-);
+    toggleCollapse = () => {
+        if (this.state.collapsedState === 1) {
+            this.setState({
+                collapsedState: false
+            });
+        }
+        else {
+            this.setState({
+                collapsedState: 1
+            });
+        }
+    }
+
+    render() {
+        return (
+            <div id='app-container'>
+                <button onClick={ () => this.toggleCollapse() }>Toggle collapse</button>
+                {/* just pass in your JSON to the src attribute */}
+                <JsonViewer
+                    sortKeys={false}
+                    style={{ padding: '30px', backgroundColor: 'white' }}
+                    src={getExampleJson1()}
+                    collapseStringsAfterLength={45}
+                    quotesOnKeys={false}
+                    onEdit={e => {
+                        if (e.new_value == 'error') {
+                            return false;
+                        }
+                    }}
+                    onDelete={e => {
+                        console.log('delete callback', e);
+                    }}
+                    onAdd={e => {
+                        if (e.new_value == 'error') {
+                            return false;
+                        }
+                    }}
+                    onSelect={e => {
+                        console.log('select callback', e);
+                    }}
+                    displayObjectSize={false}
+                    name={'dev-server'}
+                    enableClipboard={false}
+                    shouldCollapse={({ src, namespace, type }) => {
+                        if (type === 'array' && src.indexOf('test') > -1) {
+                            return true;
+                        } else if (namespace.indexOf('moment') > -1) {
+                            return true;
+                        }
+                        return false;
+                    }}
+                    defaultValue=""
+                    displayDataTypes={false}
+                    displaySearch={true}
+                    collapsed={ this.state.collapsedState }
+                />
+
+            </div>
+        );
+    }
+}
+
+ReactDom.render(<DevDemo/>, document.getElementById('app-container'));
+// export default demo;
+
+//render 2 different examples of the react-json-view component
 
 /*-------------------------------------------------------------------------*/
 /*     the following functions just contain test json data for display     */

@@ -24,11 +24,10 @@ class JsonColor extends React.PureComponent {
     }
 
     toggleColorPicker = () => {
-        this.props.colorEditorToggle({
-            toggleState: this.state.showColorPicker
-        });
+        const { showColorPicker } = this.state;
+        this.props.isOneColorPickerOpen(showColorPicker);
         this.setState({
-            showColorPicker: !this.state.showColorPicker
+            showColorPicker: !showColorPicker
         });
     }
 
@@ -43,14 +42,14 @@ class JsonColor extends React.PureComponent {
         let l = Math.round(color.hsl.l*100);
         let a = color.hsl.a;
         if (colorType === 'rgb') {
-            return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+            return `rgb(${r}, ${g}, ${b})`;
         } else if (colorType === 'rgba') {
-            return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
+            return `rgba(${r}, ${g}, ${b}, ${alpha})`;
         }
         else if (colorType === 'hsl') {
-            return 'hsl(' + h + ', ' + s + '%, ' + l + '%)';
+            return `hsl(${h}, ${s}%, ${l}%)`;
         } else if (colorType === 'hsla') {
-            return 'hsla(' + h + ', ' + s + '%, ' + l + '%, ' + a + ')';
+            return `hsla(${h}, ${s}%, ${l}%, ${a})`;
         }
         return color.hex;
     }

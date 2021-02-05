@@ -229,9 +229,9 @@ class RjvObject extends React.PureComponent {
         );
     }
 
-    handleDragAllow = (allowDrag) => {
+    handleDragAllow = (allowToDrag) => {
         this.setState({
-            dragEnabled: allowDrag.allowToDrag
+            dragEnabled: allowToDrag
         });
     }
 

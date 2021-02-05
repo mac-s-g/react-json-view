@@ -38,7 +38,8 @@ class VariableEditor extends React.PureComponent {
             parsedInput: {
                 type: false,
                 value: null
-            }
+            },
+            allowDragging: true
         };
     }
 
@@ -231,9 +232,10 @@ class VariableEditor extends React.PureComponent {
         case 'color':
             return <JsonColor
                 value={ variable.value }
+                handleChange={ this.submitEdit }
                 colorEditorToggle={ this.toggleColorEditor }
                 colorType={ this.chooseColorCodeType(variable.value) }
-                {...props}/>;
+                { ...props }/>;
         default:
             // catch-all for types that weren't anticipated
             return (
@@ -322,6 +324,9 @@ class VariableEditor extends React.PureComponent {
         this.props.isDragAllowed({
             allowToDrag: colorEditor.toggleState
         });
+        this.setState({
+            allowDragging: colorEditor.toggleState
+        });
     }
 
     chooseColorCodeType = (colorCode) => {
@@ -340,18 +345,28 @@ class VariableEditor extends React.PureComponent {
     }
 
     submitEdit = submit_detected => {
+        const { allowDragging } = this.state;
+        let newColor;
+        if (submit_detected !== undefined && submit_detected['newColorValue']) {
+            newColor = submit_detected['newColorValue'];
+        }
         const { variable, namespace, rjvId } = this.props;
         const { editValue, parsedInput } = this.state;
         let new_value = editValue;
         if (submit_detected && parsedInput.type) {
             new_value = parsedInput.value;
         }
+        if (newColor) {
+            new_value = newColor;
+        }
         this.setState({
             editMode: false
         });
-        this.props.isDragAllowed({
-            allowToDrag: true
-        });
+        if (allowDragging) {
+            this.props.isDragAllowed({
+                allowToDrag: true
+            });
+        }
         dispatcher.dispatch({
             name: 'VARIABLE_UPDATED',
             rjvId: rjvId,

@@ -48,7 +48,7 @@ ReactDom.render(
             defaultValue=""
             displayDataTypes={false}
             displaySearch={true}
-            collapsed={ false }
+            collapsed={ 1 }
         />
 
     </div>,
@@ -79,7 +79,7 @@ function getExampleJson1() {
         string_numbershort: '#ccc',
         string_numberrgb: 'rgb(255,125,0)',
         string_numberrgb2: 'rgb(0, 0, 0)',
-        string_numberrgba: ['rgba(0, 0, 0, .2)', 'rgba(125, 255, 0, .66)'],
+        string_numberrgba: ['rgba(0, 0, 0, .2)', 'rgba(125, 255, 0, .66)', 20],
         string_numberrgba2: 'rgba(0,0,0,0.5)',
         string_number_hsl: 'hsl(180, 50%, 50%)',
         string_number_hsla: 'hsla(170, 45%, 45%, 1)',
@@ -92,10 +92,11 @@ function getExampleJson1() {
                 'Multilevel': {
                     'deepNested': true,
                     'deepNested2': false,
-                    '22233deepNested2': "test",
+                    'deepNested3': 'test',
                 }
             }
-        }
+        },
+        testArray: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
     };
 }
 //just a function to get an example JSON object

@@ -17,10 +17,10 @@ class DragWrapper extends Component {
     }
 
     handleMouseDown = event => {
+        event.preventDefault();
         if (this.el !== event.target.closest('[data-drop-target="true"')) {
             return;
         }
-        event.preventDefault();
         this.dragStartPos = {
             x: event.clientX,
             y: event.clientY,
@@ -38,9 +38,15 @@ class DragWrapper extends Component {
             const delta = Math.sqrt(dx * dx + dy * dy);
             if (delta >= dragThreshold) {
                 this.dragging = true;
-                let contentClone = this.el ? this.el.cloneNode(true) : undefined;
-                contentClone.firstChild.removeChild(contentClone.querySelector('.click-to-edit'));
-                contentClone.firstChild.removeChild(contentClone.querySelector('.click-to-remove'));
+                const objectKeyElement = this.el.querySelector('.object-key');
+                const arrayKeyElement = this.el.querySelector('.variable-row');
+                let contentClone = objectKeyElement ? objectKeyElement.cloneNode(true)
+                    : arrayKeyElement ? arrayKeyElement.cloneNode(true) : undefined;
+
+                const editElement = contentClone.querySelector('.click-to-edit');
+                const removeElement = contentClone.querySelector('.click-to-remove');
+                if (editElement) editElement.remove();
+                if (removeElement) removeElement.remove();
                 if (contentClone) {
                     this.dragContainer.appendChild(contentClone);
                     document.body.appendChild(this.dragContainer);
@@ -106,29 +112,60 @@ class DragWrapper extends Component {
             variable_removed: false,
             key_name: null
         };
-        //rearranging node in object
         let new_value;
-        let newObject = {};
-        let copy = Object.entries(src).find(([key, value]) => key === droppableNodeId);
-        delete src[droppableNodeId];
-        const dropTargetIdx = Object.keys(src).findIndex(key => key === targetNodeId);
-        if (dropPosition === 'after' && dropTargetIdx === Object.keys(src).length - 1) {
-            Object.keys(src).forEach((key, idx) => {
-                newObject[key] = src[key];
-                if (idx === dropTargetIdx) {
-                    newObject[copy[0]] = copy[1];
+        //rearranging node in object
+        const dropTargetParent = dropTarget.parentNode.closest('.tree-node-container');
+        //rearranging node in array
+        if (dropTargetParent && dropTargetParent.getAttribute('data-isArray') === 'true') {
+            let copy = src[droppableNodeId];
+            if (dropPosition === 'before' || dropPosition === 'inside') {
+                if (+droppableNodeId + 1 === +targetNodeId) {
+                    new_value = src;
+                } else {
+                    //remove droppable element from array
+                    src.splice(droppableNodeId, 1);
+                    //dropped upwards
+                    if (+targetNodeId < +droppableNodeId) {
+                        src.splice(targetNodeId, 0, copy);
+                    }
+                    //dropped downwards
+                    else {
+                        //add removed element to the dropped position in array
+                        src.splice(targetNodeId - 1, 0, copy);
+                    }
                 }
-            });
-            new_value = newObject;
-        } else {
-            const shift = dropPosition === 'before' || dropPosition === 'inside' ? 0 : 1;
-            Object.keys(src).forEach((key, idx) => {
-                if (idx === dropTargetIdx + shift) {
-                    newObject[copy[0]] = copy[1];
-                }
-                newObject[key] = src[key];
-            });
-            new_value = newObject;
+            } else {
+                //remove droppable element from array
+                src.splice(droppableNodeId, 1);
+                //add removed element to the dropped position in array
+                src.splice(targetNodeId, 0, copy);
+            }
+            new_value = src;
+        }
+        //rearranging node in object
+        else {
+            let newObject = {};
+            let copy = Object.entries(src).find(([key, value]) => key === droppableNodeId);
+            delete src[droppableNodeId];
+            const dropTargetIdx = Object.keys(src).findIndex(key => key === targetNodeId);
+            if (dropPosition === 'after' && dropTargetIdx === Object.keys(src).length - 1) {
+                Object.keys(src).forEach((key, idx) => {
+                    newObject[key] = src[key];
+                    if (idx === dropTargetIdx) {
+                        newObject[copy[0]] = copy[1];
+                    }
+                });
+                new_value = newObject;
+            } else {
+                const shift = dropPosition === 'before' || dropPosition === 'inside' ? 0 : 1;
+                Object.keys(src).forEach((key, idx) => {
+                    if (idx === dropTargetIdx + shift) {
+                        newObject[copy[0]] = copy[1];
+                    }
+                    newObject[key] = src[key];
+                });
+                new_value = newObject;
+            }
         }
         dispatcher.dispatch({
             name: 'VARIABLE_ADDED',
@@ -223,7 +260,8 @@ class DragWrapper extends Component {
             namespace,
             dragAllowed,
             canDrop,
-            isArray
+            isArray,
+            value
         } = this.props;
 
         let borders = {
@@ -239,7 +277,9 @@ class DragWrapper extends Component {
             <div
                 style={ borders }
                 className='drag-wrapper tree-node-container'
+                data-isArray={ isArray }
                 data-drop-target={ true }
+                data-node-value={ value }
                 data-can-drop={ canDrop }
                 ref={ el => this.el = el }
                 data-node-id={ name }
@@ -247,7 +287,6 @@ class DragWrapper extends Component {
                 onMouseDown={ dragAllowed && this.handleMouseDown }
                 key={ name }
                 data-parent-name={ namespace }
-                data-isElementInArray={ isArray }
                 data-drop-depth={ depth }>
                 { this.props.children }
             </div>

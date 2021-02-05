@@ -13,7 +13,6 @@ class JsonColor extends React.PureComponent {
         super(props);
         this.state = {
             showColorPicker: false,
-            value: this.props.value,
             type: ''
         };
     }
@@ -57,14 +56,13 @@ class JsonColor extends React.PureComponent {
     }
 
     handleColorPickerChange = (color, event) => {
-        this.setState({
-            value: this.findColor(color)
+        this.props.handleChange({
+            newColorValue: this.findColor(color)
         });
     }
 
     renderColorPicker = () => {
-        const { theme, colorType } = this.props;
-        let { value } = this.state;
+        const { theme, colorType, value } = this.props;
         let view = 'hex';
         if (colorType === 'rgb' || colorType === 'rgba') {
             view = 'rgb';
@@ -82,7 +80,7 @@ class JsonColor extends React.PureComponent {
     }
 
     renderColorBox = () => {
-        let { value } = this.state;
+        let { value } = this.props;
         return (
             <div
                 className='color-picker-box'
@@ -94,8 +92,8 @@ class JsonColor extends React.PureComponent {
 
     render() {
         const type_name = 'color';
-        let { value, showColorPicker } = this.state;
-        let { search, theme } = this.props;
+        let { showColorPicker } = this.state;
+        let { search, theme, value } = this.props;
         const valueStr = stringifyVariable(value);
         const start = (valueStr).indexOf(search);
         if (start > -1) {

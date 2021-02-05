@@ -203,7 +203,7 @@ class RjvObject extends React.PureComponent {
 
         return (
             <div
-                class={ object_type === 'array' ? 'array-key-val' : 'object-key-val' }
+                class='object-key-val'
                 {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', styles)}
             >
                 { this.getBraceStart(object_type, expanded) }
@@ -280,7 +280,6 @@ class RjvObject extends React.PureComponent {
                         rjvId={ rjvId }
                         src={ src }
                         dragAllowed={ dragEnabled }
-                        isArray={ false }
                         canDrop={ true }>
                         <JsonObject
                             key={ variable.name }
@@ -342,7 +341,7 @@ class RjvObject extends React.PureComponent {
                         rjvId={ rjvId }
                         src={ src }
                         dragAllowed={ dragEnabled }
-                        isArray={ false }
+                        value={ variable.value }
                         canDrop={ true }>
                         <VariableEditor
                             key={ variable.name + '_' + namespace }

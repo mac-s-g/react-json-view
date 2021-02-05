@@ -90,7 +90,7 @@ function getExampleJson1() {
             'testString': 'Tree',
             'objectInside': {
                 'Multilevel': {
-                    'deepNested': true,
+                    'deepNested1': true,
                     'deepNested2': false,
                     'deepNested3': 'test',
                 }

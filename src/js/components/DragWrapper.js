@@ -38,16 +38,16 @@ class DragWrapper extends Component {
             const delta = Math.sqrt(dx * dx + dy * dy);
             if (delta >= dragThreshold) {
                 this.dragging = true;
-                const objectKeyElement = this.el.querySelector('.object-key');
-                const arrayKeyElement = this.el.querySelector('.variable-row');
-                let contentClone = objectKeyElement ? objectKeyElement.cloneNode(true)
-                    : arrayKeyElement ? arrayKeyElement.cloneNode(true) : undefined;
-
+                const keyElement = this.el.querySelector('.object-key');
+                const varElement = this.el.querySelector('.variable-row');
+                let contentClone = keyElement ? keyElement.cloneNode(true)
+                    : varElement ? varElement.cloneNode(true) : undefined;
                 const editElement = contentClone.querySelector('.click-to-edit');
                 const removeElement = contentClone.querySelector('.click-to-remove');
                 if (editElement) editElement.remove();
                 if (removeElement) removeElement.remove();
                 if (contentClone) {
+                    contentClone.style.cssText = {padding: '0'};
                     this.dragContainer.appendChild(contentClone);
                     document.body.appendChild(this.dragContainer);
                 }
@@ -189,28 +189,11 @@ class DragWrapper extends Component {
         this.dragContainer.style.left = x + 30 + 'px';
     };
 
-    getFirstChildByClass = (parent, selector) => {
-        return [...parent.childNodes].find(node => node.matches(selector));
-    };
-
     getDropPosition = (dropTarget, x, y) => {
         const targetRect = dropTarget.getBoundingClientRect();
-        let topCorrection = 0;
-        let bottomCorrection = 0;
-        const presentDropMarker = this.getFirstChildByClass(dropTarget, '.drop-marker');
-        if (presentDropMarker) {
-            const dropMarkerRect = presentDropMarker.getBoundingClientRect();
-            if (presentDropMarker.matches('.drop-before')) {
-                topCorrection = dropMarkerRect.height;
-            }
 
-            if (presentDropMarker.matches('.drop-after')) {
-                bottomCorrection = dropMarkerRect.height;
-            }
-        }
-
-        return y <= targetRect.top + dropBorderPx + topCorrection ? 'before'
-            : y >= targetRect.bottom - dropBorderPx - bottomCorrection ? 'after'
+        return y <= targetRect.top + dropBorderPx ? 'before'
+            : y >= targetRect.bottom - dropBorderPx ? 'after'
                 : 'inside';
     }
 

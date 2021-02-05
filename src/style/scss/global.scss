@@ -80,15 +80,8 @@
     position: absolute;
     border: 1px solid #ccc;
     background-color: #fafafa;
-    padding: 4px 6px;
+    padding: 4px;
     border-radius: 3px;
     z-index: 10000;
-}
-
-.drop-marker {
-    position: relative;
-    height: 10px;
-    pointer-events: none;
-    background: rgba(255, 128, 0, 0.3);
-    border-radius: 5px;
+    color: #333333;
 }

@@ -18,6 +18,7 @@ ReactDom.render(
             style={{ padding: '30px', backgroundColor: 'white' }}
             src={getExampleJson1()}
             collapseStringsAfterLength={45}
+            quotesOnKeys={false}
             onEdit={e => {
                 if (e.new_value == 'error') {
                     return false;

@@ -5,7 +5,7 @@ import searchStringIndex from './../helpers/searchStringIndex';
 
 export default function getObjectName(props) {
     const {
-        parent_type, namespace, theme, jsvRoot, name, search
+        parent_type, namespace, quotesOnKeys, theme, jsvRoot, name, search
     } = props;
 
     let display_name = props.name ? props.name : '';
@@ -28,9 +28,9 @@ export default function getObjectName(props) {
         return (
             <span {...Theme(theme, 'object-name')} key={namespace}>
                 <span class="object-key">
-                    <span style={{verticalAlign:'top'}}>"</span>
-                    <span>{display_name}</span>
-                    <span style={{verticalAlign:'top'}}>"</span>
+                    { quotesOnKeys && <span style={{verticalAlign:'top'}}>"</span> }
+                    <span>{ display_name }</span>
+                    {quotesOnKeys && <span style={{verticalAlign:'top'}}>"</span> }
                 </span>
                 <span {...Theme(theme, 'colon')}>:</span>
             </span>

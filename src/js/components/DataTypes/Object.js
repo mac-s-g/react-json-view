@@ -86,7 +86,7 @@ class RjvObject extends React.PureComponent {
 
     toggleCollapsed = () => {
         this.setState({
-            expanded: !this.state.expanded
+            expanded: !this.state.expanded && this.props.collapsed
         }, () => {
             AttributeStore.set(
                 this.props.rjvId,

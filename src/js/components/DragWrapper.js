@@ -116,7 +116,7 @@ class DragWrapper extends Component {
         //rearranging node in object
         const dropTargetParent = dropTarget.parentNode.closest('.tree-node-container');
         //rearranging node in array
-        if (dropTargetParent && dropTargetParent.getAttribute('data-isArray') === 'true') {
+        if (dropTargetParent && dropTargetParent.getAttribute('data-isarray') === 'true') {
             let copy = src[droppableNodeId];
             if (dropPosition === 'before' || dropPosition === 'inside') {
                 if (+droppableNodeId + 1 === +targetNodeId) {
@@ -260,7 +260,7 @@ class DragWrapper extends Component {
             <div
                 style={ borders }
                 className='drag-wrapper tree-node-container'
-                data-isArray={ isArray }
+                data-isarray={ isArray }
                 data-drop-target={ true }
                 data-node-value={ value }
                 data-can-drop={ canDrop }

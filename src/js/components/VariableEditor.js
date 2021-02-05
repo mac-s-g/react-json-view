@@ -38,7 +38,8 @@ class VariableEditor extends React.PureComponent {
             parsedInput: {
                 type: false,
                 value: null
-            }
+            },
+            allowDragging: true
         };
     }
 
@@ -76,7 +77,7 @@ class VariableEditor extends React.PureComponent {
                 class="variable-row"
                 key={variable.name}
             >
-                {type == 'array' ? (
+                {type === 'array' ? (
                     <span
                         {...Theme(theme, 'array-key')}
                         key={variable.name + '_' + namespace}
@@ -97,7 +98,7 @@ class VariableEditor extends React.PureComponent {
                             </span>
                             <span style={{ verticalAlign: 'top' }}>"</span>
                         </span>
-                        <span {...Theme(theme, 'colon')}>:</span>
+                        <span { ...Theme(theme, 'colon') }>:</span>
                     </span>
                 )}
                 <div
@@ -139,6 +140,7 @@ class VariableEditor extends React.PureComponent {
                     ? this.getRemoveIcon()
                     : null}
             </div>
+
         );
     }
 
@@ -159,6 +161,7 @@ class VariableEditor extends React.PureComponent {
     }
 
     prepopInput = variable => {
+        this.props.isDragAllowed(false);
         if (this.props.onEdit !== false) {
             const stringifiedValue = stringifyVariable(variable.value);
             const detected = parseInput(stringifiedValue);
@@ -227,8 +230,10 @@ class VariableEditor extends React.PureComponent {
         case 'color':
             return <JsonColor
                 value={ variable.value }
+                handleChange={ this.submitEdit }
+                isOneColorPickerOpen={ this.toggleColorEditor }
                 colorType={ this.chooseColorCodeType(variable.value) }
-                {...props}/>;
+                { ...props }/>;
         default:
             // catch-all for types that weren't anticipated
             return (
@@ -268,12 +273,14 @@ class VariableEditor extends React.PureComponent {
                                 editMode: false,
                                 editValue: ''
                             });
+                            this.props.isDragAllowed(true);
                             break;
                         }
                         case 'Enter': {
                             if (e.ctrlKey || e.metaKey) {
                                 this.submitEdit(true);
                             }
+                            this.props.isDragAllowed(true);
                             break;
                         }
                         }
@@ -288,6 +295,7 @@ class VariableEditor extends React.PureComponent {
                         { ...Theme(theme, 'cancel-icon') }
                         onClick={() => {
                             this.setState({ editMode: false, editValue: '' });
+                            this.props.isDragAllowed(true);
                         }}
                     />
                     <CheckCircle
@@ -301,6 +309,13 @@ class VariableEditor extends React.PureComponent {
                 </div>
             </div>
         );
+    }
+
+    toggleColorEditor = (isColorPickerOpen) => {
+        this.props.isDragAllowed(isColorPickerOpen);
+        this.setState({
+            allowDragging: isColorPickerOpen
+        });
     }
 
     chooseColorCodeType = (colorCode) => {
@@ -319,15 +334,26 @@ class VariableEditor extends React.PureComponent {
     }
 
     submitEdit = submit_detected => {
+        const { allowDragging } = this.state;
+        let newColor;
+        if (submit_detected !== undefined && submit_detected['newColorValue']) {
+            newColor = submit_detected['newColorValue'];
+        }
         const { variable, namespace, rjvId } = this.props;
         const { editValue, parsedInput } = this.state;
         let new_value = editValue;
         if (submit_detected && parsedInput.type) {
             new_value = parsedInput.value;
         }
+        if (newColor) {
+            new_value = newColor;
+        }
         this.setState({
             editMode: false
         });
+        if (allowDragging) {
+            this.props.isDragAllowed(true);
+        }
         dispatcher.dispatch({
             name: 'VARIABLE_UPDATED',
             rjvId: rjvId,

@@ -53,6 +53,7 @@ class ReactJsonView extends React.PureComponent {
         enableClipboard: true,
         displayObjectSize: true,
         displayDataTypes: true,
+        quotesOnKeys: true,
         onEdit: false,
         onDelete: false,
         onAdd: false,
@@ -222,9 +223,7 @@ class ReactJsonView extends React.PureComponent {
                 </div>
                 <div
                     className="react-json-view"
-                    style={{...Theme(theme, 'app-container').style, ...style}}
-                >
-                
+                    style={{...Theme(theme, 'app-container').style, ...style}}>
                     <JsonViewer
                         {...this.props}
                         src={src}

@@ -100,10 +100,6 @@ const getDefaultThemeStyling = theme => {
             top: '20px',
             left: '65px'
         },
-        'color-box': {
-            width: '10px',
-            height: '10px',
-        },
         objectKeyVal: (component, variable_style) => {
             return {
                 style: {

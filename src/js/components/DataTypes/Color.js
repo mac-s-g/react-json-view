@@ -13,7 +13,6 @@ class JsonColor extends React.PureComponent {
         super(props);
         this.state = {
             showColorPicker: false,
-            value: this.props.value,
             type: ''
         };
     }
@@ -25,8 +24,10 @@ class JsonColor extends React.PureComponent {
     }
 
     toggleColorPicker = () => {
+        const { showColorPicker } = this.state;
+        this.props.isOneColorPickerOpen(showColorPicker);
         this.setState({
-            showColorPicker: !this.state.showColorPicker
+            showColorPicker: !showColorPicker
         });
     }
 
@@ -36,38 +37,49 @@ class JsonColor extends React.PureComponent {
         let g = color.rgb.g;
         let b = color.rgb.b;
         let alpha = color.rgb.a;
-        if (colorType === 'hex') {
-            return color.hex;
+        let h = Math.round(color.hsl.h);
+        let s = Math.round(color.hsl.s*100);
+        let l = Math.round(color.hsl.l*100);
+        let a = color.hsl.a;
+        if (colorType === 'rgb') {
+            return `rgb(${r}, ${g}, ${b})`;
+        } else if (colorType === 'rgba') {
+            return `rgba(${r}, ${g}, ${b}, ${alpha})`;
         }
-        else if (colorType === 'rgb') {
-            return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+        else if (colorType === 'hsl') {
+            return `hsl(${h}, ${s}%, ${l}%)`;
+        } else if (colorType === 'hsla') {
+            return `hsla(${h}, ${s}%, ${l}%, ${a})`;
         }
-        return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
+        return color.hex;
     }
 
     handleColorPickerChange = (color, event) => {
-        this.setState({
-            value: this.findColor(color)
+        this.props.handleChange({
+            newColorValue: this.findColor(color)
         });
     }
 
     renderColorPicker = () => {
-        const { theme, colorType } = this.props;
-        let { value } = this.state;
-        if (colorType === 'rgb') {
-            value = 'rgba' + value.slice(3, value.length - 1) + ', 0)';
+        const { theme, colorType, value } = this.props;
+        let view = 'hex';
+        if (colorType === 'rgb' || colorType === 'rgba') {
+            view = 'rgb';
+        } else if (colorType === 'hsl' || colorType === 'hsla') {
+            view = 'hsl';
         }
         return (
             <span {...Theme(theme, 'color-picker')}>
                 <ReactColorPicker
                     color={ value }
+                    defaultView={ view }
                     onChangeComplete={ this.handleColorPickerChange }/>
             </span>
         );
     }
 
     renderColorBox = () => {
-        let { value } = this.state;
+        let { value } = this.props;
         return (
             <div
                 className='color-picker-box'
@@ -79,8 +91,8 @@ class JsonColor extends React.PureComponent {
 
     render() {
         const type_name = 'color';
-        let { value, showColorPicker } = this.state;
-        let { search, theme } = this.props;
+        let { showColorPicker } = this.state;
+        let { search, theme, value } = this.props;
         const valueStr = stringifyVariable(value);
         const start = (valueStr).indexOf(search);
         if (start > -1) {

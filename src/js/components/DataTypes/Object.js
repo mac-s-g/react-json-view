@@ -19,6 +19,7 @@ import { CollapsedIcon, ExpandedIcon } from './../ToggleIcons';
 
 //theme
 import Theme from './../../themes/getStyle';
+import DragWrapper from '../DragWrapper';
 
 //increment 1 with each nested object & array
 const DEPTH_INCREMENT = 1;
@@ -31,7 +32,9 @@ class RjvObject extends React.PureComponent {
         const state = RjvObject.getState(props);
         this.state = {
             ...state,
-            prevProps: {}
+            prevProps: {},
+            dropTarget: {},
+            dragEnabled: true
         };
     }
 
@@ -99,9 +102,9 @@ class RjvObject extends React.PureComponent {
             <div class="pushed-content object-container">
                 <div
                     class="object-content"
-                    {...Theme(this.props.theme, 'pushed-content')}
+                    { ...Theme(this.props.theme, 'pushed-content') }
                 >
-                    {this.renderObjectContents(src, props)}
+                    { this.renderObjectContents(src, props) }
                 </div>
             </div>
         );
@@ -116,9 +119,9 @@ class RjvObject extends React.PureComponent {
         } else {
             return (
                 <div
-                    {...Theme(this.props.theme, 'ellipsis')}
+                    { ...Theme(this.props.theme, 'ellipsis') }
                     class="node-ellipsis"
-                    onClick={this.toggleCollapsed}
+                    onClick={ this.toggleCollapsed }
                 >
                     ...
                 </div>
@@ -129,7 +132,7 @@ class RjvObject extends React.PureComponent {
     getObjectMetaData = src => {
         const { rjvId, theme } = this.props;
         const { size } = this.state;
-        return <VariableMeta size={size} {...this.props} />;
+        return <VariableMeta size={ size } { ...this.props } />;
     }
 
     getBraceStart(object_type, expanded) {
@@ -200,30 +203,36 @@ class RjvObject extends React.PureComponent {
 
         return (
             <div
-                class="object-key-val"
+                class='object-key-val'
                 {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', styles)}
             >
-                {this.getBraceStart(object_type, expanded)}
-                {expanded
+                { this.getBraceStart(object_type, expanded) }
+                { expanded
                     ? this.getObjectContent(depth, src, {
                         theme,
                         iconStyle,
                         ...rest
                     })
-                    : this.getEllipsis()}
+                    : this.getEllipsis() }
                 <span class="brace-row">
                     <span
-                        style={{
+                        style={ {
                             ...Theme(theme, 'brace').style,
                             paddingLeft: expanded ? '3px' : '0px'
-                        }}
+                        } }
                     >
-                        {object_type === 'array' ? ']' : '}'}
+                        { object_type === 'array' ? ']' : '}' }
                     </span>
-                    {expanded ? null : this.getObjectMetaData(src)}
+                    { expanded ? null : this.getObjectMetaData(src) }
                 </span>
             </div>
         );
+    }
+
+    handleDragAllow = (allowToDrag) => {
+        this.setState({
+            dragEnabled: allowToDrag
+        });
     }
 
     renderObjectContents = (variables, props) => {
@@ -232,17 +241,25 @@ class RjvObject extends React.PureComponent {
             parent_type,
             index_offset,
             groupArraysAfterLength,
-            namespace
+            namespace,
+            src,
+            type,
+            sortKeys,
+            rjvId
         } = this.props;
-        const { object_type } = this.state;
+        const {
+            object_type,
+            dropTarget,
+            dragEnabled
+        } = this.state;
         let theme = props.theme;
         let elements = [],
             variable;
         let keys = Object.keys(variables || {});
-        if (this.props.sortKeys) {
+        if (sortKeys) {
             keys = keys.sort();
         }
-        keys.forEach(name => {
+        keys.forEach((name, index) => {
             variable = new JsonVariable(name, variables[name]);
 
             if (parent_type === 'array_group' && index_offset) {
@@ -252,15 +269,28 @@ class RjvObject extends React.PureComponent {
                 return;
             } else if (variable.type === 'object') {
                 elements.push(
-                    <JsonObject
-                        key={variable.name}
-                        depth={depth + DEPTH_INCREMENT}
-                        name={variable.name}
-                        src={variable.value}
-                        namespace={namespace.concat(variable.name)}
-                        parent_type={object_type}
-                        {...props}
-                    />
+                    <DragWrapper
+                        key={ variable.name }
+                        name={ variable.name }
+                        value={ variable.value }
+                        dropMarker={ index === keys.length - 1 ? 'drop-after' : 'drop-before' }
+                        dropTarget={ dropTarget }
+                        depth={ depth }
+                        namespace={ namespace }
+                        rjvId={ rjvId }
+                        src={ src }
+                        dragAllowed={ dragEnabled }
+                        canDrop={ true }>
+                        <JsonObject
+                            key={ variable.name }
+                            depth={ depth + DEPTH_INCREMENT }
+                            name={ variable.name }
+                            src={ variable.value }
+                            namespace={ namespace.concat(variable.name) }
+                            parent_type={ object_type }
+                            { ...props }
+                        />
+                    </DragWrapper>
                 );
             } else if (variable.type === 'array') {
                 let ObjectComponent = JsonObject;
@@ -273,27 +303,57 @@ class RjvObject extends React.PureComponent {
                 }
 
                 elements.push(
-                    <ObjectComponent
-                        key={variable.name}
-                        depth={depth + DEPTH_INCREMENT}
-                        name={variable.name}
-                        src={variable.value}
-                        namespace={namespace.concat(variable.name)}
-                        type="array"
-                        parent_type={object_type}
-                        {...props}
-                    />
+                    <DragWrapper
+                        key={ variable.name }
+                        name={ variable.name }
+                        value={ variable.value }
+                        dropMarker={ index === keys.length - 1 ? 'drop-after' : 'drop-before' }
+                        dropTarget={ dropTarget }
+                        depth={ depth }
+                        namespace={ namespace }
+                        rjvId={ rjvId }
+                        src={ src }
+                        dragAllowed={ true }
+                        isArray={ true }
+                        canDrop={ true }>
+                        <ObjectComponent
+                            key={ variable.name }
+                            depth={ depth + DEPTH_INCREMENT }
+                            name={ variable.name }
+                            src={ variable.value }
+                            namespace={ namespace.concat(variable.name) }
+                            type="array"
+                            parent_type={ object_type }
+                            { ...props }
+                        />
+                    </DragWrapper>
                 );
             } else {
                 elements.push(
-                    <VariableEditor
-                        key={variable.name + '_' + namespace}
-                        variable={variable}
-                        singleIndent={SINGLE_INDENT}
-                        namespace={namespace}
-                        type={this.props.type}
-                        {...props}
-                    />
+                    <DragWrapper
+                        key={ variable.name }
+                        name={ variable.name }
+                        value={ variable.value }
+                        dropMarker={ index === keys.length - 1 ? 'drop-after' : 'drop-before' }
+                        dropTarget={ dropTarget }
+                        depth={ depth }
+                        namespace={ namespace }
+                        rjvId={ rjvId }
+                        src={ src }
+                        dragAllowed={ dragEnabled }
+                        value={ variable.value }
+                        canDrop={ true }>
+                        <VariableEditor
+                            key={ variable.name + '_' + namespace }
+                            src={ src }
+                            variable={ variable }
+                            singleIndent={ SINGLE_INDENT }
+                            namespace={ namespace }
+                            type={ type }
+                            isDragAllowed={ this.handleDragAllow }
+                            { ...props } />
+                    </DragWrapper>
+
                 );
             }
         });

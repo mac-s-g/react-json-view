@@ -4,7 +4,6 @@ import {toType} from './../helpers/util';
 
 //store persistent display attributes for objects and arrays
 class ObjectAttributes extends EventEmitter {
-
     objects = {}
 
     set = (rjvId, name, key, value) => {
@@ -20,7 +19,7 @@ class ObjectAttributes extends EventEmitter {
     get = (rjvId, name, key, default_value) => {
         if (this.objects[rjvId] === undefined
             || this.objects[rjvId][name] === undefined
-            || this.objects[rjvId][name][key] == undefined
+            || this.objects[rjvId][name][key] === undefined
         ) {
             return default_value;
         }
@@ -39,7 +38,7 @@ class ObjectAttributes extends EventEmitter {
             );
             this.set(
                 rjvId, 'action', 'variable-update',
-                {...data, type:'variable-edited'}
+                {...data, type: 'variable-edited'}
             );
             this.emit('variable-update-' + rjvId);
             break;
@@ -49,7 +48,7 @@ class ObjectAttributes extends EventEmitter {
             );
             this.set(
                 rjvId, 'action', 'variable-update',
-                {...data, type:'variable-removed'}
+                {...data, type: 'variable-removed'}
             );
             this.emit('variable-update-' + rjvId);
             break;
@@ -59,7 +58,7 @@ class ObjectAttributes extends EventEmitter {
             );
             this.set(
                 rjvId, 'action', 'variable-update',
-                {...data, type:'variable-added'}
+                {...data, type: 'variable-added'}
             );
             this.emit('variable-update-' + rjvId);
             break;
@@ -88,9 +87,8 @@ class ObjectAttributes extends EventEmitter {
             walk = walk[idx];
         }
 
-
         if (variable_removed) {
-            if (toType(walk) == 'array') {
+            if (toType(walk) === 'array') {
                 walk.splice(name, 1);
             } else {
                 delete walk[name];

@@ -1,7 +1,8 @@
 {
-    "name": "@usulpro/react-json-view",
-    "description": "Interactive react component for displaying javascript arrays and JSON objects.",
-    "version": "2.0.0",
+    "name": "react-json-view",
+    "description":
+        "Interactive react component for displaying javascript arrays and JSON objects.",
+    "version": "1.19.1",
     "main": "dist/main.js",
     "dependencies": {
         "color-string": "^1.5.3",

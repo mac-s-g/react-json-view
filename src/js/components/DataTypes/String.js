@@ -48,7 +48,7 @@ export default class extends React.PureComponent {
 
         if (collapsible && value.length > collapseStringsAfterLength) {
             style.style.cursor = 'pointer';
-            if (this.state.collapsed) {
+            if (collapsed) {
                 value = (
                     <span>
                         {value.substring(0, collapseStringsAfterLength)}

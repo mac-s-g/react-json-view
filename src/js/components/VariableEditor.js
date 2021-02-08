@@ -252,7 +252,6 @@ class VariableEditor extends React.PureComponent {
                         {JSON.stringify(variable.value)}
                     </div>
                 );
-        
         }
     };
 

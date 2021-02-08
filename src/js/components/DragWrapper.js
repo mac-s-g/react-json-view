@@ -33,6 +33,11 @@ class DragWrapper extends Component {
         document.body.addEventListener('mouseleave', this.cleanUpDrag);
     }
 
+    removeCharsFromInnerText = (text) => {
+        //currently removes chars ": [ ] { }" from inner text
+        return text.replaceAll(/:|{|}|[[\]]/g,'');
+    }
+
     handleDragMove = event => {
         if (!this.dragging) {
             const dx = this.dragStartPos.x - event.clientX;
@@ -40,16 +45,11 @@ class DragWrapper extends Component {
             const delta = Math.sqrt(dx * dx + dy * dy);
             if (delta >= dragThreshold) {
                 this.dragging = true;
-                const keyElement = this.el.querySelector('.object-key');
-                const varElement = this.el.querySelector('.variable-row');
-                let contentClone = keyElement ? keyElement.cloneNode(true)
-                    : varElement ? varElement.cloneNode(true) : undefined;
-                const editElement = contentClone.querySelector('.click-to-edit');
-                const removeElement = contentClone.querySelector('.click-to-remove');
-                if (editElement) editElement.remove();
-                if (removeElement) removeElement.remove();
+                const spanElement = this.el.querySelector('span');
+                let contentClone = spanElement ? spanElement.cloneNode(true) : undefined;
+                contentClone.innerText = this.removeCharsFromInnerText(contentClone.innerText);
                 if (contentClone) {
-                    contentClone.style.cssText = {padding: '0'};
+                    contentClone.style.cssText = { padding: '0' };
                     this.dragContainer.appendChild(contentClone);
                     document.body.appendChild(this.dragContainer);
                 }

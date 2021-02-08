@@ -93,7 +93,20 @@ function getExampleJson1() {
     return {
         string: 'this is a test string',
         integer: 42,
-        empty_array: [],
+        arrayOfObjects: [
+            {
+                'firstObjectInArray': 1
+            },
+            {
+                'secondObjectInArray': 2
+            },
+            {
+                'thirdObjectInArray': 3
+            },
+            {
+                'fourthObjectInArray': 4
+            }
+        ],
         empty_object: {},
         array: [1, 2, 3, 'test'],
         float: -2.757,

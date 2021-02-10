@@ -58,7 +58,8 @@ class VariableEditor extends React.PureComponent {
             onSelect,
             rjvId,
             search,
-            quotesOnKeys
+            quotesOnKeys,
+            displayArrayKey
         } = this.props;
         const { editMode } = this.state;
 
@@ -78,14 +79,14 @@ class VariableEditor extends React.PureComponent {
                 class="variable-row"
                 key={variable.name}
             >
-                {type === 'array' ? (
+                {type === 'array' ? ((displayArrayKey ?
                     <span
                         {...Theme(theme, 'array-key')}
                         key={variable.name + '_' + namespace}
                     >
                         {variableName}
                         <div {...Theme(theme, 'colon')}>:</div>
-                    </span>
+                    </span> : null)
                 ) : (
                     <span>
                         <span

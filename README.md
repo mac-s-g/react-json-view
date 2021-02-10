@@ -61,6 +61,8 @@ Name|Type|Default|Description
 `sortKeys`|`boolean`|`false`|set to true to sort object keys
 `validationMessage`|`string`|"Validation Error"|Custom message for validation failures to `onEdit`, `onAdd`, or `onDelete` callbacks
 `displaySearch`|`boolean`|`true`|set true/false to display or hide a search box
+`displayArrayKey`|`boolean`|`true`|When set to `true`, the index of the elements prefix values
+`quotesOnKeys`|`boolean`|`true`|set to false to remove quotes from keys (eg. `"name":` vs. `name:`)
 
 ### Features
 * `onEdit`, `onAdd` and `onDelete` props allow users to edit the `src` variable

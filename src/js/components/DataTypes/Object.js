@@ -358,7 +358,6 @@ class RjvObject extends React.PureComponent {
                             isDragAllowed={ this.handleDragAllow }
                             { ...props } />
                     </DragWrapper>
-
                 );
             }
         });

@@ -9,7 +9,7 @@ import ReactDom from 'react-dom';
 //import the react-json-view component (installed with npm)
 import JsonViewer from './../../src/js/index';
 
-class DevDemo extends React.PureComponent {
+class DevDemo extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -31,6 +31,7 @@ class DevDemo extends React.PureComponent {
     }
 
     render() {
+        const { collapsedState } = this.state;
         return (
             <div id='app-container'>
                 <button onClick={ () => this.toggleCollapse() }>Toggle collapse</button>
@@ -63,7 +64,7 @@ class DevDemo extends React.PureComponent {
                     defaultValue=""
                     displayDataTypes={false}
                     displaySearch={true}
-                    collapsed={ this.state.collapsedState }
+                    collapsed={ collapsedState }
                     displayArrayKey={true}
                 />
 

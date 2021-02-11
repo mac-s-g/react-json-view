@@ -13,7 +13,7 @@ class DevDemo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            collapsedState: 1,
+            collapsedState: 1
         };
     }
 
@@ -120,8 +120,6 @@ function getExampleJson1() {
         string_number_hsl: 'hsl(180, 50%, 50%)',
         string_number_hsla: 'hsla(170, 45%, 45%, 1)',
         date: new Date(),
-        moment: Moment(),
-        regexp: /[0-9]/gi,
         testObj: {
             'testString': 'Tree',
             'objectInside': {

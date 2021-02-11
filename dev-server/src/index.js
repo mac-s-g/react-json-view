@@ -64,7 +64,7 @@ class DevDemo extends React.PureComponent {
                     displayDataTypes={false}
                     displaySearch={true}
                     collapsed={ this.state.collapsedState }
-                    displayArrayKey={false}
+                    displayArrayKey={true}
                 />
 
             </div>

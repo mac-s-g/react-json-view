@@ -60,14 +60,6 @@ class DevDemo extends React.PureComponent {
                     displayObjectSize={false}
                     name={'dev-server'}
                     enableClipboard={false}
-                    shouldCollapse={({ src, namespace, type }) => {
-                        if (type === 'array' && src.indexOf('test') > -1) {
-                            return true;
-                        } else if (namespace.indexOf('moment') > -1) {
-                            return true;
-                        }
-                        return false;
-                    }}
                     defaultValue=""
                     displayDataTypes={false}
                     displaySearch={true}

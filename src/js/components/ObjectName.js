@@ -17,7 +17,7 @@ export default function getObjectName(props) {
 
     if (jsvRoot && (name === false || name === null)) {
         return (<span />);
-    } else if (parent_type == 'array') {
+    } else if (parent_type === 'array') {
         return displayArrayKey ? (
             <span {...Theme(theme, 'array-key')} key={namespace}>
                 <span class="array-key">{display_name}</span>

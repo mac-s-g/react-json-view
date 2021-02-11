@@ -12,8 +12,6 @@ describe('<ObjectName />', function() {
                 name="test"
                 theme="rjv-default"
                 jsvRoot={false}
-                quotesOnKeys={true}
-                displayArrayKey={false}
             />
         );
         expect(wrapper.find('.object-key')).to.have.length(1);
@@ -27,8 +25,7 @@ describe('<ObjectName />', function() {
                 parent_type="array"
                 theme="rjv-default"
                 jsvRoot={false}
-                quotesOnKeys={true}
-                displayArrayKey={false}
+                displayArrayKey={true}
             />
         );
         expect(wrapper.find('.array-key')).to.have.length(1);

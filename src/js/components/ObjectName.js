@@ -15,15 +15,18 @@ export default function getObjectName(props) {
         display_name = highlightedString(display_name, start, search.length, theme);
     }
 
-    if (jsvRoot && (name === false || name === null)) {
-        return (<span />);
+    const hasRootAndMissingName = jsvRoot && (name === false || name === null);
+    const isArrayAndKeyMissing = parent_type === 'array' && !displayArrayKey;
+
+    if (hasRootAndMissingName || isArrayAndKeyMissing) {
+        return (<span/>);
     } else if (parent_type === 'array') {
-        return displayArrayKey ? (
+        return (
             <span {...Theme(theme, 'array-key')} key={namespace}>
                 <span class="array-key">{display_name}</span>
                 <span {...Theme(theme, 'colon')}>:</span>
             </span>
-        ) : (<span/>);
+        );
     } else {
         return (
             <span {...Theme(theme, 'object-name')} key={namespace}>

@@ -46,9 +46,9 @@ class DragWrapper extends Component {
             if (delta >= dragThreshold) {
                 this.dragging = true;
                 const spanElement = this.el.querySelector('span');
-                let contentClone = spanElement ? spanElement.cloneNode(true) : undefined;
-                contentClone.innerText = this.removeCharsFromInnerText(contentClone.innerText);
-                if (contentClone) {
+                if (spanElement) {
+                    let contentClone = spanElement.cloneNode(true);
+                    contentClone.innerText = this.removeCharsFromInnerText(contentClone.innerText);
                     contentClone.style.cssText = { padding: '0' };
                     this.dragContainer.appendChild(contentClone);
                     document.body.appendChild(this.dragContainer);

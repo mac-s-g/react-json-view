@@ -43,10 +43,54 @@ class VariableEditor extends React.PureComponent {
         };
     }
 
+    highlightString = () => {
+        const { variable, search, type, theme } = this.props;
+        let variableName = variable.name;
+        if (typeof variableName === 'string' && search && type !== 'array') {
+            const start = (variableName).indexOf(search);
+            if (start > -1) {
+                variableName = highlightedString(variable.name, start, search.length, theme);
+            }
+        }
+        return variableName;
+    }
+    
+    renderArrayKeys = () => {
+        const { displayArrayKey, variable, namespace, theme } = this.props;
+        let variableName = this.highlightString();
+        return displayArrayKey && <span
+            { ...Theme(theme, 'array-key') }
+            key={ variable.name + '_' + namespace }
+        >
+            { variableName }
+            <div { ...Theme(theme, 'colon') }>:</div>
+        </span>;
+    }
+
+    renderObjectKeys = () => {
+        const { theme, namespace, variable, quotesOnKeys } = this.props;
+        let variableName = this.highlightString();
+        return (
+            <span>
+                <span
+                    { ...Theme(theme, 'object-name') }
+                    className="object-key"
+                    key={ variable.name + '_' + namespace }
+                >
+                    { !!quotesOnKeys && <span style={ {verticalAlign: 'top'} }>"</span> }
+                    <span style={ {display: 'inline-block'} }>
+                        { variableName }
+                    </span>
+                    { !!quotesOnKeys && <span style={ {verticalAlign: 'top'} }>"</span> }
+                </span>
+                <span { ...Theme(theme, 'colon') }>:</span>
+            </span>
+        );
+    }
+
     render() {
         const {
             variable,
-            src,
             singleIndent,
             type,
             theme,
@@ -56,53 +100,18 @@ class VariableEditor extends React.PureComponent {
             onEdit,
             onDelete,
             onSelect,
-            rjvId,
-            search,
-            quotesOnKeys,
-            displayArrayKey
         } = this.props;
         const { editMode } = this.state;
 
-        let variableName = variable.name;
-        if (typeof variableName === 'string' && search && type !== 'array') {
-            const start = (variableName).indexOf(search);
-            if (start > -1) {
-                variableName = highlightedString(variable.name, start, search.length, theme);
-            }
-        }
-
         return (
             <div
-                {...Theme(theme, 'objectKeyVal', {
+                { ...Theme(theme, 'objectKeyVal', {
                     paddingLeft: indentWidth * singleIndent
-                })}
+                }) }
                 class="variable-row"
-                key={variable.name}
+                key={ variable.name }
             >
-                {type === 'array' ? ((displayArrayKey ?
-                    <span
-                        {...Theme(theme, 'array-key')}
-                        key={variable.name + '_' + namespace}
-                    >
-                        {variableName}
-                        <div {...Theme(theme, 'colon')}>:</div>
-                    </span> : null)
-                ) : (
-                    <span>
-                        <span
-                            {...Theme(theme, 'object-name')}
-                            class="object-key"
-                            key={variable.name + '_' + namespace}
-                        >
-                            { !!quotesOnKeys && <span style={{verticalAlign:'top'}}>"</span> }
-                            <span style={{ display: 'inline-block' }}>
-                                {variableName}
-                            </span>
-                            { !!quotesOnKeys && <span style={{verticalAlign:'top'}}>"</span> }
-                        </span>
-                        <span { ...Theme(theme, 'colon') }>:</span>
-                    </span>
-                )}
+                { type === 'array' ? this.renderArrayKeys() : this.renderObjectKeys() }
                 <div
                     class="variable-value"
                     onClick={
@@ -125,22 +134,22 @@ class VariableEditor extends React.PureComponent {
                         cursor: onSelect === false ? 'default' : 'pointer'
                     })}
                 >
-                    {this.getValue(variable, editMode)}
+                    { this.getValue(variable, editMode) }
                 </div>
-                {enableClipboard ? (
+                { enableClipboard ? (
                     <CopyToClipboard
                         hidden={editMode}
                         src={variable.value}
                         clickCallback={enableClipboard}
                         {...{ theme, namespace }}
                     />
-                ) : null}
-                {onEdit !== false && editMode == false
+                ) : null }
+                { onEdit !== false && editMode == false
                     ? this.getEditIcon()
-                    : null}
-                {onDelete !== false && editMode == false
+                    : null }
+                { onDelete !== false && editMode == false
                     ? this.getRemoveIcon()
-                    : null}
+                    : null }
             </div>
 
         );

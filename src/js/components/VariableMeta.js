@@ -1,8 +1,9 @@
 import React from 'react';
 import dispatcher from './../helpers/dispatcher';
 
+import AttributeStore from '../stores/ObjectAttributes';
 import CopyToClipboard from './CopyToClipboard';
-import {toType} from './../helpers/util';
+import { toType } from '../helpers/util';
 
 //icons
 import {
@@ -39,6 +40,12 @@ export default class extends React.PureComponent {
                     class="click-to-add-icon"
                     {...Theme(theme, 'addVarIcon')}
                     onClick={() => {
+                        AttributeStore.set(
+                            rjvId,
+                            namespace,
+                            'expanded',
+                            true
+                        );
                         const request = {
                             name: depth > 0 ? name : null,
                             namespace: namespace.splice(

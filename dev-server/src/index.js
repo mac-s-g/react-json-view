@@ -42,7 +42,7 @@ class DevDemo extends React.PureComponent {
                     collapseStringsAfterLength={45}
                     quotesOnKeys={false}
                     onEdit={e => {
-                        if (e.new_value == 'error') {
+                        if (e.new_value === 'error') {
                             return false;
                         }
                     }}
@@ -50,7 +50,7 @@ class DevDemo extends React.PureComponent {
                         console.log('delete callback', e);
                     }}
                     onAdd={e => {
-                        if (e.new_value == 'error') {
+                        if (e.new_value === 'error') {
                             return false;
                         }
                     }}
@@ -72,6 +72,7 @@ class DevDemo extends React.PureComponent {
                     displayDataTypes={false}
                     displaySearch={true}
                     collapsed={ this.state.collapsedState }
+                    displayArrayKey={true}
                 />
 
             </div>

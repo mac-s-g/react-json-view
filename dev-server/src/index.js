@@ -42,7 +42,7 @@ class DevDemo extends React.PureComponent {
                     collapseStringsAfterLength={45}
                     quotesOnKeys={false}
                     onEdit={e => {
-                        if (e.new_value == 'error') {
+                        if (e.new_value === 'error') {
                             return false;
                         }
                     }}
@@ -50,7 +50,7 @@ class DevDemo extends React.PureComponent {
                         console.log('delete callback', e);
                     }}
                     onAdd={e => {
-                        if (e.new_value == 'error') {
+                        if (e.new_value === 'error') {
                             return false;
                         }
                     }}
@@ -60,18 +60,11 @@ class DevDemo extends React.PureComponent {
                     displayObjectSize={false}
                     name={'dev-server'}
                     enableClipboard={false}
-                    shouldCollapse={({ src, namespace, type }) => {
-                        if (type === 'array' && src.indexOf('test') > -1) {
-                            return true;
-                        } else if (namespace.indexOf('moment') > -1) {
-                            return true;
-                        }
-                        return false;
-                    }}
                     defaultValue=""
                     displayDataTypes={false}
                     displaySearch={true}
                     collapsed={ this.state.collapsedState }
+                    displayArrayKey={true}
                 />
 
             </div>

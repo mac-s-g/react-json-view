@@ -25,6 +25,7 @@ describe('<ObjectName />', function() {
                 parent_type="array"
                 theme="rjv-default"
                 jsvRoot={false}
+                displayArrayKey={true}
             />
         );
         expect(wrapper.find('.array-key')).to.have.length(1);
@@ -37,6 +38,8 @@ describe('<ObjectName />', function() {
                 name={false}
                 theme="rjv-default"
                 jsvRoot={true}
+                displayArrayKey={false}
+                quotesOnKeys={true}
             />
         );
         expect(wrapper.find('span').children()).to.have.length(0);
@@ -50,6 +53,7 @@ describe('<ObjectName />', function() {
                 theme="rjv-default"
                 jsvRoot={false}
                 quotesOnKeys={true}
+                displayArrayKey={false}
             />
         );
         expect(wrapper.find('.object-key').children('span')).to.have.length(3);
@@ -63,8 +67,24 @@ describe('<ObjectName />', function() {
                 theme="rjv-default"
                 jsvRoot={false}
                 quotesOnKeys={false}
+                displayArrayKey={false}
             />
         );
         expect(wrapper.find('.object-key').children('span')).to.have.length(1);
     });
+
+
+    it("ObjectName array hides key", function() {
+        const wrapper = render(
+            <ObjectName
+                namespace={"test"}
+                name="test"
+                parent_type="array"
+                theme="rjv-default"
+                jsvRoot={false}
+                displayArrayKey={false}
+            />
+        )
+        expect(wrapper.find(".array-key")).to.have.length(0)
+    })
 });

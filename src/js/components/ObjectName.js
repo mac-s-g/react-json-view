@@ -5,7 +5,7 @@ import searchStringIndex from './../helpers/searchStringIndex';
 
 export default function getObjectName(props) {
     const {
-        parent_type, namespace, quotesOnKeys, theme, jsvRoot, name, search
+        parent_type, namespace, quotesOnKeys, theme, jsvRoot, name, search, displayArrayKey
     } = props;
 
     let display_name = props.name ? props.name : '';
@@ -15,9 +15,12 @@ export default function getObjectName(props) {
         display_name = highlightedString(display_name, start, search.length, theme);
     }
 
-    if (jsvRoot && (name === false || name === null)) {
-        return (<span />);
-    } else if (parent_type == 'array') {
+    const hasRootAndMissingName = jsvRoot && (name === false || name === null);
+    const isArrayAndKeyMissing = parent_type === 'array' && !displayArrayKey;
+
+    if (hasRootAndMissingName || isArrayAndKeyMissing) {
+        return (<span/>);
+    } else if (parent_type === 'array') {
         return (
             <span {...Theme(theme, 'array-key')} key={namespace}>
                 <span class="array-key">{display_name}</span>
@@ -28,9 +31,9 @@ export default function getObjectName(props) {
         return (
             <span {...Theme(theme, 'object-name')} key={namespace}>
                 <span class="object-key">
-                    { quotesOnKeys && <span style={{verticalAlign:'top'}}>"</span> }
+                    { !!quotesOnKeys && <span style={{verticalAlign:'top'}}>"</span> }
                     <span>{ display_name }</span>
-                    { quotesOnKeys && <span style={{verticalAlign:'top'}}>"</span> }
+                    { !!quotesOnKeys && <span style={{verticalAlign:'top'}}>"</span> }
                 </span>
                 <span {...Theme(theme, 'colon')}>:</span>
             </span>

@@ -113,9 +113,9 @@ class ObjectAttributes extends EventEmitter {
         const type = toType(src);
         let result;
         let idx = copy_namespace.shift();
-        if (type == 'array') {
+        if (type === 'array') {
             result = [...src];
-        } else if (type == 'object') {
+        } else if (type === 'object') {
             result = {...src};
         }
         if (idx !== undefined) {

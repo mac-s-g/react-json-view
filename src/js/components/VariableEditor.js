@@ -42,6 +42,18 @@ class VariableEditor extends React.PureComponent {
             allowDragging: true
         };
     }
+    
+    renderArrayKeys = () => {
+        const { displayArrayKey, variable, namespace, theme } = this.props;
+        return (displayArrayKey ?
+            <span
+                {...Theme(theme, 'array-key')}
+                key={variable.name + '_' + namespace}
+            >
+                {variable.name}
+                <div {...Theme(theme, 'colon')}>:</div>
+            </span> : null);
+    }
 
     render() {
         const {
@@ -57,7 +69,9 @@ class VariableEditor extends React.PureComponent {
             onDelete,
             onSelect,
             rjvId,
-            search
+            search,
+            quotesOnKeys,
+            displayArrayKey
         } = this.props;
         const { editMode } = this.state;
 
@@ -77,30 +91,24 @@ class VariableEditor extends React.PureComponent {
                 class="variable-row"
                 key={variable.name}
             >
-                {type === 'array' ? (
-                    <span
-                        {...Theme(theme, 'array-key')}
-                        key={variable.name + '_' + namespace}
-                    >
-                        {variableName}
-                        <div {...Theme(theme, 'colon')}>:</div>
-                    </span>
-                ) : (
-                    <span>
-                        <span
-                            {...Theme(theme, 'object-name')}
-                            class="object-key"
-                            key={variable.name + '_' + namespace}
-                        >
-                            <span style={{ verticalAlign: 'top' }}>"</span>
-                            <span style={{ display: 'inline-block' }}>
-                                {variableName}
+                {type === 'array' ?
+                    this.renderArrayKeys() : (
+                        <span>
+                            <span
+                                {...Theme(theme, 'object-name')}
+                                class="object-key"
+                                key={variable.name + '_' + namespace}
+                            >
+                                { !!quotesOnKeys && <span style={{verticalAlign:'top'}}>"</span> }
+                                <span style={{ display: 'inline-block' }}>
+                                    {variableName}
+                                </span>
+                                { !!quotesOnKeys && <span style={{verticalAlign:'top'}}>"</span> }
                             </span>
-                            <span style={{ verticalAlign: 'top' }}>"</span>
+                            <span { ...Theme(theme, 'colon') }>:</span>
                         </span>
-                        <span { ...Theme(theme, 'colon') }>:</span>
-                    </span>
-                )}
+                    )
+                }
                 <div
                     class="variable-value"
                     onClick={

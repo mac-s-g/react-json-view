@@ -96,7 +96,7 @@ class RjvObject extends React.PureComponent {
                     rjvId,
                     namespace,
                     'expanded',
-                    this.state.expanded
+                    !expanded
                 );
             });
         }

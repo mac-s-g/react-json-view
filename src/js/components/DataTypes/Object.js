@@ -69,6 +69,19 @@ class RjvObject extends React.PureComponent {
 
     static getDerivedStateFromProps(nextProps, prevState) {
         const { prevProps } = prevState;
+        if (!nextProps.jsvRoot) {
+            if (prevProps.src !== nextProps.src && prevProps.collapsed === nextProps.collapsed) {
+                AttributeStore.set(nextProps.rjvId, nextProps.namespace, 'expanded', true);
+            } else {
+                if (nextProps.collapsed === 1) {
+                    AttributeStore.set(nextProps.rjvId, nextProps.namespace, 'expanded', false);
+                } else {
+                    AttributeStore.set(nextProps.rjvId, nextProps.namespace, 'expanded', true);
+                }
+            }
+        } else {
+            AttributeStore.set(nextProps.rjvId, nextProps.namespace, 'expanded', true);
+        }
         if (nextProps.src !== prevProps.src ||
             nextProps.collapsed !== prevProps.collapsed ||
             nextProps.name !== prevProps.name ||
@@ -135,7 +148,6 @@ class RjvObject extends React.PureComponent {
     }
 
     getObjectMetaData = src => {
-        const { rjvId, theme } = this.props;
         const { size } = this.state;
         return <VariableMeta size={ size } { ...this.props } />;
     }

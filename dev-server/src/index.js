@@ -58,6 +58,14 @@ class DevDemo extends Component {
                     onSelect={e => {
                         console.log('select callback', e);
                     }}
+                    shouldCollapse={({ src, namespace, type }) => {
+                        if (type === 'array' && src.indexOf('test') > -1) {
+                            return true;
+                        } else if (namespace.indexOf('moment') > -1) {
+                            return true;
+                        }
+                        return false;
+                    }}
                     displayObjectSize={false}
                     name={'dev-server'}
                     enableClipboard={false}
@@ -105,6 +113,7 @@ function getExampleJson1() {
         array: [1, 2, 3, 'test'],
         float: -2.757,
         undefined_var: undefined,
+        moment: Moment(),
         parent: {
             sibling1: true,
             sibling2: false,

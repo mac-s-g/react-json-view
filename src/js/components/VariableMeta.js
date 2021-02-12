@@ -40,12 +40,6 @@ export default class extends React.PureComponent {
                     class="click-to-add-icon"
                     {...Theme(theme, 'addVarIcon')}
                     onClick={() => {
-                        AttributeStore.set(
-                            rjvId,
-                            namespace,
-                            'expanded',
-                            true
-                        );
                         const request = {
                             name: depth > 0 ? name : null,
                             namespace: namespace.splice(

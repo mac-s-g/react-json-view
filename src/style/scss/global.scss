@@ -4,6 +4,10 @@
         vertical-align: top;
         display: none;
     }
+    .paste-to-json-container {
+        vertical-align: top;
+        display: none;
+    }
     .click-to-add {
         display: none;
     }
@@ -31,6 +35,9 @@
     .variable-row {
         &:hover {
             & .copy-to-clipboard-container {
+                display: inline-block;
+            }
+            & .paste-to-json-container {
                 display: inline-block;
             }
         }

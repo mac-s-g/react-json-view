@@ -62,6 +62,9 @@ class ObjectAttributes extends EventEmitter {
             );
             this.emit('variable-update-' + rjvId);
             break;
+        case 'VARIABLE_COPIED':
+            this.emit('copied-' + rjvId);
+            break;
         case 'ADD_VARIABLE_KEY_REQUEST':
             this.set(rjvId, 'action', 'new-key-request', data);
             this.emit('add-key-request-' + rjvId);

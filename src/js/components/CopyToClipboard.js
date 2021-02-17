@@ -7,6 +7,8 @@ import { Clippy } from './icons';
 
 //theme
 import Theme from './../themes/getStyle';
+import ObjectAttributes from '../stores/ObjectAttributes';
+import dispatcher from '../helpers/dispatcher';
 
 export default class extends React.PureComponent {
     constructor(props) {
@@ -27,7 +29,8 @@ export default class extends React.PureComponent {
 
     handleCopy = () => {
         const container = document.createElement('textarea');
-        const { clickCallback, src, namespace } = this.props;
+        const { clickCallback, src, namespace, rjvId } = this.props;
+        ObjectAttributes.set(rjvId,  'global', 'copied', src);
 
         container.innerHTML = JSON.stringify(
             this.clipboardValue(src),
@@ -57,6 +60,11 @@ export default class extends React.PureComponent {
                 namespace: namespace,
                 name: namespace[namespace.length - 1]
             });
+        });
+
+        dispatcher.dispatch({
+            name: 'VARIABLE_COPIED',
+            rjvId: rjvId,
         });
     }
 

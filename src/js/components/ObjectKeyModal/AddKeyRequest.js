@@ -39,12 +39,32 @@ export default class extends React.PureComponent {
         let request = ObjectAttributes.get(
             rjvId, 'action', 'new-key-request'
         );
-        request.new_value = {[input]: this.props.defaultValue, ...request.existing_value};
-        dispatcher.dispatch({
-            name: 'VARIABLE_ADDED',
-            rjvId: rjvId,
-            data: request
-        });
+        if (request.pasted) {
+            let newSrc = {};
+            Object.keys(request.existing_value).forEach((key, idx) => {
+                newSrc[key] = request.existing_value[key];
+                if (idx === request.dropTargetIdx) {
+                    newSrc[input] = request.pasteValue;
+                }
+            });
+            dispatcher.dispatch({
+                name: 'VARIABLE_ADDED',
+                rjvId: rjvId,
+                data: {
+                    ...request,
+                    new_value: newSrc
+                }
+            });
+        }
+        else {
+            request.new_value = {[input]: this.props.defaultValue, ...request.existing_value};
+            dispatcher.dispatch({
+                name: 'VARIABLE_ADDED',
+                rjvId: rjvId,
+                data: request
+            });
+        }
+
     }
 
 }

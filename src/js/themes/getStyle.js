@@ -11,8 +11,9 @@ const colorMap = theme => ({
     keyColor: theme.base07,
     arrayKeyColor: theme.base0C,
     objectSize: theme.base04,
-    copyToClipboard: theme.base0F,
-    copyToClipboardCheck: theme.base0D,
+    copyToClipboard: theme.base07,
+    pasteToJson: theme.base07,
+    copyToClipboardCheck: theme.base07,
     objectBorder: theme.base02,
     dataTypes: {
         boolean: theme.base0E,
@@ -250,6 +251,15 @@ const getDefaultThemeStyling = theme => {
         'copy-icon-copied': {
             color: colors.copyToClipboardCheck,
             marginLeft: constants.clipboardCheckMarginLeft
+        },
+        'paste-to-json': {
+            cursor: constants.clipboardCursor
+        },
+        'paste-icon': {
+            color: colors.pasteToJson,
+            fontSize: constants.iconFontSize,
+            marginRight: constants.iconMarginRight,
+            verticalAlign: 'top'
         },
         'array-group-meta-data': {
             display: 'inline-block',

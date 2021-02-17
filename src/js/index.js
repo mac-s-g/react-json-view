@@ -31,7 +31,8 @@ class ReactJsonView extends React.PureComponent {
             prevSrc: ReactJsonView.defaultProps.src,
             prevName: ReactJsonView.defaultProps.name,
             prevTheme: ReactJsonView.defaultProps.theme,
-            searchKey: ''
+            searchKey: '',
+            copied: false,
         };
     }
     timeout = null;
@@ -48,7 +49,7 @@ class ReactJsonView extends React.PureComponent {
         collapseStringsAfterLength: false,
         shouldCollapse: false,
         sortKeys: false,
-        groupArraysAfterLength: 100,
+        groupArraysAfterLength: false,
         indentWidth: 4,
         enableClipboard: true,
         displayObjectSize: true,
@@ -94,6 +95,12 @@ class ReactJsonView extends React.PureComponent {
             'global',
             'src',
             this.state.src
+        );
+        ObjectAttributes.set(
+            this.rjvId,
+            'global',
+            'copied',
+            false
         );
         // bind to events
         const listeners = this.getListeners();
@@ -142,6 +149,7 @@ class ReactJsonView extends React.PureComponent {
 
     getListeners = () => {
         return {
+            'copied': this.changeCopyState,
             'reset': this.resetState,
             'variable-update': this.updateSrc,
             'add-key-request': this.addKeyRequest
@@ -198,7 +206,8 @@ class ReactJsonView extends React.PureComponent {
             theme,
             src,
             name,
-            searchKey
+            searchKey,
+            copied
         } = this.state;
 
         const {
@@ -227,6 +236,7 @@ class ReactJsonView extends React.PureComponent {
                     style={{...Theme(theme, 'app-container').style, ...style}}>
                     <JsonViewer
                         {...this.props}
+                        copied={copied}
                         src={src}
                         name={false}
                         theme={theme}
@@ -300,6 +310,12 @@ class ReactJsonView extends React.PureComponent {
         this.setState({
             validationFailure: false,
             addKeyRequest: false
+        });
+    }
+
+    changeCopyState = () => {
+        this.setState({
+            copied: !this.state.copied
         });
     }
 }

@@ -68,7 +68,7 @@ class DevDemo extends Component {
                     }}
                     displayObjectSize={false}
                     name={'dev-server'}
-                    enableClipboard={false}
+                    enableClipboard={true}
                     defaultValue=""
                     displayDataTypes={false}
                     displaySearch={true}

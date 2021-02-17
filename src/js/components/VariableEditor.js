@@ -27,6 +27,7 @@ import { Edit, CheckCircle, RemoveIcon as Remove, CancelIcon as Cancel } from '.
 
 //theme
 import Theme from './../themes/getStyle';
+import PasteToJson from './PasteToJson';
 
 class VariableEditor extends React.PureComponent {
     constructor(props) {
@@ -39,7 +40,8 @@ class VariableEditor extends React.PureComponent {
                 type: false,
                 value: null
             },
-            allowDragging: true
+            allowDragging: true,
+            canPaste: false
         };
     }
 
@@ -100,6 +102,7 @@ class VariableEditor extends React.PureComponent {
             onEdit,
             onDelete,
             onSelect,
+            rjvId
         } = this.props;
         const { editMode } = this.state;
 
@@ -140,10 +143,16 @@ class VariableEditor extends React.PureComponent {
                     <CopyToClipboard
                         hidden={editMode}
                         src={variable.value}
+                        name={variable.name}
                         clickCallback={enableClipboard}
-                        {...{ theme, namespace }}
+                        {...{ theme, namespace, rjvId }}
                     />
                 ) : null }
+                { enableClipboard ?
+                    (<PasteToJson
+                        editMode={ editMode }
+                        { ...this.props }/>
+                    ) : null }
                 { onEdit !== false && editMode == false
                     ? this.getEditIcon()
                     : null }
@@ -159,7 +168,9 @@ class VariableEditor extends React.PureComponent {
         const { variable, theme } = this.props;
 
         return (
-            <div class="click-to-edit" style={{ verticalAlign: 'top' }}>
+            <div
+                class="click-to-edit" style={{ verticalAlign: 'top' }}
+                title="Edit">
                 <Edit
                     class="click-to-edit-icon"
                     {...Theme(theme, 'editVarIcon')}
@@ -191,7 +202,9 @@ class VariableEditor extends React.PureComponent {
         const { variable, namespace, theme, rjvId } = this.props;
 
         return (
-            <div class="click-to-remove" style={ { verticalAlign: 'top' } }>
+            <div
+                class="click-to-remove" style={ { verticalAlign: 'top' } }
+                title="Remove">
                 <Remove
                     class="click-to-remove-icon"
                     { ...Theme(theme, 'removeVarIcon') }

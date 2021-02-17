@@ -58,6 +58,7 @@ export default class extends React.PureComponent {
                         {valid
                             ? <CheckCircle {...Theme(theme, 'key-modal-submit')}
                                 class="key-modal-submit"
+                                title="Submit"
                                 onClick={e => this.submit()}
                             />
                             : null}
@@ -65,6 +66,7 @@ export default class extends React.PureComponent {
                     <span {...Theme(theme, 'key-modal-cancel')}>
                         <Cancel {...Theme(theme, 'key-modal-cancel-icon')}
                             class="key-modal-cancel"
+                            title="Cancel"
                             onClick={()=>{
                                 dispatcher.dispatch({
                                     rjvId: rjvId,

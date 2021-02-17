@@ -1,7 +1,6 @@
 import React from 'react';
 import dispatcher from './../helpers/dispatcher';
 
-import AttributeStore from '../stores/ObjectAttributes';
 import CopyToClipboard from './CopyToClipboard';
 import { toType } from '../helpers/util';
 
@@ -12,7 +11,7 @@ import {
 
 //theme
 import Theme from './../themes/getStyle';
-
+import PasteToJson from './PasteToJson';
 
 export default class extends React.PureComponent {
     getObjectSize = () => {
@@ -35,6 +34,7 @@ export default class extends React.PureComponent {
         return (
             <span
                 class="click-to-add"
+                title="Add"
                 style={{verticalAlign: 'top'}}>
                 <Add
                     class="click-to-add-icon"
@@ -109,7 +109,8 @@ export default class extends React.PureComponent {
             onAdd,
             enableClipboard,
             src,
-            namespace
+            namespace,
+            name
         } = this.props;
         return (
             <div
@@ -125,9 +126,13 @@ export default class extends React.PureComponent {
                 {enableClipboard
                     ? (<CopyToClipboard
                         clickCallback={enableClipboard}
-                        {...{src, theme, namespace}} />)
+                        {...{src, theme, namespace, name}} />)
                     : null
                 }
+                { enableClipboard ? (
+                    <PasteToJson
+                        { ...this.props }/>
+                ) : null }
                 {/* copy add/remove icons */}
                 {onAdd !== false ? this.getAddAttribute() : null}
                 {onDelete !== false ? this.getRemoveObject() : null}

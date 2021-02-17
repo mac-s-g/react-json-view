@@ -89,7 +89,7 @@ describe('<JsonObject />', function() {
                 indentWidth={1}
                 depth={1}
                 displayDataTypes={true}
-                collapsed={1}
+                collapsed={true}
                 type="object"
             />
         );
@@ -129,7 +129,7 @@ describe('<JsonObject />', function() {
                 name="test"
                 rjvId={rjvId}
                 theme="rjv-default"
-                collapsed={1}
+                collapsed={true}
                 indentWidth={1}
                 depth={1}
                 type="array"
@@ -150,7 +150,7 @@ describe('<JsonObject />', function() {
                 name="test"
                 rjvId={rjvId}
                 theme="rjv-default"
-                collapsed={1}
+                collapsed={true}
                 indentWidth={1}
                 depth={1}
                 type="array"
@@ -171,7 +171,7 @@ describe('<JsonObject />', function() {
                 name="test"
                 rjvId={rjvId}
                 theme="rjv-default"
-                collapsed={1}
+                collapsed={true}
                 indentWidth={1}
                 depth={1}
                 iconStyle="square"
@@ -193,7 +193,7 @@ describe('<JsonObject />', function() {
                 name="test"
                 rjvId={rjvId}
                 theme="rjv-default"
-                collapsed={1}
+                collapsed={true}
                 indentWidth={1}
                 depth={1}
                 iconStyle="triangle"
@@ -227,7 +227,7 @@ describe('<JsonObject />', function() {
                 theme="rjv-default"
                 namespace={['root']}
                 rjvId={rjvId}
-                collapsed={1}
+                collapsed={true}
             />
         );
         expect(wrapper.state('expanded')).to.equal(false);
@@ -256,7 +256,7 @@ describe('<JsonObject />', function() {
                 src={src}
                 theme="rjv-default"
                 namespace={['root']}
-                collapsed={1}
+                collapsed={true}
             />
         );
         expect(wrapper.state('expanded')).to.equal(false);
@@ -271,7 +271,7 @@ describe('<JsonObject />', function() {
                 theme="rjv-default"
                 namespace={['root']}
                 rjvId={rjvId}
-                collapsed={1}
+                collapsed={true}
             />
         );
 
@@ -302,7 +302,7 @@ describe('<JsonObject />', function() {
                 src={src}
                 theme="rjv-default"
                 namespace={['root']}
-                collapsed={1}
+                collapsed={true}
                 shouldCollapse={() => true}
             />
         );

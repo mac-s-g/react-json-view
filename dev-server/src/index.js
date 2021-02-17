@@ -1,7 +1,7 @@
 'use strict';
 
 //import react and reactDom for browser rendering
-import React, {Component} from 'react';
+import React from 'react';
 
 import Moment from 'moment';
 import ReactDom from 'react-dom';
@@ -9,7 +9,7 @@ import ReactDom from 'react-dom';
 //import the react-json-view component (installed with npm)
 import JsonViewer from './../../src/js/index';
 
-class DevDemo extends Component {
+class DevDemo extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {

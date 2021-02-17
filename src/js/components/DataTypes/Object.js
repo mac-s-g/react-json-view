@@ -70,16 +70,16 @@ class RjvObject extends React.PureComponent {
     static getDerivedStateFromProps(nextProps, prevState) {
         const { prevProps } = prevState;
         if (!nextProps.jsvRoot) {
+            //if src has changed but collapse did not change then remain expanded (as auto expand opens objects/arrays)
             if (prevProps.src !== nextProps.src && prevProps.collapsed === nextProps.collapsed) {
                 AttributeStore.set(nextProps.rjvId, nextProps.namespace, 'expanded', true);
             } else {
-                if (nextProps.collapsed === 1) {
-                    AttributeStore.set(nextProps.rjvId, nextProps.namespace, 'expanded', false);
-                } else {
-                    AttributeStore.set(nextProps.rjvId, nextProps.namespace, 'expanded', true);
-                }
+                //collapse all after depth 1 or expand all
+                AttributeStore.set(nextProps.rjvId, nextProps.namespace, 'expanded', (nextProps.collapsed !== 1 && nextProps.collapsed !== true));
             }
-        } else {
+        }
+        //if changing root then it should always be expanded
+        else {
             AttributeStore.set(nextProps.rjvId, nextProps.namespace, 'expanded', true);
         }
         if (nextProps.src !== prevProps.src ||

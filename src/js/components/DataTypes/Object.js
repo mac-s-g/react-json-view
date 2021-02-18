@@ -330,7 +330,7 @@ class RjvObject extends React.PureComponent {
                         namespace={ namespace }
                         rjvId={ rjvId }
                         src={ src }
-                        dragAllowed={ true }
+                        dragAllowed={ dragEnabled }
                         isArray={ true }
                         canDrop={ true }>
                         <ObjectComponent
@@ -358,7 +358,6 @@ class RjvObject extends React.PureComponent {
                         rjvId={ rjvId }
                         src={ src }
                         dragAllowed={ dragEnabled }
-                        value={ variable.value }
                         canDrop={ true }>
                         <VariableEditor
                             key={ variable.name + '_' + namespace }

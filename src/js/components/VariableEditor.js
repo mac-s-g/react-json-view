@@ -310,7 +310,7 @@ class VariableEditor extends React.PureComponent {
                         }
                         e.stopPropagation();
                     }}
-                    placeholder="update this value"
+                    placeholder="Insert new value"
                     { ...Theme(theme, 'edit-input') }
                 />
                 <div { ...Theme(theme, 'edit-icon-container') }>

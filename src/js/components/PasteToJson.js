@@ -10,17 +10,9 @@ class PasteToJson extends Component {
     }
 
     getPasteIcon = () => {
-        const { theme, rjvId, editMode } = this.props;
+        const { theme, rjvId } = this.props;
         let style = Theme(theme, 'paste-to-json').style;
-        let display = 'none';
-        if (ObjectAttributes.get(rjvId, 'global', 'copied', false)) {
-            if (editMode) {
-                display = 'none';
-            }
-            else {
-                display = 'inline';
-            }
-        }
+        let display = ObjectAttributes.get(rjvId, 'global', 'copied', false) ? 'inline' : 'none';
         return (
             <span
                 class="paste-to-json-container" title="Paste to JSON">
@@ -39,24 +31,20 @@ class PasteToJson extends Component {
         );
     }
 
-    handlePaste = () => {
-        const { rjvId, name, namespace, depth, src } = this.props;
-        const pasteValue = ObjectAttributes.get(rjvId, 'global', 'copied', false);
-        const dropTargetIdx = Object.keys(src).findIndex(key => key === this.props.variable.name);
+    pasteInArray = (request, pasteValue) => {
+        const { rjvId, src } = this.props;
+        dispatcher.dispatch({
+            name: 'VARIABLE_ADDED',
+            rjvId: rjvId,
+            data: {
+                ...request,
+                new_value: [...src, pasteValue]
+            }
+        });
+    }
 
-        const request = {
-            name: depth > 0 ? name : null,
-            namespace: namespace.splice(
-                0, (namespace.length-1)
-            ),
-            existing_value: src,
-            pasteValue,
-            dropTargetIdx,
-            variable_removed: false,
-            key_name: null,
-            pasted: true
-        };
-
+    pasteOnObjectOrVariable = (request) => {
+        const { rjvId } = this.props;
         dispatcher.dispatch({
             name: 'ADD_VARIABLE_KEY_REQUEST',
             rjvId: rjvId,
@@ -64,6 +52,69 @@ class PasteToJson extends Component {
                 ...request,
             },
         });
+    }
+
+    handlePaste = () => {
+        let {
+            rjvId,
+            name,
+            namespace,
+            src,
+            variable,
+            depth,
+            type,
+            pastedOnObjectOrArray,
+            parent_type
+        } = this.props;
+        //if no copy value in store then paste value will be false
+        //should maybe change to not clear store after pasting?
+        const pasteValue = ObjectAttributes.get(rjvId, 'global', 'copied', false);
+        const dropTargetIdx = pastedOnObjectOrArray ?
+            Object.keys(ObjectAttributes.get(rjvId, 'global', 'src')).findIndex(key => key === name) :
+            Object.keys(src).findIndex(key => key === variable.name);
+        //if pasted on array then make it add to array
+        const request = {
+            name: pastedOnObjectOrArray ? null : namespace[depth],
+            namespace: namespace.splice(0, namespace.length - 1),
+            existing_value: pastedOnObjectOrArray ?
+                ObjectAttributes.get(rjvId, 'global', 'src') : src,
+            pasteValue,
+            dropTargetIdx,
+            variable_removed: false,
+            key_name: null,
+            pasted: true
+        };
+        //if pasted on array
+        if (type === 'array') {
+            //if pasted on outer level of array and parent is not an array
+            //then it should be appended to the parent array
+            //BUG appears when pasting something on top of an array inside an array
+            //something like this:
+            //el: [
+                //1: true,
+                //2: [ <------- PASTE ON HERE, inside paste works fine
+                    //11: 'test',
+                    //22: false
+                //]
+            //]
+            if (pastedOnObjectOrArray !== undefined && parent_type === 'array') {
+                this.pasteInArray(request, pasteValue);
+            }
+            //if pasted inside array then append it to the end of the array
+            else {
+                dispatcher.dispatch({
+                    name: 'ADD_VARIABLE_KEY_REQUEST',
+                    rjvId: rjvId,
+                    data: {
+                        ...request,
+                    },
+                });
+            }
+        }
+        //if pasted on a variable or object
+        else {
+            this.pasteOnObjectOrVariable(request);
+        }
         ObjectAttributes.set(rjvId, 'global', 'copied', false);
     }
 

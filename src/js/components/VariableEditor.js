@@ -148,15 +148,14 @@ class VariableEditor extends React.PureComponent {
                         {...{ theme, namespace, rjvId }}
                     />
                 ) : null }
-                { enableClipboard ?
+                { enableClipboard && editMode === false ?
                     (<PasteToJson
-                        editMode={ editMode }
                         { ...this.props }/>
                     ) : null }
-                { onEdit !== false && editMode == false
+                { onEdit !== false && editMode === false
                     ? this.getEditIcon()
                     : null }
-                { onDelete !== false && editMode == false
+                { onDelete !== false && editMode === false
                     ? this.getRemoveIcon()
                     : null }
             </div>

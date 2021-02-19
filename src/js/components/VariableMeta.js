@@ -110,7 +110,9 @@ export default class extends React.PureComponent {
             enableClipboard,
             src,
             namespace,
-            name
+            name,
+            rjvId,
+            jsvRoot
         } = this.props;
         return (
             <div
@@ -122,17 +124,20 @@ export default class extends React.PureComponent {
             >
                 {/* size badge display */}
                 {this.getObjectSize()}
-                {/* copy to clipboard icon */}
-                {enableClipboard
+                {/* don't display copy to clipboard icon for root
+                 as it is implemented in the application already */}
+                { enableClipboard && !jsvRoot
                     ? (<CopyToClipboard
                         clickCallback={enableClipboard}
-                        {...{src, theme, namespace, name}} />)
+                        {...{src, rjvId, theme, namespace, name}} />)
                     : null
                 }
-                { enableClipboard ? (
-                    <PasteToJson
-                        { ...this.props }/>
-                ) : null }
+                { enableClipboard && !jsvRoot
+                    ? (<PasteToJson
+                        pastedOnObjectOrArray
+                        { ...this.props }/>)
+                    : null
+                }
                 {/* copy add/remove icons */}
                 {onAdd !== false ? this.getAddAttribute() : null}
                 {onDelete !== false ? this.getRemoveObject() : null}

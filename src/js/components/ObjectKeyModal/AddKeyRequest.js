@@ -39,6 +39,7 @@ export default class extends React.PureComponent {
         let request = ObjectAttributes.get(
             rjvId, 'action', 'new-key-request'
         );
+
         if (request.pasted) {
             let newSrc = {};
             Object.keys(request.existing_value).forEach((key, idx) => {

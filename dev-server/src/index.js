@@ -39,7 +39,7 @@ class DevDemo extends React.PureComponent {
                 <JsonViewer
                     sortKeys={false}
                     style={{ padding: '30px', backgroundColor: 'white' }}
-                    src={getExampleJson1()}
+                    src={getExampleJson2()}
                     collapseStringsAfterLength={45}
                     quotesOnKeys={false}
                     onEdit={e => {
@@ -72,7 +72,7 @@ class DevDemo extends React.PureComponent {
                     defaultValue=""
                     displayDataTypes={false}
                     displaySearch={true}
-                    collapsed={ collapsedState }
+                    collapsed={ false }
                     displayArrayKey={true}
                 />
 
@@ -145,20 +145,8 @@ function getExampleJson1() {
 //just a function to get an example JSON object
 function getExampleJson2() {
     return {
-        parent: {
-            sibling1: true,
-            sibling2: false,
-            sibling3: null,
-        },
-        testObj: {
-            'testString1': 'Tree'
-        },
-        testObj2: {
-            'testString3': 'Tree'
-        },
-        testObj3: {
-            'testString2': 'Tree'
-        }
+        test: 'testing',
+        array: [1, 2, 3, [1, 2, 3, 'test']],
     };
 }
 

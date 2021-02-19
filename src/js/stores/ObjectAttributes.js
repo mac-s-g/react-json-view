@@ -98,7 +98,7 @@ class ObjectAttributes extends EventEmitter {
             }
         } else {
             //update copied variable at specified namespace
-            if (name !== null) {
+            if (name !== null && name) {
                 walk[name] = new_value;
             } else {
                 updated_src = new_value;

@@ -363,9 +363,11 @@ class RjvObject extends React.PureComponent {
                             key={ variable.name + '_' + namespace }
                             src={ src }
                             variable={ variable }
+                            depth={ depth }
                             singleIndent={ SINGLE_INDENT }
                             namespace={ namespace }
                             type={ type }
+                            parent_type={ object_type }
                             isDragAllowed={ this.handleDragAllow }
                             { ...props } />
                     </DragWrapper>

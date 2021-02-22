@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Theme from '../themes/getStyle';
 import ObjectAttributes from '../stores/ObjectAttributes';
-import {Paste} from './icons';
+import { PasteIcon as Paste } from './icons';
 import dispatcher from '../helpers/dispatcher';
 
 class PasteToJson extends Component {
@@ -60,7 +60,6 @@ class PasteToJson extends Component {
             name,
             namespace,
             src,
-            variable,
             depth,
             type,
             pastedOnObjectOrArray,
@@ -71,7 +70,7 @@ class PasteToJson extends Component {
         const pasteValue = ObjectAttributes.get(rjvId, 'global', 'copied', false);
         const dropTargetIdx = pastedOnObjectOrArray ?
             Object.keys(ObjectAttributes.get(rjvId, 'global', 'src')).findIndex(key => key === name) :
-            Object.keys(src).findIndex(key => key === variable.name);
+            Object.keys(src).findIndex(key => key === name);
         //if pasted on array then make it add to array
         const request = {
             name: pastedOnObjectOrArray ? null : namespace[depth],
@@ -97,7 +96,7 @@ class PasteToJson extends Component {
                     //22: false
                 //]
             //]
-            if (pastedOnObjectOrArray !== undefined && parent_type === 'array') {
+            if (pastedOnObjectOrArray === undefined && parent_type === 'array') {
                 this.pasteInArray(request, pasteValue);
             }
             //if pasted inside array then append it to the end of the array

@@ -48,7 +48,7 @@ export default class extends React.PureComponent {
             this.setState({
                 copied: false
             });
-        }, 5500);
+        }, 1500);
 
         this.setState({ copied: true }, () => {
             if (typeof clickCallback !== 'function') {
@@ -95,13 +95,9 @@ export default class extends React.PureComponent {
     }
 
     render() {
-        const { src, theme, hidden } = this.props;
+        const { theme, hidden } = this.props;
         let style = Theme(theme, 'copy-to-clipboard').style;
-        let display = 'inline';
-
-        if (hidden) {
-            display = 'none';
-        }
+        let display = hidden ? 'none' : 'inline';
 
         return (
             <span class="copy-to-clipboard-container" title="Copy to clipboard">

@@ -139,7 +139,7 @@ export class Clippy extends React.PureComponent {
     }
 }
 
-export class Paste extends React.PureComponent {
+export class PasteIcon extends React.PureComponent {
     render() {
         const {props} = this;
         const {style, ...rest} = props;
@@ -176,7 +176,7 @@ export class Paste extends React.PureComponent {
     }
 }
 
-export class Cut extends React.PureComponent {
+export class CutIcon extends React.PureComponent {
     render() {
         const {props} = this;
         const {style, ...rest} = props;

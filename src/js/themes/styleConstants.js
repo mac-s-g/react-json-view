@@ -61,6 +61,7 @@ export default {
     clipboardCursor: 'pointer',
     clipboardCheckMarginLeft: '-12px',
 
+    cutCursor: 'pointer',
     pasteCursor: 'pointer',
 
     metaDataPadding: '0px 0px 0px 10px',

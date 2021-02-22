@@ -2,6 +2,8 @@ import React from 'react';
 import dispatcher from './../helpers/dispatcher';
 
 import CopyToClipboard from './CopyToClipboard';
+import PasteToJson from './PasteToJson';
+import CutFromJson from './CutFromJson';
 import { toType } from '../helpers/util';
 
 //icons
@@ -11,7 +13,6 @@ import {
 
 //theme
 import Theme from './../themes/getStyle';
-import PasteToJson from './PasteToJson';
 
 export default class extends React.PureComponent {
     getObjectSize = () => {
@@ -73,7 +74,7 @@ export default class extends React.PureComponent {
 
     getRemoveObject = () => {
         const {
-            theme, hover, namespace, name, src, rjvId
+            theme, namespace, name, src, rjvId
         } = this.props;
 
         //don't allow deleting of root node
@@ -118,29 +119,36 @@ export default class extends React.PureComponent {
             <div
                 {...Theme(theme, 'object-meta-data')}
                 class='object-meta-data'
-                onClick={(e)=>{
+                onClick={ (e)=>{
                     e.stopPropagation();
-                }}
+                } }
             >
                 {/* size badge display */}
-                {this.getObjectSize()}
+                { this.getObjectSize() }
                 {/* don't display copy to clipboard icon for root
                  as it is implemented in the application already */}
-                { enableClipboard && !jsvRoot
-                    ? (<CopyToClipboard
-                        clickCallback={enableClipboard}
-                        {...{src, rjvId, theme, namespace, name}} />)
-                    : null
-                }
-                { enableClipboard && !jsvRoot
-                    ? (<PasteToJson
+                { enableClipboard && !jsvRoot ? (
+                    <CopyToClipboard
+                        clickCallback={ enableClipboard }
+                        { ...{src, rjvId, theme, namespace, name} }
+                    />
+                ) : null }
+                {/*Don't display cut icon for root*/}
+                { enableClipboard && !jsvRoot ? (
+                    <CutFromJson
+                        { ...this.props }
+                    />
+                ) : null }
+                {/*don't display paste icon for root*/}
+                { enableClipboard && !jsvRoot ? (
+                    <PasteToJson
                         pastedOnObjectOrArray
-                        { ...this.props }/>)
-                    : null
-                }
+                        { ...this.props }
+                    />
+                ) : null }
                 {/* copy add/remove icons */}
-                {onAdd !== false ? this.getAddAttribute() : null}
-                {onDelete !== false ? this.getRemoveObject() : null}
+                { onAdd !== false ? this.getAddAttribute() : null }
+                { onDelete !== false ? this.getRemoveObject() : null }
             </div>
         );
     }

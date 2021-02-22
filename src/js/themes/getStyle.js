@@ -13,6 +13,7 @@ const colorMap = theme => ({
     objectSize: theme.base04,
     copyToClipboard: theme.base07,
     pasteToJson: theme.base07,
+    cutFromJson: theme.base07,
     copyToClipboardCheck: theme.base07,
     objectBorder: theme.base02,
     dataTypes: {
@@ -252,8 +253,17 @@ const getDefaultThemeStyling = theme => {
             color: colors.copyToClipboardCheck,
             marginLeft: constants.clipboardCheckMarginLeft
         },
+        'cut-from-json': {
+            cursor: constants.cutCursor,
+        },
+        'cut-icon': {
+            color: colors.cutFromJson,
+            fontSize: constants.iconFontSize,
+            marginRight: constants.iconMarginRight,
+            verticalAlign: 'top'
+        },
         'paste-to-json': {
-            cursor: constants.clipboardCursor
+            cursor: constants.pasteCursor
         },
         'paste-icon': {
             color: colors.pasteToJson,

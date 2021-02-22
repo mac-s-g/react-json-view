@@ -5,6 +5,8 @@ import dispatcher from './../helpers/dispatcher';
 import parseInput from './../helpers/parseInput';
 import stringifyVariable from './../helpers/stringifyVariable';
 import CopyToClipboard from './CopyToClipboard';
+import PasteToJson from './PasteToJson';
+import CutFromJson from './CutFromJson';
 import highlightedString from './../helpers/highlightedString';
 
 //data type components
@@ -27,7 +29,6 @@ import { Edit, CheckCircle, RemoveIcon as Remove, CancelIcon as Cancel } from '.
 
 //theme
 import Theme from './../themes/getStyle';
-import PasteToJson from './PasteToJson';
 
 class VariableEditor extends React.PureComponent {
     constructor(props) {
@@ -133,25 +134,36 @@ class VariableEditor extends React.PureComponent {
                                 }
                             }
                     }
-                    {...Theme(theme, 'variableValue', {
+                    { ...Theme(theme, 'variableValue', {
                         cursor: onSelect === false ? 'default' : 'pointer'
-                    })}
+                    }) }
                 >
                     { this.getValue(variable, editMode) }
                 </div>
                 { enableClipboard ? (
                     <CopyToClipboard
-                        hidden={editMode}
-                        src={variable.value}
-                        name={variable.name}
-                        clickCallback={enableClipboard}
-                        {...{ theme, namespace, rjvId }}
+                        hidden={ editMode }
+                        src={ variable.value }
+                        name={ variable.name }
+                        clickCallback={ enableClipboard }
+                        { ...{ theme, namespace, rjvId } }
                     />
                 ) : null }
-                { enableClipboard && editMode === false ?
-                    (<PasteToJson
-                        { ...this.props }/>
-                    ) : null }
+                { enableClipboard && editMode === false ? (
+                    <span>
+                        <CutFromJson
+                            hidden={ editMode }
+                            src={ variable.value }
+                            name={ variable.name }
+                            { ...{ theme, namespace, rjvId }}
+                        />
+                        <PasteToJson
+                            src={ variable.value }
+                            name={ variable.name }
+                            { ...this.props }
+                        />
+                    </span>
+                ) : null }
                 { onEdit !== false && editMode === false
                     ? this.getEditIcon()
                     : null }

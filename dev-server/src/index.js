@@ -103,9 +103,6 @@ function getExampleJson1() {
                 'secondObjectInArray': 2
             },
             {
-                'thirdObjectInArray': 3
-            },
-            {
                 'fourthObjectInArray': 4
             }
         ],
@@ -146,7 +143,7 @@ function getExampleJson1() {
 function getExampleJson2() {
     return {
         test: 'testing',
-        array: [1, 2, 3, [1, 2, 3, 'test']],
+        array: [{Greeting: 'hello', Greeting2: 'hi'}, 'bye', 'elephant', [1, {Number: 2, nested: [10, 20, 30,]}]]
     };
 }
 

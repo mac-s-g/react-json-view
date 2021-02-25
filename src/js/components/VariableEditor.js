@@ -158,7 +158,6 @@ class VariableEditor extends React.PureComponent {
                             { ...{ theme, namespace, rjvId }}
                         />
                         <PasteToJson
-                            src={ variable.value }
                             name={ variable.name }
                             { ...this.props }
                         />

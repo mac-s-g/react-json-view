@@ -26,6 +26,28 @@ class ObjectAttributes extends EventEmitter {
         return this.objects[rjvId][name][key];
     }
 
+    getSrcByNamespace = (rjvId, name, namespace, type, parent_type) => {
+        if (this.objects[rjvId] === undefined
+            || this.objects[rjvId][name] === undefined
+        ) {
+            return null;
+        }
+
+        namespace.shift();
+
+        //deep copy of src variable
+        let updated_src = this.deepCopy(this.objects[rjvId].global.src, [...namespace]);
+
+        //point at current index
+        let walk = updated_src;
+        for (const idx of namespace) {
+            walk = walk[idx];
+        }
+        return (type === 'object' ||
+            (type === 'array' && parent_type === 'object')) ?
+            {...walk} : [...walk];
+    }
+
     handleAction = (action) => {
         const {rjvId, data, name} = action;
         switch (name) {

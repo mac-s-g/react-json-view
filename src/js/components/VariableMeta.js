@@ -101,7 +101,7 @@ export default class extends React.PureComponent {
                 />
             </span>
         );
-    };
+    }
 
     render = () => {
         const {

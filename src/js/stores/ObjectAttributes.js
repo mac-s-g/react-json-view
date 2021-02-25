@@ -43,9 +43,8 @@ class ObjectAttributes extends EventEmitter {
         for (const idx of namespace) {
             walk = walk[idx];
         }
-        return (type === 'object' ||
-            (type === 'array' && parent_type === 'object')) ?
-            {...walk} : [...walk];
+        //return as array if parent is array (for slicing)
+        return parent_type === 'object' ? {...walk} : [...walk];
     }
 
     handleAction = (action) => {

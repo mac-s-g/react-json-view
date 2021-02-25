@@ -39,7 +39,7 @@ class DevDemo extends React.PureComponent {
                 <JsonViewer
                     sortKeys={false}
                     style={{ padding: '30px', backgroundColor: 'white' }}
-                    src={getExampleJson2()}
+                    src={getExampleJson1()}
                     collapseStringsAfterLength={45}
                     quotesOnKeys={false}
                     onEdit={e => {
@@ -69,7 +69,7 @@ class DevDemo extends React.PureComponent {
                     displayObjectSize={false}
                     name={'dev-server'}
                     enableClipboard={true}
-                    defaultValue=""
+                    defaultValue={null}
                     displayDataTypes={false}
                     displaySearch={true}
                     collapsed={ false }

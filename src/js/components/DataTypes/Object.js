@@ -303,6 +303,7 @@ class RjvObject extends React.PureComponent {
                             depth={ depth + DEPTH_INCREMENT }
                             name={ variable.name }
                             src={ variable.value }
+                            type={ variable.type }
                             namespace={ namespace.concat(variable.name) }
                             parent_type={ object_type }
                             { ...props }

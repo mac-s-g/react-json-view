@@ -17,7 +17,6 @@ class PasteToJson extends Component {
             pastedOnObjectOrArray,
             parent_type,
             namespace,
-            type,
             depth
         } = this.props;
         const pasteValue = ObjectAttributes.get(rjvId, 'global', 'copied', false);
@@ -27,7 +26,6 @@ class PasteToJson extends Component {
             rjvId,
             'global',
             parentNamespace,
-            type,
             parent_type
         );
         //find index of paste position

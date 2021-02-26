@@ -127,7 +127,7 @@ export default class extends React.PureComponent {
                 { this.getObjectSize() }
                 {/* don't display copy to clipboard icon for root
                  as it is implemented in the application already */}
-                { enableClipboard && !jsvRoot ? (
+                { enableClipboard ? (
                     <CopyToClipboard
                         clickCallback={ enableClipboard }
                         { ...{src, rjvId, theme, namespace, name} }

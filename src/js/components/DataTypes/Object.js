@@ -181,7 +181,7 @@ class RjvObject extends React.PureComponent {
     }
 
     getBraceStart(object_type, expanded) {
-        const { src, theme, iconStyle, parent_type } = this.props;
+        const { src, theme, iconStyle, parent_type, jsvRoot } = this.props;
 
         if (parent_type === 'array_group') {
             return (
@@ -204,7 +204,7 @@ class RjvObject extends React.PureComponent {
                     }}
                     {...Theme(theme, 'brace-row')}
                 >
-                    { parent_type !== 'array' && this.getEditIcon() }
+                    { (parent_type !== 'array' && !jsvRoot) && this.getEditIcon() }
                     <div
                         class="icon-container"
                         {...Theme(theme, 'icon-container')}

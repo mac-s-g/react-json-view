@@ -103,7 +103,8 @@ class VariableEditor extends React.PureComponent {
             onEdit,
             onDelete,
             onSelect,
-            rjvId
+            rjvId,
+            parent_type
         } = this.props;
         const { editMode } = this.state;
 
@@ -116,7 +117,7 @@ class VariableEditor extends React.PureComponent {
                 key={ variable.name }
             >
                 {/*disable editing array keys*/}
-                { (isNaN(Number(variable.name)) && onEdit !== false && editMode == false) && this.getEditKeyIcon() }
+                { (parent_type !== 'array' && onEdit !== false && editMode == false) && this.getEditKeyIcon() }
                 { type === 'array' ? this.renderArrayKeys() : this.renderObjectKeys() }
                 <div
                     class="variable-value"

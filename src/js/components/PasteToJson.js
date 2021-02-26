@@ -29,7 +29,7 @@ class PasteToJson extends Component {
             parent_type
         );
         //find index of paste position
-        const dropTargetIdx = pastedOnObjectOrArray && parent_type !== 'array' ?
+        const dropTargetIdx = pastedOnObjectOrArray ?
             Object.keys(existingValue).findIndex(key => key === name) :
             Object.keys(src).findIndex(key => key === name);
         const request = {
@@ -47,12 +47,13 @@ class PasteToJson extends Component {
         if (parent_type === 'array') {
             const new_value = [
                 // part of the array before the specified index
-                ...request.existing_value.slice(0, dropTargetIdx),
+                ...request.existing_value.slice(0, dropTargetIdx+1),
                 // inserted item
                 pasteValue,
                 // part of the array after the specified index
-                ...request.existing_value.slice(dropTargetIdx)
+                ...request.existing_value.slice(dropTargetIdx+1)
             ];
+            console.log(new_value);
             dispatcher.dispatch({
                 name: 'VARIABLE_ADDED',
                 rjvId: rjvId,

@@ -69,6 +69,19 @@ class RjvObject extends React.PureComponent {
 
     static getDerivedStateFromProps(nextProps, prevState) {
         const { prevProps } = prevState;
+        if (!nextProps.jsvRoot) {
+            //if src has changed but collapse did not change then remain expanded (as auto expand opens objects/arrays)
+            if (prevProps.src !== nextProps.src && prevProps.collapsed === nextProps.collapsed) {
+                AttributeStore.set(nextProps.rjvId, nextProps.namespace, 'expanded', true);
+            } else {
+                //collapse all after depth 1 or expand all
+                AttributeStore.set(nextProps.rjvId, nextProps.namespace, 'expanded', (nextProps.collapsed !== 1 && nextProps.collapsed !== true));
+            }
+        }
+        //if changing root then it should always be expanded
+        else {
+            AttributeStore.set(nextProps.rjvId, nextProps.namespace, 'expanded', true);
+        }
         if (nextProps.src !== prevProps.src ||
             nextProps.collapsed !== prevProps.collapsed ||
             nextProps.name !== prevProps.name ||
@@ -135,7 +148,6 @@ class RjvObject extends React.PureComponent {
     }
 
     getObjectMetaData = src => {
-        const { rjvId, theme } = this.props;
         const { size } = this.state;
         return <VariableMeta size={ size } { ...this.props } />;
     }
@@ -175,7 +187,7 @@ class RjvObject extends React.PureComponent {
                         {object_type === 'array' ? '[' : '{'}
                     </span>
                 </span>
-                {expanded ? this.getObjectMetaData(src) : null}
+                { expanded ? this.getObjectMetaData(src) : null }
             </span>
         );
     }
@@ -291,6 +303,7 @@ class RjvObject extends React.PureComponent {
                             depth={ depth + DEPTH_INCREMENT }
                             name={ variable.name }
                             src={ variable.value }
+                            type={ variable.type }
                             namespace={ namespace.concat(variable.name) }
                             parent_type={ object_type }
                             { ...props }
@@ -318,7 +331,7 @@ class RjvObject extends React.PureComponent {
                         namespace={ namespace }
                         rjvId={ rjvId }
                         src={ src }
-                        dragAllowed={ true }
+                        dragAllowed={ dragEnabled }
                         isArray={ true }
                         canDrop={ true }>
                         <ObjectComponent
@@ -346,19 +359,19 @@ class RjvObject extends React.PureComponent {
                         rjvId={ rjvId }
                         src={ src }
                         dragAllowed={ dragEnabled }
-                        value={ variable.value }
                         canDrop={ true }>
                         <VariableEditor
                             key={ variable.name + '_' + namespace }
                             src={ src }
                             variable={ variable }
+                            depth={ depth }
                             singleIndent={ SINGLE_INDENT }
                             namespace={ namespace }
                             type={ type }
+                            parent_type={ object_type }
                             isDragAllowed={ this.handleDragAllow }
                             { ...props } />
                     </DragWrapper>
-
                 );
             }
         });

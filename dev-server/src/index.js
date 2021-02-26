@@ -1,7 +1,7 @@
 'use strict';
 
 //import react and reactDom for browser rendering
-import React, {Component} from 'react';
+import React from 'react';
 
 import Moment from 'moment';
 import ReactDom from 'react-dom';
@@ -13,7 +13,7 @@ class DevDemo extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            collapsedState: 1,
+            collapsedState: 1
         };
     }
 
@@ -31,6 +31,7 @@ class DevDemo extends React.PureComponent {
     }
 
     render() {
+        const { collapsedState } = this.state;
         return (
             <div id='app-container'>
                 <button onClick={ () => this.toggleCollapse() }>Toggle collapse</button>
@@ -57,13 +58,21 @@ class DevDemo extends React.PureComponent {
                     onSelect={e => {
                         console.log('select callback', e);
                     }}
+                    shouldCollapse={({ src, namespace, type }) => {
+                        if (type === 'array' && src.indexOf('test') > -1) {
+                            return true;
+                        } else if (namespace.indexOf('moment') > -1) {
+                            return true;
+                        }
+                        return false;
+                    }}
                     displayObjectSize={false}
                     name={'dev-server'}
-                    enableClipboard={false}
-                    defaultValue=""
+                    enableClipboard={true}
+                    defaultValue={null}
                     displayDataTypes={false}
                     displaySearch={true}
-                    collapsed={ this.state.collapsedState }
+                    collapsed={false}
                     displayArrayKey={true}
                 />
 
@@ -94,9 +103,6 @@ function getExampleJson1() {
                 'secondObjectInArray': 2
             },
             {
-                'thirdObjectInArray': 3
-            },
-            {
                 'fourthObjectInArray': 4
             }
         ],
@@ -104,6 +110,7 @@ function getExampleJson1() {
         array: [1, 2, 3, 'test'],
         float: -2.757,
         undefined_var: undefined,
+        moment: Moment(),
         parent: {
             sibling1: true,
             sibling2: false,
@@ -119,8 +126,6 @@ function getExampleJson1() {
         string_number_hsl: 'hsl(180, 50%, 50%)',
         string_number_hsla: 'hsla(170, 45%, 45%, 1)',
         date: new Date(),
-        moment: Moment(),
-        regexp: /[0-9]/gi,
         testObj: {
             'testString': 'Tree',
             'objectInside': {
@@ -137,20 +142,8 @@ function getExampleJson1() {
 //just a function to get an example JSON object
 function getExampleJson2() {
     return {
-        parent: {
-            sibling1: true,
-            sibling2: false,
-            sibling3: null,
-        },
-        testObj: {
-            'testString1': 'Tree'
-        },
-        testObj2: {
-            'testString3': 'Tree'
-        },
-        testObj3: {
-            'testString2': 'Tree'
-        }
+        test: 'testing',
+        array: [{Greeting: 'hello', Greeting2: 'hi'}, 'bye', 'elephant', [1, {Number: 2, nested: [10, 20, 30,]}]]
     };
 }
 

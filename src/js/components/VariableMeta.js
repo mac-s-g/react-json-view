@@ -1,8 +1,9 @@
 import React from 'react';
 import dispatcher from './../helpers/dispatcher';
 
-import AttributeStore from '../stores/ObjectAttributes';
 import CopyToClipboard from './CopyToClipboard';
+import PasteToJson from './PasteToJson';
+import CutFromJson from './CutFromJson';
 import { toType } from '../helpers/util';
 
 //icons
@@ -12,7 +13,6 @@ import {
 
 //theme
 import Theme from './../themes/getStyle';
-
 
 export default class extends React.PureComponent {
     getObjectSize = () => {
@@ -35,17 +35,12 @@ export default class extends React.PureComponent {
         return (
             <span
                 class="click-to-add"
+                title="Add"
                 style={{verticalAlign: 'top'}}>
                 <Add
                     class="click-to-add-icon"
                     {...Theme(theme, 'addVarIcon')}
                     onClick={() => {
-                        AttributeStore.set(
-                            rjvId,
-                            namespace,
-                            'expanded',
-                            true
-                        );
                         const request = {
                             name: depth > 0 ? name : null,
                             namespace: namespace.splice(
@@ -79,7 +74,7 @@ export default class extends React.PureComponent {
 
     getRemoveObject = () => {
         const {
-            theme, hover, namespace, name, src, rjvId
+            theme, namespace, name, src, rjvId
         } = this.props;
 
         //don't allow deleting of root node
@@ -106,7 +101,7 @@ export default class extends React.PureComponent {
                 />
             </span>
         );
-    };
+    }
 
     render = () => {
         const {
@@ -115,28 +110,43 @@ export default class extends React.PureComponent {
             onAdd,
             enableClipboard,
             src,
-            namespace
+            namespace,
+            name,
+            rjvId,
+            jsvRoot
         } = this.props;
         return (
             <div
                 {...Theme(theme, 'object-meta-data')}
                 class='object-meta-data'
-                onClick={(e)=>{
+                onClick={ (e)=>{
                     e.stopPropagation();
-                }}
+                } }
             >
                 {/* size badge display */}
-                {this.getObjectSize()}
-                {/* copy to clipboard icon */}
-                {enableClipboard
-                    ? (<CopyToClipboard
-                        clickCallback={enableClipboard}
-                        {...{src, theme, namespace}} />)
-                    : null
+                { this.getObjectSize() }
+                { enableClipboard &&
+                    <CopyToClipboard
+                        clickCallback={ enableClipboard }
+                        { ...{src, rjvId, theme, namespace, name} }
+                    />
+                }
+                {/*Don't display cut icon for root*/}
+                { (enableClipboard && !jsvRoot) &&
+                    <CutFromJson
+                        { ...this.props }
+                    />
+                }
+                {/*don't display paste icon for root*/}
+                { (enableClipboard && !jsvRoot) &&
+                    <PasteToJson
+                        pastedOnObjectOrArray
+                        { ...this.props }
+                    />
                 }
                 {/* copy add/remove icons */}
-                {onAdd !== false ? this.getAddAttribute() : null}
-                {onDelete !== false ? this.getRemoveObject() : null}
+                { onAdd !== false && this.getAddAttribute() }
+                { onDelete !== false && this.getRemoveObject() }
             </div>
         );
     }

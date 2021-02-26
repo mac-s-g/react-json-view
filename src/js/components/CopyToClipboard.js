@@ -7,6 +7,8 @@ import { Clippy } from './icons';
 
 //theme
 import Theme from './../themes/getStyle';
+import ObjectAttributes from '../stores/ObjectAttributes';
+import dispatcher from '../helpers/dispatcher';
 
 export default class extends React.PureComponent {
     constructor(props) {
@@ -27,7 +29,8 @@ export default class extends React.PureComponent {
 
     handleCopy = () => {
         const container = document.createElement('textarea');
-        const { clickCallback, src, namespace } = this.props;
+        const { clickCallback, src, namespace, rjvId } = this.props;
+        ObjectAttributes.set(rjvId,  'global', 'copied', src);
 
         container.innerHTML = JSON.stringify(
             this.clipboardValue(src),
@@ -45,7 +48,7 @@ export default class extends React.PureComponent {
             this.setState({
                 copied: false
             });
-        }, 5500);
+        }, 1500);
 
         this.setState({ copied: true }, () => {
             if (typeof clickCallback !== 'function') {
@@ -57,6 +60,11 @@ export default class extends React.PureComponent {
                 namespace: namespace,
                 name: namespace[namespace.length - 1]
             });
+        });
+
+        dispatcher.dispatch({
+            name: 'VARIABLE_COPIED',
+            rjvId: rjvId,
         });
     }
 
@@ -87,13 +95,9 @@ export default class extends React.PureComponent {
     }
 
     render() {
-        const { src, theme, hidden } = this.props;
+        const { theme, hidden } = this.props;
         let style = Theme(theme, 'copy-to-clipboard').style;
-        let display = 'inline';
-
-        if (hidden) {
-            display = 'none';
-        }
+        let display = hidden ? 'none' : 'inline';
 
         return (
             <span class="copy-to-clipboard-container" title="Copy to clipboard">

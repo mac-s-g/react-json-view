@@ -5,6 +5,8 @@ import dispatcher from './../helpers/dispatcher';
 import parseInput from './../helpers/parseInput';
 import stringifyVariable from './../helpers/stringifyVariable';
 import CopyToClipboard from './CopyToClipboard';
+import PasteToJson from './PasteToJson';
+import CutFromJson from './CutFromJson';
 import highlightedString from './../helpers/highlightedString';
 
 //data type components
@@ -39,7 +41,8 @@ class VariableEditor extends React.PureComponent {
                 type: false,
                 value: null
             },
-            allowDragging: true
+            allowDragging: true,
+            canPaste: false
         };
     }
 
@@ -100,6 +103,7 @@ class VariableEditor extends React.PureComponent {
             onEdit,
             onDelete,
             onSelect,
+            rjvId
         } = this.props;
         const { editMode } = this.state;
 
@@ -130,26 +134,37 @@ class VariableEditor extends React.PureComponent {
                                 }
                             }
                     }
-                    {...Theme(theme, 'variableValue', {
+                    { ...Theme(theme, 'variableValue', {
                         cursor: onSelect === false ? 'default' : 'pointer'
-                    })}
+                    }) }
                 >
                     { this.getValue(variable, editMode) }
                 </div>
-                { enableClipboard ? (
+                { enableClipboard &&
                     <CopyToClipboard
-                        hidden={editMode}
-                        src={variable.value}
-                        clickCallback={enableClipboard}
-                        {...{ theme, namespace }}
+                        hidden={ editMode }
+                        src={ variable.value }
+                        name={ variable.name }
+                        clickCallback={ enableClipboard }
+                        { ...{ theme, namespace, rjvId } }
                     />
-                ) : null }
-                { onEdit !== false && editMode == false
-                    ? this.getEditIcon()
-                    : null }
-                { onDelete !== false && editMode == false
-                    ? this.getRemoveIcon()
-                    : null }
+                }
+                { (enableClipboard && editMode === false) &&
+                    <span>
+                        <CutFromJson
+                            hidden={ editMode }
+                            src={ variable.value }
+                            name={ variable.name }
+                            { ...{ theme, namespace, rjvId }}
+                        />
+                        <PasteToJson
+                            name={ variable.name }
+                            { ...this.props }
+                        />
+                    </span>
+                }
+                { (onEdit !== false && editMode === false) && this.getEditIcon() }
+                { (onDelete !== false && editMode === false) && this.getRemoveIcon() }
             </div>
 
         );
@@ -159,7 +174,9 @@ class VariableEditor extends React.PureComponent {
         const { variable, theme } = this.props;
 
         return (
-            <div class="click-to-edit" style={{ verticalAlign: 'top' }}>
+            <div
+                class="click-to-edit" style={{ verticalAlign: 'top' }}
+                title="Edit">
                 <Edit
                     class="click-to-edit-icon"
                     {...Theme(theme, 'editVarIcon')}
@@ -191,7 +208,9 @@ class VariableEditor extends React.PureComponent {
         const { variable, namespace, theme, rjvId } = this.props;
 
         return (
-            <div class="click-to-remove" style={ { verticalAlign: 'top' } }>
+            <div
+                class="click-to-remove" style={ { verticalAlign: 'top' } }
+                title="Remove">
                 <Remove
                     class="click-to-remove-icon"
                     { ...Theme(theme, 'removeVarIcon') }
@@ -297,7 +316,7 @@ class VariableEditor extends React.PureComponent {
                         }
                         e.stopPropagation();
                     }}
-                    placeholder="update this value"
+                    placeholder="Insert new value"
                     { ...Theme(theme, 'edit-input') }
                 />
                 <div { ...Theme(theme, 'edit-icon-container') }>

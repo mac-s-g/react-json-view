@@ -4,6 +4,14 @@
         vertical-align: top;
         display: none;
     }
+    .cut-from-json-container {
+        vertical-align: top;
+        display: none;
+    }
+    .paste-to-json-container {
+        vertical-align: top;
+        display: none;
+    }
     .click-to-add {
         display: none;
     }
@@ -19,6 +27,12 @@
             & > .copy-to-clipboard-container {
                 display: inline-block;
             }
+            & > .cut-from-json-container {
+                display: inline-block;
+            }
+            & > .paste-to-json-container {
+                display: inline-block;
+            }
             & > .click-to-add {
                 display: inline-block;
             }
@@ -31,6 +45,12 @@
     .variable-row {
         &:hover {
             & .copy-to-clipboard-container {
+                display: inline-block;
+            }
+            & .cut-from-json-container {
+                display: inline-block;
+            }
+            & .paste-to-json-container {
                 display: inline-block;
             }
         }

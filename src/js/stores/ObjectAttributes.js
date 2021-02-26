@@ -1,6 +1,6 @@
-import {EventEmitter} from 'events';
+import { EventEmitter } from 'events';
 import dispatcher from './../helpers/dispatcher';
-import {toType} from './../helpers/util';
+import { toType } from '../helpers/util';
 
 //store persistent display attributes for objects and arrays
 class ObjectAttributes extends EventEmitter {
@@ -24,6 +24,27 @@ class ObjectAttributes extends EventEmitter {
             return default_value;
         }
         return this.objects[rjvId][name][key];
+    }
+
+    getSrcByNamespace = (rjvId, name, namespace, parent_type) => {
+        if (this.objects[rjvId] === undefined
+            || this.objects[rjvId][name] === undefined
+        ) {
+            return null;
+        }
+
+        namespace.shift();
+
+        //deep copy of src variable
+        let updated_src = this.deepCopy(this.objects[rjvId].global.src, [...namespace]);
+
+        //point at current index
+        let walk = updated_src;
+        for (const idx of namespace) {
+            walk = walk[idx];
+        }
+        //return as array if parent is array (for slicing)
+        return parent_type === 'object' ? {...walk} : [...walk];
     }
 
     handleAction = (action) => {
@@ -62,6 +83,9 @@ class ObjectAttributes extends EventEmitter {
             );
             this.emit('variable-update-' + rjvId);
             break;
+        case 'VARIABLE_COPIED':
+            this.emit('copied-' + rjvId);
+            break;
         case 'ADD_VARIABLE_KEY_REQUEST':
             this.set(rjvId, 'action', 'new-key-request', data);
             this.emit('add-key-request-' + rjvId);
@@ -95,7 +119,7 @@ class ObjectAttributes extends EventEmitter {
             }
         } else {
             //update copied variable at specified namespace
-            if (name !== null) {
+            if (name !== null && name) {
                 walk[name] = new_value;
             } else {
                 updated_src = new_value;

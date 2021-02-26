@@ -19,7 +19,7 @@ class DragWrapper extends Component {
     }
 
     handleMouseDown = event => {
-        event.preventDefault();
+        event.stopPropagation();
         if (this.el !== event.target.closest('[data-drop-target="true"')) {
             return;
         }
@@ -39,6 +39,7 @@ class DragWrapper extends Component {
     }
 
     handleDragMove = event => {
+        event.preventDefault();
         if (!this.dragging) {
             const dx = this.dragStartPos.x - event.clientX;
             const dy = this.dragStartPos.y - event.clientY;

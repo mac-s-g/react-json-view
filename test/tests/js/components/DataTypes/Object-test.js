@@ -227,7 +227,7 @@ describe('<JsonObject />', function() {
                 theme="rjv-default"
                 namespace={['root']}
                 rjvId={rjvId}
-                collapsed={false}
+                collapsed={true}
             />
         );
         expect(wrapper.state('expanded')).to.equal(false);
@@ -256,7 +256,7 @@ describe('<JsonObject />', function() {
                 src={src}
                 theme="rjv-default"
                 namespace={['root']}
-                collapsed={false}
+                collapsed={true}
             />
         );
         expect(wrapper.state('expanded')).to.equal(false);
@@ -302,7 +302,7 @@ describe('<JsonObject />', function() {
                 src={src}
                 theme="rjv-default"
                 namespace={['root']}
-                collapsed={false}
+                collapsed={true}
                 shouldCollapse={() => true}
             />
         );

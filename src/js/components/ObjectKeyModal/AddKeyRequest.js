@@ -3,11 +3,7 @@ import dispatcher from './../../helpers/dispatcher';
 import ObjectAttributes from './../../stores/ObjectAttributes';
 import ObjectKeyModal from './ObjectKeyModal';
 
-//global theme
-import Theme from './../../themes/getStyle';
-
-
-//this input appears when adding a new value to an object
+//this input appears when adding a new value to an object or copy/cut pasting something into object
 export default class extends React.PureComponent {
 
     render() {
@@ -39,12 +35,34 @@ export default class extends React.PureComponent {
         let request = ObjectAttributes.get(
             rjvId, 'action', 'new-key-request'
         );
-        request.new_value = {[input]: this.props.defaultValue, ...request.existing_value};
-        dispatcher.dispatch({
-            name: 'VARIABLE_ADDED',
-            rjvId: rjvId,
-            data: request
-        });
+
+        if (request.pasted) {
+            let newSrc = {};
+            Object.keys(request.existing_value).forEach((key, idx) => {
+                newSrc[key] = request.existing_value[key];
+                //insert after
+                if (idx+1 === request.dropTargetIdx+1) {
+                    newSrc[input] = request.pasteValue;
+                }
+            });
+            dispatcher.dispatch({
+                name: 'VARIABLE_ADDED',
+                rjvId: rjvId,
+                data: {
+                    ...request,
+                    new_value: newSrc
+                }
+            });
+        }
+        else {
+            request.new_value = {[input]: this.props.defaultValue, ...request.existing_value};
+            dispatcher.dispatch({
+                name: 'VARIABLE_ADDED',
+                rjvId: rjvId,
+                data: request
+            });
+        }
+
     }
 
 }

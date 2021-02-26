@@ -44,7 +44,8 @@ export default class extends React.PureComponent {
             let newSrc = {};
             Object.keys(request.existing_value).forEach((key, idx) => {
                 newSrc[key] = request.existing_value[key];
-                if (idx === request.dropTargetIdx) {
+                //insert after
+                if (idx+1 === request.dropTargetIdx+1) {
                     newSrc[input] = request.pasteValue;
                 }
             });

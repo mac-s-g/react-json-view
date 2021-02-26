@@ -140,7 +140,7 @@ class VariableEditor extends React.PureComponent {
                 >
                     { this.getValue(variable, editMode) }
                 </div>
-                { enableClipboard ? (
+                { enableClipboard &&
                     <CopyToClipboard
                         hidden={ editMode }
                         src={ variable.value }
@@ -148,8 +148,8 @@ class VariableEditor extends React.PureComponent {
                         clickCallback={ enableClipboard }
                         { ...{ theme, namespace, rjvId } }
                     />
-                ) : null }
-                { enableClipboard && editMode === false ? (
+                }
+                { (enableClipboard && editMode === false) &&
                     <span>
                         <CutFromJson
                             hidden={ editMode }
@@ -162,13 +162,9 @@ class VariableEditor extends React.PureComponent {
                             { ...this.props }
                         />
                     </span>
-                ) : null }
-                { onEdit !== false && editMode === false
-                    ? this.getEditIcon()
-                    : null }
-                { onDelete !== false && editMode === false
-                    ? this.getRemoveIcon()
-                    : null }
+                }
+                { (onEdit !== false && editMode === false) && this.getEditIcon() }
+                { (onDelete !== false && editMode === false) && this.getRemoveIcon() }
             </div>
 
         );

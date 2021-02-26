@@ -21,10 +21,12 @@ class PasteToJson extends Component {
             depth
         } = this.props;
         const pasteValue = ObjectAttributes.get(rjvId, 'global', 'copied', false);
+        //for parent's namespace last namespace has to be spliced out
+        const parentNamespace = [...namespace].splice(0, namespace.length-1);
         let existingValue = ObjectAttributes.getSrcByNamespace(
             rjvId,
             'global',
-            [...namespace].splice(0, namespace.length-1),
+            parentNamespace,
             type,
             parent_type
         );
@@ -32,28 +34,39 @@ class PasteToJson extends Component {
         const dropTargetIdx = pastedOnObjectOrArray ?
             Object.keys(existingValue).findIndex(key => key === name) :
             Object.keys(src).findIndex(key => key === name);
-        const request = {
-            name: pastedOnObjectOrArray ? namespace[depth-1] : namespace[depth],
-            namespace: pastedOnObjectOrArray ?
-                namespace.splice(0, namespace.length - 2) : namespace.splice(0, namespace.length-1),
-            existing_value: pastedOnObjectOrArray ?
-                existingValue : src,
-            pasteValue,
-            dropTargetIdx,
-            variable_removed: false,
-            key_name: null,
-            pasted: true
-        };
+        let request;
+        //if pasted on object or array then the request has to be made with
+        // parent's existing value, name and namespace. Therefore an additional step has to be made backwards.
+        if (pastedOnObjectOrArray) {
+            request = {
+                name: namespace[depth-1],
+                namespace: namespace.splice(0, namespace.length - 2),
+                existing_value: existingValue,
+                pasteValue,
+                dropTargetIdx,
+                variable_removed: false,
+                key_name: null,
+                pasted: true
+            };
+        } else {
+            request = {
+                name: namespace[depth],
+                namespace: namespace.splice(0, namespace.length-1),
+                existing_value: src,
+                pasteValue,
+                dropTargetIdx,
+                variable_removed: false,
+                key_name: null,
+                pasted: true
+            };
+        }
+
         if (parent_type === 'array') {
             const new_value = [
-                // part of the array before the specified index
                 ...request.existing_value.slice(0, dropTargetIdx+1),
-                // inserted item
                 pasteValue,
-                // part of the array after the specified index
                 ...request.existing_value.slice(dropTargetIdx+1)
             ];
-            console.log(new_value);
             dispatcher.dispatch({
                 name: 'VARIABLE_ADDED',
                 rjvId: rjvId,

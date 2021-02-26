@@ -127,7 +127,6 @@ class ObjectAttributes extends EventEmitter {
             walk = walk[idx];
         }
         if (variable_key_updated) {
-            console.log(toType(walk));
             if (toType(walk) === 'array') {
                 walk.splice(name, 1);
             } else {

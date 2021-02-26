@@ -157,7 +157,7 @@ class RjvObject extends React.PureComponent {
     getEditIcon = () => {
         const { theme, name, namespace, src, rjvId } = this.props;
         return (
-            <div class="click-to-edit" style={{ verticalAlign: 'top' }} title="Edit Key">
+            <span class="click-to-edit" style={{ verticalAlign: 'top' }} title="Edit Key">
                 <Edit
                     class="click-to-edit-icon"
                     {...Theme(theme, 'editVarIcon')}
@@ -170,13 +170,13 @@ class RjvObject extends React.PureComponent {
                                 name,
                                 namespace: namespace.splice(0, namespace.length -1),
                                 existing_value: src,
-                                _removed: false,
+                                variable_removed: false,
                                 key_name: name
                             }
                         });
                     }}
                 />
-            </div>
+            </span>
         );
     }
 
@@ -204,7 +204,7 @@ class RjvObject extends React.PureComponent {
                     }}
                     {...Theme(theme, 'brace-row')}
                 >
-                    { this.getEditIcon() }
+                    { parent_type !== 'array' && this.getEditIcon() }
                     <div
                         class="icon-container"
                         {...Theme(theme, 'icon-container')}

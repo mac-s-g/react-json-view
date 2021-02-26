@@ -115,6 +115,8 @@ class VariableEditor extends React.PureComponent {
                 class="variable-row"
                 key={ variable.name }
             >
+                {/*disable editing array keys*/}
+                { (isNaN(Number(variable.name)) && onEdit !== false && editMode == false) && this.getEditKeyIcon() }
                 { type === 'array' ? this.renderArrayKeys() : this.renderObjectKeys() }
                 <div
                     class="variable-value"
@@ -189,6 +191,32 @@ class VariableEditor extends React.PureComponent {
                     }}
                 />
             </div>
+        );
+    }
+
+    getEditKeyIcon = () => {
+        const { variable: { name, value }, theme, namespace, rjvId } = this.props;
+        return (
+            <span class="click-to-edit" style={{ verticalAlign: 'top' }} title="Edit value">
+                <Edit
+                    class="click-to-edit-icon"
+                    {...Theme(theme, 'editVarIcon')}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        dispatcher.dispatch({
+                            name: 'UPDATE_VARIABLE_KEY_REQUEST',
+                            rjvId: rjvId,
+                            data: {
+                                name,
+                                namespace: namespace,
+                                existing_value: value,
+                                variable_removed: false,
+                                key_name: name
+                            }
+                        });
+                    }}
+                />
+            </span>
         );
     }
 

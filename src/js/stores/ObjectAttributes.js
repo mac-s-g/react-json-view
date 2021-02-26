@@ -90,12 +90,29 @@ class ObjectAttributes extends EventEmitter {
             this.set(rjvId, 'action', 'new-key-request', data);
             this.emit('add-key-request-' + rjvId);
             break;
+        case 'UPDATE_VARIABLE_KEY_REQUEST':
+            this.set(rjvId, 'action', 'edit-key-request', data);
+            this.emit('edit-key-request-' + rjvId);
+            break;
+        case 'VARIABLE_KEY_UPDATED':
+            action.data.updated_src = this.updateSrc(
+                rjvId, data
+            );
+            this.set(rjvId, 'action', 'variable-update',{...data, type:'variable-key-added'});
+            this.emit('variable-update-' + rjvId);
+            break;
         }
     }
 
     updateSrc = (rjvId, request) => {
         let {
-            name, namespace, new_value, existing_value, variable_removed
+            name,
+            namespace,
+            new_value,
+            existing_value,
+            variable_removed,
+            key_name,
+            variable_key_updated
         } = request;
 
         namespace.shift();
@@ -104,14 +121,21 @@ class ObjectAttributes extends EventEmitter {
         let src = this.get(rjvId, 'global', 'src');
         //deep copy of src variable
         let updated_src = this.deepCopy(src, [...namespace]);
-
         //point at current index
         let walk = updated_src;
         for (const idx of namespace) {
             walk = walk[idx];
         }
-
-        if (variable_removed) {
+        if (variable_key_updated) {
+            console.log(toType(walk));
+            if (toType(walk) === 'array') {
+                walk.splice(name, 1);
+            } else {
+                walk[key_name] = existing_value;
+                delete walk[name];
+            }
+        }
+        else if (variable_removed) {
             if (toType(walk) === 'array') {
                 walk.splice(name, 1);
             } else {

@@ -125,25 +125,25 @@ export default class extends React.PureComponent {
             >
                 {/* size badge display */}
                 { this.getObjectSize() }
-                { enableClipboard ? (
+                { enableClipboard &&
                     <CopyToClipboard
                         clickCallback={ enableClipboard }
                         { ...{src, rjvId, theme, namespace, name} }
                     />
-                ) : null }
+                }
                 {/*Don't display cut icon for root*/}
-                { enableClipboard && !jsvRoot ? (
+                { (enableClipboard && !jsvRoot) &&
                     <CutFromJson
                         { ...this.props }
                     />
-                ) : null }
+                }
                 {/*don't display paste icon for root*/}
-                { enableClipboard && !jsvRoot ? (
+                { (enableClipboard && !jsvRoot) &&
                     <PasteToJson
                         pastedOnObjectOrArray
                         { ...this.props }
                     />
-                ) : null }
+                }
                 {/* copy add/remove icons */}
                 { onAdd !== false ? this.getAddAttribute() : null }
                 { onDelete !== false ? this.getRemoveObject() : null }

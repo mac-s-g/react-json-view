@@ -29,6 +29,7 @@ import { Edit, CheckCircle, RemoveIcon as Remove, CancelIcon as Cancel } from '.
 
 //theme
 import Theme from './../themes/getStyle';
+import ObjectAttributes from '../stores/ObjectAttributes';
 
 class VariableEditor extends React.PureComponent {
     constructor(props) {
@@ -196,13 +197,27 @@ class VariableEditor extends React.PureComponent {
     }
 
     getEditKeyIcon = () => {
-        const { variable: { name, value }, theme, namespace, rjvId } = this.props;
+        const {
+            variable: { name, value },
+            theme,
+            namespace,
+            rjvId,
+            type,
+            parent_type
+        } = this.props;
         return (
             <span class="click-to-edit" style={{ verticalAlign: 'top' }} title="Edit value">
                 <Edit
                     class="click-to-edit-icon"
                     {...Theme(theme, 'editVarIcon')}
                     onClick={(e) => {
+                        let existingValue = ObjectAttributes.getSrcByNamespace(
+                            rjvId,
+                            'global',
+                            [...namespace].splice(0, namespace.length-1),
+                            type,
+                            parent_type
+                        );
                         e.stopPropagation();
                         dispatcher.dispatch({
                             name: 'UPDATE_VARIABLE_KEY_REQUEST',
@@ -210,7 +225,8 @@ class VariableEditor extends React.PureComponent {
                             data: {
                                 name,
                                 namespace: namespace,
-                                existing_value: value,
+                                existing_value: existingValue,
+                                value,
                                 variable_removed: false,
                                 key_name: name
                             }

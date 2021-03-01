@@ -22,6 +22,7 @@ import { Edit } from '../icons';
 
 //theme
 import Theme from './../../themes/getStyle';
+import ObjectAttributes from '../../stores/ObjectAttributes';
 
 //increment 1 with each nested object & array
 const DEPTH_INCREMENT = 1;
@@ -155,7 +156,8 @@ class RjvObject extends React.PureComponent {
     }
 
     getEditIcon = () => {
-        const { theme, name, namespace, src, rjvId } = this.props;
+        const { theme, name, namespace, type, parent_type, rjvId, src } = this.props;
+
         return (
             <span class="click-to-edit" style={{ verticalAlign: 'top' }} title="Edit Key">
                 <Edit
@@ -163,13 +165,21 @@ class RjvObject extends React.PureComponent {
                     {...Theme(theme, 'editVarIcon')}
                     onClick={(e) => {
                         e.stopPropagation();
+                        let existingValue = ObjectAttributes.getSrcByNamespace(
+                            rjvId,
+                            'global',
+                            [...namespace].splice(0, namespace.length-1),
+                            type,
+                            parent_type
+                        );
                         dispatcher.dispatch({
                             name: 'UPDATE_VARIABLE_KEY_REQUEST',
                             rjvId: rjvId,
                             data: {
                                 name,
                                 namespace: namespace.splice(0, namespace.length -1),
-                                existing_value: src,
+                                existing_value: existingValue,
+                                value: src,
                                 variable_removed: false,
                                 key_name: name
                             }

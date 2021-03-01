@@ -27,6 +27,7 @@ export default class extends React.PureComponent {
         );
         return (
             input !== ''
+            && Object.keys(request.existing_value).indexOf(input) === -1
         );
     }
 

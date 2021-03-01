@@ -202,8 +202,6 @@ class VariableEditor extends React.PureComponent {
             theme,
             namespace,
             rjvId,
-            type,
-            parent_type,
             depth,
             src
         } = this.props;

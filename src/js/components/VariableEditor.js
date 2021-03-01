@@ -203,7 +203,9 @@ class VariableEditor extends React.PureComponent {
             namespace,
             rjvId,
             type,
-            parent_type
+            parent_type,
+            depth,
+            src
         } = this.props;
         return (
             <span class="click-to-edit" style={{ verticalAlign: 'top' }} title="Edit value">
@@ -211,21 +213,14 @@ class VariableEditor extends React.PureComponent {
                     class="click-to-edit-icon"
                     {...Theme(theme, 'editVarIcon')}
                     onClick={(e) => {
-                        let existingValue = ObjectAttributes.getSrcByNamespace(
-                            rjvId,
-                            'global',
-                            [...namespace].splice(0, namespace.length-1),
-                            type,
-                            parent_type
-                        );
                         e.stopPropagation();
                         dispatcher.dispatch({
                             name: 'UPDATE_VARIABLE_KEY_REQUEST',
                             rjvId: rjvId,
                             data: {
-                                name,
-                                namespace: namespace,
-                                existing_value: existingValue,
+                                name: namespace[depth],
+                                namespace: namespace.splice(0, namespace.length - 1),
+                                existing_value: src,
                                 variable_removed: false,
                                 key_name: name
                             }

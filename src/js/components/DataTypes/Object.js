@@ -156,7 +156,15 @@ class RjvObject extends React.PureComponent {
     }
 
     getEditIcon = () => {
-        const { theme, name, namespace, type, parent_type, rjvId, src } = this.props;
+        const {
+            theme,
+            name,
+            namespace,
+            type,
+            parent_type,
+            rjvId,
+            depth
+        } = this.props;
 
         return (
             <span class="click-to-edit" style={{ verticalAlign: 'top' }} title="Edit Key">
@@ -176,8 +184,8 @@ class RjvObject extends React.PureComponent {
                             name: 'UPDATE_VARIABLE_KEY_REQUEST',
                             rjvId: rjvId,
                             data: {
-                                name,
-                                namespace: namespace.splice(0, namespace.length -1),
+                                name: namespace[depth-1],
+                                namespace: namespace.splice(0, namespace.length - 2),
                                 existing_value: existingValue,
                                 variable_removed: false,
                                 key_name: name

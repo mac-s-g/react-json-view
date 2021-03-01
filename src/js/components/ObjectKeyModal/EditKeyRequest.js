@@ -8,13 +8,13 @@ export default class extends React.PureComponent {
 
     render() {
         const {active, theme, rjvId } = this.props;
-        const { name } = ObjectAttributes.get(rjvId, 'action', 'edit-key-request') || {};
+        const { key_name } = ObjectAttributes.get(rjvId, 'action', 'edit-key-request') || {};
 
         return active &&
             <ObjectKeyModal
                 rjvId={rjvId}
                 theme={theme}
-                input={name}
+                input={key_name}
                 isValid={this.isValid}
                 submit={this.submit}
             />;
@@ -36,13 +36,29 @@ export default class extends React.PureComponent {
         let request = ObjectAttributes.get(
             rjvId, 'action', 'edit-key-request'
         );
-        request.key_name = input;
-        request.new_value = request.existing_value;
+        let {
+            key_name,
+            existing_value,
+        } = request;
+        let newSrc = {};
+        let dropIndex = Object.keys(existing_value).findIndex(key => key === key_name);
+
+        Object.keys(existing_value).forEach((key, idx) => {
+            if (idx !== dropIndex) {
+                newSrc[key] = existing_value[key];
+            } else {
+                newSrc[input] = existing_value[key];
+            }
+        });
+
         request.variable_key_updated = true;
         dispatcher.dispatch({
             name: 'VARIABLE_KEY_UPDATED',
             rjvId: rjvId,
-            data: request
+            data: {
+                ...request,
+                new_value: newSrc
+            }
         });
     }
 }

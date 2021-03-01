@@ -110,7 +110,6 @@ class ObjectAttributes extends EventEmitter {
             namespace,
             new_value,
             variable_removed,
-            variable_key_updated,
         } = request;
 
         namespace.shift();
@@ -124,16 +123,7 @@ class ObjectAttributes extends EventEmitter {
         for (const idx of namespace) {
             walk = walk[idx];
         }
-        if (variable_key_updated) {
-            if (toType(walk) === 'array') {
-                walk.splice(name, 1);
-            } else if (name !== null && name) {
-                walk[name] = new_value;
-            } else {
-                updated_src = new_value;
-            }
-        }
-        else if (variable_removed) {
+        if (variable_removed) {
             if (toType(walk) === 'array') {
                 walk.splice(name, 1);
             } else {

@@ -51,7 +51,6 @@ export default class extends React.PureComponent {
             }
         });
 
-        request.variable_key_updated = true;
         dispatcher.dispatch({
             name: 'VARIABLE_KEY_UPDATED',
             rjvId: rjvId,

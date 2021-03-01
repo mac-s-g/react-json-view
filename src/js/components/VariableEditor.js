@@ -198,7 +198,7 @@ class VariableEditor extends React.PureComponent {
 
     getEditKeyIcon = () => {
         const {
-            variable: { name, value },
+            variable: { name },
             theme,
             namespace,
             rjvId,
@@ -226,7 +226,6 @@ class VariableEditor extends React.PureComponent {
                                 name,
                                 namespace: namespace,
                                 existing_value: existingValue,
-                                value,
                                 variable_removed: false,
                                 key_name: name
                             }

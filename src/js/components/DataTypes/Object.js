@@ -179,7 +179,6 @@ class RjvObject extends React.PureComponent {
                                 name,
                                 namespace: namespace.splice(0, namespace.length -1),
                                 existing_value: existingValue,
-                                value: src,
                                 variable_removed: false,
                                 key_name: name
                             }

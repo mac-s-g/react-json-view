@@ -46,7 +46,7 @@ class DragWrapper extends Component {
             const delta = Math.sqrt(dx * dx + dy * dy);
             if (delta >= dragThreshold) {
                 this.dragging = true;
-                const spanElement = this.el.querySelector('span');
+                const spanElement = this.el.querySelector('span.object-key, span.array-key');
                 if (spanElement) {
                     let contentClone = spanElement.cloneNode(true);
                     contentClone.innerText = this.removeCharsFromInnerText(contentClone.innerText);

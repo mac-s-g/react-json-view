@@ -161,19 +161,17 @@ class RjvObject extends React.PureComponent {
         const {
             name,
             namespace,
-            type,
             parent_type,
             rjvId,
             depth
         } = this.props;
         e.stopPropagation();
-        let existingValue = AttributeStore.getSrcByNamespace(
+        let existingValue = AttributeStore.getSrcByNamespace({
             rjvId,
-            'global',
-            [...namespace].splice(0, namespace.length-1),
-            type,
+            name: 'global',
+            namespace: [...namespace].splice(0, namespace.length-1),
             parent_type
-        );
+        });
         dispatcher.dispatch({
             name: 'UPDATE_VARIABLE_KEY_REQUEST',
             rjvId: rjvId,

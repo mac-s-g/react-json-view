@@ -43,7 +43,7 @@ class VariableEditor extends React.PureComponent {
             },
             allowDragging: true,
             canPaste: false,
-            hovering: false
+            hoveredOver: false
         };
     }
 
@@ -107,7 +107,7 @@ class VariableEditor extends React.PureComponent {
             rjvId,
             parent_type
         } = this.props;
-        const { editMode, hovering } = this.state;
+        const { editMode, hoveredOver } = this.state;
         const disableEditingArrayKeys = (parent_type !== 'array' && onEdit !== false && editMode == false);
         return (
             <div
@@ -115,11 +115,11 @@ class VariableEditor extends React.PureComponent {
                     paddingLeft: indentWidth * singleIndent
                 }) }
                 class="variable-row"
-                onMouseEnter={ () => this.setState({ hovering: true }) }
-                onMouseLeave={ () => this.setState({ hovering: false }) }
+                onMouseEnter={ () => this.setState({ hoveredOver: true }) }
+                onMouseLeave={ () => this.setState({ hoveredOver: false }) }
                 key={ variable.name }
             >
-                { (disableEditingArrayKeys && hovering) && this.renderKeyRenameButton() }
+                { (disableEditingArrayKeys && hoveredOver) && this.renderKeyRenameButton() }
                 { type === 'array' ? this.renderArrayKeys() : this.renderObjectKeys() }
                 <div
                     class="variable-value"
@@ -145,7 +145,7 @@ class VariableEditor extends React.PureComponent {
                 >
                     { this.getValue(variable, editMode) }
                 </div>
-                { (enableClipboard && hovering) &&
+                { (enableClipboard && hoveredOver) &&
                     <CopyToClipboard
                         hidden={ editMode }
                         src={ variable.value }
@@ -154,7 +154,7 @@ class VariableEditor extends React.PureComponent {
                         { ...{ theme, namespace, rjvId } }
                     />
                 }
-                { (enableClipboard && editMode === false && hovering) && (
+                { (enableClipboard && editMode === false && hoveredOver) && (
                     <span>
                         <CutFromJson
                             hidden={ editMode }
@@ -168,8 +168,8 @@ class VariableEditor extends React.PureComponent {
                         />
                     </span>
                 ) }
-                { (onEdit !== false && editMode === false && hovering) && this.renderValueRenameButton() }
-                { (onDelete !== false && editMode === false && hovering) && this.getRemoveIcon() }
+                { (onEdit !== false && editMode === false && hoveredOver) && this.renderValueRenameButton() }
+                { (onDelete !== false && editMode === false && hoveredOver) && this.getRemoveIcon() }
             </div>
 
         );
@@ -180,7 +180,8 @@ class VariableEditor extends React.PureComponent {
 
         return (
             <div
-                class="click-to-edit" title="Edit">
+                class="click-to-edit"
+                title="Edit">
                 <Edit
                     class="click-to-edit-icon"
                     {...Theme(theme, 'editVarIcon')}
@@ -219,9 +220,11 @@ class VariableEditor extends React.PureComponent {
             theme,
         } = this.props;
         return (
-            <span class="click-to-edit" style={{ verticalAlign: 'top' }} title="Edit value">
+            <span
+                class="click-to-edit"
+                title="Edit value">
                 <Edit
-                    class="click-to-edit-icon"
+                    class="click-to-edit-key-icon"
                     {...Theme(theme, 'editVarIcon')}
                     onClick={ (e) => this.updateVariableKeyRequest(e) }
                 />
@@ -250,7 +253,8 @@ class VariableEditor extends React.PureComponent {
 
         return (
             <div
-                class="click-to-remove" title="Remove">
+                class="click-to-remove"
+                title="Remove">
                 <Remove
                     class="click-to-remove-icon"
                     { ...Theme(theme, 'removeVarIcon') }

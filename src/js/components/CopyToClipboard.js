@@ -43,7 +43,15 @@ export default class extends React.PureComponent {
         document.execCommand('copy');
 
         document.body.removeChild(container);
+        if (typeof clickCallback !== 'function') {
+            return;
+        }
 
+        clickCallback({
+            src: src,
+            namespace: namespace,
+            name: namespace[namespace.length - 1]
+        });
         dispatcher.dispatch({
             name: 'VARIABLE_COPIED',
             rjvId: rjvId,

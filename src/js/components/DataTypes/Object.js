@@ -37,7 +37,7 @@ class RjvObject extends React.PureComponent {
             prevProps: {},
             dropTarget: {},
             dragEnabled: true,
-            hovering: false
+            hoveredOver: false
         };
     }
 
@@ -153,8 +153,8 @@ class RjvObject extends React.PureComponent {
     }
 
     getObjectMetaData = src => {
-        const { size, hovering } = this.state;
-        return hovering && <VariableMeta size={ size } { ...this.props } />;
+        const { size, hoveredOver } = this.state;
+        return hoveredOver && <VariableMeta size={ size } { ...this.props } />;
     }
 
     updateKeyRequest = (e) => {
@@ -185,13 +185,13 @@ class RjvObject extends React.PureComponent {
         });
     }
 
-    getEditIcon = () => {
+    renderRenameKeyButton = () => {
         const { theme } = this.props;
 
         return (
             <span class="click-to-edit" title="Edit Key">
                 <Edit
-                    class="click-to-edit-icon"
+                    class="click-to-edit-key-icon"
                     {...Theme(theme, 'editVarIcon')}
                     onClick={ (e) => this.updateKeyRequest(e) }
                 />
@@ -223,7 +223,7 @@ class RjvObject extends React.PureComponent {
                     }}
                     {...Theme(theme, 'brace-row')}
                 >
-                    { (parent_type !== 'array' && !jsvRoot) && this.getEditIcon() }
+                    { (parent_type !== 'array' && !jsvRoot) && this.renderRenameKeyButton() }
                     <div
                         class="icon-container"
                         {...Theme(theme, 'icon-container')}
@@ -270,8 +270,8 @@ class RjvObject extends React.PureComponent {
             <div
                 class='object-key-val'
                 {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', styles)}
-                onMouseEnter={ () => this.setState({ hovering: true })}
-                onMouseLeave={ () => this.setState({ hovering: false })}
+                onMouseEnter={ () => this.setState({ hoveredOver: true })}
+                onMouseLeave={ () => this.setState({ hoveredOver: false })}
             >
                 { this.getBraceStart(object_type, expanded) }
                 { expanded

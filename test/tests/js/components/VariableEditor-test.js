@@ -23,7 +23,9 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
-        expect(wrapper.find('.click-to-edit')).to.have.length(1);
+        wrapper.simulate('mouseenter');
+        //one for value editing and one for key editing
+        expect(wrapper.find('.click-to-edit')).to.have.length(2);
     });
 
     it('VariableEditor click-to-edit should be hidden when onEdit disabled', function() {
@@ -41,6 +43,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
+        wrapper.simulate('mouseenter');
         expect(wrapper.find('.click-to-edit')).to.have.length(0);
     });
 
@@ -59,6 +62,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
+        wrapper.simulate('mouseenter');
         wrapper.setState({ editMode: true });
         expect(wrapper.find('.click-to-edit')).to.have.length(0);
     });
@@ -78,6 +82,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
+        wrapper.simulate('mouseenter');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
         expect(wrapper.state('editMode')).to.equal(true);
@@ -106,7 +111,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
-
+        wrapper.simulate('mouseenter');
         //editMode defaluts to off
         expect(wrapper.state('editMode')).to.equal(false);
         //click to open textarea
@@ -145,7 +150,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
-
+        wrapper.simulate('mouseenter');
         //editMode defaluts to off
         expect(wrapper.state('editMode')).to.equal(false);
         //click to open textarea
@@ -187,7 +192,9 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
+        wrapper.simulate('mouseenter');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
+        expect(wrapper.find('.click-to-edit-key-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
         expect(wrapper.state('editMode')).to.equal(true);
         expect(wrapper.find('.variable-editor').props().value).to.equal('null');
@@ -208,7 +215,9 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
+        wrapper.simulate('mouseenter');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
+        expect(wrapper.find('.click-to-edit-key-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
         expect(wrapper.state('editMode')).to.equal(true);
         expect(wrapper.find('.variable-editor').props().value).to.equal(
@@ -231,7 +240,9 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
+        wrapper.simulate('mouseenter');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
+        expect(wrapper.find('.click-to-edit-key-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
         expect(wrapper.state('editMode')).to.equal(true);
         expect(wrapper.find('.variable-editor').props().value).to.equal('NaN');
@@ -252,7 +263,9 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
+        wrapper.simulate('mouseenter');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
+        expect(wrapper.find('.click-to-edit-key-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
         expect(wrapper.state('editMode')).to.equal(true);
         expect(wrapper.find('.variable-editor').props().value).to.equal('test');
@@ -273,7 +286,9 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
+        wrapper.simulate('mouseenter');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
+        expect(wrapper.find('.click-to-edit-key-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
         expect(wrapper.state('editMode')).to.equal(true);
         expect(wrapper.find('.variable-editor').props().value).to.equal(
@@ -296,7 +311,9 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
+        wrapper.simulate('mouseenter');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
+        expect(wrapper.find('.click-to-edit-key-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
         expect(wrapper.state('editMode')).to.equal(true);
         expect(wrapper.find('.variable-editor').props().value).to.equal('{}');
@@ -317,7 +334,9 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
+        wrapper.simulate('mouseenter');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
+        expect(wrapper.find('.click-to-edit-key-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
         expect(wrapper.state('editMode')).to.equal(true);
         expect(wrapper.find('.variable-editor').props().value).to.equal(
@@ -340,7 +359,9 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
+        wrapper.simulate('mouseenter');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
+        expect(wrapper.find('.click-to-edit-key-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
         expect(wrapper.state('editMode')).to.equal(true);
         expect(wrapper.find('.variable-editor').props().value).to.equal('-5.2');
@@ -361,9 +382,35 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
+        wrapper.simulate('mouseenter');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
+        expect(wrapper.find('.click-to-edit-key-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
         expect(wrapper.state('editMode')).to.equal(true);
         expect(wrapper.find('.variable-editor').props().value).to.equal('5');
+    });
+
+    it('VariableEditor sets hoveredOver state to true/false from mouseenter and mouseleave events', function() {
+        const wrapper = shallow(
+            <VariableEditor
+                src={{ test: true }}
+                theme="rjv-default"
+                onEdit={edit => {}}
+                rjvId={rjvId}
+                isDragAllowed={ () => {} }
+                variable={{
+                    name: 'test',
+                    value: '5',
+                    type: 'integer'
+                }}
+            />
+        );
+        expect(wrapper.state('hoveredOver')).to.equal(false);
+
+        wrapper.simulate('mouseenter');
+        expect(wrapper.state('hoveredOver')).to.equal(true);
+
+        wrapper.simulate('mouseleave');
+        expect(wrapper.state('hoveredOver')).to.equal(false);
     });
 });

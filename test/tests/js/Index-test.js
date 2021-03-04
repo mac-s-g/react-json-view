@@ -64,7 +64,8 @@ describe('<Index />', function() {
                 enableClipboard={false}
             />
         );
-        expect(wrapper.find('.object-size')).to.have.length(7);
+        //right now always 0 because showing clipboard depends on component's state
+        expect(wrapper.find('.object-size')).to.have.length(0);
 
         wrapper.setProps({ displayObjectSize: false });
         expect(wrapper.find('.object-size')).to.have.length(0);
@@ -89,7 +90,8 @@ describe('<Index />', function() {
                 }}
             />
         );
-        expect(wrapper.find('.copy-to-clipboard-container')).to.have.length(7);
+        //right now always 0 because showing clipboard depends on component's state
+        expect(wrapper.find('.copy-to-clipboard-container')).to.have.length(0);
     });
 
     it('index test getDerivedStateFromProps', function() {

@@ -136,7 +136,11 @@ function getExampleJson1() {
                 }
             }
         },
-        // testArray: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+        testArray: [
+            {
+                'deepNested1': true,
+                'deepNested2': false
+            },2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
     };
 }
 //just a function to get an example JSON object

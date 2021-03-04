@@ -119,7 +119,7 @@ class VariableEditor extends React.PureComponent {
                 onMouseLeave={ () => this.setState({ hovering: false }) }
                 key={ variable.name }
             >
-                { (disableEditingArrayKeys && hovering) && this.renameKeyButton() }
+                { (disableEditingArrayKeys && hovering) && this.renderKeyRenameButton() }
                 { type === 'array' ? this.renderArrayKeys() : this.renderObjectKeys() }
                 <div
                     class="variable-value"
@@ -168,14 +168,14 @@ class VariableEditor extends React.PureComponent {
                         />
                     </span>
                 ) }
-                { (onEdit !== false && editMode === false && hovering) && this.renameValueButton() }
+                { (onEdit !== false && editMode === false && hovering) && this.renderValueRenameButton() }
                 { (onDelete !== false && editMode === false && hovering) && this.getRemoveIcon() }
             </div>
 
         );
     }
 
-    renameValueButton = () => {
+    renderValueRenameButton = () => {
         const { variable, theme } = this.props;
 
         return (
@@ -192,7 +192,7 @@ class VariableEditor extends React.PureComponent {
         );
     }
 
-    renameKeyButton = () => {
+    renderKeyRenameButton = () => {
         const {
             variable: { name },
             theme,

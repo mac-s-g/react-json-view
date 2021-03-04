@@ -101,31 +101,20 @@ class RjvObject extends React.PureComponent {
     }
 
     toggleCollapsed = () => {
-        let { rjvId, namespace, type, src } = this.props;
+        const { rjvId, namespace } = this.props;
         const { expanded } = this.state;
         const noSelection = window.getSelection && !window.getSelection().toString();
         if (noSelection) {
             this.setState({
                 expanded: !expanded
+            }, () => {
+                AttributeStore.set(
+                    rjvId,
+                    namespace,
+                    'expanded',
+                    !expanded
+                );
             });
-            AttributeStore.set(
-                rjvId,
-                namespace,
-                'expanded',
-                !expanded
-            );
-            if (type === 'array') {
-                Object.keys(src).forEach(key => {
-                    namespace.splice(namespace.length, 0, key);
-                    AttributeStore.set(
-                        rjvId,
-                        namespace,
-                        'expanded',
-                        !expanded
-                    );
-                    namespace.splice(namespace.length - 1, 1);
-                });
-            }
         }
     }
 

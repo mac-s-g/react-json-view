@@ -94,7 +94,7 @@ class PasteToJson extends Component {
         let display = copiedValue || copiedValue === defaultValue ? 'inline' : 'none';
         return (
             <span
-                className="paste-to-json-container" title="Paste to JSON">
+                className="paste-to-json-container" title="Paste after this">
                 <span
                     style={ {
                         ...style,

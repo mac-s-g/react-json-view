@@ -1,12 +1,15 @@
 .react-json-view {
 
     .click-to-add {
+        vertical-align: top;
         display: none;
     }
     .click-to-remove {
+        vertical-align: top;
         display: none;
     }
     .click-to-edit {
+        vertical-align: top;
         display: none;
     }
 
@@ -23,7 +26,6 @@
             }
         }
     }
-
 
     .drag-wrapper {
         width: fit-content;

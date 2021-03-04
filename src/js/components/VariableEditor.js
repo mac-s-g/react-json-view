@@ -108,7 +108,7 @@ class VariableEditor extends React.PureComponent {
             parent_type
         } = this.props;
         const { editMode } = this.state;
-
+        const disableEditForArrayKeys = parent_type !== 'array' && onEdit !== false && editMode == false;
         return (
             <div
                 { ...Theme(theme, 'objectKeyVal', {
@@ -117,8 +117,7 @@ class VariableEditor extends React.PureComponent {
                 class="variable-row"
                 key={ variable.name }
             >
-                {/*disable editing array keys*/}
-                { (parent_type !== 'array' && onEdit !== false && editMode == false) && this.getEditKeyIcon() }
+                { disableEditForArrayKeys && this.renderKeyRenameButton() }
                 { type === 'array' ? this.renderArrayKeys() : this.renderObjectKeys() }
                 <div
                     class="variable-value"
@@ -168,7 +167,7 @@ class VariableEditor extends React.PureComponent {
                     </span>
                 ) : null }
                 { onEdit !== false && editMode === false
-                    ? this.getEditIcon()
+                    ? this.renderValueRenameButton()
                     : null }
                 { onDelete !== false && editMode === false
                     ? this.getRemoveIcon()
@@ -178,7 +177,7 @@ class VariableEditor extends React.PureComponent {
         );
     }
 
-    getEditIcon = () => {
+    renderValueRenameButton = () => {
         const { variable, theme } = this.props;
 
         return (
@@ -196,7 +195,7 @@ class VariableEditor extends React.PureComponent {
         );
     }
 
-    getEditKeyIcon = () => {
+    renderKeyRenameButton = () => {
         const {
             variable: { name },
             theme,

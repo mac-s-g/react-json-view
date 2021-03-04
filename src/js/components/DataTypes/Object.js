@@ -101,20 +101,31 @@ class RjvObject extends React.PureComponent {
     }
 
     toggleCollapsed = () => {
-        const { rjvId, namespace } = this.props;
+        const { rjvId, namespace, type, src } = this.props;
         const { expanded } = this.state;
         const noSelection = window.getSelection && !window.getSelection().toString();
         if (noSelection) {
             this.setState({
                 expanded: !expanded
-            }, () => {
-                AttributeStore.set(
-                    rjvId,
-                    namespace,
-                    'expanded',
-                    !expanded
-                );
             });
+            AttributeStore.set(
+                rjvId,
+                namespace,
+                'expanded',
+                !expanded
+            );
+            if (type === 'array') {
+                Object.keys(src).forEach(key => {
+                    namespace.splice(namespace.length, 0, key);
+                    AttributeStore.set(
+                        rjvId,
+                        namespace,
+                        'expanded',
+                        !expanded
+                    );
+                    namespace.splice(namespace.length - 1, 1);
+                });
+            }
         }
     }
 
@@ -240,6 +251,11 @@ class RjvObject extends React.PureComponent {
         );
     }
 
+    handleOnHover = (isHovering) => {
+        const { jsvRoot } = this.props;
+        !jsvRoot && this.setState({ hoveredOver: isHovering });
+    }
+
     render() {
         // `indentWidth` and `collapsed` props will
         // perpetuate to children via `...rest`
@@ -270,8 +286,8 @@ class RjvObject extends React.PureComponent {
             <div
                 class='object-key-val'
                 {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', styles)}
-                onMouseEnter={ () => this.setState({ hoveredOver: true })}
-                onMouseLeave={ () => this.setState({ hoveredOver: false })}
+                onMouseEnter={ () => this.handleOnHover(true)}
+                onMouseLeave={ () => this.handleOnHover(false)}
             >
                 { this.getBraceStart(object_type, expanded) }
                 { expanded

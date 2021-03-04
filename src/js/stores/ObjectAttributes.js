@@ -26,7 +26,7 @@ class ObjectAttributes extends EventEmitter {
         return this.objects[rjvId][name][key];
     }
 
-    getSrcByNamespace = (rjvId, name, namespace, parent_type) => {
+    getSrcByNamespace = (rjvId, name, namespace, type, parent_type) => {
         if (this.objects[rjvId] === undefined
             || this.objects[rjvId][name] === undefined
         ) {

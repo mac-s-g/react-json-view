@@ -29,7 +29,6 @@ import { Edit, CheckCircle, RemoveIcon as Remove, CancelIcon as Cancel } from '.
 
 //theme
 import Theme from './../themes/getStyle';
-import ObjectAttributes from '../stores/ObjectAttributes';
 
 class VariableEditor extends React.PureComponent {
     constructor(props) {
@@ -143,7 +142,7 @@ class VariableEditor extends React.PureComponent {
                 >
                     { this.getValue(variable, editMode) }
                 </div>
-                { enableClipboard ? (
+                { enableClipboard &&
                     <CopyToClipboard
                         hidden={ editMode }
                         src={ variable.value }
@@ -151,8 +150,8 @@ class VariableEditor extends React.PureComponent {
                         clickCallback={ enableClipboard }
                         { ...{ theme, namespace, rjvId } }
                     />
-                ) : null }
-                { enableClipboard && editMode === false ? (
+                }
+                { (enableClipboard && editMode === false) &&
                     <span>
                         <CutFromJson
                             hidden={ editMode }
@@ -165,13 +164,9 @@ class VariableEditor extends React.PureComponent {
                             { ...this.props }
                         />
                     </span>
-                ) : null }
-                { onEdit !== false && editMode === false
-                    ? this.renderValueRenameButton()
-                    : null }
-                { onDelete !== false && editMode === false
-                    ? this.getRemoveIcon()
-                    : null }
+                }
+                { (onEdit !== false && editMode === false) && this.renderValueRenameButton() }
+                { (onDelete !== false && editMode === false) && this.getRemoveIcon() }
             </div>
 
         );

@@ -145,8 +145,8 @@ export default class extends React.PureComponent {
                     />
                 }
                 {/* copy add/remove icons */}
-                { onAdd !== false ? this.getAddAttribute() : null }
-                { onDelete !== false ? this.getRemoveObject() : null }
+                { onAdd !== false && this.getAddAttribute() }
+                { onDelete !== false && this.getRemoveObject() }
             </div>
         );
     }

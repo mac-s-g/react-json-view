@@ -192,34 +192,38 @@ class VariableEditor extends React.PureComponent {
         );
     }
 
-    renderKeyRenameButton = () => {
+    updateVariableKeyRequest = (e) => {
         const {
             variable: { name },
-            theme,
             namespace,
             rjvId,
             depth,
             src
+        } = this.props;
+        e.stopPropagation();
+        dispatcher.dispatch({
+            name: 'UPDATE_VARIABLE_KEY_REQUEST',
+            rjvId: rjvId,
+            data: {
+                name: namespace[depth],
+                namespace: namespace.splice(0, namespace.length - 1),
+                existing_value: src,
+                variable_removed: false,
+                key_name: name
+            }
+        });
+    }
+
+    renderKeyRenameButton = () => {
+        const {
+            theme,
         } = this.props;
         return (
             <span class="click-to-edit" style={{ verticalAlign: 'top' }} title="Edit value">
                 <Edit
                     class="click-to-edit-icon"
                     {...Theme(theme, 'editVarIcon')}
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        dispatcher.dispatch({
-                            name: 'UPDATE_VARIABLE_KEY_REQUEST',
-                            rjvId: rjvId,
-                            data: {
-                                name: namespace[depth],
-                                namespace: namespace.splice(0, namespace.length - 1),
-                                existing_value: src,
-                                variable_removed: false,
-                                key_name: name
-                            }
-                        });
-                    }}
+                    onClick={ (e) => this.updateVariableKeyRequest(e) }
                 />
             </span>
         );

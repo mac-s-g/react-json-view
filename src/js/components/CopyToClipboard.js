@@ -44,24 +44,6 @@ export default class extends React.PureComponent {
 
         document.body.removeChild(container);
 
-        this.copiedTimer = setTimeout(() => {
-            this.setState({
-                copied: false
-            });
-        }, 1500);
-
-        this.setState({ copied: true }, () => {
-            if (typeof clickCallback !== 'function') {
-                return;
-            }
-
-            clickCallback({
-                src: src,
-                namespace: namespace,
-                name: namespace[namespace.length - 1]
-            });
-        });
-
         dispatcher.dispatch({
             name: 'VARIABLE_COPIED',
             rjvId: rjvId,
@@ -70,15 +52,6 @@ export default class extends React.PureComponent {
 
     getClippyIcon = () => {
         const { theme } = this.props;
-
-        if (this.state.copied) {
-            return (
-                <span>
-                    <Clippy class="copy-icon" {...Theme(theme, 'copy-icon')} />
-                    <span {...Theme(theme, 'copy-icon-copied')}>✔</span>
-                </span>
-            );
-        }
 
         return <Clippy class="copy-icon" {...Theme(theme, 'copy-icon')} />;
     }

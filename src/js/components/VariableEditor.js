@@ -29,7 +29,6 @@ import { Edit, CheckCircle, RemoveIcon as Remove, CancelIcon as Cancel } from '.
 
 //theme
 import Theme from './../themes/getStyle';
-import ObjectAttributes from '../stores/ObjectAttributes';
 
 class VariableEditor extends React.PureComponent {
     constructor(props) {
@@ -43,7 +42,8 @@ class VariableEditor extends React.PureComponent {
                 value: null
             },
             allowDragging: true,
-            canPaste: false
+            canPaste: false,
+            hovering: false
         };
     }
 
@@ -107,7 +107,7 @@ class VariableEditor extends React.PureComponent {
             rjvId,
             parent_type
         } = this.props;
-        const { editMode } = this.state;
+        const { editMode, hovering } = this.state;
 
         return (
             <div
@@ -115,10 +115,12 @@ class VariableEditor extends React.PureComponent {
                     paddingLeft: indentWidth * singleIndent
                 }) }
                 class="variable-row"
+                onMouseEnter={ () => this.setState({ hovering: true }) }
+                onMouseLeave={ () => this.setState({ hovering: false }) }
                 key={ variable.name }
             >
                 {/*disable editing array keys*/}
-                { (parent_type !== 'array' && onEdit !== false && editMode == false) && this.getEditKeyIcon() }
+                { (parent_type !== 'array' && onEdit !== false && editMode == false && hovering) && this.getEditKeyIcon() }
                 { type === 'array' ? this.renderArrayKeys() : this.renderObjectKeys() }
                 <div
                     class="variable-value"
@@ -144,7 +146,7 @@ class VariableEditor extends React.PureComponent {
                 >
                     { this.getValue(variable, editMode) }
                 </div>
-                { enableClipboard ? (
+                { enableClipboard && hovering ? (
                     <CopyToClipboard
                         hidden={ editMode }
                         src={ variable.value }
@@ -153,7 +155,7 @@ class VariableEditor extends React.PureComponent {
                         { ...{ theme, namespace, rjvId } }
                     />
                 ) : null }
-                { enableClipboard && editMode === false ? (
+                { enableClipboard && editMode === false && hovering ? (
                     <span>
                         <CutFromJson
                             hidden={ editMode }
@@ -167,10 +169,10 @@ class VariableEditor extends React.PureComponent {
                         />
                     </span>
                 ) : null }
-                { onEdit !== false && editMode === false
+                { onEdit !== false && editMode === false && hovering
                     ? this.getEditIcon()
                     : null }
-                { onDelete !== false && editMode === false
+                { onDelete !== false && editMode === false && hovering
                     ? this.getRemoveIcon()
                     : null }
             </div>

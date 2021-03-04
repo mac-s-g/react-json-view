@@ -37,7 +37,8 @@ class RjvObject extends React.PureComponent {
             ...state,
             prevProps: {},
             dropTarget: {},
-            dragEnabled: true
+            dragEnabled: true,
+            hovering: false
         };
     }
 
@@ -151,8 +152,8 @@ class RjvObject extends React.PureComponent {
     }
 
     getObjectMetaData = src => {
-        const { size } = this.state;
-        return <VariableMeta size={ size } { ...this.props } />;
+        const { size, hovering } = this.state;
+        return (hovering && <VariableMeta size={ size } { ...this.props } />);
     }
 
     getEditIcon = () => {
@@ -268,6 +269,8 @@ class RjvObject extends React.PureComponent {
             <div
                 class='object-key-val'
                 {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', styles)}
+                onMouseEnter={ () => this.setState({ hovering: true })}
+                onMouseLeave={ () => this.setState({ hovering: false })}
             >
                 { this.getBraceStart(object_type, expanded) }
                 { expanded

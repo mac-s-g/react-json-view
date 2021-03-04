@@ -108,7 +108,7 @@ function getExampleJson1() {
         ],
         empty_object: {},
         array: [1, 2, 3, 'test'],
-        // moment: Moment(),
+        moment: Moment(),
         parent: {
             sibling1: true,
             sibling2: false,

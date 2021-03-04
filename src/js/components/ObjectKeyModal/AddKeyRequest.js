@@ -3,11 +3,7 @@ import dispatcher from './../../helpers/dispatcher';
 import ObjectAttributes from './../../stores/ObjectAttributes';
 import ObjectKeyModal from './ObjectKeyModal';
 
-//global theme
-import Theme from './../../themes/getStyle';
-
-
-//this input appears when adding a new value to an object
+//this input appears when adding a new value to an object or copy/cut pasting something into object
 export default class extends React.PureComponent {
 
     render() {

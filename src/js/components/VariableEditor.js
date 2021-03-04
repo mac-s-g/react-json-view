@@ -42,7 +42,8 @@ class VariableEditor extends React.PureComponent {
                 value: null
             },
             allowDragging: true,
-            canPaste: false
+            canPaste: false,
+            hovering: false
         };
     }
 
@@ -103,18 +104,22 @@ class VariableEditor extends React.PureComponent {
             onEdit,
             onDelete,
             onSelect,
-            rjvId
+            rjvId,
+            parent_type
         } = this.props;
-        const { editMode } = this.state;
-
+        const { editMode, hovering } = this.state;
+        const disableEditingArrayKeys = (parent_type !== 'array' && onEdit !== false && editMode == false);
         return (
             <div
                 { ...Theme(theme, 'objectKeyVal', {
                     paddingLeft: indentWidth * singleIndent
                 }) }
                 class="variable-row"
+                onMouseEnter={ () => this.setState({ hovering: true }) }
+                onMouseLeave={ () => this.setState({ hovering: false }) }
                 key={ variable.name }
             >
+                { (disableEditingArrayKeys && hovering) && this.renderKeyRenameButton() }
                 { type === 'array' ? this.renderArrayKeys() : this.renderObjectKeys() }
                 <div
                     class="variable-value"
@@ -140,7 +145,7 @@ class VariableEditor extends React.PureComponent {
                 >
                     { this.getValue(variable, editMode) }
                 </div>
-                { enableClipboard &&
+                { (enableClipboard && hovering) &&
                     <CopyToClipboard
                         hidden={ editMode }
                         src={ variable.value }
@@ -149,7 +154,7 @@ class VariableEditor extends React.PureComponent {
                         { ...{ theme, namespace, rjvId } }
                     />
                 }
-                { (enableClipboard && editMode === false) &&
+                { (enableClipboard && editMode === false && hovering) && (
                     <span>
                         <CutFromJson
                             hidden={ editMode }
@@ -162,21 +167,20 @@ class VariableEditor extends React.PureComponent {
                             { ...this.props }
                         />
                     </span>
-                }
-                { (onEdit !== false && editMode === false) && this.getEditIcon() }
-                { (onDelete !== false && editMode === false) && this.getRemoveIcon() }
+                ) }
+                { (onEdit !== false && editMode === false && hovering) && this.renderValueRenameButton() }
+                { (onDelete !== false && editMode === false && hovering) && this.getRemoveIcon() }
             </div>
 
         );
     }
 
-    getEditIcon = () => {
+    renderValueRenameButton = () => {
         const { variable, theme } = this.props;
 
         return (
             <div
-                class="click-to-edit" style={{ verticalAlign: 'top' }}
-                title="Edit">
+                class="click-to-edit" title="Edit">
                 <Edit
                     class="click-to-edit-icon"
                     {...Theme(theme, 'editVarIcon')}
@@ -185,6 +189,43 @@ class VariableEditor extends React.PureComponent {
                     }}
                 />
             </div>
+        );
+    }
+
+    updateVariableKeyRequest = (e) => {
+        const {
+            variable: { name },
+            namespace,
+            rjvId,
+            depth,
+            src
+        } = this.props;
+        e.stopPropagation();
+        dispatcher.dispatch({
+            name: 'UPDATE_VARIABLE_KEY_REQUEST',
+            rjvId: rjvId,
+            data: {
+                name: namespace[depth],
+                namespace: namespace.splice(0, namespace.length - 1),
+                existing_value: src,
+                variable_removed: false,
+                key_name: name
+            }
+        });
+    }
+
+    renderKeyRenameButton = () => {
+        const {
+            theme,
+        } = this.props;
+        return (
+            <span class="click-to-edit" style={{ verticalAlign: 'top' }} title="Edit value">
+                <Edit
+                    class="click-to-edit-icon"
+                    {...Theme(theme, 'editVarIcon')}
+                    onClick={ (e) => this.updateVariableKeyRequest(e) }
+                />
+            </span>
         );
     }
 
@@ -209,8 +250,7 @@ class VariableEditor extends React.PureComponent {
 
         return (
             <div
-                class="click-to-remove" style={ { verticalAlign: 'top' } }
-                title="Remove">
+                class="click-to-remove" title="Remove">
                 <Remove
                     class="click-to-remove-icon"
                     { ...Theme(theme, 'removeVarIcon') }

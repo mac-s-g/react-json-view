@@ -72,7 +72,7 @@ class DevDemo extends React.PureComponent {
                     defaultValue={null}
                     displayDataTypes={false}
                     displaySearch={true}
-                    collapsed={false}
+                    collapsed={ collapsedState }
                     displayArrayKey={true}
                 />
 
@@ -108,8 +108,6 @@ function getExampleJson1() {
         ],
         empty_object: {},
         array: [1, 2, 3, 'test'],
-        float: -2.757,
-        undefined_var: undefined,
         moment: Moment(),
         parent: {
             sibling1: true,
@@ -118,25 +116,27 @@ function getExampleJson1() {
             isString: 'value'
         },
         string_number: '#ffffff',
-        string_numbershort: '#ccc',
-        string_numberrgb: 'rgb(255,125,0)',
-        string_numberrgb2: 'rgb(0, 0, 0)',
-        string_numberrgba: ['rgba(0, 0, 0, .2)', 'rgba(125, 255, 0, .66)', 20],
-        string_numberrgba2: 'rgba(0,0,0,0.5)',
-        string_number_hsl: 'hsl(180, 50%, 50%)',
-        string_number_hsla: 'hsla(170, 45%, 45%, 1)',
         date: new Date(),
         testObj: {
-            'testString': 'Tree',
             'objectInside': {
                 'Multilevel': {
                     'deepNested1': true,
                     'deepNested2': false,
                     'deepNested3': 'test',
                 }
+            },'objectInsideThree': {
+                'Multilevel': {
+                    'deepNested1': true,
+                    'deepNested3': 'test',
+                }
+            },
+            'objectInsideTwo': {
+                'Multilevel': {
+                    'deepNested1': true,
+                }
             }
         },
-        testArray: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+        // testArray: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
     };
 }
 //just a function to get an example JSON object

@@ -16,7 +16,7 @@ export default {
     ellipsisCursor: 'pointer',
 
     keyMargin: '0px 5px',
-    keyLetterSpacing: '0.5px',
+    keyLetterSpacing: '0px',
     keyFontStyle: 'none',
     keyBorderRadius: '3px',
     keyColonWeight: 'bold',

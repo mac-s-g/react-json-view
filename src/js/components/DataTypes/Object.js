@@ -1,6 +1,7 @@
 import React from 'react';
-import {polyfill} from 'react-lifecycles-compat';
+import { polyfill } from 'react-lifecycles-compat';
 import { toType } from './../../helpers/util';
+import dispatcher from './../../helpers/dispatcher';
 
 //data type components
 import { JsonObject } from './DataTypes';
@@ -9,6 +10,7 @@ import VariableEditor from './../VariableEditor';
 import VariableMeta from './../VariableMeta';
 import ArrayGroup from './../ArrayGroup';
 import ObjectName from './../ObjectName';
+import DragWrapper from '../DragWrapper';
 
 import searchStringIndex from './../../helpers/searchStringIndex';
 //attribute store
@@ -16,10 +18,10 @@ import AttributeStore from './../../stores/ObjectAttributes';
 
 //icons
 import { CollapsedIcon, ExpandedIcon } from './../ToggleIcons';
+import { Edit } from '../icons';
 
 //theme
 import Theme from './../../themes/getStyle';
-import DragWrapper from '../DragWrapper';
 
 //increment 1 with each nested object & array
 const DEPTH_INCREMENT = 1;
@@ -34,7 +36,8 @@ class RjvObject extends React.PureComponent {
             ...state,
             prevProps: {},
             dropTarget: {},
-            dragEnabled: true
+            dragEnabled: true,
+            hovering: false
         };
     }
 
@@ -116,11 +119,12 @@ class RjvObject extends React.PureComponent {
     }
 
     getObjectContent = (depth, src, props) => {
+        const { theme } = this.props;
         return (
             <div class="pushed-content object-container">
                 <div
                     class="object-content"
-                    { ...Theme(this.props.theme, 'pushed-content') }
+                    { ...Theme(theme, 'pushed-content') }
                 >
                     { this.renderObjectContents(src, props) }
                 </div>
@@ -129,6 +133,7 @@ class RjvObject extends React.PureComponent {
     }
 
     getEllipsis = () => {
+        const { theme } = this.props;
         const { size } = this.state;
 
         if (size === 0) {
@@ -137,7 +142,7 @@ class RjvObject extends React.PureComponent {
         } else {
             return (
                 <div
-                    { ...Theme(this.props.theme, 'ellipsis') }
+                    { ...Theme(theme, 'ellipsis') }
                     class="node-ellipsis"
                     onClick={ this.toggleCollapsed }
                 >
@@ -148,12 +153,54 @@ class RjvObject extends React.PureComponent {
     }
 
     getObjectMetaData = src => {
-        const { size } = this.state;
-        return <VariableMeta size={ size } { ...this.props } />;
+        const { size, hovering } = this.state;
+        return hovering && <VariableMeta size={ size } { ...this.props } />;
+    }
+
+    updateKeyRequest = (e) => {
+        const {
+            name,
+            namespace,
+            parent_type,
+            rjvId,
+            depth
+        } = this.props;
+        e.stopPropagation();
+        let existingValue = AttributeStore.getSrcByNamespace({
+            rjvId,
+            name: 'global',
+            namespace: [...namespace].splice(0, namespace.length-1),
+            parent_type
+        });
+        dispatcher.dispatch({
+            name: 'UPDATE_VARIABLE_KEY_REQUEST',
+            rjvId: rjvId,
+            data: {
+                name: namespace[depth-1],
+                namespace: namespace.splice(0, namespace.length - 2),
+                existing_value: existingValue,
+                variable_removed: false,
+                key_name: name
+            }
+        });
+    }
+
+    getEditIcon = () => {
+        const { theme } = this.props;
+
+        return (
+            <span class="click-to-edit" title="Edit Key">
+                <Edit
+                    class="click-to-edit-icon"
+                    {...Theme(theme, 'editVarIcon')}
+                    onClick={ (e) => this.updateKeyRequest(e) }
+                />
+            </span>
+        );
     }
 
     getBraceStart(object_type, expanded) {
-        const { src, theme, iconStyle, parent_type } = this.props;
+        const { src, theme, iconStyle, parent_type, jsvRoot } = this.props;
 
         if (parent_type === 'array_group') {
             return (
@@ -176,6 +223,7 @@ class RjvObject extends React.PureComponent {
                     }}
                     {...Theme(theme, 'brace-row')}
                 >
+                    { (parent_type !== 'array' && !jsvRoot) && this.getEditIcon() }
                     <div
                         class="icon-container"
                         {...Theme(theme, 'icon-container')}
@@ -222,6 +270,8 @@ class RjvObject extends React.PureComponent {
             <div
                 class='object-key-val'
                 {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', styles)}
+                onMouseEnter={ () => this.setState({ hovering: true })}
+                onMouseLeave={ () => this.setState({ hovering: false })}
             >
                 { this.getBraceStart(object_type, expanded) }
                 { expanded

@@ -1,56 +1,27 @@
 .react-json-view {
 
-    .copy-to-clipboard-container {
-        vertical-align: top;
-        display: none;
-    }
-    .cut-from-json-container {
-        vertical-align: top;
-        display: none;
-    }
-    .paste-to-json-container {
-        vertical-align: top;
-        display: none;
-    }
     .click-to-add {
+        vertical-align: top;
         display: none;
     }
     .click-to-remove {
+        vertical-align: top;
         display: none;
     }
     .click-to-edit {
+        vertical-align: top;
         display: none;
     }
 
     .object-key-val {
-        &:hover > span > .object-meta-data {
-            & > .copy-to-clipboard-container {
-                display: inline-block;
-            }
-            & > .cut-from-json-container {
-                display: inline-block;
-            }
-            & > .paste-to-json-container {
-                display: inline-block;
-            }
+        &:hover > span > .object-meta-data, &:hover > span > span {
             & > .click-to-add {
                 display: inline-block;
             }
             & > .click-to-remove {
                 display: inline-block;
             }
-        }
-    }
-
-    .variable-row {
-        &:hover {
-            & .copy-to-clipboard-container {
-                display: inline-block;
-            }
-            & .cut-from-json-container {
-                display: inline-block;
-            }
-            & .paste-to-json-container {
+            & > .click-to-edit {
                 display: inline-block;
             }
         }

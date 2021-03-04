@@ -22,12 +22,12 @@ class PasteToJson extends Component {
         const pasteValue = ObjectAttributes.get(rjvId, 'global', 'copied', false);
         //for parent's namespace last namespace has to be spliced out
         const parentNamespace = [...namespace].splice(0, namespace.length-1);
-        let existingValue = ObjectAttributes.getSrcByNamespace(
+        let existingValue = ObjectAttributes.getSrcByNamespace({
             rjvId,
-            'global',
-            parentNamespace,
+            name: 'global',
+            namespace: parentNamespace,
             parent_type
-        );
+        });
         //find index of paste position
         const dropTargetIdx = pastedOnObjectOrArray ?
             Object.keys(existingValue).findIndex(key => key === name) :
@@ -94,7 +94,7 @@ class PasteToJson extends Component {
         let display = copiedValue || copiedValue === defaultValue ? 'inline' : 'none';
         return (
             <span
-                className="paste-to-json-container" title="Paste to JSON">
+                className="paste-to-json-container" title="Paste after this">
                 <span
                     style={ {
                         ...style,

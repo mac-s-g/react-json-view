@@ -35,8 +35,7 @@ export default class extends React.PureComponent {
         return (
             <span
                 class="click-to-add"
-                title="Add"
-                style={{verticalAlign: 'top'}}>
+                title="Add">
                 <Add
                     class="click-to-add-icon"
                     {...Theme(theme, 'addVarIcon')}

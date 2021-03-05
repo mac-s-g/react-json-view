@@ -28,10 +28,62 @@ export default class extends React.PureComponent {
         }
     }
 
-    getAddAttribute = () => {
+    handleAdd = () => {
         const {
-            theme, namespace, name, src, rjvId, depth
+            namespace,
+            name,
+            src,
+            rjvId,
+            depth
         } = this.props;
+        const namespaceCopy = [...namespace];
+        //expand the object/array
+        ObjectAttributes.set(
+            rjvId,
+            namespace,
+            'expanded',
+            true
+        );
+        const request = {
+            name: depth > 0 ? name : null,
+            namespace: namespace.splice(
+                0, (namespace.length-1)
+            ),
+            existing_value: src,
+            variable_removed: false,
+            key_name: null
+        };
+        if (toType(src) === 'object') {
+            dispatcher.dispatch({
+                name: 'ADD_VARIABLE_KEY_REQUEST',
+                rjvId: rjvId,
+                data: request,
+            });
+        } else {
+            //expand every object/array in the array
+            Object.keys(src).forEach(key => {
+                namespaceCopy.splice(namespaceCopy.length, 0, key);
+                ObjectAttributes.set(
+                    rjvId,
+                    namespaceCopy,
+                    'expanded',
+                    true
+                );
+                namespaceCopy.splice(namespaceCopy.length - 1, 1);
+            });
+            dispatcher.dispatch({
+                name: 'VARIABLE_ADDED',
+                rjvId: rjvId,
+                data: {
+                    ...request,
+                    new_value: [null, ...src]
+                }
+            });
+        }
+    }
+
+    getAddAttribute = () => {
+        const { theme } = this.props;
 
         return (
             <span
@@ -40,52 +92,7 @@ export default class extends React.PureComponent {
                 <Add
                     class="click-to-add-icon"
                     {...Theme(theme, 'addVarIcon')}
-                    onClick={() => {
-                        const namespaceCopy = [...namespace];
-                        //expand the object/array
-                        ObjectAttributes.set(
-                            rjvId,
-                            namespace,
-                            'expanded',
-                            true
-                        );
-                        const request = {
-                            name: depth > 0 ? name : null,
-                            namespace: namespace.splice(
-                                0, (namespace.length-1)
-                            ),
-                            existing_value: src,
-                            variable_removed: false,
-                            key_name: null
-                        };
-                        if (toType(src) === 'object') {
-                            dispatcher.dispatch({
-                                name: 'ADD_VARIABLE_KEY_REQUEST',
-                                rjvId: rjvId,
-                                data: request,
-                            });
-                        } else {
-                            //expand every object/array in the array
-                            Object.keys(src).forEach(key => {
-                                namespaceCopy.splice(namespaceCopy.length, 0, key);
-                                ObjectAttributes.set(
-                                    rjvId,
-                                    namespaceCopy,
-                                    'expanded',
-                                    true
-                                );
-                                namespaceCopy.splice(namespaceCopy.length - 1, 1);
-                            });
-                            dispatcher.dispatch({
-                                name: 'VARIABLE_ADDED',
-                                rjvId: rjvId,
-                                data: {
-                                    ...request,
-                                    new_value: [...src, null]
-                                }
-                            });
-                        }
-                    }}
+                    onClick={ () => this.handleAdd() }
                 />
             </span>
         );

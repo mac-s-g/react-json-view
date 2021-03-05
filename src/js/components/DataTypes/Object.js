@@ -102,9 +102,15 @@ class RjvObject extends React.PureComponent {
 
     toggleCollapsed = () => {
         const { rjvId, namespace, type, src } = this.props;
-        const { expanded } = this.state;
+        const { expanded, hoveredOver } = this.state;
         const noSelection = window.getSelection && !window.getSelection().toString();
         if (noSelection) {
+            //remove meta icons if collapsed and moved away from cursor
+            if (hoveredOver && expanded) {
+                this.setState({
+                    hoveredOver: !hoveredOver
+                });
+            }
             this.setState({
                 expanded: !expanded
             });
@@ -286,8 +292,8 @@ class RjvObject extends React.PureComponent {
             <div
                 class='object-key-val'
                 {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', styles)}
-                onMouseEnter={ () => this.handleOnHover(true)}
-                onMouseLeave={ () => this.handleOnHover(false)}
+                onMouseOver={ () => this.handleOnHover(true) }
+                onMouseOut={ () => this.handleOnHover(false) }
             >
                 { this.getBraceStart(object_type, expanded) }
                 { expanded

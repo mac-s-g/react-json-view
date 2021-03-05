@@ -23,7 +23,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
-        wrapper.simulate('mouseenter');
+        wrapper.simulate('mouseover');
         //one for value editing and one for key editing
         expect(wrapper.find('.click-to-edit')).to.have.length(2);
     });
@@ -43,7 +43,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
-        wrapper.simulate('mouseenter');
+        wrapper.simulate('mouseover');
         expect(wrapper.find('.click-to-edit')).to.have.length(0);
     });
 
@@ -62,7 +62,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
-        wrapper.simulate('mouseenter');
+        wrapper.simulate('mouseover');
         wrapper.setState({ editMode: true });
         expect(wrapper.find('.click-to-edit')).to.have.length(0);
     });
@@ -82,7 +82,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
-        wrapper.simulate('mouseenter');
+        wrapper.simulate('mouseover');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
         expect(wrapper.state('editMode')).to.equal(true);
@@ -111,7 +111,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
-        wrapper.simulate('mouseenter');
+        wrapper.simulate('mouseover');
         //editMode defaluts to off
         expect(wrapper.state('editMode')).to.equal(false);
         //click to open textarea
@@ -150,7 +150,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
-        wrapper.simulate('mouseenter');
+        wrapper.simulate('mouseover');
         //editMode defaluts to off
         expect(wrapper.state('editMode')).to.equal(false);
         //click to open textarea
@@ -192,7 +192,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
-        wrapper.simulate('mouseenter');
+        wrapper.simulate('mouseover');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
         expect(wrapper.find('.click-to-edit-key-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
@@ -215,7 +215,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
-        wrapper.simulate('mouseenter');
+        wrapper.simulate('mouseover');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
         expect(wrapper.find('.click-to-edit-key-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
@@ -240,7 +240,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
-        wrapper.simulate('mouseenter');
+        wrapper.simulate('mouseover');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
         expect(wrapper.find('.click-to-edit-key-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
@@ -263,7 +263,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
-        wrapper.simulate('mouseenter');
+        wrapper.simulate('mouseover');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
         expect(wrapper.find('.click-to-edit-key-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
@@ -286,7 +286,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
-        wrapper.simulate('mouseenter');
+        wrapper.simulate('mouseover');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
         expect(wrapper.find('.click-to-edit-key-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
@@ -311,7 +311,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
-        wrapper.simulate('mouseenter');
+        wrapper.simulate('mouseover');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
         expect(wrapper.find('.click-to-edit-key-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
@@ -334,7 +334,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
-        wrapper.simulate('mouseenter');
+        wrapper.simulate('mouseover');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
         expect(wrapper.find('.click-to-edit-key-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
@@ -359,7 +359,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
-        wrapper.simulate('mouseenter');
+        wrapper.simulate('mouseover');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
         expect(wrapper.find('.click-to-edit-key-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
@@ -382,7 +382,7 @@ describe('<VariableEditor />', function() {
                 }}
             />
         );
-        wrapper.simulate('mouseenter');
+        wrapper.simulate('mouseover');
         expect(wrapper.find('.click-to-edit-icon').length).to.equal(1);
         expect(wrapper.find('.click-to-edit-key-icon').length).to.equal(1);
         wrapper.find('.click-to-edit-icon').simulate('click');
@@ -407,7 +407,7 @@ describe('<VariableEditor />', function() {
         );
         expect(wrapper.state('hoveredOver')).to.equal(false);
 
-        wrapper.simulate('mouseenter');
+        wrapper.simulate('mouseover');
         expect(wrapper.state('hoveredOver')).to.equal(true);
 
         wrapper.simulate('mouseleave');

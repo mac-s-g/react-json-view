@@ -22,6 +22,7 @@ import { Edit } from '../icons';
 
 //theme
 import Theme from './../../themes/getStyle';
+import ObjectAttributes from '../../stores/ObjectAttributes';
 
 //increment 1 with each nested object & array
 const DEPTH_INCREMENT = 1;
@@ -41,8 +42,29 @@ class RjvObject extends React.PureComponent {
         };
     }
 
+    componentDidMount() {
+        ObjectAttributes.on('expanded-' + this.props.namespace.join(','), this.handleExpand)
+    }
+
+    componentWillUnmount() {
+        ObjectAttributes.removeListener('expanded-' + this.props.namespace.join(','), this.handleExpand)
+    }
+
+    handleExpand = () => {
+        const isExpanded = AttributeStore.get(
+            this.props.rjvId,
+            this.props.namespace,
+            'expanded',
+            false
+        );
+        this.setState({
+            expanded: isExpanded
+        });
+    }
+
     static getState = props => {
         const size = Object.keys(props.src).length;
+        //if root then have it's default expanded value true, others false
         const expanded =
             (props.collapsed === false ||
                 (props.collapsed !== true && props.collapsed > props.depth)) &&
@@ -72,19 +94,6 @@ class RjvObject extends React.PureComponent {
 
     static getDerivedStateFromProps(nextProps, prevState) {
         const { prevProps } = prevState;
-        if (!nextProps.jsvRoot) {
-            //if src has changed but collapse did not change then remain expanded (as auto expand opens objects/arrays)
-            if (prevProps.src !== nextProps.src && prevProps.collapsed === nextProps.collapsed) {
-                AttributeStore.set(nextProps.rjvId, nextProps.namespace, 'expanded', true);
-            } else {
-                //collapse all after depth 1 or expand all
-                AttributeStore.set(nextProps.rjvId, nextProps.namespace, 'expanded', (nextProps.collapsed !== 1 && nextProps.collapsed !== true));
-            }
-        }
-        //if changing root then it should always be expanded
-        else {
-            AttributeStore.set(nextProps.rjvId, nextProps.namespace, 'expanded', true);
-        }
         if (nextProps.src !== prevProps.src ||
             nextProps.collapsed !== prevProps.collapsed ||
             nextProps.name !== prevProps.name ||
@@ -101,20 +110,37 @@ class RjvObject extends React.PureComponent {
     }
 
     toggleCollapsed = () => {
-        const { rjvId, namespace } = this.props;
-        const { expanded } = this.state;
+        const { rjvId, namespace, type, src } = this.props;
+        const { expanded, hoveredOver } = this.state;
         const noSelection = window.getSelection && !window.getSelection().toString();
         if (noSelection) {
+            //remove meta icons if collapsed and moved away from cursor
+            if (hoveredOver && expanded) {
+                this.setState({
+                    hoveredOver: !hoveredOver
+                });
+            }
             this.setState({
                 expanded: !expanded
-            }, () => {
-                AttributeStore.set(
-                    rjvId,
-                    namespace,
-                    'expanded',
-                    !expanded
-                );
             });
+            AttributeStore.set(
+                rjvId,
+                namespace,
+                'expanded',
+                !expanded
+            );
+            if (type === 'array') {
+                Object.keys(src).forEach(key => {
+                    namespace.splice(namespace.length, 0, key);
+                    AttributeStore.set(
+                        rjvId,
+                        namespace,
+                        'expanded',
+                        !expanded
+                    );
+                    namespace.splice(namespace.length - 1, 1);
+                });
+            }
         }
     }
 
@@ -228,7 +254,7 @@ class RjvObject extends React.PureComponent {
                         class="icon-container"
                         {...Theme(theme, 'icon-container')}
                     >
-                        <IconComponent {...{ theme, iconStyle }} />
+                        { !jsvRoot && <IconComponent {...{ theme, iconStyle }} /> }
                     </div>
                     <ObjectName {...this.props} />
                     <span {...Theme(theme, 'brace')}>
@@ -238,6 +264,11 @@ class RjvObject extends React.PureComponent {
                 { expanded ? this.getObjectMetaData(src) : null }
             </span>
         );
+    }
+
+    handleOnHover = (isHovering) => {
+        const { jsvRoot } = this.props;
+        !jsvRoot && this.setState({ hoveredOver: isHovering });
     }
 
     render() {
@@ -270,8 +301,8 @@ class RjvObject extends React.PureComponent {
             <div
                 class='object-key-val'
                 {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', styles)}
-                onMouseEnter={ () => this.setState({ hoveredOver: true })}
-                onMouseLeave={ () => this.setState({ hoveredOver: false })}
+                onMouseOver={ () => this.handleOnHover(true) }
+                onMouseLeave={ () => this.handleOnHover(false) }
             >
                 { this.getBraceStart(object_type, expanded) }
                 { expanded

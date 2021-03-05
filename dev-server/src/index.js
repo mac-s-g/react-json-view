@@ -72,7 +72,7 @@ class DevDemo extends React.PureComponent {
                     defaultValue={null}
                     displayDataTypes={false}
                     displaySearch={true}
-                    collapsed={ collapsedState }
+                    collapsed={collapsedState}
                     displayArrayKey={true}
                 />
 
@@ -107,7 +107,7 @@ function getExampleJson1() {
             }
         ],
         empty_object: {},
-        array: [1, 2, 3, 'test'],
+        megaarray: [1, 2, 3],
         moment: Moment(),
         parent: {
             sibling1: true,

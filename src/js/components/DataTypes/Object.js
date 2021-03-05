@@ -66,7 +66,6 @@ class RjvObject extends React.PureComponent {
         const size = Object.keys(props.src).length;
         //if root then have it's default expanded value true, others false
         const expanded =
-            !!props.jsvRoot &&
             (props.collapsed === false ||
                 (props.collapsed !== true && props.collapsed > props.depth)) &&
             (!props.shouldCollapse ||
@@ -255,7 +254,7 @@ class RjvObject extends React.PureComponent {
                         class="icon-container"
                         {...Theme(theme, 'icon-container')}
                     >
-                        <IconComponent {...{ theme, iconStyle }} />
+                        { !jsvRoot && <IconComponent {...{ theme, iconStyle }} /> }
                     </div>
                     <ObjectName {...this.props} />
                     <span {...Theme(theme, 'brace')}>

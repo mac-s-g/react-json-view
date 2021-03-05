@@ -115,7 +115,7 @@ class VariableEditor extends React.PureComponent {
                     paddingLeft: indentWidth * singleIndent
                 }) }
                 class="variable-row"
-                onMouseEnter={ () => this.setState({ hoveredOver: true }) }
+                onMouseOver={ () => this.setState({ hoveredOver: true }) }
                 onMouseLeave={ () => this.setState({ hoveredOver: false }) }
                 key={ variable.name }
             >
@@ -423,7 +423,8 @@ class VariableEditor extends React.PureComponent {
             new_value = newColor;
         }
         this.setState({
-            editMode: false
+            editMode: false,
+            hoveredOver: false
         });
         if (allowDragging) {
             this.props.isDragAllowed(true);

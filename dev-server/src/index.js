@@ -60,9 +60,9 @@ class DevDemo extends React.PureComponent {
                     }}
                     shouldCollapse={({ src, namespace, type }) => {
                         if (type === 'array' && src.indexOf('test') > -1) {
-                            return true;
+                            return false;
                         } else if (namespace.indexOf('moment') > -1) {
-                            return true;
+                            return false;
                         }
                         return false;
                     }}

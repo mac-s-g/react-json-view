@@ -6,7 +6,9 @@ import { toType } from './../helpers/util';
 
 //icons
 import {
-    RemoveCircle as Remove, AddCircle as Add, SelectCircle as Select
+    RemoveCircle as Remove,
+    AddCircle as Add,
+    SelectCircle as Select
 } from './icons';
 
 //theme
@@ -109,9 +111,7 @@ export default class extends React.PureComponent {
     };
 
     getSelectObject = () => {
-        const {
-            theme, namespace, name, src, onSelect
-        } = this.props;
+        const { theme, namespace, name, src, onSelect } = this.props;
 
         return (
             <span class="click-to-select" title="Select Object">
@@ -129,7 +129,7 @@ export default class extends React.PureComponent {
                 />
             </span>
         );
-    }
+    };
 
     render = () => {
         const {

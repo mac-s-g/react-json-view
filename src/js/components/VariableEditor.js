@@ -22,7 +22,12 @@ import {
 } from './DataTypes/DataTypes';
 
 //clibboard icon
-import { Edit, CheckCircle, RemoveCircle as Remove, SelectCircle as Select } from './icons';
+import {
+    Edit,
+    CheckCircle,
+    RemoveCircle as Remove,
+    SelectCircle as Select
+} from './icons';
 
 //theme
 import Theme from './../themes/getStyle';
@@ -168,7 +173,7 @@ class VariableEditor extends React.PureComponent {
                 />
             </span>
         );
-    }
+    };
 
     getEditIcon = () => {
         const { variable, theme } = this.props;

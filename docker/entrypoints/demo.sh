@@ -14,6 +14,7 @@ fi
 
 # now, build the app
 cd /react
+
 npm run build:demo
 
 echo Copied distribution to /demo/dist

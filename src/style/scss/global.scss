@@ -1,4 +1,8 @@
 .react-json-view {
+    min-height: 96px;
+    word-break: break-all;
+    -ms-word-break: break-all;
+
     .copy-to-clipboard-container {
         vertical-align: top;
         display: none;

@@ -1,8 +1,15 @@
 {
+  "presets": ["react-app"],
   "plugins": [
-    'transform-class-properties',
-    'react-html-attrs',
-    'transform-function-bind'
+    "@babel/plugin-syntax-class-properties",
+    "@babel/plugin-syntax-jsx",
+    "react-html-attrs"
   ],
-  "presets": ["react", "es2015", "stage-0"]
+  "env": {
+    "test": {
+      "plugins": [
+        "istanbul"
+      ]
+    }
+  }
 }

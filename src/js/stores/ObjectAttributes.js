@@ -6,6 +6,44 @@ import { toType } from '../helpers/util';
 class ObjectAttributes extends EventEmitter {
     objects = {}
 
+    keyify = (obj, prefix = '') => {
+        return Object.keys(obj).reduce((acc, el) => {
+            if( Array.isArray(obj[el]) ) {
+                const resKey = this.keyify({...obj[el]}, prefix + el + '.]');
+                return [...acc, prefix + el, ...resKey];
+            } else if( typeof obj[el] === 'object' && obj[el] !== null ) {
+                const resKey = this.keyify(obj[el], prefix + el + '.]');
+                return [...acc, prefix + el ,...resKey];
+            }
+            return [...acc];
+        }, []);
+    }
+
+    toggleCollapsed = ({rjvId, collapsedState, value}) => {
+        let expandedNamespaces = this.keyify(value, '');
+        expandedNamespaces = expandedNamespaces.map(namespace => {
+            namespace = namespace.split('.]');
+            namespace = namespace.map(key => {
+                if (parseInt(key) || key === '0') {
+                    return +key;
+                }
+                return key;
+            });
+            return [false, ...namespace];
+        });
+
+        collapsedState = collapsedState !== 1;
+        expandedNamespaces.forEach(key => {
+            this.set(
+                rjvId,
+                key,
+                'expanded',
+                collapsedState
+            );
+            this.emit('expanded-' + key.join(','));
+        });
+    }
+
     set = (rjvId, name, key, value) => {
         if (this.objects[rjvId] === undefined) {
             this.objects[rjvId] = {};

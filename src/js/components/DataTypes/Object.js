@@ -22,6 +22,7 @@ import { Edit } from '../icons';
 
 //theme
 import Theme from './../../themes/getStyle';
+import ObjectAttributes from '../../stores/ObjectAttributes';
 
 //increment 1 with each nested object & array
 const DEPTH_INCREMENT = 1;
@@ -41,9 +42,31 @@ class RjvObject extends React.PureComponent {
         };
     }
 
+    componentDidMount() {
+        ObjectAttributes.on('expanded-' + this.props.namespace.join(','), this.handleExpand)
+    }
+
+    componentWillUnmount() {
+        ObjectAttributes.removeListener('expanded-' + this.props.namespace.join(','), this.handleExpand)
+    }
+
+    handleExpand = () => {
+        const isExpanded = AttributeStore.get(
+            this.props.rjvId,
+            this.props.namespace,
+            'expanded',
+            false
+        );
+        this.setState({
+            expanded: isExpanded
+        });
+    }
+
     static getState = props => {
         const size = Object.keys(props.src).length;
+        //if root then have it's default expanded value true, others false
         const expanded =
+            !!props.jsvRoot &&
             (props.collapsed === false ||
                 (props.collapsed !== true && props.collapsed > props.depth)) &&
             (!props.shouldCollapse ||
@@ -72,19 +95,6 @@ class RjvObject extends React.PureComponent {
 
     static getDerivedStateFromProps(nextProps, prevState) {
         const { prevProps } = prevState;
-        if (!nextProps.jsvRoot) {
-            //if src has changed but collapse did not change then remain expanded (as auto expand opens objects/arrays)
-            if (prevProps.src !== nextProps.src && prevProps.collapsed === nextProps.collapsed) {
-                AttributeStore.set(nextProps.rjvId, nextProps.namespace, 'expanded', true);
-            } else {
-                //collapse all after depth 1 or expand all
-                AttributeStore.set(nextProps.rjvId, nextProps.namespace, 'expanded', (nextProps.collapsed !== 1 && nextProps.collapsed !== true));
-            }
-        }
-        //if changing root then it should always be expanded
-        else {
-            AttributeStore.set(nextProps.rjvId, nextProps.namespace, 'expanded', true);
-        }
         if (nextProps.src !== prevProps.src ||
             nextProps.collapsed !== prevProps.collapsed ||
             nextProps.name !== prevProps.name ||

@@ -60,9 +60,9 @@ class DevDemo extends React.PureComponent {
                     }}
                     shouldCollapse={({ src, namespace, type }) => {
                         if (type === 'array' && src.indexOf('test') > -1) {
-                            return false;
+                            return true;
                         } else if (namespace.indexOf('moment') > -1) {
-                            return false;
+                            return true;
                         }
                         return false;
                     }}
@@ -107,7 +107,7 @@ function getExampleJson1() {
             }
         ],
         empty_object: {},
-        array: [1, 2, 3, 'test'],
+        megaarray: [1, 2, 3],
         moment: Moment(),
         parent: {
             sibling1: true,

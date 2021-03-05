@@ -138,7 +138,7 @@ class ReactJsonView extends React.PureComponent {
             );
         }
         if (prevProps.collapsed !== this.props.collapsed) {
-            ObjectAttributes.toggleCollapsed({
+            ObjectAttributes.toggleCollapseForAllObjectsAndArrays({
                 rjvId: this.rjvId,
                 collapsedState: this.props.collapsed,
                 value: this.props.src

@@ -6,21 +6,23 @@ import { toType } from '../helpers/util';
 class ObjectAttributes extends EventEmitter {
     objects = {}
 
-    keyify = (obj, prefix = '') => {
+    //getting all namespaces of src objects and arrays
+    getKeysOfAllObjectsAndArrays = (obj, prefix = '') => {
         return Object.keys(obj).reduce((acc, el) => {
             if( Array.isArray(obj[el]) ) {
-                const resKey = this.keyify({...obj[el]}, prefix + el + '.]');
+                const resKey = this.getKeysOfAllObjectsAndArrays({...obj[el]}, prefix + el + '.]');
                 return [...acc, prefix + el, ...resKey];
             } else if( typeof obj[el] === 'object' && obj[el] !== null ) {
-                const resKey = this.keyify(obj[el], prefix + el + '.]');
+                const resKey = this.getKeysOfAllObjectsAndArrays(obj[el], prefix + el + '.]');
                 return [...acc, prefix + el ,...resKey];
             }
             return [...acc];
         }, []);
     }
 
-    toggleCollapsed = ({rjvId, collapsedState, value}) => {
-        let expandedNamespaces = this.keyify(value, '');
+    //toggling collapse of all src objects and arrays (collapse/expand all)
+    toggleCollapseForAllObjectsAndArrays = ({rjvId, collapsedState, value}) => {
+        let expandedNamespaces = this.getKeysOfAllObjectsAndArrays(value, '');
         expandedNamespaces = expandedNamespaces.map(namespace => {
             namespace = namespace.split('.]');
             namespace = namespace.map(key => {
@@ -32,6 +34,9 @@ class ObjectAttributes extends EventEmitter {
             return [false, ...namespace];
         });
 
+        //To collapse -> expanded has to be false and vice versa
+        //collapsedState toggles between 1 and false. If false then expanded has to be true.
+        //If 1 then expanded has to be false.
         collapsedState = collapsedState !== 1;
         expandedNamespaces.forEach(key => {
             this.set(

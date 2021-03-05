@@ -293,7 +293,7 @@ class RjvObject extends React.PureComponent {
                 class='object-key-val'
                 {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', styles)}
                 onMouseOver={ () => this.handleOnHover(true) }
-                onMouseOut={ () => this.handleOnHover(false) }
+                onMouseLeave={ () => this.handleOnHover(false) }
             >
                 { this.getBraceStart(object_type, expanded) }
                 { expanded

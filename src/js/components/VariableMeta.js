@@ -13,6 +13,7 @@ import {
 
 //theme
 import Theme from './../themes/getStyle';
+import ObjectAttributes from '../stores/ObjectAttributes';
 
 export default class extends React.PureComponent {
     getObjectSize = () => {
@@ -40,6 +41,14 @@ export default class extends React.PureComponent {
                     class="click-to-add-icon"
                     {...Theme(theme, 'addVarIcon')}
                     onClick={() => {
+                        const namespaceCopy = [...namespace];
+                        //expand the object/array
+                        ObjectAttributes.set(
+                            rjvId,
+                            namespace,
+                            'expanded',
+                            true
+                        );
                         const request = {
                             name: depth > 0 ? name : null,
                             namespace: namespace.splice(
@@ -56,6 +65,17 @@ export default class extends React.PureComponent {
                                 data: request,
                             });
                         } else {
+                            //expand every object/array in the array
+                            Object.keys(src).forEach(key => {
+                                namespaceCopy.splice(namespaceCopy.length, 0, key);
+                                ObjectAttributes.set(
+                                    rjvId,
+                                    namespaceCopy,
+                                    'expanded',
+                                    true
+                                );
+                                namespaceCopy.splice(namespaceCopy.length - 1, 1);
+                            });
                             dispatcher.dispatch({
                                 name: 'VARIABLE_ADDED',
                                 rjvId: rjvId,

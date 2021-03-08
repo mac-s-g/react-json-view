@@ -43,11 +43,12 @@ class RjvObject extends React.PureComponent {
     }
 
     componentDidMount() {
-        ObjectAttributes.on('expanded-' + this.props.namespace.join(','), this.handleExpand)
+        // console.log(ObjectAttributes.get(this.props.rjvId, this.props.namespace, 'expanded', undefined));
+        ObjectAttributes.on('expanded-' + this.props.namespace.join(','), this.handleExpand);
     }
 
     componentWillUnmount() {
-        ObjectAttributes.removeListener('expanded-' + this.props.namespace.join(','), this.handleExpand)
+        ObjectAttributes.removeListener('expanded-' + this.props.namespace.join(','), this.handleExpand);
     }
 
     handleExpand = () => {

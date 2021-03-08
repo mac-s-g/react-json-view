@@ -34,6 +34,12 @@ class DevDemo extends React.PureComponent {
     toggleRerender = () => {
         this.setState({
             rerender: !this.state.rerender
+        }, () => {
+            setTimeout(() => {
+                this.setState({
+                    rerender: !this.state.rerender
+                });
+            }, 300);
         });
     }
 

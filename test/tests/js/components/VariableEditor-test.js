@@ -24,8 +24,7 @@ describe('<VariableEditor />', function() {
             />
         );
         wrapper.simulate('mouseover');
-        //one for value editing and one for key editing
-        expect(wrapper.find('.click-to-edit')).to.have.length(2);
+        expect(wrapper.find('.click-to-edit')).to.have.length(1);
     });
 
     it('VariableEditor click-to-edit should be hidden when onEdit disabled', function() {

@@ -63,6 +63,7 @@ class VariableEditor extends React.PureComponent {
         const { displayArrayKey, variable, namespace, theme } = this.props;
         let variableName = this.highlightString();
         return displayArrayKey && <span
+            className="array-key"
             { ...Theme(theme, 'array-key') }
             key={ variable.name + '_' + namespace }
         >

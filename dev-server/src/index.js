@@ -8,13 +8,14 @@ import ReactDom from 'react-dom';
 
 //import the react-json-view component (installed with npm)
 import JsonViewer from './../../src/js/index';
+import ObjectAttributes from '../../src/js/stores/ObjectAttributes';
 
 class DevDemo extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
             collapsedState: 1,
-            rerender: false
+            selectedValue: 'Wish'
         };
     }
 
@@ -31,26 +32,27 @@ class DevDemo extends React.PureComponent {
         }
     }
 
-    toggleRerender = () => {
+    handleDropdownChange = (e) => {
         this.setState({
-            rerender: !this.state.rerender
-        }, () => {
-            setTimeout(() => {
-                this.setState({
-                    rerender: !this.state.rerender
-                });
-            }, 300);
+            selectedValue: e.target.value
         });
     }
 
     render() {
-        const { collapsedState } = this.state;
+        const { collapsedState, selectedValue } = this.state;
         return (
             <div id='app-container'>
                 <button onClick={ () => this.toggleCollapse() }>Toggle collapse</button>
-                <button onClick={ () => this.toggleRerender() }>Toggle rerender</button>
+                <select defaultValue="Wish" onChange={ this.handleDropdownChange }>
+                    <option value="Wish">Wish</option>
+                    <option value="Holy">Holy</option>
+                    <option value="Water">Water</option>
+                    <option value="Greece">Greece</option>
+                </select>
+                <p>Selected value: {selectedValue}</p>
                 {/* just pass in your JSON to the src attribute */}
                 <JsonViewer
+                    key={selectedValue}
                     sortKeys={false}
                     style={{ padding: '30px', backgroundColor: 'white' }}
                     src={getExampleJson1()}
@@ -88,6 +90,7 @@ class DevDemo extends React.PureComponent {
                     displaySearch={true}
                     collapsed={collapsedState}
                     displayArrayKey={true}
+                    customId={selectedValue}
                 />
 
             </div>

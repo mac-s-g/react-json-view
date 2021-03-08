@@ -13,7 +13,8 @@ class DevDemo extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            collapsedState: 1
+            collapsedState: 1,
+            rerender: false
         };
     }
 
@@ -30,11 +31,18 @@ class DevDemo extends React.PureComponent {
         }
     }
 
+    toggleRerender = () => {
+        this.setState({
+            rerender: !this.state.rerender
+        });
+    }
+
     render() {
         const { collapsedState } = this.state;
         return (
             <div id='app-container'>
                 <button onClick={ () => this.toggleCollapse() }>Toggle collapse</button>
+                <button onClick={ () => this.toggleRerender() }>Toggle rerender</button>
                 {/* just pass in your JSON to the src attribute */}
                 <JsonViewer
                     sortKeys={false}

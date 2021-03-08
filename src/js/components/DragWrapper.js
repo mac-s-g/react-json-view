@@ -278,7 +278,7 @@ class DragWrapper extends Component {
                 ref={ el => this.el = el }
                 data-node-id={ name }
                 data-drop-marker={ dropMarker }
-                onMouseDown={ dragAllowed && this.handleMouseDown }
+                onMouseDown={ dragAllowed ? this.handleMouseDown : undefined }
                 key={ name }
                 data-parent-name={ namespace }
                 data-drop-depth={ depth }>

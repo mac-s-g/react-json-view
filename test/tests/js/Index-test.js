@@ -117,4 +117,17 @@ describe("<Index />", function() {
         )
         expect(wrapper.find(".array-group")).to.have.length(3)
     })
+
+    it("length is correct even if an object has a length property", function () {
+        const wrapper = render(
+            <Index
+                src={{
+                    first: "first property",
+                    second: "second property",
+                    length: 1000
+                }}
+            />
+        )
+        expect(wrapper.find(".object-size")).to.have.length(1)
+    })
 })

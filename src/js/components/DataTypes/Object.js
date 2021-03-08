@@ -213,16 +213,15 @@ class RjvObject extends React.PureComponent {
 
     renderRenameKeyButton = () => {
         const { theme } = this.props;
-
-        return (
+        const { hoveredOver } = this.state;
+        return hoveredOver &&
             <span class="click-to-edit" title="Edit Key">
                 <Edit
                     class="click-to-edit-key-icon"
                     {...Theme(theme, 'editVarIcon')}
                     onClick={ (e) => this.updateKeyRequest(e) }
                 />
-            </span>
-        );
+            </span>;
     }
 
     getBraceStart(object_type, expanded) {

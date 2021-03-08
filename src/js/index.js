@@ -39,7 +39,7 @@ class ReactJsonView extends React.PureComponent {
     timeout = null;
 
     //reference id for this instance
-    rjvId = Date.now().toString()
+    rjvId = this.props.customId || Date.now().toString();
 
     //all acceptable props and default values
     static defaultProps = {
@@ -228,7 +228,7 @@ class ReactJsonView extends React.PureComponent {
 
         return (
             <div
-                className="react-json-editor">
+                className={ this.props.className === 'rjv-display' ? 'rjv-display' : 'react-json-editor'}>
                 <div
                     className="react-json-view-search-box">
                     { displaySearch ?

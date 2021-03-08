@@ -1,3 +1,7 @@
+.rjv-display {
+    display: none;
+}
+
 .react-json-view {
     .click-to-add {
         vertical-align: top;
@@ -12,7 +16,6 @@
     .drag-wrapper {
         width: fit-content;
     }
-
     .object-content .variable-row,
     .object-key-val {
         .click-to-remove {

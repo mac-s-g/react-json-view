@@ -13,12 +13,17 @@
         width: fit-content;
     }
 
-    .object-content .variable-row {
+    .object-content .variable-row,
+    .object-key-val {
         .click-to-remove {
             display: inline-block;
         }
         .click-to-edit {
             display: inline-block;
+        }
+        .click-to-edit-key {
+            display: inline-block;
+            margin-left: -18px;
         }
     }
 }

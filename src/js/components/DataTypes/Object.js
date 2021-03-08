@@ -215,7 +215,7 @@ class RjvObject extends React.PureComponent {
         const { theme } = this.props;
         const { hoveredOver } = this.state;
         return hoveredOver &&
-            <span class="click-to-edit" title="Edit Key">
+            <span class="click-to-edit-key" title="Edit Key">
                 <Edit
                     class="click-to-edit-key-icon"
                     {...Theme(theme, 'editVarIcon')}

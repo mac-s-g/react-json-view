@@ -222,7 +222,7 @@ class VariableEditor extends React.PureComponent {
         } = this.props;
         return (
             <span
-                class="click-to-edit"
+                class="click-to-edit-key"
                 title="Edit value">
                 <Edit
                     class="click-to-edit-key-icon"

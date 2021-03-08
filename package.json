@@ -1,13 +1,13 @@
 {
     "name": "react-json-view",
     "description": "Interactive react component for displaying javascript arrays and JSON objects.",
-    "version": "1.21.1",
+    "version": "1.21.2",
     "main": "dist/main.js",
     "dependencies": {
         "flux": "^4.0.1",
         "react-base16-styling": "^0.6.0",
         "react-lifecycles-compat": "^3.0.4",
-        "react-textarea-autosize": "^6.1.0"
+        "react-textarea-autosize": "^8.3.2"
     },
     "devDependencies": {
         "@babel/eslint-parser": "^7.12.1",

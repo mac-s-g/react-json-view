@@ -226,9 +226,10 @@ class ReactJsonView extends React.PureComponent {
             displaySearch
         } = this.props;
 
+        const customClassname = this.props.className || '';
         return (
             <div
-                className={ this.props.className === 'rjv-display' ? 'rjv-display' : 'react-json-editor'}>
+                className={ `react-json-editor ${customClassname}` }>
                 <div
                     className="react-json-view-search-box">
                     { displaySearch ?

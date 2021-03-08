@@ -293,6 +293,7 @@ class VariableEditor extends React.PureComponent {
                         e.stopPropagation();
                     }}
                     placeholder="update this value"
+                    minRows={2}
                     {...Theme(theme, 'edit-input')}
                 />
                 <div {...Theme(theme, 'edit-icon-container')}>

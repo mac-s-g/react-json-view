@@ -8,12 +8,10 @@ export default class extends React.PureComponent {
         const namespace = [props.name];
         let ObjectComponent = JsonObject;
 
-        const size = Array.isArray(props.src)
-            ? props.src.length
-            : Object.keys(props.src).length;
         if (
+            Array.isArray(props.src) &&
             props.groupArraysAfterLength &&
-            size > props.groupArraysAfterLength
+            props.src.length > props.groupArraysAfterLength
         ) {
             ObjectComponent = ArrayGroup;
         }

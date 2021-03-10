@@ -11,8 +11,8 @@ class PasteToJson extends Component {
         super(props);
     }
 
-    checkForExternalPasteData = async () => {
-        return await navigator.clipboard.readText()
+    checkForExternalPasteData = () => {
+        return navigator.clipboard.readText()
             .then( clipData => {
                 return clipData;
             })
@@ -23,27 +23,19 @@ class PasteToJson extends Component {
 
     detectClipboardValueType = value => {
         value = value.trim();
-        value.replaceAll('\'', '\"');
-        if (value[0] === '[' || value[0] === '{') {
-            //array/object
-            return JSON.parse(value);
-        } else if (
-            value.match(/\-?\d+\.\d+/)
-            && value.match(/\-?\d+\.\d+/)[0] === value
-        ) {
-            //integer
-            return parseFloat(value);
-        } else if (
-            value.match(/\-?\d+/)
-            && value.match(/\-?\d+/)[0] === value
-        ) {
-            //float
-            return parseInt(value);
-        } else if (value[0] === '\"' || value[0] === '\'') {
-            //string from json
-            return value.substring(1, value.length-1);
-        }
-        // run in case input was not serializable
+        value = value.replaceAll('\'', '\"');
+        const isArray = value[0] === '[' && value[value.length - 1] === ']';
+        const isObject = value[0] === '{' && value[value.length - 1] === '}';
+        const isFloat = value.match(/\-?\d+\.\d+/) && value.match(/\-?\d+\.\d+/)[0] === value;
+        const isInteger = value.match(/\-?\d+/) && value.match(/\-?\d+/)[0] === value;
+        const isString = value[0] === '\"' && value[value.length - 1] === '\"';
+
+        if (isArray || isObject) { return JSON.parse(value); }
+        else if (isFloat) { return parseFloat(value); }
+        else if (isInteger) { return parseInt(value); }
+        else if (isString) { return value.substring(1, value.length-1); }
+
+        //if value is undefined, null, true or false (special types)
         value = value.toLowerCase();
         switch (value) {
         case 'undefined': {
@@ -58,10 +50,6 @@ class PasteToJson extends Component {
         case 'false': {
             return false;
         }
-        }
-        if ( typeof value === 'string' ) {
-            //external string value (without quotes)
-            return value;
         }
     }
 
@@ -154,7 +142,9 @@ class PasteToJson extends Component {
         const hasExternalPasteData = this.checkForExternalPasteData();
         //if copied value is default value (such as null or '') then this check makes sure to show paste icon
         //after copying something with default value as the value
-        let display = hasExternalPasteData /* || copiedValue || copiedValue === defaultValue*/ ? 'inline' : 'none';
+        //uncomment this to use with store as well
+        // let display = hasExternalPasteData || copiedValue || copiedValue === defaultValue ? 'inline' : 'none';
+        let display = hasExternalPasteData ? 'inline' : 'none';
         return (
             <span
                 className="paste-to-json-container" title="Paste after this">

@@ -4,12 +4,68 @@ import ObjectAttributes from '../stores/ObjectAttributes';
 import { PasteIcon as Paste } from './icons';
 import dispatcher from '../helpers/dispatcher';
 
+import regeneratorRuntime from 'regenerator-runtime';
+
 class PasteToJson extends Component {
     constructor(props) {
         super(props);
     }
 
-    handlePaste = () => {
+    checkForExternalPasteData = async () => {
+        return await navigator.clipboard.readText()
+            .then( clipData => {
+                return clipData;
+            })
+            .catch( err => {
+                return false;
+            });
+    }
+
+    detectClipboardValueType = value => {
+        value = value.trim();
+        value.replaceAll('\'', '\"');
+        if (value[0] === '[' || value[0] === '{') {
+            //array/object
+            return JSON.parse(value);
+        } else if (
+            value.match(/\-?\d+\.\d+/)
+            && value.match(/\-?\d+\.\d+/)[0] === value
+        ) {
+            //integer
+            return parseFloat(value);
+        } else if (
+            value.match(/\-?\d+/)
+            && value.match(/\-?\d+/)[0] === value
+        ) {
+            //float
+            return parseInt(value);
+        } else if (value[0] === '\"' || value[0] === '\'') {
+            //string from json
+            return value.substring(1, value.length-1);
+        }
+        // run in case input was not serializable
+        value = value.toLowerCase();
+        switch (value) {
+        case 'undefined': {
+            return undefined;
+        }
+        case 'null': {
+            return null;
+        }
+        case 'true': {
+            return true;
+        }
+        case 'false': {
+            return false;
+        }
+        }
+        if ( typeof value === 'string' ) {
+            //external string value (without quotes)
+            return value;
+        }
+    }
+
+    handlePaste = async () => {
         const {
             rjvId,
             name,
@@ -19,7 +75,10 @@ class PasteToJson extends Component {
             namespace,
             depth
         } = this.props;
-        const pasteValue = ObjectAttributes.get(rjvId, 'global', 'copied', false);
+        //const pasteValueFromStore = ObjectAttributes.get(rjvId, 'global', 'copied', false);
+
+        let pasteValue = await this.checkForExternalPasteData();
+        pasteValue = this.detectClipboardValueType(pasteValue);
         //for parent's namespace last namespace has to be spliced out
         const parentNamespace = [...namespace].splice(0, namespace.length-1);
         let existingValue = ObjectAttributes.getSrcByNamespace({
@@ -88,10 +147,14 @@ class PasteToJson extends Component {
     render() {
         const { theme, rjvId, defaultValue } = this.props;
         let style = Theme(theme, 'paste-to-json').style;
-        const copiedValue = ObjectAttributes.get(rjvId, 'global', 'copied', false);
+        //currently only clipboard value is used. Store can also be used for holding clipboard value if needed.
+        //To do that uncomment line below and setting copied value to store in CopyToClipboard.js
+        // const copiedValue = ObjectAttributes.get(rjvId, 'global', 'copied', false);
+
+        const hasExternalPasteData = this.checkForExternalPasteData();
         //if copied value is default value (such as null or '') then this check makes sure to show paste icon
         //after copying something with default value as the value
-        let display = copiedValue || copiedValue === defaultValue ? 'inline' : 'none';
+        let display = hasExternalPasteData /* || copiedValue || copiedValue === defaultValue*/ ? 'inline' : 'none';
         return (
             <span
                 className="paste-to-json-container" title="Paste after this">

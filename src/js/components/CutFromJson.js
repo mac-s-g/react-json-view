@@ -44,7 +44,7 @@ class CutFromJson extends Component {
         container.innerHTML = JSON.stringify(
             this.clipboardValue(src),
             null,
-            '  '
+            ''
         );
         document.body.appendChild(container);
         container.select();

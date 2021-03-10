@@ -11,8 +11,8 @@ class PasteToJson extends Component {
         super(props);
     }
 
-    checkForExternalPasteData = () => {
-        return navigator.clipboard.readText()
+    checkForExternalPasteData = async () => {
+        return await navigator.clipboard.readText()
             .then( clipData => {
                 return clipData;
             })
@@ -36,8 +36,8 @@ class PasteToJson extends Component {
         else if (isString) { return value.substring(1, value.length-1); }
 
         //if value is undefined, null, true or false (special types)
-        value = value.toLowerCase();
-        switch (value) {
+        let customTypes = value.toLowerCase();
+        switch (customTypes) {
         case 'undefined': {
             return undefined;
         }
@@ -51,6 +51,8 @@ class PasteToJson extends Component {
             return false;
         }
         }
+        //return as string
+        return value;
     }
 
     handlePaste = async () => {

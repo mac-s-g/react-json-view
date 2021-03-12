@@ -30,7 +30,13 @@ class PasteToJson extends Component {
         const isInteger = value.match(/\-?\d+/) && value.match(/\-?\d+/)[0] === value;
         const isString = value[0] === '\"' && value[value.length - 1] === '\"';
 
-        if (isArray || isObject) { return JSON.parse(value); }
+        if (isArray || isObject) {
+            try {
+                return JSON.parse(value);
+            } catch (e) {
+                return e.message;
+            }
+        }
         else if (isFloat) { return parseFloat(value); }
         else if (isInteger) { return parseInt(value); }
         else if (isString) { return value.substring(1, value.length-1); }

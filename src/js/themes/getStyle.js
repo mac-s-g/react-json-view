@@ -262,9 +262,6 @@ const getDefaultThemeStyling = theme => {
             marginRight: constants.iconMarginRight,
             verticalAlign: 'top'
         },
-        'paste-to-json': {
-            cursor: constants.pasteCursor
-        },
         'paste-icon': {
             color: colors.pasteToJson,
             fontSize: constants.iconFontSize,
@@ -378,6 +375,15 @@ const getDefaultThemeStyling = theme => {
             boxSizing: 'border-box',
             borderRadius: '2px'
         },
+        'value-modal-input': {
+            width: '100%',
+            padding: '3px 6px',
+            fontFamily: 'monospace',
+            color: colors.addKeyModal.color,
+            border: 'none',
+            boxSizing: 'border-box',
+            borderRadius: '2px'
+        },
         'key-modal-cancel': {
             backgroundColor: colors.editVariable.cancelIcon,
             position: 'absolute',
@@ -392,6 +398,14 @@ const getDefaultThemeStyling = theme => {
             transform: 'rotate(45deg)'
         },
         'key-modal-submit': {
+            color: colors.editVariable.addIcon,
+            fontSize: constants.iconFontSize,
+            position: 'absolute',
+            right: '2px',
+            top: '3px',
+            cursor: 'pointer'
+        },
+        'value-modal-submit': {
             color: colors.editVariable.addIcon,
             fontSize: constants.iconFontSize,
             position: 'absolute',

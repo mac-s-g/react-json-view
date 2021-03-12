@@ -2,6 +2,7 @@ import React from 'react';
 import {polyfill} from 'react-lifecycles-compat';
 import JsonViewer from './components/JsonViewer';
 import AddKeyRequest from './components/ObjectKeyModal/AddKeyRequest';
+import PasteAddKeyRequest from './components/ObjectKeyModal/PasteAddKeyRequest';
 import EditKeyRequest from './components/ObjectKeyModal/EditKeyRequest';
 import ValidationFailure from './components/ValidationFailure';
 import {toType, isTheme} from './helpers/util';
@@ -22,6 +23,7 @@ class ReactJsonView extends React.PureComponent {
             //listen to request to add/edit a key to an object
             addKeyRequest: false,
             editKeyRequest: false,
+            pasteAddKeyRequest: false,
             validationFailure: false,
             src: ReactJsonView.defaultProps.src,
             name: ReactJsonView.defaultProps.name,
@@ -101,7 +103,7 @@ class ReactJsonView extends React.PureComponent {
             this.rjvId,
             'global',
             'copied',
-            false
+            '!noValueCopied!'
         );
         // bind to events
         const listeners = this.getListeners();
@@ -161,7 +163,8 @@ class ReactJsonView extends React.PureComponent {
             'reset': this.resetState,
             'variable-update': this.updateSrc,
             'add-key-request': this.addKeyRequest,
-            'edit-key-request': this.editKeyRequest
+            'edit-key-request': this.editKeyRequest,
+            'paste-add-key-request': this.pasteAddKeyRequest
         };
     }
     //make sure props are passed in as expected
@@ -217,7 +220,8 @@ class ReactJsonView extends React.PureComponent {
             name,
             searchKey,
             copied,
-            editKeyRequest
+            editKeyRequest,
+            pasteAddKeyRequest
         } = this.state;
 
         const {
@@ -262,6 +266,11 @@ class ReactJsonView extends React.PureComponent {
                         defaultValue={defaultValue} />
                     <EditKeyRequest
                         active={editKeyRequest}
+                        theme={theme}
+                        rjvId={this.rjvId}
+                        defaultValue={defaultValue} />
+                    <PasteAddKeyRequest
+                        active={pasteAddKeyRequest}
                         theme={theme}
                         rjvId={this.rjvId}
                         defaultValue={defaultValue} />
@@ -329,11 +338,18 @@ class ReactJsonView extends React.PureComponent {
         });
     }
 
+    pasteAddKeyRequest = () => {
+        this.setState({
+            pasteAddKeyRequest: true
+        });
+    }
+
     resetState = () => {
         this.setState({
             validationFailure: false,
             addKeyRequest: false,
-            editKeyRequest: false
+            editKeyRequest: false,
+            pasteAddKeyRequest: false
         });
     }
 

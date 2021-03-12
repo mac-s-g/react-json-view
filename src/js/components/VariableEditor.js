@@ -29,6 +29,7 @@ import { Edit, CheckCircle, RemoveIcon as Remove, CancelIcon as Cancel } from '.
 
 //theme
 import Theme from './../themes/getStyle';
+import ExternalPaste from './ExternalPaste';
 
 class VariableEditor extends React.PureComponent {
     constructor(props) {
@@ -164,6 +165,10 @@ class VariableEditor extends React.PureComponent {
                             { ...{ theme, namespace, rjvId }}
                         />
                         <PasteToJson
+                            name={ variable.name }
+                            { ...this.props }
+                        />
+                        <ExternalPaste
                             name={ variable.name }
                             { ...this.props }
                         />

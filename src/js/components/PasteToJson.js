@@ -11,6 +11,10 @@ class PasteToJson extends Component {
         super(props);
     }
 
+    componentDidMount() {
+        navigator.permissions.query({name: 'clipboard-read', allowWithoutGesture: false});
+    }
+
     checkForExternalPasteData = async () => {
         return await navigator.clipboard.readText()
             .then( clipData => {

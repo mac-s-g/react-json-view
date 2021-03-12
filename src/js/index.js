@@ -90,6 +90,7 @@ class ReactJsonView extends React.PureComponent {
     }
 
     componentDidMount() {
+        navigator.permissions.query({name: 'clipboard-read', allowWithoutGesture: false});
         // initialize
         ObjectAttributes.set(
             this.rjvId,

@@ -14,6 +14,7 @@ import {
 //theme
 import Theme from './../themes/getStyle';
 import ObjectAttributes from '../stores/ObjectAttributes';
+import ExternalPaste from './ExternalPaste';
 
 export default class extends React.PureComponent {
     getObjectSize = () => {
@@ -108,7 +109,9 @@ export default class extends React.PureComponent {
             return;
         }
         return (
-            <span class="click-to-remove" >
+            <span
+                class="click-to-remove"
+                title="Remove">
                 <Remove
                     class="click-to-remove-icon"
                     {...Theme(theme, 'removeVarIcon')}
@@ -166,6 +169,12 @@ export default class extends React.PureComponent {
                 {/*don't display paste icon for root*/}
                 { (enableClipboard && !jsvRoot) &&
                     <PasteToJson
+                        pastedOnObjectOrArray
+                        { ...this.props }
+                    />
+                }
+                { (enableClipboard && !jsvRoot) &&
+                    <ExternalPaste
                         pastedOnObjectOrArray
                         { ...this.props }
                     />

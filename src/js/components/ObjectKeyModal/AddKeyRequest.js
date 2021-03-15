@@ -2,6 +2,7 @@ import React from 'react';
 import dispatcher from './../../helpers/dispatcher';
 import ObjectAttributes from './../../stores/ObjectAttributes';
 import ObjectKeyModal from './ObjectKeyModal';
+import {insertToObject} from '../../helpers/util';
 
 //this input appears when adding a new value to an object or copy/cut pasting something into object
 export default class extends React.PureComponent {
@@ -35,16 +36,10 @@ export default class extends React.PureComponent {
         let request = ObjectAttributes.get(
             rjvId, 'action', 'new-key-request'
         );
+        const { existing_value, dropTargetIdx, pasteValue } = request;
 
         if (request.pasted) {
-            let newSrc = {};
-            Object.keys(request.existing_value).forEach((key, idx) => {
-                newSrc[key] = request.existing_value[key];
-                //insert after
-                if (idx+1 === request.dropTargetIdx+1) {
-                    newSrc[input] = request.pasteValue;
-                }
-            });
+            const newSrc = insertToObject({existing_value, dropTargetIdx, input, pasteValue});
             dispatcher.dispatch({
                 name: 'VARIABLE_ADDED',
                 rjvId: rjvId,

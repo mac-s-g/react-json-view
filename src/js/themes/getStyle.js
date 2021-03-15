@@ -262,9 +262,6 @@ const getDefaultThemeStyling = theme => {
             marginRight: constants.iconMarginRight,
             verticalAlign: 'top'
         },
-        'paste-to-json': {
-            cursor: constants.pasteCursor
-        },
         'paste-icon': {
             color: colors.pasteToJson,
             fontSize: constants.iconFontSize,
@@ -371,7 +368,16 @@ const getDefaultThemeStyling = theme => {
         },
         'key-modal-input': {
             width: '100%',
-            padding: '3px 6px',
+            padding: constants.keyModalInputPadding,
+            fontFamily: 'monospace',
+            color: colors.addKeyModal.color,
+            border: 'none',
+            boxSizing: 'border-box',
+            borderRadius: '2px'
+        },
+        'value-modal-input': {
+            width: '100%',
+            padding: constants.keyModalInputPadding,
             fontFamily: 'monospace',
             color: colors.addKeyModal.color,
             border: 'none',
@@ -397,6 +403,24 @@ const getDefaultThemeStyling = theme => {
             position: 'absolute',
             right: '2px',
             top: '3px',
+            cursor: 'pointer'
+        },
+        'value-modal-submit': {
+            color: colors.editVariable.addIcon,
+            fontSize: constants.iconFontSize,
+            position: 'absolute',
+            right: '2px',
+            marginLeft: '10px',
+            top: constants.valueModalSubmitButtonTop,
+            cursor: 'pointer'
+        },
+        'value-modal-submit-in-array': {
+            color: colors.editVariable.addIcon,
+            fontSize: constants.iconFontSize,
+            position: 'absolute',
+            right: '2px',
+            marginLeft: '10px',
+            top: constants.valueModalSubmitButtonTopInArray,
             cursor: 'pointer'
         },
         'function-ellipsis': {

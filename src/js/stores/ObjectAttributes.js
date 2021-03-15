@@ -144,6 +144,10 @@ class ObjectAttributes extends EventEmitter {
             this.set(rjvId, 'action', 'variable-update',{...data, type:'variable-key-added'});
             this.emit('variable-update-' + rjvId);
             break;
+        case 'PASTE_ADD_KEY_REQUEST':
+            this.set(rjvId, 'action', 'paste-add-key-request', data);
+            this.emit('paste-add-key-request-' + rjvId);
+            break;
         }
     }
 

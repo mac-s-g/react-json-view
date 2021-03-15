@@ -97,7 +97,7 @@ class PasteToJson extends Component {
                 <Paste
                     class='paste-icon'
                     { ...Theme(theme, 'paste-icon') }
-                    onClick={ canPaste ? this.handlePaste : null}
+                    onClick={ canPaste ? this.handlePaste : undefined}
                 />
             </span>
         );

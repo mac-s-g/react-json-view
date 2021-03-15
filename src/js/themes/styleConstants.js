@@ -92,6 +92,7 @@ export default {
     addKeyCoverBackground: 'rgba(255, 255, 255, 0.3)',
     addKeyCoverPosition: 'fixed',
     addKeyCoverPositionPx: '0px',
+    addKeyCoverPositionTopPx: '120px',
     addKeyModalWidth: '200px',
     addKeyModalMargin: 'auto',
     addKeyModalPadding: '10px',

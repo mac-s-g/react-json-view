@@ -341,7 +341,7 @@ const getDefaultThemeStyling = theme => {
         },
         'key-modal-request': {
             position: constants.addKeyCoverPosition,
-            top: constants.addKeyCoverPositionPx,
+            top: constants.addKeyCoverPositionTopPx,
             left: constants.addKeyCoverPositionPx,
             right: constants.addKeyCoverPositionPx,
             bottom: constants.addKeyCoverPositionPx,

@@ -368,7 +368,7 @@ const getDefaultThemeStyling = theme => {
         },
         'key-modal-input': {
             width: '100%',
-            padding: '3px 6px',
+            padding: '3px 20px 3px 6px',
             fontFamily: 'monospace',
             color: colors.addKeyModal.color,
             border: 'none',
@@ -377,7 +377,7 @@ const getDefaultThemeStyling = theme => {
         },
         'value-modal-input': {
             width: '100%',
-            padding: '3px 6px',
+            padding: '3px 20px 3px 6px',
             fontFamily: 'monospace',
             color: colors.addKeyModal.color,
             border: 'none',
@@ -410,7 +410,8 @@ const getDefaultThemeStyling = theme => {
             fontSize: constants.iconFontSize,
             position: 'absolute',
             right: '2px',
-            top: '3px',
+            marginLeft: '10px',
+            top: '42px',
             cursor: 'pointer'
         },
         'function-ellipsis': {

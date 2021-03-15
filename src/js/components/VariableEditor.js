@@ -52,7 +52,8 @@ class VariableEditor extends React.PureComponent {
         const { variable, search, type, theme } = this.props;
         let variableName = variable.name;
         if (typeof variableName === 'string' && search && type !== 'array') {
-            const start = (variableName).indexOf(search);
+            //ignore uppercase
+            const start = (variableName.toLowerCase()).indexOf(search.toLowerCase());
             if (start > -1) {
                 variableName = highlightedString(variable.name, start, search.length, theme);
             }

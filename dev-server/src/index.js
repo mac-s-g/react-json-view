@@ -130,7 +130,8 @@ function getExampleJson1() {
             sibling1: true,
             sibling2: false,
             sibling3: null,
-            isString: 'value'
+            value: 'value',
+            VALUE: 'VALUE',
         },
         string_number: '#ffffff',
         date: new Date(),

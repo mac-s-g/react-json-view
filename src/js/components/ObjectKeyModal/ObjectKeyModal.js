@@ -13,23 +13,8 @@ export default class extends React.PureComponent {
         super(props);
         this.state = {
             input: props.input ? props.input : '',
-            pasteInput: props.pasteInput ? props.pasteInput : '',
-            keyModalRef: ''
+            pasteInput: ''
         };
-    }
-
-    changeKeyModalRef = (ref) => {
-        if (ref) {
-            this.setState({
-                keyModalRef: ref
-            });
-        }
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.state.keyModalRef !== prevState.keyModalRef) {
-            this.state.keyModalRef.focus();
-        }
     }
 
     render() {
@@ -80,7 +65,7 @@ export default class extends React.PureComponent {
             <div>
                 <input {...Theme(theme, 'key-modal-input')}
                     className="key-modal-input"
-                    ref={this.changeKeyModalRef}
+                    autoFocus={true}
                     spellCheck={false}
                     value={input}
                     placeholder="..."

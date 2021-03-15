@@ -109,7 +109,9 @@ export default class extends React.PureComponent {
             return;
         }
         return (
-            <span class="click-to-remove" >
+            <span
+                class="click-to-remove"
+                title="Remove">
                 <Remove
                     class="click-to-remove-icon"
                     {...Theme(theme, 'removeVarIcon')}

@@ -368,7 +368,7 @@ const getDefaultThemeStyling = theme => {
         },
         'key-modal-input': {
             width: '100%',
-            padding: '3px 20px 3px 6px',
+            padding: constants.keyModalInputPadding,
             fontFamily: 'monospace',
             color: colors.addKeyModal.color,
             border: 'none',
@@ -377,7 +377,7 @@ const getDefaultThemeStyling = theme => {
         },
         'value-modal-input': {
             width: '100%',
-            padding: '3px 20px 3px 6px',
+            padding: constants.keyModalInputPadding,
             fontFamily: 'monospace',
             color: colors.addKeyModal.color,
             border: 'none',
@@ -411,7 +411,16 @@ const getDefaultThemeStyling = theme => {
             position: 'absolute',
             right: '2px',
             marginLeft: '10px',
-            top: '42px',
+            top: constants.valueModalSubmitButtonTop,
+            cursor: 'pointer'
+        },
+        'value-modal-submit-in-array': {
+            color: colors.editVariable.addIcon,
+            fontSize: constants.iconFontSize,
+            position: 'absolute',
+            right: '2px',
+            marginLeft: '10px',
+            top: constants.valueModalSubmitButtonTopInArray,
             cursor: 'pointer'
         },
         'function-ellipsis': {

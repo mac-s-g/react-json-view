@@ -77,6 +77,7 @@ export default class extends React.PureComponent {
                     onKeyPress={(e) => {
                         if (valid && e.key === 'Enter') {
                             this.submit();
+                            this.closeModal();
                         } else if (e.key === 'Escape') {
                             this.closeModal();
                         }
@@ -94,9 +95,10 @@ export default class extends React.PureComponent {
     }
 
     renderPasteInput = () => {
-        const { theme, isValid } = this.props;
+        const { theme, isValid, parent_type } = this.props;
         const { pasteInput, input } = this.state;
         const isPasteValueNotEmpty = pasteInput !== '';
+        const parentIsArray = parent_type === 'array';
         const valid = isValid(input);
         return (
             <div>
@@ -107,6 +109,7 @@ export default class extends React.PureComponent {
                     className="value-modal-input"
                     spellCheck={false}
                     value={pasteInput}
+                    autoFocus={parentIsArray}
                     placeholder="..."
                     onChange={(e) => {
                         this.setState({
@@ -114,7 +117,7 @@ export default class extends React.PureComponent {
                         });
                     }}
                     onKeyPress={(e) => {
-                        if (valid && isPasteValueNotEmpty && e.key === 'Enter') {
+                        if ((valid || parentIsArray) && isPasteValueNotEmpty && e.key === 'Enter') {
                             this.submit();
                             this.closeModal();
                         } else if (e.key === 'Escape') {
@@ -122,18 +125,26 @@ export default class extends React.PureComponent {
                         }
                     }}
                 />
-                { valid && isPasteValueNotEmpty ?
-                    <CheckCircle {...Theme(theme, 'value-modal-submit')}
-                        class="value-modal-submit"
-                        title="Submit"
-                        onClick={e => {
-                            this.submit();
-                            this.closeModal();
-                        }}
-                    />
+                { (valid || parentIsArray) && isPasteValueNotEmpty ?
+                    this.renderPasteValueSubmitButton()
                     : null
                 }
             </div>
+        );
+    }
+    
+    renderPasteValueSubmitButton = () => {
+        const { parent_type, theme } = this.props;
+        const componentName = parent_type === 'array' ? 'value-modal-submit-in-array' : 'value-modal-submit';
+        return (
+            <CheckCircle {...Theme(theme, componentName)}
+                class="value-modal-submit"
+                title="Submit"
+                onClick={e => {
+                    this.submit();
+                    this.closeModal();
+                }}
+            />
         );
     }
 

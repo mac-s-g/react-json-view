@@ -97,5 +97,9 @@ export default {
     addKeyModalPadding: '10px',
     addKeyModalRadius: '3px',
 
+    keyModalInputPadding: '3px 20px 3px 6px',
+    valueModalSubmitButtonTop: '42px',
+    valueModalSubmitButtonTopInArray: '22px',
+
     colorPickerMarginLeft: '5px'
 };

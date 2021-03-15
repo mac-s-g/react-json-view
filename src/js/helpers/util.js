@@ -66,3 +66,79 @@ export function isTheme(theme) {
     }
     return false;
 }
+
+export function parseExternalClipboardData(type, value) {
+    switch(type) {
+    case 'isArray':
+    case 'isObject': {
+        try {
+            return JSON.parse(value);
+        } catch (e) {
+            return e.message;
+        }
+    }
+    case 'isFloat':
+        return parseFloat(value);
+    case 'isInteger':
+        return parseInt(value);
+    case 'isString':
+        return value.substring(1, value.length-1);
+
+
+    }
+    //if value is undefined, null, true or false (special types)
+    let customTypes = value.toLowerCase();
+    switch (customTypes) {
+    case 'undefined': {
+        return undefined;
+    }
+    case 'null': {
+        return null;
+    }
+    case 'true': {
+        return true;
+    }
+    case 'false': {
+        return false;
+    }
+    }
+    //return as string
+    return value;
+}
+
+export function getExternalClipboardDataType(value) {
+    value = value.trim();
+    value = value.replaceAll('\'', '\"');
+    const isArray = value[0] === '[' && value[value.length - 1] === ']';
+    const isObject = value[0] === '{' && value[value.length - 1] === '}';
+    const isFloat = value.match(/\-?\d+\.\d+/) && value.match(/\-?\d+\.\d+/)[0] === value;
+    const isInteger = value.match(/\-?\d+/) && value.match(/\-?\d+/)[0] === value;
+    const isString = value[0] === '\"' && value[value.length - 1] === '\"';
+
+    if (isArray) return 'isArray';
+    if (isObject) return 'isObject';
+    if (isFloat) return 'isFloat';
+    if (isInteger) return 'isInteger';
+    if (isString) return 'isString';
+}
+
+export function insertToObject({existing_value, dropTargetIdx, input, pasteValue}) {
+    let newSrc = {};
+    Object.keys(existing_value).forEach((key, idx) => {
+        newSrc[key] = existing_value[key];
+        //insert after
+        if (idx+1 === dropTargetIdx+1) {
+            newSrc[input] = pasteValue;
+        }
+    });
+    return newSrc;
+}
+
+export function insertToArray({existing_value, dropTargetIdx, pasteValue}) {
+    const new_value = [
+        ...existing_value.slice(0, dropTargetIdx+1),
+        pasteValue,
+        ...existing_value.slice(dropTargetIdx+1)
+    ];
+    return new_value;
+}

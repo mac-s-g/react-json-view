@@ -267,8 +267,7 @@ class RjvObject extends React.PureComponent {
     }
 
     handleOnHover = (isHovering) => {
-        const { jsvRoot } = this.props;
-        !jsvRoot && this.setState({ hoveredOver: isHovering });
+        this.setState({ hoveredOver: isHovering });
     }
 
     render() {

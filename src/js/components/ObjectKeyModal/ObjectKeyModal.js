@@ -82,7 +82,6 @@ export default class extends React.PureComponent {
                     autoFocus={ true }
                     spellCheck={ false }
                     value={ input }
-                    placeholder="..."
                     onChange={ (e) => {
                         this.setState({
                             input: e.target.value

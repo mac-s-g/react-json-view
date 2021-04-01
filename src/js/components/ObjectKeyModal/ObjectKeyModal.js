@@ -183,7 +183,6 @@ export default class extends React.PureComponent {
                 class="value-modal-submit"
                 title="Submit"
                 onClick={ e => {
-                    console.log('submit');
                     this.submit();
                     this.closeModal();
                 } }

@@ -93,14 +93,20 @@ export default {
     addKeyCoverPosition: 'fixed',
     addKeyCoverPositionPx: '0px',
     addKeyCoverPositionTopPx: '120px',
-    addKeyModalWidth: '200px',
-    addKeyModalMargin: 'auto',
+    addKeyModalWidth: 'auto',
+    addKeyModalMaxWidth: '550px',
+    addKeyModalHeight: 'auto',
+    addKeyModalMarginLeft: '10%',
+    addKeyModalMarginRight: 'auto',
     addKeyModalPadding: '10px',
     addKeyModalRadius: '3px',
 
     keyModalInputPadding: '3px 20px 3px 6px',
-    valueModalSubmitButtonTop: '42px',
+    valueModalSubmitButtonTop: '2px',
     valueModalSubmitButtonTopInArray: '22px',
+    valueModalTextAreaMinHeight: '115px',
+    valueModalTextAreaMinWidth: '300px',
+    valueModalTextAreaMaxWidth: '550px',
 
     colorPickerMarginLeft: '5px'
 };

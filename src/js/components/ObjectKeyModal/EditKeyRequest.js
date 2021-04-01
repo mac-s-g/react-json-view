@@ -15,12 +15,12 @@ export default class extends React.PureComponent {
                 rjvId={rjvId}
                 theme={theme}
                 input={key_name}
-                isValid={this.isValid}
+                isValidKeyName={this.isValidKeyName}
                 submit={this.submit}
             />;
     }
 
-    isValid = (input) => {
+    isValidKeyName = (input) => {
         const {rjvId} = this.props;
         const request = ObjectAttributes.get(
             rjvId, 'action', 'edit-key-request'

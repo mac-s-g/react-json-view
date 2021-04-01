@@ -13,24 +13,25 @@ import {
 export default class extends React.PureComponent {
 
     render() {
-        const {active, theme, rjvId } = this.props;
+        const { active, theme, rjvId } = this.props;
         const request = ObjectAttributes.get(
             rjvId, 'action', 'paste-add-key-request'
         );
         return active ? (
             <ObjectKeyModal
-                rjvId={rjvId}
-                theme={theme}
-                isValid={this.isValid}
-                submit={this.submit}
-                pasted={true}
-                parent_type={request.parent_type}
+                rjvId={ rjvId }
+                theme={ theme }
+                isValidKeyName={ this.isValidKeyName }
+                parsePasteInput={ this.parsePasteInput }
+                submit={ this.submit }
+                pasted={ true }
+                parent_type={ request.parent_type }
             />
         ) : null;
     }
 
-    isValid = (input) => {
-        const {rjvId} = this.props;
+    isValidKeyName = (input) => {
+        const { rjvId } = this.props;
         const request = ObjectAttributes.get(
             rjvId, 'action', 'paste-add-key-request'
         );
@@ -40,10 +41,14 @@ export default class extends React.PureComponent {
         );
     }
 
+    parsePasteInput = (input) => {
+        const pasteValueType = getExternalClipboardDataType(input);
+        return parseExternalClipboardData(pasteValueType, input);
+    }
+
     submit = (input, pasteInput) => {
-        const pasteValueType = getExternalClipboardDataType(pasteInput);
-        const pasteValue = parseExternalClipboardData(pasteValueType, pasteInput);
-        const {rjvId} = this.props;
+        const parsedPasteValue = this.parsePasteInput(pasteInput);
+        const { rjvId } = this.props;
         let request = ObjectAttributes.get(
             rjvId, 'action', 'paste-add-key-request'
         );
@@ -53,7 +58,7 @@ export default class extends React.PureComponent {
             const new_value = insertToArray({
                 existing_value,
                 dropTargetIdx,
-                pasteValue
+                pasteValue: parsedPasteValue
             });
             dispatcher.dispatch({
                 name: 'VARIABLE_ADDED',
@@ -68,7 +73,7 @@ export default class extends React.PureComponent {
                 existing_value,
                 dropTargetIdx,
                 input,
-                pasteValue
+                pasteValue: parsedPasteValue
             });
             dispatcher.dispatch({
                 name: 'VARIABLE_ADDED',

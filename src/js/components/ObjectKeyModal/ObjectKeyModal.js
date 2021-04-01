@@ -23,7 +23,7 @@ export default class extends React.PureComponent {
     }
 
     handleMouseDown = event => {
-        if (event.target.tagName.toLowerCase() !== 'textarea') {
+        if (event.target.className === 'key-modal-request') {
             this.closeModal();
         }
     }
@@ -38,6 +38,7 @@ export default class extends React.PureComponent {
             >
                 <div
                     { ...Theme(theme, 'key-modal') }
+                    className="request-modal"
                     onClick={ (e) => { e.stopPropagation(); } }
                 >
                     { parentIsNotArray ?
@@ -155,8 +156,6 @@ export default class extends React.PureComponent {
                     { ...Theme(theme, 'value-modal-textarea') }
                     className='value-modal-textarea'
                     value={ pasteInput }
-                    onHeightChange={ (e) => {
-                        console.log(e);}}
                     minRows={ 2 }
                     autoFocus={ parentIsArray }
                     onChange={ this.handlePasteInputChange }
@@ -184,6 +183,7 @@ export default class extends React.PureComponent {
                 class="value-modal-submit"
                 title="Submit"
                 onClick={ e => {
+                    console.log('submit');
                     this.submit();
                     this.closeModal();
                 } }

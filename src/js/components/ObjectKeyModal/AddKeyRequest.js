@@ -14,13 +14,13 @@ export default class extends React.PureComponent {
             <ObjectKeyModal
                 rjvId={rjvId}
                 theme={theme}
-                isValid={this.isValid}
+                isValidKeyName={this.isValidKeyName}
                 submit={this.submit}
             />
         ) : null;
     }
 
-    isValid = (input) => {
+    isValidKeyName = (input) => {
         const {rjvId} = this.props;
         const request = ObjectAttributes.get(
             rjvId, 'action', 'new-key-request'

@@ -74,7 +74,7 @@ export function parseExternalClipboardData(type, value) {
         try {
             return JSON.parse(value);
         } catch (e) {
-            return e.message;
+            return e;
         }
     }
     case 'isFloat':

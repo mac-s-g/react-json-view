@@ -11,7 +11,7 @@ describe('test', function() {
         const wrapper = mount(
             <ObjectKeyModal
                 input="test"
-                isValid={() => {
+                isValidKeyName={() => {
                     return true;
                 }}
                 submit={() => {
@@ -36,7 +36,7 @@ describe('test', function() {
         const wrapper = mount(
             <ObjectKeyModal
                 input="test"
-                isValid={input => {
+                isValidKeyName={input => {
                     valid_counter++;
                     return input === 'invalid' ? false : true;
                 }}
@@ -67,7 +67,7 @@ describe('test', function() {
         const wrapper = mount(
             <ObjectKeyModal
                 input="test"
-                isValid={input => {
+                isValidKeyName={input => {
                     return true;
                 }}
                 submit={input => {
@@ -89,7 +89,7 @@ describe('test', function() {
         const wrapper = mount(
             <ObjectKeyModal
                 input="test"
-                isValid={() => {
+                isValidKeyName={() => {
                     return true;
                 }}
                 submit={() => {
@@ -108,7 +108,7 @@ describe('test', function() {
         const wrapper = mount(
             <ObjectKeyModal
                 input="test"
-                isValid={() => {
+                isValidKeyName={() => {
                     return true;
                 }}
                 submit={() => {
@@ -133,7 +133,7 @@ describe('test', function() {
         const wrapper = mount(
             <ObjectKeyModal
                 input="test"
-                isValid={() => {
+                isValidKeyName={() => {
                     return true;
                 }}
                 submit={() => {
@@ -157,7 +157,7 @@ describe('test', function() {
         const wrapper = mount(
             <ObjectKeyModal
                 input="test"
-                isValid={() => {
+                isValidKeyName={() => {
                     return true;
                 }}
                 submit={() => {

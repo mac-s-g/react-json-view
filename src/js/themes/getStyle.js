@@ -349,18 +349,19 @@ const getDefaultThemeStyling = theme => {
         },
         'key-modal': {
             width: constants.addKeyModalWidth,
+            maxWidth: constants.addKeyModalMaxWidth,
             backgroundColor: colors.addKeyModal.background,
-            marginLeft: constants.addKeyModalMargin,
-            marginRight: constants.addKeyModalMargin,
+            marginLeft: constants.addKeyModalMarginLeft,
+            marginRight: constants.addKeyModalMarginRight,
             padding: constants.addKeyModalPadding,
             borderRadius: constants.addKeyModalRadius,
             marginTop: '15px',
-            position: 'relative'
+            position: 'absolute'
         },
         'key-modal-label': {
             color: colors.addKeyModal.labelColor,
             marginLeft: '2px',
-            marginBottom: '5px',
+            margin: '5px 0',
             fontSize: '11px'
         },
         'key-modal-input-container': {
@@ -375,14 +376,21 @@ const getDefaultThemeStyling = theme => {
             boxSizing: 'border-box',
             borderRadius: '2px'
         },
-        'value-modal-input': {
+        'value-modal-textarea': {
             width: '100%',
+            minWidth: constants.valueModalTextAreaMinWidth,
+            maxWidth: constants.valueModalTextAreaMaxWidth,
+            minHeight: constants.valueModalTextAreaMinHeight,
             padding: constants.keyModalInputPadding,
             fontFamily: 'monospace',
             color: colors.addKeyModal.color,
             border: 'none',
             boxSizing: 'border-box',
             borderRadius: '2px'
+        },
+        'paste-value-error-message': {
+            color: colors.addKeyModal.labelColor,
+            padding: '4px 0'
         },
         'key-modal-cancel': {
             backgroundColor: colors.editVariable.cancelIcon,

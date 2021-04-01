@@ -19,7 +19,10 @@ export default class extends React.PureComponent {
 
     componentDidMount() {
         document.body.addEventListener('mousedown', this.handleMouseDown);
-        document.body.addEventListener('mouseup', this.handleMouseUp);
+    }
+
+    componentWillUnmount() {
+        document.body.removeEventListener('mousedown', this.handleMouseDown);
     }
 
     handleMouseDown = event => {
@@ -70,7 +73,7 @@ export default class extends React.PureComponent {
     renderKeyNameInput = () => {
         const { theme, isValidKeyName, pasted } = this.props;
         const { input } = this.state;
-        const valid = isValidKeyName(input);
+        const hasValidKeyName = isValidKeyName(input);
 
         return (
             <div>
@@ -86,7 +89,7 @@ export default class extends React.PureComponent {
                         });
                     } }
                     onKeyPress={ (e) => {
-                        if (valid && e.key === 'Enter' && !pasted) {
+                        if (hasValidKeyName && e.key === 'Enter' && !pasted) {
                             this.submit();
                             this.closeModal();
                         } else if (e.key === 'Escape') {
@@ -94,7 +97,7 @@ export default class extends React.PureComponent {
                         }
                     } }
                 />
-                { valid && !pasted
+                { hasValidKeyName && !pasted
                     ? <CheckCircle {...Theme(theme, 'key-modal-submit')}
                         class="key-modal-submit"
                         title="Submit"
@@ -122,6 +125,7 @@ export default class extends React.PureComponent {
         }
         case 'Escape': {
             this.closeModal();
+            break;
         }
         }
     }
@@ -136,15 +140,13 @@ export default class extends React.PureComponent {
         const { pasteInput, input } = this.state;
         const isPasteValueNotEmpty = pasteInput !== '';
         const parentIsArray = parent_type === 'array';
-        const valid = isValidKeyName(input);
+        const hasValidKeyName = isValidKeyName(input);
         let errorMessage = '';
-        let showErrorMessage = false;
-        let showSubmitButton = (valid || parentIsArray) &&
+        let showSubmitButton = (hasValidKeyName || parentIsArray) &&
             isPasteValueNotEmpty;
         const parsedPasteInput = parsePasteInput(pasteInput);
         if (parsedPasteInput['__proto__']['name'] === 'SyntaxError') {
             errorMessage = parsedPasteInput['message'];
-            showErrorMessage = true;
             showSubmitButton = false;
         }
         return (
@@ -165,7 +167,7 @@ export default class extends React.PureComponent {
                     this.renderPasteValueSubmitButton()
                     : null
                 }
-                { showErrorMessage ?
+                { errorMessage ?
                     <div { ...Theme(theme, 'paste-value-error-message')}>
                         { errorMessage }
                     </div>

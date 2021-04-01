@@ -381,6 +381,7 @@ const getDefaultThemeStyling = theme => {
             minWidth: constants.valueModalTextAreaMinWidth,
             maxWidth: constants.valueModalTextAreaMaxWidth,
             minHeight: constants.valueModalTextAreaMinHeight,
+            maxHeight: constants.valueModalTextAreaMaxHeight,
             padding: constants.keyModalInputPadding,
             fontFamily: 'monospace',
             color: colors.addKeyModal.color,

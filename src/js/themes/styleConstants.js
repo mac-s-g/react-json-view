@@ -107,6 +107,7 @@ export default {
     valueModalTextAreaMinHeight: '115px',
     valueModalTextAreaMinWidth: '300px',
     valueModalTextAreaMaxWidth: '550px',
+    valueModalTextAreaMaxHeight: '500px',
 
     colorPickerMarginLeft: '5px'
 };

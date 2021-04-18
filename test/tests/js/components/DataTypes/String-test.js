@@ -67,4 +67,21 @@ describe("<JsonString />", function() {
                 .text()
         ).to.equal('"123456789"')
     })
+
+    it("remove quotes from string value", function() {
+        const props = {
+            value: "123456789",
+            quotesOnValues: false,
+            rjvId: 1,
+            displayDataTypes: false,
+            theme: "rjv-default"
+        }
+        const component = shallow(<JsonString {...props} />)
+        expect(
+            component
+                .render()
+                .find(".string-value")
+                .text()
+        ).to.equal('123456789')
+    })
 })

@@ -65,7 +65,9 @@ export default class extends React.PureComponent {
                     {...style}
                     onClick={this.toggleCollapsed}
                 >
-                     {quotesOnValues ? '"' : ''}{value}{quotesOnValues ? '"' : ''}
+                    {quotesOnValues ? '"' : ''}
+                    {value}
+                    {quotesOnValues ? '"' : ''}
                 </span>
             </div>
         );

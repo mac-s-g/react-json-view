@@ -41,7 +41,11 @@ export default class extends React.PureComponent {
         const type_name = 'string';
         const { collapsed } = this.state;
         const { props } = this;
-        const { collapseStringsAfterLength, theme, quotesOnValues } = props;
+        const {
+            collapseStringsAfterLength,
+            theme,
+            quotesOnValues = true
+        } = props;
         let { value } = props;
         let collapsible = toType(collapseStringsAfterLength) === 'integer';
         let style = { style: { cursor: 'default' } };

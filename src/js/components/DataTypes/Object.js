@@ -1,6 +1,6 @@
 import React from 'react';
 import { polyfill } from 'react-lifecycles-compat';
-import { toType } from './../../helpers/util';
+import { toType, generateExpanderProps } from './../../helpers/util';
 
 //data type components
 import { JsonObject } from './DataTypes';
@@ -156,10 +156,12 @@ class RjvObject extends React.PureComponent {
         return (
             <span>
                 <span
-                    onClick={e => {
-                        this.toggleCollapsed();
-                    }}
+                    {...generateExpanderProps(
+                        this.toggleCollapsed,
+                        this.state.expanded
+                    )}
                     {...Theme(theme, 'brace-row')}
+                    className="rjv-object-container"
                 >
                     <div
                         class="icon-container"

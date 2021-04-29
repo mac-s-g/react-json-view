@@ -1,6 +1,6 @@
 import React from 'react';
 import DataTypeLabel from './DataTypeLabel';
-import { toType } from './../../helpers/util';
+import { toType, generateExpanderProps } from './../../helpers/util';
 
 //theme
 import Theme from './../../themes/getStyle';
@@ -67,7 +67,10 @@ export default class extends React.PureComponent {
                 <span
                     class="string-value"
                     {...style}
-                    onClick={this.toggleCollapsed}
+                    {...generateExpanderProps(
+                        this.toggleCollapsed,
+                        this.state.expanded
+                    )}
                 >
                     {quotesOnValues ? '"' : ''}
                     {value}

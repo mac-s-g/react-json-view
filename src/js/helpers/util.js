@@ -53,3 +53,20 @@ export function isTheme(theme) {
     }
     return false;
 }
+
+export function generateExpanderProps(callback, isExpanded) {
+    function handler(e) {
+        if (e && e.key && e.key != 'Enter') {
+            return;
+        } else {
+            return callback(e);
+        }
+    }
+    return {
+        onClick: callback,
+        onKeyDown: handler,
+        role: 'button',
+        tabIndex: '0',
+        'aria-expanded': isExpanded
+    };
+}

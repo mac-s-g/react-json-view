@@ -1,4 +1,5 @@
 import React from 'react';
+import JSONBig from 'json-bigint';
 
 import { toType } from './../helpers/util';
 
@@ -29,7 +30,7 @@ export default class extends React.PureComponent {
         const container = document.createElement('textarea');
         const { clickCallback, src, namespace } = this.props;
 
-        container.innerHTML = JSON.stringify(
+        container.innerHTML = JSONBig.stringify(
             this.clipboardValue(src),
             null,
             '  '

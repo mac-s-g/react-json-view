@@ -14,6 +14,7 @@ import {
     JsonFloat,
     JsonFunction,
     JsonInteger,
+    JsonBigInt,
     JsonNan,
     JsonNull,
     JsonRegexp,
@@ -226,6 +227,8 @@ class VariableEditor extends React.PureComponent {
                 return <JsonString value={variable.value} {...props} />;
             case 'integer':
                 return <JsonInteger value={variable.value} {...props} />;
+            case 'bigint':
+                return <JsonBigInt value={variable.value} {...props} />;
             case 'float':
                 return <JsonFloat value={variable.value} {...props} />;
             case 'boolean':
@@ -436,6 +439,8 @@ class VariableEditor extends React.PureComponent {
                     return <JsonString value={value} {...props} />;
                 case 'integer':
                     return <JsonInteger value={value} {...props} />;
+                case 'bigint':
+                    return <JsonBigInt value={value} {...props} />;
                 case 'float':
                     return <JsonFloat value={value} {...props} />;
                 case 'boolean':

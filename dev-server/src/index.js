@@ -181,6 +181,7 @@ function getExampleJson1() {
     return {
         string: 'this is a test string',
         integer: 42,
+        bigint: BigInt('123456789012345678901234567890'),
         empty_array: [],
         empty_object: {},
         array: [1, 2, 3, 'test'],

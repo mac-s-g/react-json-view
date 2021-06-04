@@ -1,5 +1,4 @@
 import React from 'react';
-import DataTypeLabel from './DataTypeLabel';
 import { toType } from './../../helpers/util';
 
 //theme
@@ -7,8 +6,9 @@ import Theme from './../../themes/getStyle';
 
 //attribute store for storing collapsed state
 import AttributeStore from './../../stores/ObjectAttributes';
+import { DataTypeLabel } from './DataTypeLabel';
 
-export default class extends React.PureComponent {
+export class JsonString extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -41,10 +41,10 @@ export default class extends React.PureComponent {
         const type_name = 'string';
         const { collapsed } = this.state;
         const { props } = this;
-        const { collapseStringsAfterLength, theme } = props;
-        let { value } = props;
+        const { collapseStringsAfterLength, theme, variable, paths, namespace } = props;
+        let { value, searchResult } = props;
         let collapsible = toType(collapseStringsAfterLength) === 'integer';
-        let style = { style: { cursor: 'default' } };
+        let style = { style: { cursor: 'default', backgroundColor: 'inherit' } };
 
         if (collapsible && value.length > collapseStringsAfterLength) {
             style.style.cursor = 'pointer';
@@ -56,6 +56,12 @@ export default class extends React.PureComponent {
                     </span>
                 );
             }
+        }
+
+        if (paths?.includes(variable.name) ) {
+            console.log('includes');
+            console.log(namespace);
+            style.style.backgroundColor = 'yellow';
         }
 
         return (

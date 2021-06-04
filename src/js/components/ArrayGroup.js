@@ -1,17 +1,17 @@
 import React from 'react';
 import Theme from './../themes/getStyle';
 
-import VariableMeta from './VariableMeta';
-import ObjectName from './ObjectName';
 import ObjectComponent from './DataTypes/Object';
 
 //icons
 import { CollapsedIcon, ExpandedIcon } from './ToggleIcons';
+import { ObjectName } from './ObjectName';
+import { VariableMeta } from './VariableMeta';
 
 //single indent is 5px
 const SINGLE_INDENT = 5;
 
-export default class extends React.PureComponent {
+export class ArrayGroup extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {

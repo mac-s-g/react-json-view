@@ -1,10 +1,10 @@
 import React from 'react';
-import DataTypeLabel from './DataTypeLabel';
 
 //theme
 import Theme from './../../themes/getStyle';
+import { DataTypeLabel } from './DataTypeLabel';
 
-export default class extends React.PureComponent {
+export class JsonDate extends React.PureComponent {
     render() {
         const type_name = 'date';
         const { props } = this;

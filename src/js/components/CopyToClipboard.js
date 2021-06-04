@@ -8,7 +8,7 @@ import { Clippy } from './icons';
 //theme
 import Theme from './../themes/getStyle';
 
-export default class extends React.PureComponent {
+export class CopyToClipboard extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {

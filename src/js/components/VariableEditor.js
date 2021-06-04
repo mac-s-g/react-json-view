@@ -5,29 +5,39 @@ import { toType } from './../helpers/util';
 import dispatcher from './../helpers/dispatcher';
 import parseInput from './../helpers/parseInput';
 import stringifyVariable from './../helpers/stringifyVariable';
-import CopyToClipboard from './CopyToClipboard';
 
 //data type components
-import {
-    JsonBoolean,
-    JsonDate,
-    JsonFloat,
-    JsonFunction,
-    JsonInteger,
-    JsonNan,
-    JsonNull,
-    JsonRegexp,
-    JsonString,
-    JsonUndefined
-} from './DataTypes/DataTypes';
+// import {
+//     JsonBoolean,
+//     JsonDate,
+//     JsonFloat,
+//     JsonFunction,
+//     JsonInteger,
+//     JsonNan,
+//     JsonNull,
+//     JsonRegexp,
+//     JsonString,
+//     JsonUndefined
+// } from './DataTypes/DataTypes';
 
 //clibboard icon
 import { Edit, CheckCircle, RemoveCircle as Remove } from './icons';
 
 //theme
 import Theme from './../themes/getStyle';
+import { JsonString } from './DataTypes/String';
+import { JsonInteger } from './DataTypes/Integer';
+import { JsonFloat } from './DataTypes/Float';
+import { JsonBoolean } from './DataTypes/Boolean';
+import { JsonFunction } from './DataTypes/Function';
+import { JsonNull } from './DataTypes/Null';
+import { JsonNan } from './DataTypes/Nan';
+import { JsonUndefined } from './DataTypes/Undefined';
+import { JsonDate } from './DataTypes/Date';
+import { JsonRegexp } from './DataTypes/Regexp';
+import { CopyToClipboard } from './CopyToClipboard';
 
-class VariableEditor extends React.PureComponent {
+export class VariableEditor extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -99,7 +109,7 @@ class VariableEditor extends React.PureComponent {
                                 <span style={{ verticalAlign: 'top' }}>"</span>
                             )}
                         </span>
-                        <span {...Theme(theme, 'colon')}>:</span>
+                        <span {...Theme(theme, 'colon')}>:kek</span>
                     </span>
                 )}
                 <div
@@ -223,7 +233,7 @@ class VariableEditor extends React.PureComponent {
             case false:
                 return this.getEditInput();
             case 'string':
-                return <JsonString value={variable.value} {...props} />;
+                return <JsonString searchResult={true} value={variable.value} {...props} />;
             case 'integer':
                 return <JsonInteger value={variable.value} {...props} />;
             case 'float':
@@ -455,5 +465,3 @@ class VariableEditor extends React.PureComponent {
     };
 }
 
-//export component
-export default VariableEditor;

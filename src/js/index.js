@@ -1,13 +1,13 @@
 import React from 'react';
 import { polyfill } from 'react-lifecycles-compat';
-import JsonViewer from './components/JsonViewer';
-import AddKeyRequest from './components/ObjectKeyModal/AddKeyRequest';
-import ValidationFailure from './components/ValidationFailure';
 import { toType, isTheme } from './helpers/util';
 import ObjectAttributes from './stores/ObjectAttributes';
 
 //global theme
 import Theme from './themes/getStyle';
+import { ValidationFailure } from './components/ValidationFailure';
+import { AddKeyRequest } from './components/ObjectKeyModal/AddKeyRequest';
+import { JsonViewer } from './components/JsonViewer';
 
 //forward src through to JsonObject component
 class ReactJsonView extends React.PureComponent {

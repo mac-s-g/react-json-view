@@ -1,13 +1,13 @@
 import React from 'react';
 import dispatcher from './../../helpers/dispatcher';
 import ObjectAttributes from './../../stores/ObjectAttributes';
-import ObjectKeyModal from './ObjectKeyModal';
 
 //global theme
 import Theme from './../../themes/getStyle';
+import { ObjectKeyModal } from './ObjectKeyModal';
 
 //this input appears when adding a new value to an object
-export default class extends React.PureComponent {
+export class AddKeyRequest extends React.PureComponent {
     render() {
         const { active, theme, rjvId } = this.props;
 

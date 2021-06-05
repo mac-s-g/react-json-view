@@ -7,24 +7,6 @@ import parseInput from './../helpers/parseInput';
 import stringifyVariable from './../helpers/stringifyVariable';
 
 //data type components
-// import {
-//     JsonBoolean,
-//     JsonDate,
-//     JsonFloat,
-//     JsonFunction,
-//     JsonInteger,
-//     JsonNan,
-//     JsonNull,
-//     JsonRegexp,
-//     JsonString,
-//     JsonUndefined
-// } from './DataTypes/DataTypes';
-
-//clibboard icon
-import { Edit, CheckCircle, RemoveCircle as Remove } from './icons';
-
-//theme
-import Theme from './../themes/getStyle';
 import { JsonString } from './DataTypes/String';
 import { JsonInteger } from './DataTypes/Integer';
 import { JsonFloat } from './DataTypes/Float';
@@ -36,6 +18,12 @@ import { JsonUndefined } from './DataTypes/Undefined';
 import { JsonDate } from './DataTypes/Date';
 import { JsonRegexp } from './DataTypes/Regexp';
 import { CopyToClipboard } from './CopyToClipboard';
+
+//clibboard icon
+import { Edit, CheckCircle, RemoveCircle as Remove } from './icons';
+
+//theme
+import Theme from './../themes/getStyle';
 
 export class VariableEditor extends React.PureComponent {
     constructor(props) {

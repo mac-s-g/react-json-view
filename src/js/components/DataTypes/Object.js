@@ -47,12 +47,13 @@ class RjvObject extends React.PureComponent {
                 }) === false) &&
             //initialize closed if object has no items
             size !== 0;
+        const path = props.namespace.join('.');
         const state = {
             expanded: AttributeStore.get(
                 props.rjvId,
                 props.namespace,
                 'expanded',
-                expanded
+                expanded ? expanded :props.paths?.some(name => name.includes(path))
             ),
             object_type: props.type === 'array' ? 'array' : 'object',
             parent_type: props.type === 'array' ? 'array' : 'object',

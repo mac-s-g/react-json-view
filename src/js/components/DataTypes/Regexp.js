@@ -10,7 +10,7 @@ export class JsonRegexp extends React.PureComponent {
         return (
             <div {...Theme(props.theme, 'regexp')}>
                 <DataTypeLabel type_name={type_name} {...props} />
-                {this.props.value.toString()}
+                <span style={{backgroundColor: props.highlight ?  'yellow' : 'inherit'}}>{this.props.value.toString()}</span>
             </div>
         );
     }

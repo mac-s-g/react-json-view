@@ -5,6 +5,9 @@ import Theme from './../../themes/getStyle';
 
 export class JsonUndefined extends React.PureComponent {
     render() {
-        return <div {...Theme(this.props.theme, 'undefined')}>undefined</div>;
+        const { props } = this;
+        return <div {...Theme(this.props.theme, 'undefined')}>
+            <span style={{backgroundColor: props.highlight ?  'yellow' : 'inherit'}}>undefined</span>
+        </div>;
     }
 }

@@ -41,10 +41,10 @@ export class JsonString extends React.PureComponent {
         const type_name = 'string';
         const { collapsed } = this.state;
         const { props } = this;
-        const { collapseStringsAfterLength, theme, variable, paths, namespace } = props;
-        let { value, searchResult } = props;
+        const { collapseStringsAfterLength, theme, highlight } = props;
+        let { value } = props;
         let collapsible = toType(collapseStringsAfterLength) === 'integer';
-        let style = { style: { cursor: 'default', backgroundColor: 'inherit' } };
+        let style = { style: { cursor: 'default' } };
 
         if (collapsible && value.length > collapseStringsAfterLength) {
             style.style.cursor = 'pointer';
@@ -58,12 +58,6 @@ export class JsonString extends React.PureComponent {
             }
         }
 
-        if (paths?.includes(variable.name) ) {
-            console.log('includes');
-            console.log(namespace);
-            style.style.backgroundColor = 'yellow';
-        }
-
         return (
             <div {...Theme(theme, 'string')}>
                 <DataTypeLabel type_name={type_name} {...props} />
@@ -71,6 +65,7 @@ export class JsonString extends React.PureComponent {
                     class="string-value"
                     {...style}
                     onClick={this.toggleCollapsed}
+                    style={{backgroundColor: props.highlight ?  'yellow' : 'inherit'}}
                 >
                     "{value}"
                 </span>

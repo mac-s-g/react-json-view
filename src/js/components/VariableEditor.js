@@ -64,10 +64,14 @@ export class VariableEditor extends React.PureComponent {
             onEdit,
             onDelete,
             onSelect,
+            paths,
             displayArrayKey,
             quotesOnKeys
         } = this.props;
         const { editMode } = this.state;
+        const currentNamespace= [...namespace, variable.name];
+        const highlight = paths?.includes(currentNamespace.join('.'));
+
         return (
             <div
                 {...Theme(theme, 'objectKeyVal', {
@@ -109,7 +113,7 @@ export class VariableEditor extends React.PureComponent {
                                 <span style={{ verticalAlign: 'top' }}>"</span>
                             )}
                         </span>
-                        <span {...Theme(theme, 'colon')}>:kek</span>
+                        <span {...Theme(theme, 'colon')}>:</span>
                     </span>
                 )}
                 <div
@@ -137,7 +141,7 @@ export class VariableEditor extends React.PureComponent {
                         cursor: onSelect === false ? 'default' : 'pointer'
                     })}
                 >
-                    {this.getValue(variable, editMode)}
+                    {this.getValue(variable, editMode, highlight)}
                 </div>
                 {enableClipboard ? (
                     <CopyToClipboard
@@ -145,7 +149,7 @@ export class VariableEditor extends React.PureComponent {
                         hidden={editMode}
                         src={variable.value}
                         clickCallback={enableClipboard}
-                        {...{ theme, namespace: [...namespace, variable.name] }}
+                        {...{ theme, namespace: currentNamespace }}
                     />
                 ) : null}
                 {onEdit !== false && editMode == false
@@ -226,32 +230,32 @@ export class VariableEditor extends React.PureComponent {
         );
     };
 
-    getValue = (variable, editMode) => {
+    getValue = (variable, editMode, highlight) => {
         const type = editMode ? false : variable.type;
         const { props } = this;
         switch (type) {
             case false:
                 return this.getEditInput();
             case 'string':
-                return <JsonString searchResult={true} value={variable.value} {...props} />;
+                return <JsonString highlight={highlight} searchResult={true} value={variable.value} {...props} />;
             case 'integer':
-                return <JsonInteger value={variable.value} {...props} />;
+                return <JsonInteger highlight={highlight} value={variable.value} {...props} />;
             case 'float':
-                return <JsonFloat value={variable.value} {...props} />;
+                return <JsonFloat highlight={highlight} value={variable.value} {...props} />;
             case 'boolean':
-                return <JsonBoolean value={variable.value} {...props} />;
+                return <JsonBoolean highlight={highlight} value={variable.value} {...props} />;
             case 'function':
                 return <JsonFunction value={variable.value} {...props} />;
             case 'null':
-                return <JsonNull {...props} />;
+                return <JsonNull highlight={highlight} {...props} />;
             case 'nan':
-                return <JsonNan {...props} />;
+                return <JsonNan highlight={highlight} {...props} />;
             case 'undefined':
-                return <JsonUndefined {...props} />;
+                return <JsonUndefined highlight={highlight} {...props} />;
             case 'date':
-                return <JsonDate value={variable.value} {...props} />;
+                return <JsonDate highlight={highlight} value={variable.value} {...props} />;
             case 'regexp':
-                return <JsonRegexp value={variable.value} {...props} />;
+                return <JsonRegexp highlight={highlight} value={variable.value} {...props} />;
             default:
                 // catch-all for types that weren't anticipated
                 return (

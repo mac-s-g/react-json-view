@@ -13,7 +13,6 @@ import JsonViewer from './../../src/js/index';
 ReactDom.render(
     <div>
         {/* just pass in your JSON to the src attribute */}
-        kek
         <JsonViewer
             sortKeys
             style={{ padding: '30px', backgroundColor: 'white' }}
@@ -182,9 +181,6 @@ ReactDom.render(
 function getExampleJson1() {
     return {
         string: 'this is a test string',
-        onj: {
-            string: 'kek'
-        },
         integer: 42,
         empty_array: [],
         empty_object: {},

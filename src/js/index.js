@@ -1,6 +1,6 @@
 import React from 'react';
 import { polyfill } from 'react-lifecycles-compat';
-import { toType, isTheme } from './helpers/util';
+import { toType, isTheme, searchJson, debounced } from './helpers/util';
 import ObjectAttributes from './stores/ObjectAttributes';
 
 //global theme
@@ -18,6 +18,7 @@ class ReactJsonView extends React.PureComponent {
             addKeyRequest: false,
             editKeyRequest: false,
             validationFailure: false,
+            paths: [],
             src: ReactJsonView.defaultProps.src,
             name: ReactJsonView.defaultProps.name,
             theme: ReactJsonView.defaultProps.theme,
@@ -158,6 +159,17 @@ class ReactJsonView extends React.PureComponent {
         };
     };
 
+    setPaths = debounced(searchTerm =>  {
+        const paths = searchJson(this.state.src, searchTerm, this.state.name)
+        this.setState({
+            paths
+        })
+    }, 300)
+
+    handleSearch(e) {
+        this.setPaths(e.target.value);
+    }
+
     render() {
         const {
             validationFailure,
@@ -165,7 +177,8 @@ class ReactJsonView extends React.PureComponent {
             addKeyRequest,
             theme,
             src,
-            name
+            name,
+            paths
         } = this.state;
 
         const { style, defaultValue } = this.props;
@@ -181,9 +194,13 @@ class ReactJsonView extends React.PureComponent {
                     theme={theme}
                     rjvId={this.rjvId}
                 />
+                <div style={{float: 'right'}}>
+                    <input type='text'  onChange={e => this.handleSearch(e)} />
+                </div>
                 <JsonViewer
                     {...this.props}
                     src={src}
+                    paths={paths}
                     name={name}
                     theme={theme}
                     type={toType(src)}

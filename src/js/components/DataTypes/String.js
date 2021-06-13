@@ -1,5 +1,5 @@
 import React from 'react';
-import { toType } from './../../helpers/util';
+import { toType } from '../../helpers/util';
 
 //theme
 import Theme from './../../themes/getStyle';
@@ -41,7 +41,7 @@ export class JsonString extends React.PureComponent {
         const type_name = 'string';
         const { collapsed } = this.state;
         const { props } = this;
-        const { collapseStringsAfterLength, theme, highlight } = props;
+        const { collapseStringsAfterLength, theme } = props;
         let { value } = props;
         let collapsible = toType(collapseStringsAfterLength) === 'integer';
         let style = { style: { cursor: 'default' } };
@@ -65,7 +65,7 @@ export class JsonString extends React.PureComponent {
                     class="string-value"
                     {...style}
                     onClick={this.toggleCollapsed}
-                    style={{backgroundColor: props.highlight ?  'yellow' : 'inherit'}}
+                    style={{backgroundColor: props.isCurrent ? 'orange' : props.highlight ?  'yellow' : 'inherit'}}
                 >
                     "{value}"
                 </span>

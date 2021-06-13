@@ -55,7 +55,7 @@ export function isTheme(theme) {
 }
 
 
-export function searchJson(json, searchTerm, levelPath)  {
+export function searchJson(json, searchTerm, levelPath = 'root')  {
     const paths = [];
 
     if (!searchTerm) {
@@ -80,6 +80,25 @@ export function searchJson(json, searchTerm, levelPath)  {
     }
     return paths;
 }
+
+export const jsonFlatPaths = (json, levelPath = 'root') => {
+    const paths = [];
+
+    for (const jsonElement in json) {
+        const path = `${levelPath}.${jsonElement}`;
+        if (typeof json[jsonElement] === 'object') {
+            const result = jsonFlatPaths(json[jsonElement], path);
+            if (result.length) {
+                paths.push(...result);
+            }
+        } else {
+            paths.push(path);
+        }
+    }
+
+    return paths;
+};
+
 
 // source: https://codeburst.io/throttling-and-debouncing-in-javascript-646d076d0a44
 export function debounced(fn, delay) {

@@ -53,12 +53,16 @@ export class VariableEditor extends React.PureComponent {
             onDelete,
             onSelect,
             paths,
+            refs,
+            current,
             displayArrayKey,
             quotesOnKeys
         } = this.props;
         const { editMode } = this.state;
         const currentNamespace= [...namespace, variable.name];
-        const highlight = paths?.includes(currentNamespace.join('.'));
+        const currentPath = currentNamespace.join('.');
+        const highlight = paths?.includes(currentPath);
+        const isCurrent = paths[current] ===  currentPath;
 
         return (
             <div
@@ -73,6 +77,7 @@ export class VariableEditor extends React.PureComponent {
                 }
                 class="variable-row"
                 key={variable.name}
+                ref={refs[currentPath]}
             >
                 {type == 'array' ? (
                     displayArrayKey ? (
@@ -129,7 +134,7 @@ export class VariableEditor extends React.PureComponent {
                         cursor: onSelect === false ? 'default' : 'pointer'
                     })}
                 >
-                    {this.getValue(variable, editMode, highlight)}
+                    {this.getValue(variable, editMode, highlight, isCurrent)}
                 </div>
                 {enableClipboard ? (
                     <CopyToClipboard
@@ -218,14 +223,14 @@ export class VariableEditor extends React.PureComponent {
         );
     };
 
-    getValue = (variable, editMode, highlight) => {
+    getValue = (variable, editMode, highlight, isCurrent) => {
         const type = editMode ? false : variable.type;
         const { props } = this;
         switch (type) {
             case false:
                 return this.getEditInput();
             case 'string':
-                return <JsonString highlight={highlight} searchResult={true} value={variable.value} {...props} />;
+                return <JsonString highlight={highlight} isCurrent={isCurrent} searchResult={true} value={variable.value} {...props} />;
             case 'integer':
                 return <JsonInteger highlight={highlight} value={variable.value} {...props} />;
             case 'float':

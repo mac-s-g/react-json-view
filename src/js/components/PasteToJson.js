@@ -21,7 +21,7 @@ class PasteToJson extends Component {
             defaultValue
         } = this.props;
         const pasteValue = ObjectAttributes.get(rjvId, 'global', 'copied', '!noValueCopied!');
-        const canPaste = pasteValue !== '!noValueCopied!' || pasteValue === defaultValue || pasteValue === false; //in case copied value is false (boolean)
+        const canPaste = pasteValue !== '!noValueCopied!';
         if (!canPaste) { return; }
         //for parent's namespace last namespace has to be spliced out
         const parentNamespace = [...namespace].splice(0, namespace.length - 1);

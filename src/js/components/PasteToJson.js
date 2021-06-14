@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Theme from '../themes/getStyle';
 import ObjectAttributes from '../stores/ObjectAttributes';
 import { PasteIcon as Paste } from './icons';
@@ -17,12 +17,14 @@ class PasteToJson extends Component {
             pastedOnObjectOrArray,
             parent_type,
             namespace,
-            depth
+            depth,
+            defaultValue
         } = this.props;
-        const pasteValue = ObjectAttributes.get(rjvId, 'global', 'copied', false);
-
+        const pasteValue = ObjectAttributes.get(rjvId, 'global', 'copied', '!noValueCopied!');
+        const canPaste = pasteValue !== '!noValueCopied!';
+        if (!canPaste) { return; }
         //for parent's namespace last namespace has to be spliced out
-        const parentNamespace = [...namespace].splice(0, namespace.length-1);
+        const parentNamespace = [...namespace].splice(0, namespace.length - 1);
         let existingValue = ObjectAttributes.getSrcByNamespace({
             rjvId,
             name: 'global',
@@ -87,9 +89,7 @@ class PasteToJson extends Component {
     }
 
     render() {
-        const { theme, rjvId, defaultValue } = this.props;
-        const copiedValue = ObjectAttributes.get(rjvId, 'global', 'copied', '!noValueCopied!');
-        const canPaste = copiedValue !== '!noValueCopied!' || copiedValue === defaultValue || copiedValue === false; //in case copied value is false (boolean)
+        const { theme } = this.props;
         return (
             <span
                 className="paste-to-json-container"
@@ -97,7 +97,7 @@ class PasteToJson extends Component {
                 <Paste
                     class='paste-icon'
                     { ...Theme(theme, 'paste-icon') }
-                    onClick={ canPaste ? this.handlePaste : undefined}
+                    onClick={ this.handlePaste }
                 />
             </span>
         );

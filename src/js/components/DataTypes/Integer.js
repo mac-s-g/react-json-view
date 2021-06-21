@@ -11,7 +11,7 @@ export class JsonInteger extends React.PureComponent {
         return (
             <div {...Theme(props.theme, 'integer')}>
                 <DataTypeLabel type_name={type_name} {...props} />
-                <span style={{backgroundColor: props.highlight ?  'yellow' : 'inherit'}}>{this.props.value}</span>
+                <span style={{backgroundColor: props.isCurrent ? 'orange' : props.highlight ?  'yellow' : 'inherit'}}>{this.props.value}</span>
             </div>
         );
     }

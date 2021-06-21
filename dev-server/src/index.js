@@ -51,8 +51,8 @@ ReactDom.render(
                 }
                 return false;
             }}
-            paths={['string']}
             defaultValue=""
+            searchable={true}
         />
 
         <br />

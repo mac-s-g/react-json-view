@@ -62,17 +62,21 @@ export function searchJson(json, searchTerm, levelPath = 'root')  {
         return paths;
     }
 
-    for (const jsonElement in json) {
+    const normalized = searchTerm.toLowerCase();
+    for (const jsonElement of Object.keys(json).sort()) {
         const path = `${levelPath}.${jsonElement}`;
-        if (typeof json[jsonElement] === 'string' && json[jsonElement].toLowerCase().includes(searchTerm)) {
+        if (typeof json[jsonElement] === 'string' && json[jsonElement].toLowerCase().includes(normalized)) {
             paths.push(path);
         } else if (
-            (typeof json[jsonElement] === 'number' || typeof json[jsonElement] === 'boolean') &&
-            String(json[jsonElement]).includes(searchTerm)
+            (typeof json[jsonElement] === 'number' ||
+                typeof json[jsonElement] === 'boolean' ||
+                json[jsonElement] === null ||
+                json[jsonElement] === undefined) &&
+            String(json[jsonElement]).includes(normalized)
         ) {
             paths.push(path);
-        } else if (typeof json[jsonElement] === 'object') {
-            const result = searchJson(json[jsonElement], searchTerm, path);
+        } else if (typeof json[jsonElement] === 'object' && !(json[jsonElement] === null)) {
+            const result = searchJson(json[jsonElement], normalized, path);
             if (result.length) {
                 paths.push(...result);
             }
@@ -86,7 +90,7 @@ export const jsonFlatPaths = (json, levelPath = 'root') => {
 
     for (const jsonElement in json) {
         const path = `${levelPath}.${jsonElement}`;
-        if (typeof json[jsonElement] === 'object') {
+        if (typeof json[jsonElement] === 'object' && !(json[jsonElement] === null)) {
             const result = jsonFlatPaths(json[jsonElement], path);
             if (result.length) {
                 paths.push(...result);

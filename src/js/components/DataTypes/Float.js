@@ -11,7 +11,7 @@ export class JsonFloat extends React.PureComponent {
         return (
             <div {...Theme(props.theme, 'float')}>
                 <DataTypeLabel type_name={type_name} {...props} />
-                <span style={{backgroundColor: props.highlight ?  'yellow' : 'inherit'}}>{this.props.value} </span>
+                <span style={{backgroundColor: props.isCurrent ? 'orange' : props.highlight ?  'yellow' : 'inherit'}}>{this.props.value} </span>
             </div>
         );
     }

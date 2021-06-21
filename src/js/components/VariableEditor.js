@@ -1,7 +1,6 @@
 import React from 'react';
 import AutosizeTextarea from 'react-textarea-autosize';
 
-import { toType } from './../helpers/util';
 import dispatcher from './../helpers/dispatcher';
 import parseInput from './../helpers/parseInput';
 import stringifyVariable from './../helpers/stringifyVariable';
@@ -232,23 +231,23 @@ export class VariableEditor extends React.PureComponent {
             case 'string':
                 return <JsonString highlight={highlight} isCurrent={isCurrent} searchResult={true} value={variable.value} {...props} />;
             case 'integer':
-                return <JsonInteger highlight={highlight} value={variable.value} {...props} />;
+                return <JsonInteger highlight={highlight} isCurrent={isCurrent} value={variable.value} {...props} />;
             case 'float':
-                return <JsonFloat highlight={highlight} value={variable.value} {...props} />;
+                return <JsonFloat highlight={highlight} isCurrent={isCurrent} value={variable.value} {...props} />;
             case 'boolean':
-                return <JsonBoolean highlight={highlight} value={variable.value} {...props} />;
+                return <JsonBoolean highlight={highlight} isCurrent={isCurrent} value={variable.value} {...props} />;
             case 'function':
-                return <JsonFunction value={variable.value} {...props} />;
+                return <JsonFunction value={variable.value} isCurrent={isCurrent} {...props} />;
             case 'null':
-                return <JsonNull highlight={highlight} {...props} />;
+                return <JsonNull highlight={highlight} isCurrent={isCurrent} {...props} />;
             case 'nan':
-                return <JsonNan highlight={highlight} {...props} />;
+                return <JsonNan highlight={highlight} isCurrent={isCurrent} {...props} />;
             case 'undefined':
-                return <JsonUndefined highlight={highlight} {...props} />;
+                return <JsonUndefined highlight={highlight} isCurrent={isCurrent} {...props} />;
             case 'date':
-                return <JsonDate highlight={highlight} value={variable.value} {...props} />;
+                return <JsonDate highlight={highlight} isCurrent={isCurrent} value={variable.value} {...props} />;
             case 'regexp':
-                return <JsonRegexp highlight={highlight} value={variable.value} {...props} />;
+                return <JsonRegexp highlight={highlight} isCurrent={isCurrent} value={variable.value} {...props} />;
             default:
                 // catch-all for types that weren't anticipated
                 return (

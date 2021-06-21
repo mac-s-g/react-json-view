@@ -12,7 +12,9 @@ export class JsonBoolean extends React.PureComponent {
         return (
             <div {...Theme(props.theme, 'boolean')}>
                 <DataTypeLabel type_name={type_name} {...props} />
-                {props.value ? 'true' : 'false'}
+                <span style={{backgroundColor: props.isCurrent ? 'orange' : props.highlight ?  'yellow' : 'inherit'}}>
+                    {props.value ? 'true' : 'false'}
+                </span>
             </div>
         );
     }

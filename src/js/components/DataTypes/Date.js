@@ -19,7 +19,8 @@ export class JsonDate extends React.PureComponent {
         return (
             <div {...Theme(props.theme, 'date')}>
                 <DataTypeLabel type_name={type_name} {...props} />
-                <span class="date-value" {...Theme(props.theme, 'date-value', 'highlight')} style={{backgroundColor: props.highlight ?  'yellow' : 'inherit'}}>
+                <span class="date-value" {...Theme(props.theme, 'date-value')}
+                      style={{backgroundColor: props.isCurrent ? 'orange' : props.highlight ?  'yellow' : 'inherit'}}>
                     {props.value.toLocaleTimeString('en-us', display_options)}
                 </span>
             </div>

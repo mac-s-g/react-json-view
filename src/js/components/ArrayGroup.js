@@ -72,6 +72,8 @@ export default class extends React.PureComponent {
             jsvRoot,
             namespace,
             parent_type,
+            collapsed,
+            shouldCollapse,
             ...rest
         } = this.props;
 

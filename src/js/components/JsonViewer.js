@@ -1,6 +1,7 @@
 import React from 'react';
 import JsonObject from './DataTypes/Object';
 import ArrayGroup from './ArrayGroup';
+import OptimizedArrayGroup from './OptimizedArrayGroup';
 
 export default class extends React.PureComponent {
     render = () => {
@@ -13,7 +14,8 @@ export default class extends React.PureComponent {
             props.groupArraysAfterLength &&
             props.src.length > props.groupArraysAfterLength
         ) {
-            ObjectComponent = ArrayGroup;
+            if(props.useOptimizedArray) ObjectComponent = OptimizedArrayGroup;
+            else ObjectComponent = ArrayGroup;
         }
 
         return (

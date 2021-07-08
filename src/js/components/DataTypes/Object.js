@@ -8,6 +8,7 @@ import { JsonObject } from './DataTypes';
 import VariableEditor from './../VariableEditor';
 import VariableMeta from './../VariableMeta';
 import ArrayGroup from './../ArrayGroup';
+import OptimizedArrayGroup from './../OptimizedArrayGroup';
 import ObjectName from './../ObjectName';
 
 //attribute store
@@ -280,7 +281,8 @@ class RjvObject extends React.PureComponent {
                     groupArraysAfterLength &&
                     variable.value.length > groupArraysAfterLength
                 ) {
-                    ObjectComponent = ArrayGroup;
+                    if(props.useOptimizedArray) ObjectComponent = OptimizedArrayGroup;
+                    else ObjectComponent = ArrayGroup;
                 }
 
                 elements.push(

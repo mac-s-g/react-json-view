@@ -15,7 +15,7 @@ export default class extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            expanded: [true]
+            expanded: []
         };
     }
 

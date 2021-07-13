@@ -24,10 +24,16 @@ export class ArraySubGroup extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if(this.props.expanded !== nextProps.expanded)
+        if(nextProps.expanded || this.props.expanded)
+            return true;
+
+        if(
+            nextProps.start !== this.props.start ||
+            nextProps.src?.length !== this.props.src?.length
+        )
             return true;
         
-        return !!nextProps.expanded;
+        return false;
     }
 
     render() {

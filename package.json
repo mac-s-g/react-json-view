@@ -17,6 +17,7 @@
         "babel-plugin-react-html-attrs": "^2.1.0",
         "chai": "^4.2.0",
         "coveralls": "^3.1.0",
+        "cross-env": "^7.0.3",
         "css-loader": "^4.3.0",
         "enzyme": "^3.2.0",
         "enzyme-adapter-react-16": "^1.15.5",
@@ -52,19 +53,19 @@
         "react-dom": "^17.0.0 || ^16.3.0 || ^15.5.4"
     },
     "scripts": {
-        "build": "NODE_ENV=production webpack --config webpack/webpack.config.js -p --display-error-details --progress --optimize-minimize",
-        "prebuild": "NODE_ENV=test npm run test:unit",
-        "build:demo": "NODE_ENV=production webpack --config webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
-        "dev": "NODE_ENV=development webpack-dev-server --config webpack/webpack.config-dev.js --open",
+        "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.config.js -p --display-error-details --progress --optimize-minimize",
+        "prebuild": "cross-env NODE_ENV=test npm run test:unit",
+        "build:demo": "cross-env NODE_ENV=production webpack --config webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
+        "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack/webpack.config-dev.js --open",
         "modules:debug": "./docker/debug.sh",
         "modules:tree": "webpack --config webpack/webpack.config.js --json ",
         "modules:size-analyzer": "webpack --config webpack/webpack.config.js --json | webpack-bundle-size-analyzer",
         "test": "npm run test:coverage",
-        "test:unit": "NODE_ENV=test nyc mocha test/**/*-test.js",
-        "test:coverage": "NODE_ENV=test nyc --reporter=text-lcov mocha test/**/*-test.js | coveralls",
-        "test:watch": "NODE_ENV=test nyc mocha -w test/**/*-test.js",
-        "lint": "NODE_ENV=test ./node_modules/.bin/eslint src",
-        "lint-fixup": "NODE_ENV=test ./node_modules/.bin/eslint src --ext .js,.jsx --fix"
+        "test:unit": "cross-env NODE_ENV=test nyc mocha test/**/*-test.js",
+        "test:coverage": "cross-env NODE_ENV=test nyc --reporter=text-lcov mocha test/**/*-test.js | coveralls",
+        "test:watch": "cross-env NODE_ENV=test nyc mocha -w test/**/*-test.js",
+        "lint": "cross-env NODE_ENV=test ./node_modules/.bin/eslint src",
+        "lint-fixup": "cross-env NODE_ENV=test ./node_modules/.bin/eslint src --ext .js,.jsx --fix"
     },
     "repository": {
         "type": "git",

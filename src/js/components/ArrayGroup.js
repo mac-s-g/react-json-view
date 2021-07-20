@@ -91,6 +91,12 @@ export default class extends React.PureComponent {
         return (
             <div
                 class="object-key-val"
+                onMouseEnter={() =>
+                    this.setState({ ...this.state, hovered: true })
+                }
+                onMouseLeave={() =>
+                    this.setState({ ...this.state, hovered: false })
+                }
                 {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', {
                     paddingLeft: object_padding_left
                 })}
@@ -105,81 +111,81 @@ export default class extends React.PureComponent {
                     >
                         {this.getExpandedIcon(-1)}
                     </div>
-                
+
                     <ObjectName {...this.props} />
 
                     <span>
-                        <VariableMeta size={src.length} {...this.props} />
+                        <VariableMeta size={src.length} rowHovered={this.state.hovered} {...this.props} />
                     </span>
                     {(this.state.expanded[-1]
-                    ?   [...Array(groups)].map((_, i) => (
-                        <div
-                            key={i}
-                            class="object-key-val array-group"
-                            {...Theme(theme, 'objectKeyVal', {
-                                marginLeft: 6,
-                                paddingLeft: array_group_padding_left
-                            })}
-                        >
-                            <span {...Theme(theme, 'brace-row')}>
-                                <div
-                                    class="icon-container"
-                                    {...Theme(theme, 'icon-container')}
-                                    onClick={e => {
-                                        this.toggleCollapsed(i);
-                                    }}
-                                >
-                                    {this.getExpandedIcon(i)}
-                                </div>
-                                {this.state.expanded[i] ? (
-                                    <ObjectComponent
-                                        key={name + i}
-                                        depth={0}
-                                        name={false}
-                                        collapsed={false}
-                                        groupArraysAfterLength={size}
-                                        index_offset={i * size}
-                                        src={src.slice(i * size, i * size + size)}
-                                        namespace={namespace}
-                                        type="array"
-                                        parent_type="array_group"
-                                        theme={theme}
-                                        {...rest}
-                                    />
-                                ) : (
-                                    <span
-                                        {...Theme(theme, 'brace')}
+                        ? [...Array(groups)].map((_, i) => (
+                            <div
+                                key={i}
+                                class="object-key-val array-group"
+                                {...Theme(theme, 'objectKeyVal', {
+                                    marginLeft: 6,
+                                    paddingLeft: array_group_padding_left
+                                })}
+                            >
+                                <span {...Theme(theme, 'brace-row')}>
+                                    <div
+                                        class="icon-container"
+                                        {...Theme(theme, 'icon-container')}
                                         onClick={e => {
                                             this.toggleCollapsed(i);
                                         }}
-                                        class="array-group-brace"
                                     >
-                                        [
-                                        <div
-                                            {...Theme(
-                                                theme,
-                                                'array-group-meta-data'
-                                            )}
-                                            class="array-group-meta-data"
+                                        {this.getExpandedIcon(i)}
+                                    </div>
+                                    {this.state.expanded[i] ? (
+                                        <ObjectComponent
+                                            key={name + i}
+                                            depth={0}
+                                            name={false}
+                                            collapsed={false}
+                                            groupArraysAfterLength={size}
+                                            index_offset={i * size}
+                                            src={src.slice(i * size, i * size + size)}
+                                            namespace={namespace}
+                                            type="array"
+                                            parent_type="array_group"
+                                            theme={theme}
+                                            {...rest}
+                                        />
+                                    ) : (
+                                        <span
+                                            {...Theme(theme, 'brace')}
+                                            onClick={e => {
+                                                this.toggleCollapsed(i);
+                                            }}
+                                            class="array-group-brace"
                                         >
-                                            <span
-                                                class="object-size"
-                                                {...Theme(theme, 'object-size')}
+                                            [
+                                            <div
+                                                {...Theme(
+                                                    theme,
+                                                    'array-group-meta-data'
+                                                )}
+                                                class="array-group-meta-data"
                                             >
-                                                {i * size}
-                                                {' - '}
-                                                {i * size + size > src.length
-                                                    ? src.length
-                                                    : i * size + size}
-                                            </span>
-                                        </div>
-                                        ]
-                                    </span>
-                                )}
-                            </span>
-                        </div>
+                                                <span
+                                                    class="object-size"
+                                                    {...Theme(theme, 'object-size')}
+                                                >
+                                                    {i * size}
+                                                    {' - '}
+                                                    {i * size + size > src.length
+                                                        ? src.length
+                                                        : i * size + size}
+                                                </span>
+                                            </div>
+                                            ]
+                                        </span>
+                                    )}
+                                </span>
+                            </div>
                         ))
-                    :   null
+                        : null
                     )}
                 </span>
             </div>

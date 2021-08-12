@@ -88,6 +88,12 @@ export interface ReactJsonViewProps {
    */
   displayDataTypes?: boolean;
   /**
+   * When set to true, the index of the elements prefix values.
+   *
+   * Default: true
+   */
+  displayArrayKey?: boolean;
+  /**
    * set to false to remove quotes from keys (eg. "name": vs. name:)
    *
    * Default: true

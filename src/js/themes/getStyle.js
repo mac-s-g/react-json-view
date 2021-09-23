@@ -254,7 +254,7 @@ const getDefaultThemeStyling = theme => {
             marginLeft: constants.clipboardCheckMarginLeft
         },
         'cut-from-json': {
-            cursor: constants.cutCursor,
+            cursor: constants.cutCursor
         },
         'cut-icon': {
             color: colors.cutFromJson,
@@ -327,7 +327,6 @@ const getDefaultThemeStyling = theme => {
         },
         'edit-input': {
             display: 'inline-block',
-            minHeight: constants.editInputHeight,
             minWidth: constants.editInputMinWidth,
             borderRadius: constants.editInputBorderRadius,
             backgroundColor: colors.editVariable.background,

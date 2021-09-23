@@ -11,46 +11,51 @@ import {
 
 //this input appears when adding a new value to an object or copy/cut pasting something into object
 export default class extends React.PureComponent {
-
     render() {
         const { active, theme, rjvId } = this.props;
         const request = ObjectAttributes.get(
-            rjvId, 'action', 'paste-add-key-request'
+            rjvId,
+            'action',
+            'paste-add-key-request'
         );
         return active ? (
             <ObjectKeyModal
-                rjvId={ rjvId }
-                theme={ theme }
-                isValidKeyName={ this.isValidKeyName }
-                parsePasteInput={ this.parsePasteInput }
-                submit={ this.submit }
-                pasted={ true }
-                parent_type={ request.parent_type }
+                rjvId={rjvId}
+                theme={theme}
+                isValidKeyName={this.isValidKeyName}
+                parsePasteInput={this.parsePasteInput}
+                submit={this.submit}
+                pasted={true}
+                parent_type={request.parent_type}
             />
         ) : null;
     }
 
-    isValidKeyName = (input) => {
+    isValidKeyName = input => {
         const { rjvId } = this.props;
         const request = ObjectAttributes.get(
-            rjvId, 'action', 'paste-add-key-request'
+            rjvId,
+            'action',
+            'paste-add-key-request'
         );
         return (
-            input != ''
-            && Object.keys(request.existing_value).indexOf(input) === -1
+            input != '' &&
+            Object.keys(request.existing_value).indexOf(input) === -1
         );
-    }
+    };
 
-    parsePasteInput = (input) => {
+    parsePasteInput = input => {
         const pasteValueType = getExternalClipboardDataType(input);
         return parseExternalClipboardData(pasteValueType, input);
-    }
+    };
 
     submit = (input, pasteInput) => {
         const parsedPasteValue = this.parsePasteInput(pasteInput);
         const { rjvId } = this.props;
         let request = ObjectAttributes.get(
-            rjvId, 'action', 'paste-add-key-request'
+            rjvId,
+            'action',
+            'paste-add-key-request'
         );
         let { parent_type, dropTargetIdx, existing_value } = request;
 
@@ -85,5 +90,5 @@ export default class extends React.PureComponent {
             });
         }
         ObjectAttributes.set(rjvId, 'global', 'copied', '!noValueCopied!');
-    }
+    };
 }

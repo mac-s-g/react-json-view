@@ -29,7 +29,7 @@ export default class extends React.PureComponent {
         if (event.target.className === 'key-modal-request') {
             this.closeModal();
         }
-    }
+    };
 
     render() {
         const { theme, rjvId, pasted, parent_type } = this.props;
@@ -37,33 +37,36 @@ export default class extends React.PureComponent {
         return (
             <div
                 class="key-modal-request"
-                { ...Theme(theme, 'key-modal-request') }
+                {...Theme(theme, 'key-modal-request')}
             >
                 <div
-                    { ...Theme(theme, 'key-modal') }
+                    {...Theme(theme, 'key-modal')}
                     className="request-modal"
-                    onClick={ (e) => { e.stopPropagation(); } }
+                    onClick={e => {
+                        e.stopPropagation();
+                    }}
                 >
-                    { parentIsNotArray ?
-                        <div {...Theme(theme, 'key-modal-label')}>
-                            Key Name
-                        </div>
-                        : null
-                    }
-                    <div style={ { position: 'relative' } }>
-                        { parent_type !== 'array' ? this.renderKeyNameInput() : null }
-                        { pasted ? this.renderPasteInput() : null }
+                    {parentIsNotArray ? (
+                        <div {...Theme(theme, 'key-modal-label')}>Key Name</div>
+                    ) : null}
+                    <div style={{ position: 'relative' }}>
+                        {parent_type !== 'array'
+                            ? this.renderKeyNameInput()
+                            : null}
+                        {pasted ? this.renderPasteInput() : null}
                     </div>
-                    <span { ...Theme(theme, 'key-modal-cancel') }>
-                        <Cancel { ...Theme(theme, 'key-modal-cancel-icon') }
+                    <span {...Theme(theme, 'key-modal-cancel')}>
+                        <Cancel
+                            {...Theme(theme, 'key-modal-cancel-icon')}
                             class="key-modal-cancel"
                             title="Cancel"
-                            onClick={ ()=>{
+                            onClick={() => {
                                 dispatcher.dispatch({
                                     rjvId: rjvId,
                                     name: 'RESET'
                                 });
-                            } } />
+                            }}
+                        />
                     </span>
                 </div>
             </div>
@@ -77,57 +80,59 @@ export default class extends React.PureComponent {
 
         return (
             <div>
-                <input {...Theme(theme, 'key-modal-input')}
+                <input
+                    {...Theme(theme, 'key-modal-input')}
                     className="key-modal-input"
-                    autoFocus={ true }
-                    spellCheck={ false }
-                    value={ input }
-                    onChange={ (e) => {
+                    autoFocus={true}
+                    spellCheck={false}
+                    value={input}
+                    onChange={e => {
                         this.setState({
                             input: e.target.value
                         });
-                    } }
-                    onKeyPress={ (e) => {
+                    }}
+                    onKeyPress={e => {
                         if (hasValidKeyName && e.key === 'Enter' && !pasted) {
                             this.submit();
                             this.closeModal();
                         } else if (e.key === 'Escape') {
                             this.closeModal();
                         }
-                    } }
+                    }}
                 />
-                { hasValidKeyName && !pasted
-                    ? <CheckCircle {...Theme(theme, 'key-modal-submit')}
+                {hasValidKeyName && !pasted ? (
+                    <CheckCircle
+                        {...Theme(theme, 'key-modal-submit')}
                         class="key-modal-submit"
                         title="Submit"
-                        onClick={ this.submit }
+                        onClick={this.submit}
                     />
-                    : null }
+                ) : null}
             </div>
         );
-    }
+    };
 
-    handlePasteInputChange = (e) => {
+    handlePasteInputChange = e => {
         this.setState({
             pasteInput: e.target.value
         });
-    }
+    };
 
     handlePasteInputKeyPress = (e, showSubmitButton) => {
         switch (e.key) {
-        case 'Enter': {
-            if (showSubmitButton && e.ctrlKey) {
-                this.submit();
-                this.closeModal();
+            case 'Enter': {
+                if (showSubmitButton && e.ctrlKey) {
+                    this.submit();
+                    this.closeModal();
+                }
+                break;
             }
-            break;
+            case 'Escape': {
+                this.closeModal();
+                break;
+            }
         }
-        case 'Escape': {
-            this.closeModal();
-            break;
-        }
-        }
-    }
+    };
 
     renderPasteInput = () => {
         const {
@@ -141,8 +146,8 @@ export default class extends React.PureComponent {
         const parentIsArray = parent_type === 'array';
         const hasValidKeyName = isValidKeyName(input);
         let errorMessage = '';
-        let showSubmitButton = (hasValidKeyName || parentIsArray) &&
-            isPasteValueNotEmpty;
+        let showSubmitButton =
+            (hasValidKeyName || parentIsArray) && isPasteValueNotEmpty;
         const parsedPasteInput = parsePasteInput(pasteInput);
         if (parsedPasteInput['__proto__']['name'] === 'SyntaxError') {
             errorMessage = parsedPasteInput['message'];
@@ -150,53 +155,53 @@ export default class extends React.PureComponent {
         }
         return (
             <div>
-                <div { ...Theme(theme, 'key-modal-label') }>
-                    Paste value here
-                </div>
+                <div {...Theme(theme, 'key-modal-label')}>Paste value here</div>
                 <AutosizeTextarea
-                    { ...Theme(theme, 'value-modal-textarea') }
-                    className='value-modal-textarea'
-                    value={ pasteInput }
-                    minRows={ 2 }
-                    autoFocus={ parentIsArray }
-                    onChange={ this.handlePasteInputChange }
-                    onKeyDown={ (e) => this.handlePasteInputKeyPress(e, showSubmitButton) }
+                    {...Theme(theme, 'value-modal-textarea')}
+                    className="value-modal-textarea"
+                    value={pasteInput}
+                    minRows={2}
+                    autoFocus={parentIsArray}
+                    onChange={this.handlePasteInputChange}
+                    onKeyDown={e =>
+                        this.handlePasteInputKeyPress(e, showSubmitButton)
+                    }
                 />
-                { showSubmitButton ?
-                    this.renderPasteValueSubmitButton()
-                    : null
-                }
-                { errorMessage ?
-                    <div { ...Theme(theme, 'paste-value-error-message')}>
-                        { errorMessage }
+                {showSubmitButton ? this.renderPasteValueSubmitButton() : null}
+                {errorMessage ? (
+                    <div {...Theme(theme, 'paste-value-error-message')}>
+                        {errorMessage}
                     </div>
-                    : null
-                }
+                ) : null}
             </div>
         );
-    }
+    };
 
     renderPasteValueSubmitButton = () => {
         const { parent_type, theme } = this.props;
-        const componentName = parent_type === 'array' ? 'value-modal-submit-in-array' : 'value-modal-submit';
+        const componentName =
+            parent_type === 'array'
+                ? 'value-modal-submit-in-array'
+                : 'value-modal-submit';
         return (
-            <CheckCircle {...Theme(theme, componentName)}
+            <CheckCircle
+                {...Theme(theme, componentName)}
                 class="value-modal-submit"
                 title="Submit"
-                onClick={ e => {
+                onClick={e => {
                     this.submit();
                     this.closeModal();
-                } }
+                }}
             />
         );
-    }
+    };
 
     closeModal = () => {
         dispatcher.dispatch({
             rjvId: this.props.rjvId,
             name: 'RESET'
         });
-    }
+    };
 
     submit = () => {
         if (this.props.pasted) {
@@ -204,5 +209,5 @@ export default class extends React.PureComponent {
         } else {
             this.props.submit(this.state.input);
         }
-    }
+    };
 }

@@ -5,43 +5,45 @@ import ObjectKeyModal from './ObjectKeyModal';
 
 //this input appears when adding a new value to an object
 export default class extends React.PureComponent {
-
     render() {
-        const {active, theme, rjvId } = this.props;
-        const { key_name } = ObjectAttributes.get(rjvId, 'action', 'edit-key-request') || {};
+        const { active, theme, rjvId } = this.props;
+        const { key_name } =
+            ObjectAttributes.get(rjvId, 'action', 'edit-key-request') || {};
 
-        return active &&
-            <ObjectKeyModal
-                rjvId={rjvId}
-                theme={theme}
-                input={key_name}
-                isValidKeyName={this.isValidKeyName}
-                submit={this.submit}
-            />;
+        return (
+            active && (
+                <ObjectKeyModal
+                    rjvId={rjvId}
+                    theme={theme}
+                    input={key_name}
+                    isValidKeyName={this.isValidKeyName}
+                    submit={this.submit}
+                />
+            )
+        );
     }
 
-    isValidKeyName = (input) => {
-        const {rjvId} = this.props;
+    isValidKeyName = input => {
+        const { rjvId } = this.props;
         const request = ObjectAttributes.get(
-            rjvId, 'action', 'edit-key-request'
+            rjvId,
+            'action',
+            'edit-key-request'
         );
         return (
-            input !== ''
-            && Object.keys(request.existing_value).indexOf(input) === -1
+            input !== '' &&
+            Object.keys(request.existing_value).indexOf(input) === -1
         );
-    }
+    };
 
-    submit = (input) => {
+    submit = input => {
         const { rjvId } = this.props;
-        let request = ObjectAttributes.get(
-            rjvId, 'action', 'edit-key-request'
-        );
-        let {
-            key_name,
-            existing_value,
-        } = request;
+        let request = ObjectAttributes.get(rjvId, 'action', 'edit-key-request');
+        let { key_name, existing_value } = request;
         let newSrc = {};
-        let dropIndex = Object.keys(existing_value).findIndex(key => key === key_name);
+        let dropIndex = Object.keys(existing_value).findIndex(
+            key => key === key_name
+        );
 
         Object.keys(existing_value).forEach((key, idx) => {
             if (idx !== dropIndex) {
@@ -59,5 +61,5 @@ export default class extends React.PureComponent {
                 new_value: newSrc
             }
         });
-    }
+    };
 }

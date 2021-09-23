@@ -30,9 +30,15 @@ function getType(obj) {
 function isColor(strColor) {
     let isHex = /^#(?:[A-Fa-f0-9]{3}){1,2}$/i.test(strColor);
     let isRGB = /^(rgb)\(([0-9]{1,3},?\s?){3}\)$/i.test(strColor);
-    let isRGBA = /^(rgba)\(([0-9]{1,3},?\s?){3}(\d?\.?(\d{1,2})?)\)$/i.test(strColor);
-    let isHSL = /^hsl[(]\s*0*(?:[12]?\d{1,2}|3(?:[0-5]\d|60))\s*(?:\s*,\s*0*(?:\d\d?(?:\.\d+)?\s*%|\.\d+\s*%|100(?:\.0*)?\s*%)){2}\s*[)]$/i.test(strColor);
-    let isHSLA = /^hsla[(]\s*0*(?:[12]?\d{1,2}|3(?:[0-5]\d|60))\s*(?:\s*,\s*0*(?:\d\d?(?:\.\d+)?\s*%|\.\d+\s*%|100(?:\.0*)?\s*%)){2}\s*,\s*0*(?:\.\d+|1(?:\.0*)?)\s*[)]$/i.test(strColor);
+    let isRGBA = /^(rgba)\(([0-9]{1,3},?\s?){3}(\d?\.?(\d{1,2})?)\)$/i.test(
+        strColor
+    );
+    let isHSL = /^hsl[(]\s*0*(?:[12]?\d{1,2}|3(?:[0-5]\d|60))\s*(?:\s*,\s*0*(?:\d\d?(?:\.\d+)?\s*%|\.\d+\s*%|100(?:\.0*)?\s*%)){2}\s*[)]$/i.test(
+        strColor
+    );
+    let isHSLA = /^hsla[(]\s*0*(?:[12]?\d{1,2}|3(?:[0-5]\d|60))\s*(?:\s*,\s*0*(?:\d\d?(?:\.\d+)?\s*%|\.\d+\s*%|100(?:\.0*)?\s*%)){2}\s*,\s*0*(?:\.\d+|1(?:\.0*)?)\s*[)]$/i.test(
+        strColor
+    );
     return isHex || isRGB || isRGBA || isHSL || isHSLA;
 }
 
@@ -68,39 +74,37 @@ export function isTheme(theme) {
 }
 
 export function parseExternalClipboardData(type, value) {
-    switch(type) {
-    case 'isArray':
-    case 'isObject': {
-        try {
-            return JSON.parse(value);
-        } catch (e) {
-            return e;
+    switch (type) {
+        case 'isArray':
+        case 'isObject': {
+            try {
+                return JSON.parse(value);
+            } catch (e) {
+                return e;
+            }
         }
-    }
-    case 'isFloat':
-        return parseFloat(value);
-    case 'isInteger':
-        return parseInt(value);
-    case 'isString':
-        return value.substring(1, value.length-1);
-
-
+        case 'isFloat':
+            return parseFloat(value);
+        case 'isInteger':
+            return parseInt(value);
+        case 'isString':
+            return value.substring(1, value.length - 1);
     }
     //if value is undefined, null, true or false (special types)
     let customTypes = value.toLowerCase();
     switch (customTypes) {
-    case 'undefined': {
-        return undefined;
-    }
-    case 'null': {
-        return null;
-    }
-    case 'true': {
-        return true;
-    }
-    case 'false': {
-        return false;
-    }
+        case 'undefined': {
+            return undefined;
+        }
+        case 'null': {
+            return null;
+        }
+        case 'true': {
+            return true;
+        }
+        case 'false': {
+            return false;
+        }
     }
     //return as string
     return value;
@@ -108,12 +112,14 @@ export function parseExternalClipboardData(type, value) {
 
 export function getExternalClipboardDataType(value) {
     value = value.trim();
-    value = value.replaceAll('\'', '\"');
+    value = value.replaceAll("'", '"');
     const isArray = value[0] === '[' && value[value.length - 1] === ']';
     const isObject = value[0] === '{' && value[value.length - 1] === '}';
-    const isFloat = value.match(/\-?\d+\.\d+/) && value.match(/\-?\d+\.\d+/)[0] === value;
-    const isInteger = value.match(/\-?\d+/) && value.match(/\-?\d+/)[0] === value;
-    const isString = value[0] === '\"' && value[value.length - 1] === '\"';
+    const isFloat =
+        value.match(/\-?\d+\.\d+/) && value.match(/\-?\d+\.\d+/)[0] === value;
+    const isInteger =
+        value.match(/\-?\d+/) && value.match(/\-?\d+/)[0] === value;
+    const isString = value[0] === '"' && value[value.length - 1] === '"';
 
     if (isArray) return 'isArray';
     if (isObject) return 'isObject';
@@ -122,23 +128,28 @@ export function getExternalClipboardDataType(value) {
     if (isString) return 'isString';
 }
 
-export function insertToObject({existing_value, dropTargetIdx, input, pasteValue}) {
+export function insertToObject({
+    existing_value,
+    dropTargetIdx,
+    input,
+    pasteValue
+}) {
     let newSrc = {};
     Object.keys(existing_value).forEach((key, idx) => {
         newSrc[key] = existing_value[key];
         //insert after
-        if (idx+1 === dropTargetIdx+1) {
+        if (idx + 1 === dropTargetIdx + 1) {
             newSrc[input] = pasteValue;
         }
     });
     return newSrc;
 }
 
-export function insertToArray({existing_value, dropTargetIdx, pasteValue}) {
+export function insertToArray({ existing_value, dropTargetIdx, pasteValue }) {
     const new_value = [
-        ...existing_value.slice(0, dropTargetIdx+1),
+        ...existing_value.slice(0, dropTargetIdx + 1),
         pasteValue,
-        ...existing_value.slice(dropTargetIdx+1)
+        ...existing_value.slice(dropTargetIdx + 1)
     ];
     return new_value;
 }

@@ -7,7 +7,6 @@ import highlightedString from './../../helpers/highlightedString';
 import stringifyVariable from './../../helpers/stringifyVariable';
 
 export default class extends React.PureComponent {
-
     render() {
         const type_name = 'float';
         let {
@@ -27,5 +26,4 @@ export default class extends React.PureComponent {
             </div>
         );
     }
-
 }

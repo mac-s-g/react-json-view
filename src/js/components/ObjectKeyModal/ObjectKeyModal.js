@@ -42,7 +42,7 @@ export default class extends React.PureComponent {
                 <div
                     { ...Theme(theme, 'key-modal') }
                     className="request-modal"
-                    onClick={ (e) => { e.stopPropagation(); } }
+                    onClick={ e  => { e.stopPropagation(); } }
                 >
                     { parentIsNotArray ?
                         <div {...Theme(theme, 'key-modal-label')}>
@@ -196,7 +196,7 @@ export default class extends React.PureComponent {
             rjvId: this.props.rjvId,
             name: 'RESET'
         });
-    }
+    };
 
     submit = () => {
         if (this.props.pasted) {
@@ -204,5 +204,5 @@ export default class extends React.PureComponent {
         } else {
             this.props.submit(this.state.input);
         }
-    }
+    };
 }

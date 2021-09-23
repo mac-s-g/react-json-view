@@ -19,7 +19,7 @@ export default class extends React.PureComponent {
         };
     }
 
-    toggleCollapsed = (i) => {
+    toggleCollapsed = i => {
         const newExpanded = [];
         for (const j in this.state.expanded) {
             newExpanded.push(this.state.expanded[j]);
@@ -28,26 +28,32 @@ export default class extends React.PureComponent {
         this.setState({
             expanded: newExpanded
         });
-    }
+    };
 
     getExpandedIcon(i) {
         const { theme, iconStyle } = this.props;
 
         if (this.state.expanded[i]) {
-            return <ExpandedIcon {...{theme, iconStyle}}/>;
+            return <ExpandedIcon {...{ theme, iconStyle }} />;
         }
 
-        return <CollapsedIcon {...{theme, iconStyle}} />;
+        return <CollapsedIcon {...{ theme, iconStyle }} />;
     }
 
     render() {
         const {
-            src, groupArraysAfterLength, depth,
-            name, theme, jsvRoot, namespace, parent_type,
+            src,
+            groupArraysAfterLength,
+            depth,
+            name,
+            theme,
+            jsvRoot,
+            namespace,
+            parent_type,
             ...rest
         } = this.props;
 
-        let expanded_icon, object_padding_left = 0;
+        let object_padding_left = 0;
 
         const array_group_padding_left = this.props.indentWidth * SINGLE_INDENT;
 
@@ -58,10 +64,14 @@ export default class extends React.PureComponent {
         const size = groupArraysAfterLength;
         const groups = Math.ceil(src.length / size);
 
-        return (<div class='object-key-val'
-            {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', {paddingLeft: object_padding_left})}
-        >
-            <ObjectName {...this.props} />
+        return (
+            <div
+                class="object-key-val"
+                {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', {
+                    paddingLeft: object_padding_left
+                })}
+            >
+                <ObjectName {...this.props} />
 
             <span>
                 <VariableMeta size={src.length} {...this.props}/>
@@ -112,5 +122,4 @@ export default class extends React.PureComponent {
         </div>
         );
     }
-
 }

@@ -7,27 +7,23 @@ import CutFromJson from './CutFromJson';
 import { toType } from '../helpers/util';
 
 //icons
-import {
-    RemoveIcon as Remove, AddCircle as Add
-} from './icons';
+import { RemoveIcon as Remove, AddCircle as Add } from './icons';
 
 //theme
 import Theme from './../themes/getStyle';
 import ObjectAttributes from '../stores/ObjectAttributes';
 import ExternalPaste from './ExternalPaste';
-
 export default class extends React.PureComponent {
     getObjectSize = () => {
-        const {size, theme, displayObjectSize} = this.props;
+        const { size, theme, displayObjectSize } = this.props;
         if (displayObjectSize) {
             return (
-                <span class="object-size"
-                    {...Theme(theme, 'object-size')}>
+                <span class="object-size" {...Theme(theme, 'object-size')}>
                     {size} item{size === 1 ? '' : 's'}
                 </span>
             );
         }
-    }
+    };
 
     handleAdd = () => {
         const {
@@ -97,12 +93,10 @@ export default class extends React.PureComponent {
                 />
             </span>
         );
-    }
+    };
 
-    getRemoveObject = () => {
-        const {
-            theme, namespace, name, src, rjvId
-        } = this.props;
+    getRemoveObject = rowHovered => {
+        const { theme, namespace, name, src, rjvId } = this.props;
 
         //don't allow deleting of root node
         if (namespace.length === 1) {
@@ -111,6 +105,9 @@ export default class extends React.PureComponent {
         return (
             <span
                 class="click-to-remove"
+                style={{
+                    display: rowHovered ? 'inline-block' : 'none'
+                }}
                 title="Remove">
                 <Remove
                     class="click-to-remove-icon"
@@ -121,16 +118,19 @@ export default class extends React.PureComponent {
                             rjvId: rjvId,
                             data: {
                                 name: name,
-                                namespace: namespace.splice(0, (namespace.length-1)),
+                                namespace: namespace.splice(
+                                    0,
+                                    namespace.length - 1
+                                ),
                                 existing_value: src,
                                 variable_removed: true
-                            },
+                            }
                         });
                     }}
                 />
             </span>
         );
-    }
+    };
 
     render = () => {
         const {
@@ -140,6 +140,7 @@ export default class extends React.PureComponent {
             enableClipboard,
             src,
             namespace,
+            rowHovered,
             name,
             rjvId,
             jsvRoot
@@ -147,8 +148,8 @@ export default class extends React.PureComponent {
         return (
             <div
                 {...Theme(theme, 'object-meta-data')}
-                class='object-meta-data'
-                onClick={ (e)=>{
+                class="object-meta-data"
+                onClick={ e => {
                     e.stopPropagation();
                 } }
             >
@@ -180,9 +181,9 @@ export default class extends React.PureComponent {
                     />
                 }
                 {/* copy add/remove icons */}
-                { onAdd !== false && this.getAddAttribute() }
-                { onDelete !== false && this.getRemoveObject() }
+                { onAdd !== false && this.getAddAttribute(rowHovered) }
+                { onDelete !== false && this.getRemoveObject(rowHovered) }
             </div>
         );
-    }
+    };
 }

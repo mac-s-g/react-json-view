@@ -7,7 +7,6 @@ import stringifyVariable from './../../helpers/stringifyVariable';
 import Theme from './../../themes/getStyle';
 
 export default class extends React.PureComponent {
-
     render() {
         const type_name = 'int';
         let {
@@ -27,5 +26,4 @@ export default class extends React.PureComponent {
             </div>
         );
     }
-
 }

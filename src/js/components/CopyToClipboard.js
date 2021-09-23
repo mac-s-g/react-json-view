@@ -56,32 +56,39 @@ export default class extends React.PureComponent {
             name: 'VARIABLE_COPIED',
             rjvId: rjvId,
         });
-    }
+    };
 
     getClippyIcon = () => {
         const { theme } = this.props;
 
         return <Clippy class="copy-icon" {...Theme(theme, 'copy-icon')} />;
-    }
+    };
 
     clipboardValue = value => {
         const type = toType(value);
         switch (type) {
-        case 'function':
-        case 'regexp':
-            return value.toString();
-        default:
-            return value;
+            case 'function':
+            case 'regexp':
+                return value.toString();
+            default:
+                return value;
         }
-    }
+    };
 
     render() {
-        const { theme, hidden } = this.props;
+        const { theme, hidden, rowHovered } = this.props;
         let style = Theme(theme, 'copy-to-clipboard').style;
         let display = hidden ? 'none' : 'inline';
 
         return (
-            <span class="copy-to-clipboard-container" title="Copy to clipboard">
+            <span
+                className="copy-to-clipboard-container"
+                title="Copy to clipboard"
+                style={{
+                    verticalAlign: 'top',
+                    display: rowHovered ? 'inline-block' : 'none'
+                }}
+            >
                 <span
                     style={{
                         ...style,

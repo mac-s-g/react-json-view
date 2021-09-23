@@ -4,26 +4,27 @@ import ArrayGroup from './ArrayGroup';
 
 export default class extends React.PureComponent {
     render = () => {
-        const {
-            name,
-            src,
-            groupArraysAfterLength
-        } = this.props;
-        const namespace = [name];
+        const { props } = this;
+        const namespace = [props.name];
         let ObjectComponent = JsonObject;
 
-        if (groupArraysAfterLength && src.length > groupArraysAfterLength) {
+        if (
+            Array.isArray(props.src) &&
+            props.groupArraysAfterLength &&
+            props.src.length > props.groupArraysAfterLength
+        ) {
             ObjectComponent = ArrayGroup;
         }
 
         return (
-            <div class="pretty-json-container object-container" >
+            <div class="pretty-json-container object-container">
                 <div class="object-content">
                     <ObjectComponent
                         namespace={namespace}
                         depth={0}
                         jsvRoot={true}
-                        {...this.props} />
+                        {...props}
+                    />
                 </div>
             </div>
         );

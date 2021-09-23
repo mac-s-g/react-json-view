@@ -6,10 +6,10 @@ import ArrayGroup from './../../../../src/js/components/ArrayGroup';
 import JsonObject from './../../../../src/js/components/DataTypes/Object';
 import JsonString from './../../../../src/js/components/DataTypes/String';
 
-describe('<ArrayGroup />', function() {
+describe('<ArrayGroup />', function () {
     var large_array = new Array(15).fill('test');
 
-    it('ArrayGroup mount', function() {
+    it('ArrayGroup mount', function () {
         const wrapper = render(
             <ArrayGroup
                 groupArraysAfterLength={5}
@@ -18,13 +18,14 @@ describe('<ArrayGroup />', function() {
                 src={large_array}
                 theme="rjv-default"
                 jsvRoot={false}
+                indentWidth={4}
             />
         );
 
         expect(wrapper.find('.array-group').length).to.equal(3);
     });
 
-    it('ArrayGroup expands and collapses', function() {
+    it('ArrayGroup expands and collapses', function () {
         const wrapper = shallow(
             <ArrayGroup
                 groupArraysAfterLength={5}
@@ -33,13 +34,11 @@ describe('<ArrayGroup />', function() {
                 src={large_array}
                 theme="rjv-default"
                 jsvRoot={false}
+                indentWidth={4}
             />
         );
 
-        wrapper
-            .find('.array-group-brace')
-            .first()
-            .simulate('click');
+        wrapper.find('.array-group-brace').first().simulate('click');
 
         expect(wrapper.state().expanded[0]).to.equal(true);
 
@@ -52,7 +51,7 @@ describe('<ArrayGroup />', function() {
         expect(wrapper.state().expanded[0]).to.equal(false);
     });
 
-    it('ArrayGroup displays arrays on expansion', function() {
+    it('ArrayGroup displays arrays on expansion', function () {
         const wrapper = mount(
             <ArrayGroup
                 groupArraysAfterLength={5}
@@ -61,6 +60,7 @@ describe('<ArrayGroup />', function() {
                 src={large_array}
                 theme="rjv-default"
                 jsvRoot={false}
+                indentWidth={4}
             />
         );
 
@@ -71,7 +71,7 @@ describe('<ArrayGroup />', function() {
         expect(wrapper.find(JsonObject).find(JsonString).length).to.equal(5);
     });
 
-    it('ArrayGroup paginates groups accurately', function() {
+    it('ArrayGroup paginates groups accurately', function () {
         var test_array = new Array(17).fill('test');
 
         const wrapper = mount(
@@ -82,6 +82,7 @@ describe('<ArrayGroup />', function() {
                 src={test_array}
                 theme="rjv-default"
                 jsvRoot={false}
+                indentWidth={4}
             />
         );
 
@@ -90,14 +91,11 @@ describe('<ArrayGroup />', function() {
         wrapper.setState({ expanded: { 3: true } });
 
         expect(
-            wrapper
-                .find('.array-group')
-                .last()
-                .find(JsonString).length
+            wrapper.find('.array-group').last().find(JsonString).length
         ).to.equal(2);
     });
 
-    it('ArrayGroup renders at root', function() {
+    it('ArrayGroup renders at root', function () {
         const wrapper = render(
             <ArrayGroup
                 groupArraysAfterLength={5}
@@ -106,6 +104,7 @@ describe('<ArrayGroup />', function() {
                 src={large_array}
                 theme="rjv-default"
                 jsvRoot={true}
+                indentWidth={4}
             />
         );
 

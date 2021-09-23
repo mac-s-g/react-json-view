@@ -88,14 +88,16 @@ class RjvObject extends React.PureComponent {
             ),
             object_type: props.type === 'array' ? 'array' : 'object',
             parent_type: props.type === 'array' ? 'array' : 'object',
-            size
+            size,
+            hovered: false
         };
         return state;
-    }
+    };
 
     static getDerivedStateFromProps(nextProps, prevState) {
         const { prevProps } = prevState;
-        if (nextProps.src !== prevProps.src ||
+        if (
+            nextProps.src !== prevProps.src ||
             nextProps.collapsed !== prevProps.collapsed ||
             nextProps.name !== prevProps.name ||
             nextProps.namespace !== prevProps.namespace ||
@@ -123,13 +125,15 @@ class RjvObject extends React.PureComponent {
             }
             this.setState({
                 expanded: !expanded
+            }, () => {
+                AttributeStore.set(
+                  rjvId,
+                  namespace,
+                  'expanded',
+                  this.state.expanded
+                );
             });
-            AttributeStore.set(
-                rjvId,
-                namespace,
-                'expanded',
-                !expanded
-            );
+
             if (type === 'array') {
                 Object.keys(src).forEach(key => {
                     namespace.splice(namespace.length, 0, key);
@@ -157,7 +161,7 @@ class RjvObject extends React.PureComponent {
                 </div>
             </div>
         );
-    }
+    };
 
     getEllipsis = () => {
         const { theme } = this.props;
@@ -177,11 +181,11 @@ class RjvObject extends React.PureComponent {
                 </div>
             );
         }
-    }
+    };
 
     getObjectMetaData = src => {
-        const { size, hoveredOver } = this.state;
-        return hoveredOver && <VariableMeta size={ size } { ...this.props } />;
+        const { size, hovered } = this.state;
+        return hovered && <VariableMeta size={ size } { ...this.props } />;
     }
 
     updateKeyRequest = (e) => {
@@ -210,12 +214,12 @@ class RjvObject extends React.PureComponent {
                 key_name: name
             }
         });
-    }
+    };
 
     renderRenameKeyButton = () => {
         const { theme } = this.props;
-        const { hoveredOver } = this.state;
-        return hoveredOver &&
+        const { hovered } = this.state;
+        return hovered &&
             <span class="click-to-edit-key" title="Edit Key">
                 <Edit
                     class="click-to-edit-key-icon"
@@ -223,7 +227,7 @@ class RjvObject extends React.PureComponent {
                     onClick={ (e) => this.updateKeyRequest(e) }
                 />
             </span>;
-    }
+    };
 
     getBraceStart(object_type, expanded) {
         const { src, theme, iconStyle, parent_type, jsvRoot } = this.props;
@@ -299,18 +303,23 @@ class RjvObject extends React.PureComponent {
         return (
             <div
                 class='object-key-val'
+                class="object-key-val"
+                onMouseEnter={() =>
+                    this.setState({ ...this.state, hovered: true })
+                }
+                onMouseLeave={() =>
+                    this.setState({ ...this.state, hovered: false })
+                }
                 {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', styles)}
-                onMouseOver={ () => this.handleOnHover(true) }
-                onMouseLeave={ () => this.handleOnHover(false) }
             >
                 { this.getBraceStart(object_type, expanded) }
                 { expanded
                     ? this.getObjectContent(depth, src, {
-                        theme,
-                        iconStyle,
-                        ...rest
-                    })
-                    : this.getEllipsis() }
+                          theme,
+                          iconStyle,
+                          ...rest
+                      })
+                    : this.getEllipsis()}
                 <span class="brace-row">
                     <span
                         style={ {
@@ -349,13 +358,13 @@ class RjvObject extends React.PureComponent {
             dropTarget,
             dragEnabled
         } = this.state;
-        let theme = props.theme;
         let elements = [],
             variable;
         let keys = Object.keys(variables || {});
-        if (sortKeys) {
+        if (sortKeys && object_type !== 'array') {
             keys = keys.sort();
         }
+
         keys.forEach((name, index) => {
             variable = new JsonVariable(name, variables[name]);
 
@@ -455,8 +464,9 @@ class RjvObject extends React.PureComponent {
                 );
             }
         });
+
         return elements;
-    }
+    };
 }
 
 //just store name, value and type with a variable

@@ -4,10 +4,10 @@ import { expect } from 'chai';
 
 import JsonObject from './../../../../../src/js/components/DataTypes/Object';
 
-describe('<JsonObject />', function() {
+describe('<JsonObject />', function () {
     const rjvId = 1;
 
-    it('Object component should have a data type label', function() {
+    it('Object component should have a data type label', function () {
         let src = {
             test: true
         };
@@ -26,7 +26,7 @@ describe('<JsonObject />', function() {
         expect(wrapper.find('.object-key-val')).to.have.length(1);
     });
 
-    it('Object mount, multiple data type labels', function() {
+    it('Object mount, multiple data type labels', function () {
         let src = {
             bool: true, //should have label
             int: 5, //should have label
@@ -34,7 +34,7 @@ describe('<JsonObject />', function() {
             nan: NaN,
             null: null,
             undefined: undefined,
-            func: function() {}, //should have label
+            func: function () {}, //should have label
             float: 1.325, //should have label
             arr: [
                 1, //should have label
@@ -62,7 +62,7 @@ describe('<JsonObject />', function() {
         expect(wrapper.find('.data-type-label')).to.have.length(8);
     });
 
-    it('Object mount, no data type labels when collapsed', function() {
+    it('Object mount, no data type labels when collapsed', function () {
         let src = {
             bool: true, //should have label
             int: 5, //should have label
@@ -70,7 +70,7 @@ describe('<JsonObject />', function() {
             nan: NaN,
             null: null,
             undefined: undefined,
-            func: function() {}, //should have label
+            func: function () {}, //should have label
             float: 1.325, //should have label
             arr: [
                 1, //should have label
@@ -96,9 +96,9 @@ describe('<JsonObject />', function() {
         expect(wrapper.find('.data-type-label')).to.have.length(0);
     });
 
-    it('Array mount expanded', function() {
+    it('Array mount expanded', function () {
         let src = {
-            arr1: [('arr2': ["test"])]
+            arr1: [('arr2': ['test'])]
         };
         const wrapper = render(
             <JsonObject
@@ -118,9 +118,9 @@ describe('<JsonObject />', function() {
         expect(wrapper.find('.collapsed-icon')).to.have.length(0);
     });
 
-    it('Array mount collapsed', function() {
+    it('Array mount collapsed', function () {
         let src = {
-            arr1: [('arr2': ["test"])]
+            arr1: [('arr2': ['test'])]
         };
         const wrapper = render(
             <JsonObject
@@ -139,9 +139,9 @@ describe('<JsonObject />', function() {
         expect(wrapper.find('.collapsed-icon')).to.have.length(1);
     });
 
-    it('Array mount collapsed circle', function() {
+    it('Array mount collapsed circle', function () {
         let src = {
-            arr1: [('arr2': ["test"])]
+            arr1: [('arr2': ['test'])]
         };
         const wrapper = render(
             <JsonObject
@@ -160,9 +160,9 @@ describe('<JsonObject />', function() {
         expect(wrapper.find('.collapsed-icon')).to.have.length(1);
     });
 
-    it('Array mount collapsed square', function() {
+    it('Array mount collapsed square', function () {
         let src = {
-            arr1: [('arr2': ["test"])]
+            arr1: [('arr2': ['test'])]
         };
         const wrapper = render(
             <JsonObject
@@ -182,9 +182,9 @@ describe('<JsonObject />', function() {
         expect(wrapper.find('.collapsed-icon')).to.have.length(1);
     });
 
-    it('Array mount collapsed triangle', function() {
+    it('Array mount collapsed triangle', function () {
         let src = {
-            arr1: [('arr2': ["test"])]
+            arr1: [('arr2': ['test'])]
         };
         const wrapper = render(
             <JsonObject
@@ -204,7 +204,7 @@ describe('<JsonObject />', function() {
         expect(wrapper.find('.collapsed-icon')).to.have.length(1);
     });
 
-    it('non-empty object should be expanded', function() {
+    it('non-empty object should be expanded', function () {
         let src = { test: true };
 
         const wrapper = shallow(
@@ -218,7 +218,7 @@ describe('<JsonObject />', function() {
         expect(wrapper.state('expanded')).to.equal(true);
     });
 
-    it('empty object should not be expanded', function() {
+    it('empty object should not be expanded', function () {
         let src = {};
 
         const wrapper = shallow(
@@ -233,7 +233,7 @@ describe('<JsonObject />', function() {
         expect(wrapper.state('expanded')).to.equal(false);
     });
 
-    it('non-empty array should be expanded', function() {
+    it('non-empty array should be expanded', function () {
         let src = [1, 2, 3];
 
         const wrapper = shallow(
@@ -248,7 +248,7 @@ describe('<JsonObject />', function() {
         expect(wrapper.state('expanded')).to.equal(true);
     });
 
-    it('empty array should not be expanded', function() {
+    it('empty array should not be expanded', function () {
         let src = [];
 
         const wrapper = shallow(
@@ -257,12 +257,13 @@ describe('<JsonObject />', function() {
                 theme="rjv-default"
                 namespace={['root']}
                 collapsed={true}
+                indentWidth={1}
             />
         );
         expect(wrapper.state('expanded')).to.equal(false);
     });
 
-    it('non-empty array should have ellipsis', function() {
+    it('non-empty array should have ellipsis', function () {
         let src = [1, 2, 3];
 
         const wrapper = render(
@@ -272,13 +273,14 @@ describe('<JsonObject />', function() {
                 namespace={['root']}
                 rjvId={rjvId}
                 collapsed={true}
+                indentWidth={1}
             />
         );
 
         expect(wrapper.find('.node-ellipsis')).to.have.length(1);
     });
 
-    it('empty array should not have ellipsis', function() {
+    it('empty array should not have ellipsis', function () {
         let src = [];
 
         const wrapper = render(
@@ -288,13 +290,14 @@ describe('<JsonObject />', function() {
                 namespace={['root']}
                 rjvId={rjvId}
                 collapsed={true}
+                indentWidth={1}
             />
         );
 
         expect(wrapper.find('.node-ellipsis')).to.have.length(0);
     });
 
-    it('should collapse at shouldCollapse logic', function() {
+    it('should collapse at shouldCollapse logic', function () {
         let src = { prop1: 1, prop2: 2, prop3: 3 };
 
         const wrapper = shallow(
@@ -310,7 +313,7 @@ describe('<JsonObject />', function() {
         expect(wrapper.state('expanded')).to.equal(false);
     });
 
-    it('should expand based on shouldCollapse logic', function() {
+    it('should expand based on shouldCollapse logic', function () {
         let src = { prop1: 1, prop2: 2, prop3: 3 };
 
         const wrapper = shallow(
@@ -320,6 +323,7 @@ describe('<JsonObject />', function() {
                 namespace={['root']}
                 collapsed={false}
                 shouldCollapse={() => false}
+                indentWidth={1}
             />
         );
 
@@ -330,7 +334,7 @@ describe('<JsonObject />', function() {
             d: 'd',
             b: 'b',
             a: 'a',
-            c: 'c',
+            c: 'c'
         };
 
         const wrapper = render(
@@ -342,6 +346,7 @@ describe('<JsonObject />', function() {
                 collapsed={false}
                 shouldCollapse={() => false}
                 quotesOnKeys={true}
+                indentWidth={1}
             />
         );
         expect(wrapper.text()).to.equal('"":{"a":"a""b":"b""c":"c""d":"d"}');
@@ -352,7 +357,7 @@ describe('<JsonObject />', function() {
             d: 'd',
             b: 'b',
             a: 'a',
-            c: 'c',
+            c: 'c'
         };
 
         const wrapper = render(
@@ -363,6 +368,7 @@ describe('<JsonObject />', function() {
                 collapsed={false}
                 shouldCollapse={() => false}
                 quotesOnKeys={true}
+                indentWidth={1}
             />
         );
         expect(wrapper.text()).to.equal('"":{"d":"d""b":"b""a":"a""c":"c"}');

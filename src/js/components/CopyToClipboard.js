@@ -30,7 +30,7 @@ export default class extends React.PureComponent {
     handleCopy = () => {
         const container = document.createElement('textarea');
         const { clickCallback, src, namespace, rjvId } = this.props;
-        ObjectAttributes.set(rjvId,  'global', 'copied', src);
+        ObjectAttributes.set(rjvId, 'global', 'copied', src);
 
         container.innerHTML = JSON.stringify(
             this.clipboardValue(src),
@@ -54,7 +54,7 @@ export default class extends React.PureComponent {
         });
         dispatcher.dispatch({
             name: 'VARIABLE_COPIED',
-            rjvId: rjvId,
+            rjvId: rjvId
         });
     };
 

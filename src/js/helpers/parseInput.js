@@ -6,17 +6,15 @@ export default function parseInput(input) {
     input = input.trim();
     try {
         if (
-            input[0] === '#'
-            || input.substring(0,3) ==='rgb'
-            || input.substring(0,4) === 'rgba'
-            || input.substring(0,3) === 'hsl'
-            || input.substring(0,4) === 'hsla'
+            input[0] === '#' ||
+            input.substring(0, 3) === 'rgb' ||
+            input.substring(0, 4) === 'rgba' ||
+            input.substring(0, 3) === 'hsl' ||
+            input.substring(0, 4) === 'hsla'
         ) {
             return formatResponse('color', input);
         }
-        input = JSON.stringify(
-            JSON.parse(input)
-        );
+        input = JSON.stringify(JSON.parse(input));
         if (input[0] === '[') {
             //array
             return formatResponse('array', JSON.parse(input));

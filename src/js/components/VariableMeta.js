@@ -26,26 +26,13 @@ export default class extends React.PureComponent {
     };
 
     handleAdd = () => {
-        const {
-            namespace,
-            name,
-            src,
-            rjvId,
-            depth
-        } = this.props;
+        const { namespace, name, src, rjvId, depth } = this.props;
         const namespaceCopy = [...namespace];
         //expand the object/array
-        ObjectAttributes.set(
-            rjvId,
-            namespace,
-            'expanded',
-            true
-        );
+        ObjectAttributes.set(rjvId, namespace, 'expanded', true);
         const request = {
             name: depth > 0 ? name : null,
-            namespace: namespace.splice(
-                0, (namespace.length-1)
-            ),
+            namespace: namespace.splice(0, namespace.length - 1),
             existing_value: src,
             variable_removed: false,
             key_name: null
@@ -54,18 +41,13 @@ export default class extends React.PureComponent {
             dispatcher.dispatch({
                 name: 'ADD_VARIABLE_KEY_REQUEST',
                 rjvId: rjvId,
-                data: request,
+                data: request
             });
         } else {
             //expand every object/array in the array
             Object.keys(src).forEach(key => {
                 namespaceCopy.splice(namespaceCopy.length, 0, key);
-                ObjectAttributes.set(
-                    rjvId,
-                    namespaceCopy,
-                    'expanded',
-                    true
-                );
+                ObjectAttributes.set(rjvId, namespaceCopy, 'expanded', true);
                 namespaceCopy.splice(namespaceCopy.length - 1, 1);
             });
             dispatcher.dispatch({
@@ -77,19 +59,17 @@ export default class extends React.PureComponent {
                 }
             });
         }
-    }
+    };
 
     getAddAttribute = () => {
         const { theme } = this.props;
 
         return (
-            <span
-                class="click-to-add"
-                title="Add">
+            <span class="click-to-add" title="Add">
                 <Add
                     class="click-to-add-icon"
                     {...Theme(theme, 'addVarIcon')}
-                    onClick={ () => this.handleAdd() }
+                    onClick={() => this.handleAdd()}
                 />
             </span>
         );
@@ -108,7 +88,8 @@ export default class extends React.PureComponent {
                 style={{
                     display: rowHovered ? 'inline-block' : 'none'
                 }}
-                title="Remove">
+                title="Remove"
+            >
                 <Remove
                     class="click-to-remove-icon"
                     {...Theme(theme, 'removeVarIcon')}
@@ -149,40 +130,30 @@ export default class extends React.PureComponent {
             <div
                 {...Theme(theme, 'object-meta-data')}
                 class="object-meta-data"
-                onClick={ e => {
+                onClick={e => {
                     e.stopPropagation();
-                } }
+                }}
             >
                 {/* size badge display */}
-                { this.getObjectSize() }
-                { enableClipboard && !jsvRoot &&
+                {this.getObjectSize()}
+                {enableClipboard && !jsvRoot && (
                     <CopyToClipboard
-                        clickCallback={ enableClipboard }
-                        { ...{src, rjvId, theme, namespace, name} }
+                        clickCallback={enableClipboard}
+                        {...{ src, rjvId, theme, namespace, name }}
                     />
-                }
+                )}
                 {/*Don't display cut icon for root*/}
-                { (enableClipboard && !jsvRoot) &&
-                    <CutFromJson
-                        { ...this.props }
-                    />
-                }
+                {enableClipboard && !jsvRoot && <CutFromJson {...this.props} />}
                 {/*don't display paste icon for root*/}
-                { (enableClipboard && !jsvRoot) &&
-                    <PasteToJson
-                        pastedOnObjectOrArray
-                        { ...this.props }
-                    />
-                }
-                { (enableClipboard && !jsvRoot) &&
-                    <ExternalPaste
-                        pastedOnObjectOrArray
-                        { ...this.props }
-                    />
-                }
+                {enableClipboard && !jsvRoot && (
+                    <PasteToJson pastedOnObjectOrArray {...this.props} />
+                )}
+                {enableClipboard && !jsvRoot && (
+                    <ExternalPaste pastedOnObjectOrArray {...this.props} />
+                )}
                 {/* copy add/remove icons */}
-                { onAdd !== false && this.getAddAttribute(rowHovered) }
-                { onDelete !== false && this.getRemoveObject(rowHovered) }
+                {onAdd !== false && this.getAddAttribute(rowHovered)}
+                {onDelete !== false && this.getRemoveObject(rowHovered)}
             </div>
         );
     };

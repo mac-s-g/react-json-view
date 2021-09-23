@@ -28,5 +28,5 @@ export default class extends React.PureComponent {
                 </div>
             </div>
         );
-    }
+    };
 }

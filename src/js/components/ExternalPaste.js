@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Theme from '../themes/getStyle';
 import ObjectAttributes from '../stores/ObjectAttributes';
-import {ExternalPasteIcon as Paste} from './icons';
+import { ExternalPasteIcon as Paste } from './icons';
 import dispatcher from '../helpers/dispatcher';
 
 import regeneratorRuntime from 'regenerator-runtime';
@@ -23,7 +23,7 @@ class ExternalPaste extends Component {
         let request;
 
         //for parent's namespace last namespace has to be spliced out
-        const parentNamespace = [...namespace].splice(0, namespace.length-1);
+        const parentNamespace = [...namespace].splice(0, namespace.length - 1);
         let existingValue = ObjectAttributes.getSrcByNamespace({
             rjvId,
             name: 'global',
@@ -31,25 +31,25 @@ class ExternalPaste extends Component {
             parent_type
         });
         //find index of paste position
-        const dropTargetIdx = pastedOnObjectOrArray ?
-            Object.keys(existingValue).findIndex(key => key === name) :
-            Object.keys(src).findIndex(key => key === name);
+        const dropTargetIdx = pastedOnObjectOrArray
+            ? Object.keys(existingValue).findIndex(key => key === name)
+            : Object.keys(src).findIndex(key => key === name);
         //if pasted on object or array then the request has to be made with
         // parent's existing value, name and namespace. Therefore an additional step has to be made backwards.
         if (pastedOnObjectOrArray) {
             request = {
-                name: namespace[depth-1],
+                name: namespace[depth - 1],
                 namespace: namespace.splice(0, namespace.length - 2),
                 existing_value: existingValue,
                 dropTargetIdx,
                 variable_removed: false,
                 key_name: null,
-                parent_type,
+                parent_type
             };
         } else {
             request = {
                 name: namespace[depth],
-                namespace: namespace.splice(0, namespace.length-1),
+                namespace: namespace.splice(0, namespace.length - 1),
                 existing_value: src,
                 dropTargetIdx,
                 variable_removed: false,
@@ -64,16 +64,17 @@ class ExternalPaste extends Component {
                 ...request
             }
         });
-    }
+    };
 
     render() {
         const { theme } = this.props;
         return (
             <span
                 className="paste-to-json-container"
-                title="Paste from external clipboard">
+                title="Paste from external clipboard"
+            >
                 <Paste
-                    class='paste-icon'
+                    class="paste-icon"
                     {...Theme(theme, 'paste-icon')}
                     onClick={this.pasteAddKeyRequest}
                 />

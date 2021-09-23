@@ -9,13 +9,9 @@ import stringifyVariable from './../../helpers/stringifyVariable';
 export default class extends React.PureComponent {
     render() {
         const type_name = 'float';
-        let {
-            value,
-            search,
-            theme
-        } = this.props;
+        let { value, search, theme } = this.props;
         const valueStr = stringifyVariable(value);
-        const start = (valueStr).indexOf(search);
+        const start = valueStr.indexOf(search);
         if (start > -1) {
             value = highlightedString(valueStr, start, search.length, theme);
         }

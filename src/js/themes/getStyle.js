@@ -254,7 +254,7 @@ const getDefaultThemeStyling = theme => {
             marginLeft: constants.clipboardCheckMarginLeft
         },
         'cut-from-json': {
-            cursor: constants.cutCursor,
+            cursor: constants.cutCursor
         },
         'cut-icon': {
             color: colors.cutFromJson,

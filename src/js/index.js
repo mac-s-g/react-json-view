@@ -31,7 +31,7 @@ class ReactJsonView extends React.PureComponent {
             prevName: ReactJsonView.defaultProps.name,
             prevTheme: ReactJsonView.defaultProps.theme,
             searchKey: '',
-            copied: false,
+            copied: false
         };
     }
     timeout = null;
@@ -63,7 +63,7 @@ class ReactJsonView extends React.PureComponent {
         validationMessage: 'Validation Error',
         defaultValue: null,
         displaySearch: true,
-        displayArrayKey: true,
+        displayArrayKey: true
     };
 
     // will trigger whenever setState() is called, or parent passes in new props.
@@ -91,12 +91,7 @@ class ReactJsonView extends React.PureComponent {
     componentDidMount() {
         // initialize
         ObjectAttributes.set(this.rjvId, 'global', 'src', this.state.src);
-        ObjectAttributes.set(
-            this.rjvId,
-            'global',
-            'copied',
-            '!noValueCopied!'
-        );
+        ObjectAttributes.set(this.rjvId, 'global', 'copied', '!noValueCopied!');
         // bind to events
         const listeners = this.getListeners();
         for (const i in listeners) {
@@ -143,7 +138,7 @@ class ReactJsonView extends React.PureComponent {
     getListeners = () => {
         return {
             reset: this.resetState,
-            'copied': this.changeCopyState,
+            copied: this.changeCopyState,
             'variable-update': this.updateSrc,
             'add-key-request': this.addKeyRequest,
             'edit-key-request': this.editKeyRequest,
@@ -181,13 +176,13 @@ class ReactJsonView extends React.PureComponent {
         };
     };
 
-    handleSearch = (e) => {
+    handleSearch = e => {
         const { value } = e.target;
         if (this.timeout) clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
             this.setState({ searchKey: value });
         }, 500);
-    }
+    };
 
     render() {
         const {
@@ -203,31 +198,25 @@ class ReactJsonView extends React.PureComponent {
             pasteAddKeyRequest
         } = this.state;
 
-        const {
-            style,
-            defaultValue,
-            displaySearch
-        } = this.props;
+        const { style, defaultValue, displaySearch } = this.props;
 
         const customClassname = this.props.className || '';
         return (
-            <div
-                className={ `react-json-editor ${customClassname}` }>
-                <div
-                    className="react-json-view-search-box">
-                    { displaySearch ?
+            <div className={`react-json-editor ${customClassname}`}>
+                <div className="react-json-view-search-box">
+                    {displaySearch ? (
                         <input
                             className="search-box"
                             type="text"
                             placeholder="Search..."
-                            onChange={ (e) => this.handleSearch(e) }>
-                        </input>
-                        : null
-                    }
+                            onChange={e => this.handleSearch(e)}
+                        ></input>
+                    ) : null}
                 </div>
                 <div
                     className="react-json-view"
-                    style={{...Theme(theme, 'app-container').style, ...style}}>
+                    style={{ ...Theme(theme, 'app-container').style, ...style }}
+                >
                     <JsonViewer
                         {...this.props}
                         copied={copied}
@@ -242,17 +231,20 @@ class ReactJsonView extends React.PureComponent {
                         active={addKeyRequest}
                         theme={theme}
                         rjvId={this.rjvId}
-                        defaultValue={defaultValue} />
+                        defaultValue={defaultValue}
+                    />
                     <EditKeyRequest
                         active={editKeyRequest}
                         theme={theme}
                         rjvId={this.rjvId}
-                        defaultValue={defaultValue} />
+                        defaultValue={defaultValue}
+                    />
                     <PasteAddKeyRequest
                         active={pasteAddKeyRequest}
                         theme={theme}
                         rjvId={this.rjvId}
-                        defaultValue={defaultValue} />
+                        defaultValue={defaultValue}
+                    />
                 </div>
             </div>
         );
@@ -292,9 +284,9 @@ class ReactJsonView extends React.PureComponent {
             case 'variable-removed':
                 result = onDelete(on_edit_payload);
                 break;
-        case 'variable-key-added':
-            result = onEdit(on_edit_payload);
-            break;
+            case 'variable-key-added':
+                result = onEdit(on_edit_payload);
+                break;
         }
         if (result !== false) {
             ObjectAttributes.set(this.rjvId, 'global', 'src', updated_src);
@@ -318,13 +310,13 @@ class ReactJsonView extends React.PureComponent {
         this.setState({
             editKeyRequest: true
         });
-    }
+    };
 
     pasteAddKeyRequest = () => {
         this.setState({
             pasteAddKeyRequest: true
         });
-    }
+    };
 
     resetState = () => {
         this.setState({
@@ -333,7 +325,7 @@ class ReactJsonView extends React.PureComponent {
             editKeyRequest: false,
             pasteAddKeyRequest: false
         });
-    }
+    };
 
     changeCopyState = () => {
         this.setState({

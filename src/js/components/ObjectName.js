@@ -19,13 +19,18 @@ export default function getObjectName(props) {
 
     const start = searchStringIndex(display_name, search);
     if (start > -1) {
-        display_name = highlightedString(display_name, start, search.length, theme);
+        display_name = highlightedString(
+            display_name,
+            start,
+            search.length,
+            theme
+        );
     }
 
-  const hasRootAndMissingName = jsvRoot && (name === false || name === null);
-  const isArrayAndKeyMissing = parent_type === 'array' && !displayArrayKey;
+    const hasRootAndMissingName = jsvRoot && (name === false || name === null);
+    const isArrayAndKeyMissing = parent_type === 'array' && !displayArrayKey;
 
-  if (hasRootAndMissingName || isArrayAndKeyMissing) {
+    if (hasRootAndMissingName || isArrayAndKeyMissing) {
         return <span />;
     } else if (parent_type === 'array') {
         return displayArrayKey ? (

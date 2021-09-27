@@ -51,8 +51,14 @@ const config = {
         include: [PATHS.js, PATHS.devServer]
       },
       {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"]
+        test: /\.s?css$/,
+        use: [{
+          loader: "style-loader"
+        }, {
+          loader: "css-loader"
+        }, {
+          loader: "sass-loader"
+        }]
       }
     ]
   }

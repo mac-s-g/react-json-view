@@ -43,7 +43,6 @@ class RjvObject extends React.PureComponent {
     }
 
     componentDidMount() {
-        // console.log(ObjectAttributes.get(this.props.rjvId, this.props.namespace, 'expanded', undefined));
         ObjectAttributes.on(
             'expanded-' + this.props.namespace.join(','),
             this.handleExpand
@@ -311,7 +310,6 @@ class RjvObject extends React.PureComponent {
         return (
             <div
                 class="object-key-val"
-                class="object-key-val"
                 onMouseEnter={() =>
                     this.setState({ ...this.state, hovered: true })
                 }
@@ -327,7 +325,7 @@ class RjvObject extends React.PureComponent {
                           iconStyle,
                           ...rest
                       })
-                    : this.getEllipsis()}
+                    : this.getEllipsis(depth, src, {theme, iconStyle, ...rest})}
                 <span class="brace-row">
                     <span
                         style={{

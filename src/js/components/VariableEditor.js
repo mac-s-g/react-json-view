@@ -158,7 +158,8 @@ class VariableEditor extends React.PureComponent {
                     class="variable-value"
                     onMouseDown={
                         onSelect === false && onEdit === false
-                            ? null : () => {
+                            ? null
+                            : () => {
                                   let location = [...namespace];
                                   if (onSelect !== false) {
                                       location.shift();
@@ -169,15 +170,15 @@ class VariableEditor extends React.PureComponent {
                                   }
                               }
                     }
-                  onDoubleClick={
-                      onSelect === false && onEdit === false
-                        ? null
-                        : () => {
-                            if (onEdit !== false) {
-                                this.prepopInput(variable);
-                            }
-                        }
-                  }
+                    onDoubleClick={
+                        onSelect === false && onEdit === false
+                            ? null
+                            : () => {
+                                  if (onEdit !== false) {
+                                      this.prepopInput(variable);
+                                  }
+                              }
+                    }
                     {...Theme(theme, 'variableValue', {
                         cursor: onSelect === false ? 'default' : 'pointer'
                     })}

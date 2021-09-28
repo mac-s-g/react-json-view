@@ -460,13 +460,30 @@ const getDefaultThemeStyling = theme => {
     };
 };
 
+const getDefaultColorMapOverride = theme => {
+    return { ...colorMap(theme), mutedEllipsisColor: theme.base05 };
+};
+
+const getDefaultThemeOverride = theme => {
+    const colors = getDefaultColorMapOverride(theme);
+
+    return {
+        ...getDefaultThemeStyling(theme),
+        informativeEllipis: {
+            display: 'inline-block',
+            color: colors.mutedEllipsisColor,
+            cursor: constants.ellipsisCursor
+        }
+    };
+};
+
 const getStyle = theme => {
     let rjv_theme = rjv_default;
     if (theme === false || theme === 'none') {
         rjv_theme = rjv_grey;
     }
 
-    return createStyling(getDefaultThemeStyling, { defaultBase16: rjv_theme })(
+    return createStyling(getDefaultThemeOverride, { defaultBase16: rjv_theme })(
         theme
     );
 };

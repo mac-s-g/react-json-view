@@ -484,7 +484,7 @@ const getDefaultThemeOverride = theme => {
                     ...variable_style
                 }
             };
-        },
+        }
     };
 };
 

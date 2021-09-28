@@ -11,7 +11,9 @@ export default class extends React.PureComponent {
     }
 
     handleChange = (value) => {
-        this.setState({ value });
+        const pattern = new RegExp(/\n/g);
+        const formatted = value.replace(pattern, '  \n');
+        this.setState({ value: formatted });
         if (this.props.onChange) {
             this.props.onChange(value);
         }

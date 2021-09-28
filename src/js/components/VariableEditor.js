@@ -180,7 +180,7 @@ class VariableEditor extends React.PureComponent {
                               }
                     }
                     {...Theme(theme, 'variableValue', {
-                        cursor: onSelect === false ? 'default' : 'pointer'
+                        cursor: 'pointer'
                     })}
                 >
                     {this.getValue(variable, editMode)}

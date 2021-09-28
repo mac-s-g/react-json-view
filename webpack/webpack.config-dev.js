@@ -49,6 +49,10 @@ const config = {
           }
         ],
         include: [PATHS.js, PATHS.devServer]
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"]
       }
     ]
   }

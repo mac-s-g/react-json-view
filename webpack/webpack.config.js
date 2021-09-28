@@ -51,6 +51,10 @@ const config = {
           }
         ],
         include: [PATHS.js]
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"]
       }
     ]
   }

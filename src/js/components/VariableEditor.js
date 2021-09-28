@@ -8,6 +8,7 @@ import CopyToClipboard from './CopyToClipboard';
 import PasteToJson from './PasteToJson';
 import CutFromJson from './CutFromJson';
 import highlightedString from './../helpers/highlightedString';
+import MDEditor from './MarkdownEditor';
 
 //data type components
 import {
@@ -355,51 +356,76 @@ class VariableEditor extends React.PureComponent {
 
     getEditInput = () => {
         const { theme } = this.props;
-        const { editValue } = this.state;
+        const { editValue, editMode } = this.state;
 
         return (
             <div>
-                <AutosizeTextarea
-                    type="text"
-                    inputRef={input => input && input.focus()}
-                    value={editValue}
-                    class="variable-editor"
-                    onChange={event => {
-                        const value = event.target.value;
-                        const detected = parseInput(value);
-                        this.setState({
-                            editValue: value,
-                            parsedInput: {
-                                type: detected.type,
-                                value: detected.value
-                            }
-                        });
-                    }}
-                    onKeyDown={e => {
-                        switch (e.key) {
-                            case 'Escape': {
+                {
+                    editMode === 'markdown'
+                        ? <MDEditor
+                            value={ editValue }
+                            onChange={value => {
                                 this.setState({
-                                    editMode: false,
-                                    editValue: ''
+                                    editValue: value
                                 });
-                                this.props.isDragAllowed(true);
-                                break;
-                            }
-                            case 'Enter': {
-                                if (e.ctrlKey || e.metaKey) {
-                                    this.submitEdit(true);
-                                }
-                                this.props.isDragAllowed(true);
-                                break;
-                            }
-                        }
-                        e.stopPropagation();
-                    }}
-                    placeholder="Insert new value"
-                    minRows={2}
-                    {...Theme(theme, 'edit-input')}
-                />
+                            }}
+                        />
+                        : (
+                            <AutosizeTextarea
+                                type="text"
+                                inputRef={input => input && input.focus()}
+                                value={editValue}
+                                class="variable-editor"
+                                onChange={event => {
+                                    const value = event.target.value;
+                                    const detected = parseInput(value);
+                                    this.setState({
+                                        editValue: value,
+                                        parsedInput: {
+                                            type: detected.type,
+                                            value: detected.value
+                                        }
+                                    });
+                                }}
+                                onKeyDown={e => {
+                                    switch (e.key) {
+                                        case 'Escape': {
+                                            this.setState({
+                                                editMode: false,
+                                                editValue: ''
+                                            });
+                                            this.props.isDragAllowed(true);
+                                            break;
+                                        }
+                                        case 'Enter': {
+                                            if (e.ctrlKey || e.metaKey) {
+                                                this.submitEdit(true);
+                                            }
+                                            this.props.isDragAllowed(true);
+                                            break;
+                                        }
+                                    }
+                                    e.stopPropagation();
+                                }}
+                                placeholder="Insert new value"
+                                minRows={2}
+                                {...Theme(theme, 'edit-input')}
+                            />
+                        )
+                    }
                 <div {...Theme(theme, 'edit-icon-container')}>
+                    {editMode === 'markdown'
+                        ? (
+                            <button onClick={() => {
+                                this.setState({ editMode: 'regular' })
+                            }}>Regular</button>
+                        )
+                        : (
+                            <button onClick={() => {
+                                this.setState({ editMode: 'markdown' });
+                            }}>MD</button>
+                        )
+                    }
                     <Cancel
                         class="edit-cancel"
                         {...Theme(theme, 'cancel-icon')}

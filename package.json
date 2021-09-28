@@ -4,14 +4,15 @@
     "version": "1.21.3",
     "main": "dist/main.js",
     "dependencies": {
+        "@uiw/react-md-editor": "^3.6.4",
         "flux": "^4.0.1",
         "react-base16-styling": "^0.6.0",
         "react-color": "^2.19.3",
         "react-draggable": "^4.4.3",
         "react-lifecycles-compat": "^3.0.4",
-        "react-textarea-autosize": "^8.3.2",
         "react-onclickoutside": "^6.9.0",
-        "react-sortable-hoc": "^1.11.0"
+        "react-sortable-hoc": "^1.11.0",
+        "react-textarea-autosize": "^8.3.2"
     },
     "devDependencies": {
         "@babel/eslint-parser": "^7.12.1",
@@ -57,7 +58,6 @@
     },
     "scripts": {
         "build": "NODE_ENV=production webpack --config webpack/webpack.config.js -p --display-error-details --progress --optimize-minimize",
-        "prebuild": "NODE_ENV=test npm run test:unit",
         "build:demo": "NODE_ENV=production webpack --config webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
         "dev": "NODE_ENV=development webpack-dev-server --config webpack/webpack.config-dev.js --open",
         "modules:debug": "./docker/debug.sh",

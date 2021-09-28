@@ -473,7 +473,18 @@ const getDefaultThemeOverride = theme => {
             display: 'inline-block',
             color: colors.mutedEllipsisColor,
             cursor: constants.ellipsisCursor
-        }
+        },
+        variableValue: (component, variable_style) => {
+            return {
+                style: {
+                    display: 'inline-block',
+                    paddingRight: constants.variableValuePaddingRight,
+                    cursor: 'pointer',
+                    position: 'relative',
+                    ...variable_style
+                }
+            };
+        },
     };
 };
 

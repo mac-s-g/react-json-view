@@ -36,6 +36,50 @@
             margin-left: -18px;
         }
     }
+    .md-editor-container {
+        border: 1px solid rgb(118, 118, 118);
+        border-radius: 2px;
+        display: inline-block;
+
+        .styles {
+            border-bottom: 1px solid rgb(118, 118, 118);
+            display: flex;
+        }
+        .style-button {
+            display: inline-flex;
+            justify-content: center;
+            padding: 8px;
+            width: 20px;
+        }
+        .md-headers {
+            position: relative;
+
+            button {
+                border: none;
+                height: 100%;
+            }
+            .header-buttons-container {
+                background: #fff;
+                border: 1px solid rgb(118, 118, 118);
+                border-radius: 2px;
+                display: flex;
+                position: absolute;
+                left: -100%;
+                top: calc(100% + 4px);
+                z-index: 10;
+            }
+        }
+        .md-editor {
+            background-color: rgb(245, 245, 245);
+            cursor: text;
+            max-height: 400px;
+            max-width: 450px;
+            min-height: 30px;
+            min-width: 230px;
+            overflow: auto;
+            padding: 8px 20px;
+        }
+    }
 }
 
 .react-json-editor {

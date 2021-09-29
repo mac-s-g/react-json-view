@@ -169,8 +169,8 @@ class RjvObject extends React.PureComponent {
         );
     };
 
-    getEllipsis = (depth, src) => {
-        const { theme, sortKeys } = this.props;
+    getEllipsis = () => {
+        const { theme, sortKeys, src } = this.props;
         const { size, object_type } = this.state;
 
         if (size === 0) {
@@ -343,7 +343,7 @@ class RjvObject extends React.PureComponent {
                           iconStyle,
                           ...rest
                       })
-                    : this.getEllipsis(depth, src)}
+                    : this.getEllipsis()}
                 <span class="brace-row">
                     <span
                         style={{

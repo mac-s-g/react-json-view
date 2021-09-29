@@ -4,8 +4,9 @@
     "version": "1.21.3",
     "main": "dist/main.js",
     "dependencies": {
-        "@uiw/react-md-editor": "^3.6.4",
+        "draft-js": "^0.11.7",
         "flux": "^4.0.1",
+        "markdown-draft-js": "^2.3.0",
         "react-base16-styling": "^0.6.0",
         "react-color": "^2.19.3",
         "react-draggable": "^4.4.3",

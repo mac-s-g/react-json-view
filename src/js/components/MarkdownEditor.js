@@ -1,7 +1,7 @@
 import React from 'react';
 import { Editor, EditorState, RichUtils, convertFromRaw, convertToRaw } from 'draft-js';
 import { draftToMarkdown, markdownToDraft } from 'markdown-draft-js';
-import { Bold, Italic, OrderedList, Underline, UnorderedList } from './icons';
+import { Bold, Italic, OrderedList, Underline, UnorderedList, H1, H2, H3, H4, H5, H6 } from './icons';
 import 'draft-js/dist/Draft.css';
 
 const styles = [
@@ -13,12 +13,12 @@ const styles = [
 const blockTypes = [
     { label: <UnorderedList />, style: 'unordered-list-item' },
     { label: <OrderedList />, style: 'ordered-list-item' },
-    { label: 'H1', style: 'header-one' },
-    { label: 'H2', style: 'header-two' },
-    { label: 'H3', style: 'header-three'},
-    { label: 'H4', style: 'header-four' },
-    { label: 'H5', style: 'header-five' },
-    { label: 'H6', style: 'header-six' },
+    { label: <H1 />, style: 'header-one' },
+    { label: <H2 />, style: 'header-two' },
+    { label: <H3 />, style: 'header-three'},
+    { label: <H4 />, style: 'header-four' },
+    { label: <H5 />, style: 'header-five' },
+    { label: <H6 />, style: 'header-six' },
 ];
 
 export default class extends React.PureComponent {

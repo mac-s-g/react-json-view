@@ -9,6 +9,7 @@ import PasteToJson from './PasteToJson';
 import CutFromJson from './CutFromJson';
 import highlightedString from './../helpers/highlightedString';
 import MDEditor from './MarkdownEditor';
+import { Markdown, ArrowLeft } from './icons';
 
 //data type components
 import {
@@ -416,14 +417,22 @@ class VariableEditor extends React.PureComponent {
                 <div {...Theme(theme, 'edit-icon-container')}>
                     {editMode === 'markdown'
                         ? (
-                            <button onClick={() => {
-                                this.setState({ editMode: 'regular' })
-                            }}>Regular</button>
+                            <button
+                                className="editor-toggle"
+                                onClick={() => this.setState({ editMode: 'regular' })}
+                                title="Return to simple editor"
+                            >
+                                <ArrowLeft />
+                            </button>
                         )
                         : (
-                            <button onClick={() => {
-                                this.setState({ editMode: 'markdown' });
-                            }}>MD</button>
+                            <button
+                                className="editor-toggle"
+                                onClick={() => this.setState({ editMode: 'markdown' })}
+                                title="Switch to markdown editor"
+                            >
+                                <Markdown />
+                            </button>
                         )
                     }
                     <Cancel

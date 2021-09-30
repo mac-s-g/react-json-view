@@ -40,16 +40,27 @@
         border: 1px solid rgb(118, 118, 118);
         border-radius: 2px;
         display: inline-block;
+        margin-right: 4px;
 
         .styles {
             border-bottom: 1px solid rgb(118, 118, 118);
             display: flex;
         }
         .style-button {
+            align-items: center;
             display: inline-flex;
+            font-size: 19px;
             justify-content: center;
             padding: 8px;
-            width: 20px;
+            width: 24px;
+
+            &.active {
+                background: #eee;
+            }
+
+            &:hover {
+                background: #eee;
+            }
         }
         .md-headers {
             position: relative;
@@ -79,6 +90,13 @@
             overflow: auto;
             padding: 8px 20px;
         }
+    }
+    .editor-toggle {
+        background: transparent;
+        cursor: pointer;
+        display: inline-block;
+        border: none;
+        padding: 0;
     }
 }
 

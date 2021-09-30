@@ -11,6 +11,9 @@ import ObjectAttributes from './stores/ObjectAttributes';
 //global theme
 import Theme from './themes/getStyle';
 
+//some style behavior requires css
+import './../style/scss/global.scss';
+
 //forward src through to JsonObject component
 class ReactJsonView extends React.PureComponent {
     constructor(props) {

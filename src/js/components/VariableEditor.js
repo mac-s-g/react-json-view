@@ -38,7 +38,7 @@ import {
 import Theme from './../themes/getStyle';
 import ExternalPaste from './ExternalPaste';
 
-const editModes = {
+export const editModes = {
     MARKDOWN: 'MARKDOWN',
     REGULAR: 'REGULAR',
 };

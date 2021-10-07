@@ -59,6 +59,7 @@
     },
     "scripts": {
         "build": "NODE_ENV=production webpack --config webpack/webpack.config.js -p --display-error-details --progress --optimize-minimize",
+        "prebuild": "NODE_ENV=test npm run test:unit",
         "build:demo": "NODE_ENV=production webpack --config webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
         "dev": "NODE_ENV=development webpack-dev-server --config webpack/webpack.config-dev.js --open",
         "modules:debug": "./docker/debug.sh",

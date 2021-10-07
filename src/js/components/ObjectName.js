@@ -9,7 +9,8 @@ export default function getObjectName(props) {
         theme,
         jsvRoot,
         name,
-        displayArrayKey
+        displayArrayKey,
+        onSelect
     } = props;
 
     const display_name = props.name ? props.name : '';
@@ -28,7 +29,21 @@ export default function getObjectName(props) {
     } else {
         return (
             <span {...Theme(theme, 'object-name')} key={namespace}>
-                <span class="object-key">
+                <span
+                    onClick={
+                        onSelect === false
+                            ? null
+                            : e => {
+                                  let location = [...namespace];
+                                  location.shift();
+                                  onSelect({
+                                      isKey: true,
+                                      key: display_name,
+                                      namespace: location
+                                  });
+                              }
+                    }
+                    class="object-key">
                     {quotesOnKeys && (
                         <span style={{ verticalAlign: 'top' }}>"</span>
                     )}

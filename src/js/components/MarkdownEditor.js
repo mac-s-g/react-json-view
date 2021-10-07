@@ -82,7 +82,7 @@ export default class extends React.PureComponent {
 
         return (
             <div className="md-editor-container">
-                <div class="styles">
+                <div className="styles">
                     {styles.map(type => (
                         <StyleButton
                             style={type.style}

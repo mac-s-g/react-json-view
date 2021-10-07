@@ -38,11 +38,16 @@ import {
 import Theme from './../themes/getStyle';
 import ExternalPaste from './ExternalPaste';
 
+const editModes = {
+    MARKDOWN: 'MARKDOWN',
+    REGULAR: 'REGULAR',
+};
+
 class VariableEditor extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            editMode: false,
+            editMode: null,
             editValue: '',
             renameKey: false,
             parsedInput: {
@@ -131,8 +136,6 @@ class VariableEditor extends React.PureComponent {
             onSelect,
             rjvId,
             parent_type,
-            displayArrayKey,
-            quotesOnKeys
         } = this.props;
         const { editMode, hoveredOver } = this.state;
         const disableEditingArrayKeys =
@@ -278,13 +281,26 @@ class VariableEditor extends React.PureComponent {
             const stringifiedValue = stringifyVariable(variable.value);
             const detected = parseInput(stringifiedValue);
             this.setState({
-                editMode: true,
+                editMode: this.getActiveEditMode(),
                 editValue: stringifiedValue,
                 parsedInput: {
                     type: detected.type,
                     value: detected.value
                 }
             });
+        }
+    };
+
+    getActiveEditMode = () => {
+        switch (this.state.editMode) {
+            case editModes.MARKDOWN:
+                return editModes.MARKDOWN;
+            case editModes.REGULAR:
+                return editModes.REGULAR;
+            case null:
+                return editModes.REGULAR;
+            default:
+                throw new Error(`Unknown editMode "${this.state.editMode}" set in state`);
         }
     };
 
@@ -363,87 +379,98 @@ class VariableEditor extends React.PureComponent {
         const { theme } = this.props;
         const { editValue, editMode } = this.state;
 
-        return (
-            <div>
-                {
-                    editMode === 'markdown'
-                        ? <MDEditor
-                            value={ editValue }
-                            onChange={value => {
-                                this.setState({
-                                    editValue: value
-                                });
+        if (editMode === editModes.MARKDOWN) {
+            return (
+                <div>
+                    <MDEditor
+                        value={ editValue }
+                        onChange={value => this.setState({ editValue: value }) }
+                    />
+                    <div {...Theme(theme, 'edit-icon-container')}>
+                        <button
+                            className="editor-toggle"
+                            onClick={() => this.setState({ editMode: editModes.REGULAR })}
+                            title="Return to simple editor"
+                        >
+                            <ArrowLeft />
+                        </button>
+                        <Cancel
+                            class="edit-cancel"
+                            {...Theme(theme, 'cancel-icon')}
+                            onClick={() => {
+                                this.setState({ editMode: null, editValue: '' });
+                                this.props.isDragAllowed(true);
                             }}
                         />
-                        : (
-                            <AutosizeTextarea
-                                type="text"
-                                inputRef={input => input && input.focus()}
-                                value={editValue}
-                                class="variable-editor"
-                                onChange={event => {
-                                    const value = event.target.value;
-                                    const detected = parseInput(value);
-                                    this.setState({
-                                        editValue: value,
-                                        parsedInput: {
-                                            type: detected.type,
-                                            value: detected.value
-                                        }
-                                    });
-                                }}
-                                onKeyDown={e => {
-                                    switch (e.key) {
-                                        case 'Escape': {
-                                            this.setState({
-                                                editMode: false,
-                                                editValue: ''
-                                            });
-                                            this.props.isDragAllowed(true);
-                                            break;
-                                        }
-                                        case 'Enter': {
-                                            if (e.ctrlKey || e.metaKey) {
-                                                this.submitEdit(true);
-                                            }
-                                            this.props.isDragAllowed(true);
-                                            break;
-                                        }
-                                    }
-                                    e.stopPropagation();
-                                }}
-                                placeholder="Insert new value"
-                                minRows={2}
-                                {...Theme(theme, 'edit-input')}
-                            />
-                        )
-                    }
+                        <CheckCircle
+                            class="edit-check string-value"
+                            {...Theme(theme, 'check-icon')}
+                            onClick={() => {
+                                this.submitEdit();
+                            }}
+                        />
+                    </div>
+                </div>
+            )
+        }
+
+        return (
+            <div>
+                <AutosizeTextarea
+                    type="text"
+                    inputRef={input => input && input.focus()}
+                    value={editValue}
+                    class="variable-editor"
+                    onChange={event => {
+                        const value = event.target.value;
+                        const detected = parseInput(value);
+                        this.setState({
+                            editValue: value,
+                            parsedInput: {
+                                type: detected.type,
+                                value: detected.value
+                            }
+                        });
+                    }}
+                    onKeyDown={e => {
+                        switch (e.key) {
+                            case 'Escape': {
+                                this.setState({
+                                    editMode: null,
+                                    editValue: ''
+                                });
+                                this.props.isDragAllowed(true);
+                                break;
+                            }
+                            case 'Enter': {
+                                if (e.ctrlKey || e.metaKey) {
+                                    this.submitEdit(true);
+                                }
+                                this.props.isDragAllowed(true);
+                                break;
+                            }
+                        }
+                        e.stopPropagation();
+                    }}
+                    placeholder="Insert new value"
+                    minRows={2}
+                    {...Theme(theme, 'edit-input')}
+                />
                 <div {...Theme(theme, 'edit-icon-container')}>
-                    {editMode === 'markdown'
-                        ? (
-                            <button
-                                className="editor-toggle"
-                                onClick={() => this.setState({ editMode: 'regular' })}
-                                title="Return to simple editor"
-                            >
-                                <ArrowLeft />
-                            </button>
-                        )
-                        : (
-                            <button
-                                className="editor-toggle"
-                                onClick={() => this.setState({ editMode: 'markdown' })}
-                                title="Switch to markdown editor"
-                            >
-                                <Markdown />
-                            </button>
-                        )
-                    }
+
+                    <button
+                        className="editor-toggle"
+                        onClick={() => this.setState({ editMode: editModes.MARKDOWN })}
+                        title="Switch to markdown editor"
+                    >
+                        <Markdown />
+                    </button>
+
                     <Cancel
                         class="edit-cancel"
                         {...Theme(theme, 'cancel-icon')}
                         onClick={() => {
-                            this.setState({ editMode: false, editValue: '' });
+                            this.setState({ editMode: null, editValue: '' });
                             this.props.isDragAllowed(true);
                         }}
                     />
@@ -498,7 +525,7 @@ class VariableEditor extends React.PureComponent {
             new_value = newColor;
         }
         this.setState({
-            editMode: false,
+            editMode: null,
             hoveredOver: false
         });
         if (allowDragging) {
@@ -518,8 +545,7 @@ class VariableEditor extends React.PureComponent {
     };
 
     showDetected = () => {
-        const { theme, variable, namespace, rjvId } = this.props;
-        const { type, value } = this.state.parsedInput;
+        const { theme, variable } = this.props;
         const detected = this.getDetectedInput();
         if (detected) {
             return (

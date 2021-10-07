@@ -38,13 +38,22 @@
     }
     .md-editor-container {
         border: 1px solid rgb(118, 118, 118);
-        border-radius: 2px;
-        display: inline-block;
+        display: inline-flex;
+        flex-direction: column;
         margin-right: 4px;
+        max-height: 800px;
+        max-width: 500px;
+        min-height: 120px;
+        min-width: 250px;
+        overflow: hidden;
+        position: relative;
+        resize: both;
 
         .styles {
+            background: #ffffff;
             border-bottom: 1px solid rgb(118, 118, 118);
             display: flex;
+            flex-wrap: wrap;
         }
         .style-button {
             align-items: center;
@@ -83,10 +92,7 @@
         .md-editor {
             background-color: rgb(245, 245, 245);
             cursor: text;
-            max-height: 400px;
-            max-width: 450px;
-            min-height: 30px;
-            min-width: 230px;
+            flex-grow: 1;
             overflow: auto;
             padding: 8px 20px;
         }

@@ -9,7 +9,6 @@ import PasteToJson from './PasteToJson';
 import CutFromJson from './CutFromJson';
 import highlightedString from './../helpers/highlightedString';
 import MDEditor from './MarkdownEditor';
-import { Markdown, ArrowLeft } from './icons';
 
 //data type components
 import {
@@ -31,7 +30,9 @@ import {
     Edit,
     CheckCircle,
     RemoveIcon as Remove,
-    CancelIcon as Cancel
+    CancelIcon as Cancel,
+    Markdown,
+    ArrowLeft
 } from './icons';
 
 //theme
@@ -553,7 +554,7 @@ class VariableEditor extends React.PureComponent {
     };
 
     showDetected = () => {
-        const { theme, variable } = this.props;
+        const { theme } = this.props;
         const detected = this.getDetectedInput();
         if (detected) {
             return (

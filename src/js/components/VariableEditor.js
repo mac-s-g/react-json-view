@@ -158,17 +158,12 @@ class VariableEditor extends React.PureComponent {
                     : this.renderObjectKeys()}
                 <div
                     class="variable-value"
-                    onClick={
+                    onMouseDown={
                         onSelect === false && onEdit === false
                             ? null
-                            : e => {
+                            : () => {
                                   let location = [...namespace];
-                                  if (
-                                      (e.ctrlKey || e.metaKey) &&
-                                      onEdit !== false
-                                  ) {
-                                      this.prepopInput(variable);
-                                  } else if (onSelect !== false) {
+                                  if (onSelect !== false) {
                                       location.shift();
                                       onSelect({
                                           ...variable,
@@ -177,8 +172,17 @@ class VariableEditor extends React.PureComponent {
                                   }
                               }
                     }
+                    onDoubleClick={
+                        onSelect === false && onEdit === false
+                            ? null
+                            : () => {
+                                  if (onEdit !== false) {
+                                      this.prepopInput(variable);
+                                  }
+                              }
+                    }
                     {...Theme(theme, 'variableValue', {
-                        cursor: onSelect === false ? 'default' : 'pointer'
+                        cursor: 'pointer'
                     })}
                 >
                     {this.getValue(variable, editMode)}

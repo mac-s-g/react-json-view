@@ -43,7 +43,6 @@ class RjvObject extends React.PureComponent {
     }
 
     componentDidMount() {
-        // console.log(ObjectAttributes.get(this.props.rjvId, this.props.namespace, 'expanded', undefined));
         ObjectAttributes.on(
             'expanded-' + this.props.namespace.join(','),
             this.handleExpand
@@ -171,20 +170,38 @@ class RjvObject extends React.PureComponent {
     };
 
     getEllipsis = () => {
-        const { theme } = this.props;
-        const { size } = this.state;
+        const { theme, sortKeys, src } = this.props;
+        const { size, object_type } = this.state;
 
         if (size === 0) {
             //don't render an ellipsis when an object has no items
             return null;
         } else {
+            let keys = Object.keys(src || {});
+            if (sortKeys && object_type !== 'array') {
+                keys = keys.sort();
+            }
+
+            const variable = new JsonVariable(keys[0], src[keys[0]]);
+            const numberOfOtherVariables = keys.length - 1;
+            const variableValueText =
+                variable.type === 'object'
+                    ? '{...}'
+                    : variable.value.toString();
+            const variableExtraInfoText =
+                numberOfOtherVariables > 0
+                    ? numberOfOtherVariables === 1
+                        ? ' ( +' + (keys.length - 1) + ' item )'
+                        : ' ( +' + (keys.length - 1) + ' items )'
+                    : '';
             return (
                 <div
-                    {...Theme(theme, 'ellipsis')}
+                    {...Theme(theme, 'informativeEllipis')}
                     class="node-ellipsis"
                     onClick={this.toggleCollapsed}
                 >
-                    ...
+                    {variable.name} :{' '}
+                    {variableValueText + variableExtraInfoText}
                 </div>
             );
         }
@@ -310,7 +327,6 @@ class RjvObject extends React.PureComponent {
 
         return (
             <div
-                class="object-key-val"
                 class="object-key-val"
                 onMouseEnter={() =>
                     this.setState({ ...this.state, hovered: true })

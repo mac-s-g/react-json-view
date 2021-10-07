@@ -4,7 +4,6 @@ import JsonViewer from './components/JsonViewer';
 import AddKeyRequest from './components/ObjectKeyModal/AddKeyRequest';
 import PasteAddKeyRequest from './components/ObjectKeyModal/PasteAddKeyRequest';
 import EditKeyRequest from './components/ObjectKeyModal/EditKeyRequest';
-import ValidationFailure from './components/ValidationFailure';
 import { toType, isTheme } from './helpers/util';
 import ObjectAttributes from './stores/ObjectAttributes';
 
@@ -189,12 +188,9 @@ class ReactJsonView extends React.PureComponent {
 
     render() {
         const {
-            validationFailure,
-            validationMessage,
             addKeyRequest,
             theme,
             src,
-            name,
             searchKey,
             copied,
             editKeyRequest,
@@ -203,13 +199,13 @@ class ReactJsonView extends React.PureComponent {
 
         const { style, defaultValue, displaySearch } = this.props;
 
-        const customClassname = this.props.className || '';
+        const customClassname = this.props.className || this.props.class || '';
         return (
-            <div className={`react-json-editor ${customClassname}`}>
-                <div className="react-json-view-search-box">
+            <div class={`react-json-editor ${customClassname}`}>
+                <div class="react-json-view-search-box">
                     {displaySearch ? (
                         <input
-                            className="search-box"
+                            class="search-box"
                             type="text"
                             placeholder="Search..."
                             onChange={e => this.handleSearch(e)}
@@ -217,7 +213,7 @@ class ReactJsonView extends React.PureComponent {
                     ) : null}
                 </div>
                 <div
-                    className="react-json-view"
+                    class="react-json-view"
                     style={{ ...Theme(theme, 'app-container').style, ...style }}
                 >
                     <JsonViewer
@@ -259,7 +255,6 @@ class ReactJsonView extends React.PureComponent {
             namespace,
             new_value,
             existing_value,
-            variable_removed,
             updated_src,
             type
         } = ObjectAttributes.get(this.rjvId, 'action', 'variable-update');

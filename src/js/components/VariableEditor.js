@@ -87,7 +87,7 @@ class VariableEditor extends React.PureComponent {
         return (
             displayArrayKey && (
                 <span
-                    className="array-key"
+                    class="array-key"
                     {...Theme(theme, 'array-key')}
                     key={variable.name + '_' + namespace}
                 >
@@ -105,7 +105,7 @@ class VariableEditor extends React.PureComponent {
             <span>
                 <span
                     {...Theme(theme, 'object-name')}
-                    className="object-key"
+                    class="object-key"
                     key={variable.name + '_' + namespace}
                 >
                     {!!quotesOnKeys && (
@@ -391,7 +391,7 @@ class VariableEditor extends React.PureComponent {
                     />
                     <div {...Theme(theme, 'edit-icon-container')}>
                         <button
-                            className="editor-toggle"
+                            class="editor-toggle"
                             onClick={() =>
                                 this.setState({ editMode: editModes.REGULAR })
                             }
@@ -466,7 +466,7 @@ class VariableEditor extends React.PureComponent {
                 />
                 <div {...Theme(theme, 'edit-icon-container')}>
                     <button
-                        className="editor-toggle"
+                        class="editor-toggle"
                         onClick={() =>
                             this.setState({ editMode: editModes.MARKDOWN })
                         }

@@ -81,8 +81,8 @@ export default class extends React.PureComponent {
             .getType();
 
         return (
-            <div className="md-editor-container">
-                <div className="styles">
+            <div class="md-editor-container">
+                <div class="styles">
                     {styles.map(type => (
                         <StyleButton
                             style={type.style}
@@ -104,7 +104,7 @@ export default class extends React.PureComponent {
                         </StyleButton>
                     ))}
                 </div>
-                <div className="md-editor">
+                <div class="md-editor">
                     <Editor
                         ref={el => (this.editor = el)}
                         editorState={this.state.value}
@@ -128,7 +128,7 @@ const StyleButton = ({ children, style, onToggle, active }) => {
 
     return (
         <span
-            className={Object.values(classNames).filter(Boolean).join(' ')}
+            class={Object.values(classNames).filter(Boolean).join(' ')}
             onMouseDown={_onToggle}
         >
             {children}

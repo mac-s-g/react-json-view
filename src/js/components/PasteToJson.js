@@ -98,7 +98,7 @@ class PasteToJson extends Component {
     render() {
         const { theme } = this.props;
         return (
-            <span className="paste-to-json-container" title="Paste after this">
+            <span class="paste-to-json-container" title="Paste after this">
                 <Paste
                     class="paste-icon"
                     {...Theme(theme, 'paste-icon')}

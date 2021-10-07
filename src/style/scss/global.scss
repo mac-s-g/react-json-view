@@ -36,6 +36,74 @@
             margin-left: -18px;
         }
     }
+    .md-editor-container {
+        border: 1px solid rgb(118, 118, 118);
+        display: inline-flex;
+        flex-direction: column;
+        margin-right: 4px;
+        max-height: 800px;
+        max-width: 500px;
+        min-height: 120px;
+        min-width: 250px;
+        overflow: hidden;
+        position: relative;
+        resize: both;
+
+        .styles {
+            background: #ffffff;
+            border-bottom: 1px solid rgb(118, 118, 118);
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .style-button {
+            align-items: center;
+            display: inline-flex;
+            font-size: 20px;
+            justify-content: center;
+            padding: 8px;
+            width: 24px;
+
+            &.active {
+                background: #eee;
+            }
+
+            &:hover {
+                background: #eee;
+            }
+        }
+        .md-headers {
+            position: relative;
+
+            button {
+                border: none;
+                height: 100%;
+            }
+            .header-buttons-container {
+                background: #fff;
+                border: 1px solid rgb(118, 118, 118);
+                border-radius: 2px;
+                display: flex;
+                position: absolute;
+                left: -100%;
+                top: calc(100% + 4px);
+                z-index: 10;
+            }
+        }
+        .md-editor {
+            background-color: rgb(245, 245, 245);
+            cursor: text;
+            flex-grow: 1;
+            overflow: auto;
+            padding: 8px 20px;
+        }
+    }
+    .editor-toggle {
+        background: transparent;
+        cursor: pointer;
+        display: inline-block;
+        border: none;
+        padding: 0;
+    }
 }
 
 .react-json-editor {

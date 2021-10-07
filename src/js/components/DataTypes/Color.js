@@ -82,7 +82,7 @@ class JsonColor extends React.PureComponent {
         let { value } = this.props;
         return (
             <div
-                className="color-picker-box"
+                class="color-picker-box"
                 style={{ backgroundColor: value }}
                 onClick={this.toggleColorPicker}
             ></div>

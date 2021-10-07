@@ -323,7 +323,7 @@ class DragWrapper extends Component {
         return (
             <div
                 style={borders}
-                className="drag-wrapper tree-node-container"
+                class="drag-wrapper tree-node-container"
                 data-isarray={isArray}
                 data-drop-target={true}
                 data-node-value={value}

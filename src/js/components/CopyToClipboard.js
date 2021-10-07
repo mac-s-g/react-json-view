@@ -82,7 +82,7 @@ export default class extends React.PureComponent {
 
         return (
             <span
-                className="copy-to-clipboard-container"
+                class="copy-to-clipboard-container"
                 title="Copy to clipboard"
                 style={{
                     verticalAlign: 'top',

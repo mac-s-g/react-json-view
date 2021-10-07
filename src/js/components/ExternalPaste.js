@@ -70,7 +70,7 @@ class ExternalPaste extends Component {
         const { theme } = this.props;
         return (
             <span
-                className="paste-to-json-container"
+                class="paste-to-json-container"
                 title="Paste from external clipboard"
             >
                 <Paste

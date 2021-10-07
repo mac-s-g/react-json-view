@@ -41,7 +41,7 @@ export default class extends React.PureComponent {
             >
                 <div
                     {...Theme(theme, 'key-modal')}
-                    className="request-modal"
+                    class="request-modal"
                     onClick={e => {
                         e.stopPropagation();
                     }}
@@ -82,7 +82,7 @@ export default class extends React.PureComponent {
             <div>
                 <input
                     {...Theme(theme, 'key-modal-input')}
-                    className="key-modal-input"
+                    class="key-modal-input"
                     autoFocus={true}
                     spellCheck={false}
                     value={input}
@@ -158,7 +158,7 @@ export default class extends React.PureComponent {
                 <div {...Theme(theme, 'key-modal-label')}>Paste value here</div>
                 <AutosizeTextarea
                     {...Theme(theme, 'value-modal-textarea')}
-                    className="value-modal-textarea"
+                    class="value-modal-textarea"
                     value={pasteInput}
                     minRows={2}
                     autoFocus={parentIsArray}

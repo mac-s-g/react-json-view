@@ -8,6 +8,7 @@ import CopyToClipboard from './CopyToClipboard';
 import PasteToJson from './PasteToJson';
 import CutFromJson from './CutFromJson';
 import highlightedString from './../helpers/highlightedString';
+import MDEditor from './MarkdownEditor';
 
 //data type components
 import {
@@ -29,18 +30,25 @@ import {
     Edit,
     CheckCircle,
     RemoveIcon as Remove,
-    CancelIcon as Cancel
+    CancelIcon as Cancel,
+    Markdown,
+    ArrowLeft
 } from './icons';
 
 //theme
 import Theme from './../themes/getStyle';
 import ExternalPaste from './ExternalPaste';
 
+export const editModes = {
+    MARKDOWN: 'MARKDOWN',
+    REGULAR: 'REGULAR'
+};
+
 class VariableEditor extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            editMode: false,
+            editMode: null,
             editValue: '',
             renameKey: false,
             parsedInput: {
@@ -79,7 +87,7 @@ class VariableEditor extends React.PureComponent {
         return (
             displayArrayKey && (
                 <span
-                    className="array-key"
+                    class="array-key"
                     {...Theme(theme, 'array-key')}
                     key={variable.name + '_' + namespace}
                 >
@@ -97,7 +105,7 @@ class VariableEditor extends React.PureComponent {
             <span>
                 <span
                     {...Theme(theme, 'object-name')}
-                    className="object-key"
+                    class="object-key"
                     key={variable.name + '_' + namespace}
                 >
                     {!!quotesOnKeys && (
@@ -128,9 +136,7 @@ class VariableEditor extends React.PureComponent {
             onDelete,
             onSelect,
             rjvId,
-            parent_type,
-            displayArrayKey,
-            quotesOnKeys
+            parent_type
         } = this.props;
         const { editMode, hoveredOver } = this.state;
         const disableEditingArrayKeys =
@@ -276,13 +282,28 @@ class VariableEditor extends React.PureComponent {
             const stringifiedValue = stringifyVariable(variable.value);
             const detected = parseInput(stringifiedValue);
             this.setState({
-                editMode: true,
+                editMode: this.getActiveEditMode(),
                 editValue: stringifiedValue,
                 parsedInput: {
                     type: detected.type,
                     value: detected.value
                 }
             });
+        }
+    };
+
+    getActiveEditMode = () => {
+        switch (this.state.editMode) {
+            case editModes.MARKDOWN:
+                return editModes.MARKDOWN;
+            case editModes.REGULAR:
+                return editModes.REGULAR;
+            case null:
+                return editModes.REGULAR;
+            default:
+                throw new Error(
+                    `Unknown editMode "${this.state.editMode}" set in state`
+                );
         }
     };
 
@@ -359,7 +380,47 @@ class VariableEditor extends React.PureComponent {
 
     getEditInput = () => {
         const { theme } = this.props;
-        const { editValue } = this.state;
+        const { editValue, editMode } = this.state;
+
+        if (editMode === editModes.MARKDOWN) {
+            return (
+                <div>
+                    <MDEditor
+                        value={editValue}
+                        onChange={value => this.setState({ editValue: value })}
+                    />
+                    <div {...Theme(theme, 'edit-icon-container')}>
+                        <button
+                            class="editor-toggle"
+                            onClick={() =>
+                                this.setState({ editMode: editModes.REGULAR })
+                            }
+                            title="Return to simple editor"
+                        >
+                            <ArrowLeft />
+                        </button>
+                        <Cancel
+                            class="edit-cancel"
+                            {...Theme(theme, 'cancel-icon')}
+                            onClick={() => {
+                                this.setState({
+                                    editMode: null,
+                                    editValue: ''
+                                });
+                                this.props.isDragAllowed(true);
+                            }}
+                        />
+                        <CheckCircle
+                            class="edit-check string-value"
+                            {...Theme(theme, 'check-icon')}
+                            onClick={() => {
+                                this.submitEdit();
+                            }}
+                        />
+                    </div>
+                </div>
+            );
+        }
 
         return (
             <div>
@@ -383,7 +444,7 @@ class VariableEditor extends React.PureComponent {
                         switch (e.key) {
                             case 'Escape': {
                                 this.setState({
-                                    editMode: false,
+                                    editMode: null,
                                     editValue: ''
                                 });
                                 this.props.isDragAllowed(true);
@@ -404,11 +465,21 @@ class VariableEditor extends React.PureComponent {
                     {...Theme(theme, 'edit-input')}
                 />
                 <div {...Theme(theme, 'edit-icon-container')}>
+                    <button
+                        class="editor-toggle"
+                        onClick={() =>
+                            this.setState({ editMode: editModes.MARKDOWN })
+                        }
+                        title="Switch to markdown editor"
+                    >
+                        <Markdown />
+                    </button>
+
                     <Cancel
                         class="edit-cancel"
                         {...Theme(theme, 'cancel-icon')}
                         onClick={() => {
-                            this.setState({ editMode: false, editValue: '' });
+                            this.setState({ editMode: null, editValue: '' });
                             this.props.isDragAllowed(true);
                         }}
                     />
@@ -463,7 +534,7 @@ class VariableEditor extends React.PureComponent {
             new_value = newColor;
         }
         this.setState({
-            editMode: false,
+            editMode: null,
             hoveredOver: false
         });
         if (allowDragging) {
@@ -483,8 +554,7 @@ class VariableEditor extends React.PureComponent {
     };
 
     showDetected = () => {
-        const { theme, variable, namespace, rjvId } = this.props;
-        const { type, value } = this.state.parsedInput;
+        const { theme } = this.props;
         const detected = this.getDetectedInput();
         if (detected) {
             return (

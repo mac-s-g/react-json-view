@@ -40,7 +40,7 @@ import ExternalPaste from './ExternalPaste';
 
 export const editModes = {
     MARKDOWN: 'MARKDOWN',
-    REGULAR: 'REGULAR',
+    REGULAR: 'REGULAR'
 };
 
 class VariableEditor extends React.PureComponent {
@@ -135,7 +135,7 @@ class VariableEditor extends React.PureComponent {
             onDelete,
             onSelect,
             rjvId,
-            parent_type,
+            parent_type
         } = this.props;
         const { editMode, hoveredOver } = this.state;
         const disableEditingArrayKeys =
@@ -300,7 +300,9 @@ class VariableEditor extends React.PureComponent {
             case null:
                 return editModes.REGULAR;
             default:
-                throw new Error(`Unknown editMode "${this.state.editMode}" set in state`);
+                throw new Error(
+                    `Unknown editMode "${this.state.editMode}" set in state`
+                );
         }
     };
 
@@ -383,13 +385,15 @@ class VariableEditor extends React.PureComponent {
             return (
                 <div>
                     <MDEditor
-                        value={ editValue }
-                        onChange={value => this.setState({ editValue: value }) }
+                        value={editValue}
+                        onChange={value => this.setState({ editValue: value })}
                     />
                     <div {...Theme(theme, 'edit-icon-container')}>
                         <button
                             className="editor-toggle"
-                            onClick={() => this.setState({ editMode: editModes.REGULAR })}
+                            onClick={() =>
+                                this.setState({ editMode: editModes.REGULAR })
+                            }
                             title="Return to simple editor"
                         >
                             <ArrowLeft />
@@ -398,7 +402,10 @@ class VariableEditor extends React.PureComponent {
                             class="edit-cancel"
                             {...Theme(theme, 'cancel-icon')}
                             onClick={() => {
-                                this.setState({ editMode: null, editValue: '' });
+                                this.setState({
+                                    editMode: null,
+                                    editValue: ''
+                                });
                                 this.props.isDragAllowed(true);
                             }}
                         />
@@ -411,7 +418,7 @@ class VariableEditor extends React.PureComponent {
                         />
                     </div>
                 </div>
-            )
+            );
         }
 
         return (
@@ -457,10 +464,11 @@ class VariableEditor extends React.PureComponent {
                     {...Theme(theme, 'edit-input')}
                 />
                 <div {...Theme(theme, 'edit-icon-container')}>
-
                     <button
                         className="editor-toggle"
-                        onClick={() => this.setState({ editMode: editModes.MARKDOWN })}
+                        onClick={() =>
+                            this.setState({ editMode: editModes.MARKDOWN })
+                        }
                         title="Switch to markdown editor"
                     >
                         <Markdown />

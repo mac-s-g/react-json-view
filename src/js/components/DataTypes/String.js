@@ -44,25 +44,33 @@ export default class extends React.PureComponent {
     isValueCollapsible = () => {
         const { collapseStringsAfterLength, value } = this.props;
 
-        return toType(collapseStringsAfterLength) === 'integer' && value.length > collapseStringsAfterLength;
-    }
+        return (
+            toType(collapseStringsAfterLength) === 'integer' &&
+            value.length > collapseStringsAfterLength
+        );
+    };
 
     getValue = () => {
-        const { value, search, theme, collapseStringsAfterLength: collapseLength } = this.props;
+        const {
+            value,
+            search,
+            theme,
+            collapseStringsAfterLength: collapseLength
+        } = this.props;
         const startIndex = searchStringIndex(value, search);
-        const valueShouldBeCollapsed = this.isValueCollapsible() && this.state.collapsed;
+        const valueShouldBeCollapsed =
+            this.isValueCollapsible() && this.state.collapsed;
         let result = value;
 
         if (startIndex > -1) {
             result = highlightedString(value, startIndex, search.length, theme);
         }
 
-
         if (valueShouldBeCollapsed) {
             result = (
                 <span>
-                    { value.substring(0, collapseLength) }
-                    <span { ...Theme(theme, 'ellipsis') }> ...</span>
+                    {value.substring(0, collapseLength)}
+                    <span {...Theme(theme, 'ellipsis')}> ...</span>
                 </span>
             );
         }
@@ -78,7 +86,7 @@ export default class extends React.PureComponent {
         }
 
         return { style: { cursor } };
-    }
+    };
 
     render() {
         const value = this.getValue();

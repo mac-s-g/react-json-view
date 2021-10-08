@@ -217,12 +217,10 @@ class VariableEditor extends React.PureComponent {
                 )}
                 {onEdit !== false && hoveringWhileNotEditing
                     ? this.renderValueRenameButton()
-                    : null
-                }
+                    : null}
                 {onDelete !== false && hoveringWhileNotEditing
                     ? this.getRemoveIcon()
-                    : null
-                }
+                    : null}
             </div>
         );
     }

@@ -169,7 +169,7 @@ class RjvObject extends React.PureComponent {
         );
     };
 
-    getStringifiedValue = (value) => {
+    getStringifiedValue = value => {
         const { collapseStringsAfterLength } = this.props;
         if (value.length > collapseStringsAfterLength) {
             return value.substring(0, collapseStringsAfterLength) + '...';
@@ -209,8 +209,7 @@ class RjvObject extends React.PureComponent {
                     class="node-ellipsis"
                     onClick={this.toggleCollapsed}
                 >
-                    {variable.name}:{' '}
-                    {variableValueText + variableExtraInfoText}
+                    {variable.name}: {variableValueText + variableExtraInfoText}
                 </div>
             );
         }

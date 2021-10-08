@@ -43,7 +43,7 @@ describe("<JsonString />", function() {
         expect(component.find(".data-type-label")).to.have.length(0)
     })
 
-    it("collapsed string content", function() {
+    it("collapsed string content", async function() {
         const rjvId = 1
         const props = {
             value: "123456789",
@@ -60,6 +60,9 @@ describe("<JsonString />", function() {
                 .text()
         ).to.equal('"123 ..."')
         component.find(".string-value").simulate("click")
+        // Collapsing on single click has a small timeout to allow registering double-click
+        // to enter edit-mode
+        await new Promise(resolve => setTimeout(resolve, 200));
         expect(
             component
                 .render()

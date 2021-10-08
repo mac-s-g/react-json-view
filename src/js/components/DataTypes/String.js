@@ -24,50 +24,69 @@ export default class extends React.PureComponent {
     }
 
     toggleCollapsed = () => {
-        this.setState(
-            {
-                collapsed: !this.state.collapsed
-            },
-            () => {
-                AttributeStore.set(
-                    this.props.rjvId,
-                    this.props.namespace,
-                    'collapsed',
-                    this.state.collapsed
-                );
-            }
-        );
+        setTimeout(() => {
+            this.setState(
+                {
+                    collapsed: !this.state.collapsed
+                },
+                () => {
+                    AttributeStore.set(
+                        this.props.rjvId,
+                        this.props.namespace,
+                        'collapsed',
+                        this.state.collapsed
+                    );
+                }
+            );
+        }, 200);
     };
 
+    isValueCollapsible = () => {
+        const { collapseStringsAfterLength, value } = this.props;
+
+        return toType(collapseStringsAfterLength) === 'integer' && value.length > collapseStringsAfterLength;
+    }
+
+    getValue = () => {
+        const { value, search, theme, collapseStringsAfterLength: collapseLength } = this.props;
+        const startIndex = searchStringIndex(value, search);
+        const valueShouldBeCollapsed = this.isValueCollapsible() && this.state.collapsed;
+        let result = value;
+
+        if (startIndex > -1) {
+            result = highlightedString(value, startIndex, search.length, theme);
+        }
+
+
+        if (valueShouldBeCollapsed) {
+            result = (
+                <span>
+                    { value.substring(0, collapseLength) }
+                    <span { ...Theme(theme, 'ellipsis') }> ...</span>
+                </span>
+            );
+        }
+
+        return result;
+    };
+
+    getStyle = () => {
+        let cursor = 'default';
+
+        if (this.isValueCollapsible()) {
+            cursor = 'pointer';
+        }
+
+        return { style: { cursor } };
+    }
+
     render() {
-        const type_name = 'string';
-        const { collapsed } = this.state;
-        const { props } = this;
-        const { collapseStringsAfterLength, theme } = props;
-        let { value } = props;
-        let collapsible = toType(collapseStringsAfterLength) === 'integer';
-        let style = { style: { cursor: 'default' } };
-
-        const start = searchStringIndex(value, props.search);
-        if (start > -1) {
-            value = highlightedString(value, start, props.search.length, theme);
-        }
-
-        if (collapsible && value.length > collapseStringsAfterLength) {
-            style.style.cursor = 'pointer';
-            if (this.state.collapsed) {
-                value = (
-                    <span>
-                        {value.substring(0, collapseStringsAfterLength)}
-                        <span {...Theme(theme, 'ellipsis')}> ...</span>
-                    </span>
-                );
-            }
-        }
+        const value = this.getValue();
+        let style = this.getStyle();
 
         return (
-            <div {...Theme(theme, 'string')}>
-                <DataTypeLabel type_name={type_name} {...props} />
+            <div {...Theme(this.props.theme, 'string')}>
+                <DataTypeLabel type_name="string" {...this.props} />
                 <span
                     class="string-value"
                     {...style}

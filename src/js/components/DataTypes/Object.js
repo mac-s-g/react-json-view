@@ -217,7 +217,11 @@ class RjvObject extends React.PureComponent {
 
     getObjectMetaData = () => {
         const { size, hovered } = this.state;
-        return hovered && <VariableMeta size={size} {...this.props} />;
+        return (
+            hovered && (
+                <VariableMeta size={size} rowHovered={true} {...this.props} />
+            )
+        );
     };
 
     updateKeyRequest = e => {

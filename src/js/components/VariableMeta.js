@@ -139,7 +139,7 @@ export default class extends React.PureComponent {
                 {enableClipboard && !jsvRoot && (
                     <CopyToClipboard
                         clickCallback={enableClipboard}
-                        {...{ src, rjvId, theme, namespace, name }}
+                        {...{ src, rjvId, theme, namespace, name, rowHovered }}
                     />
                 )}
                 {/*Don't display cut icon for root*/}
@@ -152,7 +152,7 @@ export default class extends React.PureComponent {
                     <ExternalPaste pastedOnObjectOrArray {...this.props} />
                 )}
                 {/* copy add/remove icons */}
-                {onAdd !== false && this.getAddAttribute(rowHovered)}
+                {onAdd !== false && this.getAddAttribute()}
                 {onDelete !== false && this.getRemoveObject(rowHovered)}
             </div>
         );

@@ -78,19 +78,13 @@ export default class extends React.PureComponent {
         return result;
     };
 
-    getStyle = () => {
-        let cursor = 'default';
-
-        if (this.isValueCollapsible()) {
-            cursor = 'pointer';
-        }
-
-        return { style: { cursor } };
-    };
-
     render() {
         const value = this.getValue();
-        let style = this.getStyle();
+        let style = {
+            style: {
+                cursor: this.isValueCollapsible() ? 'pointer' : 'default'
+            }
+        };
 
         return (
             <div {...Theme(this.props.theme, 'string')}>

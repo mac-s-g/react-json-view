@@ -158,7 +158,7 @@ class RjvObject extends React.PureComponent {
         }
     };
 
-    getObjectContent = (depth, src, props) => {
+    getObjectContent = (src, props) => {
         const { theme } = this.props;
         return (
             <div class="pushed-content object-container">
@@ -167,6 +167,15 @@ class RjvObject extends React.PureComponent {
                 </div>
             </div>
         );
+    };
+
+    getStringifiedValue = (value) => {
+        const { collapseStringsAfterLength } = this.props;
+        if (value.length > collapseStringsAfterLength) {
+            return value.substring(0, collapseStringsAfterLength) + '...';
+        }
+
+        return value.toString();
     };
 
     getEllipsis = () => {
@@ -187,7 +196,7 @@ class RjvObject extends React.PureComponent {
             const variableValueText =
                 variable.type === 'object'
                     ? '{...}'
-                    : variable.value.toString();
+                    : this.getStringifiedValue(variable.value);
             const variableExtraInfoText =
                 numberOfOtherVariables > 0
                     ? numberOfOtherVariables === 1
@@ -200,7 +209,7 @@ class RjvObject extends React.PureComponent {
                     class="node-ellipsis"
                     onClick={this.toggleCollapsed}
                 >
-                    {variable.name} :{' '}
+                    {variable.name}:{' '}
                     {variableValueText + variableExtraInfoText}
                 </div>
             );
@@ -338,7 +347,7 @@ class RjvObject extends React.PureComponent {
             >
                 {this.getBraceStart(object_type, expanded)}
                 {expanded
-                    ? this.getObjectContent(depth, src, {
+                    ? this.getObjectContent(src, {
                           theme,
                           iconStyle,
                           ...rest

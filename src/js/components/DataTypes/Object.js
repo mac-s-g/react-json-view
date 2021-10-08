@@ -215,7 +215,7 @@ class RjvObject extends React.PureComponent {
         }
     };
 
-    getObjectMetaData = src => {
+    getObjectMetaData = () => {
         const { size, hovered } = this.state;
         return hovered && <VariableMeta size={size} {...this.props} />;
     };
@@ -259,7 +259,7 @@ class RjvObject extends React.PureComponent {
     };
 
     getBraceStart(object_type, expanded) {
-        const { src, theme, iconStyle, parent_type, jsvRoot } = this.props;
+        const { theme, iconStyle, parent_type, jsvRoot } = this.props;
 
         if (parent_type === 'array_group') {
             return (
@@ -267,7 +267,7 @@ class RjvObject extends React.PureComponent {
                     <span {...Theme(theme, 'brace')}>
                         {object_type === 'array' ? '[' : '{'}
                     </span>
-                    {expanded ? this.getObjectMetaData(src) : null}
+                    {expanded ? this.getObjectMetaData() : null}
                 </span>
             );
         }
@@ -277,7 +277,7 @@ class RjvObject extends React.PureComponent {
         return (
             <span>
                 <span
-                    onClick={e => {
+                    onClick={() => {
                         this.toggleCollapsed();
                     }}
                     {...Theme(theme, 'brace-row')}
@@ -298,7 +298,7 @@ class RjvObject extends React.PureComponent {
                         {object_type === 'array' ? '[' : '{'}
                     </span>
                 </span>
-                {expanded ? this.getObjectMetaData(src) : null}
+                {expanded ? this.getObjectMetaData() : null}
             </span>
         );
     }
@@ -361,7 +361,7 @@ class RjvObject extends React.PureComponent {
                     >
                         {object_type === 'array' ? ']' : '}'}
                     </span>
-                    {expanded ? null : this.getObjectMetaData(src)}
+                    {expanded ? null : this.getObjectMetaData()}
                 </span>
             </div>
         );

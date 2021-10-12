@@ -158,7 +158,7 @@ class RjvObject extends React.PureComponent {
         }
     };
 
-    getObjectContent = (depth, src, props) => {
+    getObjectContent = (src, props) => {
         const { theme } = this.props;
         return (
             <div class="pushed-content object-container">
@@ -167,6 +167,15 @@ class RjvObject extends React.PureComponent {
                 </div>
             </div>
         );
+    };
+
+    getStringifiedValue = value => {
+        const { collapseStringsAfterLength } = this.props;
+        if (value.length > collapseStringsAfterLength) {
+            return value.substring(0, collapseStringsAfterLength) + '...';
+        }
+
+        return value.toString();
     };
 
     getEllipsis = () => {
@@ -187,7 +196,7 @@ class RjvObject extends React.PureComponent {
             const variableValueText =
                 variable.type === 'object'
                     ? '{...}'
-                    : variable.value.toString();
+                    : this.getStringifiedValue(variable.value);
             const variableExtraInfoText =
                 numberOfOtherVariables > 0
                     ? numberOfOtherVariables === 1
@@ -200,16 +209,19 @@ class RjvObject extends React.PureComponent {
                     class="node-ellipsis"
                     onClick={this.toggleCollapsed}
                 >
-                    {variable.name} :{' '}
-                    {variableValueText + variableExtraInfoText}
+                    {variable.name}: {variableValueText + variableExtraInfoText}
                 </div>
             );
         }
     };
 
-    getObjectMetaData = src => {
+    getObjectMetaData = () => {
         const { size, hovered } = this.state;
-        return hovered && <VariableMeta size={size} {...this.props} />;
+        return (
+            hovered && (
+                <VariableMeta size={size} rowHovered={true} {...this.props} />
+            )
+        );
     };
 
     updateKeyRequest = e => {
@@ -251,7 +263,7 @@ class RjvObject extends React.PureComponent {
     };
 
     getBraceStart(object_type, expanded) {
-        const { src, theme, iconStyle, parent_type, jsvRoot } = this.props;
+        const { theme, iconStyle, parent_type, jsvRoot } = this.props;
 
         if (parent_type === 'array_group') {
             return (
@@ -259,7 +271,7 @@ class RjvObject extends React.PureComponent {
                     <span {...Theme(theme, 'brace')}>
                         {object_type === 'array' ? '[' : '{'}
                     </span>
-                    {expanded ? this.getObjectMetaData(src) : null}
+                    {expanded ? this.getObjectMetaData() : null}
                 </span>
             );
         }
@@ -269,7 +281,7 @@ class RjvObject extends React.PureComponent {
         return (
             <span>
                 <span
-                    onClick={e => {
+                    onClick={() => {
                         this.toggleCollapsed();
                     }}
                     {...Theme(theme, 'brace-row')}
@@ -290,7 +302,7 @@ class RjvObject extends React.PureComponent {
                         {object_type === 'array' ? '[' : '{'}
                     </span>
                 </span>
-                {expanded ? this.getObjectMetaData(src) : null}
+                {expanded ? this.getObjectMetaData() : null}
             </span>
         );
     }
@@ -338,7 +350,7 @@ class RjvObject extends React.PureComponent {
             >
                 {this.getBraceStart(object_type, expanded)}
                 {expanded
-                    ? this.getObjectContent(depth, src, {
+                    ? this.getObjectContent(src, {
                           theme,
                           iconStyle,
                           ...rest
@@ -353,7 +365,7 @@ class RjvObject extends React.PureComponent {
                     >
                         {object_type === 'array' ? ']' : '}'}
                     </span>
-                    {expanded ? null : this.getObjectMetaData(src)}
+                    {expanded ? null : this.getObjectMetaData()}
                 </span>
             </div>
         );

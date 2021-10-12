@@ -140,7 +140,9 @@ class VariableEditor extends React.PureComponent {
         } = this.props;
         const { editMode, hoveredOver } = this.state;
         const disableEditingArrayKeys =
-            parent_type !== 'array' && onEdit !== false && editMode == false;
+            parent_type !== 'array' && onEdit !== false && editMode === null;
+        const hoveringWhileNotEditing = editMode === null && hoveredOver;
+
         return (
             <div
                 {...Theme(theme, 'objectKeyVal', {
@@ -201,7 +203,7 @@ class VariableEditor extends React.PureComponent {
                         {...{ theme, namespace, rjvId }}
                     />
                 )}
-                {enableClipboard && editMode === false && hoveredOver && (
+                {enableClipboard && hoveringWhileNotEditing && (
                     <span>
                         <CutFromJson
                             hidden={editMode}
@@ -213,14 +215,12 @@ class VariableEditor extends React.PureComponent {
                         <ExternalPaste name={variable.name} {...this.props} />
                     </span>
                 )}
-                {onEdit !== false &&
-                    editMode === false &&
-                    hoveredOver &&
-                    this.renderValueRenameButton()}
-                {onDelete !== false &&
-                    editMode === false &&
-                    hoveredOver &&
-                    this.getRemoveIcon()}
+                {onEdit !== false && hoveringWhileNotEditing
+                    ? this.renderValueRenameButton()
+                    : null}
+                {onDelete !== false && hoveringWhileNotEditing
+                    ? this.getRemoveIcon()
+                    : null}
             </div>
         );
     }

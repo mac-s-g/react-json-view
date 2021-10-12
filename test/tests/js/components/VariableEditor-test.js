@@ -1,8 +1,7 @@
 import React from 'react';
-import { shallow, render, mount } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { expect } from 'chai';
 
-import Index from './../../../../src/js/index';
 import VariableEditor, { editModes } from './../../../../src/js/components/VariableEditor';
 
 describe('<VariableEditor />', function() {
@@ -32,7 +31,7 @@ describe('<VariableEditor />', function() {
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={() => {}}
                 isDragAllowed={ () => {} }
                 rjvId={rjvId}
                 variable={{
@@ -52,7 +51,7 @@ describe('<VariableEditor />', function() {
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={() => {}}
                 isDragAllowed={ () => {} }
                 rjvId={rjvId}
                 variable={{
@@ -159,7 +158,7 @@ describe('<VariableEditor />', function() {
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={() => {}}
                 isDragAllowed={ () => {} }
                 rjvId={rjvId}
                 variable={{
@@ -179,7 +178,7 @@ describe('<VariableEditor />', function() {
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={() => {}}
                 isDragAllowed={ () => {} }
                 rjvId={rjvId}
                 variable={{
@@ -201,7 +200,7 @@ describe('<VariableEditor />', function() {
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={() => {}}
                 isDragAllowed={ () => {} }
                 rjvId={rjvId}
                 variable={{
@@ -221,7 +220,7 @@ describe('<VariableEditor />', function() {
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={() => {}}
                 isDragAllowed={ () => {} }
                 rjvId={rjvId}
                 variable={{
@@ -241,7 +240,7 @@ describe('<VariableEditor />', function() {
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={() => {}}
                 isDragAllowed={ () => {} }
                 rjvId={rjvId}
                 variable={{
@@ -263,7 +262,7 @@ describe('<VariableEditor />', function() {
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={() => {}}
                 isDragAllowed={ () => {} }
                 rjvId={rjvId}
                 variable={{
@@ -283,7 +282,7 @@ describe('<VariableEditor />', function() {
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={() => {}}
                 rjvId={rjvId}
                 isDragAllowed={ () => {} }
                 variable={{
@@ -305,7 +304,7 @@ describe('<VariableEditor />', function() {
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={() => {}}
                 rjvId={rjvId}
                 isDragAllowed={ () => {} }
                 variable={{
@@ -325,7 +324,7 @@ describe('<VariableEditor />', function() {
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={() => {}}
                 rjvId={rjvId}
                 isDragAllowed={ () => {} }
                 variable={{
@@ -345,7 +344,7 @@ describe('<VariableEditor />', function() {
             <VariableEditor
                 src={{ test: true }}
                 theme="rjv-default"
-                onEdit={edit => {}}
+                onEdit={() => {}}
                 rjvId={rjvId}
                 isDragAllowed={ () => {} }
                 variable={{
@@ -363,4 +362,29 @@ describe('<VariableEditor />', function() {
         wrapper.simulate('mouseleave');
         expect(wrapper.state('hoveredOver')).to.equal(false);
     });
+
+    it('VariableEditor displays action buttons on hover', function() {
+        const wrapper = mount(
+            <VariableEditor 
+                src={{ test: true }}
+                theme="rjv-default"
+                onEdit={() => {}}
+                rjvId={rjvId}
+                enableClipboard={ true }
+                variable={{
+                    name: 'test',
+                    value: '5',
+                    type: 'string'
+                }}
+            />
+        );
+
+        wrapper.simulate('mouseover');
+
+        expect(wrapper.find({ title: 'Cut' }).length).to.equal(1);
+        expect(wrapper.find({ title: 'Paste from external clipboard' }).length).to.equal(1);
+        expect(wrapper.find({ title: 'Paste after this' }).length).to.equal(1);
+        expect(wrapper.find({ title: 'Edit' }).length).to.equal(1);
+        expect(wrapper.find({ title: 'Remove' }).length).to.equal(1);
+    })
 });

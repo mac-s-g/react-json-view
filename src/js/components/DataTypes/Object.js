@@ -167,7 +167,11 @@ class RjvObject extends React.PureComponent {
                     >
                         <IconComponent {...{ theme, iconStyle }} />
                     </div>
-                    <ObjectName {...this.props} />
+                    <ObjectName
+                        {...this.props}
+                        onToggleCollapsed={this.toggleCollapsed}
+                        isExpanded={expanded}
+                    />
                     <span {...Theme(theme, 'brace')}>
                         {object_type === 'array' ? '[' : '{'}
                     </span>

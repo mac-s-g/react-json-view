@@ -53,3 +53,64 @@ export function isTheme(theme) {
     }
     return false;
 }
+
+export function handleObjectKeyKeyDown(type, e, isExpanded, onToggleCollapsed) {
+    const wrapper = document.querySelector('.react-json-view');
+    const target = e.target;
+
+    function focusOn(which) {
+        const elements = Array.from(wrapper.querySelectorAll('[tabindex="0"]'));
+        const index = elements.findIndex(curr => curr === target);
+        if (which === 'next' && index < elements.length - 1) {
+            e.preventDefault();
+            elements[index + 1].focus();
+        }
+        if (which === 'previous' && index > 0) {
+            e.preventDefault();
+            elements[index - 1].focus();
+        }
+    }
+
+    if (e.key === 'ArrowDown') {
+        focusOn('next');
+    }
+
+    if (e.key === 'ArrowUp') {
+        focusOn('previous');
+    }
+
+    if (e.key === 'ArrowRight') {
+        if (e.target.classList.contains('object-key')) {
+            if (!isExpanded) {
+                if (onToggleCollapsed) {
+                    onToggleCollapsed();
+                }
+            } else {
+                focusOn('next');
+            }
+        }
+    }
+
+    if (e.key === 'ArrowLeft') {
+        if (isExpanded && onToggleCollapsed) {
+            onToggleCollapsed();
+        } else {
+            if (type === 'variable') {
+                target
+                    .closest('.object-key-val')
+                    .querySelector('.object-key')
+                    .focus();
+            }
+
+            if (type === 'object-name') {
+                const closestObject = target
+                    .closest('.object-key-val')
+                    .parentElement.closest('.object-key-val');
+
+                if (closestObject) {
+                    closestObject.querySelector('.object-key').focus();
+                }
+            }
+        }
+    }
+}

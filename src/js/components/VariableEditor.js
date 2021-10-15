@@ -78,7 +78,14 @@ class VariableEditor extends React.PureComponent {
                             {...Theme(theme, 'array-key')}
                             key={variable.name + '_' + namespace}
                         >
-                            {variable.name}
+                            <span
+                                tabIndex={0}
+                                onKeyDown={e =>
+                                    handleObjectKeyKeyDown('array-variable', e)
+                                }
+                            >
+                                {variable.name}
+                            </span>
                             <div {...Theme(theme, 'colon')}>:</div>
                         </span>
                     ) : null

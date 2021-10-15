@@ -22,7 +22,20 @@ export default function getObjectName(props) {
     } else if (parent_type == 'array') {
         return displayArrayKey ? (
             <span {...Theme(theme, 'array-key')} key={namespace}>
-                <span class="array-key">{display_name}</span>
+                <span
+                    class="array-key"
+                    tabIndex={0}
+                    onKeyDown={e =>
+                        handleObjectKeyKeyDown(
+                            'object-name',
+                            e,
+                            isExpanded,
+                            onToggleCollapsed
+                        )
+                    }
+                >
+                    {display_name}
+                </span>
                 <span {...Theme(theme, 'colon')}>:</span>
             </span>
         ) : (

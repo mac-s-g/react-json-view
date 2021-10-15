@@ -183,7 +183,7 @@ function getExampleJson1() {
         integer: 42,
         empty_array: [],
         empty_object: {},
-        array: [1, 2, 3, 'test'],
+        array: [{ a: 1, b: 2 }, 2, 3, 'test'],
         float: -2.757,
         undefined_var: undefined,
         parent: {

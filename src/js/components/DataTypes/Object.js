@@ -170,6 +170,10 @@ class RjvObject extends React.PureComponent {
     };
 
     getStringifiedValue = value => {
+        if (value === null || value === undefined) {
+            return value;
+        }
+
         const { collapseStringsAfterLength } = this.props;
         if (value.length > collapseStringsAfterLength) {
             return value.substring(0, collapseStringsAfterLength) + '...';

@@ -108,7 +108,6 @@ export function handleObjectKeyKeyDown(type, e, isExpanded, onToggleCollapsed) {
         if (isExpanded && onToggleCollapsed) {
             onToggleCollapsed();
         } else {
-            console.log('here', type);
             if (type === 'array-variable') {
                 target
                     .closest('.object-key-val')

@@ -182,6 +182,9 @@ class VariableEditor extends React.PureComponent {
                         onSelect === false && onEdit === false
                             ? null
                             : () => {
+                                  if (this.state.editMode !== null) {
+                                      return;
+                                  }
                                   if (onEdit !== false) {
                                       this.prepopInput(variable);
                                   }

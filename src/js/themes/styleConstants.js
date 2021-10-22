@@ -89,9 +89,9 @@ export default {
     detectedRowPaddingTop: '3px',
 
     addKeyCoverBackground: 'rgba(255, 255, 255, 0.3)',
-    addKeyCoverPosition: 'fixed',
+    addKeyCoverPosition: 'absolute',
     addKeyCoverPositionPx: '0px',
-    addKeyCoverPositionTopPx: '120px',
+    addKeyCoverPositionTopPx: '60px',
     addKeyModalWidth: 'auto',
     addKeyModalMaxWidth: '550px',
     addKeyModalHeight: 'auto',

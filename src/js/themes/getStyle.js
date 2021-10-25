@@ -464,6 +464,10 @@ const getDefaultThemeStyling = theme => {
             color: colors.validationFailure.iconColor,
             fontSize: constants.iconFontSize,
             transform: 'rotate(45deg)'
+        },
+        'selected-type': {
+            color: theme.base05,
+            cursor: 'default'
         }
     };
 };

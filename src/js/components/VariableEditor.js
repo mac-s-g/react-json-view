@@ -500,7 +500,7 @@ class VariableEditor extends React.PureComponent {
                             this.submitEdit(true);
                         }}
                     />
-                    <div>{this.showDetected()}</div>
+                    <div>{this.renderType()}</div>
                 </div>
             </div>
         );
@@ -542,7 +542,7 @@ class VariableEditor extends React.PureComponent {
         }
 
         if (parsedInput.type === 'string') {
-            new_value = stringifyVariable(parsedInput.value);
+            new_value = this.state.editValue;
         }
 
         this.setState({
@@ -565,31 +565,47 @@ class VariableEditor extends React.PureComponent {
         });
     };
 
-    showDetected = () => {
+    onVariableTypeChange = (parsedInput, selectedOption) => {
+        const { editValue } = this.state;
+
+        let type = selectedOption;
+        if (selectedOption === 'auto') {
+            type = parseInput(editValue).type;
+        }
+
+        this.setState({
+            ...this.state,
+            parsedInput: {
+                ...parsedInput,
+                type: type,
+                userOverride: selectedOption !== 'auto'
+            }
+        });
+    };
+
+    renderType = () => {
         const { theme } = this.props;
         const { parsedInput } = this.state;
+
+        const selectedType = parsedInput.userOverride
+            ? parsedInput.type || 'string'
+            : 'auto';
+
         return (
             <div>
                 <div {...Theme(theme, 'detected-row')}>
-                    {parsedInput.type || 'string'}
+                    {!parsedInput.userOverride && (
+                        <span {...Theme(theme, 'selected-type')}>
+                            {parsedInput.type || 'string'}
+                        </span>
+                    )}
                     <VariableTypeSelect
-                        selectedType={
-                            parsedInput.userOverride
-                                ? parsedInput.type || 'string'
-                                : 'auto'
-                        }
+                        selectedType={selectedType}
                         onTypeSelect={selectedOption =>
-                            this.setState({
-                                ...this.state,
-                                parsedInput: {
-                                    ...parsedInput,
-                                    type:
-                                        selectedOption === 'auto'
-                                            ? parsedInput.type
-                                            : selectedOption,
-                                    userOverride: selectedOption !== 'auto'
-                                }
-                            })
+                            this.onVariableTypeChange(
+                                parsedInput,
+                                selectedOption
+                            )
                         }
                     />
                 </div>

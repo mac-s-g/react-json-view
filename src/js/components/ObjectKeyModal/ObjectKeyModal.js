@@ -40,7 +40,7 @@ export default class extends React.PureComponent {
                 class="key-modal-request"
                 {...Theme(theme, 'key-modal-request')}
             >
-                <Draggable>
+                <Draggable disabled={pasted}>
                     <div
                         {...Theme(theme, 'key-modal')}
                         class="request-modal"

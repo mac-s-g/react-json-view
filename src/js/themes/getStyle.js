@@ -309,7 +309,9 @@ const getDefaultThemeStyling = theme => {
         },
         'edit-icon-container': {
             display: 'inline-block',
-            verticalAlign: 'top'
+            verticalAlign: 'top',
+            position: 'sticky',
+            top: '20px'
         },
         'check-icon': {
             display: 'inline-block',

@@ -531,9 +531,10 @@ class VariableEditor extends React.PureComponent {
     submitEdit = submit_detected => {
         const { allowDragging } = this.state;
         const { variable, namespace, rjvId } = this.props;
-        const { editValue, parsedInput } = this.state;
+        const { editValue, editMode, parsedInput } = this.state;
+        let type = parsedInput.type;
         let new_value = editValue;
-        if (submit_detected && parsedInput.type) {
+        if (submit_detected && type) {
             new_value = parsedInput.value;
         }
 
@@ -541,7 +542,11 @@ class VariableEditor extends React.PureComponent {
             new_value = submit_detected['newColorValue'];
         }
 
-        if (parsedInput.type === 'string') {
+        if (editMode === editModes.MARKDOWN) {
+            type = 'string';
+        }
+
+        if (type === 'string') {
             new_value = this.state.editValue;
         }
 

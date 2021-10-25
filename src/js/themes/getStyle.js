@@ -338,7 +338,13 @@ const getDefaultThemeStyling = theme => {
             fontFamily: constants.editInputFontFamily
         },
         'detected-row': {
-            paddingTop: constants.detectedRowPaddingTop
+            paddingTop: constants.detectedRowPaddingTop,
+            display: 'grid',
+            gridGap: '8px',
+            gridTemplateColumns: 'auto auto',
+            marginLeft: '4px',
+            justifyContent: 'center',
+            alignItems: 'center'
         },
         'key-modal-request': {
             position: constants.addKeyCoverPosition,

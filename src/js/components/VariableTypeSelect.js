@@ -4,17 +4,19 @@ export const VariableTypeSelect = props => {
     const { selectedType, onTypeSelect } = props;
 
     const supportedTypes = [
+        'auto',
         'object',
         'array',
         'string',
         'integer',
         'float',
         'boolean',
+        'color',
+        'date',
         'function',
         'null',
         'nan',
-        'undefined',
-        'date'
+        'undefined'
     ];
 
     const renderOption = optionName => {

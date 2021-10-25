@@ -290,11 +290,9 @@ class VariableEditor extends React.PureComponent {
                 editMode: this.getActiveEditMode(),
                 editValue: stringifiedValue,
                 parsedInput: {
-                    type: this.state.parsedInput.userOverride
-                        ? this.state.parsedInput.type
-                        : detected.type,
+                    type: detected.type,
                     value: detected.value,
-                    userOverride: this.state.parsedInput.userOverride
+                    userOverride: false
                 }
             });
         }
@@ -573,15 +571,23 @@ class VariableEditor extends React.PureComponent {
         return (
             <div>
                 <div {...Theme(theme, 'detected-row')}>
+                    {parsedInput.type || 'string'}
                     <VariableTypeSelect
-                        selectedType={parsedInput.type || 'string'}
+                        selectedType={
+                            parsedInput.userOverride
+                                ? parsedInput.type || 'string'
+                                : 'auto'
+                        }
                         onTypeSelect={selectedOption =>
                             this.setState({
                                 ...this.state,
                                 parsedInput: {
                                     ...parsedInput,
-                                    type: selectedOption,
-                                    userOverride: true
+                                    type:
+                                        selectedOption === 'auto'
+                                            ? parsedInput.type
+                                            : selectedOption,
+                                    userOverride: selectedOption !== 'auto'
                                 }
                             })
                         }

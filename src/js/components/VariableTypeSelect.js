@@ -13,7 +13,6 @@ export const VariableTypeSelect = props => {
         'boolean',
         'color',
         'date',
-        'function',
         'null',
         'nan',
         'undefined'

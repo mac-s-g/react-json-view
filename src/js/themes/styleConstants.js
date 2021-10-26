@@ -103,10 +103,10 @@ export default {
     keyModalInputPadding: '3px 20px 3px 6px',
     valueModalSubmitButtonTop: '2px',
     valueModalSubmitButtonTopInArray: '22px',
-    valueModalTextAreaMinHeight: '115px',
     valueModalTextAreaMinWidth: '300px',
     valueModalTextAreaMaxWidth: '550px',
-    valueModalTextAreaMaxHeight: '500px',
+    valueModalTextAreaMinRows: 8,
+    valueModalTextAreaMaxRows: 40,
 
     colorPickerMarginLeft: '5px'
 };

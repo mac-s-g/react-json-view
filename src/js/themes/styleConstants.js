@@ -95,7 +95,7 @@ export default {
     addKeyModalWidth: 'auto',
     addKeyModalMaxWidth: '550px',
     addKeyModalHeight: 'auto',
-    addKeyModalMarginLeft: '10%',
+    addKeyModalMarginLeft: '10px',
     addKeyModalMarginRight: 'auto',
     addKeyModalPadding: '10px',
     addKeyModalRadius: '3px',

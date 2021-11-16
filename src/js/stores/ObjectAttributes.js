@@ -159,12 +159,7 @@ class ObjectAttributes extends EventEmitter {
     };
 
     updateSrc = (rjvId, request) => {
-        let {
-            name,
-            namespace,
-            new_value,
-            variable_removed
-        } = request;
+        let { name, namespace, new_value, variable_removed } = request;
 
         namespace.shift();
 

@@ -578,10 +578,10 @@ class VariableEditor extends React.PureComponent {
         let shouldBeCorrectType = parseInput(editValue).type;
         if (selectedOption === 'auto') {
             type = parseInput(editValue).type;
-        } 
-        
+        }
+
         //don't allow user to use strict types for incorrect formats
-        if (type !== 'string' && type !== shouldBeCorrectType ) {
+        if (type !== 'string' && type !== shouldBeCorrectType) {
             dispatcher.dispatch({
                 rjvId: rjvId,
                 name: 'VALIDATION-FAILURE'

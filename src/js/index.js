@@ -12,7 +12,7 @@ import Theme from './themes/getStyle';
 
 //some style behavior requires css
 import './../style/scss/global.scss';
-import ValidationFailure from "./components/ValidationFailure";
+import ValidationFailure from './components/ValidationFailure';
 
 //forward src through to JsonObject component
 class ReactJsonView extends React.PureComponent {
@@ -221,10 +221,10 @@ class ReactJsonView extends React.PureComponent {
                     style={{ ...Theme(theme, 'app-container').style, ...style }}
                 >
                     <ValidationFailure
-                      message={validationMessage}
-                      active={validationFailure}
-                      theme={theme}
-                      rjvId={this.rjvId}
+                        message={validationMessage}
+                        active={validationFailure}
+                        theme={theme}
+                        rjvId={this.rjvId}
                     />
                     <JsonViewer
                         {...this.props}

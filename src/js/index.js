@@ -12,6 +12,7 @@ import Theme from './themes/getStyle';
 
 //some style behavior requires css
 import './../style/scss/global.scss';
+import ValidationFailure from "./components/ValidationFailure";
 
 //forward src through to JsonObject component
 class ReactJsonView extends React.PureComponent {
@@ -62,7 +63,7 @@ class ReactJsonView extends React.PureComponent {
         onSelect: false,
         iconStyle: 'triangle',
         style: {},
-        validationMessage: 'Validation Error',
+        validationMessage: 'Conversion is not feasible',
         defaultValue: null,
         displaySearch: true,
         displayArrayKey: true
@@ -141,6 +142,7 @@ class ReactJsonView extends React.PureComponent {
         return {
             reset: this.resetState,
             copied: this.changeCopyState,
+            'validation-failure': this.validationFailure,
             'variable-update': this.updateSrc,
             'add-key-request': this.addKeyRequest,
             'edit-key-request': this.editKeyRequest,
@@ -194,7 +196,9 @@ class ReactJsonView extends React.PureComponent {
             searchKey,
             copied,
             editKeyRequest,
-            pasteAddKeyRequest
+            pasteAddKeyRequest,
+            validationMessage,
+            validationFailure
         } = this.state;
 
         const { style, defaultValue, displaySearch } = this.props;
@@ -216,6 +220,12 @@ class ReactJsonView extends React.PureComponent {
                     class="react-json-view"
                     style={{ ...Theme(theme, 'app-container').style, ...style }}
                 >
+                    <ValidationFailure
+                      message={validationMessage}
+                      active={validationFailure}
+                      theme={theme}
+                      rjvId={this.rjvId}
+                    />
                     <JsonViewer
                         {...this.props}
                         copied={copied}
@@ -323,6 +333,17 @@ class ReactJsonView extends React.PureComponent {
             editKeyRequest: false,
             pasteAddKeyRequest: false
         });
+    };
+
+    validationFailure = () => {
+        this.setState({
+            validationFailure: true
+        });
+        setTimeout(() => {
+            this.setState({
+                validationFailure: false
+            });
+        }, 5000);
     };
 
     changeCopyState = () => {

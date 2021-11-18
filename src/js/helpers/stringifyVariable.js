@@ -14,6 +14,9 @@ export default value => {
         case 'string':
             string_value = value;
             break;
+        case 'color':
+            string_value = value;
+            break;
         case 'date':
             string_value = value.toString();
             break;

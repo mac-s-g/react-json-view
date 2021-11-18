@@ -309,7 +309,9 @@ const getDefaultThemeStyling = theme => {
         },
         'edit-icon-container': {
             display: 'inline-block',
-            verticalAlign: 'top'
+            verticalAlign: 'top',
+            position: 'sticky',
+            top: '20px'
         },
         'check-icon': {
             display: 'inline-block',
@@ -336,7 +338,13 @@ const getDefaultThemeStyling = theme => {
             fontFamily: constants.editInputFontFamily
         },
         'detected-row': {
-            paddingTop: constants.detectedRowPaddingTop
+            paddingTop: constants.detectedRowPaddingTop,
+            display: 'grid',
+            gridGap: '8px',
+            gridTemplateColumns: 'auto auto',
+            marginLeft: '4px',
+            justifyContent: 'center',
+            alignItems: 'center'
         },
         'key-modal-request': {
             position: constants.addKeyCoverPosition,
@@ -379,8 +387,8 @@ const getDefaultThemeStyling = theme => {
             width: '100%',
             minWidth: constants.valueModalTextAreaMinWidth,
             maxWidth: constants.valueModalTextAreaMaxWidth,
-            minHeight: constants.valueModalTextAreaMinHeight,
-            maxHeight: constants.valueModalTextAreaMaxHeight,
+            minRows: constants.valueModalTextAreaMinRows,
+            maxRows: constants.valueModalTextAreaMaxRows,
             padding: constants.keyModalInputPadding,
             fontFamily: 'monospace',
             color: colors.addKeyModal.color,
@@ -456,6 +464,10 @@ const getDefaultThemeStyling = theme => {
             color: colors.validationFailure.iconColor,
             fontSize: constants.iconFontSize,
             transform: 'rotate(45deg)'
+        },
+        'selected-type': {
+            color: theme.base05,
+            cursor: 'default'
         }
     };
 };

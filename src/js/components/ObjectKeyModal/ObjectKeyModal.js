@@ -2,10 +2,11 @@ import React from 'react';
 import dispatcher from './../../helpers/dispatcher';
 import AutosizeTextarea from 'react-textarea-autosize';
 
-import { CheckCircle, Add as Cancel } from './../icons';
+import { Add as Cancel, CheckCircle } from './../icons';
 
 //global theme
 import Theme from './../../themes/getStyle';
+import Draggable from 'react-draggable';
 
 //this input appears when adding a new value to an object or doing external paste
 export default class extends React.PureComponent {
@@ -39,36 +40,40 @@ export default class extends React.PureComponent {
                 class="key-modal-request"
                 {...Theme(theme, 'key-modal-request')}
             >
-                <div
-                    {...Theme(theme, 'key-modal')}
-                    class="request-modal"
-                    onClick={e => {
-                        e.stopPropagation();
-                    }}
-                >
-                    {parentIsNotArray ? (
-                        <div {...Theme(theme, 'key-modal-label')}>Key Name</div>
-                    ) : null}
-                    <div style={{ position: 'relative' }}>
-                        {parent_type !== 'array'
-                            ? this.renderKeyNameInput()
-                            : null}
-                        {pasted ? this.renderPasteInput() : null}
+                <Draggable disabled={pasted} bounds="parent">
+                    <div
+                        {...Theme(theme, 'key-modal')}
+                        class="request-modal"
+                        onClick={e => {
+                            e.stopPropagation();
+                        }}
+                    >
+                        {parentIsNotArray ? (
+                            <div {...Theme(theme, 'key-modal-label')}>
+                                Key Name
+                            </div>
+                        ) : null}
+                        <div style={{ position: 'relative' }}>
+                            {parent_type !== 'array'
+                                ? this.renderKeyNameInput()
+                                : null}
+                            {pasted ? this.renderPasteInput() : null}
+                        </div>
+                        <span {...Theme(theme, 'key-modal-cancel')}>
+                            <Cancel
+                                {...Theme(theme, 'key-modal-cancel-icon')}
+                                class="key-modal-cancel"
+                                title="Cancel"
+                                onClick={() => {
+                                    dispatcher.dispatch({
+                                        rjvId: rjvId,
+                                        name: 'RESET'
+                                    });
+                                }}
+                            />
+                        </span>
                     </div>
-                    <span {...Theme(theme, 'key-modal-cancel')}>
-                        <Cancel
-                            {...Theme(theme, 'key-modal-cancel-icon')}
-                            class="key-modal-cancel"
-                            title="Cancel"
-                            onClick={() => {
-                                dispatcher.dispatch({
-                                    rjvId: rjvId,
-                                    name: 'RESET'
-                                });
-                            }}
-                        />
-                    </span>
-                </div>
+                </Draggable>
             </div>
         );
     }

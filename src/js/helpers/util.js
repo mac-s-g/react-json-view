@@ -27,7 +27,7 @@ function getType(obj) {
     return type;
 }
 
-function isColor(strColor) {
+export function isColor(strColor) {
     let isHex = /^#(?:[A-Fa-f0-9]{3}){1,2}$/i.test(strColor);
     let isRGB = /^(rgb)\(([0-9]{1,3},?\s?){3}\)$/i.test(strColor);
     let isRGBA = /^(rgba)\(([0-9]{1,3},?\s?){3}(\d?\.?(\d{1,2})?)\)$/i.test(

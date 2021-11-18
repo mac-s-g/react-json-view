@@ -1,3 +1,5 @@
+import { isColor } from './util';
+
 export default function parseInput(input) {
     //following code is to make a best guess at
     //the type for a variable being submitted.
@@ -5,13 +7,7 @@ export default function parseInput(input) {
     //we are working with a serialized data representation
     input = input.trim();
     try {
-        if (
-            input[0] === '#' ||
-            input.substring(0, 3) === 'rgb' ||
-            input.substring(0, 4) === 'rgba' ||
-            input.substring(0, 3) === 'hsl' ||
-            input.substring(0, 4) === 'hsla'
-        ) {
+        if (isColor(input)) {
             return formatResponse('color', input);
         }
         input = JSON.stringify(JSON.parse(input));

@@ -152,17 +152,14 @@ class ObjectAttributes extends EventEmitter {
                 this.set(rjvId, 'action', 'paste-add-key-request', data);
                 this.emit('paste-add-key-request-' + rjvId);
                 break;
+            case 'VALIDATION-FAILURE':
+                this.emit('validation-failure-' + rjvId);
+                break;
         }
     };
 
     updateSrc = (rjvId, request) => {
-        let {
-            name,
-            namespace,
-            new_value,
-
-            variable_removed
-        } = request;
+        let { name, namespace, new_value, variable_removed } = request;
 
         namespace.shift();
 

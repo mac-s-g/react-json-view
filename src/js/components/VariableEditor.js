@@ -13,6 +13,7 @@ import MDEditor from './MarkdownEditor';
 //data type components
 import {
     JsonBoolean,
+    JsonColor,
     JsonDate,
     JsonFloat,
     JsonFunction,
@@ -21,23 +22,23 @@ import {
     JsonNull,
     JsonRegexp,
     JsonString,
-    JsonUndefined,
-    JsonColor
+    JsonUndefined
 } from './DataTypes/DataTypes';
 
 //clibboard icon
 import {
-    Edit,
-    CheckCircle,
-    RemoveIcon as Remove,
+    ArrowLeft,
     CancelIcon as Cancel,
+    CheckCircle,
+    Edit,
     Markdown,
-    ArrowLeft
+    RemoveIcon as Remove
 } from './icons';
 
 //theme
 import Theme from './../themes/getStyle';
 import ExternalPaste from './ExternalPaste';
+import { VariableTypeSelect } from './VariableTypeSelect';
 
 export const editModes = {
     MARKDOWN: 'MARKDOWN',
@@ -53,7 +54,8 @@ class VariableEditor extends React.PureComponent {
             renameKey: false,
             parsedInput: {
                 type: false,
-                value: null
+                value: null,
+                userOverride: false
             },
             allowDragging: true,
             canPaste: false,
@@ -182,6 +184,9 @@ class VariableEditor extends React.PureComponent {
                         onSelect === false && onEdit === false
                             ? null
                             : () => {
+                                  if (this.state.editMode !== null) {
+                                      return;
+                                  }
                                   if (onEdit !== false) {
                                       this.prepopInput(variable);
                                   }
@@ -286,7 +291,8 @@ class VariableEditor extends React.PureComponent {
                 editValue: stringifiedValue,
                 parsedInput: {
                     type: detected.type,
-                    value: detected.value
+                    value: detected.value,
+                    userOverride: false
                 }
             });
         }
@@ -414,7 +420,7 @@ class VariableEditor extends React.PureComponent {
                             class="edit-check string-value"
                             {...Theme(theme, 'check-icon')}
                             onClick={() => {
-                                this.submitEdit();
+                                this.submitEdit(true);
                             }}
                         />
                     </div>
@@ -435,8 +441,12 @@ class VariableEditor extends React.PureComponent {
                         this.setState({
                             editValue: value,
                             parsedInput: {
-                                type: detected.type,
-                                value: detected.value
+                                type: this.state.parsedInput.userOverride
+                                    ? this.state.parsedInput.type
+                                    : detected.type,
+                                value: detected.value,
+                                userOverride: this.state.parsedInput
+                                    .userOverride
                             }
                         });
                     }}
@@ -487,10 +497,10 @@ class VariableEditor extends React.PureComponent {
                         class="edit-check string-value"
                         {...Theme(theme, 'check-icon')}
                         onClick={() => {
-                            this.submitEdit();
+                            this.submitEdit(true);
                         }}
                     />
-                    <div>{this.showDetected()}</div>
+                    <div>{this.renderType()}</div>
                 </div>
             </div>
         );
@@ -520,19 +530,26 @@ class VariableEditor extends React.PureComponent {
 
     submitEdit = submit_detected => {
         const { allowDragging } = this.state;
-        let newColor;
-        if (submit_detected !== undefined && submit_detected['newColorValue']) {
-            newColor = submit_detected['newColorValue'];
-        }
         const { variable, namespace, rjvId } = this.props;
-        const { editValue, parsedInput } = this.state;
+        const { editValue, editMode, parsedInput } = this.state;
+        let type = parsedInput.type;
         let new_value = editValue;
-        if (submit_detected && parsedInput.type) {
+        if (submit_detected && type) {
             new_value = parsedInput.value;
         }
-        if (newColor) {
-            new_value = newColor;
+
+        if (submit_detected !== undefined && submit_detected['newColorValue']) {
+            new_value = submit_detected['newColorValue'];
         }
+
+        if (editMode === editModes.MARKDOWN) {
+            type = 'string';
+        }
+
+        if (type === 'string') {
+            new_value = this.state.editValue;
+        }
+
         this.setState({
             editMode: null,
             hoveredOver: false
@@ -553,117 +570,63 @@ class VariableEditor extends React.PureComponent {
         });
     };
 
-    showDetected = () => {
-        const { theme } = this.props;
-        const detected = this.getDetectedInput();
-        if (detected) {
-            return (
-                <div>
-                    <div {...Theme(theme, 'detected-row')}>
-                        {detected}
-                        <CheckCircle
-                            class="edit-check detected"
-                            style={{
-                                verticalAlign: 'top',
-                                paddingLeft: '3px',
-                                ...Theme(theme, 'check-icon').style
-                            }}
-                            onClick={() => {
-                                this.submitEdit(true);
-                            }}
-                        />
-                    </div>
-                </div>
-            );
+    onVariableTypeChange = (parsedInput, selectedOption) => {
+        const { editValue } = this.state;
+        const { rjvId } = this.props;
+
+        let type = selectedOption;
+        let shouldBeCorrectType = parseInput(editValue).type;
+        if (selectedOption === 'auto') {
+            type = parseInput(editValue).type;
         }
+
+        //don't allow user to use strict types for incorrect formats
+        if (type !== 'string' && type !== shouldBeCorrectType) {
+            dispatcher.dispatch({
+                rjvId: rjvId,
+                name: 'VALIDATION-FAILURE'
+            });
+            return;
+        }
+
+        this.setState({
+            ...this.state,
+            parsedInput: {
+                ...parsedInput,
+                type: type,
+                userOverride: selectedOption !== 'auto'
+            }
+        });
     };
 
-    getDetectedInput = () => {
+    renderType = () => {
+        const { theme } = this.props;
         const { parsedInput } = this.state;
-        const { type, value } = parsedInput;
-        const { props } = this;
-        const { theme } = props;
 
-        if (type !== false) {
-            switch (type.toLowerCase()) {
-                case 'object':
-                    return (
-                        <span>
-                            <span
-                                style={{
-                                    ...Theme(theme, 'brace').style,
-                                    cursor: 'default'
-                                }}
-                            >
-                                {'{'}
-                            </span>
-                            <span
-                                style={{
-                                    ...Theme(theme, 'ellipsis').style,
-                                    cursor: 'default'
-                                }}
-                            >
-                                ...
-                            </span>
-                            <span
-                                style={{
-                                    ...Theme(theme, 'brace').style,
-                                    cursor: 'default'
-                                }}
-                            >
-                                {'}'}
-                            </span>
+        const selectedType = parsedInput.userOverride
+            ? parsedInput.type || 'string'
+            : 'auto';
+
+        return (
+            <div>
+                <div {...Theme(theme, 'detected-row')}>
+                    {!parsedInput.userOverride && (
+                        <span {...Theme(theme, 'selected-type')}>
+                            {parsedInput.type || 'string'}
                         </span>
-                    );
-                case 'array':
-                    return (
-                        <span>
-                            <span
-                                style={{
-                                    ...Theme(theme, 'brace').style,
-                                    cursor: 'default'
-                                }}
-                            >
-                                {'['}
-                            </span>
-                            <span
-                                style={{
-                                    ...Theme(theme, 'ellipsis').style,
-                                    cursor: 'default'
-                                }}
-                            >
-                                ...
-                            </span>
-                            <span
-                                style={{
-                                    ...Theme(theme, 'brace').style,
-                                    cursor: 'default'
-                                }}
-                            >
-                                {']'}
-                            </span>
-                        </span>
-                    );
-                case 'string':
-                    return <JsonString value={value} {...props} />;
-                case 'integer':
-                    return <JsonInteger value={value} {...props} />;
-                case 'float':
-                    return <JsonFloat value={value} {...props} />;
-                case 'boolean':
-                    return <JsonBoolean value={value} {...props} />;
-                case 'function':
-                    return <JsonFunction value={value} {...props} />;
-                case 'null':
-                    return <JsonNull {...props} />;
-                case 'nan':
-                    return <JsonNan {...props} />;
-                case 'undefined':
-                    return <JsonUndefined {...props} />;
-                case 'date':
-                    return <JsonDate value={new Date(value)} {...props} />;
-            }
-        }
+                    )}
+                    <VariableTypeSelect
+                        selectedType={selectedType}
+                        onTypeSelect={selectedOption =>
+                            this.onVariableTypeChange(
+                                parsedInput,
+                                selectedOption
+                            )
+                        }
+                    />
+                </div>
+            </div>
+        );
     };
 }
 

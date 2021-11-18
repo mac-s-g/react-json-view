@@ -89,24 +89,24 @@ export default {
     detectedRowPaddingTop: '3px',
 
     addKeyCoverBackground: 'rgba(255, 255, 255, 0.3)',
-    addKeyCoverPosition: 'fixed',
+    addKeyCoverPosition: 'absolute',
     addKeyCoverPositionPx: '0px',
-    addKeyCoverPositionTopPx: '120px',
+    addKeyCoverPositionTopPx: '60px',
     addKeyModalWidth: 'auto',
     addKeyModalMaxWidth: '550px',
     addKeyModalHeight: 'auto',
-    addKeyModalMarginLeft: '10%',
-    addKeyModalMarginRight: 'auto',
+    addKeyModalMarginLeft: '10px',
+    addKeyModalMarginRight: '10px',
     addKeyModalPadding: '10px',
     addKeyModalRadius: '3px',
 
     keyModalInputPadding: '3px 20px 3px 6px',
     valueModalSubmitButtonTop: '2px',
     valueModalSubmitButtonTopInArray: '22px',
-    valueModalTextAreaMinHeight: '115px',
     valueModalTextAreaMinWidth: '300px',
     valueModalTextAreaMaxWidth: '550px',
-    valueModalTextAreaMaxHeight: '500px',
+    valueModalTextAreaMinRows: 8,
+    valueModalTextAreaMaxRows: 40,
 
     colorPickerMarginLeft: '5px'
 };

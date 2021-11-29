@@ -175,6 +175,11 @@ class RjvObject extends React.PureComponent {
         }
 
         const { collapseStringsAfterLength } = this.props;
+
+        if (Array.isArray(value)) {
+            return '[...]';
+        }
+
         if (value.length > collapseStringsAfterLength) {
             return value.substring(0, collapseStringsAfterLength) + '...';
         }

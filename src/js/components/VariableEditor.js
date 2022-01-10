@@ -261,7 +261,7 @@ class VariableEditor extends React.PureComponent {
             <div>
                 <AutosizeTextarea
                     type="text"
-                    inputRef={input => {
+                    ref={input => {
                         if (input) {
                             input[!selectOnFocus ? 'focus' : 'select']();
                         }

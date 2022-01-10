@@ -88,6 +88,12 @@ export interface ReactJsonViewProps {
    */
   displayDataTypes?: boolean;
   /**
+   * set to false to remove quotes from keys (eg. "name": vs. name:)
+   *
+   * Default: true
+   */
+  quotesOnKeys?: boolean;
+  /**
    * When a callback function is passed in, edit functionality is enabled.
    * The callback is invoked before edits are completed. Returning false
    * from onEdit will prevent the change from being made. see: onEdit docs.

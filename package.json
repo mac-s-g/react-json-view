@@ -49,7 +49,6 @@
     "@babel/register": "7.12.10",
     "babel-plugin-react-html-attrs": "~2.1.0",
     "chai": "~4.2.0",
-    "coveralls": "~3.1.0",
     "css-loader": "~4.3.0",
     "enzyme": "~3.2.0",
     "enzyme-adapter-react-16": "~1.15.5",
@@ -94,7 +93,7 @@
     "modules:tree": "webpack --config webpack/webpack.config.js --json ",
     "prebuild": "NODE_ENV=test npm run test:unit",
     "test": "npm run test:coverage",
-    "test:coverage": "NODE_ENV=test nyc --reporter=text-lcov mocha test/**/*-test.js | coveralls",
+    "test:coverage": "NODE_ENV=test nyc --reporter=text-lcov mocha test/**/*-test.js",
     "test:unit": "NODE_ENV=test nyc mocha test/**/*-test.js",
     "test:watch": "NODE_ENV=test nyc mocha -w test/**/*-test.js"
   },

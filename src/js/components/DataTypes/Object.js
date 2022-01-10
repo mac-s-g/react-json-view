@@ -1,5 +1,5 @@
 import React from 'react';
-import {polyfill} from 'react-lifecycles-compat';
+import { polyfill } from 'react-lifecycles-compat';
 import { toType } from './../../helpers/util';
 
 //data type components
@@ -57,14 +57,16 @@ class RjvObject extends React.PureComponent {
             ),
             object_type: props.type === 'array' ? 'array' : 'object',
             parent_type: props.type === 'array' ? 'array' : 'object',
-            size
+            size,
+            hovered: false
         };
         return state;
-    }
+    };
 
     static getDerivedStateFromProps(nextProps, prevState) {
         const { prevProps } = prevState;
-        if (nextProps.src !== prevProps.src ||
+        if (
+            nextProps.src !== prevProps.src ||
             nextProps.collapsed !== prevProps.collapsed ||
             nextProps.name !== prevProps.name ||
             nextProps.namespace !== prevProps.namespace ||
@@ -80,17 +82,20 @@ class RjvObject extends React.PureComponent {
     }
 
     toggleCollapsed = () => {
-        this.setState({
-            expanded: !this.state.expanded
-        }, () => {
-            AttributeStore.set(
-                this.props.rjvId,
-                this.props.namespace,
-                'expanded',
-                this.state.expanded
-            );
-        });
-    }
+        this.setState(
+            {
+                expanded: !this.state.expanded
+            },
+            () => {
+                AttributeStore.set(
+                    this.props.rjvId,
+                    this.props.namespace,
+                    'expanded',
+                    this.state.expanded
+                );
+            }
+        );
+    };
 
     getObjectContent = (depth, src, props) => {
         return (
@@ -103,7 +108,7 @@ class RjvObject extends React.PureComponent {
                 </div>
             </div>
         );
-    }
+    };
 
     getEllipsis = () => {
         const { size } = this.state;
@@ -122,13 +127,15 @@ class RjvObject extends React.PureComponent {
                 </div>
             );
         }
-    }
+    };
 
     getObjectMetaData = src => {
         const { rjvId, theme } = this.props;
-        const { size } = this.state;
-        return <VariableMeta size={size} {...this.props} />;
-    }
+        const { size, hovered } = this.state;
+        return (
+            <VariableMeta rowHovered={hovered} size={size} {...this.props} />
+        );
+    };
 
     getBraceStart(object_type, expanded) {
         const { src, theme, iconStyle, parent_type } = this.props;
@@ -199,15 +206,21 @@ class RjvObject extends React.PureComponent {
         return (
             <div
                 class="object-key-val"
+                onMouseEnter={() =>
+                    this.setState({ ...this.state, hovered: true })
+                }
+                onMouseLeave={() =>
+                    this.setState({ ...this.state, hovered: false })
+                }
                 {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', styles)}
             >
                 {this.getBraceStart(object_type, expanded)}
                 {expanded
                     ? this.getObjectContent(depth, src, {
-                        theme,
-                        iconStyle,
-                        ...rest
-                    })
+                          theme,
+                          iconStyle,
+                          ...rest
+                      })
                     : this.getEllipsis()}
                 <span class="brace-row">
                     <span
@@ -233,13 +246,13 @@ class RjvObject extends React.PureComponent {
             namespace
         } = this.props;
         const { object_type } = this.state;
-        let theme = props.theme;
         let elements = [],
             variable;
         let keys = Object.keys(variables || {});
-        if (this.props.sortKeys) {
+        if (this.props.sortKeys && object_type !== 'array') {
             keys = keys.sort();
         }
+
         keys.forEach(name => {
             variable = new JsonVariable(name, variables[name]);
 
@@ -295,8 +308,9 @@ class RjvObject extends React.PureComponent {
                 );
             }
         });
+
         return elements;
-    }
+    };
 }
 
 //just store name, value and type with a variable

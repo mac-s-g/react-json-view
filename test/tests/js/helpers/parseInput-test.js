@@ -20,12 +20,24 @@ describe("parseInput", function() {
         expect(parseInput("5.22").type).to.equal("float")
     })
 
+    it("parseInput small float", function() {
+        expect(parseInput("0.0000002").type).to.equal("float")
+    })
+
+    it("parseInput scientific notation float", function() {
+        expect(parseInput("2e-7").type).to.equal("float")
+    })
+
     it("parseInput date", function() {
         expect(parseInput("5/22").type).to.equal("date")
     })
 
     it("parseInput integer", function() {
         expect(parseInput("22").type).to.equal("integer")
+    })
+
+    it("parseInput scientific notation integer", function() {
+        expect(parseInput("4e+8").type).to.equal("integer")
     })
 
     it("parseInput NaN", function() {

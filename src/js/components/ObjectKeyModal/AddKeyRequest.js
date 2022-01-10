@@ -6,12 +6,10 @@ import ObjectKeyModal from './ObjectKeyModal';
 //global theme
 import Theme from './../../themes/getStyle';
 
-
 //this input appears when adding a new value to an object
 export default class extends React.PureComponent {
-
     render() {
-        const {active, theme, rjvId} = this.props;
+        const { active, theme, rjvId } = this.props;
 
         return active ? (
             <ObjectKeyModal
@@ -23,29 +21,28 @@ export default class extends React.PureComponent {
         ) : null;
     }
 
-    isValid = (input) => {
-        const {rjvId} = this.props;
+    isValid = input => {
+        const { rjvId } = this.props;
         const request = ObjectAttributes.get(
-            rjvId, 'action', 'new-key-request'
+            rjvId,
+            'action',
+            'new-key-request'
         );
         return (
-            input != ''
-            && Object.keys(request.existing_value).indexOf(input) === -1
+            input != '' &&
+            Object.keys(request.existing_value).indexOf(input) === -1
         );
-    }
+    };
 
-    submit = (input) => {
-        const {rjvId} = this.props;
-        let request = ObjectAttributes.get(
-            rjvId, 'action', 'new-key-request'
-        );
-        request.new_value = {...request.existing_value};
+    submit = input => {
+        const { rjvId } = this.props;
+        let request = ObjectAttributes.get(rjvId, 'action', 'new-key-request');
+        request.new_value = { ...request.existing_value };
         request.new_value[input] = this.props.defaultValue;
         dispatcher.dispatch({
             name: 'VARIABLE_ADDED',
             rjvId: rjvId,
             data: request
         });
-    }
-
+    };
 }

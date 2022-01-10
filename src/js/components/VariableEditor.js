@@ -111,7 +111,7 @@ class VariableEditor extends React.PureComponent {
                             : e => {
                                   let location = [...namespace];
                                   if (
-                                      (keyModifier(e, 'edit')) &&
+                                      keyModifier(e, 'edit') &&
                                       onEdit !== false
                                   ) {
                                       this.prepopInput(variable);
@@ -305,7 +305,7 @@ class VariableEditor extends React.PureComponent {
                     <Remove
                         class="edit-cancel"
                         {...Theme(theme, 'cancel-icon')}
-                        onClick={(e) => {
+                        onClick={e => {
                             if (e) {
                                 e.stopPropagation();
                             }
@@ -316,7 +316,7 @@ class VariableEditor extends React.PureComponent {
                     <CheckCircle
                         class="edit-check string-value"
                         {...Theme(theme, 'check-icon')}
-                        onClick={(e) => {
+                        onClick={e => {
                             if (e) {
                                 e.stopPropagation();
                             }
@@ -369,7 +369,7 @@ class VariableEditor extends React.PureComponent {
                                 paddingLeft: '3px',
                                 ...Theme(theme, 'check-icon').style
                             }}
-                            onClick={(e) => {
+                            onClick={e => {
                                 if (e) {
                                     e.stopPropagation();
                                 }

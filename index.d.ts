@@ -141,6 +141,18 @@ export interface ReactJsonViewProps {
    * Default: null
    */
   defaultValue?: TypeDefaultValue | TypeDefaultValue[] | null;
+  /**
+   * Whether to select the textarea contents on edit
+   *
+   * Default: false
+   */
+  selectOnFocus?: boolean;
+  /**
+   * The key modifier to be combined with a click on JSON values to edit them
+   *
+   * Default: (e) => e.metaKey || e.ctrlKey
+   */
+  keyModifier?: (event: Event, type: 'edit' | 'submit') => boolean;
 }
 
 export interface OnCopyProps {

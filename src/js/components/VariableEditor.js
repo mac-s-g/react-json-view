@@ -55,7 +55,8 @@ class VariableEditor extends React.PureComponent {
             onDelete,
             onSelect,
             displayArrayKey,
-            quotesOnKeys
+            quotesOnKeys,
+            keyModifier
         } = this.props;
         const { editMode } = this.state;
         return (
@@ -110,7 +111,7 @@ class VariableEditor extends React.PureComponent {
                             : e => {
                                   let location = [...namespace];
                                   if (
-                                      (e.ctrlKey || e.metaKey) &&
+                                      keyModifier(e, 'edit') &&
                                       onEdit !== false
                                   ) {
                                       this.prepopInput(variable);
@@ -253,14 +254,18 @@ class VariableEditor extends React.PureComponent {
     };
 
     getEditInput = () => {
-        const { theme } = this.props;
+        const { keyModifier, selectOnFocus, theme } = this.props;
         const { editValue } = this.state;
 
         return (
             <div>
                 <AutosizeTextarea
                     type="text"
-                    inputRef={input => input && input.focus()}
+                    ref={input => {
+                        if (input) {
+                            input[!selectOnFocus ? 'focus' : 'select']();
+                        }
+                    }}
                     value={editValue}
                     class="variable-editor"
                     onChange={event => {
@@ -284,7 +289,7 @@ class VariableEditor extends React.PureComponent {
                                 break;
                             }
                             case 'Enter': {
-                                if (e.ctrlKey || e.metaKey) {
+                                if (keyModifier(e, 'submit')) {
                                     this.submitEdit(true);
                                 }
                                 break;
@@ -300,14 +305,22 @@ class VariableEditor extends React.PureComponent {
                     <Remove
                         class="edit-cancel"
                         {...Theme(theme, 'cancel-icon')}
-                        onClick={() => {
+                        onClick={e => {
+                            if (e) {
+                                e.stopPropagation();
+                            }
+
                             this.setState({ editMode: false, editValue: '' });
                         }}
                     />
                     <CheckCircle
                         class="edit-check string-value"
                         {...Theme(theme, 'check-icon')}
-                        onClick={() => {
+                        onClick={e => {
+                            if (e) {
+                                e.stopPropagation();
+                            }
+
                             this.submitEdit();
                         }}
                     />
@@ -356,7 +369,11 @@ class VariableEditor extends React.PureComponent {
                                 paddingLeft: '3px',
                                 ...Theme(theme, 'check-icon').style
                             }}
-                            onClick={() => {
+                            onClick={e => {
+                                if (e) {
+                                    e.stopPropagation();
+                                }
+
                                 this.submitEdit(true);
                             }}
                         />

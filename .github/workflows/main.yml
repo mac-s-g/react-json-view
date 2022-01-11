@@ -3,10 +3,10 @@ name: test
 on:
   push:
     branches:
-    - feat-allow-textarea-select
+    - master
   pull_request:
     branches:
-    - feat-allow-textarea-select
+    - master
 
 jobs:
   test:

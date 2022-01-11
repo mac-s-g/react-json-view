@@ -1,7 +1,7 @@
 {
-  "name": "react-json-view",
+  "name": "@microlink/react-json-view",
   "description": "Interactive react component for displaying javascript arrays and JSON objects.",
-  "homepage": "https://github.com/mac-s-g/react-json-view",
+  "homepage": "https://github.com/microlinkhq/react-json-view",
   "version": "1.21.3",
   "main": "dist/main.js",
   "author": {
@@ -9,10 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mac-s-g/react-json-view.git"
+    "url": "git+https://github.com/microlinkhq/react-json-view.git"
   },
   "bugs": {
-    "url": "https://github.com/mac-s-g/react-json-view/issues"
+    "url": "https://github.com/microlinkhq/react-json-view/issues"
   },
   "keywords": [
     "array-viewer",

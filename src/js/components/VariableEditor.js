@@ -55,7 +55,8 @@ class VariableEditor extends React.PureComponent {
             onDelete,
             onSelect,
             displayArrayKey,
-            quotesOnKeys
+            quotesOnKeys,
+            nonEditableFields
         } = this.props;
         const { editMode } = this.state;
         return (
@@ -69,7 +70,7 @@ class VariableEditor extends React.PureComponent {
                 onMouseLeave={() =>
                     this.setState({ ...this.state, hovered: false })
                 }
-                class="variable-row"
+                class={`variable-row ${variable.name}`}
                 key={variable.name}
             >
                 {type == 'array' ? (
@@ -138,10 +139,10 @@ class VariableEditor extends React.PureComponent {
                         {...{ theme, namespace: [...namespace, variable.name] }}
                     />
                 ) : null}
-                {onEdit !== false && editMode == false
+                {onEdit !== false && !nonEditableFields.includes(variable.name) && editMode == false
                     ? this.getEditIcon()
                     : null}
-                {onDelete !== false && editMode == false
+                {onDelete !== false && !nonEditableFields.includes(variable.name) && editMode == false
                     ? this.getRemoveIcon()
                     : null}
             </div>

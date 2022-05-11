@@ -7,6 +7,148 @@
   "author": {
     "name": "Mac Gainor"
   },
+  "contributors": [
+    {
+      "name": "mac",
+      "email": "mac.gainor@gmail.com"
+    },
+    {
+      "name": "Brad Adams",
+      "email": "hi@breadadams.com"
+    },
+    {
+      "name": "Kiko Beats",
+      "email": "josefrancisco.verdu@gmail.com"
+    },
+    {
+      "name": "Xuefei Li",
+      "email": "frankvsense@gmail.com"
+    },
+    {
+      "name": "Caina Leao",
+      "email": "caina.leao@endemolshine.com"
+    },
+    {
+      "name": "Tom McLaughlin",
+      "email": "tom@codedown.io"
+    },
+    {
+      "name": "Andy Baird",
+      "email": "andy@threadsculture.com"
+    },
+    {
+      "name": "Daniel Santos",
+      "email": "dsantosp12@gmail.com"
+    },
+    {
+      "name": "mac-s-g",
+      "email": "mac@conversica.com"
+    },
+    {
+      "name": "Pravdomil",
+      "email": "pravdomil.toman@gmail.com"
+    },
+    {
+      "name": "jorgejar",
+      "email": "jorge.jaramillo@docker.com"
+    },
+    {
+      "name": "superfaz",
+      "email": "16510828+superfaz@users.noreply.github.com"
+    },
+    {
+      "name": "Varad Chemburkar",
+      "email": "vhc1992@gmail.com"
+    },
+    {
+      "name": "Jason Etcovitch",
+      "email": "jasonetco@gmail.com"
+    },
+    {
+      "name": "John Arthur",
+      "email": "thorjarhun@users.noreply.github.com"
+    },
+    {
+      "name": "Jack",
+      "email": "jackdh@users.noreply.github.com"
+    },
+    {
+      "name": "Guillaume FORTAINE",
+      "email": "guillaume.fortaine@ingenico.com"
+    },
+    {
+      "name": "Michael Reynolds",
+      "email": "michael.reynolds@paybase.io"
+    },
+    {
+      "name": "Oleg Proskurin",
+      "email": "regx@usul.su"
+    },
+    {
+      "name": "EvertE",
+      "email": "evert.etienne@sitemark.com"
+    },
+    {
+      "name": "REDMOND\\xuefl",
+      "email": "xuefl@microsoft.com"
+    },
+    {
+      "name": "Rubens Mariuzzo",
+      "email": "rubens@mariuzzo.com"
+    },
+    {
+      "name": "Ryan Haywood",
+      "email": "ryan@ryanhaywood.com"
+    },
+    {
+      "name": "Taylor Birkeland",
+      "email": "tabirkeland@gmail.com"
+    },
+    {
+      "name": "Dheeraj Yennam",
+      "email": "dyennam@gmail.com"
+    },
+    {
+      "name": "Uzi Kilon",
+      "email": "uzikilon@users.noreply.github.com"
+    },
+    {
+      "name": "Aaron Cunnington",
+      "email": "azcn2503@gmail.com"
+    },
+    {
+      "name": "DELORD Vincent",
+      "email": "vincent.delord@renault.com"
+    },
+    {
+      "name": "casey langen",
+      "email": "clangen@nerdwallet.com"
+    },
+    {
+      "name": "Craig Kochis",
+      "email": "cjkochis@gmail.com"
+    },
+    {
+      "name": "Cai Leao",
+      "email": "cainaleaouk@users.noreply.github.com"
+    },
+    {
+      "name": "Bob Thomas",
+      "email": "BThomas@tripwire.com"
+    },
+    {
+      "name": "Ashwin Menkudle",
+      "email": "ashwinmenkudle@gmail.com"
+    },
+    {
+      "name": "shybyte",
+      "email": "ein@volloeko.de"
+    },
+    {
+      "name": "Jeremy Liberman",
+      "email": "mrleebo@msn.com"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/microlinkhq/react-json-view.git"
@@ -103,42 +245,5 @@
   "peerDependencies": {
     "react": ">= 15",
     "react-dom": ">= 15"
-  },
-  "contributors": [
-    "mac <mac.gainor@gmail.com>",
-    "Brad Adams <hi@breadadams.com>",
-    "Xuefei Li <frankvsense@gmail.com>",
-    "Caina Leao <caina.leao@endemolshine.com>",
-    "Tom McLaughlin <tom@codedown.io>",
-    "Andy Baird <andy@threadsculture.com>",
-    "Kiko Beats <josefrancisco.verdu@gmail.com>",
-    "mac-s-g <mac@conversica.com>",
-    "Daniel Santos <dsantosp12@gmail.com>",
-    "Pravdomil <pravdomil.toman@gmail.com>",
-    "jorgejar <jorge.jaramillo@docker.com>",
-    "superfaz <16510828+superfaz@users.noreply.github.com>",
-    "Varad Chemburkar <vhc1992@gmail.com>",
-    "Jason Etcovitch <jasonetco@gmail.com>",
-    "John Arthur <thorjarhun@users.noreply.github.com>",
-    "Jack <jackdh@users.noreply.github.com>",
-    "Guillaume FORTAINE <guillaume.fortaine@ingenico.com>",
-    "Michael Reynolds <michael.reynolds@paybase.io>",
-    "Oleg Proskurin <regx@usul.su>",
-    "EvertE <evert.etienne@sitemark.com>",
-    "REDMOND\\xuefl <xuefl@microsoft.com>",
-    "Rubens Mariuzzo <rubens@mariuzzo.com>",
-    "Ryan Haywood <ryan@ryanhaywood.com>",
-    "Taylor Birkeland <tabirkeland@gmail.com>",
-    "Dheeraj Yennam <dyennam@gmail.com>",
-    "Uzi Kilon <uzikilon@users.noreply.github.com>",
-    "Aaron Cunnington <azcn2503@gmail.com>",
-    "DELORD Vincent <vincent.delord@renault.com>",
-    "casey langen <clangen@nerdwallet.com>",
-    "Craig Kochis <cjkochis@gmail.com>",
-    "Cai Leao <cainaleaouk@users.noreply.github.com>",
-    "Bob Thomas <BThomas@tripwire.com>",
-    "Ashwin Menkudle <ashwinmenkudle@gmail.com>",
-    "shybyte <ein@volloeko.de>",
-    "Jeremy Liberman <mrleebo@msn.com>"
-  ]
+  }
 }

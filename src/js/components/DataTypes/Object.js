@@ -110,20 +110,27 @@ class RjvObject extends React.PureComponent {
         );
     };
 
-    getEllipsis = () => {
+    getEllipsis = (parent_type, src) => {
         const { size } = this.state;
-
+        const metadataCount = 5;
+        const showMetadata = parent_type === 'object';
+        const metadata =
+            showMetadata &&
+            Object.getOwnPropertyNames(src).slice(0, metadataCount).join(', ');
         if (size === 0) {
             //don't render an ellipsis when an object has no items
             return null;
         } else {
             return (
                 <div
-                    {...Theme(this.props.theme, 'ellipsis')}
+                    {...Theme(
+                        this.props.theme,
+                        showMetadata ? undefined : 'ellipsis'
+                    )}
                     class="node-ellipsis"
                     onClick={this.toggleCollapsed}
                 >
-                    ...
+                    {showMetadata ? metadata : '...'}
                 </div>
             );
         }
@@ -221,7 +228,7 @@ class RjvObject extends React.PureComponent {
                           iconStyle,
                           ...rest
                       })
-                    : this.getEllipsis()}
+                    : this.getEllipsis(parent_type, src)}
                 <span class="brace-row">
                     <span
                         style={{

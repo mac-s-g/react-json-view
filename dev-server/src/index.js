@@ -52,6 +52,7 @@ ReactDom.render(
                 return false;
             }}
             defaultValue=""
+            objectCollpasedMaxPropsCount={true}
         />
 
         <br />

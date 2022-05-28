@@ -146,7 +146,7 @@ export interface ReactJsonViewProps {
    *
    * Default: null
    */
-   objectCollpasedMaxPropsCount?: number | boolean | null;
+   objectCollpasedMaxPropsCount?: number | boolean;
 }
 
 export interface OnCopyProps {

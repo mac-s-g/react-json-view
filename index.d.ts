@@ -140,7 +140,13 @@ export interface ReactJsonViewProps {
    *
    * Default: null
    */
-  defaultValue?: TypeDefaultValue | TypeDefaultValue[] | null;
+  defaultValue?: TypeDefaultValue | TypeDefaultValue[] | null;  
+  /**
+   * Set to a value to be used as see object props when object is collpased
+   *
+   * Default: null
+   */
+   objectCollpasedMaxPropsCount?: number | boolean | null;
 }
 
 export interface OnCopyProps {

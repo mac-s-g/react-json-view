@@ -58,7 +58,8 @@ class RjvObject extends React.PureComponent {
             object_type: props.type === 'array' ? 'array' : 'object',
             parent_type: props.type === 'array' ? 'array' : 'object',
             size,
-            hovered: false
+            hovered: false,
+            objectCollpasedMaxPropsCount: props.objectCollpasedMaxPropsCount
         };
         return state;
     };
@@ -110,13 +111,22 @@ class RjvObject extends React.PureComponent {
         );
     };
 
-    getEllipsis = (parent_type, src) => {
+    getEllipsis = (parent_type, src, jsvRoot, objectCollpasedMaxPropsCount) => {
         const { size } = this.state;
-        const metadataCount = 5;
-        const showMetadata = parent_type === 'object';
-        const metadata =
-            showMetadata &&
-            Object.getOwnPropertyNames(src).slice(0, metadataCount).join(', ');
+        const showMetadata =
+            objectCollpasedMaxPropsCount &&
+            (jsvRoot || parent_type === 'object');
+        let metadata = '...';
+        if (showMetadata) {
+            metadata = Object.getOwnPropertyNames(src);
+            if (
+                objectCollpasedMaxPropsCount > 0 &&
+                objectCollpasedMaxPropsCount !== true
+            )
+                metadata = metadata.slice(0, objectCollpasedMaxPropsCount);
+
+            metadata = metadata.join(', ');
+        }
         if (size === 0) {
             //don't render an ellipsis when an object has no items
             return null;
@@ -130,7 +140,7 @@ class RjvObject extends React.PureComponent {
                     class="node-ellipsis"
                     onClick={this.toggleCollapsed}
                 >
-                    {showMetadata ? metadata : '...'}
+                    {metadata}
                 </div>
             );
         }
@@ -197,9 +207,10 @@ class RjvObject extends React.PureComponent {
             theme,
             jsvRoot,
             iconStyle,
+            objectCollpasedMaxPropsCount,
             ...rest
         } = this.props;
-
+        debugger;
         const { object_type, expanded } = this.state;
 
         let styles = {};
@@ -226,9 +237,15 @@ class RjvObject extends React.PureComponent {
                     ? this.getObjectContent(depth, src, {
                           theme,
                           iconStyle,
+                          objectCollpasedMaxPropsCount,
                           ...rest
                       })
-                    : this.getEllipsis(parent_type, src)}
+                    : this.getEllipsis(
+                          parent_type,
+                          src,
+                          jsvRoot,
+                          objectCollpasedMaxPropsCount
+                      )}
                 <span class="brace-row">
                     <span
                         style={{

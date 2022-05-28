@@ -210,7 +210,6 @@ class RjvObject extends React.PureComponent {
             objectCollpasedMaxPropsCount,
             ...rest
         } = this.props;
-        debugger;
         const { object_type, expanded } = this.state;
 
         let styles = {};

@@ -11,7 +11,7 @@ npm-debug.log
 /docker
 /entrypoints
 /node_modules
-/src
+# /src
 /test
 /webpack
 

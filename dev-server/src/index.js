@@ -52,7 +52,7 @@ ReactDom.render(
                 return false;
             }}
             defaultValue=""
-            objectCollpasedMaxPropsCount={true}
+            objectCollpasedMaxPropsCount={4}
         />
 
         <br />
@@ -85,6 +85,7 @@ ReactDom.render(
                 src.constructor &&
                 src.constructor.name === 'Moment'
             }
+            objectCollpasedMaxPropsCount={4}
         />
 
         <br />
@@ -96,6 +97,7 @@ ReactDom.render(
             name={'feature_set'}
             displayDataTypes={false}
             indentWidth={2}
+            objectCollpasedMaxPropsCount={4}
         />
 
         <br />
@@ -107,6 +109,7 @@ ReactDom.render(
             name={'feature_set'}
             displayDataTypes={false}
             indentWidth={5}
+            objectCollpasedMaxPropsCount={4}
         />
 
         <br />
@@ -120,6 +123,7 @@ ReactDom.render(
             displayObjectSize={false}
             displayDataTypes={false}
             enableClipboard={false}
+            objectCollpasedMaxPropsCount={4}
         />
 
         <br />
@@ -131,6 +135,7 @@ ReactDom.render(
             onEdit={edit => {
                 console.log(edit);
             }}
+            objectCollpasedMaxPropsCount={4}
         />
 
         <br />

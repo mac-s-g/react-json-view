@@ -117,7 +117,9 @@ class RjvObject extends React.PureComponent {
             objectCollpasedMaxPropsCount &&
             (jsvRoot || parent_type === 'object');
         let metadata = '...';
+        let propsCount = 0;
         if (showMetadata) {
+            propsCount = Object.getOwnPropertyNames(src).length;
             metadata = Object.getOwnPropertyNames(src);
             if (
                 objectCollpasedMaxPropsCount > 0 &&
@@ -141,6 +143,10 @@ class RjvObject extends React.PureComponent {
                     onClick={this.toggleCollapsed}
                 >
                     {metadata}
+                    {typeof objectCollpasedMaxPropsCount === 'number' &&
+                    propsCount > objectCollpasedMaxPropsCount
+                        ? ', ...'
+                        : ''}
                 </div>
             );
         }

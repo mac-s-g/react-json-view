@@ -83,6 +83,14 @@ const getDefaultThemeStyling = theme => {
         'collapsed-icon': {
             color: colors.collapsedIcon
         },
+        'ellipsis-metadata': {
+            display: 'inline-block',
+            color: colors.dataTypes.undefined,
+            fontSize: constants.undefinedFontSize,
+            padding: constants.undefinedPadding,
+            borderRadius: constants.undefinedBorderRadius,
+            cursor: 'pointer'
+        },
         colon: {
             display: 'inline-block',
             margin: constants.keyMargin,

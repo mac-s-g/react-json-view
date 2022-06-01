@@ -137,7 +137,7 @@ class RjvObject extends React.PureComponent {
                 <div
                     {...Theme(
                         this.props.theme,
-                        showMetadata ? undefined : 'ellipsis'
+                        showMetadata ? 'ellipsis-metadata' : 'ellipsis'
                     )}
                     class="node-ellipsis"
                     onClick={this.toggleCollapsed}

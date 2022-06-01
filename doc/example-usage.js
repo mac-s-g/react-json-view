@@ -1,5 +1,5 @@
 
-import ReactJson from 'react-json-view';
+import ReactJson from 'react-json-view-2';
 
 //you have some json to display
 let my_important_json = {
@@ -31,7 +31,7 @@ let my_important_json = {
 
 
 // ES6 with React
-import ReactJson from 'react-json-view';
+import ReactJson from 'react-json-view-2';
 
 ...
 <ReactJson src={my_important_json} />

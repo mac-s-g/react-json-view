@@ -165,6 +165,7 @@ ReactDom.render(
                 base0E: 'rgba(70, 70, 230, 1)',
                 base0F: 'rgba(70, 70, 230, 1)'
             }}
+            objectCollpasedMaxPropsCount={true}
         />
 
         <JsonViewer
@@ -173,6 +174,7 @@ ReactDom.render(
             name="large_array"
             groupArraysAfterLength={50}
             src={getExampleJson4()}
+            objectCollpasedMaxPropsCount={true}
         />
     </div>,
     document.getElementById('app-container')

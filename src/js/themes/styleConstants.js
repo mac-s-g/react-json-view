@@ -11,7 +11,7 @@ export default {
     braceFontWeight: 'bold',
     braceCursor: 'pointer',
 
-    ellipsisFontSize: '18px',
+    ellipsisFontSize: '12px',
     ellipsisLineHeight: '10px',
     ellipsisCursor: 'pointer',
 

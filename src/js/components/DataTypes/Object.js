@@ -113,9 +113,12 @@ class RjvObject extends React.PureComponent {
 
     getEllipsis = (parent_type, src, jsvRoot, objectCollpasedMaxPropsCount) => {
         const { size } = this.state;
+        const isArray = src instanceof Array;
         const showMetadata =
             objectCollpasedMaxPropsCount &&
+            !isArray &&
             (jsvRoot || parent_type === 'object');
+        debugger;
         let metadata = '...';
         let propsCount = 0;
         if (showMetadata) {

@@ -52,7 +52,7 @@ ReactDom.render(
                 return false;
             }}
             defaultValue=""
-            objectCollpasedMaxPropsCount={4}
+            objectCollapsedMaxPropsCount={4}
         />
 
         <br />
@@ -85,7 +85,7 @@ ReactDom.render(
                 src.constructor &&
                 src.constructor.name === 'Moment'
             }
-            objectCollpasedMaxPropsCount={4}
+            objectCollapsedMaxPropsCount={4}
         />
 
         <br />
@@ -97,7 +97,7 @@ ReactDom.render(
             name={'feature_set'}
             displayDataTypes={false}
             indentWidth={2}
-            objectCollpasedMaxPropsCount={4}
+            objectCollapsedMaxPropsCount={4}
         />
 
         <br />
@@ -109,7 +109,7 @@ ReactDom.render(
             name={'feature_set'}
             displayDataTypes={false}
             indentWidth={5}
-            objectCollpasedMaxPropsCount={4}
+            objectCollapsedMaxPropsCount={4}
         />
 
         <br />
@@ -123,7 +123,7 @@ ReactDom.render(
             displayObjectSize={false}
             displayDataTypes={false}
             enableClipboard={false}
-            objectCollpasedMaxPropsCount={4}
+            objectCollapsedMaxPropsCount={4}
         />
 
         <br />
@@ -135,7 +135,7 @@ ReactDom.render(
             onEdit={edit => {
                 console.log(edit);
             }}
-            objectCollpasedMaxPropsCount={4}
+            objectCollapsedMaxPropsCount={4}
         />
 
         <br />
@@ -165,7 +165,7 @@ ReactDom.render(
                 base0E: 'rgba(70, 70, 230, 1)',
                 base0F: 'rgba(70, 70, 230, 1)'
             }}
-            objectCollpasedMaxPropsCount={true}
+            objectCollapsedMaxPropsCount={true}
         />
 
         <JsonViewer
@@ -174,7 +174,7 @@ ReactDom.render(
             name="large_array"
             groupArraysAfterLength={50}
             src={getExampleJson4()}
-            objectCollpasedMaxPropsCount={true}
+            objectCollapsedMaxPropsCount={true}
         />
     </div>,
     document.getElementById('app-container')

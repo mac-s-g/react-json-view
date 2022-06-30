@@ -15,6 +15,10 @@ ReactDom.render(
         {/* just pass in your JSON to the src attribute */}
         <JsonViewer
             sortKeys
+            autoEscape
+            caseSensitive={false}
+            searchWords={['string', 'is', '3', 'test']}
+            highlightStyle={{ backgroundColor: 'yellow' }}
             style={{ padding: '30px', backgroundColor: 'white' }}
             src={getExampleJson1()}
             quotesOnKeys={false}

@@ -1,5 +1,5 @@
 {
-    "name": "react-json-view",
+    "name": "@grapherjs/react-json-view",
     "description": "Interactive react component for displaying javascript arrays and JSON objects.",
     "version": "1.21.3",
     "main": "dist/main.js",
@@ -28,7 +28,7 @@
         "jsdom": "^16.4.0",
         "mocha": "^8.2.1",
         "moment": "^2.29.1",
-        "node-sass": "^4.14.1",
+        "node-sass": "^7.0.1",
         "nyc": "^15.1.0",
         "prettier": "^2.2.1",
         "react": "^16.14.0",

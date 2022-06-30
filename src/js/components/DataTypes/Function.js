@@ -1,5 +1,6 @@
 import React from 'react';
 import DataTypeLabel from './DataTypeLabel';
+import { highlight } from './../../helpers/highlight-words-core';
 
 //theme
 import Theme from './../../themes/getStyle';
@@ -58,13 +59,32 @@ export default class extends React.PureComponent {
 
     getFunctionDisplay = collapsed => {
         const { props } = this;
+        const {
+            autoEscape,
+            caseSensitive,
+            searchWords,
+            highlightStyle,
+            highlightClassName
+        } = props;
+
+        const options = {
+            autoEscape,
+            caseSensitive,
+            searchWords,
+            highlightStyle,
+            highlightClassName
+        };
+
         if (collapsed) {
             return (
                 <span>
-                    {this.props.value
-                        .toString()
-                        .slice(9, -1)
-                        .replace(/\{[\s\S]+/, '')}
+                    {highlight({
+                        ...options,
+                        textToHighlight: this.props.value
+                            .toString()
+                            .slice(9, -1)
+                            .replace(/\{[\s\S]+/, '')
+                    })}
                     <span
                         class="function-collapsed"
                         style={{ fontWeight: 'bold' }}
@@ -76,7 +96,10 @@ export default class extends React.PureComponent {
                 </span>
             );
         } else {
-            return this.props.value.toString().slice(9, -1);
+            return highlight({
+                ...options,
+                textToHighlight: this.props.value.toString().slice(9, -1)
+            });
         }
     };
 }

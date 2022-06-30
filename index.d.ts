@@ -141,6 +141,24 @@ export interface ReactJsonViewProps {
    * Default: null
    */
   defaultValue?: TypeDefaultValue | TypeDefaultValue[] | null;
+  /** ***********************
+   * Highlighter 
+   * ***********************/
+
+  /** Escape characters in searchWords which are meaningful in regular expressions */
+  autoEscape?: boolean;
+
+  /** Search should be case sensitive; defaults to false */
+  caseSensitive?: boolean
+
+  /** CSS class name applied to highlighted text or object mapping search term matches to class names. */
+  highlightClassName?: string;
+
+  /** Inline styles applied to highlighted text */
+  highlightStyle?: React.CSSProperties
+
+  /** Array of search words. String search terms are automatically cast to RegExps unless autoEscape is true. */
+  searchWords?: string[]
 }
 
 export interface OnCopyProps {

@@ -28,11 +28,11 @@
         "jsdom": "^16.4.0",
         "mocha": "^8.2.1",
         "moment": "^2.29.1",
-        "node-sass": "^4.14.1",
+        "node-sass": "^7.0.1",
         "nyc": "^15.1.0",
         "prettier": "^2.2.1",
-        "react": "^16.14.0",
-        "react-dom": "^16.14.0",
+        "react": "^18.1.0",
+        "react-dom": "^18.1.0",
         "react-github-button": "^0.1.11",
         "react-hot-loader": "^4.13.0",
         "react-scripts": "4.0.1",
@@ -48,14 +48,14 @@
         "webpack-dev-server": "^3.11.2"
     },
     "peerDependencies": {
-        "react": "^17.0.0 || ^16.3.0 || ^15.5.4",
-        "react-dom": "^17.0.0 || ^16.3.0 || ^15.5.4"
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
     },
     "scripts": {
         "build": "NODE_ENV=production webpack --config webpack/webpack.config.js -p --display-error-details --progress --optimize-minimize",
         "prebuild": "NODE_ENV=test npm run test:unit",
         "build:demo": "NODE_ENV=production webpack --config webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
-        "dev": "NODE_ENV=development webpack-dev-server --config webpack/webpack.config-dev.js --open",
+        "dev": "NODE_ENV=development webpack-dev-server --config webpack/webpack.config-dev.js --openssl-legacy-provider",
         "modules:debug": "./docker/debug.sh",
         "modules:tree": "webpack --config webpack/webpack.config.js --json ",
         "modules:size-analyzer": "webpack --config webpack/webpack.config.js --json | webpack-bundle-size-analyzer",

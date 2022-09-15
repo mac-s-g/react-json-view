@@ -28,8 +28,7 @@ export default class extends React.PureComponent {
     handleCopy = () => {
         const container = document.createElement('textarea');
         const { clickCallback, src, namespace } = this.props;
-
-        container.innerHTML = JSON.stringify(
+        container.value = JSON.stringify(
             this.clipboardValue(src),
             null,
             '  '
@@ -40,7 +39,6 @@ export default class extends React.PureComponent {
         document.execCommand('copy');
 
         document.body.removeChild(container);
-
         this.copiedTimer = setTimeout(() => {
             this.setState({
                 copied: false

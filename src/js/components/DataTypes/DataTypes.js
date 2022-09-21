@@ -9,3 +9,4 @@ export { default as JsonObject } from './Object';
 export { default as JsonRegexp } from './Regexp';
 export { default as JsonString } from './String';
 export { default as JsonUndefined } from './Undefined';
+export { default as JsonBigInt } from './BigInt';

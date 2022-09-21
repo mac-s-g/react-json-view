@@ -1,3 +1,5 @@
+import json from 'json-bigint';
+
 export default function parseInput(input) {
     //following code is to make a best guess at
     //the type for a variable being submitted.
@@ -5,13 +7,13 @@ export default function parseInput(input) {
     //we are working with a serialized data representation
     input = input.trim();
     try {
-        input = JSON.stringify(JSON.parse(input));
+        input = json.stringify(json.parse(input));
         if (input[0] === '[') {
             //array
-            return formatResponse('array', JSON.parse(input));
+            return formatResponse('array', json.parse(input));
         } else if (input[0] === '{') {
             //object
-            return formatResponse('object', JSON.parse(input));
+            return formatResponse('object', json.parse(input));
         } else if (
             input.match(/\-?\d+\.\d+/) &&
             input.match(/\-?\d+\.\d+/)[0] === input

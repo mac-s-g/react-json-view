@@ -196,7 +196,8 @@ function getExampleJson1() {
                 } else {
                     return 'other';
                 }
-            }
+            },
+            deposit: BigInt(1000)
         },
         string_number: '1234',
         date: new Date(),

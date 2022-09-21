@@ -1,5 +1,6 @@
 import React from 'react';
 import { expect } from 'chai';
+import json from 'json-bigint';
 
 import stringifyVariable from './../../../../src/js/helpers/stringifyVariable';
 
@@ -7,14 +8,14 @@ describe('stringifyVariable', function () {
     it('stringifyVariable object', function () {
         let test = { a: true };
         expect(stringifyVariable(test)).to.equal(
-            JSON.stringify(test, null, '  ')
+            json.stringify(test, null, '  ')
         );
     });
 
     it('stringifyVariable array', function () {
         let test = [1, 2, 3];
         expect(stringifyVariable(test)).to.equal(
-            JSON.stringify(test, null, '  ')
+            json.stringify(test, null, '  ')
         );
     });
 

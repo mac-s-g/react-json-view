@@ -1,5 +1,6 @@
 import React from 'react';
 import AutosizeTextarea from 'react-textarea-autosize';
+import json from 'json-bigint';
 
 import { toType } from './../helpers/util';
 import dispatcher from './../helpers/dispatcher';
@@ -18,7 +19,8 @@ import {
     JsonNull,
     JsonRegexp,
     JsonString,
-    JsonUndefined
+    JsonUndefined,
+    JsonBigInt
 } from './DataTypes/DataTypes';
 
 //clibboard icon
@@ -242,11 +244,13 @@ class VariableEditor extends React.PureComponent {
                 return <JsonDate value={variable.value} {...props} />;
             case 'regexp':
                 return <JsonRegexp value={variable.value} {...props} />;
+            case 'bigint':
+                return <JsonBigInt value={variable.value} {...props} />;
             default:
                 // catch-all for types that weren't anticipated
                 return (
                     <div class="object-value">
-                        {JSON.stringify(variable.value)}
+                        {json.stringify(variable.value)}
                     </div>
                 );
         }

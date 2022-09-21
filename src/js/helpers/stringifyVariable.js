@@ -1,4 +1,5 @@
 import { toType } from './util';
+import json from 'json-bigint';
 
 export default value => {
     const type = toType(value);
@@ -25,7 +26,7 @@ export default value => {
             break;
         default: {
             try {
-                string_value = JSON.stringify(value, null, '  ');
+                string_value = json.stringify(value, null, '  ');
             } catch (e) {
                 string_value = '';
             }

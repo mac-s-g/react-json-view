@@ -1,5 +1,5 @@
 import React from 'react';
-
+import json from 'json-bigint';
 import { toType } from './../helpers/util';
 
 //clibboard icon
@@ -29,7 +29,7 @@ export default class extends React.PureComponent {
         const container = document.createElement('textarea');
         const { clickCallback, src, namespace } = this.props;
 
-        container.innerHTML = JSON.stringify(
+        container.innerHTML = json.stringify(
             this.clipboardValue(src),
             null,
             '  '

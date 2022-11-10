@@ -1,27 +1,13 @@
 import React, { useContext } from "react";
 
-import dispatcher from "../helpers/dispatcher";
 import { toType } from "../helpers/util";
-// theme
 import Theme from "../themes/getStyle";
 import CopyToClipboard from "./CopyToClipboard";
-// icons
 import { AddCircle as Add, RemoveCircle as Remove } from "./icons";
 import LocalJsonViewContext from "./LocalJsonViewContext";
 import ReactJsonViewContext from "./ReactJsonViewContext";
 
 export default class extends React.PureComponent {
-  getObjectSize = () => {
-    const { size, theme, displayObjectSize } = this.props;
-    if (displayObjectSize) {
-      return (
-        <span className="object-size" {...Theme(theme, "object-size")}>
-          {size} item{size === 1 ? "" : "s"}
-        </span>
-      );
-    }
-  };
-
   getAddAttribute = (rowHovered) => {
     const { namespace, name, value, depth } = useContext(LocalJsonViewContext);
     const {
@@ -109,7 +95,8 @@ const VariableMeta = ({ rowHovered }) => {
   const { props: rjvProps } = useContext(ReactJsonViewContext);
 
   return (
-    <div
+    <button
+      type="button"
       {...Theme(rjvProps.theme, "object-meta-data")}
       className="object-meta-data"
       onClick={(e) => {
@@ -117,7 +104,9 @@ const VariableMeta = ({ rowHovered }) => {
       }}
     >
       {/* size badge display */}
-      {this.getObjectSize()}
+      <span className="object-size" {...Theme(theme, "object-size")}>
+        {size} item{size === 1 ? "" : "s"}
+      </span>
       {/* copy to clipboard icon */}
       {rjvProps.enableClipboard ? (
         <CopyToClipboard
@@ -128,6 +117,6 @@ const VariableMeta = ({ rowHovered }) => {
       {/* copy add/remove icons */}
       {rjvProps.canAdd !== false ? this.getAddAttribute(rowHovered) : null}
       {rjvProps.onDelete !== false ? this.getRemoveObject(rowHovered) : null}
-    </div>
+    </button>
   );
 };

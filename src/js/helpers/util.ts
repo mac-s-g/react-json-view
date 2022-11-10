@@ -1,27 +1,17 @@
-// returns a string "type" of input object
-export function toType(obj: unknown) {
-  let type = getType(obj);
-  // some extra disambiguation for numbers
-  if (type === "number") {
-    if (isNaN(obj as number)) {
-      type = "nan";
-      // eslint-disable-next-line no-bitwise
-    } else if (((obj as number) | 0) !== obj) {
-      // bitwise OR produces integers
-      type = "float";
-    } else {
-      type = "integer";
-    }
-  }
-  return type;
-}
+import { Json, TypeName } from "../components/ReactJsonViewContext";
+import { Theme } from "./theme";
 
-// source: http://stackoverflow.com/questions/7390426/better-way-to-get-type-of-a-javascript-variable/7390612#7390612
-function getType(obj: unknown) {
-  return {}.toString
-    .call(obj)
-    .match(/\s([a-zA-Z]+)/)![1]
-    .toLowerCase();
+export function toType(obj: Json): TypeName {
+  const t = typeof obj;
+
+  if (obj === null) return "null";
+  if (Array.isArray(obj)) return "array";
+  if (t === "boolean") return "boolean";
+  if (t === "string") return "string";
+  if (t === "number") return "number";
+  if (t === "object") return "object";
+
+  throw new Error("Object isn't Json");
 }
 
 // validation for base-16 themes
@@ -44,9 +34,9 @@ export function isTheme(theme: unknown): theme is Theme {
     "base0E",
     "base0F",
   ];
-  if (toType(theme) === "object") {
+  if (typeof theme === "object" && theme) {
     for (let i = 0; i < themeKeys.length; i += 1) {
-      if (!(themeKeys[i] in (theme as {}))) {
+      if (!(themeKeys[i] in theme)) {
         return false;
       }
     }
@@ -54,3 +44,23 @@ export function isTheme(theme: unknown): theme is Theme {
   }
   return false;
 }
+
+// increment 1 with each nested object & array
+export const DEPTH_INCREMENT = 1;
+// single indent is 5px
+export const SINGLE_INDENT = 5;
+
+export const DISPLAY_BRACES = {
+  array: {
+    start: "[",
+    end: "]",
+  },
+  object: {
+    start: "{",
+    end: "}",
+  },
+  doubleQuotes: {
+    start: '"',
+    end: '"',
+  },
+} as const;

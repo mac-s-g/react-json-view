@@ -12,7 +12,7 @@ export type Json =
 export type ReactJsonViewProps = {
   value: Json & object;
   onChange: (v: Json & object) => void;
-  rootNodeName: string;
+  rootNodeName: string | null;
   theme: Theme | string;
   style: StyleHTMLAttributes<"div">;
   newKeyDefaultValue?: Json;
@@ -33,6 +33,14 @@ export type ReactJsonViewProps = {
   canAdd: boolean;
   iconStyle: "circle" | "triangle" | "square";
 };
+
+export type TypeName =
+  | "string"
+  | "number"
+  | "null"
+  | "object"
+  | "array"
+  | "boolean";
 
 const ReactJsonViewContext = createContext<{
   props: ReactJsonViewProps;

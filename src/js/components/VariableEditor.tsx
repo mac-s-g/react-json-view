@@ -4,9 +4,10 @@ import AutosizeTextarea from "react-textarea-autosize";
 import dispatcher from "../helpers/dispatcher";
 import parseInput from "../helpers/parseInput";
 import stringifyVariable from "../helpers/stringifyVariable";
+// theme
+import Theme from "../themes/getStyle";
 import CopyToClipboard from "./CopyToClipboard";
-
-//data type components
+// data type components
 import {
   JsonBoolean,
   JsonDate,
@@ -18,13 +19,9 @@ import {
   JsonRegexp,
   JsonString,
   JsonUndefined,
-} from "./DataTypes/DataTypes";
-
-//clibboard icon
-import { Edit, CheckCircle, RemoveCircle as Remove } from "./icons";
-
-//theme
-import Theme from "../themes/getStyle";
+} from "./DataTypes";
+// clibboard icon
+import { CheckCircle, Edit, RemoveCircle as Remove } from "./icons";
 
 const EditIcon = ({ variable, theme, hovered, prepopulateInput }) => {
   return (
@@ -61,10 +58,10 @@ const RemoveIcon = ({ variable, namespace, theme, rjvId, hovered }) => {
         onClick={() => {
           dispatcher.dispatch({
             name: "VARIABLE_REMOVED",
-            rjvId: rjvId,
+            rjvId,
             data: {
               name: variable.name,
-              namespace: namespace,
+              namespace,
               existing_value: variable.value,
               variable_removed: true,
             },
@@ -156,7 +153,7 @@ const EditInput = ({
         value={editValue}
         class="variable-editor"
         onChange={(event) => {
-          const value = event.target.value;
+          const { value } = event.target;
           const detected = parseInput(value);
 
           setEditValue(value);
@@ -295,7 +292,7 @@ const DetectedInput = ({ parsedInput, theme }) => {
                 cursor: "default",
               }}
             >
-              {"["}
+              [
             </span>
             <span
               style={{
@@ -311,7 +308,7 @@ const DetectedInput = ({ parsedInput, theme }) => {
                 cursor: "default",
               }}
             >
-              {"]"}
+              ]
             </span>
           </span>
         );
@@ -386,12 +383,12 @@ const VariableEditor = ({
     setEditMode(false);
     dispatcher.dispatch({
       name: "VARIABLE_UPDATED",
-      rjvId: rjvId,
+      rjvId,
       data: {
         name: variable.name,
-        namespace: namespace,
+        namespace,
         existing_value: variable.value,
-        new_value: new_value,
+        new_value,
         variable_removed: false,
       },
     });
@@ -411,7 +408,7 @@ const VariableEditor = ({
         displayArrayKey ? (
           <span
             {...Theme(theme, "array-key")}
-            key={variable.name + "_" + namespace}
+            key={`${variable.name}_${namespace}`}
           >
             {variable.name}
             <div {...Theme(theme, "colon")}>:</div>
@@ -422,7 +419,7 @@ const VariableEditor = ({
           <span
             {...Theme(theme, "object-name")}
             className="object-key"
-            key={variable.name + "_" + namespace}
+            key={`${variable.name}_${namespace}`}
           >
             {!!quotesOnKeys && <span style={{ verticalAlign: "top" }}>"</span>}
             <span style={{ display: "inline-block" }}>{variable.name}</span>
@@ -437,7 +434,7 @@ const VariableEditor = ({
           onSelect === false && onEdit === false
             ? undefined
             : (e) => {
-                let location = [...namespace];
+                const location = [...namespace];
                 if ((e.ctrlKey || e.metaKey) && onEdit !== false) {
                   prepopulateInput(variable);
                 } else if (onSelect !== false) {

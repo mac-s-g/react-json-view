@@ -4,7 +4,7 @@ import { toType } from "../helpers/util";
 import ArrayGroup from "./ArrayGroup";
 import JsonObject from "./DataTypes/Object";
 import LocalJsonViewContext from "./LocalJsonViewContext";
-import ReactJsonViewContext, { Json } from "./ReactJsonViewContext";
+import ReactJsonViewContext from "./ReactJsonViewContext";
 
 type JsonViewerProps = object;
 const JsonViewer = (p: JsonViewerProps) => {
@@ -23,17 +23,24 @@ const JsonViewer = (p: JsonViewerProps) => {
 
   const namespace = [rjvProps.rootNodeName];
 
+  const type = toType(rjvProps.value);
+
   return (
     <LocalJsonViewContext.Provider
       value={{
         namespace,
-        type: toType(rjvProps.value),
+        type,
         value: rjvProps.value,
+        depth: 0,
       }}
     >
       <div className="pretty-json-container object-container">
         <div className="object-content">
-          <ObjectComponent namespace={namespace} depth={0} jsvRoot />
+          <ObjectComponent
+            indexOffset={0}
+            objectType={type as "array" | "object"}
+            parentIsArrayGroup={false}
+          />
         </div>
       </div>
     </LocalJsonViewContext.Provider>

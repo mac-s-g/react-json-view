@@ -1,11 +1,13 @@
 import { createContext } from "react";
 
-import { Json } from "./ReactJsonViewContext";
+import { Json, TypeName } from "./ReactJsonViewContext";
 
 const LocalJsonViewContext = createContext<{
   value: Json;
-  namespace: string[];
-  type: string;
+  namespace: (string | null)[];
+  type: TypeName;
+  depth: number;
+  parentType: TypeName;
 }>(null!);
 
 export default LocalJsonViewContext;

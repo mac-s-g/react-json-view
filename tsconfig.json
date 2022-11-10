@@ -1,0 +1,42 @@
+{
+    "compilerOptions": {
+      "target": "esnext",
+      "module": "esnext",
+      "lib": ["dom", "esnext"],
+      "declaration": true,
+      "sourceMap": true,
+      "moduleResolution": "node",
+      "skipLibCheck": true,
+      "strict": true,
+      "isolatedModules": true,
+      "noFallthroughCasesInSwitch": true,
+      "suppressImplicitAnyIndexErrors": false,
+      "noImplicitAny": true,
+      "strictFunctionTypes": true,
+      "strictNullChecks": true,
+      "strictPropertyInitialization": true,
+      "jsx": "react-jsx",
+      "esModuleInterop": true,
+      "resolveJsonModule": true,
+      "allowSyntheticDefaultImports": true,
+      "downlevelIteration": true,
+      "declarationMap": true
+    },
+    "include": [
+      "src/**/*.tsx",
+      "src/**/*.ts",
+    ],
+    "exclude": [
+      "**/node_modules",
+      "**/dist",
+      "**/build"
+    ],
+    "ts-node": {
+      "compilerOptions": {
+        "module": "CommonJS",
+        "resolveJsonModule": true,
+        "noImplicitAny": false
+      }
+    }
+  }
+  

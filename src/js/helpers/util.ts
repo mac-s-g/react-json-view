@@ -1,0 +1,56 @@
+// returns a string "type" of input object
+export function toType(obj: unknown) {
+  let type = getType(obj);
+  // some extra disambiguation for numbers
+  if (type === "number") {
+    if (isNaN(obj as number)) {
+      type = "nan";
+      // eslint-disable-next-line no-bitwise
+    } else if (((obj as number) | 0) !== obj) {
+      // bitwise OR produces integers
+      type = "float";
+    } else {
+      type = "integer";
+    }
+  }
+  return type;
+}
+
+// source: http://stackoverflow.com/questions/7390426/better-way-to-get-type-of-a-javascript-variable/7390612#7390612
+function getType(obj: unknown) {
+  return {}.toString
+    .call(obj)
+    .match(/\s([a-zA-Z]+)/)![1]
+    .toLowerCase();
+}
+
+// validation for base-16 themes
+export function isTheme(theme: unknown): theme is Theme {
+  const themeKeys = [
+    "base00",
+    "base01",
+    "base02",
+    "base03",
+    "base04",
+    "base05",
+    "base06",
+    "base07",
+    "base08",
+    "base09",
+    "base0A",
+    "base0B",
+    "base0C",
+    "base0D",
+    "base0E",
+    "base0F",
+  ];
+  if (toType(theme) === "object") {
+    for (let i = 0; i < themeKeys.length; i += 1) {
+      if (!(themeKeys[i] in (theme as {}))) {
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
+}

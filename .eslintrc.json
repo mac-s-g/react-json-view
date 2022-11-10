@@ -1,20 +1,82 @@
 {
-  "plugins": ["react", "prettier"],
-  "rules": {
-    "prettier/prettier": "error",
-    "import/no-anonymous-default-export": "off",
-    "egegeg": "off"
-  },
-  "parser":"@babel/eslint-parser",
+  "root": true,
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "sourceType": "module",
-    "ecmaVersion": 6,
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
-    }
+    "ecmaVersion": 10,
+    "project": ["tsconfig.json"]
   },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "prettier/prettier",
+    "plugin:prettier/recommended",
+    "plugin:import/typescript"
+  ],
   "env": {
     "es6": true,
+    "browser": true,
     "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "plugins": [
+    "@typescript-eslint/eslint-plugin",
+    "testing-library",
+    "simple-import-sort",
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "import/no-extraneous-dependencies": 0,
+    "react/destructuring-assignment": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "react/state-in-constructor": "off",
+    "react/jsx-no-useless-fragment": "off",
+    "no-nested-ternary": "off",
+    "no-param-reassign": "off",
+    "react/static-property-placement": "off",
+    "no-shadow": "off",
+    "radix": "off",
+    "import/no-cycle": "off",
+    "consistent-return": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "import/extensions": "off",
+    "no-underscore-dangle": "off",
+    "import/export": "off",
+    "react/jsx-no-constructed-context-values": "off",
+    "react/require-default-props": "off",
+    "no-console": "off",
+    "import/no-unresolved": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/aria-role": "off",
+    "no-restricted-syntax": "off",
+    "guard-for-in": "off",
+    "import/prefer-default-export": 0,
+    "import/no-default-export": 0,
+    "react/jsx-filename-extension": 0,
+    "react/function-component-definition": 0,
+    "react/react-in-jsx-scope": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/prop-types": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/no-non-null-assertion": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+
+    "no-use-before-define": 0,
+    "simple-import-sort/imports": 2,
+    "simple-import-sort/exports": 2,
+    "sort-imports": 0,
+    "import/order": 0,
+    "no-duplicate-imports": 2,
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
   }
 }

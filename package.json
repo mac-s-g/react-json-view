@@ -5,6 +5,7 @@
   "version": "0.0.1",
   "main": "dist/main.js",
   "devDependencies": {
+    "@types/react-dom": "^18.0.8",
     "@typescript-eslint/eslint-plugin": "^5.42.1",
     "@typescript-eslint/parser": "^5.42.1",
     "esbuild": "^0.15.13",
@@ -42,8 +43,8 @@
     "build:watch": "NODE_ENV=development node ./scripts/build.js",
     "build:demo": "NODE_ENV=production webpack --config webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
     "dev": "NODE_ENV=development webpack-dev-server --config webpack/webpack.config-dev.js --open",
-    "lint:check": "NODE_ENV=test eslint src",
-    "lint:fix": "NODE_ENV=test eslint src --ext .js,.jsx --fix"
+    "lint:check": "NODE_ENV=test eslint src demo/src",
+    "lint:fix": "NODE_ENV=test eslint src demo/src --ext .js,.jsx --fix"
   },
   "repository": {
     "type": "git",

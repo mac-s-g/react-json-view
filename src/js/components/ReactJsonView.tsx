@@ -10,9 +10,11 @@ import ReactJsonViewContext, {
 import ValidationFailure from "./ValidationFailure";
 
 const ReactJsonView = ({
-  value,
-  onChange,
-  rootNodeName,
+  value = {},
+  onChange = () => {
+    /* NOOP */
+  },
+  rootNodeName = "root",
 
   style = {},
   newKeyDefaultValue = null,
@@ -32,7 +34,7 @@ const ReactJsonView = ({
   canAdd = false,
   displayObjectSize = true,
   iconStyle = "triangle",
-}: ReactJsonViewProps) => {
+}: Partial<ReactJsonViewProps>) => {
   // listen to request to add/edit a key to an object
   const [addKeyRequest, setAddKeyRequest] = useState(false);
   const [editKeyRequest, setEditKeyRequest] = useState(false);

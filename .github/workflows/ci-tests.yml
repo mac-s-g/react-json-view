@@ -19,7 +19,7 @@ jobs:
         with:
           path: node_modules
           key: dependencies
-      - run: npm i
-      - run: npm run lint
-      - run: npm run test
+      - run: pnpm install
+      - run: pnpm build
+      - run: pnpm lint
 

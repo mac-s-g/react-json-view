@@ -1,7 +1,0 @@
-{
-  "plugins": ["transform-decorators-legacy"],
-  "require": [
-    "@babel/register",
-    "./test/testHelpers/requireSources.js"
-  ]
-}

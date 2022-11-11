@@ -92,4 +92,4 @@ export default {
   addKeyModalMargin: "auto",
   addKeyModalPadding: "10px",
   addKeyModalRadius: "3px",
-};
+} as const;

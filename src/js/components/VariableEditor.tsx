@@ -1,8 +1,11 @@
-import { useContext, useState } from "react";
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import { useContext, useMemo, useState } from "react";
 import AutosizeTextarea from "react-textarea-autosize";
 
 import parseInput from "../helpers/parseInput";
 import stringifyVariable from "../helpers/stringifyVariable";
+import { DISPLAY_BRACES, SINGLE_INDENT, toType } from "../helpers/util";
 // theme
 import Theme from "../themes/getStyle";
 import CopyToClipboard from "./CopyToClipboard";
@@ -11,9 +14,21 @@ import { JsonBoolean, JsonNull, JsonNumber, JsonString } from "./DataTypes";
 // clibboard icon
 import { CheckCircle, Edit, RemoveCircle as Remove } from "./icons";
 import LocalJsonViewContext from "./LocalJsonViewContext";
-import ReactJsonViewContext from "./ReactJsonViewContext";
+import ReactJsonViewContext, { Json } from "./ReactJsonViewContext";
 
-const EditIcon = ({ variable, theme, hovered, prepopulateInput }) => {
+type EditState = { editMode: false } | { editMode: true; editValue: string };
+
+const EditIcon = ({
+  onEdit,
+  hovered,
+}: {
+  hovered: boolean;
+  onEdit: () => void;
+}) => {
+  const {
+    props: { theme },
+  } = useContext(ReactJsonViewContext);
+
   return (
     <div
       className="click-to-edit"
@@ -25,15 +40,19 @@ const EditIcon = ({ variable, theme, hovered, prepopulateInput }) => {
       <Edit
         class="click-to-edit-icon"
         {...Theme(theme, "editVarIcon")}
-        onClick={() => {
-          prepopulateInput(variable);
-        }}
+        onClick={onEdit}
       />
     </div>
   );
 };
 
-const RemoveIcon = ({ variable, namespace, theme, rjvId, hovered }) => {
+const RemoveIcon = ({ hovered }: { hovered: boolean }) => {
+  const { namespace, value } = useContext(LocalJsonViewContext);
+  const {
+    props: { theme },
+    rjvId,
+  } = useContext(ReactJsonViewContext);
+  const name = namespace.at(-1);
   return (
     <div
       className="click-to-remove"
@@ -46,16 +65,7 @@ const RemoveIcon = ({ variable, namespace, theme, rjvId, hovered }) => {
         class="click-to-remove-icon"
         {...Theme(theme, "removeVarIcon")}
         onClick={() => {
-          dispatcher.dispatch({
-            name: "VARIABLE_REMOVED",
-            rjvId,
-            data: {
-              name: variable.name,
-              namespace,
-              existing_value: variable.value,
-              variable_removed: true,
-            },
-          });
+          // TODO: Add logic to actually remove the key
         }}
       />
     </div>
@@ -63,75 +73,46 @@ const RemoveIcon = ({ variable, namespace, theme, rjvId, hovered }) => {
 };
 
 const Value = ({
-  variable,
-  editMode,
-  editValue,
-  namespace,
-  parsedInput,
-  rjvId,
-  setEditMode,
-  theme,
+  edit,
+  setEdit,
   submitEdit,
-  setParsedInput,
-  setEditValue,
+}: {
+  edit: EditState;
+  setEdit: (n: EditState) => void;
+  submitEdit: () => void;
 }) => {
-  // TODO: FIX THIS LOL
-  const props = {};
+  const { value } = useContext(LocalJsonViewContext);
 
-  const type = editMode ? false : variable.type;
+  const type = edit.editMode ? "edit" : toType(value);
   switch (type) {
-    case false:
+    case "edit":
       return (
-        <EditInput
-          editValue={editValue}
-          parsedInput={parsedInput}
-          setEditMode={setEditMode}
-          setEditValue={setEditValue}
-          setParsedInput={setParsedInput}
-          submitEdit={submitEdit}
-          variable={variable}
-        />
+        <EditInput submitEdit={submitEdit} edit={edit} setEdit={setEdit} />
       );
     case "string":
-      return <JsonString value={variable.value} {...props} />;
-    case "integer":
-      return <JsonInteger value={variable.value} {...props} />;
-    case "float":
-      return <JsonFloat value={variable.value} {...props} />;
+      return <JsonString />;
     case "boolean":
-      return <JsonBoolean value={variable.value} {...props} />;
-    case "function":
-      return <JsonFunction value={variable.value} {...props} />;
+      return <JsonBoolean />;
     case "null":
-      return <JsonNull {...props} />;
-    case "nan":
-      return <JsonNan {...props} />;
-    case "undefined":
-      return <JsonUndefined {...props} />;
-    case "date":
-      return <JsonDate value={variable.value} {...props} />;
-    case "regexp":
-      return <JsonRegexp value={variable.value} {...props} />;
+      return <JsonNull />;
+    case "number":
+      return <JsonNumber />;
     default:
-      // catch-all for types that weren't anticipated
-      return (
-        <div className="object-value">{JSON.stringify(variable.value)}</div>
-      );
+      throw new Error("Invalid Type passed to VariableEditor");
   }
 };
 
 const EditInput = ({
-  editValue,
-  setEditValue,
-  setParsedInput,
-  setEditMode,
+  edit,
+  setEdit,
   submitEdit,
-  variable,
-  parsedInput,
+}: {
+  edit: EditState;
+  setEdit: (n: EditState) => void;
+  submitEdit: () => void;
 }) => {
   const {
     props: { theme },
-    rjvId,
   } = useContext(ReactJsonViewContext);
   const { namespace } = useContext(LocalJsonViewContext);
 
@@ -139,32 +120,33 @@ const EditInput = ({
     <div>
       <AutosizeTextarea
         type="text"
-        inputRef={(input) => input && input.focus()}
-        value={editValue}
+        inputRef={(input: HTMLInputElement) => input && input.focus()}
+        value={edit.editMode ? edit.editValue : ""}
         class="variable-editor"
         onChange={(event) => {
           const { value } = event.target;
-          const detected = parseInput(value);
 
-          setEditValue(value);
-          setParsedInput({
-            type: detected.type,
-            value: detected.value,
+          setEdit({
+            editMode: true,
+            editValue: value,
           });
         }}
         onKeyDown={(e) => {
           switch (e.key) {
             case "Escape": {
-              setEditMode(false);
-              setEditValue("");
+              setEdit({
+                editMode: false,
+              });
               break;
             }
             case "Enter": {
               if (e.ctrlKey || e.metaKey) {
-                submitEdit(true);
+                submitEdit();
               }
               break;
             }
+            default:
+              break;
           }
           e.stopPropagation();
         }}
@@ -177,8 +159,7 @@ const EditInput = ({
           class="edit-cancel"
           {...Theme(theme, "cancel-icon")}
           onClick={() => {
-            setEditMode(false);
-            setEditValue("");
+            setEdit({ editMode: false });
           }}
         />
         <CheckCircle
@@ -189,218 +170,190 @@ const EditInput = ({
           }}
         />
         <div>
-          <ShowDetected
+          {/* TODO: Show Detected */}
+          {/* <ShowDetected
             namespace={namespace}
             parsedInput={parsedInput}
             rjvId={rjvId}
             theme={theme}
             variable={variable}
             submitEdit={submitEdit}
-          />
+          /> */}
         </div>
       </div>
     </div>
   );
 };
 
-const ShowDetected = ({
-  theme,
-  variable,
-  namespace,
-  rjvId,
-  parsedInput,
-  submitEdit,
-}) => {
-  const { type, value } = parsedInput;
-  const detected = <DetectedInput parsedInput={parsedInput} theme={theme} />;
-  if (detected) {
-    return (
-      <div>
-        <div {...Theme(theme, "detected-row")}>
-          {detected}
-          <CheckCircle
-            class="edit-check detected"
-            style={{
-              verticalAlign: "top",
-              paddingLeft: "3px",
-              ...Theme(theme, "check-icon").style,
-            }}
-            onClick={() => {
-              submitEdit(true);
-            }}
-          />
-        </div>
-      </div>
-    );
-  }
-  return <></>;
-};
+// const ShowDetected = ({ parsedInput, submitEdit }) => {
+//   const {
+//     props: { theme },
+//   } = useContext(ReactJsonViewContext);
+//   const { type, value } = parsedInput;
+//   const detected = <DetectedInput parsedInput={parsedInput} theme={theme} />;
+//   if (detected) {
+//     return (
+//       <div>
+//         <div {...Theme(theme, "detected-row")}>
+//           {detected}
+//           <CheckCircle
+//             class="edit-check detected"
+//             style={{
+//               verticalAlign: "top",
+//               paddingLeft: "3px",
+//               ...Theme(theme, "check-icon").style,
+//             }}
+//             onClick={() => {
+//               submitEdit(true);
+//             }}
+//           />
+//         </div>
+//       </div>
+//     );
+//   }
+//   return <></>;
+// };
 
-const DetectedInput = ({ parsedInput, theme }) => {
-  const { type, value } = parsedInput;
+// const DetectedInput = ({ parsedInput }) => {
+//   const {
+//     props: { theme },
+//   } = useContext(ReactJsonViewContext);
 
-  // TODO: Fix this LOL
-  const props = {};
+//   const { type, value } = parsedInput;
 
-  if (type !== false) {
-    switch (type.toLowerCase()) {
-      case "object":
-        return (
-          <span>
-            <span
-              style={{
-                ...Theme(theme, "brace").style,
-                cursor: "default",
-              }}
-            >
-              {"{"}
-            </span>
-            <span
-              style={{
-                ...Theme(theme, "ellipsis").style,
-                cursor: "default",
-              }}
-            >
-              ...
-            </span>
-            <span
-              style={{
-                ...Theme(theme, "brace").style,
-                cursor: "default",
-              }}
-            >
-              {"}"}
-            </span>
-          </span>
-        );
-      case "array":
-        return (
-          <span>
-            <span
-              style={{
-                ...Theme(theme, "brace").style,
-                cursor: "default",
-              }}
-            >
-              [
-            </span>
-            <span
-              style={{
-                ...Theme(theme, "ellipsis").style,
-                cursor: "default",
-              }}
-            >
-              ...
-            </span>
-            <span
-              style={{
-                ...Theme(theme, "brace").style,
-                cursor: "default",
-              }}
-            >
-              ]
-            </span>
-          </span>
-        );
-      case "string":
-        return <JsonString value={value} {...props} />;
-      case "integer":
-        return <JsonInteger value={value} {...props} />;
-      case "float":
-        return <JsonFloat value={value} {...props} />;
-      case "boolean":
-        return <JsonBoolean value={value} {...props} />;
-      case "function":
-        return <JsonFunction value={value} {...props} />;
-      case "null":
-        return <JsonNull {...props} />;
-      case "nan":
-        return <JsonNan {...props} />;
-      case "undefined":
-        return <JsonUndefined {...props} />;
-      case "date":
-        return <JsonDate value={new Date(value)} {...props} />;
-    }
-  }
-  return <></>;
-};
+//   // TODO: Fix this LOL
+//   const props = {};
 
-const VariableEditor = ({
-  variable,
-  singleIndent,
-  type,
-  theme,
-  namespace,
-  indentWidth,
-  enableClipboard,
-  onEdit,
-  onDelete,
-  onSelect,
-  displayArrayKey,
-  quotesOnKeys,
-  rjvId,
-}) => {
-  // TODO: The first 2 states should be one state
-  const [editMode, setEditMode] = useState<boolean>(false);
-  const [editValue, setEditValue] = useState<string>("");
+//   if (type !== false) {
+//     switch (type.toLowerCase()) {
+//       case "object":
+//         return (
+//           <span>
+//             <span
+//               style={{
+//                 ...Theme(theme, "brace").style,
+//                 cursor: "default",
+//               }}
+//             >
+//               {"{"}
+//             </span>
+//             <span
+//               style={{
+//                 ...Theme(theme, "ellipsis").style,
+//                 cursor: "default",
+//               }}
+//             >
+//               ...
+//             </span>
+//             <span
+//               style={{
+//                 ...Theme(theme, "brace").style,
+//                 cursor: "default",
+//               }}
+//             >
+//               {"}"}
+//             </span>
+//           </span>
+//         );
+//       case "array":
+//         return (
+//           <span>
+//             <span
+//               style={{
+//                 ...Theme(theme, "brace").style,
+//                 cursor: "default",
+//               }}
+//             >
+//               [
+//             </span>
+//             <span
+//               style={{
+//                 ...Theme(theme, "ellipsis").style,
+//                 cursor: "default",
+//               }}
+//             >
+//               ...
+//             </span>
+//             <span
+//               style={{
+//                 ...Theme(theme, "brace").style,
+//                 cursor: "default",
+//               }}
+//             >
+//               ]
+//             </span>
+//           </span>
+//         );
+//       case "string":
+//         return <JsonString />;
+//       case "number":
+//         return <JsonNumber />;
+//       case "boolean":
+//         return <JsonBoolean />;
+//       case "null":
+//         return <JsonNull {...props} />;
+//       default:
+//         throw new Error("Invalid Type");
+//     }
+//   }
+//   return <></>;
+// };
+
+const VariableEditor = () => {
+  const {
+    props: {
+      enableClipboard,
+      canEdit,
+      canDelete,
+      theme,
+      indentWidth,
+      quotesOnKeys,
+      displayArrayKey,
+    },
+  } = useContext(ReactJsonViewContext);
+
+  const { namespace, value } = useContext(LocalJsonViewContext);
+  const type = toType(value);
+  const name = namespace.at(-1);
+
+  const [edit, setEdit] = useState<EditState>({ editMode: false });
+
   const [hovered, setHovered] = useState<boolean>(false);
   const [renameKey, setRenameKey] = useState<boolean>(false);
-  const [parsedInput, setParsedInput] = useState<{
-    type: boolean;
-    value: null;
-  }>({ type: false, value: null });
 
-  // TODO: This isn't needed (bad design)
-  const prepopulateInput = (variable) => {
-    if (onEdit !== false) {
-      const stringifiedValue = stringifyVariable(variable.value);
-      const detected = parseInput(stringifiedValue);
+  const enterEditMode = () => {
+    if (canEdit) {
+      const stringifiedValue = stringifyVariable(
+        value as number | string | boolean | null,
+      );
 
-      setEditMode(true);
-      setEditValue(stringifiedValue);
-      setParsedInput({
-        type: detected.type,
-        value: detected.value,
+      setEdit({
+        editMode: true,
+        editValue: stringifiedValue,
       });
     }
   };
 
-  const submitEdit = (submit_detected) => {
-    let new_value: string | null = editValue;
-    if (submit_detected && parsedInput.type) {
-      new_value = parsedInput.value;
-    }
-    setEditMode(false);
-    dispatcher.dispatch({
-      name: "VARIABLE_UPDATED",
-      rjvId,
-      data: {
-        name: variable.name,
-        namespace,
-        existing_value: variable.value,
-        new_value,
-        variable_removed: false,
-      },
-    });
+  const submitEdit = () => {
+    setEdit({ editMode: false });
+
+    // TODO: Write Code to actually submit the edit
   };
 
   return (
     <div
       {...Theme(theme, "objectKeyVal", {
-        paddingLeft: indentWidth * singleIndent,
+        paddingLeft: indentWidth * SINGLE_INDENT,
       })}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="variable-row"
-      key={variable.name}
+      key={name}
     >
-      {type == "array" ? (
+      {type === "array" ? (
         displayArrayKey ? (
-          <span
-            {...Theme(theme, "array-key")}
-            key={`${variable.name}_${namespace}`}
-          >
-            {variable.name}
+          <span {...Theme(theme, "array-key")} key={`${name}_${namespace}`}>
+            {name}
             <div {...Theme(theme, "colon")}>:</div>
           </span>
         ) : null
@@ -409,11 +362,19 @@ const VariableEditor = ({
           <span
             {...Theme(theme, "object-name")}
             className="object-key"
-            key={`${variable.name}_${namespace}`}
+            key={`${name}_${namespace}`}
           >
-            {!!quotesOnKeys && <span style={{ verticalAlign: "top" }}>"</span>}
-            <span style={{ display: "inline-block" }}>{variable.name}</span>
-            {!!quotesOnKeys && <span style={{ verticalAlign: "top" }}>"</span>}
+            {!!quotesOnKeys && (
+              <span style={{ verticalAlign: "top" }}>
+                {DISPLAY_BRACES.doubleQuotes.start}
+              </span>
+            )}
+            <span style={{ display: "inline-block" }}>{name}</span>
+            {!!quotesOnKeys && (
+              <span style={{ verticalAlign: "top" }}>
+                {DISPLAY_BRACES.doubleQuotes.end}
+              </span>
+            )}
           </span>
           <span {...Theme(theme, "colon")}>:</span>
         </span>
@@ -421,65 +382,29 @@ const VariableEditor = ({
       <div
         className="variable-value"
         onClick={
-          onSelect === false && onEdit === false
+          !canEdit
             ? undefined
             : (e) => {
                 const location = [...namespace];
-                if ((e.ctrlKey || e.metaKey) && onEdit !== false) {
-                  prepopulateInput(variable);
-                } else if (onSelect !== false) {
-                  location.shift();
-                  onSelect({
-                    ...variable,
-                    namespace: location,
-                  });
+                if (e.ctrlKey || e.metaKey) {
+                  enterEditMode();
                 }
               }
         }
-        {...Theme(theme, "variableValue", {
-          cursor: onSelect === false ? "default" : "pointer",
-        })}
+        {...Theme(theme, "variableValue", {})}
       >
-        <Value
-          variable={variable}
-          setEditMode={setEditMode}
-          editMode={editMode}
-          editValue={editValue}
-          namespace={namespace}
-          parsedInput={parsedInput}
-          rjvId={rjvId}
-          setEditValue={setEditValue}
-          setParsedInput={setParsedInput}
-          submitEdit={submitEdit}
-          theme={theme}
-        />
+        <Value edit={edit} setEdit={setEdit} submitEdit={submitEdit} />
       </div>
-      {enableClipboard ? (
-        <CopyToClipboard
-          rowHovered={hovered}
-          hidden={editMode}
-          src={variable.value}
-          clickCallback={enableClipboard}
-          {...{ theme, namespace: [...namespace, variable.name] }}
-        />
-      ) : null}
-      {(onEdit !== false && editMode == false) ?? (
+      {enableClipboard ? <CopyToClipboard rowHovered={hovered} /> : null}
+      {(canEdit && !edit.editMode) ?? (
         <EditIcon
           hovered={hovered}
-          prepopulateInput={prepopulateInput}
-          theme={theme}
-          variable={variable}
+          onEdit={() => {
+            // TODO: Set the editing var to true or whatever
+          }}
         />
       )}
-      {(onDelete !== false && editMode == false) ?? (
-        <RemoveIcon
-          hovered={hovered}
-          namespace={namespace}
-          rjvId={rjvId}
-          theme={theme}
-          variable={variable}
-        />
-      )}
+      {(canDelete && !edit.editMode) ?? <RemoveIcon hovered={hovered} />}
     </div>
   );
 };

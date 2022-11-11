@@ -1,3 +1,6 @@
+/* eslint-disable */
+// @ts-nocheck
+
 import { EventEmitter } from "events";
 
 import dispatcher from "../helpers/dispatcher";
@@ -17,13 +20,13 @@ class ObjectAttributes extends EventEmitter {
     this.objects[rjvId][name][key] = value;
   };
 
-  get = (rjvId, name, key, default_value) => {
+  get = (rjvId, name, key, defaultValue) => {
     if (
       this.objects[rjvId] === undefined ||
       this.objects[rjvId][name] === undefined ||
-      this.objects[rjvId][name][key] == undefined
+      this.objects[rjvId][name][key] === undefined
     ) {
-      return default_value;
+      return defaultValue;
     }
     return this.objects[rjvId][name][key];
   };
@@ -61,6 +64,8 @@ class ObjectAttributes extends EventEmitter {
       case "ADD_VARIABLE_KEY_REQUEST":
         this.set(rjvId, "action", "new-key-request", data);
         this.emit(`add-key-request-${rjvId}`);
+        break;
+      default:
         break;
     }
   };

@@ -12,7 +12,7 @@ const ObjectName = () => {
 
   const { depth, namespace, parentType } = useContext(LocalJsonViewContext);
   const isRoot = depth === 0;
-  const name = namespace[namespace.length - 1];
+  const name = namespace.at(-1);
 
   if (isRoot && name === null) {
     return <span />;

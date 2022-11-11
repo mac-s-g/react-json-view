@@ -1,13 +1,6 @@
-import { toType } from "./util";
+import { Json } from "../components/ReactJsonViewContext";
 
-const getClipboardValue = (value: unknown) => {
-  const type = toType(value);
-  switch (type) {
-    case "function":
-    case "regexp":
-      return (value as {}).toString();
-    default:
-      return value;
-  }
+const getClipboardValue = (value: Json) => {
+  return JSON.stringify(value);
 };
 export default getClipboardValue;

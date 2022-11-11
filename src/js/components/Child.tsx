@@ -50,12 +50,7 @@ const Child = ({
       ) : type === "array" ? (
         <ArrayGroup />
       ) : (
-        <VariableEditor
-          variable={variable}
-          singleIndent={SINGLE_INDENT}
-          namespace={namespace}
-          type={type}
-        />
+        <VariableEditor />
       )}
     </LocalJsonViewContext.Provider>
   );

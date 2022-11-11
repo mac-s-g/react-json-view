@@ -1,9 +1,10 @@
 import { createStyling } from "react-base16-styling";
 
+import { Theme, UserTheme } from "../helpers/theme";
 import { rjvDefault, rjvGrey } from "./base16/rjv-themes";
 import constants from "./styleConstants";
 
-const colorMap = (theme) => ({
+const colorMap = (theme: Theme) => ({
   backgroundColor: theme.base00,
   ellipsisColor: theme.base09,
   braceColor: theme.base07,
@@ -51,7 +52,7 @@ const colorMap = (theme) => ({
   },
 });
 
-const getDefaultThemeStyling = (theme) => {
+const getDefaultThemeStyling = (theme: Theme) => {
   const colors = colorMap(theme);
 
   return {
@@ -90,7 +91,7 @@ const getDefaultThemeStyling = (theme) => {
       color: colors.keyColor,
       verticalAlign: "top",
     },
-    objectKeyVal: (component, variable_style) => {
+    objectKeyVal: (component, variableStyle) => {
       return {
         style: {
           paddingTop: constants.keyValPaddingTop,
@@ -98,10 +99,10 @@ const getDefaultThemeStyling = (theme) => {
           paddingBottom: constants.keyValPaddingBottom,
           borderLeft: `${constants.keyValBorderLeft} ${colors.objectBorder}`,
           ":hover": {
-            paddingLeft: `${variable_style.paddingLeft - 1}px`,
+            paddingLeft: `${variableStyle.paddingLeft - 1}px`,
             borderLeft: `${constants.keyValBorderHover} ${colors.objectBorder}`,
           },
-          ...variable_style,
+          ...variableStyle,
         },
       };
     },
@@ -111,13 +112,13 @@ const getDefaultThemeStyling = (theme) => {
     "pushed-content": {
       marginLeft: constants.pushedContentMarginLeft,
     },
-    variableValue: (component, variable_style) => {
+    variableValue: (component, variableStyle) => {
       return {
         style: {
           display: "inline-block",
           paddingRight: constants.variableValuePaddingRight,
           position: "relative",
-          ...variable_style,
+          ...variableStyle,
         },
       };
     },
@@ -386,9 +387,9 @@ const getDefaultThemeStyling = (theme) => {
   };
 };
 
-const getStyle = (theme) => {
+const getStyle = (theme: UserTheme) => {
   let rjvTheme = rjvDefault;
-  if (theme === false || theme === "none") {
+  if (theme === "none") {
     rjvTheme = rjvGrey;
   }
 

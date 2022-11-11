@@ -13,7 +13,7 @@ const RemoveObject = ({ rowHovered }: { rowHovered: boolean }) => {
   } = useContext(ReactJsonViewContext);
   const { namespace } = useContext(LocalJsonViewContext);
 
-  const name = namespace[namespace.length - 1];
+  const name = namespace.at(-1);
 
   // don't allow deleting of root node
   if (namespace.length === 1) {
@@ -44,7 +44,7 @@ const AddAttribute = ({ rowHovered }: { rowHovered: boolean }) => {
     rjvId,
   } = useContext(ReactJsonViewContext);
 
-  const name = namespace[namespace.length - 1];
+  const name = namespace.at(-1);
   return (
     <span
       className="click-to-add"

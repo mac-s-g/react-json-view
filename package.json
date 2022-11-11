@@ -41,8 +41,8 @@
   "scripts": {
     "build:once": "NODE_ENV=production node ./scripts/build.js",
     "build:watch": "NODE_ENV=development node ./scripts/build.js",
-    "build:demo": "NODE_ENV=production webpack --config webpack/webpack.config-demo.js -p --display-error-details --progress --optimize-minimize",
-    "dev": "NODE_ENV=development webpack-dev-server --config webpack/webpack.config-dev.js --open",
+    "build-demo:once": "NODE_ENV=production node ./scripts/build-demo.js",
+    "build-demo:watch": "NODE_ENV=development node ./scripts/build-demo.js",
     "lint:check": "NODE_ENV=test eslint src demo/src",
     "lint:fix": "NODE_ENV=test eslint src demo/src --ext .js,.jsx --fix"
   },

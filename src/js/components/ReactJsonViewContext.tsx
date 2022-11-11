@@ -14,7 +14,7 @@ export type ReactJsonViewProps = {
   value: Json & object;
   onChange: (v: Json & object) => void;
   rootNodeName: string | null;
-  theme: Theme | string;
+  theme: Theme;
   style: StyleHTMLAttributes<"div">;
   newKeyDefaultValue?: Json;
   validationMessage: string;

@@ -1,3 +1,7 @@
+import "../style/scss/global.scss";
+
+import { createRoot } from "react-dom/client";
+
 import ReactJsonDemo from "./components/Demo";
 
 const Index = () => {
@@ -7,4 +11,14 @@ const Index = () => {
     </div>
   );
 };
-export default Index;
+
+const app = document.getElementById("mac-react-container");
+
+// app entrypoint
+const root = createRoot(app!);
+
+root.render(
+  <div className="app-entry">
+    <Index />
+  </div>,
+);

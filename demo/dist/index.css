@@ -1,0 +1,54 @@
+@import "https://fonts.googleapis.com/css?family=Open+Sans";
+
+/* demo/src/style/scss/global.scss */
+#mac-react-container {
+  font-family: "Open Sans";
+  padding: 20px;
+}
+#mac-react-container .header-1 {
+  font-size: 28px;
+  margin-right: 5px;
+  margin-bottom: 3px;
+}
+#mac-react-container .header-2 {
+  font-size: 22px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  font-style: italic;
+}
+
+/* demo/src/style/scss/rjv-demo.scss */
+.rjv-demo .rjv-settings,
+.rjv-demo .rjv-source {
+  vertical-align: top;
+  display: inline-block;
+  margin-top: 5px;
+  margin-right: 10px;
+  min-width: 300px;
+  max-width: 400px;
+}
+.rjv-demo .rjv-settings .rjv-input,
+.rjv-demo .rjv-source .rjv-input {
+  margin-bottom: 5px;
+}
+.rjv-demo .rjv-settings .rjv-input .rjv-label,
+.rjv-demo .rjv-source .rjv-input .rjv-label {
+  font-size: 14px;
+  font-weight: bold;
+}
+.rjv-demo .rjv-header {
+  position: relative;
+}
+.rjv-demo .rjv-header .rjv-logo {
+  width: 100px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  cursor: pointer;
+}
+.rjv-demo .rjv-header .github-btn {
+  display: block;
+  position: absolute;
+  right: 0px;
+  top: 48px;
+}

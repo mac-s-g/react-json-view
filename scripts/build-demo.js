@@ -3,14 +3,9 @@ import esbuild from "esbuild";
 
 await esbuild.build({
   plugins: [sassPlugin()],
-  entryPoints: ["./src/js/index.tsx"],
-  outdir: "dist",
-  loader: { ".js": "jsx" },
-  external: [
-    "react",
-    "react-dom",
-  ],
+  entryPoints: ["./demo/src/js/index.tsx"],
+  outdir: "./demo/dist",
   bundle: true,
-  format: "esm",
+  format: "iife",
   watch: process.env.NODE_ENV === "development",
 });

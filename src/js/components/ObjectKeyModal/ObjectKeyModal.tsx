@@ -59,7 +59,7 @@ const ObjectKeyModal = ({
           {valid ? (
             <CheckCircle
               {...Theme(theme, "key-modal-submit")}
-              class="key-modal-submit"
+              className="key-modal-submit"
               onClick={() => handleSubmit()}
             />
           ) : null}
@@ -67,7 +67,7 @@ const ObjectKeyModal = ({
         <span {...Theme(theme, "key-modal-cancel")}>
           <Cancel
             {...Theme(theme, "key-modal-cancel-icon")}
-            class="key-modal-cancel"
+            className="key-modal-cancel"
             onClick={() => {
               onClose();
             }}

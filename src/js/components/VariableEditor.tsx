@@ -38,7 +38,7 @@ const EditIcon = ({
       }}
     >
       <Edit
-        class="click-to-edit-icon"
+        className="click-to-edit-icon"
         {...Theme(theme, "editVarIcon")}
         onClick={onEdit}
       />
@@ -62,7 +62,7 @@ const RemoveIcon = ({ hovered }: { hovered: boolean }) => {
       }}
     >
       <Remove
-        class="click-to-remove-icon"
+        className="click-to-remove-icon"
         {...Theme(theme, "removeVarIcon")}
         onClick={() => {
           // TODO: Add logic to actually remove the key
@@ -122,7 +122,7 @@ const EditInput = ({
         type="text"
         inputRef={(input: HTMLInputElement) => input && input.focus()}
         value={edit.editMode ? edit.editValue : ""}
-        class="variable-editor"
+        className="variable-editor"
         onChange={(event) => {
           const { value } = event.target;
 
@@ -156,14 +156,14 @@ const EditInput = ({
       />
       <div {...Theme(theme, "edit-icon-container")}>
         <Remove
-          class="edit-cancel"
+          className="edit-cancel"
           {...Theme(theme, "cancel-icon")}
           onClick={() => {
             setEdit({ editMode: false });
           }}
         />
         <CheckCircle
-          class="edit-check string-value"
+          className="edit-check string-value"
           {...Theme(theme, "check-icon")}
           onClick={() => {
             submitEdit();
@@ -197,7 +197,7 @@ const EditInput = ({
 //         <div {...Theme(theme, "detected-row")}>
 //           {detected}
 //           <CheckCircle
-//             class="edit-check detected"
+//             className="edit-check detected"
 //             style={{
 //               verticalAlign: "top",
 //               paddingLeft: "3px",

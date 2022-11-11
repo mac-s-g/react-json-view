@@ -19,7 +19,7 @@ const ReactJsonView = ({
   style = {},
   newKeyDefaultValue = null,
   shouldCollapse = () => false,
-  theme,
+  theme = "none",
   validationMessage = "Validation Error",
   collapseStringsAfterLength = Infinity,
   sortKeys = false,
@@ -78,8 +78,6 @@ const ReactJsonView = ({
         <ValidationFailure
           message={validationMessage}
           active={validationFailure}
-          theme={theme}
-          rjvId={rjvId}
         />
         <JsonViewer />
         <ObjectKeyModal

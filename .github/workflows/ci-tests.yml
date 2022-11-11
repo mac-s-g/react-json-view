@@ -20,6 +20,6 @@ jobs:
           path: node_modules
           key: dependencies
       - run: pnpm install
-      - run: pnpm build
-      - run: pnpm lint
+      - run: pnpm build:once
+      - run: pnpm lint:check
 

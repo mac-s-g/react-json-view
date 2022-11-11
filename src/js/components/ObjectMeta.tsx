@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useContext } from "react";
 
 import { toType } from "../helpers/util";
@@ -27,7 +29,7 @@ const RemoveObject = ({ rowHovered }: { rowHovered: boolean }) => {
       }}
     >
       <Remove
-        class="click-to-remove-icon"
+        className="click-to-remove-icon"
         {...Theme(theme, "removeVarIcon")}
         onClick={() => {
           // TODO: WRITE CODE TO REMOVE THE OBJECT
@@ -54,7 +56,7 @@ const AddAttribute = ({ rowHovered }: { rowHovered: boolean }) => {
       }}
     >
       <Add
-        class="click-to-add-icon"
+        className="click-to-add-icon"
         {...Theme(theme, "addVarIcon")}
         onClick={() => {
           const request = {
@@ -81,7 +83,7 @@ const ObjectMeta = ({ rowHovered }: { rowHovered: boolean }) => {
   const size = Object.keys(value as typeof value & object).length;
 
   return (
-    <button
+    <div
       type="button"
       {...Theme(theme, "object-meta-data")}
       className="object-meta-data"
@@ -98,7 +100,7 @@ const ObjectMeta = ({ rowHovered }: { rowHovered: boolean }) => {
       {/* copy add/remove icons */}
       {canAdd ? <AddAttribute rowHovered={rowHovered} /> : null}
       {canDelete ? <RemoveObject rowHovered={rowHovered} /> : null}
-    </button>
+    </div>
   );
 };
 

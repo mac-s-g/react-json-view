@@ -18,15 +18,24 @@ export function ExpandedIcon() {
   switch (iconStyle) {
     case "triangle":
       return (
-        <ArrowDown {...Theme(theme, "expanded-icon")} class="expanded-icon" />
+        <ArrowDown
+          {...Theme(theme, "expanded-icon")}
+          className="expanded-icon"
+        />
       );
     case "square":
       return (
-        <SquareMinus {...Theme(theme, "expanded-icon")} class="expanded-icon" />
+        <SquareMinus
+          {...Theme(theme, "expanded-icon")}
+          className="expanded-icon"
+        />
       );
     default:
       return (
-        <CircleMinus {...Theme(theme, "expanded-icon")} class="expanded-icon" />
+        <CircleMinus
+          {...Theme(theme, "expanded-icon")}
+          className="expanded-icon"
+        />
       );
   }
 }
@@ -41,21 +50,21 @@ export function CollapsedIcon() {
       return (
         <ArrowRight
           {...Theme(theme, "collapsed-icon")}
-          class="collapsed-icon"
+          className="collapsed-icon"
         />
       );
     case "square":
       return (
         <SquarePlus
           {...Theme(theme, "collapsed-icon")}
-          class="collapsed-icon"
+          className="collapsed-icon"
         />
       );
     default:
       return (
         <CirclePlus
           {...Theme(theme, "collapsed-icon")}
-          class="collapsed-icon"
+          className="collapsed-icon"
         />
       );
   }

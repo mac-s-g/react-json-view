@@ -15,13 +15,13 @@ const CopyIcon = ({ copied }: { copied: boolean }) => {
   if (copied) {
     return (
       <span>
-        <Clippy class="copy-icon" {...Theme(theme, "copy-icon")} />
+        <Clippy className="copy-icon" {...Theme(theme, "copy-icon")} />
         <span {...Theme(theme, "copy-icon-copied")}>✔</span>
       </span>
     );
   }
 
-  return <Clippy class="copy-icon" {...Theme(theme, "copy-icon")} />;
+  return <Clippy className="copy-icon" {...Theme(theme, "copy-icon")} />;
 };
 
 const CopyToClipboard = ({ rowHovered }: { rowHovered: boolean }) => {

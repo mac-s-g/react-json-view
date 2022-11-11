@@ -3,7 +3,7 @@ import { useId, useState } from "react";
 // global theme
 import themeStyle from "../themes/getStyle";
 import JsonViewer from "./JsonViewer";
-import AddKeyRequest from "./ObjectKeyModal/AddKeyRequest";
+import ObjectKeyModal from "./ObjectKeyModal/ObjectKeyModal";
 import ReactJsonViewContext, {
   ReactJsonViewProps,
 } from "./ReactJsonViewContext";
@@ -80,11 +80,9 @@ const ReactJsonView = ({
           rjvId={rjvId}
         />
         <JsonViewer />
-        <AddKeyRequest
+        <ObjectKeyModal
           active={addKeyRequest}
-          theme={theme}
-          rjvId={rjvId}
-          defaultValue={newKeyDefaultValue}
+          onClose={() => setAddKeyRequest(false)}
         />
       </ReactJsonViewContext.Provider>
     </div>

@@ -1,176 +1,119 @@
-import React, { useContext } from "react";
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import { useContext, useState } from "react";
 
 import { SINGLE_INDENT } from "../helpers/util";
 import Theme from "../themes/getStyle";
+import Child from "./Child";
 import ObjectComponent from "./DataTypes/Object";
 import LocalJsonViewContext from "./LocalJsonViewContext";
+import ObjectMeta from "./ObjectMeta";
 import ObjectName from "./ObjectName";
 import ReactJsonViewContext, { Json } from "./ReactJsonViewContext";
-// icons
 import { CollapsedIcon, ExpandedIcon } from "./ToggleIcons";
-import VariableMeta from "./VariableMeta";
-
-// single indent is 5px
-
-export default class extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      expanded: [],
-    };
-  }
-
-  toggleCollapsed = (i) => {
-    const newExpanded = [];
-    for (const j in this.state.expanded) {
-      newExpanded.push(this.state.expanded[j]);
-    }
-    newExpanded[i] = !newExpanded[i];
-    this.setState({
-      expanded: newExpanded,
-    });
-  };
-
-  getExpandedIcon(i) {
-    const { theme, iconStyle } = this.props;
-
-    if (this.state.expanded[i]) {
-      return <ExpandedIcon {...{ theme, iconStyle }} />;
-    }
-
-    return <CollapsedIcon {...{ theme, iconStyle }} />;
-  }
-}
-
-/* *********************************************************** */
-/* New Code                                                    */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
-/* *********************************************************** */
 
 const ArrayGroup = () => {
-  const { name } = this.props;
-
   const { namespace, value, depth } = useContext(LocalJsonViewContext);
   const {
     props: { theme, groupArraysAfterLength, indentWidth },
   } = useContext(ReactJsonViewContext);
 
+  const [collapsed, setCollapsed] = useState<{
+    [key: number]: boolean | undefined;
+  }>({});
+
+  const toggleCollapsed = (i: number) => {
+    setCollapsed({
+      ...collapsed,
+      [i]: collapsed[i] === undefined ? false : !collapsed,
+    });
+  };
+
+  const isCollapsed = (i: number) => {
+    return i === undefined || i;
+  };
+
   const isRoot = depth === 0;
 
-  let object_padding_left = 0;
-
-  const array_group_padding_left = indentWidth * SINGLE_INDENT;
-
-  if (!isRoot) {
-    object_padding_left = indentWidth * SINGLE_INDENT;
-  }
+  const arrayGroupPaddingLeft = indentWidth * SINGLE_INDENT;
+  const objectPaddingLeft = isRoot ? 0 : indentWidth * SINGLE_INDENT;
 
   const size = groupArraysAfterLength;
-  const groups = Math.ceil((value as Json[]).length / size);
+  const numGroups = Math.ceil((value as Json[]).length / size);
 
   return (
     <div
       className="object-key-val"
       {...Theme(theme, isRoot ? "jsv-root" : "objectKeyVal", {
-        paddingLeft: object_padding_left,
+        paddingLeft: objectPaddingLeft,
       })}
     >
       <ObjectName />
 
       <span>
-        <VariableMeta size={src.length} {...this.props} />
+        {/* TODO: Make this more acdcurate potentially */}
+        <ObjectMeta rowHovered={false} />
       </span>
-      {[...Array(groups)].map((_, i) => (
-        <div
-          key={i}
-          className="object-key-val array-group"
-          {...Theme(theme, "objectKeyVal", {
-            marginLeft: 6,
-            paddingLeft: array_group_padding_left,
-          })}
-        >
-          <span {...Theme(theme, "brace-row")}>
-            <div
-              className="icon-container"
-              {...Theme(theme, "icon-container")}
-              onClick={(e) => {
-                this.toggleCollapsed(i);
-              }}
-            >
-              {this.getExpandedIcon(i)}
-            </div>
-            {this.state.expanded[i] ? (
-              <ObjectComponent
-                key={name + i}
-                depth={0}
-                name={false}
-                collapsed={false}
-                groupArraysAfterLength={size}
-                index_offset={i * size}
-                src={src.slice(i * size, i * size + size)}
-                namespace={namespace}
-                type="array"
-                parent_type="array_group"
-                theme={theme}
-              />
-            ) : (
-              <span
-                {...Theme(theme, "brace")}
+      {[...Array(numGroups)]
+        .map((_, i) => i)
+        .map((i) => (
+          <div
+            key={i}
+            className="object-key-val array-group"
+            {...Theme(theme, "objectKeyVal", {
+              marginLeft: 6,
+              paddingLeft: arrayGroupPaddingLeft,
+            })}
+          >
+            <span {...Theme(theme, "brace-row")}>
+              <div
+                className="icon-container"
+                {...Theme(theme, "icon-container")}
                 onClick={(e) => {
-                  this.toggleCollapsed(i);
+                  toggleCollapsed(i);
                 }}
-                className="array-group-brace"
               >
-                [
-                <div
-                  {...Theme(theme, "array-group-meta-data")}
-                  className="array-group-meta-data"
+                {isCollapsed(i) ? <CollapsedIcon /> : <ExpandedIcon />}
+              </div>
+              {isCollapsed(i) ? (
+                <span
+                  {...Theme(theme, "brace")}
+                  onClick={(e) => {
+                    toggleCollapsed(i);
+                  }}
+                  className="array-group-brace"
                 >
-                  <span
-                    className="object-size"
-                    {...Theme(theme, "object-size")}
+                  [
+                  <div
+                    {...Theme(theme, "array-group-meta-data")}
+                    className="array-group-meta-data"
                   >
-                    {i * size}
-                    {" - "}
-                    {i * size + size > src.length
-                      ? src.length
-                      : i * size + size}
-                  </span>
-                </div>
-                ]
-              </span>
-            )}
-          </span>
-        </div>
-      ))}
+                    <span
+                      className="object-size"
+                      {...Theme(theme, "object-size")}
+                    >
+                      {i * size}
+                      {" - "}
+                      {i * size + size > (value as Json[]).length
+                        ? (value as Json[]).length
+                        : i * size + size}
+                    </span>
+                  </div>
+                  ]
+                </span>
+              ) : (
+                <Child
+                  depth={depth + 1}
+                  namespace={namespace.concat(null)}
+                  parentType="array"
+                  value={(value as Json[]).slice(i * size, i * size + size)}
+                />
+              )}
+            </span>
+          </div>
+        ))}
     </div>
   );
 };
+
+export default ArrayGroup;

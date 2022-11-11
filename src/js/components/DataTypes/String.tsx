@@ -1,73 +1,53 @@
-import React from "react";
+import { useContext, useState } from "react";
 
-import { toType } from "../../helpers/util";
-// attribute store for storing collapsed state
-import AttributeStore from "../../stores/ObjectAttributes";
-// theme
+import { DISPLAY_BRACES } from "../../helpers/util";
 import Theme from "../../themes/getStyle";
+import LocalJsonViewContext from "../LocalJsonViewContext";
+import ReactJsonViewContext from "../ReactJsonViewContext";
 import DataTypeLabel from "./DataTypeLabel";
 
-export default class extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      collapsed: AttributeStore.get(
-        props.rjvId,
-        props.namespace,
-        "collapsed",
-        true,
-      ),
-    };
-  }
-
-  toggleCollapsed = () => {
-    this.setState(
-      {
-        collapsed: !this.state.collapsed,
-      },
-      () => {
-        AttributeStore.set(
-          this.props.rjvId,
-          this.props.namespace,
-          "collapsed",
-          this.state.collapsed,
-        );
-      },
-    );
+const StringDataType = () => {
+  const typeName = "string";
+  const [collapsed, setCollapsed] = useState(true);
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
   };
+  const {
+    props: { collapseStringsAfterLength, theme },
+  } = useContext(ReactJsonViewContext);
+  const { value } = useContext(LocalJsonViewContext);
+  const style = { style: { cursor: "default" } };
 
-  render() {
-    const type_name = "string";
-    const { collapsed } = this.state;
-    const { props } = this;
-    const { collapseStringsAfterLength, theme } = props;
-    let { value } = props;
-    const collapsible = toType(collapseStringsAfterLength) === "integer";
-    const style = { style: { cursor: "default" } };
+  const collapsable = (value as string).length > collapseStringsAfterLength;
 
-    if (collapsible && value.length > collapseStringsAfterLength) {
-      style.style.cursor = "pointer";
-      if (this.state.collapsed) {
-        value = (
-          <span>
-            {value.substring(0, collapseStringsAfterLength)}
-            <span {...Theme(theme, "ellipsis")}> ...</span>
-          </span>
-        );
-      }
-    }
-
-    return (
-      <div {...Theme(theme, "string")}>
-        <DataTypeLabel type_name={type_name} {...props} />
-        <span
-          className="string-value"
-          {...style}
-          onClick={this.toggleCollapsed}
-        >
-          "{value}"
-        </span>
-      </div>
-    );
+  if (collapsable) {
+    style.style.cursor = "pointer";
   }
-}
+
+  return (
+    <div {...Theme(theme, "string")}>
+      <DataTypeLabel typeName="string" />
+      <button
+        type="button"
+        className="string-value"
+        {...style}
+        onClick={toggleCollapsed}
+      >
+        <>
+          {DISPLAY_BRACES.doubleQuotes.start}
+          {collapsable && collapsed ? (
+            <span>
+              {(value as string).substring(0, collapseStringsAfterLength)}
+              <span {...Theme(theme, "ellipsis")}> ...</span>
+            </span>
+          ) : (
+            value
+          )}
+          {DISPLAY_BRACES.doubleQuotes.end}
+        </>
+      </button>
+    </div>
+  );
+};
+
+export default StringDataType;

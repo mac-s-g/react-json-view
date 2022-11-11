@@ -6,6 +6,7 @@ export type Json =
   | number
   | string
   | null
+  | boolean
   | Array<Json>
   | { [key: string]: Json };
 

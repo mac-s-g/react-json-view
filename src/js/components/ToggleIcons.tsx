@@ -1,4 +1,4 @@
-import React from "react";
+import { useContext } from "react";
 
 import Theme from "../themes/getStyle";
 import {
@@ -9,9 +9,12 @@ import {
   SquareMinus,
   SquarePlus,
 } from "./icons";
+import ReactJsonViewContext from "./ReactJsonViewContext";
 
-export function ExpandedIcon(props) {
-  const { theme, iconStyle } = props;
+export function ExpandedIcon() {
+  const {
+    props: { theme, iconStyle },
+  } = useContext(ReactJsonViewContext);
   switch (iconStyle) {
     case "triangle":
       return (
@@ -28,8 +31,11 @@ export function ExpandedIcon(props) {
   }
 }
 
-export function CollapsedIcon(props) {
-  const { theme, iconStyle } = props;
+export function CollapsedIcon() {
+  const {
+    props: { theme, iconStyle },
+  } = useContext(ReactJsonViewContext);
+
   switch (iconStyle) {
     case "triangle":
       return (

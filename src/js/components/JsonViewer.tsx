@@ -32,6 +32,7 @@ const JsonViewer = (p: JsonViewerProps) => {
         type,
         value: rjvProps.value,
         depth: 0,
+        parentType: "object",
       }}
     >
       <div className="pretty-json-container object-container">

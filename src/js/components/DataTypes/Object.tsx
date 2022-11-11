@@ -4,14 +4,15 @@ import {
   DEPTH_INCREMENT,
   DISPLAY_BRACES,
   SINGLE_INDENT,
+  toType,
 } from "../../helpers/util";
 import Theme from "../../themes/getStyle";
 import Child from "../Child";
 import LocalJsonViewContext from "../LocalJsonViewContext";
+import ObjectMeta from "../ObjectMeta";
 import ObjectName from "../ObjectName";
 import ReactJsonViewContext, { Json } from "../ReactJsonViewContext";
 import { CollapsedIcon, ExpandedIcon } from "../ToggleIcons";
-import VariableMeta from "../VariableMeta";
 
 const Ellipsis = ({
   size,
@@ -41,7 +42,6 @@ const StartBrace = ({
   objectType,
   collapsed,
   hovered,
-  size,
   toggleCollapsed,
   parentIsArrayGroup,
 }: {
@@ -53,7 +53,7 @@ const StartBrace = ({
   parentIsArrayGroup: boolean;
 }) => {
   const {
-    props: { theme, iconStyle },
+    props: { theme },
   } = useContext(ReactJsonViewContext);
 
   const braceString = DISPLAY_BRACES[objectType].start;
@@ -62,7 +62,7 @@ const StartBrace = ({
     return (
       <span>
         <span {...Theme(theme, "brace")}>{braceString}</span>
-        {collapsed ? <></> : <VariableMeta rowHovered={hovered} size={size} />}
+        {collapsed ? <></> : <ObjectMeta rowHovered={hovered} />}
       </span>
     );
   }
@@ -79,13 +79,13 @@ const StartBrace = ({
         {...Theme(theme, "brace-row")}
       >
         <div className="icon-container" {...Theme(theme, "icon-container")}>
-          <IconComponent {...{ theme, iconStyle }} />
+          <IconComponent />
         </div>
         <ObjectName />
         <span {...Theme(theme, "brace")}>{braceString}</span>
       </button>
 
-      {collapsed ? <></> : <VariableMeta rowHovered={hovered} size={size} />}
+      {collapsed ? <></> : <ObjectMeta rowHovered={hovered} />}
     </span>
   );
 };
@@ -101,12 +101,13 @@ const ObjectDataTypeContents = ({
 }) => {
   const { depth, namespace, value } = useContext(LocalJsonViewContext);
   const {
-    props: { groupArraysAfterLength, sortKeys, theme },
+    props: { sortKeys, theme },
   } = useContext(ReactJsonViewContext);
 
   const baseKeys = Object.keys(value as typeof value & object);
   const shouldSort = sortKeys && objectType !== "array";
   const actualKeys = shouldSort ? baseKeys.sort() : baseKeys;
+  const type = toType(value);
 
   return (
     <div className="pushed-content object-container">
@@ -119,6 +120,7 @@ const ObjectDataTypeContents = ({
             )}
             value={(value as any)[key] as Json}
             key={`${key}-${namespace}`}
+            parentType={type}
           />
         ))}
       </div>
@@ -214,7 +216,7 @@ const ObjectDataType = ({
       <span className="brace-row">
         <EndBrace collapsed={collapsed} objectType={objectType} />
 
-        {collapsed ? <VariableMeta rowHovered={hovered} size={size} /> : <></>}
+        {collapsed ? <ObjectMeta rowHovered={hovered} /> : <></>}
       </span>
     </div>
   );

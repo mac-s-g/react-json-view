@@ -5,10 +5,14 @@ import getClipboardValue from "../helpers/getClipboardValue";
 import Theme from "../themes/getStyle";
 // clibboard icon
 import { Clippy } from "./icons";
+import LocalJsonViewContext from "./LocalJsonViewContext";
 import ReactJsonViewContext from "./ReactJsonViewContext";
 
-const CopyIcon = ({ theme, copied }) => {
-  if (this.state.copied) {
+const CopyIcon = ({ copied }: { copied: boolean }) => {
+  const {
+    props: { theme },
+  } = useContext(ReactJsonViewContext);
+  if (copied) {
     return (
       <span>
         <Clippy class="copy-icon" {...Theme(theme, "copy-icon")} />
@@ -20,27 +24,23 @@ const CopyIcon = ({ theme, copied }) => {
   return <Clippy class="copy-icon" {...Theme(theme, "copy-icon")} />;
 };
 
-const CopyToClipboard = ({
-  hidden,
-  rowHovered,
-  clickCallback,
-}: {
-  hidden: boolean;
-  rowHovered: boolean;
-  clickCallback: unknown;
-}) => {
-  const { props: rjvProps } = useContext(ReactJsonViewContext);
+const CopyToClipboard = ({ rowHovered }: { rowHovered: boolean }) => {
+  const {
+    props: { theme, enableClipboard },
+  } = useContext(ReactJsonViewContext);
 
-  const { style } = Theme(rjvProps.theme, "copy-to-clipboard");
+  const { value } = useContext(LocalJsonViewContext);
+
+  const { style } = Theme(theme, "copy-to-clipboard");
 
   const [copied, setCopied] = useState(false);
 
-  const display = hidden ? "none" : "inline";
+  const display = enableClipboard ? "inline" : "none";
 
   const handleCopy = () => {
     const container = document.createElement("textarea");
 
-    container.innerHTML = JSON.stringify(getClipboardValue(src), null, "  ");
+    container.innerHTML = JSON.stringify(getClipboardValue(value), null, "  ");
 
     document.body.appendChild(container);
     container.select();
@@ -48,12 +48,6 @@ const CopyToClipboard = ({
     document.body.removeChild(container);
 
     setCopied(true);
-    typeof clickCallback === "function" &&
-      clickCallback({
-        src,
-        namespace,
-        name: namespace[namespace.length - 1],
-      });
   };
 
   useEffect(() => {
@@ -75,15 +69,16 @@ const CopyToClipboard = ({
         display: rowHovered ? "inline-block" : "none",
       }}
     >
-      <span
+      <button
+        type="button"
         style={{
           ...style,
           display,
         }}
         onClick={handleCopy}
       >
-        <CopyIcon copied={copied} theme={theme} />
-      </span>
+        <CopyIcon copied={copied} />
+      </button>
     </span>
   );
 };

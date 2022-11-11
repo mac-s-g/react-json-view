@@ -1,27 +1,17 @@
-import React, { useState } from "react";
+import { useContext, useState } from "react";
 import AutosizeTextarea from "react-textarea-autosize";
 
-import dispatcher from "../helpers/dispatcher";
 import parseInput from "../helpers/parseInput";
 import stringifyVariable from "../helpers/stringifyVariable";
 // theme
 import Theme from "../themes/getStyle";
 import CopyToClipboard from "./CopyToClipboard";
 // data type components
-import {
-  JsonBoolean,
-  JsonDate,
-  JsonFloat,
-  JsonFunction,
-  JsonInteger,
-  JsonNan,
-  JsonNull,
-  JsonRegexp,
-  JsonString,
-  JsonUndefined,
-} from "./DataTypes";
+import { JsonBoolean, JsonNull, JsonNumber, JsonString } from "./DataTypes";
 // clibboard icon
 import { CheckCircle, Edit, RemoveCircle as Remove } from "./icons";
+import LocalJsonViewContext from "./LocalJsonViewContext";
+import ReactJsonViewContext from "./ReactJsonViewContext";
 
 const EditIcon = ({ variable, theme, hovered, prepopulateInput }) => {
   return (
@@ -94,14 +84,11 @@ const Value = ({
       return (
         <EditInput
           editValue={editValue}
-          namespace={namespace}
           parsedInput={parsedInput}
-          rjvId={rjvId}
           setEditMode={setEditMode}
           setEditValue={setEditValue}
           setParsedInput={setParsedInput}
           submitEdit={submitEdit}
-          theme={theme}
           variable={variable}
         />
       );
@@ -134,17 +121,20 @@ const Value = ({
 };
 
 const EditInput = ({
-  theme,
   editValue,
   setEditValue,
   setParsedInput,
   setEditMode,
   submitEdit,
-  namespace,
   variable,
-  rjvId,
   parsedInput,
 }) => {
+  const {
+    props: { theme },
+    rjvId,
+  } = useContext(ReactJsonViewContext);
+  const { namespace } = useContext(LocalJsonViewContext);
+
   return (
     <div>
       <AutosizeTextarea

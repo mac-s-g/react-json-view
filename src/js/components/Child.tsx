@@ -1,19 +1,22 @@
 import { useContext } from "react";
 
 import { SINGLE_INDENT, toType } from "../helpers/util";
+import ArrayGroup from "./ArrayGroup";
 import { JsonObject } from "./DataTypes";
 import LocalJsonViewContext from "./LocalJsonViewContext";
-import ReactJsonViewContext, { Json } from "./ReactJsonViewContext";
+import ReactJsonViewContext, { Json, TypeName } from "./ReactJsonViewContext";
 import VariableEditor from "./VariableEditor";
 
 const Child = ({
   depth,
   namespace,
   value,
+  parentType,
 }: {
   depth: number;
   namespace: (string | null)[];
   value: Json;
+  parentType: TypeName;
 }) => {
   const type = toType(value);
 
@@ -28,6 +31,7 @@ const Child = ({
         namespace,
         type,
         value,
+        parentType,
       }}
     >
       {type === "object" ? (

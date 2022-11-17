@@ -1,6 +1,8 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@types/events': ^3.0.0
+  '@types/react': ^18.0.25
   '@types/react-dom': ^18.0.8
   '@typescript-eslint/eslint-plugin': ^5.42.1
   '@typescript-eslint/parser': ^5.42.1
@@ -18,6 +20,7 @@ specifiers:
   eslint-plugin-react-hooks: 4.6.0
   eslint-plugin-simple-import-sort: ^8.0.0
   eslint-plugin-testing-library: 5.5.1
+  events: ^3.3.0
   ignore-styles: ^5.0.1
   jsdom: 20.0.2
   prettier: 2.7.1
@@ -29,8 +32,17 @@ specifiers:
   react-textarea-autosize: ^8.3.4
   sass: 1.56.0
   typescript: ^4.8.4
+  win-node-env: ^0.6.1
+
+dependencies:
+  events: 3.3.0
+
+optionalDependencies:
+  win-node-env: 0.6.1
 
 devDependencies:
+  '@types/events': 3.0.0
+  '@types/react': 18.0.25
   '@types/react-dom': 18.0.8
   '@typescript-eslint/eslint-plugin': 5.42.1_sgm4vy47mw7vebfms32yieo3xa
   '@typescript-eslint/parser': 5.42.1_3rubbgt5ekhqrcgx4uwls3neim
@@ -56,7 +68,7 @@ devDependencies:
   react-dom: 18.2.0_react@18.2.0
   react-github-button: 0.1.11
   react-test-renderer: 18.2.0_react@18.2.0
-  react-textarea-autosize: 8.3.4_react@18.2.0
+  react-textarea-autosize: 8.3.4_fan5qbzahqtxlm5dzefqlqx5ia
   sass: 1.56.0
   typescript: 4.8.4
 
@@ -175,6 +187,10 @@ packages:
 
   /@types/base16/1.0.2:
     resolution: {integrity: sha512-oYO/U4VD1DavwrKuCSQWdLG+5K22SLPem2OQaHmFcQuwHoVeGC+JGVRji2MUqZUAIQZHEonOeVfAX09hYiLsdg==}
+    dev: true
+
+  /@types/events/3.0.0:
+    resolution: {integrity: sha512-EaObqwIvayI5a8dCzhFrjKzVwKLxjoG9T6Ppd5CEo07LRKfQ8Yokw54r5+Wq7FaBQ+yXRvQAYPrHwya1/UFt9g==}
     dev: true
 
   /@types/json-schema/7.0.11:
@@ -1424,6 +1440,11 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /events/3.3.0:
+    resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
+    engines: {node: '>=0.8.x'}
+    dev: false
+
   /fast-deep-equal/3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
     dev: true
@@ -2250,7 +2271,7 @@ packages:
       scheduler: 0.23.0
     dev: true
 
-  /react-textarea-autosize/8.3.4_react@18.2.0:
+  /react-textarea-autosize/8.3.4_fan5qbzahqtxlm5dzefqlqx5ia:
     resolution: {integrity: sha512-CdtmP8Dc19xL8/R6sWvtknD/eCXkQr30dtvC4VmGInhRsfF8X/ihXCq6+9l9qbxmKRiq407/7z5fxE7cVWQNgQ==}
     engines: {node: '>=10'}
     peerDependencies:
@@ -2259,7 +2280,7 @@ packages:
       '@babel/runtime': 7.20.1
       react: 18.2.0
       use-composed-ref: 1.3.0_react@18.2.0
-      use-latest: 1.2.1_react@18.2.0
+      use-latest: 1.2.1_fan5qbzahqtxlm5dzefqlqx5ia
     transitivePeerDependencies:
       - '@types/react'
     dev: true
@@ -2649,7 +2670,7 @@ packages:
       react: 18.2.0
     dev: true
 
-  /use-isomorphic-layout-effect/1.1.2_react@18.2.0:
+  /use-isomorphic-layout-effect/1.1.2_fan5qbzahqtxlm5dzefqlqx5ia:
     resolution: {integrity: sha512-49L8yCO3iGT/ZF9QttjwLF/ZD9Iwto5LnH5LmEdk/6cFmXddqi2ulF0edxTwjj+7mqvpVVGQWvbXZdn32wRSHA==}
     peerDependencies:
       '@types/react': '*'
@@ -2658,10 +2679,11 @@ packages:
       '@types/react':
         optional: true
     dependencies:
+      '@types/react': 18.0.25
       react: 18.2.0
     dev: true
 
-  /use-latest/1.2.1_react@18.2.0:
+  /use-latest/1.2.1_fan5qbzahqtxlm5dzefqlqx5ia:
     resolution: {integrity: sha512-xA+AVm/Wlg3e2P/JiItTziwS7FK92LWrDB0p+hgXloIMuVCeJJ8v6f0eeHyPZaJrM+usM1FkFfbNCrJGs8A/zw==}
     peerDependencies:
       '@types/react': '*'
@@ -2670,8 +2692,9 @@ packages:
       '@types/react':
         optional: true
     dependencies:
+      '@types/react': 18.0.25
       react: 18.2.0
-      use-isomorphic-layout-effect: 1.1.2_react@18.2.0
+      use-isomorphic-layout-effect: 1.1.2_fan5qbzahqtxlm5dzefqlqx5ia
     dev: true
 
   /v8-compile-cache/2.3.0:
@@ -2727,6 +2750,14 @@ packages:
     dependencies:
       isexe: 2.0.0
     dev: true
+
+  /win-node-env/0.6.1:
+    resolution: {integrity: sha512-oR+MLQ6jdvwqkLEkKBYxRvBOYbTlQV9dJKn8vLzjA4HCzcqdlCE6H1oOvA7lAdCgNXiOX0xfjl/Y47ZcZN6FDA==}
+    os: [win32]
+    hasBin: true
+    requiresBuild: true
+    dev: false
+    optional: true
 
   /word-wrap/1.2.3:
     resolution: {integrity: sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==}

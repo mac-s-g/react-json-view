@@ -181,11 +181,11 @@ export interface InteractionProps {
   /**
    * The updated subtree of the JSON tree.
    */
-  updated_src: object;
+  updatedSrc: object;
   /**
    * The existing subtree of the JSON tree.
    */
-  existing_src: object;
+  existingSrc: object;
   /**
    * The key of the entry that is interacted with.
    */
@@ -197,11 +197,11 @@ export interface InteractionProps {
   /**
    * The original value of the entry that is interacted with.
    */
-  existing_value: object | string | number | boolean | null;
+  existingValue: object | string | number | boolean | null;
   /**
    * The updated value of the entry that is interacted with.
    */
-  new_value?: object | string | number | boolean | null;
+  newValue?: object | string | number | boolean | null;
 }
 
 export interface OnSelectProps {

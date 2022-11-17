@@ -6,6 +6,7 @@ import AutosizeTextarea from "react-textarea-autosize";
 import parseInput from "../helpers/parseInput";
 import stringifyVariable from "../helpers/stringifyVariable";
 import { DISPLAY_BRACES, SINGLE_INDENT, toType } from "../helpers/util";
+import attributeStore from "../stores/ObjectAttributes";
 // theme
 import Theme from "../themes/getStyle";
 import CopyToClipboard from "./CopyToClipboard";
@@ -28,7 +29,6 @@ const EditIcon = ({
   const {
     props: { theme },
   } = useContext(ReactJsonViewContext);
-
   return (
     <div
       className="click-to-edit"
@@ -46,7 +46,17 @@ const EditIcon = ({
   );
 };
 
-const RemoveIcon = ({ hovered }: { hovered: boolean }) => {
+const RemoveIcon = ({
+  hovered,
+  handleClick,
+}: {
+  hovered: boolean;
+  handleClick: (
+    rjvd: string,
+    namespace: (string | null)[],
+    value: Json,
+  ) => void;
+}) => {
   const { namespace, value } = useContext(LocalJsonViewContext);
   const {
     props: { theme },
@@ -66,6 +76,7 @@ const RemoveIcon = ({ hovered }: { hovered: boolean }) => {
         {...Theme(theme, "removeVarIcon")}
         onClick={() => {
           // TODO: Add logic to actually remove the key
+          handleClick(rjvId, namespace, value);
         }}
       />
     </div>
@@ -82,7 +93,6 @@ const Value = ({
   submitEdit: () => void;
 }) => {
   const { value } = useContext(LocalJsonViewContext);
-
   const type = edit.editMode ? "edit" : toType(value);
   switch (type) {
     case "edit":
@@ -120,7 +130,7 @@ const EditInput = ({
     <div>
       <AutosizeTextarea
         type="text"
-        inputRef={(input: HTMLInputElement) => input && input.focus()}
+        ref={(input: HTMLInputElement) => input && input.focus()}
         value={edit.editMode ? edit.editValue : ""}
         className="variable-editor"
         onChange={(event) => {
@@ -309,7 +319,9 @@ const VariableEditor = () => {
       indentWidth,
       quotesOnKeys,
       displayArrayKey,
+      onChange,
     },
+    rjvId,
   } = useContext(ReactJsonViewContext);
 
   const { namespace, value } = useContext(LocalJsonViewContext);
@@ -335,9 +347,45 @@ const VariableEditor = () => {
   };
 
   const submitEdit = () => {
+    const newValue = edit.editMode && edit.editValue;
     setEdit({ editMode: false });
-
     // TODO: Write Code to actually submit the edit
+    const data = {
+      name,
+      namespace,
+      existingValue: value,
+      newValue,
+      updatedSrc: {},
+      variableRemoved: false,
+    };
+
+    attributeStore.handleAction({
+      name: "VARIABLE_UPDATED",
+      rjvId,
+      data,
+    });
+    onChange(data.updatedSrc);
+  };
+
+  const removeVariable = (
+    rjvId: string,
+    namespace: (string | null)[],
+    value: Json,
+  ) => {
+    const data = {
+      name,
+      namespace,
+      existingValue: value,
+      updatedSrc: {},
+      variableRemoved: true,
+    };
+
+    attributeStore.handleAction({
+      name: "VARIABLE_REMOVED",
+      rjvId,
+      data,
+    });
+    onChange(data.updatedSrc);
   };
 
   return (
@@ -396,15 +444,18 @@ const VariableEditor = () => {
         <Value edit={edit} setEdit={setEdit} submitEdit={submitEdit} />
       </div>
       {enableClipboard ? <CopyToClipboard rowHovered={hovered} /> : null}
-      {(canEdit && !edit.editMode) ?? (
+      {canEdit && !edit.editMode && (
         <EditIcon
           hovered={hovered}
           onEdit={() => {
             // TODO: Set the editing var to true or whatever
+            enterEditMode();
           }}
         />
       )}
-      {(canDelete && !edit.editMode) ?? <RemoveIcon hovered={hovered} />}
+      {canDelete && !edit.editMode && (
+        <RemoveIcon hovered={hovered} handleClick={removeVariable} />
+      )}
     </div>
   );
 };

@@ -3,7 +3,6 @@
 
 import { EventEmitter } from "events";
 
-import dispatcher from "../helpers/dispatcher";
 import { toType } from "../helpers/util";
 
 // store persistent display attributes for objects and arrays
@@ -20,7 +19,7 @@ class ObjectAttributes extends EventEmitter {
     this.objects[rjvId][name][key] = value;
   };
 
-  get = (rjvId, name, key, defaultValue) => {
+  get = (rjvId: string, name: string, key: string, defaultValue?: any) => {
     if (
       this.objects[rjvId] === undefined ||
       this.objects[rjvId][name] === undefined ||
@@ -38,7 +37,7 @@ class ObjectAttributes extends EventEmitter {
         this.emit(`reset-${rjvId}`);
         break;
       case "VARIABLE_UPDATED":
-        action.data.updated_src = this.updateSrc(rjvId, data);
+        action.data.updatedSrc = this.updateSrc(rjvId, data);
         this.set(rjvId, "action", "variable-update", {
           ...data,
           type: "variable-edited",
@@ -46,7 +45,7 @@ class ObjectAttributes extends EventEmitter {
         this.emit(`variable-update-${rjvId}`);
         break;
       case "VARIABLE_REMOVED":
-        action.data.updated_src = this.updateSrc(rjvId, data);
+        action.data.updatedSrc = this.updateSrc(rjvId, data);
         this.set(rjvId, "action", "variable-update", {
           ...data,
           type: "variable-removed",
@@ -54,7 +53,7 @@ class ObjectAttributes extends EventEmitter {
         this.emit(`variable-update-${rjvId}`);
         break;
       case "VARIABLE_ADDED":
-        action.data.updated_src = this.updateSrc(rjvId, data);
+        action.data.updatedSrc = this.updateSrc(rjvId, data);
         this.set(rjvId, "action", "variable-update", {
           ...data,
           type: "variable-added",
@@ -71,7 +70,7 @@ class ObjectAttributes extends EventEmitter {
   };
 
   updateSrc = (rjvId, request) => {
-    const { name, namespace, new_value, existing_value, variable_removed } =
+    const { name, namespace, newValue, existingValue, variableRemoved } =
       request;
 
     namespace.shift();
@@ -79,15 +78,17 @@ class ObjectAttributes extends EventEmitter {
     // deepy copy src
     const src = this.get(rjvId, "global", "src");
     // deep copy of src variable
-    let updated_src = this.deepCopy(src, [...namespace]);
-
+    let updatedSrc = this.deepCopy(src, [...namespace]);
+    
     // point at current index
-    let walk = updated_src;
+    let walk = updatedSrc;
     for (const idx of namespace) {
-      walk = walk[idx];
+      if(walk[idx]){
+        walk = walk[idx];
+      }
     }
-
-    if (variable_removed) {
+   
+    if (variableRemoved) {
       if (toType(walk) == "array") {
         walk.splice(name, 1);
       } else {
@@ -96,15 +97,15 @@ class ObjectAttributes extends EventEmitter {
     } else {
       // update copied variable at specified namespace
       if (name !== null) {
-        walk[name] = new_value;
+        walk[name] = newValue;
       } else {
-        updated_src = new_value;
+        updatedSrc = newValue;
       }
     }
 
-    this.set(rjvId, "global", "src", updated_src);
+    this.set(rjvId, "global", "src", updatedSrc);
 
-    return updated_src;
+    return updatedSrc;
   };
 
   deepCopy = (src, copy_namespace) => {
@@ -124,5 +125,5 @@ class ObjectAttributes extends EventEmitter {
 }
 
 const attributeStore = new ObjectAttributes();
-dispatcher.register(attributeStore.handleAction.bind(attributeStore));
+
 export default attributeStore;

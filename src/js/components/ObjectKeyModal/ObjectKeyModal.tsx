@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useContext, useState } from "react";
 
+import attributeStore from "../../stores/ObjectAttributes";
 import Theme from "../../themes/getStyle";
 import { Add as Cancel, CheckCircle } from "../icons";
 import ReactJsonViewContext from "../ReactJsonViewContext";
@@ -15,16 +16,32 @@ const ObjectKeyModal = ({
   active: boolean;
 }) => {
   const {
-    props: { theme, newKeyDefaultValue },
+    props: { theme, newKeyDefaultValue, onChange },
+    rjvId,
   } = useContext(ReactJsonViewContext);
 
-  const [input, setInput] = useState(newKeyDefaultValue);
+  const [input, setInput] = useState(newKeyDefaultValue || "");
 
   // TODO: Figure out what the invalid state is supposed to mean
   const valid = true;
 
   const handleSubmit = () => {
     // TODO: Write logic to actually submit
+    const request = attributeStore.get(
+      rjvId,
+      "action",
+      "new-key-request",
+      newKeyDefaultValue,
+    );
+    request.newValue = { ...request.existingValue };
+    request.newValue[input] = null;
+
+    attributeStore.handleAction({
+      name: "VARIABLE_ADDED",
+      rjvId,
+      data: request,
+    });
+    onClose();
   };
 
   return active ? (

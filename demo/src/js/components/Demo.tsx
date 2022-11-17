@@ -14,7 +14,16 @@ const Demo = () => {
       nestedB: 8,
     },
   });
-  return <ReactJson value={value} onChange={setValue} rootNodeName="root" />;
+  return (
+    <ReactJson
+      value={value}
+      onChange={setValue}
+      rootNodeName="root"
+      canEdit
+      canDelete
+      canAdd
+    />
+  );
 };
 
 export default Demo;

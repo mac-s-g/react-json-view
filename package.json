@@ -5,6 +5,8 @@
   "version": "0.0.1",
   "main": "dist/main.js",
   "devDependencies": {
+    "@types/events": "^3.0.0",
+    "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "@typescript-eslint/eslint-plugin": "^5.42.1",
     "@typescript-eslint/parser": "^5.42.1",
@@ -81,5 +83,11 @@
   "directories": {
     "docs": "docs",
     "test": "test"
+  },
+  "optionalDependencies": {
+    "win-node-env": "^0.6.1"
+  },
+  "dependencies": {
+    "events": "^3.3.0"
   }
 }

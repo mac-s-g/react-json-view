@@ -54,7 +54,6 @@ const ReactJsonView = ({
 
   const getListeners = () => {
     return {
-      // reset: resetState,
       "variable-update": updateSrc,
       "add-key-request": addKeyRequestHandler,
     };
@@ -65,17 +64,9 @@ const ReactJsonView = ({
   };
 
   const updateSrc = () => {
-    const {
-      name,
-      namespace,
-      newValue,
-      existingValue,
-      variableRemoved,
-      updatedSrc,
-      type,
-    } = attributeStore.get(rjvId, "action", "variable-update");
+    const { name, namespace, newValue, existingValue, updatedSrc, type } =
+      attributeStore.get(rjvId, "action", "variable-update");
 
-    // console.log(attributeStore.get(rjvId, "action", "variable-update"))
     let result;
 
     const onEditPayload = {
@@ -105,6 +96,11 @@ const ReactJsonView = ({
     } else {
       setValidationFailure(true);
     }
+  };
+
+  const onClose = () => {
+    setAddKeyRequest(false);
+    setValidationFailure(false);
   };
 
   return (
@@ -145,10 +141,7 @@ const ReactJsonView = ({
           active={validationFailure}
         />
         <JsonViewer />
-        <ObjectKeyModal
-          active={addKeyRequest}
-          onClose={() => setAddKeyRequest(false)}
-        />
+        <ObjectKeyModal active={addKeyRequest} onClose={onClose} />
       </ReactJsonViewContext.Provider>
     </div>
   );

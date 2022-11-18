@@ -8,7 +8,7 @@ import Theme from "../themes/getStyle";
 import CopyToClipboard from "./CopyToClipboard";
 import { AddCircle as Add, RemoveCircle as Remove } from "./icons";
 import LocalJsonViewContext from "./LocalJsonViewContext";
-import ReactJsonViewContext from "./ReactJsonViewContext";
+import ReactJsonViewContext, { Json } from "./ReactJsonViewContext";
 
 const RemoveObject = ({ rowHovered }: { rowHovered: boolean }) => {
   const {
@@ -34,7 +34,6 @@ const RemoveObject = ({ rowHovered }: { rowHovered: boolean }) => {
         className="click-to-remove-icon"
         {...Theme(theme, "removeVarIcon")}
         onClick={() => {
-          // TODO: WRITE CODE TO REMOVE THE OBJECT
           const data = {
             name,
             namespace: namespace.splice(0, namespace.length - 1),
@@ -79,22 +78,22 @@ const AddAttribute = ({ rowHovered }: { rowHovered: boolean }) => {
             variableRemoved: false,
             keyName: null,
           };
-          // TODO: Add logic to actually add the item whether it's an object or array
           if (toType(value) === "object") {
             attributeStore.handleAction({
               name: "ADD_VARIABLE_KEY_REQUEST",
               rjvId,
               data: request,
             });
-            // } else {
-            //   attributeStore.handleAction({
-            //     name: "VARIABLE_ADDED",
-            //     rjvId,
-            //     data: {
-            //       ...request,
-            //       new_value: value.length ?? [...value, null],
-            //     },
-            //   });
+          } else {
+            attributeStore.handleAction({
+              name: "VARIABLE_ADDED",
+              rjvId,
+              data: {
+                ...request,
+                newValue: value &&
+                  (value as Json[]).length && [...(value as Json[]), null],
+              },
+            });
           }
         }}
       />

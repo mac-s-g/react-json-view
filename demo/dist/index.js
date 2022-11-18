@@ -1013,7 +1013,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect3(create, deps) {
+          function useEffect4(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1793,7 +1793,7 @@
           exports.useContext = useContext17;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect3;
+          exports.useEffect = useEffect4;
           exports.useId = useId2;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
@@ -27678,7 +27678,7 @@
       }
     };
     updateSrc = (rjvId, request) => {
-      const { name, namespace, newValue, existingValue, variableRemoved } = request;
+      const { name, namespace, newValue, variableRemoved } = request;
       namespace.shift();
       const src = this.get(rjvId, "global", "src");
       let updatedSrc = this.deepCopy(src, [...namespace]);
@@ -27704,17 +27704,17 @@
       this.set(rjvId, "global", "src", updatedSrc);
       return updatedSrc;
     };
-    deepCopy = (src, copy_namespace) => {
+    deepCopy = (src, copyNamespace) => {
       const type = toType(src);
       let result;
-      const idx = copy_namespace.shift();
+      const idx = copyNamespace.shift();
       if (type == "array") {
         result = [...src];
       } else if (type == "object") {
         result = { ...src };
       }
       if (idx !== void 0) {
-        result[idx] = this.deepCopy(src[idx], copy_namespace);
+        result[idx] = this.deepCopy(src[idx], copyNamespace);
       }
       return result;
     };
@@ -29034,6 +29034,15 @@
               rjvId,
               data: request
             });
+          } else {
+            ObjectAttributes_default.handleAction({
+              name: "VARIABLE_ADDED",
+              rjvId,
+              data: {
+                ...request,
+                newValue: value && value.length && [...value, null]
+              }
+            });
           }
         }
       })
@@ -30109,8 +30118,15 @@
       props: { theme, newKeyDefaultValue, onChange },
       rjvId
     } = (0, import_react21.useContext)(ReactJsonViewContext_default);
-    const [input, setInput] = (0, import_react21.useState)(newKeyDefaultValue || "");
-    const valid = true;
+    const [input, setInput] = (0, import_react21.useState)("");
+    const [valid, setValid] = (0, import_react21.useState)(false);
+    const isValid = (input2) => {
+      const request = ObjectAttributes_default.get(rjvId, "action", "new-key-request");
+      return input2 !== "" && Object.keys(request.existingValue).indexOf(input2) === -1;
+    };
+    (0, import_react21.useEffect)(() => {
+      setValid(isValid(input));
+    }, [input]);
     const handleSubmit = () => {
       const request = ObjectAttributes_default.get(
         rjvId,
@@ -30119,12 +30135,13 @@
         newKeyDefaultValue
       );
       request.newValue = { ...request.existingValue };
-      request.newValue[input] = null;
+      request.newValue[input] = newKeyDefaultValue;
       ObjectAttributes_default.handleAction({
         name: "VARIABLE_ADDED",
         rjvId,
         data: request
       });
+      setInput("");
       onClose();
     };
     return active ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", {
@@ -30158,6 +30175,7 @@
                   if (valid && e.key === "Enter") {
                     handleSubmit();
                   } else if (e.key === "Escape") {
+                    setInput("");
                     onClose();
                   }
                 }
@@ -30175,6 +30193,7 @@
               ...style(theme, "key-modal-cancel-icon"),
               className: "key-modal-cancel",
               onClick: () => {
+                setInput("");
                 onClose();
               }
             })
@@ -30261,15 +30280,7 @@
       setAddKeyRequest(true);
     };
     const updateSrc = () => {
-      const {
-        name,
-        namespace,
-        newValue,
-        existingValue,
-        variableRemoved,
-        updatedSrc,
-        type
-      } = ObjectAttributes_default.get(rjvId, "action", "variable-update");
+      const { name, namespace, newValue, existingValue, updatedSrc, type } = ObjectAttributes_default.get(rjvId, "action", "variable-update");
       let result;
       const onEditPayload = {
         existingSrc: value,
@@ -30298,6 +30309,10 @@
       } else {
         setValidationFailure(true);
       }
+    };
+    const onClose = () => {
+      setAddKeyRequest(false);
+      setValidationFailure(false);
     };
     return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", {
       className: "react-json-view",
@@ -30337,7 +30352,7 @@
           /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(JsonViewer_default, {}),
           /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(ObjectKeyModal_default, {
             active: addKeyRequest,
-            onClose: () => setAddKeyRequest(false)
+            onClose
           })
         ]
       })
@@ -30352,12 +30367,18 @@
   var import_jsx_runtime19 = __toESM(require_jsx_runtime(), 1);
   var Demo = () => {
     const [value, setValue] = (0, import_react24.useState)({
-      a: 4,
-      b: 5,
-      c: {
-        nestedA: 4,
-        nestedB: 8
-      }
+      stringV: "this is a test string",
+      integer: 42,
+      empty_array: [],
+      empty_object: {},
+      array: [1, 2, 3, "test"],
+      float: -2.757,
+      parent: {
+        sibling1: true,
+        sibling2: false,
+        sibling3: null
+      },
+      string_number: "1234"
     });
     return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(js_default, {
       value,

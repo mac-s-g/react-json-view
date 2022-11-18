@@ -7,7 +7,6 @@ import parseInput from "../helpers/parseInput";
 import stringifyVariable from "../helpers/stringifyVariable";
 import { DISPLAY_BRACES, SINGLE_INDENT, toType } from "../helpers/util";
 import attributeStore from "../stores/ObjectAttributes";
-// theme
 import Theme from "../themes/getStyle";
 import CopyToClipboard from "./CopyToClipboard";
 // data type components
@@ -75,7 +74,6 @@ const RemoveIcon = ({
         className="click-to-remove-icon"
         {...Theme(theme, "removeVarIcon")}
         onClick={() => {
-          // TODO: Add logic to actually remove the key
           handleClick(rjvId, namespace, value);
         }}
       />
@@ -349,7 +347,6 @@ const VariableEditor = () => {
   const submitEdit = () => {
     const newValue = edit.editMode && edit.editValue;
     setEdit({ editMode: false });
-    // TODO: Write Code to actually submit the edit
     const data = {
       name,
       namespace,
@@ -448,7 +445,6 @@ const VariableEditor = () => {
         <EditIcon
           hovered={hovered}
           onEdit={() => {
-            // TODO: Set the editing var to true or whatever
             enterEditMode();
           }}
         />

@@ -70,7 +70,7 @@ class ObjectAttributes extends EventEmitter {
   };
 
   updateSrc = (rjvId, request) => {
-    const { name, namespace, newValue, existingValue, variableRemoved } =
+    const { name, namespace, newValue, variableRemoved } =
       request;
 
     namespace.shift();
@@ -108,17 +108,17 @@ class ObjectAttributes extends EventEmitter {
     return updatedSrc;
   };
 
-  deepCopy = (src, copy_namespace) => {
+  deepCopy = (src, copyNamespace) => {
     const type = toType(src);
     let result;
-    const idx = copy_namespace.shift();
+    const idx = copyNamespace.shift();
     if (type == "array") {
       result = [...src];
     } else if (type == "object") {
       result = { ...src };
     }
     if (idx !== undefined) {
-      result[idx] = this.deepCopy(src[idx], copy_namespace);
+      result[idx] = this.deepCopy(src[idx], copyNamespace);
     }
     return result;
   };

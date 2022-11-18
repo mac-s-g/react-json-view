@@ -403,13 +403,11 @@ const getStyle = (theme: UserTheme) => {
     rjvTheme = rjvGrey;
   }
 
-  // TODO: Fix this remove the `as any`
   return createStyling(getDefaultThemeStyling, {
     defaultBase16: rjvTheme,
   })(theme);
 };
 
-// TODO: Fix this remove `as any`
 export default function style(
   theme: UserTheme,
   component: string,
@@ -418,7 +416,6 @@ export default function style(
   if (!theme) {
     console.error("theme has not been set");
   }
-  // TODO: Fix this remove the `@ts-ignore`
-  // @ts-ignore
+
   return getStyle(theme)(component, args);
 }

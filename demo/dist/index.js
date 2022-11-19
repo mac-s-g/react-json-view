@@ -28233,7 +28233,9 @@
         color: colors.ellipsisColor,
         fontSize: styleConstants_default.ellipsisFontSize,
         lineHeight: styleConstants_default.ellipsisLineHeight,
-        cursor: styleConstants_default.ellipsisCursor
+        cursor: styleConstants_default.ellipsisCursor,
+        border: "none",
+        backgroundColor: "transparent"
       },
       "brace-row": {
         display: "inline-block",

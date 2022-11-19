@@ -75,6 +75,8 @@ const getDefaultThemeStyling: ThemeStyling = (theme: Theme) => {
       fontSize: constants.ellipsisFontSize,
       lineHeight: constants.ellipsisLineHeight,
       cursor: constants.ellipsisCursor,
+      border: "none",
+      backgroundColor: "transparent",
     },
     "brace-row": {
       display: "inline-block",

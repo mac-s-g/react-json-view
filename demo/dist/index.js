@@ -28237,7 +28237,9 @@
       },
       "brace-row": {
         display: "inline-block",
-        cursor: "pointer"
+        cursor: "pointer",
+        border: "none",
+        backgroundColor: "transparent"
       },
       brace: {
         display: "inline-block",
@@ -28385,7 +28387,9 @@
         color: colors.dataTypes.regexp
       },
       "copy-to-clipboard": {
-        cursor: styleConstants_default.clipboardCursor
+        cursor: styleConstants_default.clipboardCursor,
+        border: "none",
+        backgroundColor: "transparent"
       },
       "copy-icon": {
         color: colors.copyToClipboard,
@@ -30242,7 +30246,7 @@
     style: style2 = {},
     newKeyDefaultValue = null,
     shouldCollapse = () => false,
-    theme = "none",
+    theme = "rjvDefault",
     validationMessage = "Validation Error",
     collapseStringsAfterLength = Infinity,
     sortKeys = false,
@@ -30367,18 +30371,12 @@
   var import_jsx_runtime19 = __toESM(require_jsx_runtime(), 1);
   var Demo = () => {
     const [value, setValue] = (0, import_react24.useState)({
-      stringV: "this is a test string",
-      integer: 42,
-      empty_array: [],
-      empty_object: {},
-      array: [1, 2, 3, "test"],
-      float: -2.757,
-      parent: {
-        sibling1: true,
-        sibling2: false,
-        sibling3: null
-      },
-      string_number: "1234"
+      a: 4,
+      b: 5,
+      c: {
+        nestedA: 4,
+        nestedB: 8
+      }
     });
     return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(js_default, {
       value,

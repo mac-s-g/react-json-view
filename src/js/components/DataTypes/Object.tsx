@@ -59,7 +59,6 @@ const StartBrace = ({
   } = useContext(ReactJsonViewContext);
 
   const braceString = DISPLAY_BRACES[objectType].start;
-
   if (parentIsArrayGroup) {
     return (
       <span>

@@ -20,7 +20,7 @@ const ReactJsonView = ({
   style = {},
   newKeyDefaultValue = null,
   shouldCollapse = () => false,
-  theme = "none",
+  theme = "rjvDefault",
   validationMessage = "Validation Error",
   collapseStringsAfterLength = Infinity,
   sortKeys = false,

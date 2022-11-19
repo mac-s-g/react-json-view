@@ -79,6 +79,8 @@ const getDefaultThemeStyling: ThemeStyling = (theme: Theme) => {
     "brace-row": {
       display: "inline-block",
       cursor: "pointer",
+      border: "none",
+      backgroundColor: "transparent",
     },
     brace: {
       display: "inline-block",
@@ -229,6 +231,8 @@ const getDefaultThemeStyling: ThemeStyling = (theme: Theme) => {
     },
     "copy-to-clipboard": {
       cursor: constants.clipboardCursor,
+      border: "none",
+      backgroundColor: "transparent",
     },
     "copy-icon": {
       color: colors.copyToClipboard,

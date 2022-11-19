@@ -3,17 +3,19 @@
 import React, { useContext } from "react";
 
 import { toType } from "../helpers/util";
+import attributeStore from "../stores/ObjectAttributes";
 import Theme from "../themes/getStyle";
 import CopyToClipboard from "./CopyToClipboard";
 import { AddCircle as Add, RemoveCircle as Remove } from "./icons";
 import LocalJsonViewContext from "./LocalJsonViewContext";
-import ReactJsonViewContext from "./ReactJsonViewContext";
+import ReactJsonViewContext, { Json } from "./ReactJsonViewContext";
 
 const RemoveObject = ({ rowHovered }: { rowHovered: boolean }) => {
   const {
     props: { theme },
+    rjvId,
   } = useContext(ReactJsonViewContext);
-  const { namespace } = useContext(LocalJsonViewContext);
+  const { namespace, value } = useContext(LocalJsonViewContext);
 
   const name = namespace.at(-1);
 
@@ -32,7 +34,17 @@ const RemoveObject = ({ rowHovered }: { rowHovered: boolean }) => {
         className="click-to-remove-icon"
         {...Theme(theme, "removeVarIcon")}
         onClick={() => {
-          // TODO: WRITE CODE TO REMOVE THE OBJECT
+          const data = {
+            name,
+            namespace: namespace.splice(0, namespace.length - 1),
+            existingValue: value,
+            variableRemoved: true,
+          };
+          attributeStore.handleAction({
+            name: "VARIABLE_REMOVED",
+            rjvId,
+            data,
+          });
         }}
       />
     </span>
@@ -62,11 +74,27 @@ const AddAttribute = ({ rowHovered }: { rowHovered: boolean }) => {
           const request = {
             name: depth > 0 ? name : null,
             namespace: namespace.splice(0, namespace.length - 1),
-            existing_value: value,
-            variable_removed: false,
-            key_name: null,
+            existingValue: value,
+            variableRemoved: false,
+            keyName: null,
           };
-          // TODO: Add logic to actually add the item whether it's an object or array
+          if (toType(value) === "object") {
+            attributeStore.handleAction({
+              name: "ADD_VARIABLE_KEY_REQUEST",
+              rjvId,
+              data: request,
+            });
+          } else {
+            attributeStore.handleAction({
+              name: "VARIABLE_ADDED",
+              rjvId,
+              data: {
+                ...request,
+                newValue: value &&
+                  (value as Json[]).length && [...(value as Json[]), null],
+              },
+            });
+          }
         }}
       />
     </span>

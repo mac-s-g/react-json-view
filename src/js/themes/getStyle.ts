@@ -1,4 +1,9 @@
-import { createStyling } from "react-base16-styling";
+import {
+  Base16Theme,
+  createStyling,
+  StylingConfig,
+  StylingValue,
+} from "react-base16-styling";
 
 import { Theme, UserTheme } from "../helpers/theme";
 import { rjvDefault, rjvGrey } from "./base16/rjv-themes";
@@ -52,7 +57,9 @@ const colorMap = (theme: Theme) => ({
   },
 });
 
-const getDefaultThemeStyling = (theme: Theme) => {
+type ThemeStyling = (base16Theme: Base16Theme) => StylingConfig;
+
+const getDefaultThemeStyling: ThemeStyling = (theme: Theme) => {
   const colors = colorMap(theme);
 
   return {
@@ -99,15 +106,17 @@ const getDefaultThemeStyling = (theme: Theme) => {
           paddingBottom: constants.keyValPaddingBottom,
           borderLeft: `${constants.keyValBorderLeft} ${colors.objectBorder}`,
           ":hover": {
-            paddingLeft: `${variableStyle.paddingLeft - 1}px`,
+            paddingLeft: `${
+              (variableStyle as Record<string, number>).paddingLeft - 1
+            }px`,
             borderLeft: `${constants.keyValBorderHover} ${colors.objectBorder}`,
           },
-          ...variableStyle,
+          ...(variableStyle as Record<string, unknown>),
         },
       };
     },
     "object-key-val-no-border": {
-      padding: constants.keyValPadding,
+      padding: constants.keyValPaddingTop,
     },
     "pushed-content": {
       marginLeft: constants.pushedContentMarginLeft,
@@ -118,7 +127,7 @@ const getDefaultThemeStyling = (theme: Theme) => {
           display: "inline-block",
           paddingRight: constants.variableValuePaddingRight,
           position: "relative",
-          ...variableStyle,
+          ...(variableStyle as Record<string, unknown>),
         },
       };
     },
@@ -389,22 +398,24 @@ const getDefaultThemeStyling = (theme: Theme) => {
 
 const getStyle = (theme: UserTheme) => {
   let rjvTheme = rjvDefault;
+
   if (theme === "none") {
     rjvTheme = rjvGrey;
   }
 
-  // TODO: Fix this remove the `as any`
-  return createStyling(getDefaultThemeStyling as any, {
+  return createStyling(getDefaultThemeStyling, {
     defaultBase16: rjvTheme,
   })(theme);
 };
 
-// TODO: Fix this remove `as any`
-export default function style(theme, component, args?): any {
+export default function style(
+  theme: UserTheme,
+  component: string,
+  args?: Record<string, StylingValue | Base16Theme | number>,
+): any {
   if (!theme) {
     console.error("theme has not been set");
   }
-  // TODO: Fix this remove the `@ts-ignore`
-  // @ts-ignore
+
   return getStyle(theme)(component, args);
 }

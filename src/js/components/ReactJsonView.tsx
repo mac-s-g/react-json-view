@@ -1,5 +1,6 @@
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 
+import attributeStore from "../stores/ObjectAttributes";
 // global theme
 import themeStyle from "../themes/getStyle";
 import JsonViewer from "./JsonViewer";
@@ -42,6 +43,66 @@ const ReactJsonView = ({
 
   const rjvId = useId();
 
+  useEffect(() => {
+    attributeStore.set(rjvId, "global", "src", value);
+    attributeStore.on(`add-key-request-${rjvId}`, addKeyRequestHandler);
+    const listeners = getListeners();
+    for (const i in listeners) {
+      attributeStore.on(`${i}-${rjvId}`, (listeners as any)[i]);
+    }
+  }, []);
+
+  const getListeners = () => {
+    return {
+      "variable-update": updateSrc,
+      "add-key-request": addKeyRequestHandler,
+    };
+  };
+
+  const addKeyRequestHandler = () => {
+    setAddKeyRequest(true);
+  };
+
+  const updateSrc = () => {
+    const { name, namespace, newValue, existingValue, updatedSrc, type } =
+      attributeStore.get(rjvId, "action", "variable-update");
+
+    let result;
+
+    const onEditPayload = {
+      existingSrc: value,
+      newValue,
+      updatedSrc,
+      name,
+      namespace,
+      existingValue,
+    };
+    switch (type) {
+      case "variable-added":
+        onChange(onEditPayload.updatedSrc);
+        result = onEditPayload;
+        break;
+      case "variable-edited":
+        result = onChange(onEditPayload);
+        break;
+      case "variable-removed":
+        onChange(onEditPayload.updatedSrc);
+        result = onEditPayload;
+        break;
+      default:
+    }
+    if (result !== false) {
+      attributeStore.set(rjvId, "global", "src", updatedSrc);
+    } else {
+      setValidationFailure(true);
+    }
+  };
+
+  const onClose = () => {
+    setAddKeyRequest(false);
+    setValidationFailure(false);
+  };
+
   return (
     <div
       className="react-json-view"
@@ -80,10 +141,7 @@ const ReactJsonView = ({
           active={validationFailure}
         />
         <JsonViewer />
-        <ObjectKeyModal
-          active={addKeyRequest}
-          onClose={() => setAddKeyRequest(false)}
-        />
+        <ObjectKeyModal active={addKeyRequest} onClose={onClose} />
       </ReactJsonViewContext.Provider>
     </div>
   );

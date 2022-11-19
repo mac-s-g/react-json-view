@@ -1,6 +1,6 @@
 import { createContext, StyleHTMLAttributes } from "react";
 
-import { Theme } from "../helpers/theme";
+import { UserTheme } from "../helpers/theme";
 
 export type Json =
   | number
@@ -12,11 +12,11 @@ export type Json =
 
 export type ReactJsonViewProps = {
   value: Json & object;
-  onChange: (v: Json & object) => void;
+  onChange: (v: Json & object) => void | boolean;
   rootNodeName: string | null;
-  theme: Theme;
+  theme: UserTheme;
   style: StyleHTMLAttributes<"div">;
-  newKeyDefaultValue?: Json;
+  newKeyDefaultValue?: string | null;
   validationMessage: string;
   collapseStringsAfterLength: number;
   sortKeys: boolean;

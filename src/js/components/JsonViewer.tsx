@@ -7,6 +7,7 @@ import LocalJsonViewContext from "./LocalJsonViewContext";
 import ReactJsonViewContext from "./ReactJsonViewContext";
 
 type JsonViewerProps = object;
+
 const JsonViewer = (p: JsonViewerProps) => {
   const { props: rjvProps } = useContext(ReactJsonViewContext);
   const ObjectComponent = useMemo(() => {

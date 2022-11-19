@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
+import attributeStore from "../../stores/ObjectAttributes";
 import Theme from "../../themes/getStyle";
 import { Add as Cancel, CheckCircle } from "../icons";
 import ReactJsonViewContext from "../ReactJsonViewContext";
@@ -15,16 +16,41 @@ const ObjectKeyModal = ({
   active: boolean;
 }) => {
   const {
-    props: { theme, newKeyDefaultValue },
+    props: { theme, newKeyDefaultValue, onChange },
+    rjvId,
   } = useContext(ReactJsonViewContext);
 
-  const [input, setInput] = useState(newKeyDefaultValue);
+  const [input, setInput] = useState("");
+  const [valid, setValid] = useState(false);
 
-  // TODO: Figure out what the invalid state is supposed to mean
-  const valid = true;
+  const isValid = (input: any) => {
+    const request = attributeStore.get(rjvId, "action", "new-key-request");
+    return (
+      input !== "" && Object.keys(request.existingValue).indexOf(input) === -1
+    );
+  };
+
+  useEffect(() => {
+    setValid(isValid(input));
+  }, [input]);
 
   const handleSubmit = () => {
-    // TODO: Write logic to actually submit
+    const request = attributeStore.get(
+      rjvId,
+      "action",
+      "new-key-request",
+      newKeyDefaultValue,
+    );
+    request.newValue = { ...request.existingValue };
+    request.newValue[input] = newKeyDefaultValue;
+
+    attributeStore.handleAction({
+      name: "VARIABLE_ADDED",
+      rjvId,
+      data: request,
+    });
+    setInput("");
+    onClose();
   };
 
   return active ? (
@@ -52,6 +78,7 @@ const ObjectKeyModal = ({
               if (valid && e.key === "Enter") {
                 handleSubmit();
               } else if (e.key === "Escape") {
+                setInput("");
                 onClose();
               }
             }}
@@ -69,6 +96,7 @@ const ObjectKeyModal = ({
             {...Theme(theme, "key-modal-cancel-icon")}
             className="key-modal-cancel"
             onClick={() => {
+              setInput("");
               onClose();
             }}
           />

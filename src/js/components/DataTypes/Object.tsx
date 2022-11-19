@@ -21,7 +21,9 @@ const Ellipsis = ({
   size: number;
   onToggleCollapsed: () => void;
 }) => {
-  const { props: theme } = useContext(ReactJsonViewContext);
+  const {
+    props: { theme },
+  } = useContext(ReactJsonViewContext);
   if (size === 0) {
     // don't render an ellipsis when an object has no items
     return <></>;

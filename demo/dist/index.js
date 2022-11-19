@@ -28241,7 +28241,8 @@
         display: "inline-block",
         cursor: "pointer",
         border: "none",
-        backgroundColor: "transparent"
+        backgroundColor: "transparent",
+        padding: "0"
       },
       brace: {
         display: "inline-block",
@@ -28774,7 +28775,7 @@
       children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", {
         style: {
           ...getIconStyle(style2).style,
-          paddingLeft: "2px",
+          paddingRight: "2px",
           verticalAlign: "top"
         },
         viewBox: "0 0 15 15",

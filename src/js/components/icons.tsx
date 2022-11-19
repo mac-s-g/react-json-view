@@ -109,7 +109,7 @@ export const ArrowDown = (props: IconProps) => {
       <svg
         style={{
           ...getIconStyle(style).style,
-          paddingLeft: "2px",
+          paddingRight: "2px",
           verticalAlign: "top",
         }}
         viewBox="0 0 15 15"

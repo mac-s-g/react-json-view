@@ -83,6 +83,7 @@ const getDefaultThemeStyling: ThemeStyling = (theme: Theme) => {
       cursor: "pointer",
       border: "none",
       backgroundColor: "transparent",
+      padding: "0",
     },
     brace: {
       display: "inline-block",

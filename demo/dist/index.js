@@ -29040,7 +29040,7 @@
               rjvId,
               data: {
                 ...request,
-                newValue: value && value.length && [...value, null]
+                newValue: [...value, null]
               }
             });
           }

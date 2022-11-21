@@ -5,9 +5,9 @@ const DEFAULT_WIDTH = 24;
 const DEFAULT_HEIGHT = 24;
 const DEFAULT_COLOR = "#000000";
 
-type IconProps = {
+interface IconProps {
   style: HTMLProps<"svg">["style"];
-};
+}
 
 export const CircleMinus = (props: IconProps) => {
   const { style, ...rest } = props;
@@ -216,7 +216,11 @@ export const Edit = (props: IconProps) => {
   );
 };
 
-export const CheckCircle = (props: IconProps) => {
+interface CheckCircleProps extends IconProps {
+  onClick?: (e?: any) => void;
+}
+
+export const CheckCircle = (props: CheckCircleProps) => {
   const { style, ...rest } = props;
 
   return (

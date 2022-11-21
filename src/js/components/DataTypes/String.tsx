@@ -16,7 +16,14 @@ const StringDataType = () => {
     props: { collapseStringsAfterLength, theme },
   } = useContext(ReactJsonViewContext);
   const { value } = useContext(LocalJsonViewContext);
-  const style = { style: { cursor: "default" } };
+  const style = {
+    style: {
+      cursor: "default",
+      border: "none",
+      backgroundColor: "transparent",
+      ...Theme(theme, "string").style,
+    },
+  };
 
   const collapsable = (value as string).length > collapseStringsAfterLength;
 

@@ -6,7 +6,7 @@ import {
 } from "react-base16-styling";
 
 import { Theme, UserTheme } from "../helpers/theme";
-import { rjvDefault, rjvGrey } from "./base16/rjv-themes";
+import { apathy, rjvDefault, rjvGrey } from "./base16/rjv-themes";
 import constants from "./styleConstants";
 
 const colorMap = (theme: Theme) => ({
@@ -26,7 +26,7 @@ const colorMap = (theme: Theme) => ({
     date: theme.base0D,
     float: theme.base0B,
     function: theme.base0D,
-    integer: theme.base0F,
+    number: theme.base0F,
     string: theme.base09,
     nan: theme.base08,
     null: theme.base0A,
@@ -194,9 +194,9 @@ const getDefaultThemeStyling: ThemeStyling = (theme: Theme) => {
     "function-value": {
       fontStyle: "italic",
     },
-    integer: {
+    number: {
       display: "inline-block",
-      color: colors.dataTypes.integer,
+      color: colors.dataTypes.number,
     },
     string: {
       display: "inline-block",
@@ -408,6 +408,8 @@ const getStyle = (theme: UserTheme) => {
 
   if (theme === "none") {
     rjvTheme = rjvGrey;
+  } else if (theme === "apathy") {
+    rjvTheme = apathy;
   }
 
   return createStyling(getDefaultThemeStyling, {

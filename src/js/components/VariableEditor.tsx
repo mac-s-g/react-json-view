@@ -14,7 +14,7 @@ import { JsonBoolean, JsonNull, JsonNumber, JsonString } from "./DataTypes";
 // clibboard icon
 import { CheckCircle, Edit, RemoveCircle as Remove } from "./icons";
 import LocalJsonViewContext from "./LocalJsonViewContext";
-import ReactJsonViewContext, { Json } from "./ReactJsonViewContext";
+import ReactJsonViewContext, { Json, TypeName } from "./ReactJsonViewContext";
 
 type EditState = { editMode: false } | { editMode: true; editValue: string };
 
@@ -121,6 +121,7 @@ const EditInput = ({
 }) => {
   const {
     props: { theme },
+    rjvId,
   } = useContext(ReactJsonViewContext);
   const { namespace } = useContext(LocalJsonViewContext);
 
@@ -178,134 +179,134 @@ const EditInput = ({
           }}
         />
         <div>
-          {/* TODO: Show Detected */}
-          {/* <ShowDetected
-            namespace={namespace}
-            parsedInput={parsedInput}
-            rjvId={rjvId}
-            theme={theme}
-            variable={variable}
-            submitEdit={submitEdit}
-          /> */}
+          <ShowDetected edit={edit} submitEdit={submitEdit} />
         </div>
       </div>
     </div>
   );
 };
 
-// const ShowDetected = ({ parsedInput, submitEdit }) => {
-//   const {
-//     props: { theme },
-//   } = useContext(ReactJsonViewContext);
-//   const { type, value } = parsedInput;
-//   const detected = <DetectedInput parsedInput={parsedInput} theme={theme} />;
-//   if (detected) {
-//     return (
-//       <div>
-//         <div {...Theme(theme, "detected-row")}>
-//           {detected}
-//           <CheckCircle
-//             className="edit-check detected"
-//             style={{
-//               verticalAlign: "top",
-//               paddingLeft: "3px",
-//               ...Theme(theme, "check-icon").style,
-//             }}
-//             onClick={() => {
-//               submitEdit(true);
-//             }}
-//           />
-//         </div>
-//       </div>
-//     );
-//   }
-//   return <></>;
-// };
+const ShowDetected = ({
+  submitEdit,
+  edit,
+}: {
+  edit: EditState;
+  submitEdit: (eubmitDetected?: boolean) => void;
+}) => {
+  const {
+    props: { theme },
+  } = useContext(ReactJsonViewContext);
 
-// const DetectedInput = ({ parsedInput }) => {
-//   const {
-//     props: { theme },
-//   } = useContext(ReactJsonViewContext);
+  const parsedInput: { type: TypeName | boolean; value: Json } = edit.editMode
+    ? parseInput(edit.editValue)
+    : { type: false, value: null };
 
-//   const { type, value } = parsedInput;
+  const detected = <DetectedInput parsedInput={parsedInput} />;
+  if (detected) {
+    return (
+      <div>
+        <div {...Theme(theme, "detected-row")}>
+          {detected}
+          <CheckCircle
+            style={{
+              verticalAlign: "top",
+              paddingLeft: "3px",
+              ...Theme(theme, "check-icon").style,
+            }}
+            onClick={() => submitEdit(true)}
+          />
+        </div>
+      </div>
+    );
+  }
+  return <></>;
+};
 
-//   // TODO: Fix this LOL
-//   const props = {};
+const DetectedInput = ({
+  parsedInput,
+}: {
+  parsedInput: { type: TypeName | boolean; value: Json };
+}) => {
+  const {
+    props: { theme },
+  } = useContext(ReactJsonViewContext);
 
-//   if (type !== false) {
-//     switch (type.toLowerCase()) {
-//       case "object":
-//         return (
-//           <span>
-//             <span
-//               style={{
-//                 ...Theme(theme, "brace").style,
-//                 cursor: "default",
-//               }}
-//             >
-//               {"{"}
-//             </span>
-//             <span
-//               style={{
-//                 ...Theme(theme, "ellipsis").style,
-//                 cursor: "default",
-//               }}
-//             >
-//               ...
-//             </span>
-//             <span
-//               style={{
-//                 ...Theme(theme, "brace").style,
-//                 cursor: "default",
-//               }}
-//             >
-//               {"}"}
-//             </span>
-//           </span>
-//         );
-//       case "array":
-//         return (
-//           <span>
-//             <span
-//               style={{
-//                 ...Theme(theme, "brace").style,
-//                 cursor: "default",
-//               }}
-//             >
-//               [
-//             </span>
-//             <span
-//               style={{
-//                 ...Theme(theme, "ellipsis").style,
-//                 cursor: "default",
-//               }}
-//             >
-//               ...
-//             </span>
-//             <span
-//               style={{
-//                 ...Theme(theme, "brace").style,
-//                 cursor: "default",
-//               }}
-//             >
-//               ]
-//             </span>
-//           </span>
-//         );
-//       case "string":
-//         return <JsonString />;
-//       case "number":
-//         return <JsonNumber />;
-//       case "boolean":
-//         return <JsonBoolean />;
-//       case "null":
-//         return <JsonNull {...props} />;
-//       default:
-//         throw new Error("Invalid Type");
-//     }
-//   }
-//   return <></>;
-// };
+  const { type } = parsedInput;
+
+  if (type !== false) {
+    switch ((type as string).toLowerCase()) {
+      case "object":
+        return (
+          <span>
+            <span
+              style={{
+                ...Theme(theme, "brace").style,
+                cursor: "default",
+              }}
+            >
+              {"{"}
+            </span>
+            <span
+              style={{
+                ...Theme(theme, "ellipsis").style,
+                cursor: "default",
+              }}
+            >
+              ...
+            </span>
+            <span
+              style={{
+                ...Theme(theme, "brace").style,
+                cursor: "default",
+              }}
+            >
+              {"}"}
+            </span>
+          </span>
+        );
+      case "array":
+        return (
+          <span>
+            <span
+              style={{
+                ...Theme(theme, "brace").style,
+                cursor: "default",
+              }}
+            >
+              [
+            </span>
+            <span
+              style={{
+                ...Theme(theme, "ellipsis").style,
+                cursor: "default",
+              }}
+            >
+              ...
+            </span>
+            <span
+              style={{
+                ...Theme(theme, "brace").style,
+                cursor: "default",
+              }}
+            >
+              ]
+            </span>
+          </span>
+        );
+      case "string":
+        return <JsonString />;
+      case "number":
+        return <JsonNumber />;
+      case "boolean":
+        return <JsonBoolean />;
+      case "null":
+        return <JsonNull />;
+      default:
+        throw new Error("Invalid Type");
+    }
+  }
+  return <></>;
+};
 
 const VariableEditor = () => {
   const {
@@ -344,9 +345,13 @@ const VariableEditor = () => {
     }
   };
 
-  const submitEdit = () => {
-    const newValue = edit.editMode && edit.editValue;
+  const submitEdit = (submitDetected?: boolean) => {
+    const newValue =
+      edit.editMode &&
+      (submitDetected ? parseInput(edit.editValue).value : edit.editValue);
+
     setEdit({ editMode: false });
+
     const data = {
       name,
       namespace,

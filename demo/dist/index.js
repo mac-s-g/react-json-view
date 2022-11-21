@@ -2348,7 +2348,7 @@
           var HostPortal = 4;
           var HostComponent = 5;
           var HostText = 6;
-          var Fragment7 = 7;
+          var Fragment8 = 7;
           var Mode = 8;
           var ContextConsumer = 9;
           var ContextProvider = 10;
@@ -3425,7 +3425,7 @@
                 return "DehydratedFragment";
               case ForwardRef:
                 return getWrappedName$1(type, type.render, "ForwardRef");
-              case Fragment7:
+              case Fragment8:
                 return "Fragment";
               case HostComponent:
                 return type;
@@ -12790,7 +12790,7 @@
               }
             }
             function updateFragment2(returnFiber, current2, fragment, lanes, key) {
-              if (current2 === null || current2.tag !== Fragment7) {
+              if (current2 === null || current2.tag !== Fragment8) {
                 var created = createFiberFromFragment(fragment, returnFiber.mode, lanes, key);
                 created.return = returnFiber;
                 return created;
@@ -13192,7 +13192,7 @@
                 if (child.key === key) {
                   var elementType = element.type;
                   if (elementType === REACT_FRAGMENT_TYPE) {
-                    if (child.tag === Fragment7) {
+                    if (child.tag === Fragment8) {
                       deleteRemainingChildren(returnFiber, child.sibling);
                       var existing = useFiber(child, element.props.children);
                       existing.return = returnFiber;
@@ -17298,7 +17298,7 @@
                 var _resolvedProps2 = workInProgress2.elementType === type ? _unresolvedProps2 : resolveDefaultProps(type, _unresolvedProps2);
                 return updateForwardRef(current2, workInProgress2, type, _resolvedProps2, renderLanes2);
               }
-              case Fragment7:
+              case Fragment8:
                 return updateFragment(current2, workInProgress2, renderLanes2);
               case Mode:
                 return updateMode(current2, workInProgress2, renderLanes2);
@@ -17570,7 +17570,7 @@
               case SimpleMemoComponent:
               case FunctionComponent:
               case ForwardRef:
-              case Fragment7:
+              case Fragment8:
               case Mode:
               case Profiler:
               case ContextConsumer:
@@ -21784,7 +21784,7 @@
             return fiber;
           }
           function createFiberFromFragment(elements, mode, lanes, key) {
-            var fiber = createFiber(Fragment7, elements, key, mode);
+            var fiber = createFiber(Fragment8, elements, key, mode);
             fiber.lanes = lanes;
             return fiber;
           }
@@ -28097,6 +28097,26 @@
     base0E: "rgba(1, 1, 1, 0.8)",
     base0F: "rgba(1, 1, 1, 0.8)"
   };
+  var apathy = {
+    scheme: "apathy",
+    author: "jannik siebert (https://github.com/janniks)",
+    base00: "#031A16",
+    base01: "#0B342D",
+    base02: "#184E45",
+    base03: "#2B685E",
+    base04: "#5F9C92",
+    base05: "#81B5AC",
+    base06: "#A7CEC8",
+    base07: "#D2E7E4",
+    base08: "#3E9688",
+    base09: "#3E7996",
+    base0A: "#3E4C96",
+    base0B: "#883E96",
+    base0C: "#963E4C",
+    base0D: "#96883E",
+    base0E: "#4C963E",
+    base0F: "#3E965B"
+  };
 
   // src/js/themes/styleConstants.ts
   var styleConstants_default = {
@@ -28189,7 +28209,7 @@
       date: theme.base0D,
       float: theme.base0B,
       function: theme.base0D,
-      integer: theme.base0F,
+      number: theme.base0F,
       string: theme.base09,
       nan: theme.base08,
       null: theme.base0A,
@@ -28351,9 +28371,9 @@
       "function-value": {
         fontStyle: "italic"
       },
-      integer: {
+      number: {
         display: "inline-block",
-        color: colors.dataTypes.integer
+        color: colors.dataTypes.number
       },
       string: {
         display: "inline-block",
@@ -28563,6 +28583,8 @@
     let rjvTheme = rjvDefault;
     if (theme === "none") {
       rjvTheme = rjvGrey;
+    } else if (theme === "apathy") {
+      rjvTheme = apathy;
     }
     return createStyling(getDefaultThemeStyling, {
       defaultBase16: rjvTheme
@@ -29386,7 +29408,14 @@
       props: { collapseStringsAfterLength, theme }
     } = (0, import_react12.useContext)(ReactJsonViewContext_default);
     const { value } = (0, import_react12.useContext)(LocalJsonViewContext_default);
-    const style2 = { style: { cursor: "default" } };
+    const style2 = {
+      style: {
+        cursor: "default",
+        border: "none",
+        backgroundColor: "transparent",
+        ...style(theme, "string").style
+      }
+    };
     const collapsable = value.length > collapseStringsAfterLength;
     if (collapsable) {
       style2.style.cursor = "pointer";
@@ -29681,6 +29710,54 @@
   var index2 = /* @__PURE__ */ (0, import_react15.forwardRef)(TextareaAutosize);
   var react_textarea_autosize_browser_esm_default = index2;
 
+  // src/js/helpers/parseInput.ts
+  function parseInput(originalInput) {
+    let input = originalInput.trim();
+    try {
+      input = JSON.stringify(JSON.parse(input));
+      if (input[0] === "[") {
+        return formatResponse("array", JSON.parse(input));
+      }
+      if (input[0] === "{") {
+        return formatResponse("object", JSON.parse(input));
+      }
+      if (input.match(/-?\d+\.\d+/) && input.match(/-?\d+\.\d+/)[0] === input) {
+        return formatResponse("number", parseFloat(input));
+      }
+      if (input.match(/-?\d+e-\d+/) && input.match(/-?\d+e-\d+/)[0] === input) {
+        return formatResponse("number", Number(input));
+      }
+      if (input.match(/-?\d+/) && input.match(/-?\d+/)[0] === input) {
+        return formatResponse("number", parseInt(input));
+      }
+      if (input.match(/-?\d+e\+\d+/) && input.match(/-?\d+e\+\d+/)[0] === input) {
+        return formatResponse("number", Number(input));
+      }
+    } catch (e) {
+    }
+    input = input.toLowerCase();
+    switch (input) {
+      case "null": {
+        return formatResponse("null", null);
+      }
+      case "true": {
+        return formatResponse("boolean", true);
+      }
+      case "false": {
+        return formatResponse("boolean", false);
+      }
+      default: {
+        return formatResponse("string", originalInput);
+      }
+    }
+  }
+  function formatResponse(type, value) {
+    return {
+      type,
+      value
+    };
+  }
+
   // src/js/helpers/stringifyVariable.ts
   var stringifyVariable_default = (value) => {
     if (value === null)
@@ -29768,7 +29845,8 @@
     submitEdit
   }) => {
     const {
-      props: { theme }
+      props: { theme },
+      rjvId
     } = (0, import_react16.useContext)(ReactJsonViewContext_default);
     const { namespace } = (0, import_react16.useContext)(LocalJsonViewContext_default);
     return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", {
@@ -29825,11 +29903,122 @@
                 submitEdit();
               }
             }),
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", {})
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", {
+              children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(ShowDetected, {
+                edit,
+                submitEdit
+              })
+            })
           ]
         })
       ]
     });
+  };
+  var ShowDetected = ({
+    submitEdit,
+    edit
+  }) => {
+    const {
+      props: { theme }
+    } = (0, import_react16.useContext)(ReactJsonViewContext_default);
+    const parsedInput = edit.editMode ? parseInput(edit.editValue) : { type: false, value: null };
+    const detected = /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(DetectedInput, {
+      parsedInput
+    });
+    if (detected) {
+      return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", {
+        children: /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", {
+          ...style(theme, "detected-row"),
+          children: [
+            detected,
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(CheckCircle, {
+              style: {
+                verticalAlign: "top",
+                paddingLeft: "3px",
+                ...style(theme, "check-icon").style
+              },
+              onClick: () => submitEdit(true)
+            })
+          ]
+        })
+      });
+    }
+    return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_jsx_runtime12.Fragment, {});
+  };
+  var DetectedInput = ({
+    parsedInput
+  }) => {
+    const {
+      props: { theme }
+    } = (0, import_react16.useContext)(ReactJsonViewContext_default);
+    const { type } = parsedInput;
+    if (type !== false) {
+      switch (type.toLowerCase()) {
+        case "object":
+          return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("span", {
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", {
+                style: {
+                  ...style(theme, "brace").style,
+                  cursor: "default"
+                },
+                children: "{"
+              }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", {
+                style: {
+                  ...style(theme, "ellipsis").style,
+                  cursor: "default"
+                },
+                children: "..."
+              }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", {
+                style: {
+                  ...style(theme, "brace").style,
+                  cursor: "default"
+                },
+                children: "}"
+              })
+            ]
+          });
+        case "array":
+          return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("span", {
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", {
+                style: {
+                  ...style(theme, "brace").style,
+                  cursor: "default"
+                },
+                children: "["
+              }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", {
+                style: {
+                  ...style(theme, "ellipsis").style,
+                  cursor: "default"
+                },
+                children: "..."
+              }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", {
+                style: {
+                  ...style(theme, "brace").style,
+                  cursor: "default"
+                },
+                children: "]"
+              })
+            ]
+          });
+        case "string":
+          return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(String_default, {});
+        case "number":
+          return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Number_default, {});
+        case "boolean":
+          return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Boolean_default, {});
+        case "null":
+          return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Null_default, {});
+        default:
+          throw new Error("Invalid Type");
+      }
+    }
+    return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_jsx_runtime12.Fragment, {});
   };
   var VariableEditor = () => {
     const {
@@ -29862,8 +30051,8 @@
         });
       }
     };
-    const submitEdit = () => {
-      const newValue = edit.editMode && edit.editValue;
+    const submitEdit = (submitDetected) => {
+      const newValue = edit.editMode && (submitDetected ? parseInput(edit.editValue).value : edit.editValue);
       setEdit({ editMode: false });
       const data = {
         name,
@@ -30219,12 +30408,17 @@
     active
   }) => {
     const {
-      props: { theme }
+      props: { theme },
+      rjvId
     } = (0, import_react22.useContext)(ReactJsonViewContext_default);
     return active ? /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", {
       className: "validation-failure",
       ...style(theme, "validation-failure"),
       onClick: () => {
+        ObjectAttributes_default.handleAction({
+          rjvId,
+          name: "RESET"
+        });
       },
       children: [
         /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", {
@@ -30251,7 +30445,7 @@
     shouldCollapse = () => false,
     theme = "rjvDefault",
     validationMessage = "Validation Error",
-    collapseStringsAfterLength = Infinity,
+    collapseStringsAfterLength = 4,
     sortKeys = false,
     quotesOnKeys = false,
     groupArraysAfterLength = 100,
@@ -30279,6 +30473,7 @@
     }, []);
     const getListeners = () => {
       return {
+        reset: onClose,
         "variable-update": updateSrc,
         "add-key-request": addKeyRequestHandler
       };
@@ -30288,7 +30483,7 @@
     };
     const updateSrc = () => {
       const { name, namespace, newValue, existingValue, updatedSrc, type } = ObjectAttributes_default.get(rjvId, "action", "variable-update");
-      let result;
+      let result = false;
       const onEditPayload = {
         existingSrc: value,
         newValue,
@@ -30303,7 +30498,8 @@
           result = onEditPayload;
           break;
         case "variable-edited":
-          result = onChange(onEditPayload);
+          onChange(onEditPayload.updatedSrc);
+          result = onEditPayload;
           break;
         case "variable-removed":
           onChange(onEditPayload.updatedSrc);
@@ -30374,17 +30570,24 @@
   var import_jsx_runtime19 = __toESM(require_jsx_runtime(), 1);
   var Demo = () => {
     const [value, setValue] = (0, import_react24.useState)({
-      a: 4,
-      b: 5,
-      c: {
-        nestedA: 4,
-        nestedB: 8
-      }
+      stringV: "this is a test string",
+      integer: 42,
+      empty_array: [],
+      empty_object: {},
+      array: [1, 2, 3, "test"],
+      float: -2.757,
+      parent: {
+        sibling1: true,
+        sibling2: false,
+        sibling3: null
+      },
+      string_number: "1234"
     });
     return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(js_default, {
       value,
       onChange: setValue,
       rootNodeName: "root",
+      theme: "apathy",
       canEdit: true,
       canDelete: true,
       canAdd: true

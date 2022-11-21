@@ -3,6 +3,7 @@
 
 import { useContext } from "react";
 
+import attributeStore from "../stores/ObjectAttributes";
 import Theme from "../themes/getStyle";
 import { Add as Clear } from "./icons";
 import ReactJsonViewContext from "./ReactJsonViewContext";
@@ -17,13 +18,17 @@ const ValidationFailure = ({
 }) => {
   const {
     props: { theme },
+    rjvId,
   } = useContext(ReactJsonViewContext);
   return active ? (
     <div
       className="validation-failure"
       {...Theme(theme, "validation-failure")}
       onClick={() => {
-        // TODO: Add logic to reset
+        attributeStore.handleAction({
+          rjvId,
+          name: "RESET",
+        });
       }}
     >
       <span {...Theme(theme, "validation-failure-label")}>{message}</span>

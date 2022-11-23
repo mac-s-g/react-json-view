@@ -6,7 +6,7 @@ import LocalJsonViewContext from "../LocalJsonViewContext";
 import ReactJsonViewContext from "../ReactJsonViewContext";
 import DataTypeLabel from "./DataTypeLabel";
 
-const StringDataType = () => {
+const StringDataType = ({ dataValue }: { dataValue?: string }) => {
   const typeName = "string";
   const [collapsed, setCollapsed] = useState(true);
   const toggleCollapsed = () => {
@@ -25,7 +25,9 @@ const StringDataType = () => {
     },
   };
 
-  const collapsable = (value as string).length > collapseStringsAfterLength;
+  const collapsable = value
+    ? (value as string).length > collapseStringsAfterLength
+    : false;
 
   if (collapsable) {
     style.style.cursor = "pointer";
@@ -48,7 +50,7 @@ const StringDataType = () => {
               <span {...Theme(theme, "ellipsis")}> ...</span>
             </span>
           ) : (
-            value
+            dataValue ?? value
           )}
           {DISPLAY_BRACES.doubleQuotes.end}
         </>

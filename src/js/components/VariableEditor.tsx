@@ -231,7 +231,7 @@ const DetectedInput = ({
     props: { theme },
   } = useContext(ReactJsonViewContext);
 
-  const { type } = parsedInput;
+  const { type, value } = parsedInput;
 
   if (type !== false) {
     switch ((type as string).toLowerCase()) {
@@ -294,9 +294,9 @@ const DetectedInput = ({
           </span>
         );
       case "string":
-        return <JsonString />;
+        return <JsonString dataValue={value as string} />;
       case "number":
-        return <JsonNumber />;
+        return <JsonNumber dataValue={value as number} />;
       case "boolean":
         return <JsonBoolean />;
       case "null":

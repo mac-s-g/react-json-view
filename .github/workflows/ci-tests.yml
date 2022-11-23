@@ -19,6 +19,12 @@ jobs:
         with:
           path: node_modules
           key: dependencies
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7.8.0
+          
       - run: pnpm install
       - run: pnpm build:once
       - run: pnpm lint:check

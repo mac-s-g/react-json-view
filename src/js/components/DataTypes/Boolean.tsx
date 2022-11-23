@@ -5,7 +5,7 @@ import LocalJsonViewContext from "../LocalJsonViewContext";
 import ReactJsonViewContext from "../ReactJsonViewContext";
 import DataTypeLabel from "./DataTypeLabel";
 
-const BooleanRenderer = () => {
+const BooleanRenderer = ({ dataValue }: { dataValue?: string }) => {
   const {
     props: { theme },
   } = useContext(ReactJsonViewContext);
@@ -14,7 +14,7 @@ const BooleanRenderer = () => {
   return (
     <div {...Theme(theme, "boolean")}>
       <DataTypeLabel typeName="boolean" />
-      {value ? "true" : "false"}
+      {dataValue ?? value ? "true" : "false"}
     </div>
   );
 };

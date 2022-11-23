@@ -28639,7 +28639,7 @@
 
   // src/js/components/DataTypes/Boolean.tsx
   var import_jsx_runtime2 = __toESM(require_jsx_runtime(), 1);
-  var BooleanRenderer = () => {
+  var BooleanRenderer = ({ dataValue }) => {
     const {
       props: { theme }
     } = (0, import_react4.useContext)(ReactJsonViewContext_default);
@@ -28650,7 +28650,7 @@
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(DataTypeLabel_default, {
           typeName: "boolean"
         }),
-        value ? "true" : "false"
+        dataValue ?? value ? "true" : "false"
       ]
     });
   };
@@ -28659,13 +28659,13 @@
   // src/js/components/DataTypes/Null.tsx
   var import_react5 = __toESM(require_react(), 1);
   var import_jsx_runtime3 = __toESM(require_jsx_runtime(), 1);
-  var NullDataType = () => {
+  var NullDataType = ({ dataValue }) => {
     const {
       props: { theme }
     } = (0, import_react5.useContext)(ReactJsonViewContext_default);
     return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", {
       ...style(theme, "null"),
-      children: "NULL"
+      children: dataValue ?? "NULL"
     });
   };
   var Null_default = NullDataType;
@@ -28673,7 +28673,7 @@
   // src/js/components/DataTypes/Number.tsx
   var import_react6 = __toESM(require_react(), 1);
   var import_jsx_runtime4 = __toESM(require_jsx_runtime(), 1);
-  var NumberDataType = () => {
+  var NumberDataType = ({ dataValue }) => {
     const {
       props: { theme }
     } = (0, import_react6.useContext)(ReactJsonViewContext_default);
@@ -28684,7 +28684,7 @@
         /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(DataTypeLabel_default, {
           typeName: "number"
         }),
-        value
+        dataValue ?? value
       ]
     });
   };
@@ -29398,7 +29398,7 @@
   // src/js/components/DataTypes/String.tsx
   var import_react12 = __toESM(require_react(), 1);
   var import_jsx_runtime11 = __toESM(require_jsx_runtime(), 1);
-  var StringDataType = () => {
+  var StringDataType = ({ dataValue }) => {
     const typeName = "string";
     const [collapsed, setCollapsed] = (0, import_react12.useState)(true);
     const toggleCollapsed = () => {
@@ -29416,7 +29416,7 @@
         ...style(theme, "string").style
       }
     };
-    const collapsable = value.length > collapseStringsAfterLength;
+    const collapsable = value ? value.length > collapseStringsAfterLength : false;
     if (collapsable) {
       style2.style.cursor = "pointer";
     }
@@ -29442,7 +29442,7 @@
                     children: " ..."
                   })
                 ]
-              }) : value,
+              }) : dataValue ?? value,
               DISPLAY_BRACES.doubleQuotes.end
             ]
           })
@@ -29951,7 +29951,7 @@
     const {
       props: { theme }
     } = (0, import_react16.useContext)(ReactJsonViewContext_default);
-    const { type } = parsedInput;
+    const { type, value } = parsedInput;
     if (type !== false) {
       switch (type.toLowerCase()) {
         case "object":
@@ -30007,9 +30007,13 @@
             ]
           });
         case "string":
-          return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(String_default, {});
+          return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(String_default, {
+            dataValue: value
+          });
         case "number":
-          return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Number_default, {});
+          return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Number_default, {
+            dataValue: value
+          });
         case "boolean":
           return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Boolean_default, {});
         case "null":

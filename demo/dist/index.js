@@ -28097,25 +28097,25 @@
     base0E: "rgba(1, 1, 1, 0.8)",
     base0F: "rgba(1, 1, 1, 0.8)"
   };
-  var apathy = {
-    scheme: "apathy",
-    author: "jannik siebert (https://github.com/janniks)",
-    base00: "#031A16",
-    base01: "#0B342D",
-    base02: "#184E45",
-    base03: "#2B685E",
-    base04: "#5F9C92",
-    base05: "#81B5AC",
-    base06: "#A7CEC8",
-    base07: "#D2E7E4",
-    base08: "#3E9688",
-    base09: "#3E7996",
-    base0A: "#3E4C96",
-    base0B: "#883E96",
-    base0C: "#963E4C",
-    base0D: "#96883E",
-    base0E: "#4C963E",
-    base0F: "#3E965B"
+  var monokai = {
+    scheme: "monokai",
+    author: "wimer hazenberg (http://www.monokai.nl)",
+    base00: "#272822",
+    base01: "#383830",
+    base02: "#49483e",
+    base03: "#75715e",
+    base04: "#a59f85",
+    base05: "#f8f8f2",
+    base06: "#f5f4f1",
+    base07: "#f9f8f5",
+    base08: "#f92672",
+    base09: "#fd971f",
+    base0A: "#f4bf75",
+    base0B: "#a6e22e",
+    base0C: "#a1efe4",
+    base0D: "#66d9ef",
+    base0E: "#ae81ff",
+    base0F: "#cc6633"
   };
 
   // src/js/themes/styleConstants.ts
@@ -28139,8 +28139,8 @@
     keyVerticalAlign: "top",
     keyOpacity: "0.85",
     keyOpacityHover: "1",
-    keyValPaddingTop: "3px",
-    keyValPaddingBottom: "3px",
+    keyValPaddingTop: "5px",
+    keyValPaddingBottom: "5px",
     keyValPaddingRight: "5px",
     keyValBorderLeft: "1px solid",
     keyValBorderHover: "2px solid",
@@ -28583,8 +28583,8 @@
     let rjvTheme = rjvDefault;
     if (theme === "none") {
       rjvTheme = rjvGrey;
-    } else if (theme === "apathy") {
-      rjvTheme = apathy;
+    } else if (theme === "monokai") {
+      rjvTheme = monokai;
     }
     return createStyling(getDefaultThemeStyling, {
       defaultBase16: rjvTheme
@@ -29251,6 +29251,7 @@
     const braceString = DISPLAY_BRACES[objectType].start;
     if (parentIsArrayGroup) {
       return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("span", {
+        style: { minHeight: "18px", display: "inline-block" },
         children: [
           /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", {
             ...style(theme, "brace"),
@@ -29264,6 +29265,7 @@
     }
     const IconComponent = collapsed ? CollapsedIcon : ExpandedIcon;
     return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("span", {
+      style: { minHeight: "18px", display: "inline-block" },
       children: [
         /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("button", {
           type: "button",
@@ -30090,7 +30092,8 @@
     };
     return /* @__PURE__ */ (0, import_react17.createElement)("div", {
       ...style(theme, "objectKeyVal", {
-        paddingLeft: indentWidth * SINGLE_INDENT
+        paddingLeft: indentWidth * SINGLE_INDENT,
+        minHeight: "18px"
       }),
       onMouseEnter: () => setHovered(true),
       onMouseLeave: () => setHovered(false),
@@ -30591,7 +30594,7 @@
       value,
       onChange: setValue,
       rootNodeName: "root",
-      theme: "apathy",
+      theme: "monokai",
       canEdit: true,
       canDelete: true,
       canAdd: true

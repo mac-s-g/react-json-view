@@ -26,7 +26,7 @@ const Demo = () => {
       value={value}
       onChange={setValue}
       rootNodeName="root"
-      theme="apathy"
+      theme="monokai"
       canEdit
       canDelete
       canAdd

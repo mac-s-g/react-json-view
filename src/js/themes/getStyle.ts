@@ -6,7 +6,7 @@ import {
 } from "react-base16-styling";
 
 import { Theme, UserTheme } from "../helpers/theme";
-import { apathy, rjvDefault, rjvGrey } from "./base16/rjv-themes";
+import { monokai, rjvDefault, rjvGrey } from "./base16/rjv-themes";
 import constants from "./styleConstants";
 
 const colorMap = (theme: Theme) => ({
@@ -408,8 +408,8 @@ const getStyle = (theme: UserTheme) => {
 
   if (theme === "none") {
     rjvTheme = rjvGrey;
-  } else if (theme === "apathy") {
-    rjvTheme = apathy;
+  } else if (theme === "monokai") {
+    rjvTheme = monokai;
   }
 
   return createStyling(getDefaultThemeStyling, {

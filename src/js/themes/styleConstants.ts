@@ -24,8 +24,8 @@ export default {
   keyOpacity: "0.85",
   keyOpacityHover: "1",
 
-  keyValPaddingTop: "3px",
-  keyValPaddingBottom: "3px",
+  keyValPaddingTop: "5px",
+  keyValPaddingBottom: "5px",
   keyValPaddingRight: "5px",
   keyValBorderLeft: "1px solid",
   keyValBorderHover: "2px solid",

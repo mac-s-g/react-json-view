@@ -63,7 +63,7 @@ const StartBrace = ({
 
   if (parentIsArrayGroup) {
     return (
-      <span>
+      <span style={{ minHeight: "18px", display: "inline-block" }}>
         <span {...Theme(theme, "brace")}>{braceString}</span>
         {collapsed ? <></> : <ObjectMeta rowHovered={hovered} />}
       </span>
@@ -73,7 +73,7 @@ const StartBrace = ({
   const IconComponent = collapsed ? CollapsedIcon : ExpandedIcon;
 
   return (
-    <span>
+    <span style={{ minHeight: "18px", display: "inline-block" }}>
       <button
         type="button"
         onClick={(e) => {

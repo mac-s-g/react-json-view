@@ -78,6 +78,7 @@ const AddAttribute = ({ rowHovered }: { rowHovered: boolean }) => {
             variableRemoved: false,
             keyName: null,
           };
+
           if (toType(value) === "object") {
             attributeStore.handleAction({
               name: "ADD_VARIABLE_KEY_REQUEST",
@@ -90,8 +91,7 @@ const AddAttribute = ({ rowHovered }: { rowHovered: boolean }) => {
               rjvId,
               data: {
                 ...request,
-                newValue: value &&
-                  (value as Json[]).length && [...(value as Json[]), null],
+                newValue: [...(value as Json[]), null],
               },
             });
           }

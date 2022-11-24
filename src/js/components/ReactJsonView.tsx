@@ -20,9 +20,9 @@ const ReactJsonView = ({
   style = {},
   newKeyDefaultValue = null,
   shouldCollapse = () => false,
-  theme = "none",
+  theme = "rjvDefault",
   validationMessage = "Validation Error",
-  collapseStringsAfterLength = Infinity,
+  collapseStringsAfterLength = 4,
   sortKeys = false,
   quotesOnKeys = false,
   groupArraysAfterLength = 100,
@@ -54,6 +54,7 @@ const ReactJsonView = ({
 
   const getListeners = () => {
     return {
+      reset: onClose,
       "variable-update": updateSrc,
       "add-key-request": addKeyRequestHandler,
     };
@@ -67,7 +68,7 @@ const ReactJsonView = ({
     const { name, namespace, newValue, existingValue, updatedSrc, type } =
       attributeStore.get(rjvId, "action", "variable-update");
 
-    let result;
+    let result: boolean | object = false;
 
     const onEditPayload = {
       existingSrc: value,
@@ -83,7 +84,8 @@ const ReactJsonView = ({
         result = onEditPayload;
         break;
       case "variable-edited":
-        result = onChange(onEditPayload);
+        onChange(onEditPayload.updatedSrc);
+        result = onEditPayload;
         break;
       case "variable-removed":
         onChange(onEditPayload.updatedSrc);

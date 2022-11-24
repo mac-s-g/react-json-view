@@ -6,7 +6,7 @@ import {
 } from "react-base16-styling";
 
 import { Theme, UserTheme } from "../helpers/theme";
-import { rjvDefault, rjvGrey } from "./base16/rjv-themes";
+import { monokai, rjvDefault, rjvGrey } from "./base16/rjv-themes";
 import constants from "./styleConstants";
 
 const colorMap = (theme: Theme) => ({
@@ -26,7 +26,7 @@ const colorMap = (theme: Theme) => ({
     date: theme.base0D,
     float: theme.base0B,
     function: theme.base0D,
-    integer: theme.base0F,
+    number: theme.base0F,
     string: theme.base09,
     nan: theme.base08,
     null: theme.base0A,
@@ -75,10 +75,15 @@ const getDefaultThemeStyling: ThemeStyling = (theme: Theme) => {
       fontSize: constants.ellipsisFontSize,
       lineHeight: constants.ellipsisLineHeight,
       cursor: constants.ellipsisCursor,
+      border: "none",
+      backgroundColor: "transparent",
     },
     "brace-row": {
       display: "inline-block",
       cursor: "pointer",
+      border: "none",
+      backgroundColor: "transparent",
+      padding: "0",
     },
     brace: {
       display: "inline-block",
@@ -189,9 +194,9 @@ const getDefaultThemeStyling: ThemeStyling = (theme: Theme) => {
     "function-value": {
       fontStyle: "italic",
     },
-    integer: {
+    number: {
       display: "inline-block",
-      color: colors.dataTypes.integer,
+      color: colors.dataTypes.number,
     },
     string: {
       display: "inline-block",
@@ -229,6 +234,8 @@ const getDefaultThemeStyling: ThemeStyling = (theme: Theme) => {
     },
     "copy-to-clipboard": {
       cursor: constants.clipboardCursor,
+      border: "none",
+      backgroundColor: "transparent",
     },
     "copy-icon": {
       color: colors.copyToClipboard,
@@ -247,10 +254,12 @@ const getDefaultThemeStyling: ThemeStyling = (theme: Theme) => {
     "object-meta-data": {
       display: "inline-block",
       padding: constants.metaDataPadding,
+      height: "18px",
     },
     "icon-container": {
       display: "inline-block",
       width: constants.iconContainerWidth,
+      height: constants.iconContainerheight,
     },
     tooltip: {
       padding: constants.tooltipPadding,
@@ -401,6 +410,8 @@ const getStyle = (theme: UserTheme) => {
 
   if (theme === "none") {
     rjvTheme = rjvGrey;
+  } else if (theme === "monokai") {
+    rjvTheme = monokai;
   }
 
   return createStyling(getDefaultThemeStyling, {

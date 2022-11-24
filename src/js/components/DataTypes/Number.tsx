@@ -5,7 +5,7 @@ import LocalJsonViewContext from "../LocalJsonViewContext";
 import ReactJsonViewContext from "../ReactJsonViewContext";
 import DataTypeLabel from "./DataTypeLabel";
 
-const NumberDataType = () => {
+const NumberDataType = ({ dataValue }: { dataValue?: number }) => {
   const {
     props: { theme },
   } = useContext(ReactJsonViewContext);
@@ -14,7 +14,7 @@ const NumberDataType = () => {
   return (
     <div {...Theme(theme, "number")}>
       <DataTypeLabel typeName="number" />
-      {value}
+      {dataValue ?? value}
     </div>
   );
 };

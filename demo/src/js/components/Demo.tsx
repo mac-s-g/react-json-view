@@ -20,11 +20,13 @@ const Demo = () => {
     },
     string_number: "1234",
   });
+
   return (
     <ReactJson
       value={value}
       onChange={setValue}
       rootNodeName="root"
+      theme="monokai"
       canEdit
       canDelete
       canAdd

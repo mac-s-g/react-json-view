@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { Base16Theme, StylingValue } from "react-base16-styling";
 
 import {
   DEPTH_INCREMENT,
@@ -62,7 +63,7 @@ const StartBrace = ({
 
   if (parentIsArrayGroup) {
     return (
-      <span>
+      <span style={{ minHeight: "18px", display: "inline-block" }}>
         <span {...Theme(theme, "brace")}>{braceString}</span>
         {collapsed ? <></> : <ObjectMeta rowHovered={hovered} />}
       </span>
@@ -72,7 +73,12 @@ const StartBrace = ({
   const IconComponent = collapsed ? CollapsedIcon : ExpandedIcon;
 
   return (
-    <span>
+    <span
+      style={{
+        minHeight: "18px",
+        display: "inline-block",
+      }}
+    >
       <button
         type="button"
         onClick={(e) => {
@@ -120,7 +126,7 @@ const ObjectDataTypeContents = ({
             namespace={namespace.concat(
               parentIsArrayGroup ? `${parseInt(key) + indexOffset}` : key,
             )}
-            value={(value as any)[key] as Json}
+            value={(value as Record<string, Json>)[key] as Json}
             key={`${key}-${namespace}`}
             parentType={type}
           />
@@ -153,7 +159,6 @@ const EndBrace = ({
   );
 };
 
-// TODO: Remove the any
 const ObjectDataType = ({
   parentIsArrayGroup,
   objectType,
@@ -175,7 +180,7 @@ const ObjectDataType = ({
   );
 
   /* <old> */
-  const styles = {} as any;
+  const styles = {} as Record<string, number | StylingValue | Base16Theme>;
   if (!isRoot && !parentIsArrayGroup) {
     styles.paddingLeft = indentWidth * SINGLE_INDENT;
   } else if (parentIsArrayGroup) {

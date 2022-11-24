@@ -17,4 +17,4 @@ export type Theme = {
   base0F: string;
 };
 
-export type UserTheme = Theme | "none";
+export type UserTheme = string;

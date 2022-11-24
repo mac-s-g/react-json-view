@@ -24,8 +24,8 @@ export default {
   keyOpacity: "0.85",
   keyOpacityHover: "1",
 
-  keyValPaddingTop: "3px",
-  keyValPaddingBottom: "3px",
+  keyValPaddingTop: "5px",
+  keyValPaddingBottom: "5px",
   keyValPaddingRight: "5px",
   keyValBorderLeft: "1px solid",
   keyValBorderHover: "2px solid",
@@ -65,7 +65,8 @@ export default {
 
   arrayGroupMetaPadding: "0px 0px 0px 4px",
 
-  iconContainerWidth: "17px",
+  iconContainerWidth: "18px",
+  iconContainerheight: "18px",
 
   tooltipPadding: "4px",
 

@@ -65,7 +65,8 @@ export default {
 
   arrayGroupMetaPadding: "0px 0px 0px 4px",
 
-  iconContainerWidth: "17px",
+  iconContainerWidth: "18px",
+  iconContainerheight: "18px",
 
   tooltipPadding: "4px",
 

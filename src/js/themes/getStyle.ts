@@ -254,10 +254,12 @@ const getDefaultThemeStyling: ThemeStyling = (theme: Theme) => {
     "object-meta-data": {
       display: "inline-block",
       padding: constants.metaDataPadding,
+      height: "18px",
     },
     "icon-container": {
       display: "inline-block",
       width: constants.iconContainerWidth,
+      height: constants.iconContainerheight,
     },
     tooltip: {
       padding: constants.tooltipPadding,

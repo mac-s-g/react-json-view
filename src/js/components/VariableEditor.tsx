@@ -394,7 +394,7 @@ const VariableEditor = () => {
     <div
       {...Theme(theme, "objectKeyVal", {
         paddingLeft: indentWidth * SINGLE_INDENT,
-        minHeight: "18px",
+        minHeight: "20px",
       })}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}

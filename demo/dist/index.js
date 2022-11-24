@@ -28169,7 +28169,8 @@
     clipboardCheckMarginLeft: "-12px",
     metaDataPadding: "0px 0px 0px 10px",
     arrayGroupMetaPadding: "0px 0px 0px 4px",
-    iconContainerWidth: "17px",
+    iconContainerWidth: "18px",
+    iconContainerheight: "18px",
     tooltipPadding: "4px",
     editInputMinWidth: "130px",
     editInputBorderRadius: "2px",
@@ -28430,11 +28431,13 @@
       },
       "object-meta-data": {
         display: "inline-block",
-        padding: styleConstants_default.metaDataPadding
+        padding: styleConstants_default.metaDataPadding,
+        height: "18px"
       },
       "icon-container": {
         display: "inline-block",
-        width: styleConstants_default.iconContainerWidth
+        width: styleConstants_default.iconContainerWidth,
+        height: styleConstants_default.iconContainerheight
       },
       tooltip: {
         padding: styleConstants_default.tooltipPadding
@@ -29265,7 +29268,10 @@
     }
     const IconComponent = collapsed ? CollapsedIcon : ExpandedIcon;
     return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("span", {
-      style: { minHeight: "18px", display: "inline-block" },
+      style: {
+        minHeight: "18px",
+        display: "inline-block"
+      },
       children: [
         /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("button", {
           type: "button",
@@ -30093,7 +30099,7 @@
     return /* @__PURE__ */ (0, import_react17.createElement)("div", {
       ...style(theme, "objectKeyVal", {
         paddingLeft: indentWidth * SINGLE_INDENT,
-        minHeight: "18px"
+        minHeight: "20px"
       }),
       onMouseEnter: () => setHovered(true),
       onMouseLeave: () => setHovered(false),

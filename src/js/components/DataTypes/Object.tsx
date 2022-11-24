@@ -73,7 +73,12 @@ const StartBrace = ({
   const IconComponent = collapsed ? CollapsedIcon : ExpandedIcon;
 
   return (
-    <span style={{ minHeight: "18px", display: "inline-block" }}>
+    <span
+      style={{
+        minHeight: "18px",
+        display: "inline-block",
+      }}
+    >
       <button
         type="button"
         onClick={(e) => {

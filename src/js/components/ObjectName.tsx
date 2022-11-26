@@ -28,7 +28,7 @@ const ObjectName = () => {
         onMouseLeave={() => setHovered(false)}
       >
         <span className="array-key">{name}</span>
-        <EditKeyIcon rowHovered={hovered} />
+        {!isRoot ? <EditKeyIcon rowHovered={hovered} /> : null}
         <span {...Theme(theme, "colon")}>:</span>
       </span>
     ) : (
@@ -55,7 +55,7 @@ const ObjectName = () => {
           </span>
         )}
       </span>
-      <EditKeyIcon rowHovered={hovered} />
+      {!isRoot ? <EditKeyIcon rowHovered={hovered} /> : null}
       <span {...Theme(theme, "colon")}>:</span>
     </span>
   );

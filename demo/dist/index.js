@@ -29163,9 +29163,9 @@
             className: "array-key",
             children: name
           }),
-          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(EditKeyIcon, {
+          !isRoot ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(EditKeyIcon, {
             rowHovered: hovered
-          }),
+          }) : null,
           /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", {
             ...style(theme, "colon"),
             children: ":"
@@ -29194,9 +29194,9 @@
             })
           ]
         }),
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(EditKeyIcon, {
+        !isRoot ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(EditKeyIcon, {
           rowHovered: hovered
-        }),
+        }) : null,
         /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", {
           ...style(theme, "colon"),
           children: ":"
@@ -30113,12 +30113,12 @@
       },
       rjvId
     } = (0, import_react16.useContext)(ReactJsonViewContext_default);
-    const { namespace, value } = (0, import_react16.useContext)(LocalJsonViewContext_default);
+    const { namespace, value, parentType } = (0, import_react16.useContext)(LocalJsonViewContext_default);
     const type = toType(value);
     const name = namespace.at(-1);
     const [edit, setEdit] = (0, import_react16.useState)({ editMode: false });
     const [hovered, setHovered] = (0, import_react16.useState)(false);
-    const [renameKey, setRenameKey] = (0, import_react16.useState)(false);
+    const [hoveredKey, setHoveredKey] = (0, import_react16.useState)(false);
     const enterEditMode = () => {
       if (canEdit) {
         const stringifiedValue = stringifyVariable_default(
@@ -30179,6 +30179,9 @@
       ...style(theme, "colon"),
       children: ":"
     })) : null : /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("span", {
+      style: { cursor: "pointer" },
+      onMouseEnter: () => setHoveredKey(true),
+      onMouseLeave: () => setHoveredKey(false),
       children: [
         /* @__PURE__ */ (0, import_react17.createElement)("span", {
           ...style(theme, "object-name"),
@@ -30194,6 +30197,9 @@
           style: { verticalAlign: "top" },
           children: DISPLAY_BRACES.doubleQuotes.end
         })),
+        parentType !== "array" ? /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(EditKeyIcon, {
+          rowHovered: hoveredKey
+        }) : null,
         /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", {
           ...style(theme, "colon"),
           children: ":"

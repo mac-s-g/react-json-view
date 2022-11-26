@@ -1001,7 +1001,7 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState9(initialState) {
+          function useState10(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1801,7 +1801,7 @@
           exports.useMemo = useMemo3;
           exports.useReducer = useReducer;
           exports.useRef = useRef4;
-          exports.useState = useState9;
+          exports.useState = useState10;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -27669,26 +27669,47 @@
           });
           this.emit(`variable-update-${rjvId}`);
           break;
+        case "VARIABLE_KEY_UPDATED":
+          action.data.updatedSrc = this.updateSrc(
+            rjvId,
+            data
+          );
+          this.set(rjvId, "action", "variable-update", { ...data, type: "variable-key-added" });
+          this.emit(`variable-update-${rjvId}`);
+          break;
         case "ADD_VARIABLE_KEY_REQUEST":
           this.set(rjvId, "action", "new-key-request", data);
           this.emit(`add-key-request-${rjvId}`);
+          break;
+        case "UPDATE_VARIABLE_KEY_REQUEST":
+          this.set(rjvId, "action", "edit-key-request", data);
+          this.emit("edit-key-request-" + rjvId);
           break;
         default:
           break;
       }
     };
     updateSrc = (rjvId, request) => {
-      const { name, namespace, newValue, variableRemoved } = request;
+      const { name, keyName, namespace, newValue, existingValue, variableRemoved, variableKeyUpdated } = request;
       namespace.shift();
       const src = this.get(rjvId, "global", "src");
       let updatedSrc = this.deepCopy(src, [...namespace]);
       let walk = updatedSrc;
       for (const idx of namespace) {
-        if (walk[idx]) {
+        if (walk[idx] && !variableKeyUpdated) {
+          walk = walk[idx];
+        } else if (variableKeyUpdated && idx !== name) {
           walk = walk[idx];
         }
       }
-      if (variableRemoved) {
+      if (variableKeyUpdated) {
+        if (toType(walk) == "array") {
+          walk.splice(name, 1);
+        } else {
+          walk[keyName] = existingValue;
+          delete walk[name];
+        }
+      } else if (variableRemoved) {
         if (toType(walk) == "array") {
           walk.splice(name, 1);
         } else {
@@ -28263,7 +28284,8 @@
         cursor: "pointer",
         border: "none",
         backgroundColor: "transparent",
-        padding: "0"
+        padding: "0",
+        position: "relative"
       },
       brace: {
         display: "inline-block",
@@ -28696,18 +28718,6 @@
   // src/js/components/DataTypes/Object.tsx
   var import_react11 = __toESM(require_react(), 1);
 
-  // src/js/components/ObjectMeta.tsx
-  var import_react8 = __toESM(require_react(), 1);
-
-  // src/js/components/CopyToClipboard.tsx
-  var import_react7 = __toESM(require_react(), 1);
-
-  // src/js/helpers/getClipboardValue.ts
-  var getClipboardValue = (value) => {
-    return JSON.stringify(value);
-  };
-  var getClipboardValue_default = getClipboardValue;
-
   // src/js/components/icons.tsx
   var import_jsx_runtime5 = __toESM(require_jsx_runtime(), 1);
   var DEFAULT_COLOR = "#000000";
@@ -28928,6 +28938,18 @@
     };
   }
 
+  // src/js/components/ObjectMeta.tsx
+  var import_react8 = __toESM(require_react(), 1);
+
+  // src/js/components/CopyToClipboard.tsx
+  var import_react7 = __toESM(require_react(), 1);
+
+  // src/js/helpers/getClipboardValue.ts
+  var getClipboardValue = (value) => {
+    return JSON.stringify(value);
+  };
+  var getClipboardValue_default = getClipboardValue;
+
   // src/js/components/CopyToClipboard.tsx
   var import_jsx_runtime6 = __toESM(require_jsx_runtime(), 1);
   var CopyIcon = ({ copied }) => {
@@ -29082,7 +29104,7 @@
   };
   var ObjectMeta = ({ rowHovered }) => {
     const {
-      props: { theme, enableClipboard, canEdit, canDelete, canAdd }
+      props: { theme, enableClipboard, canDelete, canAdd }
     } = (0, import_react8.useContext)(ReactJsonViewContext_default);
     const { value } = (0, import_react8.useContext)(LocalJsonViewContext_default);
     const size = Object.keys(value).length;
@@ -29124,6 +29146,7 @@
     const {
       props: { theme, quotesOnKeys, displayArrayKey }
     } = (0, import_react9.useContext)(ReactJsonViewContext_default);
+    const [hovered, setHovered] = (0, import_react9.useState)(false);
     const { depth, namespace, parentType } = (0, import_react9.useContext)(LocalJsonViewContext_default);
     const isRoot = depth === 0;
     const name = namespace.at(-1);
@@ -29133,10 +29156,15 @@
     if (parentType === "array") {
       return displayArrayKey ? /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", {
         ...style(theme, "array-key"),
+        onMouseEnter: () => setHovered(true),
+        onMouseLeave: () => setHovered(false),
         children: [
           /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", {
             className: "array-key",
             children: name
+          }),
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(EditKeyIcon, {
+            rowHovered: hovered
           }),
           /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", {
             ...style(theme, "colon"),
@@ -29147,6 +29175,8 @@
     }
     return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", {
       ...style(theme, "object-name"),
+      onMouseEnter: () => setHovered(true),
+      onMouseLeave: () => setHovered(false),
       children: [
         /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", {
           className: "object-key",
@@ -29163,6 +29193,9 @@
               children: DISPLAY_BRACES.doubleQuotes.end
             })
           ]
+        }),
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(EditKeyIcon, {
+          rowHovered: hovered
         }),
         /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", {
           ...style(theme, "colon"),
@@ -29239,6 +29272,40 @@
       onClick: onToggleCollapsed,
       type: "button",
       children: "..."
+    });
+  };
+  var EditKeyIcon = ({ rowHovered }) => {
+    const {
+      props: { theme },
+      rjvId
+    } = (0, import_react11.useContext)(ReactJsonViewContext_default);
+    const { namespace, value } = (0, import_react11.useContext)(LocalJsonViewContext_default);
+    const name = namespace.at(-1);
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", {
+      className: "click-to-edit",
+      style: {
+        verticalAlign: "top",
+        display: rowHovered ? "inline-block" : "none"
+      },
+      title: "Edit Key",
+      children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(Edit, {
+        className: "click-to-edit-icon",
+        ...style(theme, "editVarIcon"),
+        onClick: (e) => {
+          e.stopPropagation();
+          ObjectAttributes_default.handleAction({
+            name: "UPDATE_VARIABLE_KEY_REQUEST",
+            rjvId,
+            data: {
+              name,
+              namespace,
+              existingValue: value,
+              variableRemoved: false,
+              keyName: name
+            }
+          });
+        }
+      })
     });
   };
   var StartBrace = ({
@@ -30321,39 +30388,60 @@
   var import_jsx_runtime16 = __toESM(require_jsx_runtime(), 1);
   var ObjectKeyModal = ({
     onClose,
-    active
+    addKeyRequest,
+    editKeyRequest,
+    inputValue
   }) => {
     const {
       props: { theme, newKeyDefaultValue, onChange },
       rjvId
     } = (0, import_react21.useContext)(ReactJsonViewContext_default);
-    const [input, setInput] = (0, import_react21.useState)("");
+    const [input, setInput] = (0, import_react21.useState)(inputValue);
     const [valid, setValid] = (0, import_react21.useState)(false);
     const isValid = (input2) => {
-      const request = ObjectAttributes_default.get(rjvId, "action", "new-key-request");
-      return input2 !== "" && Object.keys(request.existingValue).indexOf(input2) === -1;
+      if (addKeyRequest) {
+        const request2 = ObjectAttributes_default.get(rjvId, "action", "new-key-request");
+        return input2 !== "" && Object.keys(request2.existingValue).indexOf(input2) === -1;
+      }
+      const request = ObjectAttributes_default.get(rjvId, "action", "edit-key-request");
+      return input2 !== "" && request.name !== input2;
     };
     (0, import_react21.useEffect)(() => {
       setValid(isValid(input));
     }, [input]);
+    (0, import_react21.useEffect)(() => {
+      setInput(inputValue);
+    }, [inputValue]);
     const handleSubmit = () => {
-      const request = ObjectAttributes_default.get(
-        rjvId,
-        "action",
-        "new-key-request",
-        newKeyDefaultValue
-      );
-      request.newValue = { ...request.existingValue };
-      request.newValue[input] = newKeyDefaultValue;
-      ObjectAttributes_default.handleAction({
-        name: "VARIABLE_ADDED",
-        rjvId,
-        data: request
-      });
-      setInput("");
+      if (addKeyRequest) {
+        const request = ObjectAttributes_default.get(
+          rjvId,
+          "action",
+          "new-key-request",
+          newKeyDefaultValue
+        );
+        request.newValue = { ...request.existingValue };
+        request.newValue[input] = newKeyDefaultValue;
+        ObjectAttributes_default.handleAction({
+          name: "VARIABLE_ADDED",
+          rjvId,
+          data: request
+        });
+        setInput("");
+      } else {
+        const request = ObjectAttributes_default.get(rjvId, "action", "edit-key-request");
+        request.keyName = input;
+        request.newValue = request.existingValue;
+        request.variableKeyUpdated = true;
+        ObjectAttributes_default.handleAction({
+          name: "VARIABLE_KEY_UPDATED",
+          rjvId,
+          data: request
+        });
+      }
       onClose();
     };
-    return active ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", {
+    return addKeyRequest || editKeyRequest ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", {
       className: "key-modal-request",
       ...style(theme, "key-modal-request"),
       onClick: (e) => {
@@ -30473,7 +30561,10 @@
     iconStyle = "triangle"
   }) => {
     const [addKeyRequest, setAddKeyRequest] = (0, import_react23.useState)(false);
-    const [editKeyRequest, setEditKeyRequest] = (0, import_react23.useState)(false);
+    const [editKeyRequest, setEditKeyRequest] = (0, import_react23.useState)({
+      editKey: false,
+      keyValue: ""
+    });
     const [validationFailure, setValidationFailure] = (0, import_react23.useState)(false);
     const rjvId = (0, import_react23.useId)();
     (0, import_react23.useEffect)(() => {
@@ -30488,11 +30579,16 @@
       return {
         reset: onClose,
         "variable-update": updateSrc,
-        "add-key-request": addKeyRequestHandler
+        "add-key-request": addKeyRequestHandler,
+        "edit-key-request": editKeyRequestHandler
       };
     };
     const addKeyRequestHandler = () => {
       setAddKeyRequest(true);
+    };
+    const editKeyRequestHandler = () => {
+      const { name } = ObjectAttributes_default.get(rjvId, "action", "edit-key-request");
+      setEditKeyRequest({ editKey: true, keyValue: name });
     };
     const updateSrc = () => {
       const { name, namespace, newValue, existingValue, updatedSrc, type } = ObjectAttributes_default.get(rjvId, "action", "variable-update");
@@ -30514,6 +30610,10 @@
           onChange(onEditPayload.updatedSrc);
           result = onEditPayload;
           break;
+        case "variable-key-added":
+          onChange(onEditPayload.updatedSrc);
+          result = onEditPayload;
+          break;
         case "variable-removed":
           onChange(onEditPayload.updatedSrc);
           result = onEditPayload;
@@ -30528,6 +30628,7 @@
     };
     const onClose = () => {
       setAddKeyRequest(false);
+      setEditKeyRequest({ editKey: false, keyValue: "" });
       setValidationFailure(false);
     };
     return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", {
@@ -30567,7 +30668,9 @@
           }),
           /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(JsonViewer_default, {}),
           /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(ObjectKeyModal_default, {
-            active: addKeyRequest,
+            inputValue: editKeyRequest.keyValue,
+            addKeyRequest,
+            editKeyRequest: editKeyRequest.editKey,
             onClose
           })
         ]
@@ -30592,7 +30695,10 @@
       parent: {
         sibling1: true,
         sibling2: false,
-        sibling3: null
+        sibling3: {
+          a: "name",
+          b: "age"
+        }
       },
       string_number: "1234"
     });

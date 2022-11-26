@@ -11,6 +11,7 @@ import Theme from "../themes/getStyle";
 import CopyToClipboard from "./CopyToClipboard";
 // data type components
 import { JsonBoolean, JsonNull, JsonNumber, JsonString } from "./DataTypes";
+import { EditKeyIcon } from "./DataTypes/Object";
 // clibboard icon
 import { CheckCircle, Edit, RemoveCircle as Remove } from "./icons";
 import LocalJsonViewContext from "./LocalJsonViewContext";
@@ -427,6 +428,7 @@ const VariableEditor = () => {
               </span>
             )}
           </span>
+          {/* <EditKeyIcon /> */}
           <span {...Theme(theme, "colon")}>:</span>
         </span>
       )}

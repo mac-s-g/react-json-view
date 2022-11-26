@@ -10,50 +10,74 @@ import ReactJsonViewContext from "../ReactJsonViewContext";
 // TODO: Add support for editing keys (not just creating them);
 const ObjectKeyModal = ({
   onClose,
-  active,
+  addKeyRequest,
+  editKeyRequest,
+  inputValue,
 }: {
   onClose: () => void;
-  active: boolean;
+  addKeyRequest?: boolean;
+  editKeyRequest?: boolean;
+  inputValue?: string;
 }) => {
   const {
     props: { theme, newKeyDefaultValue, onChange },
     rjvId,
   } = useContext(ReactJsonViewContext);
 
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(inputValue);
   const [valid, setValid] = useState(false);
 
   const isValid = (input: any) => {
-    const request = attributeStore.get(rjvId, "action", "new-key-request");
-    return (
-      input !== "" && Object.keys(request.existingValue).indexOf(input) === -1
-    );
+    if (addKeyRequest) {
+      const request = attributeStore.get(rjvId, "action", "new-key-request");
+      return (
+        input !== "" && Object.keys(request.existingValue).indexOf(input) === -1
+      );
+    }
+
+    const request = attributeStore.get(rjvId, "action", "edit-key-request");
+    return input !== "" && request.name !== input;
   };
 
   useEffect(() => {
     setValid(isValid(input));
   }, [input]);
 
-  const handleSubmit = () => {
-    const request = attributeStore.get(
-      rjvId,
-      "action",
-      "new-key-request",
-      newKeyDefaultValue,
-    );
-    request.newValue = { ...request.existingValue };
-    request.newValue[input] = newKeyDefaultValue;
+  useEffect(() => {
+    setInput(inputValue);
+  }, [inputValue]);
 
-    attributeStore.handleAction({
-      name: "VARIABLE_ADDED",
-      rjvId,
-      data: request,
-    });
-    setInput("");
+  const handleSubmit = () => {
+    if (addKeyRequest) {
+      const request = attributeStore.get(
+        rjvId,
+        "action",
+        "new-key-request",
+        newKeyDefaultValue,
+      );
+      request.newValue = { ...request.existingValue };
+      request.newValue[input!] = newKeyDefaultValue;
+      attributeStore.handleAction({
+        name: "VARIABLE_ADDED",
+        rjvId,
+        data: request,
+      });
+      setInput("");
+    } else {
+      const request = attributeStore.get(rjvId, "action", "edit-key-request");
+      request.keyName = input;
+      request.newValue = request.existingValue;
+      request.variableKeyUpdated = true;
+      attributeStore.handleAction({
+        name: "VARIABLE_KEY_UPDATED",
+        rjvId,
+        data: request,
+      });
+    }
     onClose();
   };
 
-  return active ? (
+  return addKeyRequest || editKeyRequest ? (
     <div
       className="key-modal-request"
       {...Theme(theme, "key-modal-request")}

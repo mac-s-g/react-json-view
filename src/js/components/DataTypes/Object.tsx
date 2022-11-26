@@ -7,8 +7,10 @@ import {
   SINGLE_INDENT,
   toType,
 } from "../../helpers/util";
+import attributeStore from "../../stores/ObjectAttributes";
 import Theme from "../../themes/getStyle";
 import Child from "../Child";
+import { Edit } from "../icons";
 import LocalJsonViewContext from "../LocalJsonViewContext";
 import ObjectMeta from "../ObjectMeta";
 import ObjectName from "../ObjectName";
@@ -38,6 +40,44 @@ const Ellipsis = ({
     >
       ...
     </button>
+  );
+};
+
+export const EditKeyIcon = ({ rowHovered }: { rowHovered?: boolean }) => {
+  const {
+    props: { theme },
+    rjvId,
+  } = useContext(ReactJsonViewContext);
+  const { namespace, value } = useContext(LocalJsonViewContext);
+  const name = namespace.at(-1);
+  return (
+    <div
+      className="click-to-edit"
+      style={{
+        verticalAlign: "top",
+        display: rowHovered ? "inline-block" : "none",
+      }}
+      title="Edit Key"
+    >
+      <Edit
+        className="click-to-edit-icon"
+        {...Theme(theme, "editVarIcon")}
+        onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+          e.stopPropagation();
+          attributeStore.handleAction({
+            name: "UPDATE_VARIABLE_KEY_REQUEST",
+            rjvId,
+            data: {
+              name,
+              namespace,
+              existingValue: value,
+              variableRemoved: false,
+              keyName: name,
+            },
+          });
+        }}
+      />
+    </div>
   );
 };
 

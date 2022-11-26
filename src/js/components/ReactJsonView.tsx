@@ -38,7 +38,10 @@ const ReactJsonView = ({
 }: Partial<ReactJsonViewProps>) => {
   // listen to request to add/edit a key to an object
   const [addKeyRequest, setAddKeyRequest] = useState(false);
-  const [editKeyRequest, setEditKeyRequest] = useState(false);
+  const [editKeyRequest, setEditKeyRequest] = useState({
+    editKey: false,
+    keyValue: "",
+  });
   const [validationFailure, setValidationFailure] = useState(false);
 
   const rjvId = useId();
@@ -57,11 +60,17 @@ const ReactJsonView = ({
       reset: onClose,
       "variable-update": updateSrc,
       "add-key-request": addKeyRequestHandler,
+      "edit-key-request": editKeyRequestHandler,
     };
   };
 
   const addKeyRequestHandler = () => {
     setAddKeyRequest(true);
+  };
+
+  const editKeyRequestHandler = () => {
+    const { name } = attributeStore.get(rjvId, "action", "edit-key-request");
+    setEditKeyRequest({ editKey: true, keyValue: name });
   };
 
   const updateSrc = () => {
@@ -87,6 +96,10 @@ const ReactJsonView = ({
         onChange(onEditPayload.updatedSrc);
         result = onEditPayload;
         break;
+      case "variable-key-added":
+        onChange(onEditPayload.updatedSrc);
+        result = onEditPayload;
+        break;
       case "variable-removed":
         onChange(onEditPayload.updatedSrc);
         result = onEditPayload;
@@ -102,6 +115,7 @@ const ReactJsonView = ({
 
   const onClose = () => {
     setAddKeyRequest(false);
+    setEditKeyRequest({ editKey: false, keyValue: "" });
     setValidationFailure(false);
   };
 
@@ -143,7 +157,12 @@ const ReactJsonView = ({
           active={validationFailure}
         />
         <JsonViewer />
-        <ObjectKeyModal active={addKeyRequest} onClose={onClose} />
+        <ObjectKeyModal
+          inputValue={editKeyRequest.keyValue}
+          addKeyRequest={addKeyRequest}
+          editKeyRequest={editKeyRequest.editKey}
+          onClose={onClose}
+        />
       </ReactJsonViewContext.Provider>
     </div>
   );

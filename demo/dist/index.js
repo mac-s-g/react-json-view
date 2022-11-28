@@ -30601,8 +30601,8 @@
       setAddKeyRequest(true);
     };
     const editKeyRequestHandler = () => {
-      const request = ObjectAttributes_default.get(rjvId, "action", "edit-key-request");
-      setEditKeyRequest({ editKey: true, keyValue: request.name });
+      const { name } = ObjectAttributes_default.get(rjvId, "action", "edit-key-request");
+      setEditKeyRequest({ editKey: true, keyValue: name });
     };
     const updateSrc = () => {
       const { name, namespace, newValue, existingValue, updatedSrc, type } = ObjectAttributes_default.get(rjvId, "action", "variable-update");

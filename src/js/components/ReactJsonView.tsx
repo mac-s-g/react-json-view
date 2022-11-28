@@ -69,8 +69,8 @@ const ReactJsonView = ({
   };
 
   const editKeyRequestHandler = () => {
-    const request = attributeStore.get(rjvId, "action", "edit-key-request");
-    setEditKeyRequest({ editKey: true, keyValue: request.name });
+    const { name } = attributeStore.get(rjvId, "action", "edit-key-request");
+    setEditKeyRequest({ editKey: true, keyValue: name });
   };
 
   const updateSrc = () => {

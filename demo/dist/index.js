@@ -29279,7 +29279,7 @@
       props: { theme },
       rjvId
     } = (0, import_react11.useContext)(ReactJsonViewContext_default);
-    const { namespace, value } = (0, import_react11.useContext)(LocalJsonViewContext_default);
+    const { namespace, value, parentObj } = (0, import_react11.useContext)(LocalJsonViewContext_default);
     const name = namespace.at(-1);
     return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", {
       className: "click-to-edit",
@@ -29300,6 +29300,7 @@
               name,
               namespace,
               existingValue: value,
+              parentObj,
               variableRemoved: false,
               keyName: name
             }
@@ -29389,7 +29390,8 @@
             parentIsArrayGroup ? `${parseInt(key) + indexOffset}` : key
           ),
           value: value[key],
-          parentType: type
+          parentType: type,
+          parentObj: value
         }, `${key}-${namespace}`))
       })
     });
@@ -30239,7 +30241,8 @@
     depth,
     namespace,
     value,
-    parentType
+    parentType,
+    parentObj
   }) => {
     const type = toType(value);
     const {
@@ -30251,7 +30254,8 @@
         namespace,
         type,
         value,
-        parentType
+        parentType,
+        parentObj
       },
       children: type === "object" ? /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Object_default, {
         objectType: "object",
@@ -30372,7 +30376,8 @@
         type,
         value: rjvProps.value,
         depth: 0,
-        parentType: "object"
+        parentType: "object",
+        parentObj: rjvProps.value
       },
       children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", {
         className: "pretty-json-container object-container",
@@ -30399,18 +30404,21 @@
     inputValue
   }) => {
     const {
-      props: { theme, newKeyDefaultValue, onChange },
+      props: { theme, newKeyDefaultValue },
       rjvId
     } = (0, import_react21.useContext)(ReactJsonViewContext_default);
     const [input, setInput] = (0, import_react21.useState)(inputValue);
     const [valid, setValid] = (0, import_react21.useState)(false);
     const isValid = (input2) => {
       if (addKeyRequest) {
-        const request2 = ObjectAttributes_default.get(rjvId, "action", "new-key-request");
-        return input2 !== "" && Object.keys(request2.existingValue).indexOf(input2) === -1;
+        const request = ObjectAttributes_default.get(rjvId, "action", "new-key-request");
+        return input2 !== "" && Object.keys(request.existingValue).indexOf(input2) === -1;
       }
-      const request = ObjectAttributes_default.get(rjvId, "action", "edit-key-request");
-      return input2 !== "" && request.name !== input2;
+      if (editKeyRequest) {
+        const request = ObjectAttributes_default.get(rjvId, "action", "edit-key-request");
+        return input2 !== "" && request.name !== input2 && Object.keys(request.parentObj).indexOf(input2) === -1;
+      }
+      return false;
     };
     (0, import_react21.useEffect)(() => {
       setValid(isValid(input));
@@ -30593,8 +30601,8 @@
       setAddKeyRequest(true);
     };
     const editKeyRequestHandler = () => {
-      const { name } = ObjectAttributes_default.get(rjvId, "action", "edit-key-request");
-      setEditKeyRequest({ editKey: true, keyValue: name });
+      const request = ObjectAttributes_default.get(rjvId, "action", "edit-key-request");
+      setEditKeyRequest({ editKey: true, keyValue: request.name });
     };
     const updateSrc = () => {
       const { name, namespace, newValue, existingValue, updatedSrc, type } = ObjectAttributes_default.get(rjvId, "action", "variable-update");

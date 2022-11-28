@@ -12,11 +12,13 @@ const Child = ({
   namespace,
   value,
   parentType,
+  parentObj,
 }: {
   depth: number;
   namespace: (string | null)[];
   value: Json;
   parentType: TypeName;
+  parentObj: Json;
 }) => {
   const type = toType(value);
 
@@ -32,6 +34,7 @@ const Child = ({
         type,
         value,
         parentType,
+        parentObj,
       }}
     >
       {type === "object" ? (

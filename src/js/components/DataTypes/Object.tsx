@@ -48,7 +48,7 @@ export const EditKeyIcon = ({ rowHovered }: { rowHovered?: boolean }) => {
     props: { theme },
     rjvId,
   } = useContext(ReactJsonViewContext);
-  const { namespace, value } = useContext(LocalJsonViewContext);
+  const { namespace, value, parentObj } = useContext(LocalJsonViewContext);
   const name = namespace.at(-1);
   return (
     <div
@@ -71,6 +71,7 @@ export const EditKeyIcon = ({ rowHovered }: { rowHovered?: boolean }) => {
               name,
               namespace,
               existingValue: value,
+              parentObj,
               variableRemoved: false,
               keyName: name,
             },
@@ -169,6 +170,7 @@ const ObjectDataTypeContents = ({
             value={(value as Record<string, Json>)[key] as Json}
             key={`${key}-${namespace}`}
             parentType={type}
+            parentObj={value}
           />
         ))}
       </div>

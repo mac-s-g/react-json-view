@@ -20,7 +20,7 @@ const ObjectKeyModal = ({
   inputValue?: string;
 }) => {
   const {
-    props: { theme, newKeyDefaultValue, onChange },
+    props: { theme, newKeyDefaultValue },
     rjvId,
   } = useContext(ReactJsonViewContext);
 
@@ -30,13 +30,22 @@ const ObjectKeyModal = ({
   const isValid = (input: any) => {
     if (addKeyRequest) {
       const request = attributeStore.get(rjvId, "action", "new-key-request");
+
       return (
         input !== "" && Object.keys(request.existingValue).indexOf(input) === -1
       );
     }
+    if (editKeyRequest) {
+      const request = attributeStore.get(rjvId, "action", "edit-key-request");
 
-    const request = attributeStore.get(rjvId, "action", "edit-key-request");
-    return input !== "" && request.name !== input;
+      return (
+        input !== "" &&
+        request.name !== input &&
+        Object.keys(request.parentObj).indexOf(input) === -1
+      );
+    }
+
+    return false;
   };
 
   useEffect(() => {

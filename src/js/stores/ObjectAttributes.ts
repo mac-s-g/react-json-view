@@ -83,10 +83,9 @@ class ObjectAttributes extends EventEmitter {
   updateSrc = (rjvId, request) => {
     const { name, keyName, namespace, newValue, existingValue, variableRemoved, variableKeyUpdated } =
       request;
-      //console.log(namespace, keyName)
+
     namespace.shift();
     
-    //console.log(name, keyName, namespace, newValue, existingValue, variableRemoved, variableKeyUpdated)
     // deepy copy src
     const src = this.get(rjvId, "global", "src");
     // deep copy of src variable

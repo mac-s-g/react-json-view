@@ -60,9 +60,20 @@ class ObjectAttributes extends EventEmitter {
         });
         this.emit(`variable-update-${rjvId}`);
         break;
+      case 'VARIABLE_KEY_UPDATED':
+        action.data.updatedSrc = this.updateSrc(
+            rjvId, data
+        );
+        this.set(rjvId, 'action', 'variable-update',{...data, type:'variable-key-added'});
+        this.emit(`variable-update-${rjvId}`);
+        break;
       case "ADD_VARIABLE_KEY_REQUEST":
         this.set(rjvId, "action", "new-key-request", data);
         this.emit(`add-key-request-${rjvId}`);
+        break;
+      case 'UPDATE_VARIABLE_KEY_REQUEST':
+        this.set(rjvId, 'action', 'edit-key-request', data);
+        this.emit('edit-key-request-' + rjvId);
         break;
       default:
         break;
@@ -70,11 +81,12 @@ class ObjectAttributes extends EventEmitter {
   };
 
   updateSrc = (rjvId, request) => {
-    const { name, namespace, newValue, variableRemoved } =
+    const { name, keyName, namespace, newValue, existingValue, variableRemoved, variableKeyUpdated } =
       request;
-
+      //console.log(namespace, keyName)
     namespace.shift();
-
+    
+    //console.log(name, keyName, namespace, newValue, existingValue, variableRemoved, variableKeyUpdated)
     // deepy copy src
     const src = this.get(rjvId, "global", "src");
     // deep copy of src variable
@@ -82,13 +94,25 @@ class ObjectAttributes extends EventEmitter {
     
     // point at current index
     let walk = updatedSrc;
+  
     for (const idx of namespace) {
-      if(walk[idx]){
+      if(walk[idx] && !variableKeyUpdated){
+        walk = walk[idx];
+      }
+      else if(variableKeyUpdated && idx !== name){
         walk = walk[idx];
       }
     }
-   
-    if (variableRemoved) {
+
+    if(variableKeyUpdated){
+      if (toType(walk) == 'array') {
+          walk.splice(name, 1);
+      } else {
+          walk[keyName] = existingValue;
+          delete walk[name];
+      }
+    }
+    else if (variableRemoved) {
       if (toType(walk) == "array") {
         walk.splice(name, 1);
       } else {
@@ -99,6 +123,7 @@ class ObjectAttributes extends EventEmitter {
       if (name !== null) {
         walk[name] = newValue;
       } else {
+        //walk[newValue] = existingValue;
         updatedSrc = newValue;
       }
     }

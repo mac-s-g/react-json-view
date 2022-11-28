@@ -11,6 +11,7 @@ import Theme from "../themes/getStyle";
 import CopyToClipboard from "./CopyToClipboard";
 // data type components
 import { JsonBoolean, JsonNull, JsonNumber, JsonString } from "./DataTypes";
+import { EditKeyIcon } from "./DataTypes/Object";
 // clibboard icon
 import { CheckCircle, Edit, RemoveCircle as Remove } from "./icons";
 import LocalJsonViewContext from "./LocalJsonViewContext";
@@ -323,14 +324,14 @@ const VariableEditor = () => {
     rjvId,
   } = useContext(ReactJsonViewContext);
 
-  const { namespace, value } = useContext(LocalJsonViewContext);
+  const { namespace, value, parentType } = useContext(LocalJsonViewContext);
   const type = toType(value);
   const name = namespace.at(-1);
 
   const [edit, setEdit] = useState<EditState>({ editMode: false });
 
   const [hovered, setHovered] = useState<boolean>(false);
-  const [renameKey, setRenameKey] = useState<boolean>(false);
+  const [hoveredKey, setHoveredKey] = useState<boolean>(false);
 
   const enterEditMode = () => {
     if (canEdit) {
@@ -409,7 +410,11 @@ const VariableEditor = () => {
           </span>
         ) : null
       ) : (
-        <span>
+        <span
+          style={{ cursor: "pointer" }}
+          onMouseEnter={() => setHoveredKey(true)}
+          onMouseLeave={() => setHoveredKey(false)}
+        >
           <span
             {...Theme(theme, "object-name")}
             className="object-key"
@@ -427,6 +432,9 @@ const VariableEditor = () => {
               </span>
             )}
           </span>
+          {parentType !== "array" ? (
+            <EditKeyIcon rowHovered={hoveredKey} />
+          ) : null}
           <span {...Theme(theme, "colon")}>:</span>
         </span>
       )}

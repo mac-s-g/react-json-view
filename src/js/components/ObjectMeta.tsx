@@ -103,7 +103,7 @@ const AddAttribute = ({ rowHovered }: { rowHovered: boolean }) => {
 
 const ObjectMeta = ({ rowHovered }: { rowHovered: boolean }) => {
   const {
-    props: { theme, enableClipboard, canEdit, canDelete, canAdd },
+    props: { theme, enableClipboard, canDelete, canAdd },
   } = useContext(ReactJsonViewContext);
 
   const { value } = useContext(LocalJsonViewContext);

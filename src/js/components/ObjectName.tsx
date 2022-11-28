@@ -1,7 +1,8 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import { DISPLAY_BRACES } from "../helpers/util";
 import Theme from "../themes/getStyle";
+import { EditKeyIcon } from "./DataTypes/Object";
 import LocalJsonViewContext from "./LocalJsonViewContext";
 import ReactJsonViewContext from "./ReactJsonViewContext";
 
@@ -9,6 +10,7 @@ const ObjectName = () => {
   const {
     props: { theme, quotesOnKeys, displayArrayKey },
   } = useContext(ReactJsonViewContext);
+  const [hovered, setHovered] = useState(false);
 
   const { depth, namespace, parentType } = useContext(LocalJsonViewContext);
   const isRoot = depth === 0;
@@ -20,8 +22,13 @@ const ObjectName = () => {
 
   if (parentType === "array") {
     return displayArrayKey ? (
-      <span {...Theme(theme, "array-key")}>
+      <span
+        {...Theme(theme, "array-key")}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
         <span className="array-key">{name}</span>
+        {!isRoot ? <EditKeyIcon rowHovered={hovered} /> : null}
         <span {...Theme(theme, "colon")}>:</span>
       </span>
     ) : (
@@ -30,7 +37,11 @@ const ObjectName = () => {
   }
 
   return (
-    <span {...Theme(theme, "object-name")}>
+    <span
+      {...Theme(theme, "object-name")}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <span className="object-key">
         {quotesOnKeys && (
           <span style={{ verticalAlign: "top" }}>
@@ -44,6 +55,7 @@ const ObjectName = () => {
           </span>
         )}
       </span>
+      {!isRoot ? <EditKeyIcon rowHovered={hovered} /> : null}
       <span {...Theme(theme, "colon")}>:</span>
     </span>
   );

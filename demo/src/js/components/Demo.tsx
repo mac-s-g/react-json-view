@@ -16,7 +16,10 @@ const Demo = () => {
     parent: {
       sibling1: true,
       sibling2: false,
-      sibling3: null,
+      sibling3: {
+        a: "name",
+        b: "age",
+      },
     },
     string_number: "1234",
   });

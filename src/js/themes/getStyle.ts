@@ -84,6 +84,7 @@ const getDefaultThemeStyling: ThemeStyling = (theme: Theme) => {
       border: "none",
       backgroundColor: "transparent",
       padding: "0",
+      position: "relative",
     },
     brace: {
       display: "inline-block",

@@ -8,6 +8,7 @@ const LocalJsonViewContext = createContext<{
   type: TypeName;
   depth: number;
   parentType: TypeName;
+  parentObj: Json;
 }>(null!);
 
 export default LocalJsonViewContext;

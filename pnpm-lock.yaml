@@ -25,8 +25,9 @@ specifiers:
   eslint-plugin-simple-import-sort: ^8.0.0
   eslint-plugin-testing-library: 5.5.1
   events: ^3.3.0
-  husky: ^8.0.2
+  husky: ^8.0.0
   ignore-styles: ^5.0.1
+  inquirer: ^8.0.0
   jsdom: 20.0.2
   prettier: 2.7.1
   react: 18.2.0
@@ -49,7 +50,7 @@ optionalDependencies:
 devDependencies:
   '@commitlint/cli': 17.3.0
   '@commitlint/config-conventional': 17.3.0
-  '@commitlint/cz-commitlint': 17.3.0_commitizen@4.2.6
+  '@commitlint/cz-commitlint': 17.3.0_642ufom6iksqztxkrm4jxikjhy
   '@types/events': 3.0.0
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.8
@@ -71,6 +72,7 @@ devDependencies:
   eslint-plugin-testing-library: 5.5.1_3rubbgt5ekhqrcgx4uwls3neim
   husky: 8.0.2
   ignore-styles: 5.0.1
+  inquirer: 8.2.4
   jsdom: 20.0.2
   prettier: 2.7.1
   react: 18.2.0
@@ -150,7 +152,7 @@ packages:
       '@commitlint/types': 17.0.0
       ajv: 8.11.0
 
-  /@commitlint/cz-commitlint/17.3.0_commitizen@4.2.6:
+  /@commitlint/cz-commitlint/17.3.0_642ufom6iksqztxkrm4jxikjhy:
     resolution: {integrity: sha512-kaHa6vzEriGQZgnBj08TTc92m8KUAd0LbXhzUbfuoJzH5b9TnfsQI7Him7oXWe4PzXBVEMREcAdqIQHzRUilfQ==}
     engines: {node: '>=v14'}
     peerDependencies:
@@ -162,6 +164,7 @@ packages:
       '@commitlint/types': 17.0.0
       chalk: 4.1.2
       commitizen: 4.2.6
+      inquirer: 8.2.4
       lodash.isplainobject: 4.0.6
       word-wrap: 1.2.3
     transitivePeerDependencies:

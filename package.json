@@ -4,7 +4,15 @@
   "description": "Interactive react component for displaying javascript arrays and JSON objects.",
   "version": "0.0.1",
   "main": "dist/main.js",
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
+  },
   "devDependencies": {
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-conventional": "^17.3.0",
+    "@commitlint/cz-commitlint": "^17.3.0",
     "@types/events": "^3.0.0",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
@@ -24,7 +32,9 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-simple-import-sort": "^8.0.0",
     "eslint-plugin-testing-library": "5.5.1",
+    "husky": "^8.0.0",
     "ignore-styles": "^5.0.1",
+    "inquirer": "^8.0.0",
     "jsdom": "20.0.2",
     "prettier": "2.7.1",
     "react": "18.2.0",
@@ -46,7 +56,9 @@
     "build-demo:once": "NODE_ENV=production node ./scripts/build-demo.js",
     "build-demo:watch": "NODE_ENV=development node ./scripts/build-demo.js",
     "lint:check": "NODE_ENV=test eslint src demo/src",
-    "lint:fix": "NODE_ENV=test eslint src demo/src --ext .js,.jsx --fix"
+    "lint:fix": "NODE_ENV=test eslint src demo/src --ext .js,.jsx --fix",
+    "prepare": "husky install",
+    "commit": "git-cz"
   },
   "repository": {
     "type": "git",
@@ -88,6 +100,7 @@
     "win-node-env": "^0.6.1"
   },
   "dependencies": {
+    "commitizen": "^4.2.6",
     "events": "^3.3.0"
   }
 }

@@ -1,6 +1,5 @@
 import React from "react"
 import { render, mount } from "enzyme"
-import sinon from "sinon"
 import { expect } from "chai"
 import { JSDOM } from "jsdom"
 
@@ -93,7 +92,7 @@ describe("<Index />", function() {
     })
 
     it("index test getDerivedStateFromProps", function() {
-        sinon.spy(Index, "getDerivedStateFromProps")
+        jest.spyOn(Index, "getDerivedStateFromProps").mockClear()
         // mount() will cause getDerivedStateFromProps to be called twice.
         // 1. before first render()
         // 2. result of setState() in componentDidMount()
@@ -102,9 +101,7 @@ describe("<Index />", function() {
         // setProps() will cause getDerivedStateFromProps to be called once.
         wrapper.setProps({ src: { test1: true, test2: false } })
         // in total, it was called thrice.
-        expect(Index.getDerivedStateFromProps.calledThrice).to.equal(
-            true
-        )
+        expect(Index.getDerivedStateFromProps).toHaveBeenCalled()
     })
 
     it("index can have ArrayGroup root component", function() {

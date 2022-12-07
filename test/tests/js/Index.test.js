@@ -1,9 +1,11 @@
 import React from "react"
-import { render, mount } from "enzyme"
-import { expect } from "chai"
+import Adapter from 'enzyme-adapter-react-16';
+import Enzyme, { render, mount } from "enzyme"
 import { JSDOM } from "jsdom"
 
 import Index from "../../../src/js/index"
+
+Enzyme.configure({ adapter: new Adapter() });
 
 const { window } = new JSDOM()
 global.window = window
@@ -34,8 +36,8 @@ describe("<Index />", function() {
                 }}
             />
         )
-        expect(wrapper.find(".data-type-label")).to.have.length(14)
-        expect(wrapper.find(".data-type-label")).to.have.length(14)
+        expect(wrapper.find(".data-type-label")).toHaveLength(14)
+        expect(wrapper.find(".data-type-label")).toHaveLength(14)
     })
 
     it("check object-size labels from index", function() {
@@ -63,17 +65,17 @@ describe("<Index />", function() {
                 enableClipboard={false}
             />
         )
-        expect(wrapper.find(".object-size")).to.have.length(7)
+        expect(wrapper.find(".object-size")).toHaveLength(7)
 
         wrapper.setProps({ displayObjectSize: false })
-        expect(wrapper.find(".object-size")).to.have.length(0)
+        expect(wrapper.find(".object-size")).toHaveLength(0)
     })
 
     it("src replaced with error message (ERROR OUTPUT EXPECTED)", function() {
         const wrapper = render(
             <Index src={"{jsonEncodedString:true, createError:true}"} />
         )
-        expect(wrapper.find(".data-type-label")).to.have.length(1)
+        expect(wrapper.find(".data-type-label")).toHaveLength(1)
     })
 
     it("make sure copy to clipboard is displayed all properties", function() {
@@ -88,7 +90,7 @@ describe("<Index />", function() {
                 }}
             />
         )
-        expect(wrapper.find(".copy-to-clipboard-container")).to.have.length(7)
+        expect(wrapper.find(".copy-to-clipboard-container")).toHaveLength(7)
     })
 
     it("index test getDerivedStateFromProps", function() {
@@ -97,7 +99,7 @@ describe("<Index />", function() {
         // 1. before first render()
         // 2. result of setState() in componentDidMount()
         const wrapper = mount(<Index src={{ test: true }} />)
-        expect(wrapper.find(".data-type-label")).to.have.length(1)
+        expect(wrapper.find(".data-type-label")).toHaveLength(1)
         // setProps() will cause getDerivedStateFromProps to be called once.
         wrapper.setProps({ src: { test1: true, test2: false } })
         // in total, it was called thrice.
@@ -112,7 +114,7 @@ describe("<Index />", function() {
                 src={new Array(15).fill(0)}
             />
         )
-        expect(wrapper.find(".array-group")).to.have.length(3)
+        expect(wrapper.find(".array-group")).toHaveLength(3)
     })
 
     it("length is correct even if an object has a length property", function () {
@@ -125,6 +127,6 @@ describe("<Index />", function() {
                 }}
             />
         )
-        expect(wrapper.find(".object-size")).to.have.length(1)
+        expect(wrapper.find(".object-size")).toHaveLength(1)
     })
 })

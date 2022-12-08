@@ -8,7 +8,9 @@
   "env": {
     "test": {
       "plugins": [
-        "istanbul"
+        ["@babel/plugin-transform-react-jsx", {
+          "runtime": "automatic"
+        }]
       ]
     }
   }

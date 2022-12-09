@@ -73,7 +73,7 @@
     "lint:check": "NODE_ENV=test eslint src demo/src",
     "lint:fix": "NODE_ENV=test eslint src demo/src --ext .js,.jsx --fix",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
     "prepare": "husky install",
     "commit": "git-cz"
   },

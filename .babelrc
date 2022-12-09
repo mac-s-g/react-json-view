@@ -1,5 +1,5 @@
 {
-  "presets": ["react-app"],
+  "presets": ["react-app", "@babel/preset-typescript"],
   "plugins": [
     "@babel/plugin-syntax-class-properties",
     "@babel/plugin-syntax-jsx",

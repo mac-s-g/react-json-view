@@ -107,6 +107,7 @@ const ArrayGroup = () => {
                   namespace={namespace.concat(null)}
                   parentType="array"
                   value={(value as Json[]).slice(i * size, i * size + size)}
+                  parentObj={(value as Json[]).slice(i * size, i * size + size)}
                 />
               )}
             </span>

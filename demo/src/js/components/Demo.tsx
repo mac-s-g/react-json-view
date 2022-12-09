@@ -7,12 +7,22 @@ import ReactJson from "../../../../src/js/index";
 
 const Demo = () => {
   const [value, setValue] = useState<Json & object>({
-    test: true,
-    passing: "hopefully",
-    arr: [5],
-    obj: {},
-    regexp: /[0-9]/gi
-});
+    stringV: "this is a test string",
+    integer: 42,
+    empty_array: [],
+    empty_object: {},
+    array: [1, 2, 3, "test"],
+    float: -2.757,
+    parent: {
+      sibling1: true,
+      sibling2: false,
+      sibling3: {
+        a: "name",
+        b: "age",
+      },
+    },
+    string_number: "1234",
+  });
 
   return (
     <ReactJson

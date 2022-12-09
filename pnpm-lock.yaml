@@ -923,7 +923,6 @@ packages:
       '@babel/helper-create-regexp-features-plugin': 7.20.5_@babel+core@7.20.5
       '@babel/helper-plugin-utils': 7.20.2
     dev: true
-=======
       color-convert: 1.9.3
 
   /@babel/plugin-syntax-async-generators/7.8.4_@babel+core@7.20.5:

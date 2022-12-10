@@ -7,7 +7,6 @@ import Theme from "../../themes/getStyle";
 import { Add as Cancel, CheckCircle } from "../icons";
 import ReactJsonViewContext from "../ReactJsonViewContext";
 
-// TODO: Add support for editing keys (not just creating them);
 const ObjectKeyModal = ({
   onClose,
   addKeyRequest,

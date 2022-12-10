@@ -448,7 +448,7 @@
             }
             return element;
           };
-          function createElement3(type, config, children) {
+          function createElement2(type, config, children) {
             var propName;
             var props = {};
             var key = null;
@@ -585,14 +585,14 @@
           function escapeUserProvidedKey(text) {
             return text.replace(userProvidedKeyEscapeRegex, "$&/");
           }
-          function getElementKey(element, index3) {
+          function getElementKey(element, index) {
             if (typeof element === "object" && element !== null && element.key != null) {
               {
                 checkKeyStringCoercion(element.key);
               }
               return escape("" + element.key);
             }
-            return index3.toString(36);
+            return index.toString(36);
           }
           function mapIntoArray(children, array, escapedPrefix, nameSoFar, callback) {
             var type = typeof children;
@@ -892,7 +892,7 @@
             }
             return lazyType;
           }
-          function forwardRef2(render) {
+          function forwardRef(render) {
             {
               if (render != null && render.$$typeof === REACT_MEMO_TYPE) {
                 error("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).");
@@ -1009,7 +1009,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useReducer(reducer, initialArg, init);
           }
-          function useRef4(initialValue) {
+          function useRef(initialValue) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
@@ -1021,11 +1021,11 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useInsertionEffect(create, deps);
           }
-          function useLayoutEffect3(create, deps) {
+          function useLayoutEffect(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useLayoutEffect(create, deps);
           }
-          function useCallback2(callback, deps) {
+          function useCallback(callback, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
@@ -1524,7 +1524,7 @@
                 error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
               }
             }
-            var element = createElement3.apply(this, arguments);
+            var element = createElement2.apply(this, arguments);
             if (element == null) {
               return element;
             }
@@ -1783,13 +1783,13 @@
           exports.createElement = createElement$1;
           exports.createFactory = createFactory;
           exports.createRef = createRef;
-          exports.forwardRef = forwardRef2;
+          exports.forwardRef = forwardRef;
           exports.isValidElement = isValidElement;
           exports.lazy = lazy;
           exports.memo = memo;
           exports.startTransition = startTransition;
           exports.unstable_act = act;
-          exports.useCallback = useCallback2;
+          exports.useCallback = useCallback;
           exports.useContext = useContext17;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
@@ -1797,10 +1797,10 @@
           exports.useId = useId2;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
-          exports.useLayoutEffect = useLayoutEffect3;
+          exports.useLayoutEffect = useLayoutEffect;
           exports.useMemo = useMemo3;
           exports.useReducer = useReducer;
-          exports.useRef = useRef4;
+          exports.useRef = useRef;
           exports.useState = useState10;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
@@ -1839,9 +1839,9 @@
           var enableProfiling = false;
           var frameYieldMs = 5;
           function push(heap, node) {
-            var index3 = heap.length;
+            var index = heap.length;
             heap.push(node);
-            siftUp(heap, node, index3);
+            siftUp(heap, node, index);
           }
           function peek(heap) {
             return heap.length === 0 ? null : heap[0];
@@ -1859,42 +1859,42 @@
             return first;
           }
           function siftUp(heap, node, i) {
-            var index3 = i;
-            while (index3 > 0) {
-              var parentIndex = index3 - 1 >>> 1;
+            var index = i;
+            while (index > 0) {
+              var parentIndex = index - 1 >>> 1;
               var parent = heap[parentIndex];
               if (compare(parent, node) > 0) {
                 heap[parentIndex] = node;
-                heap[index3] = parent;
-                index3 = parentIndex;
+                heap[index] = parent;
+                index = parentIndex;
               } else {
                 return;
               }
             }
           }
           function siftDown(heap, node, i) {
-            var index3 = i;
+            var index = i;
             var length = heap.length;
             var halfLength = length >>> 1;
-            while (index3 < halfLength) {
-              var leftIndex = (index3 + 1) * 2 - 1;
+            while (index < halfLength) {
+              var leftIndex = (index + 1) * 2 - 1;
               var left = heap[leftIndex];
               var rightIndex = leftIndex + 1;
               var right = heap[rightIndex];
               if (compare(left, node) < 0) {
                 if (rightIndex < length && compare(right, left) < 0) {
-                  heap[index3] = right;
+                  heap[index] = right;
                   heap[rightIndex] = node;
-                  index3 = rightIndex;
+                  index = rightIndex;
                 } else {
-                  heap[index3] = left;
+                  heap[index] = left;
                   heap[leftIndex] = node;
-                  index3 = leftIndex;
+                  index = leftIndex;
                 }
               } else if (rightIndex < length && compare(right, node) < 0) {
-                heap[index3] = right;
+                heap[index] = right;
                 heap[rightIndex] = node;
-                index3 = rightIndex;
+                index = rightIndex;
               } else {
                 return;
               }
@@ -2297,9 +2297,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React3 = require_react();
+          var React2 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React3.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React2.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3820,7 +3820,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React3.Children.forEach(props.children, function(child) {
+                  React2.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -5885,7 +5885,7 @@
             {
               var map = /* @__PURE__ */ new Map();
               var lane = 1;
-              for (var index4 = 0; index4 < TotalLanes; index4++) {
+              for (var index2 = 0; index2 < TotalLanes; index2++) {
                 var label = getLabelForLane(lane);
                 map.set(lane, label);
                 lane *= 2;
@@ -6256,9 +6256,9 @@
               var entanglements = root3.entanglements;
               var lanes = nextLanes & entangledLanes;
               while (lanes > 0) {
-                var index4 = pickArbitraryLaneIndex(lanes);
-                var lane = 1 << index4;
-                nextLanes |= entanglements[index4];
+                var index2 = pickArbitraryLaneIndex(lanes);
+                var lane = 1 << index2;
+                nextLanes |= entanglements[index2];
                 lanes &= ~lane;
               }
             }
@@ -6268,9 +6268,9 @@
             var eventTimes = root3.eventTimes;
             var mostRecentEventTime = NoTimestamp;
             while (lanes > 0) {
-              var index4 = pickArbitraryLaneIndex(lanes);
-              var lane = 1 << index4;
-              var eventTime = eventTimes[index4];
+              var index2 = pickArbitraryLaneIndex(lanes);
+              var lane = 1 << index2;
+              var eventTime = eventTimes[index2];
               if (eventTime > mostRecentEventTime) {
                 mostRecentEventTime = eventTime;
               }
@@ -6329,12 +6329,12 @@
             var expirationTimes = root3.expirationTimes;
             var lanes = pendingLanes;
             while (lanes > 0) {
-              var index4 = pickArbitraryLaneIndex(lanes);
-              var lane = 1 << index4;
-              var expirationTime = expirationTimes[index4];
+              var index2 = pickArbitraryLaneIndex(lanes);
+              var lane = 1 << index2;
+              var expirationTime = expirationTimes[index2];
               if (expirationTime === NoTimestamp) {
                 if ((lane & suspendedLanes) === NoLanes || (lane & pingedLanes) !== NoLanes) {
-                  expirationTimes[index4] = computeExpirationTime(lane, currentTime);
+                  expirationTimes[index2] = computeExpirationTime(lane, currentTime);
                 }
               } else if (expirationTime <= currentTime) {
                 root3.expiredLanes |= lane;
@@ -6444,8 +6444,8 @@
               root3.pingedLanes = NoLanes;
             }
             var eventTimes = root3.eventTimes;
-            var index4 = laneToIndex(updateLane);
-            eventTimes[index4] = eventTime;
+            var index2 = laneToIndex(updateLane);
+            eventTimes[index2] = eventTime;
           }
           function markRootSuspended(root3, suspendedLanes) {
             root3.suspendedLanes |= suspendedLanes;
@@ -6453,9 +6453,9 @@
             var expirationTimes = root3.expirationTimes;
             var lanes = suspendedLanes;
             while (lanes > 0) {
-              var index4 = pickArbitraryLaneIndex(lanes);
-              var lane = 1 << index4;
-              expirationTimes[index4] = NoTimestamp;
+              var index2 = pickArbitraryLaneIndex(lanes);
+              var lane = 1 << index2;
+              expirationTimes[index2] = NoTimestamp;
               lanes &= ~lane;
             }
           }
@@ -6475,11 +6475,11 @@
             var expirationTimes = root3.expirationTimes;
             var lanes = noLongerPendingLanes;
             while (lanes > 0) {
-              var index4 = pickArbitraryLaneIndex(lanes);
-              var lane = 1 << index4;
-              entanglements[index4] = NoLanes;
-              eventTimes[index4] = NoTimestamp;
-              expirationTimes[index4] = NoTimestamp;
+              var index2 = pickArbitraryLaneIndex(lanes);
+              var lane = 1 << index2;
+              entanglements[index2] = NoLanes;
+              eventTimes[index2] = NoTimestamp;
+              expirationTimes[index2] = NoTimestamp;
               lanes &= ~lane;
             }
           }
@@ -6488,10 +6488,10 @@
             var entanglements = root3.entanglements;
             var lanes = rootEntangledLanes;
             while (lanes) {
-              var index4 = pickArbitraryLaneIndex(lanes);
-              var lane = 1 << index4;
-              if (lane & entangledLanes | entanglements[index4] & entangledLanes) {
-                entanglements[index4] |= entangledLanes;
+              var index2 = pickArbitraryLaneIndex(lanes);
+              var lane = 1 << index2;
+              if (lane & entangledLanes | entanglements[index2] & entangledLanes) {
+                entanglements[index2] |= entangledLanes;
               }
               lanes &= ~lane;
             }
@@ -6547,9 +6547,9 @@
             }
             var pendingUpdatersLaneMap = root3.pendingUpdatersLaneMap;
             while (lanes > 0) {
-              var index4 = laneToIndex(lanes);
-              var lane = 1 << index4;
-              var updaters = pendingUpdatersLaneMap[index4];
+              var index2 = laneToIndex(lanes);
+              var lane = 1 << index2;
+              var updaters = pendingUpdatersLaneMap[index2];
               updaters.add(fiber);
               lanes &= ~lane;
             }
@@ -6561,9 +6561,9 @@
             var pendingUpdatersLaneMap = root3.pendingUpdatersLaneMap;
             var memoizedUpdaters = root3.memoizedUpdaters;
             while (lanes > 0) {
-              var index4 = laneToIndex(lanes);
-              var lane = 1 << index4;
-              var updaters = pendingUpdatersLaneMap[index4];
+              var index2 = laneToIndex(lanes);
+              var lane = 1 << index2;
+              var updaters = pendingUpdatersLaneMap[index2];
               if (updaters.size > 0) {
                 updaters.forEach(function(fiber) {
                   var alternate = fiber.alternate;
@@ -8888,10 +8888,10 @@
           function getOwnerDocumentFromRootContainer(rootContainerElement) {
             return rootContainerElement.nodeType === DOCUMENT_NODE ? rootContainerElement : rootContainerElement.ownerDocument;
           }
-          function noop3() {
+          function noop() {
           }
           function trapClickOnNonInteractiveElement(node) {
-            node.onclick = noop3;
+            node.onclick = noop;
           }
           function setInitialDOMProperties(tag, domElement, rootContainerElement, nextProps, isCustomComponentTag) {
             for (var propKey in nextProps) {
@@ -8953,7 +8953,7 @@
               }
             }
           }
-          function createElement3(type, props, rootContainerElement, parentNamespace) {
+          function createElement2(type, props, rootContainerElement, parentNamespace) {
             var isCustomComponentTag;
             var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement);
             var domElement;
@@ -9805,7 +9805,7 @@
               }
               parentNamespace = hostContextDev.namespace;
             }
-            var domElement = createElement3(type, props, rootContainerInstance, parentNamespace);
+            var domElement = createElement2(type, props, rootContainerInstance, parentNamespace);
             precacheFiberNode(internalInstanceHandle, domElement);
             updateFiberProps(domElement, props);
             return domElement;
@@ -10365,36 +10365,36 @@
           {
             fiberStack = [];
           }
-          var index3 = -1;
+          var index = -1;
           function createCursor(defaultValue) {
             return {
               current: defaultValue
             };
           }
           function pop(cursor, fiber) {
-            if (index3 < 0) {
+            if (index < 0) {
               {
                 error("Unexpected pop.");
               }
               return;
             }
             {
-              if (fiber !== fiberStack[index3]) {
+              if (fiber !== fiberStack[index]) {
                 error("Unexpected Fiber popped.");
               }
             }
-            cursor.current = valueStack[index3];
-            valueStack[index3] = null;
+            cursor.current = valueStack[index];
+            valueStack[index] = null;
             {
-              fiberStack[index3] = null;
+              fiberStack[index] = null;
             }
-            index3--;
+            index--;
           }
           function push(cursor, value, fiber) {
-            index3++;
-            valueStack[index3] = cursor.current;
+            index++;
+            valueStack[index] = cursor.current;
             {
-              fiberStack[index3] = fiber;
+              fiberStack[index] = fiber;
             }
             cursor.current = value;
           }
@@ -10641,7 +10641,7 @@
             treeForkProvider = workInProgress2;
             treeForkCount = totalChildren;
           }
-          function pushTreeId(workInProgress2, totalChildren, index4) {
+          function pushTreeId(workInProgress2, totalChildren, index2) {
             warnIfNotHydrating();
             idStack[idStackIndex++] = treeContextId;
             idStack[idStackIndex++] = treeContextOverflow;
@@ -10651,7 +10651,7 @@
             var baseOverflow = treeContextOverflow;
             var baseLength = getBitLength(baseIdWithLeadingBit) - 1;
             var baseId = baseIdWithLeadingBit & ~(1 << baseLength);
-            var slot = index4 + 1;
+            var slot = index2 + 1;
             var length = getBitLength(totalChildren) + baseLength;
             if (length > 30) {
               var numberOfOverflowBits = baseLength - baseLength % 5;
@@ -11981,7 +11981,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React3.Component().refs;
+          var emptyRefsObject = new React2.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -14084,7 +14084,7 @@
               return _ref2;
             }
           }
-          function updateRef3(initialValue) {
+          function updateRef(initialValue) {
             var hook = updateWorkInProgressHook();
             return hook.memoizedState;
           }
@@ -14766,7 +14766,7 @@
               useRef: function(initialValue) {
                 currentHookNameInDev = "useRef";
                 updateHookTypesDev();
-                return updateRef3();
+                return updateRef();
               },
               useState: function(initialState) {
                 currentHookNameInDev = "useState";
@@ -14870,7 +14870,7 @@
               useRef: function(initialValue) {
                 currentHookNameInDev = "useRef";
                 updateHookTypesDev();
-                return updateRef3();
+                return updateRef();
               },
               useState: function(initialState) {
                 currentHookNameInDev = "useState";
@@ -15105,7 +15105,7 @@
                 currentHookNameInDev = "useRef";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
-                return updateRef3();
+                return updateRef();
               },
               useState: function(initialState) {
                 currentHookNameInDev = "useState";
@@ -15226,7 +15226,7 @@
                 currentHookNameInDev = "useRef";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
-                return updateRef3();
+                return updateRef();
               },
               useState: function(initialState) {
                 currentHookNameInDev = "useState";
@@ -16827,13 +16827,13 @@
               }
             }
           }
-          function validateSuspenseListNestedChild(childSlot, index4) {
+          function validateSuspenseListNestedChild(childSlot, index2) {
             {
               var isAnArray = isArray(childSlot);
               var isIterable = !isAnArray && typeof getIteratorFn(childSlot) === "function";
               if (isAnArray || isIterable) {
                 var type = isAnArray ? "array" : "iterable";
-                error("A nested %s was passed to row #%s in <SuspenseList />. Wrap it in an additional SuspenseList to configure its revealOrder: <SuspenseList revealOrder=...> ... <SuspenseList revealOrder=...>{%s}</SuspenseList> ... </SuspenseList>", type, index4, type);
+                error("A nested %s was passed to row #%s in <SuspenseList />. Wrap it in an additional SuspenseList to configure its revealOrder: <SuspenseList revealOrder=...> ... <SuspenseList revealOrder=...>{%s}</SuspenseList> ... </SuspenseList>", type, index2, type);
                 return false;
               }
             }
@@ -22193,10 +22193,10 @@
           var setErrorHandler = null;
           var setSuspenseHandler = null;
           {
-            var copyWithDeleteImpl = function(obj, path, index4) {
-              var key = path[index4];
+            var copyWithDeleteImpl = function(obj, path, index2) {
+              var key = path[index2];
               var updated = isArray(obj) ? obj.slice() : assign({}, obj);
-              if (index4 + 1 === path.length) {
+              if (index2 + 1 === path.length) {
                 if (isArray(updated)) {
                   updated.splice(key, 1);
                 } else {
@@ -22204,17 +22204,17 @@
                 }
                 return updated;
               }
-              updated[key] = copyWithDeleteImpl(obj[key], path, index4 + 1);
+              updated[key] = copyWithDeleteImpl(obj[key], path, index2 + 1);
               return updated;
             };
             var copyWithDelete = function(obj, path) {
               return copyWithDeleteImpl(obj, path, 0);
             };
-            var copyWithRenameImpl = function(obj, oldPath, newPath, index4) {
-              var oldKey = oldPath[index4];
+            var copyWithRenameImpl = function(obj, oldPath, newPath, index2) {
+              var oldKey = oldPath[index2];
               var updated = isArray(obj) ? obj.slice() : assign({}, obj);
-              if (index4 + 1 === oldPath.length) {
-                var newKey = newPath[index4];
+              if (index2 + 1 === oldPath.length) {
+                var newKey = newPath[index2];
                 updated[newKey] = updated[oldKey];
                 if (isArray(updated)) {
                   updated.splice(oldKey, 1);
@@ -22226,7 +22226,7 @@
                   obj[oldKey],
                   oldPath,
                   newPath,
-                  index4 + 1
+                  index2 + 1
                 );
               }
               return updated;
@@ -22245,13 +22245,13 @@
               }
               return copyWithRenameImpl(obj, oldPath, newPath, 0);
             };
-            var copyWithSetImpl = function(obj, path, index4, value) {
-              if (index4 >= path.length) {
+            var copyWithSetImpl = function(obj, path, index2, value) {
+              if (index2 >= path.length) {
                 return value;
               }
-              var key = path[index4];
+              var key = path[index2];
               var updated = isArray(obj) ? obj.slice() : assign({}, obj);
-              updated[key] = copyWithSetImpl(obj[key], path, index4 + 1, value);
+              updated[key] = copyWithSetImpl(obj[key], path, index2 + 1, value);
               return updated;
             };
             var copyWithSet = function(obj, path, value) {
@@ -23212,9 +23212,9 @@
           copy[i] = arr[i];
         return copy;
       }
-      function spliceOne(list, index3) {
-        for (; index3 + 1 < list.length; index3++)
-          list[index3] = list[index3 + 1];
+      function spliceOne(list, index) {
+        for (; index + 1 < list.length; index++)
+          list[index] = list[index + 1];
         list.pop();
       }
       function unwrapListeners(arr) {
@@ -26243,9 +26243,9 @@
         return func.apply(thisArg, args);
       }
       function arrayEach(array, iteratee) {
-        var index3 = -1, length = array ? array.length : 0;
-        while (++index3 < length) {
-          if (iteratee(array[index3], index3, array) === false) {
+        var index = -1, length = array ? array.length : 0;
+        while (++index < length) {
+          if (iteratee(array[index], index, array) === false) {
             break;
           }
         }
@@ -26256,10 +26256,10 @@
         return !!length && baseIndexOf(array, value, 0) > -1;
       }
       function baseFindIndex(array, predicate, fromIndex, fromRight) {
-        var length = array.length, index3 = fromIndex + (fromRight ? 1 : -1);
-        while (fromRight ? index3-- : ++index3 < length) {
-          if (predicate(array[index3], index3, array)) {
-            return index3;
+        var length = array.length, index = fromIndex + (fromRight ? 1 : -1);
+        while (fromRight ? index-- : ++index < length) {
+          if (predicate(array[index], index, array)) {
+            return index;
           }
         }
         return -1;
@@ -26268,10 +26268,10 @@
         if (value !== value) {
           return baseFindIndex(array, baseIsNaN, fromIndex);
         }
-        var index3 = fromIndex - 1, length = array.length;
-        while (++index3 < length) {
-          if (array[index3] === value) {
-            return index3;
+        var index = fromIndex - 1, length = array.length;
+        while (++index < length) {
+          if (array[index] === value) {
+            return index;
           }
         }
         return -1;
@@ -26302,12 +26302,12 @@
         return result;
       }
       function replaceHolders(array, placeholder) {
-        var index3 = -1, length = array.length, resIndex = 0, result = [];
-        while (++index3 < length) {
-          var value = array[index3];
+        var index = -1, length = array.length, resIndex = 0, result = [];
+        while (++index < length) {
+          var value = array[index];
           if (value === placeholder || value === PLACEHOLDER) {
-            array[index3] = PLACEHOLDER;
-            result[resIndex++] = index3;
+            array[index] = PLACEHOLDER;
+            result[resIndex++] = index;
           }
         }
         return result;
@@ -26374,10 +26374,10 @@
         return result;
       }
       function copyArray(source, array) {
-        var index3 = -1, length = source.length;
+        var index = -1, length = source.length;
         array || (array = Array(length));
-        while (++index3 < length) {
-          array[index3] = source[index3];
+        while (++index < length) {
+          array[index] = source[index];
         }
         return array;
       }
@@ -26417,9 +26417,9 @@
       function createCurry(func, bitmask, arity) {
         var Ctor = createCtor(func);
         function wrapper() {
-          var length = arguments.length, args = Array(length), index3 = length, placeholder = getHolder(wrapper);
-          while (index3--) {
-            args[index3] = arguments[index3];
+          var length = arguments.length, args = Array(length), index = length, placeholder = getHolder(wrapper);
+          while (index--) {
+            args[index] = arguments[index];
           }
           var holders = length < 3 && args[0] !== placeholder && args[length - 1] !== placeholder ? [] : replaceHolders(args, placeholder);
           length -= holders.length;
@@ -26445,9 +26445,9 @@
       function createHybrid(func, bitmask, thisArg, partials, holders, partialsRight, holdersRight, argPos, ary, arity) {
         var isAry = bitmask & ARY_FLAG, isBind = bitmask & BIND_FLAG, isBindKey = bitmask & BIND_KEY_FLAG, isCurried = bitmask & (CURRY_FLAG | CURRY_RIGHT_FLAG), isFlip = bitmask & FLIP_FLAG, Ctor = isBindKey ? void 0 : createCtor(func);
         function wrapper() {
-          var length = arguments.length, args = Array(length), index3 = length;
-          while (index3--) {
-            args[index3] = arguments[index3];
+          var length = arguments.length, args = Array(length), index = length;
+          while (index--) {
+            args[index] = arguments[index];
           }
           if (isCurried) {
             var placeholder = getHolder(wrapper), holdersCount = countHolders(args, placeholder);
@@ -26593,8 +26593,8 @@
       function reorder(array, indexes) {
         var arrLength = array.length, length = nativeMin(indexes.length, arrLength), oldArray = copyArray(array);
         while (length--) {
-          var index3 = indexes[length];
-          array[length] = isIndex(index3, arrLength) ? oldArray[index3] : void 0;
+          var index = indexes[length];
+          array[length] = isIndex(index, arrLength) ? oldArray[index] : void 0;
         }
         return array;
       }
@@ -26701,7 +26701,7 @@
       if (true) {
         (function() {
           "use strict";
-          var React3 = require_react();
+          var React2 = require_react();
           var REACT_ELEMENT_TYPE = Symbol.for("react.element");
           var REACT_PORTAL_TYPE = Symbol.for("react.portal");
           var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -26727,7 +26727,7 @@
             }
             return null;
           }
-          var ReactSharedInternals = React3.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React2.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function error(format) {
             {
               {
@@ -27575,14 +27575,359 @@
     }
   });
 
+  // node_modules/.pnpm/@babel+runtime@7.20.6/node_modules/@babel/runtime/helpers/extends.js
+  var require_extends = __commonJS({
+    "node_modules/.pnpm/@babel+runtime@7.20.6/node_modules/@babel/runtime/helpers/extends.js"(exports, module) {
+      function _extends() {
+        module.exports = _extends = Object.assign ? Object.assign.bind() : function(target) {
+          for (var i = 1; i < arguments.length; i++) {
+            var source = arguments[i];
+            for (var key in source) {
+              if (Object.prototype.hasOwnProperty.call(source, key)) {
+                target[key] = source[key];
+              }
+            }
+          }
+          return target;
+        }, module.exports.__esModule = true, module.exports["default"] = module.exports;
+        return _extends.apply(this, arguments);
+      }
+      module.exports = _extends, module.exports.__esModule = true, module.exports["default"] = module.exports;
+    }
+  });
+
+  // node_modules/.pnpm/@babel+runtime@7.20.6/node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js
+  var require_objectWithoutPropertiesLoose = __commonJS({
+    "node_modules/.pnpm/@babel+runtime@7.20.6/node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js"(exports, module) {
+      function _objectWithoutPropertiesLoose(source, excluded) {
+        if (source == null)
+          return {};
+        var target = {};
+        var sourceKeys = Object.keys(source);
+        var key, i;
+        for (i = 0; i < sourceKeys.length; i++) {
+          key = sourceKeys[i];
+          if (excluded.indexOf(key) >= 0)
+            continue;
+          target[key] = source[key];
+        }
+        return target;
+      }
+      module.exports = _objectWithoutPropertiesLoose, module.exports.__esModule = true, module.exports["default"] = module.exports;
+    }
+  });
+
+  // node_modules/.pnpm/use-isomorphic-layout-effect@1.1.2_kzbn2opkn2327fwg5yzwzya5o4/node_modules/use-isomorphic-layout-effect/dist/use-isomorphic-layout-effect.browser.cjs.js
+  var require_use_isomorphic_layout_effect_browser_cjs = __commonJS({
+    "node_modules/.pnpm/use-isomorphic-layout-effect@1.1.2_kzbn2opkn2327fwg5yzwzya5o4/node_modules/use-isomorphic-layout-effect/dist/use-isomorphic-layout-effect.browser.cjs.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      var react = require_react();
+      var index = react.useLayoutEffect;
+      exports.default = index;
+    }
+  });
+
+  // node_modules/.pnpm/use-latest@1.2.1_kzbn2opkn2327fwg5yzwzya5o4/node_modules/use-latest/dist/use-latest.cjs.dev.js
+  var require_use_latest_cjs_dev = __commonJS({
+    "node_modules/.pnpm/use-latest@1.2.1_kzbn2opkn2327fwg5yzwzya5o4/node_modules/use-latest/dist/use-latest.cjs.dev.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      var React2 = require_react();
+      var useIsomorphicLayoutEffect = require_use_isomorphic_layout_effect_browser_cjs();
+      function _interopDefault(e) {
+        return e && e.__esModule ? e : { "default": e };
+      }
+      function _interopNamespace(e) {
+        if (e && e.__esModule)
+          return e;
+        var n = /* @__PURE__ */ Object.create(null);
+        if (e) {
+          Object.keys(e).forEach(function(k) {
+            if (k !== "default") {
+              var d = Object.getOwnPropertyDescriptor(e, k);
+              Object.defineProperty(n, k, d.get ? d : {
+                enumerable: true,
+                get: function() {
+                  return e[k];
+                }
+              });
+            }
+          });
+        }
+        n["default"] = e;
+        return Object.freeze(n);
+      }
+      var React__namespace = /* @__PURE__ */ _interopNamespace(React2);
+      var useIsomorphicLayoutEffect__default = /* @__PURE__ */ _interopDefault(useIsomorphicLayoutEffect);
+      var useLatest = function useLatest2(value) {
+        var ref = React__namespace.useRef(value);
+        useIsomorphicLayoutEffect__default["default"](function() {
+          ref.current = value;
+        });
+        return ref;
+      };
+      exports["default"] = useLatest;
+    }
+  });
+
+  // node_modules/.pnpm/use-latest@1.2.1_kzbn2opkn2327fwg5yzwzya5o4/node_modules/use-latest/dist/use-latest.cjs.js
+  var require_use_latest_cjs = __commonJS({
+    "node_modules/.pnpm/use-latest@1.2.1_kzbn2opkn2327fwg5yzwzya5o4/node_modules/use-latest/dist/use-latest.cjs.js"(exports, module) {
+      "use strict";
+      if (false) {
+        module.exports = null;
+      } else {
+        module.exports = require_use_latest_cjs_dev();
+      }
+    }
+  });
+
+  // node_modules/.pnpm/use-composed-ref@1.3.0_react@18.2.0/node_modules/use-composed-ref/dist/use-composed-ref.cjs.js
+  var require_use_composed_ref_cjs = __commonJS({
+    "node_modules/.pnpm/use-composed-ref@1.3.0_react@18.2.0/node_modules/use-composed-ref/dist/use-composed-ref.cjs.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      var React2 = require_react();
+      var updateRef = function updateRef2(ref, value) {
+        if (typeof ref === "function") {
+          ref(value);
+          return;
+        }
+        ref.current = value;
+      };
+      var useComposedRef = function useComposedRef2(libRef, userRef) {
+        var prevUserRef = React2.useRef();
+        return React2.useCallback(function(instance) {
+          libRef.current = instance;
+          if (prevUserRef.current) {
+            updateRef(prevUserRef.current, null);
+          }
+          prevUserRef.current = userRef;
+          if (!userRef) {
+            return;
+          }
+          updateRef(userRef, instance);
+        }, [userRef]);
+      };
+      exports.default = useComposedRef;
+    }
+  });
+
+  // node_modules/.pnpm/react-textarea-autosize@8.4.0_kzbn2opkn2327fwg5yzwzya5o4/node_modules/react-textarea-autosize/dist/react-textarea-autosize.cjs.dev.js
+  var require_react_textarea_autosize_cjs_dev = __commonJS({
+    "node_modules/.pnpm/react-textarea-autosize@8.4.0_kzbn2opkn2327fwg5yzwzya5o4/node_modules/react-textarea-autosize/dist/react-textarea-autosize.cjs.dev.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      var _extends = require_extends();
+      var _objectWithoutPropertiesLoose = require_objectWithoutPropertiesLoose();
+      var React2 = require_react();
+      var useLatest = require_use_latest_cjs();
+      var useComposedRef = require_use_composed_ref_cjs();
+      function _interopDefault(e) {
+        return e && e.__esModule ? e : { "default": e };
+      }
+      var useLatest__default = /* @__PURE__ */ _interopDefault(useLatest);
+      var useComposedRef__default = /* @__PURE__ */ _interopDefault(useComposedRef);
+      var HIDDEN_TEXTAREA_STYLE = {
+        "min-height": "0",
+        "max-height": "none",
+        height: "0",
+        visibility: "hidden",
+        overflow: "hidden",
+        position: "absolute",
+        "z-index": "-1000",
+        top: "0",
+        right: "0"
+      };
+      var forceHiddenStyles = function forceHiddenStyles2(node) {
+        Object.keys(HIDDEN_TEXTAREA_STYLE).forEach(function(key) {
+          node.style.setProperty(key, HIDDEN_TEXTAREA_STYLE[key], "important");
+        });
+      };
+      var hiddenTextarea = null;
+      var getHeight = function getHeight2(node, sizingData) {
+        var height = node.scrollHeight;
+        if (sizingData.sizingStyle.boxSizing === "border-box") {
+          return height + sizingData.borderSize;
+        }
+        return height - sizingData.paddingSize;
+      };
+      function calculateNodeHeight(sizingData, value, minRows, maxRows) {
+        if (minRows === void 0) {
+          minRows = 1;
+        }
+        if (maxRows === void 0) {
+          maxRows = Infinity;
+        }
+        if (!hiddenTextarea) {
+          hiddenTextarea = document.createElement("textarea");
+          hiddenTextarea.setAttribute("tabindex", "-1");
+          hiddenTextarea.setAttribute("aria-hidden", "true");
+          forceHiddenStyles(hiddenTextarea);
+        }
+        if (hiddenTextarea.parentNode === null) {
+          document.body.appendChild(hiddenTextarea);
+        }
+        var paddingSize = sizingData.paddingSize, borderSize = sizingData.borderSize, sizingStyle = sizingData.sizingStyle;
+        var boxSizing = sizingStyle.boxSizing;
+        Object.keys(sizingStyle).forEach(function(_key) {
+          var key = _key;
+          hiddenTextarea.style[key] = sizingStyle[key];
+        });
+        forceHiddenStyles(hiddenTextarea);
+        hiddenTextarea.value = value;
+        var height = getHeight(hiddenTextarea, sizingData);
+        hiddenTextarea.value = "x";
+        var rowHeight = hiddenTextarea.scrollHeight - paddingSize;
+        var minHeight = rowHeight * minRows;
+        if (boxSizing === "border-box") {
+          minHeight = minHeight + paddingSize + borderSize;
+        }
+        height = Math.max(minHeight, height);
+        var maxHeight = rowHeight * maxRows;
+        if (boxSizing === "border-box") {
+          maxHeight = maxHeight + paddingSize + borderSize;
+        }
+        height = Math.min(maxHeight, height);
+        return [height, rowHeight];
+      }
+      var noop = function noop2() {
+      };
+      var pick = function pick2(props, obj) {
+        return props.reduce(function(acc, prop) {
+          acc[prop] = obj[prop];
+          return acc;
+        }, {});
+      };
+      var SIZING_STYLE = [
+        "borderBottomWidth",
+        "borderLeftWidth",
+        "borderRightWidth",
+        "borderTopWidth",
+        "boxSizing",
+        "fontFamily",
+        "fontSize",
+        "fontStyle",
+        "fontWeight",
+        "letterSpacing",
+        "lineHeight",
+        "paddingBottom",
+        "paddingLeft",
+        "paddingRight",
+        "paddingTop",
+        "tabSize",
+        "textIndent",
+        "textRendering",
+        "textTransform",
+        "width",
+        "wordBreak"
+      ];
+      var isIE = typeof document !== "undefined" ? !!document.documentElement.currentStyle : false;
+      var getSizingData = function getSizingData2(node) {
+        var style2 = window.getComputedStyle(node);
+        if (style2 === null) {
+          return null;
+        }
+        var sizingStyle = pick(SIZING_STYLE, style2);
+        var boxSizing = sizingStyle.boxSizing;
+        if (boxSizing === "") {
+          return null;
+        }
+        if (isIE && boxSizing === "border-box") {
+          sizingStyle.width = parseFloat(sizingStyle.width) + parseFloat(sizingStyle.borderRightWidth) + parseFloat(sizingStyle.borderLeftWidth) + parseFloat(sizingStyle.paddingRight) + parseFloat(sizingStyle.paddingLeft) + "px";
+        }
+        var paddingSize = parseFloat(sizingStyle.paddingBottom) + parseFloat(sizingStyle.paddingTop);
+        var borderSize = parseFloat(sizingStyle.borderBottomWidth) + parseFloat(sizingStyle.borderTopWidth);
+        return {
+          sizingStyle,
+          paddingSize,
+          borderSize
+        };
+      };
+      var useWindowResizeListener = function useWindowResizeListener2(listener) {
+        var latestListener = useLatest__default["default"](listener);
+        React2.useLayoutEffect(function() {
+          var handler = function handler2(event) {
+            latestListener.current(event);
+          };
+          window.addEventListener("resize", handler);
+          return function() {
+            window.removeEventListener("resize", handler);
+          };
+        }, []);
+      };
+      var TextareaAutosize = function TextareaAutosize2(_ref, userRef) {
+        var cacheMeasurements = _ref.cacheMeasurements, maxRows = _ref.maxRows, minRows = _ref.minRows, _ref$onChange = _ref.onChange, onChange = _ref$onChange === void 0 ? noop : _ref$onChange, _ref$onHeightChange = _ref.onHeightChange, onHeightChange = _ref$onHeightChange === void 0 ? noop : _ref$onHeightChange, props = _objectWithoutPropertiesLoose(_ref, ["cacheMeasurements", "maxRows", "minRows", "onChange", "onHeightChange"]);
+        if (props.style) {
+          if ("maxHeight" in props.style) {
+            throw new Error("Using `style.maxHeight` for <TextareaAutosize/> is not supported. Please use `maxRows`.");
+          }
+          if ("minHeight" in props.style) {
+            throw new Error("Using `style.minHeight` for <TextareaAutosize/> is not supported. Please use `minRows`.");
+          }
+        }
+        var isControlled = props.value !== void 0;
+        var libRef = React2.useRef(null);
+        var ref = useComposedRef__default["default"](libRef, userRef);
+        var heightRef = React2.useRef(0);
+        var measurementsCacheRef = React2.useRef();
+        var resizeTextarea = function resizeTextarea2() {
+          var node = libRef.current;
+          var nodeSizingData = cacheMeasurements && measurementsCacheRef.current ? measurementsCacheRef.current : getSizingData(node);
+          if (!nodeSizingData) {
+            return;
+          }
+          measurementsCacheRef.current = nodeSizingData;
+          var _calculateNodeHeight = calculateNodeHeight(nodeSizingData, node.value || node.placeholder || "x", minRows, maxRows), height = _calculateNodeHeight[0], rowHeight = _calculateNodeHeight[1];
+          if (heightRef.current !== height) {
+            heightRef.current = height;
+            node.style.setProperty("height", height + "px", "important");
+            onHeightChange(height, {
+              rowHeight
+            });
+          }
+        };
+        var handleChange = function handleChange2(event) {
+          if (!isControlled) {
+            resizeTextarea();
+          }
+          onChange(event);
+        };
+        if (typeof document !== "undefined") {
+          React2.useLayoutEffect(resizeTextarea);
+          useWindowResizeListener(resizeTextarea);
+        }
+        return /* @__PURE__ */ React2.createElement("textarea", _extends({}, props, {
+          onChange: handleChange,
+          ref
+        }));
+      };
+      var index = /* @__PURE__ */ React2.forwardRef(TextareaAutosize);
+      exports.default = index;
+    }
+  });
+
+  // node_modules/.pnpm/react-textarea-autosize@8.4.0_kzbn2opkn2327fwg5yzwzya5o4/node_modules/react-textarea-autosize/dist/react-textarea-autosize.cjs.js
+  var require_react_textarea_autosize_cjs = __commonJS({
+    "node_modules/.pnpm/react-textarea-autosize@8.4.0_kzbn2opkn2327fwg5yzwzya5o4/node_modules/react-textarea-autosize/dist/react-textarea-autosize.cjs.js"(exports, module) {
+      "use strict";
+      if (false) {
+        module.exports = null;
+      } else {
+        module.exports = require_react_textarea_autosize_cjs_dev();
+      }
+    }
+  });
+
   // demo/src/js/index.tsx
   var import_client = __toESM(require_client(), 1);
 
   // demo/src/js/components/Demo.tsx
-  var import_react24 = __toESM(require_react(), 1);
+  var import_react21 = __toESM(require_react(), 1);
 
   // src/js/components/ReactJsonView.tsx
-  var import_react23 = __toESM(require_react(), 1);
+  var import_react20 = __toESM(require_react(), 1);
 
   // src/js/stores/ObjectAttributes.ts
   var import_events = __toESM(require_events(), 1);
@@ -27743,7 +28088,7 @@
   var attributeStore = new ObjectAttributes();
   var ObjectAttributes_default = attributeStore;
 
-  // node_modules/.pnpm/@babel+runtime@7.20.1/node_modules/@babel/runtime/helpers/esm/typeof.js
+  // node_modules/.pnpm/@babel+runtime@7.20.6/node_modules/@babel/runtime/helpers/esm/typeof.js
   function _typeof(obj) {
     "@babel/helpers - typeof";
     return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj2) {
@@ -27753,8 +28098,29 @@
     }, _typeof(obj);
   }
 
-  // node_modules/.pnpm/@babel+runtime@7.20.1/node_modules/@babel/runtime/helpers/esm/defineProperty.js
+  // node_modules/.pnpm/@babel+runtime@7.20.6/node_modules/@babel/runtime/helpers/esm/toPrimitive.js
+  function _toPrimitive(input, hint) {
+    if (_typeof(input) !== "object" || input === null)
+      return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== void 0) {
+      var res = prim.call(input, hint || "default");
+      if (_typeof(res) !== "object")
+        return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (hint === "string" ? String : Number)(input);
+  }
+
+  // node_modules/.pnpm/@babel+runtime@7.20.6/node_modules/@babel/runtime/helpers/esm/toPropertyKey.js
+  function _toPropertyKey(arg) {
+    var key = _toPrimitive(arg, "string");
+    return _typeof(key) === "symbol" ? key : String(key);
+  }
+
+  // node_modules/.pnpm/@babel+runtime@7.20.6/node_modules/@babel/runtime/helpers/esm/defineProperty.js
   function _defineProperty(obj, key, value) {
+    key = _toPropertyKey(key);
     if (key in obj) {
       Object.defineProperty(obj, key, {
         value,
@@ -27768,43 +28134,42 @@
     return obj;
   }
 
-  // node_modules/.pnpm/@babel+runtime@7.20.1/node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js
+  // node_modules/.pnpm/@babel+runtime@7.20.6/node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js
   function _arrayWithHoles(arr) {
     if (Array.isArray(arr))
       return arr;
   }
 
-  // node_modules/.pnpm/@babel+runtime@7.20.1/node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js
+  // node_modules/.pnpm/@babel+runtime@7.20.6/node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js
   function _iterableToArrayLimit(arr, i) {
-    var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
-    if (_i == null)
-      return;
-    var _arr = [];
-    var _n = true;
-    var _d = false;
-    var _s, _e;
-    try {
-      for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
-        _arr.push(_s.value);
-        if (i && _arr.length === i)
-          break;
-      }
-    } catch (err) {
-      _d = true;
-      _e = err;
-    } finally {
+    var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
+    if (null != _i) {
+      var _s, _e, _x, _r, _arr = [], _n = true, _d = false;
       try {
-        if (!_n && _i["return"] != null)
-          _i["return"]();
+        if (_x = (_i = _i.call(arr)).next, 0 === i) {
+          if (Object(_i) !== _i)
+            return;
+          _n = false;
+        } else
+          for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = true) {
+            ;
+          }
+      } catch (err) {
+        _d = true, _e = err;
       } finally {
-        if (_d)
-          throw _e;
+        try {
+          if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r))
+            return;
+        } finally {
+          if (_d)
+            throw _e;
+        }
       }
+      return _arr;
     }
-    return _arr;
   }
 
-  // node_modules/.pnpm/@babel+runtime@7.20.1/node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
+  // node_modules/.pnpm/@babel+runtime@7.20.6/node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
   function _arrayLikeToArray(arr, len) {
     if (len == null || len > arr.length)
       len = arr.length;
@@ -27814,7 +28179,7 @@
     return arr2;
   }
 
-  // node_modules/.pnpm/@babel+runtime@7.20.1/node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
+  // node_modules/.pnpm/@babel+runtime@7.20.6/node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
   function _unsupportedIterableToArray(o, minLen) {
     if (!o)
       return;
@@ -27829,12 +28194,12 @@
       return _arrayLikeToArray(o, minLen);
   }
 
-  // node_modules/.pnpm/@babel+runtime@7.20.1/node_modules/@babel/runtime/helpers/esm/nonIterableRest.js
+  // node_modules/.pnpm/@babel+runtime@7.20.6/node_modules/@babel/runtime/helpers/esm/nonIterableRest.js
   function _nonIterableRest() {
     throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
-  // node_modules/.pnpm/@babel+runtime@7.20.1/node_modules/@babel/runtime/helpers/esm/slicedToArray.js
+  // node_modules/.pnpm/@babel+runtime@7.20.6/node_modules/@babel/runtime/helpers/esm/slicedToArray.js
   function _slicedToArray(arr, i) {
     return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
   }
@@ -28623,13 +28988,13 @@
   }
 
   // src/js/components/JsonViewer.tsx
-  var import_react20 = __toESM(require_react(), 1);
+  var import_react17 = __toESM(require_react(), 1);
 
   // src/js/components/ArrayGroup.tsx
-  var import_react19 = __toESM(require_react(), 1);
+  var import_react16 = __toESM(require_react(), 1);
 
   // src/js/components/Child.tsx
-  var import_react18 = __toESM(require_react(), 1);
+  var import_react15 = __toESM(require_react(), 1);
 
   // src/js/components/DataTypes/Boolean.tsx
   var import_react4 = __toESM(require_react(), 1);
@@ -29530,262 +29895,8 @@
   var String_default = StringDataType;
 
   // src/js/components/VariableEditor.tsx
-  var import_react16 = __toESM(require_react(), 1);
-
-  // node_modules/.pnpm/@babel+runtime@7.20.1/node_modules/@babel/runtime/helpers/esm/extends.js
-  function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
-      }
-      return target;
-    };
-    return _extends.apply(this, arguments);
-  }
-
-  // node_modules/.pnpm/@babel+runtime@7.20.1/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
-  function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null)
-      return {};
-    var target = {};
-    var sourceKeys = Object.keys(source);
-    var key, i;
-    for (i = 0; i < sourceKeys.length; i++) {
-      key = sourceKeys[i];
-      if (excluded.indexOf(key) >= 0)
-        continue;
-      target[key] = source[key];
-    }
-    return target;
-  }
-
-  // node_modules/.pnpm/react-textarea-autosize@8.3.4_fan5qbzahqtxlm5dzefqlqx5ia/node_modules/react-textarea-autosize/dist/react-textarea-autosize.browser.esm.js
-  var import_react15 = __toESM(require_react());
-
-  // node_modules/.pnpm/use-latest@1.2.1_fan5qbzahqtxlm5dzefqlqx5ia/node_modules/use-latest/dist/use-latest.esm.js
-  var React2 = __toESM(require_react());
-
-  // node_modules/.pnpm/use-isomorphic-layout-effect@1.1.2_fan5qbzahqtxlm5dzefqlqx5ia/node_modules/use-isomorphic-layout-effect/dist/use-isomorphic-layout-effect.browser.esm.js
-  var import_react13 = __toESM(require_react());
-  var index = import_react13.useLayoutEffect;
-  var use_isomorphic_layout_effect_browser_esm_default = index;
-
-  // node_modules/.pnpm/use-latest@1.2.1_fan5qbzahqtxlm5dzefqlqx5ia/node_modules/use-latest/dist/use-latest.esm.js
-  var useLatest = function useLatest2(value) {
-    var ref = React2.useRef(value);
-    use_isomorphic_layout_effect_browser_esm_default(function() {
-      ref.current = value;
-    });
-    return ref;
-  };
-
-  // node_modules/.pnpm/use-composed-ref@1.3.0_react@18.2.0/node_modules/use-composed-ref/dist/use-composed-ref.esm.js
-  var import_react14 = __toESM(require_react());
-  var updateRef = function updateRef2(ref, value) {
-    if (typeof ref === "function") {
-      ref(value);
-      return;
-    }
-    ref.current = value;
-  };
-  var useComposedRef = function useComposedRef2(libRef, userRef) {
-    var prevUserRef = (0, import_react14.useRef)();
-    return (0, import_react14.useCallback)(function(instance) {
-      libRef.current = instance;
-      if (prevUserRef.current) {
-        updateRef(prevUserRef.current, null);
-      }
-      prevUserRef.current = userRef;
-      if (!userRef) {
-        return;
-      }
-      updateRef(userRef, instance);
-    }, [userRef]);
-  };
-  var use_composed_ref_esm_default = useComposedRef;
-
-  // node_modules/.pnpm/react-textarea-autosize@8.3.4_fan5qbzahqtxlm5dzefqlqx5ia/node_modules/react-textarea-autosize/dist/react-textarea-autosize.browser.esm.js
-  var HIDDEN_TEXTAREA_STYLE = {
-    "min-height": "0",
-    "max-height": "none",
-    height: "0",
-    visibility: "hidden",
-    overflow: "hidden",
-    position: "absolute",
-    "z-index": "-1000",
-    top: "0",
-    right: "0"
-  };
-  var forceHiddenStyles = function forceHiddenStyles2(node) {
-    Object.keys(HIDDEN_TEXTAREA_STYLE).forEach(function(key) {
-      node.style.setProperty(key, HIDDEN_TEXTAREA_STYLE[key], "important");
-    });
-  };
-  var hiddenTextarea = null;
-  var getHeight = function getHeight2(node, sizingData) {
-    var height = node.scrollHeight;
-    if (sizingData.sizingStyle.boxSizing === "border-box") {
-      return height + sizingData.borderSize;
-    }
-    return height - sizingData.paddingSize;
-  };
-  function calculateNodeHeight(sizingData, value, minRows, maxRows) {
-    if (minRows === void 0) {
-      minRows = 1;
-    }
-    if (maxRows === void 0) {
-      maxRows = Infinity;
-    }
-    if (!hiddenTextarea) {
-      hiddenTextarea = document.createElement("textarea");
-      hiddenTextarea.setAttribute("tabindex", "-1");
-      hiddenTextarea.setAttribute("aria-hidden", "true");
-      forceHiddenStyles(hiddenTextarea);
-    }
-    if (hiddenTextarea.parentNode === null) {
-      document.body.appendChild(hiddenTextarea);
-    }
-    var paddingSize = sizingData.paddingSize, borderSize = sizingData.borderSize, sizingStyle = sizingData.sizingStyle;
-    var boxSizing = sizingStyle.boxSizing;
-    Object.keys(sizingStyle).forEach(function(_key) {
-      var key = _key;
-      hiddenTextarea.style[key] = sizingStyle[key];
-    });
-    forceHiddenStyles(hiddenTextarea);
-    hiddenTextarea.value = value;
-    var height = getHeight(hiddenTextarea, sizingData);
-    hiddenTextarea.value = "x";
-    var rowHeight = hiddenTextarea.scrollHeight - paddingSize;
-    var minHeight = rowHeight * minRows;
-    if (boxSizing === "border-box") {
-      minHeight = minHeight + paddingSize + borderSize;
-    }
-    height = Math.max(minHeight, height);
-    var maxHeight = rowHeight * maxRows;
-    if (boxSizing === "border-box") {
-      maxHeight = maxHeight + paddingSize + borderSize;
-    }
-    height = Math.min(maxHeight, height);
-    return [height, rowHeight];
-  }
-  var noop = function noop2() {
-  };
-  var pick = function pick2(props, obj) {
-    return props.reduce(function(acc, prop) {
-      acc[prop] = obj[prop];
-      return acc;
-    }, {});
-  };
-  var SIZING_STYLE = [
-    "borderBottomWidth",
-    "borderLeftWidth",
-    "borderRightWidth",
-    "borderTopWidth",
-    "boxSizing",
-    "fontFamily",
-    "fontSize",
-    "fontStyle",
-    "fontWeight",
-    "letterSpacing",
-    "lineHeight",
-    "paddingBottom",
-    "paddingLeft",
-    "paddingRight",
-    "paddingTop",
-    "tabSize",
-    "textIndent",
-    "textRendering",
-    "textTransform",
-    "width",
-    "wordBreak"
-  ];
-  var isIE = !!document.documentElement.currentStyle;
-  var getSizingData = function getSizingData2(node) {
-    var style2 = window.getComputedStyle(node);
-    if (style2 === null) {
-      return null;
-    }
-    var sizingStyle = pick(SIZING_STYLE, style2);
-    var boxSizing = sizingStyle.boxSizing;
-    if (boxSizing === "") {
-      return null;
-    }
-    if (isIE && boxSizing === "border-box") {
-      sizingStyle.width = parseFloat(sizingStyle.width) + parseFloat(sizingStyle.borderRightWidth) + parseFloat(sizingStyle.borderLeftWidth) + parseFloat(sizingStyle.paddingRight) + parseFloat(sizingStyle.paddingLeft) + "px";
-    }
-    var paddingSize = parseFloat(sizingStyle.paddingBottom) + parseFloat(sizingStyle.paddingTop);
-    var borderSize = parseFloat(sizingStyle.borderBottomWidth) + parseFloat(sizingStyle.borderTopWidth);
-    return {
-      sizingStyle,
-      paddingSize,
-      borderSize
-    };
-  };
-  var useWindowResizeListener = function useWindowResizeListener2(listener) {
-    var latestListener = useLatest(listener);
-    (0, import_react15.useLayoutEffect)(function() {
-      var handler = function handler2(event) {
-        latestListener.current(event);
-      };
-      window.addEventListener("resize", handler);
-      return function() {
-        window.removeEventListener("resize", handler);
-      };
-    }, []);
-  };
-  var TextareaAutosize = function TextareaAutosize2(_ref, userRef) {
-    var cacheMeasurements = _ref.cacheMeasurements, maxRows = _ref.maxRows, minRows = _ref.minRows, _ref$onChange = _ref.onChange, onChange = _ref$onChange === void 0 ? noop : _ref$onChange, _ref$onHeightChange = _ref.onHeightChange, onHeightChange = _ref$onHeightChange === void 0 ? noop : _ref$onHeightChange, props = _objectWithoutPropertiesLoose(_ref, ["cacheMeasurements", "maxRows", "minRows", "onChange", "onHeightChange"]);
-    if (props.style) {
-      if ("maxHeight" in props.style) {
-        throw new Error("Using `style.maxHeight` for <TextareaAutosize/> is not supported. Please use `maxRows`.");
-      }
-      if ("minHeight" in props.style) {
-        throw new Error("Using `style.minHeight` for <TextareaAutosize/> is not supported. Please use `minRows`.");
-      }
-    }
-    var isControlled = props.value !== void 0;
-    var libRef = (0, import_react15.useRef)(null);
-    var ref = use_composed_ref_esm_default(libRef, userRef);
-    var heightRef = (0, import_react15.useRef)(0);
-    var measurementsCacheRef = (0, import_react15.useRef)();
-    var resizeTextarea = function resizeTextarea2() {
-      var node = libRef.current;
-      var nodeSizingData = cacheMeasurements && measurementsCacheRef.current ? measurementsCacheRef.current : getSizingData(node);
-      if (!nodeSizingData) {
-        return;
-      }
-      measurementsCacheRef.current = nodeSizingData;
-      var _calculateNodeHeight = calculateNodeHeight(nodeSizingData, node.value || node.placeholder || "x", minRows, maxRows), height = _calculateNodeHeight[0], rowHeight = _calculateNodeHeight[1];
-      if (heightRef.current !== height) {
-        heightRef.current = height;
-        node.style.setProperty("height", height + "px", "important");
-        onHeightChange(height, {
-          rowHeight
-        });
-      }
-    };
-    var handleChange = function handleChange2(event) {
-      if (!isControlled) {
-        resizeTextarea();
-      }
-      onChange(event);
-    };
-    {
-      (0, import_react15.useLayoutEffect)(resizeTextarea);
-      useWindowResizeListener(resizeTextarea);
-    }
-    return /* @__PURE__ */ (0, import_react15.createElement)("textarea", _extends({}, props, {
-      onChange: handleChange,
-      ref
-    }));
-  };
-  var index2 = /* @__PURE__ */ (0, import_react15.forwardRef)(TextareaAutosize);
-  var react_textarea_autosize_browser_esm_default = index2;
+  var import_react13 = __toESM(require_react(), 1);
+  var import_react_textarea_autosize = __toESM(require_react_textarea_autosize_cjs(), 1);
 
   // src/js/helpers/parseInput.ts
   function parseInput(originalInput) {
@@ -29844,14 +29955,14 @@
 
   // src/js/components/VariableEditor.tsx
   var import_jsx_runtime12 = __toESM(require_jsx_runtime(), 1);
-  var import_react17 = __toESM(require_react(), 1);
+  var import_react14 = __toESM(require_react(), 1);
   var EditIcon = ({
     onEdit,
     hovered
   }) => {
     const {
       props: { theme }
-    } = (0, import_react16.useContext)(ReactJsonViewContext_default);
+    } = (0, import_react13.useContext)(ReactJsonViewContext_default);
     return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", {
       className: "click-to-edit",
       style: {
@@ -29869,11 +29980,11 @@
     hovered,
     handleClick
   }) => {
-    const { namespace, value } = (0, import_react16.useContext)(LocalJsonViewContext_default);
+    const { namespace, value } = (0, import_react13.useContext)(LocalJsonViewContext_default);
     const {
       props: { theme },
       rjvId
-    } = (0, import_react16.useContext)(ReactJsonViewContext_default);
+    } = (0, import_react13.useContext)(ReactJsonViewContext_default);
     const name = namespace.at(-1);
     return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", {
       className: "click-to-remove",
@@ -29895,7 +30006,7 @@
     setEdit,
     submitEdit
   }) => {
-    const { value } = (0, import_react16.useContext)(LocalJsonViewContext_default);
+    const { value } = (0, import_react13.useContext)(LocalJsonViewContext_default);
     const type = edit.editMode ? "edit" : toType(value);
     switch (type) {
       case "edit":
@@ -29924,11 +30035,11 @@
     const {
       props: { theme },
       rjvId
-    } = (0, import_react16.useContext)(ReactJsonViewContext_default);
-    const { namespace } = (0, import_react16.useContext)(LocalJsonViewContext_default);
+    } = (0, import_react13.useContext)(ReactJsonViewContext_default);
+    const { namespace } = (0, import_react13.useContext)(LocalJsonViewContext_default);
     return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", {
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(react_textarea_autosize_browser_esm_default, {
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_react_textarea_autosize.default, {
           type: "text",
           ref: (input) => input && input.focus(),
           value: edit.editMode ? edit.editValue : "",
@@ -29997,7 +30108,7 @@
   }) => {
     const {
       props: { theme }
-    } = (0, import_react16.useContext)(ReactJsonViewContext_default);
+    } = (0, import_react13.useContext)(ReactJsonViewContext_default);
     const parsedInput = edit.editMode ? parseInput(edit.editValue) : { type: false, value: null };
     const detected = /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(DetectedInput, {
       parsedInput
@@ -30027,7 +30138,7 @@
   }) => {
     const {
       props: { theme }
-    } = (0, import_react16.useContext)(ReactJsonViewContext_default);
+    } = (0, import_react13.useContext)(ReactJsonViewContext_default);
     const { type, value } = parsedInput;
     if (type !== false) {
       switch (type.toLowerCase()) {
@@ -30114,13 +30225,13 @@
         onChange
       },
       rjvId
-    } = (0, import_react16.useContext)(ReactJsonViewContext_default);
-    const { namespace, value, parentType } = (0, import_react16.useContext)(LocalJsonViewContext_default);
+    } = (0, import_react13.useContext)(ReactJsonViewContext_default);
+    const { namespace, value, parentType } = (0, import_react13.useContext)(LocalJsonViewContext_default);
     const type = toType(value);
     const name = namespace.at(-1);
-    const [edit, setEdit] = (0, import_react16.useState)({ editMode: false });
-    const [hovered, setHovered] = (0, import_react16.useState)(false);
-    const [hoveredKey, setHoveredKey] = (0, import_react16.useState)(false);
+    const [edit, setEdit] = (0, import_react13.useState)({ editMode: false });
+    const [hovered, setHovered] = (0, import_react13.useState)(false);
+    const [hoveredKey, setHoveredKey] = (0, import_react13.useState)(false);
     const enterEditMode = () => {
       if (canEdit) {
         const stringifiedValue = stringifyVariable_default(
@@ -30165,7 +30276,7 @@
       });
       onChange(data.updatedSrc);
     };
-    return /* @__PURE__ */ (0, import_react17.createElement)("div", {
+    return /* @__PURE__ */ (0, import_react14.createElement)("div", {
       ...style(theme, "objectKeyVal", {
         paddingLeft: indentWidth * SINGLE_INDENT,
         minHeight: "20px"
@@ -30174,7 +30285,7 @@
       onMouseLeave: () => setHovered(false),
       className: "variable-row",
       key: name
-    }, type === "array" ? displayArrayKey ? /* @__PURE__ */ (0, import_react17.createElement)("span", {
+    }, type === "array" ? displayArrayKey ? /* @__PURE__ */ (0, import_react14.createElement)("span", {
       ...style(theme, "array-key"),
       key: `${name}_${namespace}`
     }, name, /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", {
@@ -30185,7 +30296,7 @@
       onMouseEnter: () => setHoveredKey(true),
       onMouseLeave: () => setHoveredKey(false),
       children: [
-        /* @__PURE__ */ (0, import_react17.createElement)("span", {
+        /* @__PURE__ */ (0, import_react14.createElement)("span", {
           ...style(theme, "object-name"),
           className: "object-key",
           key: `${name}_${namespace}`
@@ -30247,7 +30358,7 @@
     const type = toType(value);
     const {
       props: { groupArraysAfterLength }
-    } = (0, import_react18.useContext)(ReactJsonViewContext_default);
+    } = (0, import_react15.useContext)(ReactJsonViewContext_default);
     return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(LocalJsonViewContext_default.Provider, {
       value: {
         depth,
@@ -30273,11 +30384,11 @@
   // src/js/components/ArrayGroup.tsx
   var import_jsx_runtime14 = __toESM(require_jsx_runtime(), 1);
   var ArrayGroup = () => {
-    const { namespace, value, depth } = (0, import_react19.useContext)(LocalJsonViewContext_default);
+    const { namespace, value, depth } = (0, import_react16.useContext)(LocalJsonViewContext_default);
     const {
       props: { theme, groupArraysAfterLength, indentWidth }
-    } = (0, import_react19.useContext)(ReactJsonViewContext_default);
-    const [collapsed, setCollapsed] = (0, import_react19.useState)({});
+    } = (0, import_react16.useContext)(ReactJsonViewContext_default);
+    const [collapsed, setCollapsed] = (0, import_react16.useState)({});
     const toggleCollapsed = (i) => {
       setCollapsed({
         ...collapsed,
@@ -30362,8 +30473,8 @@
   // src/js/components/JsonViewer.tsx
   var import_jsx_runtime15 = __toESM(require_jsx_runtime(), 1);
   var JsonViewer = (p) => {
-    const { props: rjvProps } = (0, import_react20.useContext)(ReactJsonViewContext_default);
-    const ObjectComponent = (0, import_react20.useMemo)(() => {
+    const { props: rjvProps } = (0, import_react17.useContext)(ReactJsonViewContext_default);
+    const ObjectComponent = (0, import_react17.useMemo)(() => {
       if (Array.isArray(rjvProps.value) && rjvProps.groupArraysAfterLength && rjvProps.value.length > rjvProps.groupArraysAfterLength) {
         return ArrayGroup_default;
       }
@@ -30396,7 +30507,7 @@
   var JsonViewer_default = JsonViewer;
 
   // src/js/components/ObjectKeyModal/ObjectKeyModal.tsx
-  var import_react21 = __toESM(require_react(), 1);
+  var import_react18 = __toESM(require_react(), 1);
   var import_jsx_runtime16 = __toESM(require_jsx_runtime(), 1);
   var ObjectKeyModal = ({
     onClose,
@@ -30407,9 +30518,9 @@
     const {
       props: { theme, newKeyDefaultValue },
       rjvId
-    } = (0, import_react21.useContext)(ReactJsonViewContext_default);
-    const [input, setInput] = (0, import_react21.useState)(inputValue);
-    const [valid, setValid] = (0, import_react21.useState)(false);
+    } = (0, import_react18.useContext)(ReactJsonViewContext_default);
+    const [input, setInput] = (0, import_react18.useState)(inputValue);
+    const [valid, setValid] = (0, import_react18.useState)(false);
     const isValid = (input2) => {
       if (addKeyRequest) {
         const request = ObjectAttributes_default.get(rjvId, "action", "new-key-request");
@@ -30421,10 +30532,10 @@
       }
       return false;
     };
-    (0, import_react21.useEffect)(() => {
+    (0, import_react18.useEffect)(() => {
       setValid(isValid(input));
     }, [input]);
-    (0, import_react21.useEffect)(() => {
+    (0, import_react18.useEffect)(() => {
       setInput(inputValue);
     }, [inputValue]);
     const handleSubmit = () => {
@@ -30517,7 +30628,7 @@
   var ObjectKeyModal_default = ObjectKeyModal;
 
   // src/js/components/ValidationFailure.tsx
-  var import_react22 = __toESM(require_react(), 1);
+  var import_react19 = __toESM(require_react(), 1);
   var import_jsx_runtime17 = __toESM(require_jsx_runtime(), 1);
   var ValidationFailure = ({
     message,
@@ -30526,7 +30637,7 @@
     const {
       props: { theme },
       rjvId
-    } = (0, import_react22.useContext)(ReactJsonViewContext_default);
+    } = (0, import_react19.useContext)(ReactJsonViewContext_default);
     return active ? /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", {
       className: "validation-failure",
       ...style(theme, "validation-failure"),
@@ -30575,14 +30686,14 @@
     displayObjectSize = true,
     iconStyle = "triangle"
   }) => {
-    const [addKeyRequest, setAddKeyRequest] = (0, import_react23.useState)(false);
-    const [editKeyRequest, setEditKeyRequest] = (0, import_react23.useState)({
+    const [addKeyRequest, setAddKeyRequest] = (0, import_react20.useState)(false);
+    const [editKeyRequest, setEditKeyRequest] = (0, import_react20.useState)({
       editKey: false,
       keyValue: ""
     });
-    const [validationFailure, setValidationFailure] = (0, import_react23.useState)(false);
-    const rjvId = (0, import_react23.useId)();
-    (0, import_react23.useEffect)(() => {
+    const [validationFailure, setValidationFailure] = (0, import_react20.useState)(false);
+    const rjvId = (0, import_react20.useId)();
+    (0, import_react20.useEffect)(() => {
       ObjectAttributes_default.set(rjvId, "global", "src", value);
       ObjectAttributes_default.on(`add-key-request-${rjvId}`, addKeyRequestHandler);
       const listeners = getListeners();
@@ -30700,7 +30811,7 @@
   // demo/src/js/components/Demo.tsx
   var import_jsx_runtime19 = __toESM(require_jsx_runtime(), 1);
   var Demo = () => {
-    const [value, setValue] = (0, import_react24.useState)({
+    const [value, setValue] = (0, import_react21.useState)({
       stringV: "this is a test string",
       integer: 42,
       empty_array: [],

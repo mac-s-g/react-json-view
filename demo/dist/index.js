@@ -29017,11 +29017,7 @@
       props: { theme, displayDataTypes }
     } = (0, import_react3.useContext)(ReactJsonViewContext_default);
     if (displayDataTypes) {
-      return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-        className: "data-type-label",
-        ...style(theme, "data-type-label"),
-        children: typeName
-      });
+      return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "data-type-label", ...style(theme, "data-type-label"), children: typeName });
     }
     return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, {});
   };
@@ -29034,15 +29030,10 @@
       props: { theme }
     } = (0, import_react4.useContext)(ReactJsonViewContext_default);
     const { value } = (0, import_react4.useContext)(LocalJsonViewContext_default);
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", {
-      ...style(theme, "boolean"),
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(DataTypeLabel_default, {
-          typeName: "boolean"
-        }),
-        dataValue ?? value ? "true" : "false"
-      ]
-    });
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { ...style(theme, "boolean"), children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(DataTypeLabel_default, { typeName: "boolean" }),
+      dataValue ?? value ? "true" : "false"
+    ] });
   };
   var Boolean_default = BooleanRenderer;
 
@@ -29053,10 +29044,7 @@
     const {
       props: { theme }
     } = (0, import_react5.useContext)(ReactJsonViewContext_default);
-    return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", {
-      ...style(theme, "null"),
-      children: dataValue ?? "NULL"
-    });
+    return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { ...style(theme, "null"), children: dataValue ?? "NULL" });
   };
   var Null_default = NullDataType;
 
@@ -29068,15 +29056,10 @@
       props: { theme }
     } = (0, import_react6.useContext)(ReactJsonViewContext_default);
     const { value } = (0, import_react6.useContext)(LocalJsonViewContext_default);
-    return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", {
-      ...style(theme, "number"),
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(DataTypeLabel_default, {
-          typeName: "number"
-        }),
-        dataValue ?? value
-      ]
-    });
+    return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { ...style(theme, "number"), children: [
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(DataTypeLabel_default, { typeName: "number" }),
+      dataValue ?? value
+    ] });
   };
   var Number_default = NumberDataType;
 
@@ -29088,73 +29071,65 @@
   var DEFAULT_COLOR = "#000000";
   var CircleMinus = (props) => {
     const { style: style2, ...rest } = props;
-    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", {
-      ...rest,
-      children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", {
+    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { ...rest, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+      "svg",
+      {
         ...getIconStyle(style2),
         viewBox: "0 0 24 24",
         fill: "currentColor",
         preserveAspectRatio: "xMidYMid meet",
-        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", {
-          d: "M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M7,13H17V11H7"
-        })
-      })
-    });
+        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { d: "M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M7,13H17V11H7" })
+      }
+    ) });
   };
   var CirclePlus = (props) => {
     const { style: style2, ...rest } = props;
-    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", {
-      ...rest,
-      children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", {
+    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { ...rest, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+      "svg",
+      {
         ...getIconStyle(style2),
         viewBox: "0 0 24 24",
         fill: "currentColor",
         preserveAspectRatio: "xMidYMid meet",
-        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", {
-          d: "M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M13,7H11V11H7V13H11V17H13V13H17V11H13V7Z"
-        })
-      })
-    });
+        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { d: "M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M13,7H11V11H7V13H11V17H13V13H17V11H13V7Z" })
+      }
+    ) });
   };
   var SquareMinus = (props) => {
     const { style: style2, ...rest } = props;
     const svgStyle = getIconStyle(style2).style;
-    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", {
-      ...rest,
-      children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", {
+    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { ...rest, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+      "svg",
+      {
         fill: svgStyle.color,
         width: svgStyle.height,
         height: svgStyle.width,
         style: svgStyle,
         viewBox: "0 0 1792 1792",
-        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", {
-          d: "M1344 800v64q0 14-9 23t-23 9h-832q-14 0-23-9t-9-23v-64q0-14 9-23t23-9h832q14 0 23 9t9 23zm128 448v-832q0-66-47-113t-113-47h-832q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113zm128-832v832q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h832q119 0 203.5 84.5t84.5 203.5z"
-        })
-      })
-    });
+        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { d: "M1344 800v64q0 14-9 23t-23 9h-832q-14 0-23-9t-9-23v-64q0-14 9-23t23-9h832q14 0 23 9t9 23zm128 448v-832q0-66-47-113t-113-47h-832q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113zm128-832v832q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h832q119 0 203.5 84.5t84.5 203.5z" })
+      }
+    ) });
   };
   var SquarePlus = (props) => {
     const { style: style2, ...rest } = props;
     const svgStyle = getIconStyle(style2).style;
-    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", {
-      ...rest,
-      children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", {
+    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { ...rest, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+      "svg",
+      {
         fill: svgStyle.color,
         width: svgStyle.height,
         height: svgStyle.width,
         style: svgStyle,
         viewBox: "0 0 1792 1792",
-        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", {
-          d: "M1344 800v64q0 14-9 23t-23 9h-352v352q0 14-9 23t-23 9h-64q-14 0-23-9t-9-23v-352h-352q-14 0-23-9t-9-23v-64q0-14 9-23t23-9h352v-352q0-14 9-23t23-9h64q14 0 23 9t9 23v352h352q14 0 23 9t9 23zm128 448v-832q0-66-47-113t-113-47h-832q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113zm128-832v832q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h832q119 0 203.5 84.5t84.5 203.5z"
-        })
-      })
-    });
+        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { d: "M1344 800v64q0 14-9 23t-23 9h-352v352q0 14-9 23t-23 9h-64q-14 0-23-9t-9-23v-352h-352q-14 0-23-9t-9-23v-64q0-14 9-23t23-9h352v-352q0-14 9-23t23-9h64q14 0 23 9t9 23v352h352q14 0 23 9t9 23zm128 448v-832q0-66-47-113t-113-47h-832q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113zm128-832v832q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h832q119 0 203.5 84.5t84.5 203.5z" })
+      }
+    ) });
   };
   var ArrowRight = (props) => {
     const { style: style2, ...rest } = props;
-    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", {
-      ...rest,
-      children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", {
+    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { ...rest, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+      "svg",
+      {
         style: {
           ...getIconStyle(style2).style,
           paddingLeft: "2px",
@@ -29162,17 +29137,15 @@
         },
         viewBox: "0 0 15 15",
         fill: "currentColor",
-        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", {
-          d: "M0 14l6-6-6-6z"
-        })
-      })
-    });
+        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { d: "M0 14l6-6-6-6z" })
+      }
+    ) });
   };
   var ArrowDown = (props) => {
     const { style: style2, ...rest } = props;
-    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", {
-      ...rest,
-      children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", {
+    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { ...rest, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+      "svg",
+      {
         style: {
           ...getIconStyle(style2).style,
           paddingRight: "2px",
@@ -29180,113 +29153,87 @@
         },
         viewBox: "0 0 15 15",
         fill: "currentColor",
-        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", {
-          d: "M0 5l6 6 6-6z"
-        })
-      })
-    });
+        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { d: "M0 5l6 6 6-6z" })
+      }
+    ) });
   };
   var Clippy = (props) => {
     const { style: style2, ...rest } = props;
-    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", {
-      ...rest,
-      children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", {
+    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { ...rest, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+      "svg",
+      {
         ...getIconStyle(style2),
         viewBox: "0 0 40 40",
         fill: "currentColor",
         preserveAspectRatio: "xMidYMid meet",
-        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("g", {
-          children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", {
-            d: "m30 35h-25v-22.5h25v7.5h2.5v-12.5c0-1.4-1.1-2.5-2.5-2.5h-7.5c0-2.8-2.2-5-5-5s-5 2.2-5 5h-7.5c-1.4 0-2.5 1.1-2.5 2.5v27.5c0 1.4 1.1 2.5 2.5 2.5h25c1.4 0 2.5-1.1 2.5-2.5v-5h-2.5v5z m-20-27.5h2.5s2.5-1.1 2.5-2.5 1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5 1.3 2.5 2.5 2.5h2.5s2.5 1.1 2.5 2.5h-20c0-1.5 1.1-2.5 2.5-2.5z m-2.5 20h5v-2.5h-5v2.5z m17.5-5v-5l-10 7.5 10 7.5v-5h12.5v-5h-12.5z m-17.5 10h7.5v-2.5h-7.5v2.5z m12.5-17.5h-12.5v2.5h12.5v-2.5z m-7.5 5h-5v2.5h5v-2.5z"
-          })
-        })
-      })
-    });
+        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("g", { children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { d: "m30 35h-25v-22.5h25v7.5h2.5v-12.5c0-1.4-1.1-2.5-2.5-2.5h-7.5c0-2.8-2.2-5-5-5s-5 2.2-5 5h-7.5c-1.4 0-2.5 1.1-2.5 2.5v27.5c0 1.4 1.1 2.5 2.5 2.5h25c1.4 0 2.5-1.1 2.5-2.5v-5h-2.5v5z m-20-27.5h2.5s2.5-1.1 2.5-2.5 1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5 1.3 2.5 2.5 2.5h2.5s2.5 1.1 2.5 2.5h-20c0-1.5 1.1-2.5 2.5-2.5z m-2.5 20h5v-2.5h-5v2.5z m17.5-5v-5l-10 7.5 10 7.5v-5h12.5v-5h-12.5z m-17.5 10h7.5v-2.5h-7.5v2.5z m12.5-17.5h-12.5v2.5h12.5v-2.5z m-7.5 5h-5v2.5h5v-2.5z" }) })
+      }
+    ) });
   };
   var RemoveCircle = (props) => {
     const { style: style2, ...rest } = props;
-    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", {
-      ...rest,
-      children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", {
+    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { ...rest, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+      "svg",
+      {
         ...getIconStyle(style2),
         viewBox: "0 0 40 40",
         fill: "currentColor",
         preserveAspectRatio: "xMidYMid meet",
-        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("g", {
-          children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", {
-            d: "m28.6 25q0-0.5-0.4-1l-4-4 4-4q0.4-0.5 0.4-1 0-0.6-0.4-1.1l-2-2q-0.4-0.4-1-0.4-0.6 0-1 0.4l-4.1 4.1-4-4.1q-0.4-0.4-1-0.4-0.6 0-1 0.4l-2 2q-0.5 0.5-0.5 1.1 0 0.5 0.5 1l4 4-4 4q-0.5 0.5-0.5 1 0 0.7 0.5 1.1l2 2q0.4 0.4 1 0.4 0.6 0 1-0.4l4-4.1 4.1 4.1q0.4 0.4 1 0.4 0.6 0 1-0.4l2-2q0.4-0.4 0.4-1z m8.7-5q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z"
-          })
-        })
-      })
-    });
+        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("g", { children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { d: "m28.6 25q0-0.5-0.4-1l-4-4 4-4q0.4-0.5 0.4-1 0-0.6-0.4-1.1l-2-2q-0.4-0.4-1-0.4-0.6 0-1 0.4l-4.1 4.1-4-4.1q-0.4-0.4-1-0.4-0.6 0-1 0.4l-2 2q-0.5 0.5-0.5 1.1 0 0.5 0.5 1l4 4-4 4q-0.5 0.5-0.5 1 0 0.7 0.5 1.1l2 2q0.4 0.4 1 0.4 0.6 0 1-0.4l4-4.1 4.1 4.1q0.4 0.4 1 0.4 0.6 0 1-0.4l2-2q0.4-0.4 0.4-1z m8.7-5q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z" }) })
+      }
+    ) });
   };
   var AddCircle = (props) => {
     const { style: style2, ...rest } = props;
-    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", {
-      ...rest,
-      children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", {
+    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { ...rest, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+      "svg",
+      {
         ...getIconStyle(style2),
         viewBox: "0 0 40 40",
         fill: "currentColor",
         preserveAspectRatio: "xMidYMid meet",
-        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("g", {
-          children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", {
-            d: "m30.1 21.4v-2.8q0-0.6-0.4-1t-1-0.5h-5.7v-5.7q0-0.6-0.4-1t-1-0.4h-2.9q-0.6 0-1 0.4t-0.4 1v5.7h-5.7q-0.6 0-1 0.5t-0.5 1v2.8q0 0.6 0.5 1t1 0.5h5.7v5.7q0 0.5 0.4 1t1 0.4h2.9q0.6 0 1-0.4t0.4-1v-5.7h5.7q0.6 0 1-0.5t0.4-1z m7.2-1.4q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z"
-          })
-        })
-      })
-    });
+        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("g", { children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { d: "m30.1 21.4v-2.8q0-0.6-0.4-1t-1-0.5h-5.7v-5.7q0-0.6-0.4-1t-1-0.4h-2.9q-0.6 0-1 0.4t-0.4 1v5.7h-5.7q-0.6 0-1 0.5t-0.5 1v2.8q0 0.6 0.5 1t1 0.5h5.7v5.7q0 0.5 0.4 1t1 0.4h2.9q0.6 0 1-0.4t0.4-1v-5.7h5.7q0.6 0 1-0.5t0.4-1z m7.2-1.4q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z" }) })
+      }
+    ) });
   };
   var Add = (props) => {
     const { style: style2, ...rest } = props;
-    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", {
-      ...rest,
-      children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", {
+    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { ...rest, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+      "svg",
+      {
         ...getIconStyle(style2),
         viewBox: "0 0 40 40",
         fill: "currentColor",
         preserveAspectRatio: "xMidYMid meet",
-        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("g", {
-          children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", {
-            d: "m31.6 21.6h-10v10h-3.2v-10h-10v-3.2h10v-10h3.2v10h10v3.2z"
-          })
-        })
-      })
-    });
+        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("g", { children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { d: "m31.6 21.6h-10v10h-3.2v-10h-10v-3.2h10v-10h3.2v10h10v3.2z" }) })
+      }
+    ) });
   };
   var Edit = (props) => {
     const { style: style2, ...rest } = props;
-    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", {
-      ...rest,
-      children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", {
+    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { ...rest, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+      "svg",
+      {
         ...getIconStyle(style2),
         viewBox: "0 0 40 40",
         fill: "currentColor",
         preserveAspectRatio: "xMidYMid meet",
-        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("g", {
-          children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", {
-            d: "m19.8 26.4l2.6-2.6-3.4-3.4-2.6 2.6v1.3h2.2v2.1h1.2z m9.8-16q-0.3-0.4-0.7 0l-7.8 7.8q-0.4 0.4 0 0.7t0.7 0l7.8-7.8q0.4-0.4 0-0.7z m1.8 13.2v4.3q0 2.6-1.9 4.5t-4.5 1.9h-18.6q-2.6 0-4.5-1.9t-1.9-4.5v-18.6q0-2.7 1.9-4.6t4.5-1.8h18.6q1.4 0 2.6 0.5 0.3 0.2 0.4 0.5 0.1 0.4-0.2 0.7l-1.1 1.1q-0.3 0.3-0.7 0.1-0.5-0.1-1-0.1h-18.6q-1.4 0-2.5 1.1t-1 2.5v18.6q0 1.4 1 2.5t2.5 1h18.6q1.5 0 2.5-1t1.1-2.5v-2.9q0-0.2 0.2-0.4l1.4-1.5q0.3-0.3 0.8-0.1t0.4 0.6z m-2.1-16.5l6.4 6.5-15 15h-6.4v-6.5z m9.9 3l-2.1 2-6.4-6.4 2.1-2q0.6-0.7 1.5-0.7t1.5 0.7l3.4 3.4q0.6 0.6 0.6 1.5t-0.6 1.5z"
-          })
-        })
-      })
-    });
+        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("g", { children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { d: "m19.8 26.4l2.6-2.6-3.4-3.4-2.6 2.6v1.3h2.2v2.1h1.2z m9.8-16q-0.3-0.4-0.7 0l-7.8 7.8q-0.4 0.4 0 0.7t0.7 0l7.8-7.8q0.4-0.4 0-0.7z m1.8 13.2v4.3q0 2.6-1.9 4.5t-4.5 1.9h-18.6q-2.6 0-4.5-1.9t-1.9-4.5v-18.6q0-2.7 1.9-4.6t4.5-1.8h18.6q1.4 0 2.6 0.5 0.3 0.2 0.4 0.5 0.1 0.4-0.2 0.7l-1.1 1.1q-0.3 0.3-0.7 0.1-0.5-0.1-1-0.1h-18.6q-1.4 0-2.5 1.1t-1 2.5v18.6q0 1.4 1 2.5t2.5 1h18.6q1.5 0 2.5-1t1.1-2.5v-2.9q0-0.2 0.2-0.4l1.4-1.5q0.3-0.3 0.8-0.1t0.4 0.6z m-2.1-16.5l6.4 6.5-15 15h-6.4v-6.5z m9.9 3l-2.1 2-6.4-6.4 2.1-2q0.6-0.7 1.5-0.7t1.5 0.7l3.4 3.4q0.6 0.6 0.6 1.5t-0.6 1.5z" }) })
+      }
+    ) });
   };
   var CheckCircle = (props) => {
     const { style: style2, ...rest } = props;
-    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", {
-      ...rest,
-      children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", {
+    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { ...rest, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+      "svg",
+      {
         ...getIconStyle(style2),
         viewBox: "0 0 40 40",
         fill: "currentColor",
         preserveAspectRatio: "xMidYMid meet",
-        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("g", {
-          children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", {
-            d: "m31.7 16.4q0-0.6-0.4-1l-2.1-2.1q-0.4-0.4-1-0.4t-1 0.4l-9.1 9.1-5-5q-0.5-0.4-1-0.4t-1 0.4l-2.1 2q-0.4 0.4-0.4 1 0 0.6 0.4 1l8.1 8.1q0.4 0.4 1 0.4 0.6 0 1-0.4l12.2-12.1q0.4-0.4 0.4-1z m5.6 3.6q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z"
-          })
-        })
-      })
-    });
+        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("g", { children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { d: "m31.7 16.4q0-0.6-0.4-1l-2.1-2.1q-0.4-0.4-1-0.4t-1 0.4l-9.1 9.1-5-5q-0.5-0.4-1-0.4t-1 0.4l-2.1 2q-0.4 0.4-0.4 1 0 0.6 0.4 1l8.1 8.1q0.4 0.4 1 0.4 0.6 0 1-0.4l12.2-12.1q0.4-0.4 0.4-1z m5.6 3.6q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z" }) })
+      }
+    ) });
   };
   function getIconStyle(style2) {
     if (!style2) {
@@ -29322,23 +29269,12 @@
       props: { theme }
     } = (0, import_react7.useContext)(ReactJsonViewContext_default);
     if (copied) {
-      return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("span", {
-        children: [
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Clippy, {
-            className: "copy-icon",
-            ...style(theme, "copy-icon")
-          }),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", {
-            ...style(theme, "copy-icon-copied"),
-            children: "\u2714"
-          })
-        ]
-      });
+      return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("span", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Clippy, { className: "copy-icon", ...style(theme, "copy-icon") }),
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { ...style(theme, "copy-icon-copied"), children: "\u2714" })
+      ] });
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Clippy, {
-      className: "copy-icon",
-      ...style(theme, "copy-icon")
-    });
+    return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Clippy, { className: "copy-icon", ...style(theme, "copy-icon") });
   };
   var CopyToClipboard = ({ rowHovered }) => {
     const {
@@ -29365,25 +29301,29 @@
         clearTimeout(timer);
       };
     });
-    return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", {
-      className: "copy-to-clipboard-container",
-      title: "Copy to clipboard",
-      style: {
-        verticalAlign: "top",
-        display: rowHovered ? "inline-block" : "none"
-      },
-      children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("button", {
-        type: "button",
+    return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+      "span",
+      {
+        className: "copy-to-clipboard-container",
+        title: "Copy to clipboard",
         style: {
-          ...style2,
-          display
+          verticalAlign: "top",
+          display: rowHovered ? "inline-block" : "none"
         },
-        onClick: handleCopy,
-        children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(CopyIcon, {
-          copied
-        })
-      })
-    });
+        children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+          "button",
+          {
+            type: "button",
+            style: {
+              ...style2,
+              display
+            },
+            onClick: handleCopy,
+            children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(CopyIcon, { copied })
+          }
+        )
+      }
+    );
   };
   var CopyToClipboard_default = CopyToClipboard;
 
@@ -29399,29 +29339,35 @@
     if (namespace.length === 1) {
       return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_jsx_runtime7.Fragment, {});
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", {
-      className: "click-to-remove",
-      style: {
-        display: rowHovered ? "inline-block" : "none"
-      },
-      children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(RemoveCircle, {
-        className: "click-to-remove-icon",
-        ...style(theme, "removeVarIcon"),
-        onClick: () => {
-          const data = {
-            name,
-            namespace: namespace.splice(0, namespace.length - 1),
-            existingValue: value,
-            variableRemoved: true
-          };
-          ObjectAttributes_default.handleAction({
-            name: "VARIABLE_REMOVED",
-            rjvId,
-            data
-          });
-        }
-      })
-    });
+    return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+      "span",
+      {
+        className: "click-to-remove",
+        style: {
+          display: rowHovered ? "inline-block" : "none"
+        },
+        children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+          RemoveCircle,
+          {
+            className: "click-to-remove-icon",
+            ...style(theme, "removeVarIcon"),
+            onClick: () => {
+              const data = {
+                name,
+                namespace: namespace.splice(0, namespace.length - 1),
+                existingValue: value,
+                variableRemoved: true
+              };
+              ObjectAttributes_default.handleAction({
+                name: "VARIABLE_REMOVED",
+                rjvId,
+                data
+              });
+            }
+          }
+        )
+      }
+    );
   };
   var AddAttribute = ({ rowHovered }) => {
     const { namespace, value, depth } = (0, import_react8.useContext)(LocalJsonViewContext_default);
@@ -29430,42 +29376,48 @@
       rjvId
     } = (0, import_react8.useContext)(ReactJsonViewContext_default);
     const name = namespace.at(-1);
-    return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", {
-      className: "click-to-add",
-      style: {
-        verticalAlign: "top",
-        display: rowHovered ? "inline-block" : "none"
-      },
-      children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(AddCircle, {
-        className: "click-to-add-icon",
-        ...style(theme, "addVarIcon"),
-        onClick: () => {
-          const request = {
-            name: depth > 0 ? name : null,
-            namespace: namespace.splice(0, namespace.length - 1),
-            existingValue: value,
-            variableRemoved: false,
-            keyName: null
-          };
-          if (toType(value) === "object") {
-            ObjectAttributes_default.handleAction({
-              name: "ADD_VARIABLE_KEY_REQUEST",
-              rjvId,
-              data: request
-            });
-          } else {
-            ObjectAttributes_default.handleAction({
-              name: "VARIABLE_ADDED",
-              rjvId,
-              data: {
-                ...request,
-                newValue: [...value, null]
+    return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+      "span",
+      {
+        className: "click-to-add",
+        style: {
+          verticalAlign: "top",
+          display: rowHovered ? "inline-block" : "none"
+        },
+        children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+          AddCircle,
+          {
+            className: "click-to-add-icon",
+            ...style(theme, "addVarIcon"),
+            onClick: () => {
+              const request = {
+                name: depth > 0 ? name : null,
+                namespace: namespace.splice(0, namespace.length - 1),
+                existingValue: value,
+                variableRemoved: false,
+                keyName: null
+              };
+              if (toType(value) === "object") {
+                ObjectAttributes_default.handleAction({
+                  name: "ADD_VARIABLE_KEY_REQUEST",
+                  rjvId,
+                  data: request
+                });
+              } else {
+                ObjectAttributes_default.handleAction({
+                  name: "VARIABLE_ADDED",
+                  rjvId,
+                  data: {
+                    ...request,
+                    newValue: [...value, null]
+                  }
+                });
               }
-            });
+            }
           }
-        }
-      })
-    });
+        )
+      }
+    );
   };
   var ObjectMeta = ({ rowHovered }) => {
     const {
@@ -29473,34 +29425,27 @@
     } = (0, import_react8.useContext)(ReactJsonViewContext_default);
     const { value } = (0, import_react8.useContext)(LocalJsonViewContext_default);
     const size = Object.keys(value).length;
-    return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", {
-      type: "button",
-      ...style(theme, "object-meta-data"),
-      className: "object-meta-data",
-      onClick: (e) => {
-        e.stopPropagation();
-      },
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", {
-          className: "object-size",
-          ...style(theme, "object-size"),
-          children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+      "div",
+      {
+        type: "button",
+        ...style(theme, "object-meta-data"),
+        className: "object-meta-data",
+        onClick: (e) => {
+          e.stopPropagation();
+        },
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { className: "object-size", ...style(theme, "object-size"), children: [
             size,
             " item",
             size === 1 ? "" : "s"
-          ]
-        }),
-        enableClipboard ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(CopyToClipboard_default, {
-          rowHovered
-        }) : null,
-        canAdd ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(AddAttribute, {
-          rowHovered
-        }) : null,
-        canDelete ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(RemoveObject, {
-          rowHovered
-        }) : null
-      ]
-    });
+          ] }),
+          enableClipboard ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(CopyToClipboard_default, { rowHovered }) : null,
+          canAdd ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(AddAttribute, { rowHovered }) : null,
+          canDelete ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(RemoveObject, { rowHovered }) : null
+        ]
+      }
+    );
   };
   var ObjectMeta_default = ObjectMeta;
 
@@ -29519,55 +29464,37 @@
       return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", {});
     }
     if (parentType === "array") {
-      return displayArrayKey ? /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", {
-        ...style(theme, "array-key"),
+      return displayArrayKey ? /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
+        "span",
+        {
+          ...style(theme, "array-key"),
+          onMouseEnter: () => setHovered(true),
+          onMouseLeave: () => setHovered(false),
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "array-key", children: name }),
+            !isRoot ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(EditKeyIcon, { rowHovered: hovered }) : null,
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { ...style(theme, "colon"), children: ":" })
+          ]
+        }
+      ) : /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", {});
+    }
+    return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
+      "span",
+      {
+        ...style(theme, "object-name"),
         onMouseEnter: () => setHovered(true),
         onMouseLeave: () => setHovered(false),
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", {
-            className: "array-key",
-            children: name
-          }),
-          !isRoot ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(EditKeyIcon, {
-            rowHovered: hovered
-          }) : null,
-          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", {
-            ...style(theme, "colon"),
-            children: ":"
-          })
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", { className: "object-key", children: [
+            quotesOnKeys && /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { style: { verticalAlign: "top" }, children: DISPLAY_BRACES.doubleQuotes.start }),
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { children: name }),
+            quotesOnKeys && /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { style: { verticalAlign: "top" }, children: DISPLAY_BRACES.doubleQuotes.end })
+          ] }),
+          !isRoot ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(EditKeyIcon, { rowHovered: hovered }) : null,
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { ...style(theme, "colon"), children: ":" })
         ]
-      }) : /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", {});
-    }
-    return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", {
-      ...style(theme, "object-name"),
-      onMouseEnter: () => setHovered(true),
-      onMouseLeave: () => setHovered(false),
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", {
-          className: "object-key",
-          children: [
-            quotesOnKeys && /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", {
-              style: { verticalAlign: "top" },
-              children: DISPLAY_BRACES.doubleQuotes.start
-            }),
-            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", {
-              children: name
-            }),
-            quotesOnKeys && /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", {
-              style: { verticalAlign: "top" },
-              children: DISPLAY_BRACES.doubleQuotes.end
-            })
-          ]
-        }),
-        !isRoot ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(EditKeyIcon, {
-          rowHovered: hovered
-        }) : null,
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", {
-          ...style(theme, "colon"),
-          children: ":"
-        })
-      ]
-    });
+      }
+    );
   };
   var ObjectName_default = ObjectName;
 
@@ -29580,20 +29507,29 @@
     } = (0, import_react10.useContext)(ReactJsonViewContext_default);
     switch (iconStyle) {
       case "triangle":
-        return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(ArrowDown, {
-          ...style(theme, "expanded-icon"),
-          className: "expanded-icon"
-        });
+        return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+          ArrowDown,
+          {
+            ...style(theme, "expanded-icon"),
+            className: "expanded-icon"
+          }
+        );
       case "square":
-        return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(SquareMinus, {
-          ...style(theme, "expanded-icon"),
-          className: "expanded-icon"
-        });
+        return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+          SquareMinus,
+          {
+            ...style(theme, "expanded-icon"),
+            className: "expanded-icon"
+          }
+        );
       default:
-        return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(CircleMinus, {
-          ...style(theme, "expanded-icon"),
-          className: "expanded-icon"
-        });
+        return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+          CircleMinus,
+          {
+            ...style(theme, "expanded-icon"),
+            className: "expanded-icon"
+          }
+        );
     }
   }
   function CollapsedIcon() {
@@ -29602,20 +29538,29 @@
     } = (0, import_react10.useContext)(ReactJsonViewContext_default);
     switch (iconStyle) {
       case "triangle":
-        return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(ArrowRight, {
-          ...style(theme, "collapsed-icon"),
-          className: "collapsed-icon"
-        });
+        return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+          ArrowRight,
+          {
+            ...style(theme, "collapsed-icon"),
+            className: "collapsed-icon"
+          }
+        );
       case "square":
-        return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(SquarePlus, {
-          ...style(theme, "collapsed-icon"),
-          className: "collapsed-icon"
-        });
+        return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+          SquarePlus,
+          {
+            ...style(theme, "collapsed-icon"),
+            className: "collapsed-icon"
+          }
+        );
       default:
-        return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(CirclePlus, {
-          ...style(theme, "collapsed-icon"),
-          className: "collapsed-icon"
-        });
+        return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+          CirclePlus,
+          {
+            ...style(theme, "collapsed-icon"),
+            className: "collapsed-icon"
+          }
+        );
     }
   }
 
@@ -29631,13 +29576,16 @@
     if (size === 0) {
       return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(import_jsx_runtime10.Fragment, {});
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("button", {
-      ...style(theme, "ellipsis"),
-      className: "node-ellipsis",
-      onClick: onToggleCollapsed,
-      type: "button",
-      children: "..."
-    });
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+      "button",
+      {
+        ...style(theme, "ellipsis"),
+        className: "node-ellipsis",
+        onClick: onToggleCollapsed,
+        type: "button",
+        children: "..."
+      }
+    );
   };
   var EditKeyIcon = ({ rowHovered }) => {
     const {
@@ -29646,33 +29594,39 @@
     } = (0, import_react11.useContext)(ReactJsonViewContext_default);
     const { namespace, value, parentObj } = (0, import_react11.useContext)(LocalJsonViewContext_default);
     const name = namespace.at(-1);
-    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", {
-      className: "click-to-edit",
-      style: {
-        verticalAlign: "top",
-        display: rowHovered ? "inline-block" : "none"
-      },
-      title: "Edit Key",
-      children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(Edit, {
-        className: "click-to-edit-icon",
-        ...style(theme, "editVarIcon"),
-        onClick: (e) => {
-          e.stopPropagation();
-          ObjectAttributes_default.handleAction({
-            name: "UPDATE_VARIABLE_KEY_REQUEST",
-            rjvId,
-            data: {
-              name,
-              namespace,
-              existingValue: value,
-              parentObj,
-              variableRemoved: false,
-              keyName: name
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+      "div",
+      {
+        className: "click-to-edit",
+        style: {
+          verticalAlign: "top",
+          display: rowHovered ? "inline-block" : "none"
+        },
+        title: "Edit Key",
+        children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+          Edit,
+          {
+            className: "click-to-edit-icon",
+            ...style(theme, "editVarIcon"),
+            onClick: (e) => {
+              e.stopPropagation();
+              ObjectAttributes_default.handleAction({
+                name: "UPDATE_VARIABLE_KEY_REQUEST",
+                rjvId,
+                data: {
+                  name,
+                  namespace,
+                  existingValue: value,
+                  parentObj,
+                  variableRemoved: false,
+                  keyName: name
+                }
+              });
             }
-          });
-        }
-      })
-    });
+          }
+        )
+      }
+    );
   };
   var StartBrace = ({
     objectType,
@@ -29686,50 +29640,39 @@
     } = (0, import_react11.useContext)(ReactJsonViewContext_default);
     const braceString = DISPLAY_BRACES[objectType].start;
     if (parentIsArrayGroup) {
-      return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("span", {
-        style: { minHeight: "18px", display: "inline-block" },
-        children: [
-          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", {
-            ...style(theme, "brace"),
-            children: braceString
-          }),
-          collapsed ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(import_jsx_runtime10.Fragment, {}) : /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(ObjectMeta_default, {
-            rowHovered: hovered
-          })
-        ]
-      });
+      return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("span", { style: { minHeight: "18px", display: "inline-block" }, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { ...style(theme, "brace"), children: braceString }),
+        collapsed ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(import_jsx_runtime10.Fragment, {}) : /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(ObjectMeta_default, { rowHovered: hovered })
+      ] });
     }
     const IconComponent = collapsed ? CollapsedIcon : ExpandedIcon;
-    return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("span", {
-      style: {
-        minHeight: "18px",
-        display: "inline-block"
-      },
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("button", {
-          type: "button",
-          onClick: (e) => {
-            toggleCollapsed();
-          },
-          ...style(theme, "brace-row"),
-          children: [
-            /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", {
-              className: "icon-container",
-              ...style(theme, "icon-container"),
-              children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(IconComponent, {})
-            }),
-            /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(ObjectName_default, {}),
-            /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", {
-              ...style(theme, "brace"),
-              children: braceString
-            })
-          ]
-        }),
-        collapsed ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(import_jsx_runtime10.Fragment, {}) : /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(ObjectMeta_default, {
-          rowHovered: hovered
-        })
-      ]
-    });
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+      "span",
+      {
+        style: {
+          minHeight: "18px",
+          display: "inline-block"
+        },
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+            "button",
+            {
+              type: "button",
+              onClick: (e) => {
+                toggleCollapsed();
+              },
+              ...style(theme, "brace-row"),
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "icon-container", ...style(theme, "icon-container"), children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(IconComponent, {}) }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(ObjectName_default, {}),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { ...style(theme, "brace"), children: braceString })
+              ]
+            }
+          ),
+          collapsed ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(import_jsx_runtime10.Fragment, {}) : /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(ObjectMeta_default, { rowHovered: hovered })
+        ]
+      }
+    );
   };
   var ObjectDataTypeContents = ({
     indexOffset,
@@ -29744,22 +29687,19 @@
     const shouldSort = sortKeys && objectType !== "array";
     const actualKeys = shouldSort ? baseKeys.sort() : baseKeys;
     const type = toType(value);
-    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", {
-      className: "pushed-content object-container",
-      children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", {
-        className: "object-content",
-        ...style(theme, "pushed-content"),
-        children: actualKeys.map((key) => /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(Child_default, {
-          depth: depth + DEPTH_INCREMENT,
-          namespace: namespace.concat(
-            parentIsArrayGroup ? `${parseInt(key) + indexOffset}` : key
-          ),
-          value: value[key],
-          parentType: type,
-          parentObj: value
-        }, `${key}-${namespace}`))
-      })
-    });
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "pushed-content object-container", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "object-content", ...style(theme, "pushed-content"), children: actualKeys.map((key) => /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+      Child_default,
+      {
+        depth: depth + DEPTH_INCREMENT,
+        namespace: namespace.concat(
+          parentIsArrayGroup ? `${parseInt(key) + indexOffset}` : key
+        ),
+        value: value[key],
+        parentType: type,
+        parentObj: value
+      },
+      `${key}-${namespace}`
+    )) }) });
   };
   var EndBrace = ({
     objectType,
@@ -29768,13 +29708,16 @@
     const {
       props: { theme }
     } = (0, import_react11.useContext)(ReactJsonViewContext_default);
-    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", {
-      style: {
-        ...style(theme, "brace").style,
-        paddingLeft: collapsed ? "0px" : "3px"
-      },
-      children: DISPLAY_BRACES[objectType].end
-    });
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+      "span",
+      {
+        style: {
+          ...style(theme, "brace").style,
+          paddingLeft: collapsed ? "0px" : "3px"
+        },
+        children: DISPLAY_BRACES[objectType].end
+      }
+    );
   };
   var ObjectDataType = ({
     parentIsArrayGroup,
@@ -29798,42 +29741,46 @@
       styles.display = "inline";
     }
     const size = Object.keys(value).length;
-    return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", {
-      className: "object-key-val",
-      onMouseEnter: () => setHovered(true),
-      onMouseLeave: () => setHovered(false),
-      ...style(theme, isRoot ? "jsv-root" : "objectKeyVal", styles),
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(StartBrace, {
-          objectType,
-          collapsed,
-          hovered,
-          parentIsArrayGroup,
-          size,
-          toggleCollapsed: () => setCollapsed(!collapsed)
-        }),
-        collapsed ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(Ellipsis, {
-          onToggleCollapsed: () => setCollapsed(!collapsed),
-          size
-        }) : /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(ObjectDataTypeContents, {
-          objectType,
-          indexOffset,
-          parentIsArrayGroup
-        }),
-        /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("span", {
-          className: "brace-row",
-          children: [
-            /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(EndBrace, {
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+      "div",
+      {
+        className: "object-key-val",
+        onMouseEnter: () => setHovered(true),
+        onMouseLeave: () => setHovered(false),
+        ...style(theme, isRoot ? "jsv-root" : "objectKeyVal", styles),
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+            StartBrace,
+            {
+              objectType,
               collapsed,
-              objectType
-            }),
-            collapsed ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(ObjectMeta_default, {
-              rowHovered: hovered
-            }) : /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(import_jsx_runtime10.Fragment, {})
-          ]
-        })
-      ]
-    });
+              hovered,
+              parentIsArrayGroup,
+              size,
+              toggleCollapsed: () => setCollapsed(!collapsed)
+            }
+          ),
+          collapsed ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+            Ellipsis,
+            {
+              onToggleCollapsed: () => setCollapsed(!collapsed),
+              size
+            }
+          ) : /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+            ObjectDataTypeContents,
+            {
+              objectType,
+              indexOffset,
+              parentIsArrayGroup
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("span", { className: "brace-row", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(EndBrace, { collapsed, objectType }),
+            collapsed ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(ObjectMeta_default, { rowHovered: hovered }) : /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(import_jsx_runtime10.Fragment, {})
+          ] })
+        ]
+      }
+    );
   };
   var Object_default = ObjectDataType;
 
@@ -29862,35 +29809,26 @@
     if (collapsable) {
       style2.style.cursor = "pointer";
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", {
-      ...style(theme, "string"),
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(DataTypeLabel_default, {
-          typeName: "string"
-        }),
-        /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("button", {
+    return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { ...style(theme, "string"), children: [
+      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(DataTypeLabel_default, { typeName: "string" }),
+      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+        "button",
+        {
           type: "button",
           className: "string-value",
           ...style2,
           onClick: toggleCollapsed,
-          children: /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(import_jsx_runtime11.Fragment, {
-            children: [
-              DISPLAY_BRACES.doubleQuotes.start,
-              collapsable && collapsed ? /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("span", {
-                children: [
-                  value.substring(0, collapseStringsAfterLength),
-                  /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", {
-                    ...style(theme, "ellipsis"),
-                    children: " ..."
-                  })
-                ]
-              }) : dataValue ?? value,
-              DISPLAY_BRACES.doubleQuotes.end
-            ]
-          })
-        })
-      ]
-    });
+          children: /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(import_jsx_runtime11.Fragment, { children: [
+            DISPLAY_BRACES.doubleQuotes.start,
+            collapsable && collapsed ? /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("span", { children: [
+              value.substring(0, collapseStringsAfterLength),
+              /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { ...style(theme, "ellipsis"), children: " ..." })
+            ] }) : dataValue ?? value,
+            DISPLAY_BRACES.doubleQuotes.end
+          ] })
+        }
+      )
+    ] });
   };
   var String_default = StringDataType;
 
@@ -29963,18 +29901,24 @@
     const {
       props: { theme }
     } = (0, import_react13.useContext)(ReactJsonViewContext_default);
-    return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", {
-      className: "click-to-edit",
-      style: {
-        verticalAlign: "top",
-        display: hovered ? "inline-block" : "none"
-      },
-      children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Edit, {
-        className: "click-to-edit-icon",
-        ...style(theme, "editVarIcon"),
-        onClick: onEdit
-      })
-    });
+    return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+      "div",
+      {
+        className: "click-to-edit",
+        style: {
+          verticalAlign: "top",
+          display: hovered ? "inline-block" : "none"
+        },
+        children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+          Edit,
+          {
+            className: "click-to-edit-icon",
+            ...style(theme, "editVarIcon"),
+            onClick: onEdit
+          }
+        )
+      }
+    );
   };
   var RemoveIcon = ({
     hovered,
@@ -29986,20 +29930,26 @@
       rjvId
     } = (0, import_react13.useContext)(ReactJsonViewContext_default);
     const name = namespace.at(-1);
-    return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", {
-      className: "click-to-remove",
-      style: {
-        verticalAlign: "top",
-        display: hovered ? "inline-block" : "none"
-      },
-      children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(RemoveCircle, {
-        className: "click-to-remove-icon",
-        ...style(theme, "removeVarIcon"),
-        onClick: () => {
-          handleClick(rjvId, namespace, value);
-        }
-      })
-    });
+    return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+      "div",
+      {
+        className: "click-to-remove",
+        style: {
+          verticalAlign: "top",
+          display: hovered ? "inline-block" : "none"
+        },
+        children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+          RemoveCircle,
+          {
+            className: "click-to-remove-icon",
+            ...style(theme, "removeVarIcon"),
+            onClick: () => {
+              handleClick(rjvId, namespace, value);
+            }
+          }
+        )
+      }
+    );
   };
   var Value = ({
     edit,
@@ -30010,11 +29960,7 @@
     const type = edit.editMode ? "edit" : toType(value);
     switch (type) {
       case "edit":
-        return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(EditInput, {
-          submitEdit,
-          edit,
-          setEdit
-        });
+        return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(EditInput, { submitEdit, edit, setEdit });
       case "string":
         return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(String_default, {});
       case "boolean":
@@ -30037,9 +29983,10 @@
       rjvId
     } = (0, import_react13.useContext)(ReactJsonViewContext_default);
     const { namespace } = (0, import_react13.useContext)(LocalJsonViewContext_default);
-    return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", {
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_react_textarea_autosize.default, {
+    return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+        import_react_textarea_autosize.default,
+        {
           type: "text",
           ref: (input) => input && input.focus(),
           value: edit.editMode ? edit.editValue : "",
@@ -30073,34 +30020,32 @@
           placeholder: "update this value",
           minRows: 2,
           ...style(theme, "edit-input")
-        }),
-        /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", {
-          ...style(theme, "edit-icon-container"),
-          children: [
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(RemoveCircle, {
-              className: "edit-cancel",
-              ...style(theme, "cancel-icon"),
-              onClick: () => {
-                setEdit({ editMode: false });
-              }
-            }),
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(CheckCircle, {
-              className: "edit-check string-value",
-              ...style(theme, "check-icon"),
-              onClick: () => {
-                submitEdit();
-              }
-            }),
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", {
-              children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(ShowDetected, {
-                edit,
-                submitEdit
-              })
-            })
-          ]
-        })
-      ]
-    });
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { ...style(theme, "edit-icon-container"), children: [
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+          RemoveCircle,
+          {
+            className: "edit-cancel",
+            ...style(theme, "cancel-icon"),
+            onClick: () => {
+              setEdit({ editMode: false });
+            }
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+          CheckCircle,
+          {
+            className: "edit-check string-value",
+            ...style(theme, "check-icon"),
+            onClick: () => {
+              submitEdit();
+            }
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(ShowDetected, { edit, submitEdit }) })
+      ] })
+    ] });
   };
   var ShowDetected = ({
     submitEdit,
@@ -30110,26 +30055,22 @@
       props: { theme }
     } = (0, import_react13.useContext)(ReactJsonViewContext_default);
     const parsedInput = edit.editMode ? parseInput(edit.editValue) : { type: false, value: null };
-    const detected = /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(DetectedInput, {
-      parsedInput
-    });
+    const detected = /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(DetectedInput, { parsedInput });
     if (detected) {
-      return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", {
-        children: /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", {
-          ...style(theme, "detected-row"),
-          children: [
-            detected,
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(CheckCircle, {
-              style: {
-                verticalAlign: "top",
-                paddingLeft: "3px",
-                ...style(theme, "check-icon").style
-              },
-              onClick: () => submitEdit(true)
-            })
-          ]
-        })
-      });
+      return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { ...style(theme, "detected-row"), children: [
+        detected,
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+          CheckCircle,
+          {
+            style: {
+              verticalAlign: "top",
+              paddingLeft: "3px",
+              ...style(theme, "check-icon").style
+            },
+            onClick: () => submitEdit(true)
+          }
+        )
+      ] }) });
     }
     return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_jsx_runtime12.Fragment, {});
   };
@@ -30143,65 +30084,75 @@
     if (type !== false) {
       switch (type.toLowerCase()) {
         case "object":
-          return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("span", {
-            children: [
-              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", {
+          return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("span", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+              "span",
+              {
                 style: {
                   ...style(theme, "brace").style,
                   cursor: "default"
                 },
                 children: "{"
-              }),
-              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", {
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+              "span",
+              {
                 style: {
                   ...style(theme, "ellipsis").style,
                   cursor: "default"
                 },
                 children: "..."
-              }),
-              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", {
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+              "span",
+              {
                 style: {
                   ...style(theme, "brace").style,
                   cursor: "default"
                 },
                 children: "}"
-              })
-            ]
-          });
+              }
+            )
+          ] });
         case "array":
-          return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("span", {
-            children: [
-              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", {
+          return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("span", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+              "span",
+              {
                 style: {
                   ...style(theme, "brace").style,
                   cursor: "default"
                 },
                 children: "["
-              }),
-              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", {
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+              "span",
+              {
                 style: {
                   ...style(theme, "ellipsis").style,
                   cursor: "default"
                 },
                 children: "..."
-              }),
-              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", {
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+              "span",
+              {
                 style: {
                   ...style(theme, "brace").style,
                   cursor: "default"
                 },
                 children: "]"
-              })
-            ]
-          });
+              }
+            )
+          ] });
         case "string":
-          return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(String_default, {
-            dataValue: value
-          });
+          return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(String_default, { dataValue: value });
         case "number":
-          return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Number_default, {
-            dataValue: value
-          });
+          return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Number_default, { dataValue: value });
         case "boolean":
           return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Boolean_default, {});
         case "null":
@@ -30276,73 +30227,67 @@
       });
       onChange(data.updatedSrc);
     };
-    return /* @__PURE__ */ (0, import_react14.createElement)("div", {
-      ...style(theme, "objectKeyVal", {
-        paddingLeft: indentWidth * SINGLE_INDENT,
-        minHeight: "20px"
-      }),
-      onMouseEnter: () => setHovered(true),
-      onMouseLeave: () => setHovered(false),
-      className: "variable-row",
-      key: name
-    }, type === "array" ? displayArrayKey ? /* @__PURE__ */ (0, import_react14.createElement)("span", {
-      ...style(theme, "array-key"),
-      key: `${name}_${namespace}`
-    }, name, /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", {
-      ...style(theme, "colon"),
-      children: ":"
-    })) : null : /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("span", {
-      style: { cursor: "pointer" },
-      onMouseEnter: () => setHoveredKey(true),
-      onMouseLeave: () => setHoveredKey(false),
-      children: [
-        /* @__PURE__ */ (0, import_react14.createElement)("span", {
-          ...style(theme, "object-name"),
-          className: "object-key",
-          key: `${name}_${namespace}`
-        }, !!quotesOnKeys && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", {
-          style: { verticalAlign: "top" },
-          children: DISPLAY_BRACES.doubleQuotes.start
-        }), /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", {
-          style: { display: "inline-block" },
-          children: name
-        }), !!quotesOnKeys && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", {
-          style: { verticalAlign: "top" },
-          children: DISPLAY_BRACES.doubleQuotes.end
-        })),
-        parentType !== "array" ? /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(EditKeyIcon, {
-          rowHovered: hoveredKey
-        }) : null,
-        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", {
-          ...style(theme, "colon"),
-          children: ":"
-        })
-      ]
-    }), /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", {
-      className: "variable-value",
-      onClick: !canEdit ? void 0 : (e) => {
-        const location = [...namespace];
-        if (e.ctrlKey || e.metaKey) {
-          enterEditMode();
-        }
+    return /* @__PURE__ */ (0, import_react14.createElement)(
+      "div",
+      {
+        ...style(theme, "objectKeyVal", {
+          paddingLeft: indentWidth * SINGLE_INDENT,
+          minHeight: "20px"
+        }),
+        onMouseEnter: () => setHovered(true),
+        onMouseLeave: () => setHovered(false),
+        className: "variable-row",
+        key: name
       },
-      ...style(theme, "variableValue", {}),
-      children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Value, {
-        edit,
-        setEdit,
-        submitEdit
-      })
-    }), enableClipboard ? /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(CopyToClipboard_default, {
-      rowHovered: hovered
-    }) : null, canEdit && !edit.editMode && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(EditIcon, {
-      hovered,
-      onEdit: () => {
-        enterEditMode();
-      }
-    }), canDelete && !edit.editMode && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(RemoveIcon, {
-      hovered,
-      handleClick: removeVariable
-    }));
+      type === "array" ? displayArrayKey ? /* @__PURE__ */ (0, import_react14.createElement)("span", { ...style(theme, "array-key"), key: `${name}_${namespace}` }, name, /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { ...style(theme, "colon"), children: ":" })) : null : /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
+        "span",
+        {
+          style: { cursor: "pointer" },
+          onMouseEnter: () => setHoveredKey(true),
+          onMouseLeave: () => setHoveredKey(false),
+          children: [
+            /* @__PURE__ */ (0, import_react14.createElement)(
+              "span",
+              {
+                ...style(theme, "object-name"),
+                className: "object-key",
+                key: `${name}_${namespace}`
+              },
+              !!quotesOnKeys && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { style: { verticalAlign: "top" }, children: DISPLAY_BRACES.doubleQuotes.start }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { style: { display: "inline-block" }, children: name }),
+              !!quotesOnKeys && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { style: { verticalAlign: "top" }, children: DISPLAY_BRACES.doubleQuotes.end })
+            ),
+            parentType !== "array" ? /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(EditKeyIcon, { rowHovered: hoveredKey }) : null,
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { ...style(theme, "colon"), children: ":" })
+          ]
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+        "div",
+        {
+          className: "variable-value",
+          onClick: !canEdit ? void 0 : (e) => {
+            const location = [...namespace];
+            if (e.ctrlKey || e.metaKey) {
+              enterEditMode();
+            }
+          },
+          ...style(theme, "variableValue", {}),
+          children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Value, { edit, setEdit, submitEdit })
+        }
+      ),
+      enableClipboard ? /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(CopyToClipboard_default, { rowHovered: hovered }) : null,
+      canEdit && !edit.editMode && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+        EditIcon,
+        {
+          hovered,
+          onEdit: () => {
+            enterEditMode();
+          }
+        }
+      ),
+      canDelete && !edit.editMode && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(RemoveIcon, { hovered, handleClick: removeVariable })
+    );
   };
   var VariableEditor_default = VariableEditor;
 
@@ -30359,25 +30304,34 @@
     const {
       props: { groupArraysAfterLength }
     } = (0, import_react15.useContext)(ReactJsonViewContext_default);
-    return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(LocalJsonViewContext_default.Provider, {
-      value: {
-        depth,
-        namespace,
-        type,
-        value,
-        parentType,
-        parentObj
-      },
-      children: type === "object" ? /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Object_default, {
-        objectType: "object",
-        indexOffset: 0,
-        parentIsArrayGroup: false
-      }) : type === "array" && value.length <= groupArraysAfterLength ? /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Object_default, {
-        objectType: "array",
-        indexOffset: 0,
-        parentIsArrayGroup: false
-      }) : type === "array" ? /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(ArrayGroup_default, {}) : /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(VariableEditor_default, {})
-    });
+    return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+      LocalJsonViewContext_default.Provider,
+      {
+        value: {
+          depth,
+          namespace,
+          type,
+          value,
+          parentType,
+          parentObj
+        },
+        children: type === "object" ? /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+          Object_default,
+          {
+            objectType: "object",
+            indexOffset: 0,
+            parentIsArrayGroup: false
+          }
+        ) : type === "array" && value.length <= groupArraysAfterLength ? /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+          Object_default,
+          {
+            objectType: "array",
+            indexOffset: 0,
+            parentIsArrayGroup: false
+          }
+        ) : type === "array" ? /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(ArrayGroup_default, {}) : /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(VariableEditor_default, {})
+      }
+    );
   };
   var Child_default = Child;
 
@@ -30403,70 +30357,85 @@
     const objectPaddingLeft = isRoot ? 0 : indentWidth * SINGLE_INDENT;
     const size = groupArraysAfterLength;
     const numGroups = Math.ceil(value.length / size);
-    return /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", {
-      className: "object-key-val",
-      ...style(theme, isRoot ? "jsv-root" : "objectKeyVal", {
-        paddingLeft: objectPaddingLeft
-      }),
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(ObjectName_default, {}),
-        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", {
-          children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(ObjectMeta_default, {
-            rowHovered: false
-          })
+    return /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(
+      "div",
+      {
+        className: "object-key-val",
+        ...style(theme, isRoot ? "jsv-root" : "objectKeyVal", {
+          paddingLeft: objectPaddingLeft
         }),
-        [...Array(numGroups)].map((_, i) => i).map((i) => /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", {
-          className: "object-key-val array-group",
-          ...style(theme, "objectKeyVal", {
-            marginLeft: 6,
-            paddingLeft: arrayGroupPaddingLeft
-          }),
-          children: /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("span", {
-            ...style(theme, "brace-row"),
-            children: [
-              /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", {
-                className: "icon-container",
-                ...style(theme, "icon-container"),
-                onClick: (e) => {
-                  toggleCollapsed(i);
-                },
-                children: isCollapsed(i) ? /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(CollapsedIcon, {}) : /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(ExpandedIcon, {})
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(ObjectName_default, {}),
+          /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(ObjectMeta_default, { rowHovered: false }) }),
+          [...Array(numGroups)].map((_, i) => i).map((i) => /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+            "div",
+            {
+              className: "object-key-val array-group",
+              ...style(theme, "objectKeyVal", {
+                marginLeft: 6,
+                paddingLeft: arrayGroupPaddingLeft
               }),
-              isCollapsed(i) ? /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("span", {
-                ...style(theme, "brace"),
-                onClick: (e) => {
-                  toggleCollapsed(i);
-                },
-                className: "array-group-brace",
-                children: [
-                  "[",
-                  /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", {
-                    ...style(theme, "array-group-meta-data"),
-                    className: "array-group-meta-data",
-                    children: /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("span", {
-                      className: "object-size",
-                      ...style(theme, "object-size"),
-                      children: [
-                        i * size,
-                        " - ",
-                        i * size + size > value.length ? value.length : i * size + size
-                      ]
-                    })
-                  }),
-                  "]"
-                ]
-              }) : /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Child_default, {
-                depth: depth + 1,
-                namespace: namespace.concat(null),
-                parentType: "array",
-                value: value.slice(i * size, i * size + size),
-                parentObj: value.slice(i * size, i * size + size)
-              })
-            ]
-          })
-        }, i))
-      ]
-    });
+              children: /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("span", { ...style(theme, "brace-row"), children: [
+                /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+                  "div",
+                  {
+                    className: "icon-container",
+                    ...style(theme, "icon-container"),
+                    onClick: (e) => {
+                      toggleCollapsed(i);
+                    },
+                    children: isCollapsed(i) ? /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(CollapsedIcon, {}) : /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(ExpandedIcon, {})
+                  }
+                ),
+                isCollapsed(i) ? /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(
+                  "span",
+                  {
+                    ...style(theme, "brace"),
+                    onClick: (e) => {
+                      toggleCollapsed(i);
+                    },
+                    className: "array-group-brace",
+                    children: [
+                      "[",
+                      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+                        "div",
+                        {
+                          ...style(theme, "array-group-meta-data"),
+                          className: "array-group-meta-data",
+                          children: /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(
+                            "span",
+                            {
+                              className: "object-size",
+                              ...style(theme, "object-size"),
+                              children: [
+                                i * size,
+                                " - ",
+                                i * size + size > value.length ? value.length : i * size + size
+                              ]
+                            }
+                          )
+                        }
+                      ),
+                      "]"
+                    ]
+                  }
+                ) : /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+                  Child_default,
+                  {
+                    depth: depth + 1,
+                    namespace: namespace.concat(null),
+                    parentType: "array",
+                    value: value.slice(i * size, i * size + size),
+                    parentObj: value.slice(i * size, i * size + size)
+                  }
+                )
+              ] })
+            },
+            i
+          ))
+        ]
+      }
+    );
   };
   var ArrayGroup_default = ArrayGroup;
 
@@ -30482,27 +30451,27 @@
     }, []);
     const namespace = [rjvProps.rootNodeName];
     const type = toType(rjvProps.value);
-    return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(LocalJsonViewContext_default.Provider, {
-      value: {
-        namespace,
-        type,
-        value: rjvProps.value,
-        depth: 0,
-        parentType: "object",
-        parentObj: rjvProps.value
-      },
-      children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", {
-        className: "pretty-json-container object-container",
-        children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", {
-          className: "object-content",
-          children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(ObjectComponent, {
+    return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+      LocalJsonViewContext_default.Provider,
+      {
+        value: {
+          namespace,
+          type,
+          value: rjvProps.value,
+          depth: 0,
+          parentType: "object",
+          parentObj: rjvProps.value
+        },
+        children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "pretty-json-container object-container", children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "object-content", children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+          ObjectComponent,
+          {
             indexOffset: 0,
             objectType: type,
             parentIsArrayGroup: false
-          })
-        })
-      })
-    });
+          }
+        ) }) })
+      }
+    );
   };
   var JsonViewer_default = JsonViewer;
 
@@ -30567,24 +30536,21 @@
       }
       onClose();
     };
-    return addKeyRequest || editKeyRequest ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", {
-      className: "key-modal-request",
-      ...style(theme, "key-modal-request"),
-      onClick: (e) => {
-        if (e.target === e.currentTarget)
-          onClose();
-      },
-      children: /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", {
-        ...style(theme, "key-modal"),
-        children: [
-          /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", {
-            ...style(theme, "key-modal-label"),
-            children: "Key Name:"
-          }),
-          /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", {
-            style: { position: "relative" },
-            children: [
-              /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("input", {
+    return addKeyRequest || editKeyRequest ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+      "div",
+      {
+        className: "key-modal-request",
+        ...style(theme, "key-modal-request"),
+        onClick: (e) => {
+          if (e.target === e.currentTarget)
+            onClose();
+        },
+        children: /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { ...style(theme, "key-modal"), children: [
+          /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { ...style(theme, "key-modal-label"), children: "Key Name:" }),
+          /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { style: { position: "relative" }, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+              "input",
+              {
                 ...style(theme, "key-modal-input"),
                 className: "key-modal-input",
                 ref: (el) => el && el.focus(),
@@ -30602,28 +30568,31 @@
                     onClose();
                   }
                 }
-              }),
-              valid ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(CheckCircle, {
+              }
+            ),
+            valid ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+              CheckCircle,
+              {
                 ...style(theme, "key-modal-submit"),
                 className: "key-modal-submit",
                 onClick: () => handleSubmit()
-              }) : null
-            ]
-          }),
-          /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("span", {
-            ...style(theme, "key-modal-cancel"),
-            children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Add, {
+              }
+            ) : null
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("span", { ...style(theme, "key-modal-cancel"), children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+            Add,
+            {
               ...style(theme, "key-modal-cancel-icon"),
               className: "key-modal-cancel",
               onClick: () => {
                 setInput("");
                 onClose();
               }
-            })
-          })
-        ]
-      })
-    }) : /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(import_jsx_runtime16.Fragment, {});
+            }
+          ) })
+        ] })
+      }
+    ) : /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(import_jsx_runtime16.Fragment, {});
   };
   var ObjectKeyModal_default = ObjectKeyModal;
 
@@ -30638,25 +30607,23 @@
       props: { theme },
       rjvId
     } = (0, import_react19.useContext)(ReactJsonViewContext_default);
-    return active ? /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", {
-      className: "validation-failure",
-      ...style(theme, "validation-failure"),
-      onClick: () => {
-        ObjectAttributes_default.handleAction({
-          rjvId,
-          name: "RESET"
-        });
-      },
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", {
-          ...style(theme, "validation-failure-label"),
-          children: message
-        }),
-        /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Add, {
-          ...style(theme, "validation-failure-clear")
-        })
-      ]
-    }) : /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(import_jsx_runtime17.Fragment, {});
+    return active ? /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(
+      "div",
+      {
+        className: "validation-failure",
+        ...style(theme, "validation-failure"),
+        onClick: () => {
+          ObjectAttributes_default.handleAction({
+            rjvId,
+            name: "RESET"
+          });
+        },
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", { ...style(theme, "validation-failure-label"), children: message }),
+          /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Add, { ...style(theme, "validation-failure-clear") })
+        ]
+      }
+    ) : /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(import_jsx_runtime17.Fragment, {});
   };
   var ValidationFailure_default = ValidationFailure;
 
@@ -30757,51 +30724,63 @@
       setEditKeyRequest({ editKey: false, keyValue: "" });
       setValidationFailure(false);
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", {
-      className: "react-json-view",
-      style: { ...style(theme, "app-container").style, ...style },
-      children: /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(ReactJsonViewContext_default.Provider, {
-        value: {
-          rjvId,
-          props: {
-            canAdd,
-            canDelete,
-            canEdit,
-            collapseStringsAfterLength,
-            displayArrayKey,
-            displayDataTypes,
-            displayObjectSize,
-            enableClipboard,
-            groupArraysAfterLength,
-            iconStyle,
-            indentWidth,
-            onChange,
-            quotesOnKeys,
-            rootNodeName,
-            shouldCollapse,
-            sortKeys,
-            style: style2,
-            theme,
-            validationMessage,
-            value,
-            newKeyDefaultValue
+    return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+      "div",
+      {
+        className: "react-json-view",
+        style: { ...style(theme, "app-container").style, ...style },
+        children: /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(
+          ReactJsonViewContext_default.Provider,
+          {
+            value: {
+              rjvId,
+              props: {
+                canAdd,
+                canDelete,
+                canEdit,
+                collapseStringsAfterLength,
+                displayArrayKey,
+                displayDataTypes,
+                displayObjectSize,
+                enableClipboard,
+                groupArraysAfterLength,
+                iconStyle,
+                indentWidth,
+                onChange,
+                quotesOnKeys,
+                rootNodeName,
+                shouldCollapse,
+                sortKeys,
+                style: style2,
+                theme,
+                validationMessage,
+                value,
+                newKeyDefaultValue
+              }
+            },
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+                ValidationFailure_default,
+                {
+                  message: validationMessage,
+                  active: validationFailure
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(JsonViewer_default, {}),
+              /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+                ObjectKeyModal_default,
+                {
+                  inputValue: editKeyRequest.keyValue,
+                  addKeyRequest,
+                  editKeyRequest: editKeyRequest.editKey,
+                  onClose
+                }
+              )
+            ]
           }
-        },
-        children: [
-          /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(ValidationFailure_default, {
-            message: validationMessage,
-            active: validationFailure
-          }),
-          /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(JsonViewer_default, {}),
-          /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(ObjectKeyModal_default, {
-            inputValue: editKeyRequest.keyValue,
-            addKeyRequest,
-            editKeyRequest: editKeyRequest.editKey,
-            onClose
-          })
-        ]
-      })
-    });
+        )
+      }
+    );
   };
   var ReactJsonView_default = ReactJsonView;
 
@@ -30828,33 +30807,30 @@
       },
       string_number: "1234"
     });
-    return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(js_default, {
-      value,
-      onChange: setValue,
-      rootNodeName: "root",
-      theme: "monokai",
-      canEdit: true,
-      canDelete: true,
-      canAdd: true
-    });
+    return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+      js_default,
+      {
+        value,
+        onChange: setValue,
+        rootNodeName: "root",
+        theme: "monokai",
+        canEdit: true,
+        canDelete: true,
+        canAdd: true
+      }
+    );
   };
   var Demo_default = Demo;
 
   // demo/src/js/index.tsx
   var import_jsx_runtime20 = __toESM(require_jsx_runtime(), 1);
   var Index = () => {
-    return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", {
-      className: "mac-react",
-      children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Demo_default, {})
-    });
+    return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { className: "mac-react", children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Demo_default, {}) });
   };
   var app = document.getElementById("mac-react-container");
   var root = (0, import_client.createRoot)(app);
   root.render(
-    /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", {
-      className: "app-entry",
-      children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Index, {})
-    })
+    /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { className: "app-entry", children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Index, {}) })
   );
 })();
 /**

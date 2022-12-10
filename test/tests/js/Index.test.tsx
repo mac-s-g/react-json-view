@@ -1,13 +1,12 @@
-import React from "react";
-import { render, cleanup } from "@testing-library/react";
-// import { error } from "console";
 import "@testing-library/jest-dom";
 
-import ReactJsonViewContext from "../../../src/js/components/ReactJsonViewContext";
+import { cleanup, render } from "@testing-library/react";
+import React from "react";
 
+import ReactJsonViewContext from "../../../src/js/components/ReactJsonViewContext";
 import Index from "../../../src/js/index";
 
-describe("<Index />", function () {
+describe("<Index />", () => {
   const rjvId = 1;
 
   // it("check data type labels from index", function() {
@@ -75,7 +74,7 @@ describe("<Index />", function () {
   //     expect(wrapper.find(".data-type-label")).toHaveLength(1)
   // })
 
-  it("make sure copy to clipboard is displayed on all properties: True", function () {
+  it("make sure copy to clipboard is displayed on all properties: True", () => {
     render(
       <Index
         value={{

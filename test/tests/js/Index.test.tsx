@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 
-import { cleanup, render } from "@testing-library/react";
+import { cleanup, prettyDOM, render, screen } from "@testing-library/react";
 import React from "react";
 
 import ReactJsonViewContext from "../../../src/js/components/ReactJsonViewContext";
@@ -9,70 +9,68 @@ import Index from "../../../src/js/index";
 describe("<Index />", () => {
   const rjvId = 1;
 
-  // it("check data type labels from index", function() {
-  //     const { getByText } = render(
-  //         <Index
-  //             src={{
-  //                 bool: true,
-  //                 str: "test",
-  //                 int: 5,
-  //                 nan: NaN,
-  //                 null: null,
-  //                 func: test => {},
-  //                 obj: {
-  //                     arrChild: [1, 2, "three"],
-  //                     objChild: {
-  //                         one: 1,
-  //                         two: "two"
-  //                     }
-  //                 },
-  //                 arr: [[1, "two"], { one: "one", two: 2 }],
-  //                 regexp: /[0-9]/gi
-  //             }}
-  //         />
-  //     )
+  it("check data type labels from index", () => {
+    render(
+      <Index
+        value={{
+          bool: true,
+          str: "test",
+          int: 5,
+          nan: NaN,
+          null: null,
+          obj: {
+            arrChild: [1, 2, "three"],
+            objChild: {
+              one: 1,
+              two: "two",
+            },
+          },
+          arr: [[1, "two"], { one: "one", two: 2 }],
+        }}
+      />,
+    );
 
-  //     expect(getByText(".data-type-label")).toHaveLength(14)
-  //     expect(getByText(".data-type-label")).toHaveLength(14)
-  // })
+    const dataTypeLabelElement = document.querySelectorAll(".data-type-label");
+    expect(dataTypeLabelElement).toHaveLength(13);
+  });
 
-  // it("check object-size labels from index", function() {
-  //     const wrapper = mount(
-  //         <Index
-  //             src={{
-  //                 bool: true,
-  //                 str: "test",
-  //                 int: 5,
-  //                 nan: NaN,
-  //                 null: null,
-  //                 func: test => {},
-  //                 obj: {
-  //                     arrChild: [1, 2, "three"],
-  //                     objChild: {
-  //                         one: 1,
-  //                         two: "two"
-  //                     }
-  //                 },
-  //                 arr: [[1, "two"], { one: "one", two: 2 }],
-  //                 regexp: /[0-9]/gi
-  //             }}
-  //             displayObjectSize={true}
-  //             displayDataTypes={true}
-  //             enableClipboard={false}
-  //         />
-  //     )
-  //     expect(wrapper.find(".object-size")).toHaveLength(7)
+  it("check object-size labels from index", () => {
+    const rendered = render(
+      <Index
+        value={{
+          bool: true,
+          str: "test",
+          int: 5,
+          nan: NaN,
+          null: null,
+          obj: {
+            arrChild: [1, 2, "three"],
+            objChild: {
+              one: 1,
+              two: "two",
+            },
+          },
+          arr: [[1, "two"], { one: "one", two: 2 }],
+        }}
+        displayObjectSize
+        displayDataTypes
+        enableClipboard={false}
+      />,
+    );
+    // console.log(prettyDOM(rendered.container as Element));
+    const objectSizeElement = document.querySelectorAll(".object-size");
+    expect(objectSizeElement).toHaveLength(7);
 
-  //     wrapper.setProps({ displayObjectSize: false })
-  //     expect(wrapper.find(".object-size")).toHaveLength(0)
-  // })
+    // wrapper.setProps({ displayObjectSize: false });
+    // expect(wrapper.find(".object-size")).toHaveLength(0);
+  });
 
-  // it("src replaced with error message (ERROR OUTPUT EXPECTED)", function() {
-  //     const wrapper = render(
-  //         <Index src={"{jsonEncodedString:true, createError:true}"} />
-  //     )
-  //     expect(wrapper.find(".data-type-label")).toHaveLength(1)
-  // })
+  // it("src replaced with error message (ERROR OUTPUT EXPECTED)", () => {
+  //   const wrapper = render(
+  //     <Index svalue"{jsonEncodedString:true, createError:true}" />,
+  //   );
+  //   expect(wrapper.find(".data-type-label")).toHaveLength(1);
+  // });
 
   it("make sure copy to clipboard is displayed on all properties: True", () => {
     render(
@@ -105,27 +103,27 @@ describe("<Index />", () => {
   //     expect(Index.getDerivedStateFromProps).toHaveBeenCalled()
   // })
 
-  // it("index can have ArrayGroup root component", function() {
-  //     const wrapper = render(
-  //         <Index
-  //             name="test"
-  //             groupArraysAfterLength={5}
-  //             src={new Array(15).fill(0)}
-  //         />
-  //     )
-  //     expect(wrapper.find(".array-group")).toHaveLength(3)
-  // })
+  it("index can have ArrayGroup root component", () => {
+    render(<Index value={new Array(15).fill(0)} groupArraysAfterLength={5} />);
 
-  // it("length is correct even if an object has a length property", function () {
-  //     const wrapper = render(
-  //         <Index
-  //             src={{
-  //                 first: "first property",
-  //                 second: "second property",
-  //                 length: 1000
-  //             }}
-  //         />
-  //     )
-  //     expect(wrapper.find(".object-size")).toHaveLength(1)
-  // })
+    const arrayGroupElement = document.querySelectorAll(".array-group");
+    expect(arrayGroupElement).toHaveLength(3);
+  });
+
+  it("length is correct even if an object has a length property", () => {
+    render(
+      <Index
+        value={{
+          first: "first property",
+          second: "second property",
+          length: 1000,
+        }}
+        groupArraysAfterLength={5}
+      />,
+    );
+
+    const objectSizeElement = document.querySelectorAll(".object-size");
+
+    expect(objectSizeElement).toHaveLength(1);
+  });
 });

@@ -9,6 +9,34 @@ import Index from "../../../src/js/index";
 describe("<Index />", () => {
   const rjvId = 1;
 
+  it("render component with default props", () => {
+    const rendered = render(<Index value={{}} />);
+    const reactJsonViewElem =
+      rendered.container.querySelector(".react-json-view");
+    expect(reactJsonViewElem).not.toBe(null);
+  });
+
+  it("render component with object as value", () => {
+    const rendered = render(
+      <Index
+        value={{
+          fname: "john",
+          lname: "doe",
+        }}
+      />,
+    );
+    const stringValueElem =
+      rendered.container.querySelectorAll(".string-value");
+    expect(stringValueElem).toHaveLength(2);
+  });
+
+  it("render component with array as value", () => {
+    const rendered = render(<Index value={["hello", "world"]} />);
+    const stringValueElem =
+      rendered.container.querySelectorAll(".string-value");
+    expect(stringValueElem).toHaveLength(2);
+  });
+
   it("check data type labels from index", () => {
     render(
       <Index

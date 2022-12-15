@@ -11,11 +11,11 @@ import VariableEditor from "../../../../src/js/components/VariableEditor";
 import Index from "../../../../src/js/index";
 import attributeStore from "../../../../src/js/stores/ObjectAttributes";
 
-afterEach(() => {
-  cleanup();
-});
-
 describe("<VariableEditor />", () => {
+  afterEach(() => {
+    cleanup();
+  });
+
   it("VariableEditor click-to-edit should be visible", () => {
     const rjvId = "id";
 

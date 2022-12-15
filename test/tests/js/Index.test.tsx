@@ -3,7 +3,6 @@ import "@testing-library/jest-dom";
 import { cleanup, prettyDOM, render, screen } from "@testing-library/react";
 import React from "react";
 
-import ReactJsonViewContext from "../../../src/js/components/ReactJsonViewContext";
 import Index from "../../../src/js/index";
 
 describe("<Index />", () => {

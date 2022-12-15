@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, render, mount } from 'enzyme';
 import { expect } from 'chai';
 
-import JsonObject from './../../../../../src/js/components/DataTypes/Object';
+import JsonObject from '../../../../../src/js/components/DataTypes/Object';
 
 describe('<JsonObject />', function () {
     const rjvId = 1;

@@ -2,7 +2,7 @@ import React from "react"
 import { shallow } from "enzyme"
 import { expect } from "chai"
 
-import DataTypeLabel from "./../../../../../src/js/components/DataTypes/DataTypeLabel"
+import DataTypeLabel from "../../../../../src/js/components/DataTypes/DataTypeLabel"
 
 describe("<DataTypeLabel />", function() {
     const rjvId = 1

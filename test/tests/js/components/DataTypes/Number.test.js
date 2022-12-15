@@ -3,7 +3,7 @@ import { mount } from "enzyme"
 import { expect } from "chai"
 
 import JsonInteger from "./../../../../../src/js/components/DataTypes/Integer"
-import DataTypeLabel from "./../../../../../src/js/components/DataTypes/DataTypeLabel"
+import DataTypeLabel from "../../../../../src/js/components/DataTypes/DataTypeLabel"
 
 describe("<JsonInteger />", function() {
     const rjvId = 1

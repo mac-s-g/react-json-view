@@ -120,7 +120,7 @@ describe('<JsonObject />', function () {
 
     it('Array mount collapsed', function () {
         let src = {
-            arr1: [('arr2': ['test'])]
+            arr1: [('arr2', ['test'])]
         };
         const wrapper = render(
             <JsonObject
@@ -141,7 +141,7 @@ describe('<JsonObject />', function () {
 
     it('Array mount collapsed circle', function () {
         let src = {
-            arr1: [('arr2': ['test'])]
+            arr1: [('arr2', ['test'])]
         };
         const wrapper = render(
             <JsonObject
@@ -184,7 +184,7 @@ describe('<JsonObject />', function () {
 
     it('Array mount collapsed triangle', function () {
         let src = {
-            arr1: [('arr2': ['test'])]
+            arr1: [('arr2', ['test'])]
         };
         const wrapper = render(
             <JsonObject

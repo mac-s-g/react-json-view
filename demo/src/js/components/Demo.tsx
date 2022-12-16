@@ -8,18 +8,16 @@ import ReactJson from "../../../../src/js/index";
 const Demo = () => {
   const [value, setValue] = useState<Json & object>({
     bool: true,
+    number: 5,
     str: "test",
-    int: 5,
     nan: NaN,
     null: null,
+    arr: [1, 2],
     obj: {
-      arrChild: [1, 2, "three"],
-      objChild: {
-        one: 1,
-        two: "two",
-      },
+      test: true,
     },
-    arr: [[1, "two"], { one: "one", two: 2 }],
+    empty_arr: [],
+    empty_obj: {},
   });
 
   return (

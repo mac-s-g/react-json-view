@@ -162,7 +162,7 @@ describe('<JsonObject />', function () {
 
     it('Array mount collapsed square', function () {
         let src = {
-            arr1: [('arr2': ['test'])]
+            arr1: [('arr2', ['test'])]
         };
         const wrapper = render(
             <JsonObject

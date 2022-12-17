@@ -15,20 +15,22 @@ describe("<JsonBoolean />", () => {
   it("bool component should have a data type label: True", () => {
     const rendered = render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            theme: "rjvDefault",
-            displayDataTypes: true,
-          },
-        }}
+        value={
+          {
+            props: {
+              theme: "rjvDefault",
+              displayDataTypes: true,
+            },
+          } as any
+        }
       >
         {" "}
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: true,
-          }}
+          value={
+            {
+              value: true,
+            } as any
+          }
         >
           <JsonBoolean />
         </LocalJsonViewContext.Provider>
@@ -42,20 +44,22 @@ describe("<JsonBoolean />", () => {
   it("bool component not should have a data type label: True", () => {
     const rendered = render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            theme: "rjvDefault",
-            displayDataTypes: false,
-          },
-        }}
+        value={
+          {
+            props: {
+              theme: "rjvDefault",
+              displayDataTypes: false,
+            },
+          } as any
+        }
       >
         {" "}
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: true,
-          }}
+          value={
+            {
+              value: true,
+            } as any
+          }
         >
           <JsonBoolean />
         </LocalJsonViewContext.Provider>
@@ -98,20 +102,22 @@ describe("<JsonBoolean />", () => {
   it("bool component should have a data type label: False", () => {
     const rendered = render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            theme: "rjvDefault",
-            displayDataTypes: false,
-          },
-        }}
+        value={
+          {
+            props: {
+              theme: "rjvDefault",
+              displayDataTypes: false,
+            },
+          } as any
+        }
       >
         {" "}
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: false,
-          }}
+          value={
+            {
+              value: false,
+            } as any
+          }
         >
           <JsonBoolean />
         </LocalJsonViewContext.Provider>

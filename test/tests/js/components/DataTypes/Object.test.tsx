@@ -70,27 +70,29 @@ describe("<JsonObject />", () => {
     const rjvId = "id";
     const rendered = render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            theme: "rjvDefault",
-            indentWidth: 1,
-            displayDataTypes: true,
-            shouldCollapse: () => false,
-            groupArraysAfterLength: 100,
-          },
-          rjvId,
-        }}
+        value={
+          {
+            props: {
+              theme: "rjvDefault",
+              indentWidth: 1,
+              displayDataTypes: true,
+              shouldCollapse: () => false,
+              groupArraysAfterLength: 100,
+            },
+            rjvId,
+          } as any
+        }
       >
         {" "}
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value,
-            namespace: ["root"],
-            type: "boolean",
-            depth: 0,
-          }}
+          value={
+            {
+              value,
+              namespace: ["root"],
+              type: "boolean",
+              depth: 0,
+            } as any
+          }
         >
           <JsonObject
             objectType="object"
@@ -123,27 +125,29 @@ describe("<JsonObject />", () => {
     const rjvId = "id";
     const rendered = render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            theme: "rjvDefault",
-            indentWidth: 1,
-            displayDataTypes: true,
-            shouldCollapse: () => true,
-            groupArraysAfterLength: 100,
-          },
-          rjvId,
-        }}
+        value={
+          {
+            props: {
+              theme: "rjvDefault",
+              indentWidth: 1,
+              displayDataTypes: true,
+              shouldCollapse: () => true,
+              groupArraysAfterLength: 100,
+            },
+            rjvId,
+          } as any
+        }
       >
         {" "}
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value,
-            namespace: ["root"],
-            type: "object",
-            depth: 0,
-          }}
+          value={
+            {
+              value,
+              namespace: ["root"],
+              type: "object",
+              depth: 0,
+            } as any
+          }
         >
           <JsonObject
             objectType="object"
@@ -165,26 +169,28 @@ describe("<JsonObject />", () => {
     };
     const rendered = render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            theme: "rjvDefault",
-            indentWidth: 1,
-            displayDataTypes: true,
-            shouldCollapse: () => false,
-            groupArraysAfterLength: 100,
-          },
-          rjvId,
-        }}
+        value={
+          {
+            props: {
+              theme: "rjvDefault",
+              indentWidth: 1,
+              displayDataTypes: true,
+              shouldCollapse: () => false,
+              groupArraysAfterLength: 100,
+            },
+            rjvId,
+          } as any
+        }
       >
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value,
-            namespace: ["arr_test"],
-            type: "array",
-            depth: 1,
-          }}
+          value={
+            {
+              value,
+              namespace: ["arr_test"],
+              type: "array",
+              depth: 1,
+            } as any
+          }
         >
           <JsonObject
             objectType="array"
@@ -211,27 +217,29 @@ describe("<JsonObject />", () => {
     };
     const rendered = render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            theme: "rjvDefault",
-            indentWidth: 1,
-            displayDataTypes: true,
-            shouldCollapse: () => true,
-            groupArraysAfterLength: 100,
-            iconStyle: iconStyle ?? "triangle",
-          },
-          rjvId,
-        }}
+        value={
+          {
+            props: {
+              theme: "rjvDefault",
+              indentWidth: 1,
+              displayDataTypes: true,
+              shouldCollapse: () => true,
+              groupArraysAfterLength: 100,
+              iconStyle: iconStyle ?? "triangle",
+            },
+            rjvId,
+          } as any
+        }
       >
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value,
-            namespace: ["arr_test"],
-            type: "array",
-            depth: 1,
-          }}
+          value={
+            {
+              value,
+              namespace: ["arr_test"],
+              type: "array",
+              depth: 1,
+            } as any
+          }
         >
           <JsonObject
             objectType="array"
@@ -266,26 +274,28 @@ describe("<JsonObject />", () => {
     const value = ["1", "2", "3"];
     const rendered = render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            theme: "rjvDefault",
-            indentWidth: 1,
-            displayDataTypes: true,
-            shouldCollapse: () => true,
-            groupArraysAfterLength: 100,
-          },
-          rjvId,
-        }}
+        value={
+          {
+            props: {
+              theme: "rjvDefault",
+              indentWidth: 1,
+              displayDataTypes: true,
+              shouldCollapse: () => true,
+              groupArraysAfterLength: 100,
+            },
+            rjvId,
+          } as any
+        }
       >
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value,
-            namespace: ["root"],
-            type: "array",
-            depth: 1,
-          }}
+          value={
+            {
+              value,
+              namespace: ["root"],
+              type: "array",
+              depth: 1,
+            } as any
+          }
         >
           <JsonObject
             objectType="array"
@@ -305,26 +315,28 @@ describe("<JsonObject />", () => {
     const value = new Array(0);
     const rendered = render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            theme: "rjvDefault",
-            indentWidth: 1,
-            displayDataTypes: true,
-            shouldCollapse: () => true,
-            groupArraysAfterLength: 100,
-          },
-          rjvId,
-        }}
+        value={
+          {
+            props: {
+              theme: "rjvDefault",
+              indentWidth: 1,
+              displayDataTypes: true,
+              shouldCollapse: () => true,
+              groupArraysAfterLength: 100,
+            },
+            rjvId,
+          } as any
+        }
       >
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value,
-            namespace: ["root"],
-            type: "array",
-            depth: 1,
-          }}
+          value={
+            {
+              value,
+              namespace: ["root"],
+              type: "array",
+              depth: 1,
+            } as any
+          }
         >
           <JsonObject
             objectType="array"
@@ -349,26 +361,28 @@ describe("<JsonObject />", () => {
     const rjvId = "id";
     const rendered = render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            theme: "rjvDefault",
-            indentWidth: 1,
-            displayDataTypes: true,
-            shouldCollapse: () => false,
-            sortKeys: true,
-          },
-          rjvId,
-        }}
+        value={
+          {
+            props: {
+              theme: "rjvDefault",
+              indentWidth: 1,
+              displayDataTypes: true,
+              shouldCollapse: () => false,
+              sortKeys: true,
+            },
+            rjvId,
+          } as any
+        }
       >
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value,
-            namespace: ["root"],
-            type: "object",
-            depth: 1,
-          }}
+          value={
+            {
+              value,
+              namespace: ["root"],
+              type: "object",
+              depth: 1,
+            } as any
+          }
         >
           <JsonObject
             objectType="object"
@@ -378,7 +392,6 @@ describe("<JsonObject />", () => {
         </LocalJsonViewContext.Provider>
       </ReactJsonViewContext.Provider>,
     );
-    console.log(prettyDOM(rendered.container));
 
     const firstKey = rendered.container.querySelectorAll(".object-key span");
 
@@ -395,25 +408,27 @@ describe("<JsonObject />", () => {
     const rjvId = "id";
     const rendered = render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            theme: "rjvDefault",
-            indentWidth: 1,
-            displayDataTypes: true,
-            shouldCollapse: () => false,
-          },
-          rjvId,
-        }}
+        value={
+          {
+            props: {
+              theme: "rjvDefault",
+              indentWidth: 1,
+              displayDataTypes: true,
+              shouldCollapse: () => false,
+            },
+            rjvId,
+          } as any
+        }
       >
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value,
-            namespace: ["root"],
-            type: "object",
-            depth: 1,
-          }}
+          value={
+            {
+              value,
+              namespace: ["root"],
+              type: "object",
+              depth: 1,
+            } as any
+          }
         >
           <JsonObject
             objectType="object"
@@ -423,7 +438,6 @@ describe("<JsonObject />", () => {
         </LocalJsonViewContext.Provider>
       </ReactJsonViewContext.Provider>,
     );
-    console.log(prettyDOM(rendered.container));
 
     const firstKey = rendered.container.querySelectorAll(".object-key span");
 

@@ -21,28 +21,30 @@ describe("<VariableEditor />", () => {
 
     render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            canEdit: true,
-            canDelete: true,
-            enableClipboard: true,
-            theme: "rjvDefault",
-            indentWidth: 4,
-            quotesOnKeys: true,
-            displayArrayKey: true,
-          },
-          rjvId,
-        }}
+        value={
+          {
+            props: {
+              canEdit: true,
+              canDelete: true,
+              enableClipboard: true,
+              theme: "rjvDefault",
+              indentWidth: 4,
+              quotesOnKeys: true,
+              displayArrayKey: true,
+            },
+            rjvId,
+          } as any
+        }
       >
         {" "}
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: "test",
-            namespace: ["name"],
-            parentType: "object",
-          }}
+          value={
+            {
+              value: "test",
+              namespace: ["name"],
+              parentType: "object",
+            } as any
+          }
         >
           <VariableEditor />
         </LocalJsonViewContext.Provider>
@@ -59,27 +61,29 @@ describe("<VariableEditor />", () => {
 
     render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            canEdit: false,
-            canDelete: true,
-            enableClipboard: true,
-            theme: "rjvDefault",
-            indentWidth: 4,
-            quotesOnKeys: true,
-            displayArrayKey: true,
-          },
-          rjvId,
-        }}
+        value={
+          {
+            props: {
+              canEdit: false,
+              canDelete: true,
+              enableClipboard: true,
+              theme: "rjvDefault",
+              indentWidth: 4,
+              quotesOnKeys: true,
+              displayArrayKey: true,
+            },
+            rjvId,
+          } as any
+        }
       >
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: "test",
-            namespace: ["name"],
-            parentType: "object",
-          }}
+          value={
+            {
+              value: "test",
+              namespace: ["name"],
+              parentType: "object",
+            } as any
+          }
         >
           <VariableEditor />
         </LocalJsonViewContext.Provider>
@@ -97,27 +101,29 @@ describe("<VariableEditor />", () => {
 
     render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            canEdit: true,
-            canDelete: true,
-            enableClipboard: true,
-            theme: "rjvDefault",
-            indentWidth: 4,
-            quotesOnKeys: true,
-            displayArrayKey: true,
-          },
-          rjvId,
-        }}
+        value={
+          {
+            props: {
+              canEdit: true,
+              canDelete: true,
+              enableClipboard: true,
+              theme: "rjvDefault",
+              indentWidth: 4,
+              quotesOnKeys: true,
+              displayArrayKey: true,
+            },
+            rjvId,
+          } as any
+        }
       >
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: "test",
-            namespace: ["name"],
-            parentType: "object",
-          }}
+          value={
+            {
+              value: "test",
+              namespace: ["name"],
+              parentType: "object",
+            } as any
+          }
         >
           <VariableEditor />
         </LocalJsonViewContext.Provider>
@@ -146,27 +152,29 @@ describe("<VariableEditor />", () => {
 
     render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            canEdit: true,
-            canDelete: true,
-            enableClipboard: true,
-            theme: "rjvDefault",
-            indentWidth: 4,
-            quotesOnKeys: true,
-            displayArrayKey: true,
-          },
-          rjvId,
-        }}
+        value={
+          {
+            props: {
+              canEdit: true,
+              canDelete: true,
+              enableClipboard: true,
+              theme: "rjvDefault",
+              indentWidth: 4,
+              quotesOnKeys: true,
+              displayArrayKey: true,
+            },
+            rjvId,
+          } as any
+        }
       >
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: "test",
-            namespace: ["name"],
-            parentType: "object",
-          }}
+          value={
+            {
+              value: "test",
+              namespace: ["name"],
+              parentType: "object",
+            } as any
+          }
         >
           <VariableEditor />
         </LocalJsonViewContext.Provider>
@@ -217,30 +225,32 @@ describe("<VariableEditor />", () => {
       return (
         <>
           <ReactJsonViewContext.Provider
-            value={{
-              /* @ts-ignore */
-              props: {
-                canEdit: true,
-                canDelete: true,
-                enableClipboard: true,
-                theme: "rjvDefault",
-                indentWidth: 4,
-                quotesOnKeys: true,
-                displayArrayKey: true,
-                onChange: (value) => {
-                  expect((value as { name: string }).name).toBe("newValue");
+            value={
+              {
+                props: {
+                  canEdit: true,
+                  canDelete: true,
+                  enableClipboard: true,
+                  theme: "rjvDefault",
+                  indentWidth: 4,
+                  quotesOnKeys: true,
+                  displayArrayKey: true,
+                  onChange: (value: any) => {
+                    expect((value as { name: string }).name).toBe("newValue");
+                  },
                 },
-              },
-              rjvId,
-            }}
+                rjvId,
+              } as any
+            }
           >
             <LocalJsonViewContext.Provider
-              /* @ts-ignore */
-              value={{
-                value: existingValue,
-                namespace: ["name"],
-                parentType: "object",
-              }}
+              value={
+                {
+                  value: existingValue,
+                  namespace: ["name"],
+                  parentType: "object",
+                } as any
+              }
             >
               <div>
                 {children}
@@ -299,30 +309,32 @@ describe("<VariableEditor />", () => {
       return (
         <>
           <ReactJsonViewContext.Provider
-            value={{
-              /* @ts-ignore */
-              props: {
-                canEdit: true,
-                canDelete: true,
-                enableClipboard: true,
-                theme: "rjvDefault",
-                indentWidth: 4,
-                quotesOnKeys: true,
-                displayArrayKey: true,
-                onChange: (value) => {
-                  expect((value as { name: string }).name).toBe("newValue");
+            value={
+              {
+                props: {
+                  canEdit: true,
+                  canDelete: true,
+                  enableClipboard: true,
+                  theme: "rjvDefault",
+                  indentWidth: 4,
+                  quotesOnKeys: true,
+                  displayArrayKey: true,
+                  onChange: (value: any) => {
+                    expect((value as { name: string }).name).toBe("newValue");
+                  },
                 },
-              },
-              rjvId,
-            }}
+                rjvId,
+              } as any
+            }
           >
             <LocalJsonViewContext.Provider
-              /* @ts-ignore */
-              value={{
-                value: existingValue,
-                namespace: ["name"],
-                parentType: "object",
-              }}
+              value={
+                {
+                  value: existingValue,
+                  namespace: ["name"],
+                  parentType: "object",
+                } as any
+              }
             >
               <div>
                 {children}
@@ -379,44 +391,6 @@ describe("<VariableEditor />", () => {
       (result.current.edit as { editMode: boolean; editValue: string })
         .editValue,
     ).toBe("existingValue");
-
-    // const wrapper = shallow(
-    //   <VariableEditor
-    //     src={{ test: existing_value }}
-    //     theme="rjv-default"
-    //     onEdit={(edit) => {
-    //       expect(edit.updated_src.test).toBe(new_value);
-    //     }}
-    //     namespace={["test"]}
-    //     rjvId={rjvId}
-    //     variable={{
-    //       name: "test",
-    //       value: existing_value,
-    //       type: "string",
-    //     }}
-    //   />,
-    // );
-
-    // editMode defaluts to off
-    // expect(wrapper.state("editMode")).toBe(false);
-    // click to open textarea
-    // wrapper.find(".click-to-edit-icon").simulate("click");
-    // verify editMode is on
-    // expect(wrapper.state("editMode")).toBe(true);
-    // make sure default textarea value is correct
-    // expect(wrapper.find(".variable-editor").props().value).toBe(existing_value);
-    // update edit value
-    // wrapper.setState({ editValue: new_value });
-    // cancel update
-    // wrapper.find(".edit-cancel").simulate("click");
-    // make sure editMode is off after cancel
-    // expect(wrapper.state("editMode")).toBe(false);
-    // pop open textarea again
-    // wrapper.find(".click-to-edit-icon").simulate("click");
-    // make sure editMode is on
-    // expect(wrapper.state("editMode")).toBe(true);
-    // make sure that textarea still contains original value
-    // expect(wrapper.find(".variable-editor").props().value).toBe(existing_value);
   });
 
   it("VariableEditor detected null", () => {
@@ -424,27 +398,29 @@ describe("<VariableEditor />", () => {
 
     render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            canEdit: true,
-            canDelete: true,
-            enableClipboard: true,
-            theme: "rjvDefault",
-            indentWidth: 4,
-            quotesOnKeys: true,
-            displayArrayKey: true,
-          },
-          rjvId,
-        }}
+        value={
+          {
+            props: {
+              canEdit: true,
+              canDelete: true,
+              enableClipboard: true,
+              theme: "rjvDefault",
+              indentWidth: 4,
+              quotesOnKeys: true,
+              displayArrayKey: true,
+            },
+            rjvId,
+          } as any
+        }
       >
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: null,
-            namespace: ["name"],
-            parentType: "object",
-          }}
+          value={
+            {
+              value: null,
+              namespace: ["name"],
+              parentType: "object",
+            } as any
+          }
         >
           <VariableEditor />
         </LocalJsonViewContext.Provider>
@@ -493,27 +469,29 @@ describe("<VariableEditor />", () => {
 
     render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            canEdit: true,
-            canDelete: true,
-            enableClipboard: true,
-            theme: "rjvDefault",
-            indentWidth: 4,
-            quotesOnKeys: true,
-            displayArrayKey: true,
-          },
-          rjvId,
-        }}
+        value={
+          {
+            props: {
+              canEdit: true,
+              canDelete: true,
+              enableClipboard: true,
+              theme: "rjvDefault",
+              indentWidth: 4,
+              quotesOnKeys: true,
+              displayArrayKey: true,
+            },
+            rjvId,
+          } as any
+        }
       >
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: NaN,
-            namespace: ["name"],
-            parentType: "object",
-          }}
+          value={
+            {
+              value: NaN,
+              namespace: ["name"],
+              parentType: "object",
+            } as any
+          }
         >
           <VariableEditor />
         </LocalJsonViewContext.Provider>
@@ -536,23 +514,6 @@ describe("<VariableEditor />", () => {
     );
     expect(variableEditorElement.length).toBe(1);
     expect((variableEditorElement[0] as HTMLTextAreaElement).value).toBe("NaN");
-    // const wrapper = shallow(
-    //   <VariableEditor
-    //     src={{ test: true }}
-    //     theme="rjv-default"
-    //     onEdit={(edit) => {}}
-    //     rjvId={rjvId}
-    //     variable={{
-    //       name: "test",
-    //       value: "NaN",
-    //       type: "nan",
-    //     }}
-    //   />,
-    // );
-    // expect(wrapper.find(".click-to-edit-icon").length).toBe(1);
-    // wrapper.find(".click-to-edit-icon").simulate("click");
-    // expect(wrapper.state("editMode")).toBe(true);
-    // expect(wrapper.find(".variable-editor").props().value).toBe("NaN");
   });
 
   it("VariableEditor detected string", () => {
@@ -560,27 +521,29 @@ describe("<VariableEditor />", () => {
 
     render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            canEdit: true,
-            canDelete: true,
-            enableClipboard: true,
-            theme: "rjvDefault",
-            indentWidth: 4,
-            quotesOnKeys: true,
-            displayArrayKey: true,
-          },
-          rjvId,
-        }}
+        value={
+          {
+            props: {
+              canEdit: true,
+              canDelete: true,
+              enableClipboard: true,
+              theme: "rjvDefault",
+              indentWidth: 4,
+              quotesOnKeys: true,
+              displayArrayKey: true,
+            },
+            rjvId,
+          } as any
+        }
       >
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: "test",
-            namespace: ["name"],
-            parentType: "object",
-          }}
+          value={
+            {
+              value: "test",
+              namespace: ["name"],
+              parentType: "object",
+            } as any
+          }
         >
           <VariableEditor />
         </LocalJsonViewContext.Provider>
@@ -605,23 +568,6 @@ describe("<VariableEditor />", () => {
     expect((variableEditorElement[0] as HTMLTextAreaElement).value).toBe(
       "test",
     );
-    // const wrapper = shallow(
-    //   <VariableEditor
-    //     src={{ test: true }}
-    //     theme="rjv-default"
-    //     onEdit={(edit) => {}}
-    //     rjvId={rjvId}
-    //     variable={{
-    //       name: "test",
-    //       value: "test",
-    //       type: "string",
-    //     }}
-    //   />,
-    // );
-    // expect(wrapper.find(".click-to-edit-icon").length).toBe(1);
-    // wrapper.find(".click-to-edit-icon").simulate("click");
-    // expect(wrapper.state("editMode")).toBe(true);
-    // expect(wrapper.find(".variable-editor").props().value).toBe("test");
   });
 
   it("VariableEditor detected object", () => {
@@ -629,27 +575,29 @@ describe("<VariableEditor />", () => {
 
     render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            canEdit: true,
-            canDelete: true,
-            enableClipboard: true,
-            theme: "rjvDefault",
-            indentWidth: 4,
-            quotesOnKeys: true,
-            displayArrayKey: true,
-          },
-          rjvId,
-        }}
+        value={
+          {
+            props: {
+              canEdit: true,
+              canDelete: true,
+              enableClipboard: true,
+              theme: "rjvDefault",
+              indentWidth: 4,
+              quotesOnKeys: true,
+              displayArrayKey: true,
+            },
+            rjvId,
+          } as any
+        }
       >
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: "{}",
-            namespace: ["name"],
-            parentType: "object",
-          }}
+          value={
+            {
+              value: "{}",
+              namespace: ["name"],
+              parentType: "object",
+            } as any
+          }
         >
           <VariableEditor />
         </LocalJsonViewContext.Provider>
@@ -672,23 +620,6 @@ describe("<VariableEditor />", () => {
     );
     expect(variableEditorElement.length).toBe(1);
     expect((variableEditorElement[0] as HTMLTextAreaElement).value).toBe("{}");
-    // const wrapper = shallow(
-    //   <VariableEditor
-    //     src={{ test: true }}
-    //     theme="rjv-default"
-    //     onEdit={(edit) => {}}
-    //     rjvId={rjvId}
-    //     variable={{
-    //       name: "test",
-    //       value: "{}",
-    //       type: "object",
-    //     }}
-    //   />,
-    // );
-    // expect(wrapper.find(".click-to-edit-icon").length).toBe(1);
-    // wrapper.find(".click-to-edit-icon").simulate("click");
-    // expect(wrapper.state("editMode")).toBe(true);
-    // expect(wrapper.find(".variable-editor").props().value).toBe("{}");
   });
 
   it("VariableEditor detected array", () => {
@@ -696,27 +627,29 @@ describe("<VariableEditor />", () => {
 
     render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            canEdit: true,
-            canDelete: true,
-            enableClipboard: true,
-            theme: "rjvDefault",
-            indentWidth: 4,
-            quotesOnKeys: true,
-            displayArrayKey: true,
-          },
-          rjvId,
-        }}
+        value={
+          {
+            props: {
+              canEdit: true,
+              canDelete: true,
+              enableClipboard: true,
+              theme: "rjvDefault",
+              indentWidth: 4,
+              quotesOnKeys: true,
+              displayArrayKey: true,
+            },
+            rjvId,
+          } as any
+        }
       >
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: "[1,2,3]",
-            namespace: ["name"],
-            parentType: "object",
-          }}
+          value={
+            {
+              value: "[1,2,3]",
+              namespace: ["name"],
+              parentType: "object",
+            } as any
+          }
         >
           <VariableEditor />
         </LocalJsonViewContext.Provider>
@@ -741,23 +674,5 @@ describe("<VariableEditor />", () => {
     expect((variableEditorElement[0] as HTMLTextAreaElement).value).toBe(
       "[1,2,3]",
     );
-
-    // const wrapper = shallow(
-    //   <VariableEditor
-    //     src={{ test: true }}
-    //     theme="rjv-default"
-    //     onEdit={(edit) => {}}
-    //     rjvId={rjvId}
-    //     variable={{
-    //       name: "test",
-    //       value: "[1,2,3]",
-    //       type: "array",
-    //     }}
-    //   />,
-    // );
-    // expect(wrapper.find(".click-to-edit-icon").length).toBe(1);
-    // wrapper.find(".click-to-edit-icon").simulate("click");
-    // expect(wrapper.state("editMode")).toBe(true);
-    // expect(wrapper.find(".variable-editor").props().value).toBe("[1,2,3]");
   });
 });

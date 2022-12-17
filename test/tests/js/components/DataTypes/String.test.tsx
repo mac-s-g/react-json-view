@@ -14,20 +14,22 @@ describe("<JsonString />", () => {
   it("string component should have a data type label", () => {
     const rendered = render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            theme: "rjvDefault",
-            displayDataTypes: true,
-          },
-        }}
+        value={
+          {
+            props: {
+              theme: "rjvDefault",
+              displayDataTypes: true,
+            },
+          } as any
+        }
       >
         {" "}
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: "test",
-          }}
+          value={
+            {
+              value: "test",
+            } as any
+          }
         >
           <JsonString />
         </LocalJsonViewContext.Provider>
@@ -41,20 +43,22 @@ describe("<JsonString />", () => {
   it("string with hidden data type", () => {
     const rendered = render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            theme: "rjvDefault",
-            displayDataTypes: false,
-          },
-        }}
+        value={
+          {
+            props: {
+              theme: "rjvDefault",
+              displayDataTypes: false,
+            },
+          } as any
+        }
       >
         {" "}
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: "test",
-          }}
+          value={
+            {
+              value: "test",
+            } as any
+          }
         >
           <JsonString />
         </LocalJsonViewContext.Provider>
@@ -70,21 +74,23 @@ describe("<JsonString />", () => {
   it("collapsed string content", () => {
     const rendered = render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            theme: "rjvDefault",
-            displayDataTypes: false,
-            collapseStringsAfterLength: 3,
-          },
-        }}
+        value={
+          {
+            props: {
+              theme: "rjvDefault",
+              displayDataTypes: false,
+              collapseStringsAfterLength: 3,
+            },
+          } as any
+        }
       >
         {" "}
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: "123456789",
-          }}
+          value={
+            {
+              value: "123456789",
+            } as any
+          }
         >
           <JsonString />
         </LocalJsonViewContext.Provider>

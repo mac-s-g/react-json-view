@@ -14,13 +14,14 @@ describe("<DataTypeLabel />", () => {
   it("DataTypeLabel should exist when displayDataTypes is true", () => {
     const rendered = render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            theme: "rjvDefault",
-            displayDataTypes: true,
-          },
-        }}
+        value={
+          {
+            props: {
+              theme: "rjvDefault",
+              displayDataTypes: true,
+            },
+          } as any
+        }
       >
         <DataTypeLabel typeName="string" />
       </ReactJsonViewContext.Provider>,
@@ -34,13 +35,14 @@ describe("<DataTypeLabel />", () => {
   it("DataTypeLabel should not exist when displayDataTypes is false", () => {
     const rendered = render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            theme: "rjvDefault",
-            displayDataTypes: false,
-          },
-        }}
+        value={
+          {
+            props: {
+              theme: "rjvDefault",
+              displayDataTypes: false,
+            },
+          } as any
+        }
       >
         <DataTypeLabel typeName="string" />
       </ReactJsonViewContext.Provider>,

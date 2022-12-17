@@ -15,20 +15,22 @@ describe("<JsonNumber />", () => {
   it("Number component should have a data type label", () => {
     const rendered = render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            theme: "rjvDefault",
-            displayDataTypes: true,
-          },
-        }}
+        value={
+          {
+            props: {
+              theme: "rjvDefault",
+              displayDataTypes: true,
+            },
+          } as any
+        }
       >
         {" "}
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: 1,
-          }}
+          value={
+            {
+              value: 1,
+            } as any
+          }
         >
           <JsonNumber />
         </LocalJsonViewContext.Provider>
@@ -42,20 +44,22 @@ describe("<JsonNumber />", () => {
   it("Number component should not have a data type label", () => {
     const rendered = render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            theme: "rjvDefault",
-            displayDataTypes: false,
-          },
-        }}
+        value={
+          {
+            props: {
+              theme: "rjvDefault",
+              displayDataTypes: false,
+            },
+          } as any
+        }
       >
         {" "}
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: 1,
-          }}
+          value={
+            {
+              value: 1,
+            } as any
+          }
         >
           <JsonNumber />
         </LocalJsonViewContext.Provider>

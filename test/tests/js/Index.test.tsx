@@ -92,13 +92,6 @@ describe("<Index />", () => {
     // expect(wrapper.find(".object-size")).toHaveLength(0);
   });
 
-  // it("src replaced with error message (ERROR OUTPUT EXPECTED)", () => {
-  //   const wrapper = render(
-  //     <Index svalue"{jsonEncodedString:true, createError:true}" />,
-  //   );
-  //   expect(wrapper.find(".data-type-label")).toHaveLength(1);
-  // });
-
   it("make sure copy to clipboard is displayed on all properties: True", () => {
     render(
       <Index
@@ -116,19 +109,6 @@ describe("<Index />", () => {
 
     expect(clipboardIcons).toHaveLength(6);
   });
-
-  // it("index test getDerivedStateFromProps", function() {
-  //     jest.spyOn(Index, "getDerivedStateFromProps").mockClear()
-  //     // mount() will cause getDerivedStateFromProps to be called twice.
-  //     // 1. before first render()
-  //     // 2. result of setState() in componentDidMount()
-  //     const wrapper = mount(<Index src={{ test: true }} />)
-  //     expect(wrapper.find(".data-type-label")).toHaveLength(1)
-  //     // setProps() will cause getDerivedStateFromProps to be called once.
-  //     wrapper.setProps({ src: { test1: true, test2: false } })
-  //     // in total, it was called thrice.
-  //     expect(Index.getDerivedStateFromProps).toHaveBeenCalled()
-  // })
 
   it("index can have ArrayGroup root component", () => {
     render(<Index value={new Array(15).fill(0)} groupArraysAfterLength={5} />);

@@ -15,20 +15,22 @@ describe("<JsonNull />", () => {
   it("Null component should show no data type label (type labels enabled)", () => {
     const rendered = render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            theme: "rjvDefault",
-            displayDataTypes: true,
-          },
-        }}
+        value={
+          {
+            props: {
+              theme: "rjvDefault",
+              displayDataTypes: true,
+            },
+          } as any
+        }
       >
         {" "}
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: null,
-          }}
+          value={
+            {
+              value: null,
+            } as any
+          }
         >
           <JsonNull />
         </LocalJsonViewContext.Provider>

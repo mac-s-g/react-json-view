@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable import/no-named-default */
 import { useContext, useMemo, useState } from "react";
-import AutosizeTextarea from "react-textarea-autosize";
+import TextareaAutosize, {
+  TextareaAutosizeProps,
+} from "react-textarea-autosize";
 
 import parseInput from "../helpers/parseInput";
-import stringifyVariable from "../helpers/stringifyVariable";
 import { DISPLAY_BRACES, SINGLE_INDENT, toType } from "../helpers/util";
 import attributeStore from "../stores/ObjectAttributes";
 import Theme from "../themes/getStyle";
@@ -16,6 +18,7 @@ import { EditKeyIcon } from "./DataTypes/Object";
 import { CheckCircle, Edit, RemoveCircle as Remove } from "./icons";
 import LocalJsonViewContext from "./LocalJsonViewContext";
 import ReactJsonViewContext, { Json, TypeName } from "./ReactJsonViewContext";
+import useEditState from "./useEditState";
 
 type EditState = { editMode: false } | { editMode: true; editValue: string };
 
@@ -126,14 +129,26 @@ const EditInput = ({
   } = useContext(ReactJsonViewContext);
   const { namespace } = useContext(LocalJsonViewContext);
 
+  const TextAreaSize = useMemo(
+    () =>
+      Object.prototype.hasOwnProperty.call(TextareaAutosize, "default")
+        ? (
+            TextareaAutosize as React.ForwardRefExoticComponent<TextareaAutosizeProps> & {
+              default: React.FC;
+            }
+          ).default
+        : TextareaAutosize,
+    [],
+  );
+
   return (
     <div>
-      <AutosizeTextarea
+      <TextAreaSize
         type="text"
-        ref={(input: HTMLInputElement) => input && input.focus()}
+        ref={(textarea: HTMLTextAreaElement) => textarea && textarea.focus()}
         value={edit.editMode ? edit.editValue : ""}
         className="variable-editor"
-        onChange={(event) => {
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           const { value } = event.target;
 
           setEdit({
@@ -141,7 +156,7 @@ const EditInput = ({
             editValue: value,
           });
         }}
-        onKeyDown={(e) => {
+        onKeyDown={(e: React.KeyboardEvent) => {
           switch (e.key) {
             case "Escape": {
               setEdit({
@@ -192,7 +207,7 @@ const ShowDetected = ({
   edit,
 }: {
   edit: EditState;
-  submitEdit: (eubmitDetected?: boolean) => void;
+  submitEdit: (submitDetected?: boolean) => void;
 }) => {
   const {
     props: { theme },
@@ -321,54 +336,53 @@ const VariableEditor = () => {
       displayArrayKey,
       onChange,
     },
-    rjvId,
   } = useContext(ReactJsonViewContext);
 
   const { namespace, value, parentType } = useContext(LocalJsonViewContext);
   const type = toType(value);
   const name = namespace.at(-1);
 
-  const [edit, setEdit] = useState<EditState>({ editMode: false });
-
+  // const [edit, setEdit] = useState<EditState>({ editMode: false });
+  const { edit, setEdit, enterEditMode, submitEdit } = useEditState();
   const [hovered, setHovered] = useState<boolean>(false);
   const [hoveredKey, setHoveredKey] = useState<boolean>(false);
 
-  const enterEditMode = () => {
-    if (canEdit) {
-      const stringifiedValue = stringifyVariable(
-        value as number | string | boolean | null,
-      );
+  // const enterEditMode = () => {
+  //   if (canEdit) {
+  //     const stringifiedValue = stringifyVariable(
+  //       value as number | string | boolean | null,
+  //     );
 
-      setEdit({
-        editMode: true,
-        editValue: stringifiedValue,
-      });
-    }
-  };
+  //     setEdit({
+  //       editMode: true,
+  //       editValue: stringifiedValue,
+  //     });
+  //   }
+  // };
 
-  const submitEdit = (submitDetected?: boolean) => {
-    const newValue =
-      edit.editMode &&
-      (submitDetected ? parseInput(edit.editValue).value : edit.editValue);
+  // const submitEdit = (submitDetected?: boolean) => {
+  //   const newValue =
+  //     edit.editMode &&
+  //     (submitDetected ? parseInput(edit.editValue).value : edit.editValue);
 
-    setEdit({ editMode: false });
+  //   setEdit({ editMode: false });
 
-    const data = {
-      name,
-      namespace,
-      existingValue: value,
-      newValue,
-      updatedSrc: {},
-      variableRemoved: false,
-    };
+  //   const data = {
+  //     name,
+  //     namespace,
+  //     existingValue: value,
+  //     newValue,
+  //     updatedSrc: {},
+  //     variableRemoved: false,
+  //   };
 
-    attributeStore.handleAction({
-      name: "VARIABLE_UPDATED",
-      rjvId,
-      data,
-    });
-    onChange(data.updatedSrc);
-  };
+  //   attributeStore.handleAction({
+  //     name: "VARIABLE_UPDATED",
+  //     rjvId,
+  //     data,
+  //   });
+  //   onChange(data.updatedSrc);
+  // };
 
   const removeVariable = (
     rjvId: string,

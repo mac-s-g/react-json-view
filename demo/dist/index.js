@@ -987,7 +987,7 @@
             }
             return dispatcher;
           }
-          function useContext17(Context) {
+          function useContext18(Context) {
             var dispatcher = resolveDispatcher();
             {
               if (Context._context !== void 0) {
@@ -1001,7 +1001,7 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState10(initialState) {
+          function useState11(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1009,7 +1009,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useReducer(reducer, initialArg, init);
           }
-          function useRef(initialValue) {
+          function useRef2(initialValue) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
@@ -1790,7 +1790,7 @@
           exports.startTransition = startTransition;
           exports.unstable_act = act;
           exports.useCallback = useCallback;
-          exports.useContext = useContext17;
+          exports.useContext = useContext18;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
           exports.useEffect = useEffect4;
@@ -1800,8 +1800,8 @@
           exports.useLayoutEffect = useLayoutEffect;
           exports.useMemo = useMemo3;
           exports.useReducer = useReducer;
-          exports.useRef = useRef;
-          exports.useState = useState10;
+          exports.useRef = useRef2;
+          exports.useState = useState11;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -27857,7 +27857,7 @@
           };
         }, []);
       };
-      var TextareaAutosize = function TextareaAutosize2(_ref, userRef) {
+      var TextareaAutosize2 = function TextareaAutosize3(_ref, userRef) {
         var cacheMeasurements = _ref.cacheMeasurements, maxRows = _ref.maxRows, minRows = _ref.minRows, _ref$onChange = _ref.onChange, onChange = _ref$onChange === void 0 ? noop : _ref$onChange, _ref$onHeightChange = _ref.onHeightChange, onHeightChange = _ref$onHeightChange === void 0 ? noop : _ref$onHeightChange, props = _objectWithoutPropertiesLoose(_ref, ["cacheMeasurements", "maxRows", "minRows", "onChange", "onHeightChange"]);
         if (props.style) {
           if ("maxHeight" in props.style) {
@@ -27903,7 +27903,7 @@
           ref
         }));
       };
-      var index = /* @__PURE__ */ React2.forwardRef(TextareaAutosize);
+      var index = /* @__PURE__ */ React2.forwardRef(TextareaAutosize2);
       exports.default = index;
     }
   });
@@ -27924,10 +27924,10 @@
   var import_client = __toESM(require_client(), 1);
 
   // demo/src/js/components/Demo.tsx
-  var import_react21 = __toESM(require_react(), 1);
+  var import_react22 = __toESM(require_react(), 1);
 
   // src/js/components/ReactJsonView.tsx
-  var import_react20 = __toESM(require_react(), 1);
+  var import_react21 = __toESM(require_react(), 1);
 
   // src/js/stores/ObjectAttributes.ts
   var import_events = __toESM(require_events(), 1);
@@ -28988,13 +28988,13 @@
   }
 
   // src/js/components/JsonViewer.tsx
-  var import_react17 = __toESM(require_react(), 1);
+  var import_react18 = __toESM(require_react(), 1);
 
   // src/js/components/ArrayGroup.tsx
-  var import_react16 = __toESM(require_react(), 1);
+  var import_react17 = __toESM(require_react(), 1);
 
   // src/js/components/Child.tsx
-  var import_react15 = __toESM(require_react(), 1);
+  var import_react16 = __toESM(require_react(), 1);
 
   // src/js/components/DataTypes/Boolean.tsx
   var import_react4 = __toESM(require_react(), 1);
@@ -29833,7 +29833,7 @@
   var String_default = StringDataType;
 
   // src/js/components/VariableEditor.tsx
-  var import_react13 = __toESM(require_react(), 1);
+  var import_react14 = __toESM(require_react(), 1);
   var import_react_textarea_autosize = __toESM(require_react_textarea_autosize_cjs(), 1);
 
   // src/js/helpers/parseInput.ts
@@ -29884,6 +29884,9 @@
     };
   }
 
+  // src/js/components/useEditState.tsx
+  var import_react13 = __toESM(require_react(), 1);
+
   // src/js/helpers/stringifyVariable.ts
   var stringifyVariable_default = (value) => {
     if (value === null)
@@ -29891,16 +29894,58 @@
     return value.toString();
   };
 
+  // src/js/components/useEditState.tsx
+  var useEditState = () => {
+    const [edit, setEdit] = (0, import_react13.useState)({ editMode: false });
+    const {
+      props: { canEdit, onChange },
+      rjvId
+    } = (0, import_react13.useContext)(ReactJsonViewContext_default);
+    const { namespace, value } = (0, import_react13.useContext)(LocalJsonViewContext_default);
+    const name = namespace.at(-1);
+    const enterEditMode = () => {
+      if (canEdit) {
+        const stringifiedValue = stringifyVariable_default(
+          value
+        );
+        setEdit({
+          editMode: true,
+          editValue: stringifiedValue
+        });
+      }
+    };
+    const submitEdit = (submitDetected) => {
+      const newValue = edit.editMode && (submitDetected ? parseInput(edit.editValue).value : edit.editValue);
+      setEdit({ editMode: false });
+      const data = {
+        name,
+        namespace,
+        existingValue: value,
+        newValue,
+        updatedSrc: {},
+        variableRemoved: false
+      };
+      ObjectAttributes_default.handleAction({
+        name: "VARIABLE_UPDATED",
+        rjvId,
+        data
+      });
+      onChange(data.updatedSrc);
+    };
+    return { edit, setEdit, enterEditMode, submitEdit };
+  };
+  var useEditState_default = useEditState;
+
   // src/js/components/VariableEditor.tsx
   var import_jsx_runtime12 = __toESM(require_jsx_runtime(), 1);
-  var import_react14 = __toESM(require_react(), 1);
+  var import_react15 = __toESM(require_react(), 1);
   var EditIcon = ({
     onEdit,
     hovered
   }) => {
     const {
       props: { theme }
-    } = (0, import_react13.useContext)(ReactJsonViewContext_default);
+    } = (0, import_react14.useContext)(ReactJsonViewContext_default);
     return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
       "div",
       {
@@ -29924,11 +29969,11 @@
     hovered,
     handleClick
   }) => {
-    const { namespace, value } = (0, import_react13.useContext)(LocalJsonViewContext_default);
+    const { namespace, value } = (0, import_react14.useContext)(LocalJsonViewContext_default);
     const {
       props: { theme },
       rjvId
-    } = (0, import_react13.useContext)(ReactJsonViewContext_default);
+    } = (0, import_react14.useContext)(ReactJsonViewContext_default);
     const name = namespace.at(-1);
     return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
       "div",
@@ -29956,7 +30001,7 @@
     setEdit,
     submitEdit
   }) => {
-    const { value } = (0, import_react13.useContext)(LocalJsonViewContext_default);
+    const { value } = (0, import_react14.useContext)(LocalJsonViewContext_default);
     const type = edit.editMode ? "edit" : toType(value);
     switch (type) {
       case "edit":
@@ -29981,14 +30026,18 @@
     const {
       props: { theme },
       rjvId
-    } = (0, import_react13.useContext)(ReactJsonViewContext_default);
-    const { namespace } = (0, import_react13.useContext)(LocalJsonViewContext_default);
+    } = (0, import_react14.useContext)(ReactJsonViewContext_default);
+    const { namespace } = (0, import_react14.useContext)(LocalJsonViewContext_default);
+    const TextAreaSize = (0, import_react14.useMemo)(
+      () => Object.prototype.hasOwnProperty.call(import_react_textarea_autosize.default, "default") ? import_react_textarea_autosize.default.default : import_react_textarea_autosize.default,
+      []
+    );
     return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { children: [
       /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
-        import_react_textarea_autosize.default,
+        TextAreaSize,
         {
           type: "text",
-          ref: (input) => input && input.focus(),
+          ref: (textarea) => textarea && textarea.focus(),
           value: edit.editMode ? edit.editValue : "",
           className: "variable-editor",
           onChange: (event) => {
@@ -30053,7 +30102,7 @@
   }) => {
     const {
       props: { theme }
-    } = (0, import_react13.useContext)(ReactJsonViewContext_default);
+    } = (0, import_react14.useContext)(ReactJsonViewContext_default);
     const parsedInput = edit.editMode ? parseInput(edit.editValue) : { type: false, value: null };
     const detected = /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(DetectedInput, { parsedInput });
     if (detected) {
@@ -30079,7 +30128,7 @@
   }) => {
     const {
       props: { theme }
-    } = (0, import_react13.useContext)(ReactJsonViewContext_default);
+    } = (0, import_react14.useContext)(ReactJsonViewContext_default);
     const { type, value } = parsedInput;
     if (type !== false) {
       switch (type.toLowerCase()) {
@@ -30174,45 +30223,15 @@
         quotesOnKeys,
         displayArrayKey,
         onChange
-      },
-      rjvId
-    } = (0, import_react13.useContext)(ReactJsonViewContext_default);
-    const { namespace, value, parentType } = (0, import_react13.useContext)(LocalJsonViewContext_default);
+      }
+    } = (0, import_react14.useContext)(ReactJsonViewContext_default);
+    const { namespace, value, parentType } = (0, import_react14.useContext)(LocalJsonViewContext_default);
     const type = toType(value);
     const name = namespace.at(-1);
-    const [edit, setEdit] = (0, import_react13.useState)({ editMode: false });
-    const [hovered, setHovered] = (0, import_react13.useState)(false);
-    const [hoveredKey, setHoveredKey] = (0, import_react13.useState)(false);
-    const enterEditMode = () => {
-      if (canEdit) {
-        const stringifiedValue = stringifyVariable_default(
-          value
-        );
-        setEdit({
-          editMode: true,
-          editValue: stringifiedValue
-        });
-      }
-    };
-    const submitEdit = (submitDetected) => {
-      const newValue = edit.editMode && (submitDetected ? parseInput(edit.editValue).value : edit.editValue);
-      setEdit({ editMode: false });
-      const data = {
-        name,
-        namespace,
-        existingValue: value,
-        newValue,
-        updatedSrc: {},
-        variableRemoved: false
-      };
-      ObjectAttributes_default.handleAction({
-        name: "VARIABLE_UPDATED",
-        rjvId,
-        data
-      });
-      onChange(data.updatedSrc);
-    };
-    const removeVariable = (rjvId2, namespace2, value2) => {
+    const { edit, setEdit, enterEditMode, submitEdit } = useEditState_default();
+    const [hovered, setHovered] = (0, import_react14.useState)(false);
+    const [hoveredKey, setHoveredKey] = (0, import_react14.useState)(false);
+    const removeVariable = (rjvId, namespace2, value2) => {
       const data = {
         name,
         namespace: namespace2,
@@ -30222,12 +30241,12 @@
       };
       ObjectAttributes_default.handleAction({
         name: "VARIABLE_REMOVED",
-        rjvId: rjvId2,
+        rjvId,
         data
       });
       onChange(data.updatedSrc);
     };
-    return /* @__PURE__ */ (0, import_react14.createElement)(
+    return /* @__PURE__ */ (0, import_react15.createElement)(
       "div",
       {
         ...style(theme, "objectKeyVal", {
@@ -30239,14 +30258,14 @@
         className: "variable-row",
         key: name
       },
-      type === "array" ? displayArrayKey ? /* @__PURE__ */ (0, import_react14.createElement)("span", { ...style(theme, "array-key"), key: `${name}_${namespace}` }, name, /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { ...style(theme, "colon"), children: ":" })) : null : /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
+      type === "array" ? displayArrayKey ? /* @__PURE__ */ (0, import_react15.createElement)("span", { ...style(theme, "array-key"), key: `${name}_${namespace}` }, name, /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { ...style(theme, "colon"), children: ":" })) : null : /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
         "span",
         {
           style: { cursor: "pointer" },
           onMouseEnter: () => setHoveredKey(true),
           onMouseLeave: () => setHoveredKey(false),
           children: [
-            /* @__PURE__ */ (0, import_react14.createElement)(
+            /* @__PURE__ */ (0, import_react15.createElement)(
               "span",
               {
                 ...style(theme, "object-name"),
@@ -30303,7 +30322,7 @@
     const type = toType(value);
     const {
       props: { groupArraysAfterLength }
-    } = (0, import_react15.useContext)(ReactJsonViewContext_default);
+    } = (0, import_react16.useContext)(ReactJsonViewContext_default);
     return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
       LocalJsonViewContext_default.Provider,
       {
@@ -30338,11 +30357,11 @@
   // src/js/components/ArrayGroup.tsx
   var import_jsx_runtime14 = __toESM(require_jsx_runtime(), 1);
   var ArrayGroup = () => {
-    const { namespace, value, depth } = (0, import_react16.useContext)(LocalJsonViewContext_default);
+    const { namespace, value, depth } = (0, import_react17.useContext)(LocalJsonViewContext_default);
     const {
       props: { theme, groupArraysAfterLength, indentWidth }
-    } = (0, import_react16.useContext)(ReactJsonViewContext_default);
-    const [collapsed, setCollapsed] = (0, import_react16.useState)({});
+    } = (0, import_react17.useContext)(ReactJsonViewContext_default);
+    const [collapsed, setCollapsed] = (0, import_react17.useState)({});
     const toggleCollapsed = (i) => {
       setCollapsed({
         ...collapsed,
@@ -30442,8 +30461,8 @@
   // src/js/components/JsonViewer.tsx
   var import_jsx_runtime15 = __toESM(require_jsx_runtime(), 1);
   var JsonViewer = (p) => {
-    const { props: rjvProps } = (0, import_react17.useContext)(ReactJsonViewContext_default);
-    const ObjectComponent = (0, import_react17.useMemo)(() => {
+    const { props: rjvProps } = (0, import_react18.useContext)(ReactJsonViewContext_default);
+    const ObjectComponent = (0, import_react18.useMemo)(() => {
       if (Array.isArray(rjvProps.value) && rjvProps.groupArraysAfterLength && rjvProps.value.length > rjvProps.groupArraysAfterLength) {
         return ArrayGroup_default;
       }
@@ -30476,7 +30495,7 @@
   var JsonViewer_default = JsonViewer;
 
   // src/js/components/ObjectKeyModal/ObjectKeyModal.tsx
-  var import_react18 = __toESM(require_react(), 1);
+  var import_react19 = __toESM(require_react(), 1);
   var import_jsx_runtime16 = __toESM(require_jsx_runtime(), 1);
   var ObjectKeyModal = ({
     onClose,
@@ -30487,9 +30506,9 @@
     const {
       props: { theme, newKeyDefaultValue },
       rjvId
-    } = (0, import_react18.useContext)(ReactJsonViewContext_default);
-    const [input, setInput] = (0, import_react18.useState)(inputValue);
-    const [valid, setValid] = (0, import_react18.useState)(false);
+    } = (0, import_react19.useContext)(ReactJsonViewContext_default);
+    const [input, setInput] = (0, import_react19.useState)(inputValue);
+    const [valid, setValid] = (0, import_react19.useState)(false);
     const isValid = (input2) => {
       if (addKeyRequest) {
         const request = ObjectAttributes_default.get(rjvId, "action", "new-key-request");
@@ -30501,10 +30520,10 @@
       }
       return false;
     };
-    (0, import_react18.useEffect)(() => {
+    (0, import_react19.useEffect)(() => {
       setValid(isValid(input));
     }, [input]);
-    (0, import_react18.useEffect)(() => {
+    (0, import_react19.useEffect)(() => {
       setInput(inputValue);
     }, [inputValue]);
     const handleSubmit = () => {
@@ -30597,7 +30616,7 @@
   var ObjectKeyModal_default = ObjectKeyModal;
 
   // src/js/components/ValidationFailure.tsx
-  var import_react19 = __toESM(require_react(), 1);
+  var import_react20 = __toESM(require_react(), 1);
   var import_jsx_runtime17 = __toESM(require_jsx_runtime(), 1);
   var ValidationFailure = ({
     message,
@@ -30606,7 +30625,7 @@
     const {
       props: { theme },
       rjvId
-    } = (0, import_react19.useContext)(ReactJsonViewContext_default);
+    } = (0, import_react20.useContext)(ReactJsonViewContext_default);
     return active ? /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(
       "div",
       {
@@ -30653,14 +30672,14 @@
     displayObjectSize = true,
     iconStyle = "triangle"
   }) => {
-    const [addKeyRequest, setAddKeyRequest] = (0, import_react20.useState)(false);
-    const [editKeyRequest, setEditKeyRequest] = (0, import_react20.useState)({
+    const [addKeyRequest, setAddKeyRequest] = (0, import_react21.useState)(false);
+    const [editKeyRequest, setEditKeyRequest] = (0, import_react21.useState)({
       editKey: false,
       keyValue: ""
     });
-    const [validationFailure, setValidationFailure] = (0, import_react20.useState)(false);
-    const rjvId = (0, import_react20.useId)();
-    (0, import_react20.useEffect)(() => {
+    const [validationFailure, setValidationFailure] = (0, import_react21.useState)(false);
+    const rjvId = (0, import_react21.useId)();
+    (0, import_react21.useEffect)(() => {
       ObjectAttributes_default.set(rjvId, "global", "src", value);
       ObjectAttributes_default.on(`add-key-request-${rjvId}`, addKeyRequestHandler);
       const listeners = getListeners();
@@ -30790,22 +30809,18 @@
   // demo/src/js/components/Demo.tsx
   var import_jsx_runtime19 = __toESM(require_jsx_runtime(), 1);
   var Demo = () => {
-    const [value, setValue] = (0, import_react21.useState)({
-      stringV: "this is a test string",
-      integer: 42,
-      empty_array: [],
-      empty_object: {},
-      array: [1, 2, 3, "test"],
-      float: -2.757,
-      parent: {
-        sibling1: true,
-        sibling2: false,
-        sibling3: {
-          a: "name",
-          b: "age"
-        }
+    const [value, setValue] = (0, import_react22.useState)({
+      bool: true,
+      number: 5,
+      str: "test",
+      nan: NaN,
+      null: null,
+      arr: [1, 2],
+      obj: {
+        test: true
       },
-      string_number: "1234"
+      empty_arr: [],
+      empty_obj: {}
     });
     return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
       js_default,

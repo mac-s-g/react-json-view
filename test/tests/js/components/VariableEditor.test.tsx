@@ -1,39 +1,50 @@
-import { fireEvent, prettyDOM, render } from "@testing-library/react";
-import React, { useContext } from "react";
+import "@testing-library/jest-dom";
+
+import { fireEvent, prettyDOM, render, screen } from "@testing-library/react";
+import { act, cleanup, renderHook } from "@testing-library/react-hooks";
+import React, { useContext, useEffect, useRef } from "react";
 
 import LocalJsonViewContext from "../../../../src/js/components/LocalJsonViewContext";
 import ReactJsonViewContext from "../../../../src/js/components/ReactJsonViewContext";
+import useEditState from "../../../../src/js/components/useEditState";
 import VariableEditor from "../../../../src/js/components/VariableEditor";
 import Index from "../../../../src/js/index";
+import attributeStore from "../../../../src/js/stores/ObjectAttributes";
 
 describe("<VariableEditor />", () => {
+  afterEach(() => {
+    cleanup();
+  });
+
   it("VariableEditor click-to-edit should be visible", () => {
     const rjvId = "id";
 
     render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            canEdit: true,
-            canDelete: true,
-            enableClipboard: true,
-            theme: "rjvDefault",
-            indentWidth: 4,
-            quotesOnKeys: true,
-            displayArrayKey: true,
-          },
-          rjvId,
-        }}
+        value={
+          {
+            props: {
+              canEdit: true,
+              canDelete: true,
+              enableClipboard: true,
+              theme: "rjvDefault",
+              indentWidth: 4,
+              quotesOnKeys: true,
+              displayArrayKey: true,
+            },
+            rjvId,
+          } as any
+        }
       >
         {" "}
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: "test",
-            namespace: ["name"],
-            parentType: "object",
-          }}
+          value={
+            {
+              value: "test",
+              namespace: ["name"],
+              parentType: "object",
+            } as any
+          }
         >
           <VariableEditor />
         </LocalJsonViewContext.Provider>
@@ -50,27 +61,29 @@ describe("<VariableEditor />", () => {
 
     render(
       <ReactJsonViewContext.Provider
-        value={{
-          /* @ts-ignore */
-          props: {
-            canEdit: false,
-            canDelete: true,
-            enableClipboard: true,
-            theme: "rjvDefault",
-            indentWidth: 4,
-            quotesOnKeys: true,
-            displayArrayKey: true,
-          },
-          rjvId,
-        }}
+        value={
+          {
+            props: {
+              canEdit: false,
+              canDelete: true,
+              enableClipboard: true,
+              theme: "rjvDefault",
+              indentWidth: 4,
+              quotesOnKeys: true,
+              displayArrayKey: true,
+            },
+            rjvId,
+          } as any
+        }
       >
         <LocalJsonViewContext.Provider
-          /* @ts-ignore */
-          value={{
-            value: "test",
-            namespace: ["name"],
-            parentType: "object",
-          }}
+          value={
+            {
+              value: "test",
+              namespace: ["name"],
+              parentType: "object",
+            } as any
+          }
         >
           <VariableEditor />
         </LocalJsonViewContext.Provider>
@@ -83,325 +96,583 @@ describe("<VariableEditor />", () => {
     expect(clickEditClass).toHaveLength(0);
   });
 
-  // it("VariableEditor click-to-edit should be hidden when editMode is active", function() {
-  //     const rjvId = "id";
+  it("VariableEditor click-to-edit should be hidden when editMode is active", () => {
+    const rjvId = "id";
 
-  //     const rendered = render(
-  //         <ReactJsonViewContext.Provider
-  //             value={{
-  //                  /* @ts-ignore */
-  //                 props: {
-  //                     canEdit: true,
-  //                     canDelete: true,
-  //                     enableClipboard: true,
-  //                     theme: "rjvDefault",
-  //                     indentWidth: 4,
-  //                     quotesOnKeys: true,
-  //                     displayArrayKey: true,
-  //                 },
-  //                 rjvId
-  //             }}
-  //         >
-  //              {/* @ts-ignore */}
-  //             <LocalJsonViewContext.Provider value={{
-  //                 value: "test",
-  //                 namespace: ['name'],
-  //                 parentType: "object"
-  //             }}>
-  //                 <VariableEditor />
-  //             </LocalJsonViewContext.Provider>
-  //         </ReactJsonViewContext.Provider>
-  //     )
+    render(
+      <ReactJsonViewContext.Provider
+        value={
+          {
+            props: {
+              canEdit: true,
+              canDelete: true,
+              enableClipboard: true,
+              theme: "rjvDefault",
+              indentWidth: 4,
+              quotesOnKeys: true,
+              displayArrayKey: true,
+            },
+            rjvId,
+          } as any
+        }
+      >
+        <LocalJsonViewContext.Provider
+          value={
+            {
+              value: "test",
+              namespace: ["name"],
+              parentType: "object",
+            } as any
+          }
+        >
+          <VariableEditor />
+        </LocalJsonViewContext.Provider>
+      </ReactJsonViewContext.Provider>,
+    );
 
-  //     const clickEditClass = document.querySelectorAll('.variable-value ~ .click-to-edit');
-  //     fireEvent(
-  //         document.querySelector('.variable-value ~ .click-to-edit .click-to-edit-icon')!,
-  //         new MouseEvent('click', {
-  //           bubbles: true,
-  //           cancelable: true,
-  //         }),
-  //       )
-  //     console.log(prettyDOM(rendered.container as Element), document.querySelector('.variable-value ~ .click-to-edit .click-to-edit-icon'))
-  //     expect(clickEditClass).toHaveLength(0)
-  // })
+    const clickToEditIconElement = document.querySelector(
+      ".variable-value ~ .click-to-edit .click-to-edit-icon",
+    )!;
+    fireEvent(
+      clickToEditIconElement,
+      new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+    const clickEditClass = document.querySelectorAll(
+      ".variable-value ~ .click-to-edit",
+    );
 
-  // it("VariableEditor test textarea and cancel icon", function() {
-  //     const wrapper = shallow(
-  //         <VariableEditor
-  //             src={{ test: true }}
-  //             theme="rjv-default"
-  //             onEdit={edit => {}}
-  //             rjvId={rjvId}
-  //             variable={{
-  //                 name: "test",
-  //                 value: 5,
-  //                 type: "int"
-  //             }}
-  //         />
-  //     )
-  //     expect(wrapper.find(".click-to-edit-icon").length).toBe(1)
-  //     wrapper.find(".click-to-edit-icon").simulate("click")
-  //     expect(wrapper.state("editMode")).toBe(true)
-  //     expect(wrapper.find(".variable-editor").length).toBe(1)
-  //     wrapper.find(".edit-cancel").simulate("click")
-  //     expect(wrapper.find(".variable-editor").length).toBe(0)
-  // })
+    expect(clickEditClass).toHaveLength(0);
+  });
 
-  // it("VariableEditor test textarea and submit icon", function() {
-  //     const existing_value = "existing_value"
-  //     const new_value = "new_value"
-  //     const wrapper = shallow(
-  //         <VariableEditor
-  //             src={{ test: existing_value }}
-  //             theme="rjv-default"
-  //             onEdit={edit => {
-  //                 expect(edit.updated_src.test).toBe(new_value)
-  //             }}
-  //             namespace={["test"]}
-  //             rjvId={rjvId}
-  //             variable={{
-  //                 name: "test",
-  //                 value: existing_value,
-  //                 type: "string"
-  //             }}
-  //         />
-  //     )
+  it("VariableEditor test textarea and cancel icon", () => {
+    const rjvId = "id";
 
-  //     //editMode defaluts to off
-  //     expect(wrapper.state("editMode")).toBe(false)
-  //     //click to open textarea
-  //     wrapper.find(".click-to-edit-icon").simulate("click")
-  //     //verify editMode is on
-  //     expect(wrapper.state("editMode")).toBe(true)
-  //     //make sure default textarea value is correct
-  //     expect(wrapper.find(".variable-editor").props().value).toBe(existing_value)
-  //     //update edit value
-  //     wrapper.setState({ editValue: new_value })
-  //     //submit new value
-  //     wrapper.find(".edit-check").simulate("click")
-  //     //make sure editMode is off after submit
-  //     expect(wrapper.state("editMode")).toBe(false)
-  // })
+    render(
+      <ReactJsonViewContext.Provider
+        value={
+          {
+            props: {
+              canEdit: true,
+              canDelete: true,
+              enableClipboard: true,
+              theme: "rjvDefault",
+              indentWidth: 4,
+              quotesOnKeys: true,
+              displayArrayKey: true,
+            },
+            rjvId,
+          } as any
+        }
+      >
+        <LocalJsonViewContext.Provider
+          value={
+            {
+              value: "test",
+              namespace: ["name"],
+              parentType: "object",
+            } as any
+          }
+        >
+          <VariableEditor />
+        </LocalJsonViewContext.Provider>
+      </ReactJsonViewContext.Provider>,
+    );
 
-  // it("VariableEditor edit after src change should respect current src", function() {
-  //     const existing_value = "existing_value"
-  //     const new_value = "new_value"
-  //     const wrapper = shallow(
-  //         <VariableEditor
-  //             src={{ test: existing_value }}
-  //             theme="rjv-default"
-  //             onEdit={edit => {
-  //                 expect(edit.updated_src.test).toBe(new_value)
-  //             }}
-  //             namespace={["test"]}
-  //             rjvId={rjvId}
-  //             variable={{
-  //                 name: "test",
-  //                 value: existing_value,
-  //                 type: "string"
-  //             }}
-  //         />
-  //     )
+    const clickToEditIconElement = document.querySelector(
+      ".variable-value ~ .click-to-edit .click-to-edit-icon",
+    )!;
+    expect(clickToEditIconElement).toBeInTheDocument();
+    fireEvent(
+      clickToEditIconElement,
+      new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+    let variableEditorElement = document.querySelectorAll(
+      ".variable-value .variable-editor",
+    );
+    expect(variableEditorElement.length).toBe(1);
 
-  //     //editMode defaluts to off
-  //     expect(wrapper.state("editMode")).toBe(false)
-  //     //click to open textarea
-  //     wrapper.find(".click-to-edit-icon").simulate("click")
-  //     //verify editMode is on
-  //     expect(wrapper.state("editMode")).toBe(true)
-  //     //make sure default textarea value is correct
-  //     expect(wrapper.find(".variable-editor").props().value).toBe(existing_value)
-  //     //update edit value
-  //     wrapper.setState({ editValue: new_value })
-  //     //cancel update
-  //     wrapper.find(".edit-cancel").simulate("click")
-  //     //make sure editMode is off after cancel
-  //     expect(wrapper.state("editMode")).toBe(false)
-  //     //pop open textarea again
-  //     wrapper.find(".click-to-edit-icon").simulate("click")
-  //     //make sure editMode is on
-  //     expect(wrapper.state("editMode")).toBe(true)
-  //     //make sure that textarea still contains original value
-  //     expect(wrapper.find(".variable-editor").props().value).toBe(existing_value)
-  // })
+    const editCancelElement = document.querySelector(".edit-cancel")!;
+    fireEvent(
+      editCancelElement,
+      new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+    variableEditorElement = document.querySelectorAll(
+      ".variable-value .variable-editor",
+    );
+    expect(variableEditorElement.length).toBe(0);
+  });
 
-  // it("VariableEditor detected null", function() {
-  //     const wrapper = shallow(
-  //         <VariableEditor
-  //             src={{ test: true }}
-  //             theme="rjv-default"
-  //             onEdit={edit => {}}
-  //             rjvId={rjvId}
-  //             variable={{
-  //                 name: "test",
-  //                 value: "null",
-  //                 type: "null"
-  //             }}
-  //         />
-  //     )
-  //     expect(wrapper.find(".click-to-edit-icon").length).toBe(1)
-  //     wrapper.find(".click-to-edit-icon").simulate("click")
-  //     expect(wrapper.state("editMode")).toBe(true)
-  //     expect(wrapper.find(".variable-editor").props().value).toBe("null")
-  // })
+  it("VariableEditor test edit state and submit function", () => {
+    const existingValue = "existingValue";
+    const newValue = "newValue";
 
-  // it("VariableEditor detected undefined", function() {
-  //     const wrapper = shallow(
-  //         <VariableEditor
-  //             src={{ test: true }}
-  //             theme="rjv-default"
-  //             onEdit={edit => {}}
-  //             rjvId={rjvId}
-  //             variable={{
-  //                 name: "test",
-  //                 value: "undefined",
-  //                 type: "undefined"
-  //             }}
-  //         />
-  //     )
-  //     expect(wrapper.find(".click-to-edit-icon").length).toBe(1)
-  //     wrapper.find(".click-to-edit-icon").simulate("click")
-  //     expect(wrapper.state("editMode")).toBe(true)
-  //     expect(wrapper.find(".variable-editor").props().value).toBe("undefined")
-  // })
+    const rjvId = "id";
 
-  // it("VariableEditor detected NaN", function() {
-  //     const wrapper = shallow(
-  //         <VariableEditor
-  //             src={{ test: true }}
-  //             theme="rjv-default"
-  //             onEdit={edit => {}}
-  //             rjvId={rjvId}
-  //             variable={{
-  //                 name: "test",
-  //                 value: "NaN",
-  //                 type: "nan"
-  //             }}
-  //         />
-  //     )
-  //     expect(wrapper.find(".click-to-edit-icon").length).toBe(1)
-  //     wrapper.find(".click-to-edit-icon").simulate("click")
-  //     expect(wrapper.state("editMode")).toBe(true)
-  //     expect(wrapper.find(".variable-editor").props().value).toBe("NaN")
-  // })
+    const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+      useEffect(() => {
+        attributeStore.set(rjvId, "global", "src", { name: "test" });
+      });
 
-  // it("VariableEditor detected string", function() {
-  //     const wrapper = shallow(
-  //         <VariableEditor
-  //             src={{ test: true }}
-  //             theme="rjv-default"
-  //             onEdit={edit => {}}
-  //             rjvId={rjvId}
-  //             variable={{
-  //                 name: "test",
-  //                 value: "test",
-  //                 type: "string"
-  //             }}
-  //         />
-  //     )
-  //     expect(wrapper.find(".click-to-edit-icon").length).toBe(1)
-  //     wrapper.find(".click-to-edit-icon").simulate("click")
-  //     expect(wrapper.state("editMode")).toBe(true)
-  //     expect(wrapper.find(".variable-editor").props().value).toBe("test")
-  // })
+      return (
+        <>
+          <ReactJsonViewContext.Provider
+            value={
+              {
+                props: {
+                  canEdit: true,
+                  canDelete: true,
+                  enableClipboard: true,
+                  theme: "rjvDefault",
+                  indentWidth: 4,
+                  quotesOnKeys: true,
+                  displayArrayKey: true,
+                  onChange: (value: any) => {
+                    expect((value as { name: string }).name).toBe("newValue");
+                  },
+                },
+                rjvId,
+              } as any
+            }
+          >
+            <LocalJsonViewContext.Provider
+              value={
+                {
+                  value: existingValue,
+                  namespace: ["name"],
+                  parentType: "object",
+                } as any
+              }
+            >
+              <div>
+                {children}
+                <VariableEditor />
+              </div>
+            </LocalJsonViewContext.Provider>
+          </ReactJsonViewContext.Provider>
+        </>
+      );
+    };
 
-  // it("VariableEditor detected function", function() {
-  //     const wrapper = shallow(
-  //         <VariableEditor
-  //             src={{ test: true }}
-  //             theme="rjv-default"
-  //             onEdit={edit => {}}
-  //             rjvId={rjvId}
-  //             variable={{
-  //                 name: "test",
-  //                 value: "function test() {}",
-  //                 type: "function"
-  //             }}
-  //         />
-  //     )
-  //     expect(wrapper.find(".click-to-edit-icon").length).toBe(1)
-  //     wrapper.find(".click-to-edit-icon").simulate("click")
-  //     expect(wrapper.state("editMode")).toBe(true)
-  //     expect(wrapper.find(".variable-editor").props().value).toBe("function test() {}")
-  // })
+    const { result } = renderHook(() => useEditState(), { wrapper });
 
-  // it("VariableEditor detected object", function() {
-  //     const wrapper = shallow(
-  //         <VariableEditor
-  //             src={{ test: true }}
-  //             theme="rjv-default"
-  //             onEdit={edit => {}}
-  //             rjvId={rjvId}
-  //             variable={{
-  //                 name: "test",
-  //                 value: "{}",
-  //                 type: "object"
-  //             }}
-  //         />
-  //     )
-  //     expect(wrapper.find(".click-to-edit-icon").length).toBe(1)
-  //     wrapper.find(".click-to-edit-icon").simulate("click")
-  //     expect(wrapper.state("editMode")).toBe(true)
-  //     expect(wrapper.find(".variable-editor").props().value).toBe("{}")
-  // })
+    // editMode defaults to off
+    expect(result.current.edit.editMode).toBe(false);
 
-  // it("VariableEditor detected array", function() {
-  //     const wrapper = shallow(
-  //         <VariableEditor
-  //             src={{ test: true }}
-  //             theme="rjv-default"
-  //             onEdit={edit => {}}
-  //             rjvId={rjvId}
-  //             variable={{
-  //                 name: "test",
-  //                 value: "[1,2,3]",
-  //                 type: "array"
-  //             }}
-  //         />
-  //     )
-  //     expect(wrapper.find(".click-to-edit-icon").length).toBe(1)
-  //     wrapper.find(".click-to-edit-icon").simulate("click")
-  //     expect(wrapper.state("editMode")).toBe(true)
-  //     expect(wrapper.find(".variable-editor").props().value).toBe("[1,2,3]")
-  // })
+    // click to open textarea
+    act(() => {
+      result.current.enterEditMode();
+    });
 
-  // it("VariableEditor detected float", function() {
-  //     const wrapper = shallow(
-  //         <VariableEditor
-  //             src={{ test: true }}
-  //             theme="rjv-default"
-  //             onEdit={edit => {}}
-  //             rjvId={rjvId}
-  //             variable={{
-  //                 name: "test",
-  //                 value: "-5.2",
-  //                 type: "float"
-  //             }}
-  //         />
-  //     )
-  //     expect(wrapper.find(".click-to-edit-icon").length).toBe(1)
-  //     wrapper.find(".click-to-edit-icon").simulate("click")
-  //     expect(wrapper.state("editMode")).toBe(true)
-  //     expect(wrapper.find(".variable-editor").props().value).toBe("-5.2")
-  // })
+    // verify editMode is on
+    expect(result.current.edit.editMode).toBe(true);
 
-  // it("VariableEditor detected integer", function() {
-  //     const wrapper = shallow(
-  //         <VariableEditor
-  //             src={{ test: true }}
-  //             theme="rjv-default"
-  //             onEdit={edit => {}}
-  //             rjvId={rjvId}
-  //             variable={{
-  //                 name: "test",
-  //                 value: "5",
-  //                 type: "integer"
-  //             }}
-  //         />
-  //     )
-  //     expect(wrapper.find(".click-to-edit-icon").length).toBe(1)
-  //     wrapper.find(".click-to-edit-icon").simulate("click")
-  //     expect(wrapper.state("editMode")).toBe(true)
-  //     expect(wrapper.find(".variable-editor").props().value).toBe("5")
-  // })
+    // make sure default editValue is correct
+    expect(
+      (result.current.edit as { editMode: boolean; editValue: string })
+        .editValue,
+    ).toBe("existingValue");
+
+    // update edit value
+    act(() => {
+      result.current.setEdit({ editMode: true, editValue: newValue });
+    });
+
+    // submit new value
+    act(() => {
+      result.current.submitEdit();
+    });
+
+    // make sure editMode is off after submit
+    expect(result.current.edit.editMode).toBe(false);
+  });
+
+  it("VariableEditor edit after value change should respect current value", () => {
+    const existingValue = "existingValue";
+    const newValue = "newValue";
+
+    const rjvId = "id";
+
+    const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+      useEffect(() => {
+        attributeStore.set(rjvId, "global", "src", { name: "test" });
+      });
+
+      return (
+        <>
+          <ReactJsonViewContext.Provider
+            value={
+              {
+                props: {
+                  canEdit: true,
+                  canDelete: true,
+                  enableClipboard: true,
+                  theme: "rjvDefault",
+                  indentWidth: 4,
+                  quotesOnKeys: true,
+                  displayArrayKey: true,
+                  onChange: (value: any) => {
+                    expect((value as { name: string }).name).toBe("newValue");
+                  },
+                },
+                rjvId,
+              } as any
+            }
+          >
+            <LocalJsonViewContext.Provider
+              value={
+                {
+                  value: existingValue,
+                  namespace: ["name"],
+                  parentType: "object",
+                } as any
+              }
+            >
+              <div>
+                {children}
+                <VariableEditor />
+              </div>
+            </LocalJsonViewContext.Provider>
+          </ReactJsonViewContext.Provider>
+        </>
+      );
+    };
+
+    const { result } = renderHook(() => useEditState(), { wrapper });
+
+    // editMode defaults to off
+    expect(result.current.edit.editMode).toBe(false);
+
+    // open textarea
+    act(() => {
+      result.current.enterEditMode();
+    });
+
+    // verify editMode is on
+    expect(result.current.edit.editMode).toBe(true);
+
+    // make sure default editValue is correct
+    expect(
+      (result.current.edit as { editMode: boolean; editValue: string })
+        .editValue,
+    ).toBe("existingValue");
+
+    // update edit value
+    act(() => {
+      result.current.setEdit({ editMode: true, editValue: newValue });
+    });
+
+    // cancel update
+    act(() => {
+      result.current.setEdit({ editMode: false });
+    });
+
+    // make sure editMode is off after cancel
+    expect(result.current.edit.editMode).toBe(false);
+
+    // open textarea again
+    act(() => {
+      result.current.enterEditMode();
+    });
+
+    // make sure editMode is on
+    expect(result.current.edit.editMode).toBe(true);
+
+    // make sure that editValue still contains original value
+    expect(
+      (result.current.edit as { editMode: boolean; editValue: string })
+        .editValue,
+    ).toBe("existingValue");
+  });
+
+  it("VariableEditor detected null", () => {
+    const rjvId = "id";
+
+    render(
+      <ReactJsonViewContext.Provider
+        value={
+          {
+            props: {
+              canEdit: true,
+              canDelete: true,
+              enableClipboard: true,
+              theme: "rjvDefault",
+              indentWidth: 4,
+              quotesOnKeys: true,
+              displayArrayKey: true,
+            },
+            rjvId,
+          } as any
+        }
+      >
+        <LocalJsonViewContext.Provider
+          value={
+            {
+              value: null,
+              namespace: ["name"],
+              parentType: "object",
+            } as any
+          }
+        >
+          <VariableEditor />
+        </LocalJsonViewContext.Provider>
+      </ReactJsonViewContext.Provider>,
+    );
+
+    const clickToEditIconElement = document.querySelector(
+      ".variable-value ~ .click-to-edit .click-to-edit-icon",
+    )!;
+    expect(clickToEditIconElement).toBeInTheDocument();
+    fireEvent(
+      clickToEditIconElement,
+      new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+    const variableEditorElement = document.querySelectorAll(
+      ".variable-value .variable-editor",
+    );
+    expect(variableEditorElement.length).toBe(1);
+    expect((variableEditorElement[0] as HTMLTextAreaElement).value).toBe(
+      "null",
+    );
+    // const wrapper = shallow(
+    //   <VariableEditor
+    //     src={{ test: true }}
+    //     theme="rjv-default"
+    //     onEdit={(edit) => {}}
+    //     rjvId={rjvId}
+    //     variable={{
+    //       name: "test",
+    //       value: "null",
+    //       type: "null",
+    //     }}
+    //   />,
+    // );
+    // expect(wrapper.find(".click-to-edit-icon").length).toBe(1);
+    // wrapper.find(".click-to-edit-icon").simulate("click");
+    // expect(wrapper.state("editMode")).toBe(true);
+    // expect(wrapper.find(".variable-editor").props().value).toBe("null");
+  });
+
+  it("VariableEditor detected NaN", () => {
+    const rjvId = "id";
+
+    render(
+      <ReactJsonViewContext.Provider
+        value={
+          {
+            props: {
+              canEdit: true,
+              canDelete: true,
+              enableClipboard: true,
+              theme: "rjvDefault",
+              indentWidth: 4,
+              quotesOnKeys: true,
+              displayArrayKey: true,
+            },
+            rjvId,
+          } as any
+        }
+      >
+        <LocalJsonViewContext.Provider
+          value={
+            {
+              value: NaN,
+              namespace: ["name"],
+              parentType: "object",
+            } as any
+          }
+        >
+          <VariableEditor />
+        </LocalJsonViewContext.Provider>
+      </ReactJsonViewContext.Provider>,
+    );
+
+    const clickToEditIconElement = document.querySelector(
+      ".variable-value ~ .click-to-edit .click-to-edit-icon",
+    )!;
+    expect(clickToEditIconElement).toBeInTheDocument();
+    fireEvent(
+      clickToEditIconElement,
+      new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+    const variableEditorElement = document.querySelectorAll(
+      ".variable-value .variable-editor",
+    );
+    expect(variableEditorElement.length).toBe(1);
+    expect((variableEditorElement[0] as HTMLTextAreaElement).value).toBe("NaN");
+  });
+
+  it("VariableEditor detected string", () => {
+    const rjvId = "id";
+
+    render(
+      <ReactJsonViewContext.Provider
+        value={
+          {
+            props: {
+              canEdit: true,
+              canDelete: true,
+              enableClipboard: true,
+              theme: "rjvDefault",
+              indentWidth: 4,
+              quotesOnKeys: true,
+              displayArrayKey: true,
+            },
+            rjvId,
+          } as any
+        }
+      >
+        <LocalJsonViewContext.Provider
+          value={
+            {
+              value: "test",
+              namespace: ["name"],
+              parentType: "object",
+            } as any
+          }
+        >
+          <VariableEditor />
+        </LocalJsonViewContext.Provider>
+      </ReactJsonViewContext.Provider>,
+    );
+
+    const clickToEditIconElement = document.querySelector(
+      ".variable-value ~ .click-to-edit .click-to-edit-icon",
+    )!;
+    expect(clickToEditIconElement).toBeInTheDocument();
+    fireEvent(
+      clickToEditIconElement,
+      new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+    const variableEditorElement = document.querySelectorAll(
+      ".variable-value .variable-editor",
+    );
+    expect(variableEditorElement.length).toBe(1);
+    expect((variableEditorElement[0] as HTMLTextAreaElement).value).toBe(
+      "test",
+    );
+  });
+
+  it("VariableEditor detected object", () => {
+    const rjvId = "id";
+
+    render(
+      <ReactJsonViewContext.Provider
+        value={
+          {
+            props: {
+              canEdit: true,
+              canDelete: true,
+              enableClipboard: true,
+              theme: "rjvDefault",
+              indentWidth: 4,
+              quotesOnKeys: true,
+              displayArrayKey: true,
+            },
+            rjvId,
+          } as any
+        }
+      >
+        <LocalJsonViewContext.Provider
+          value={
+            {
+              value: "{}",
+              namespace: ["name"],
+              parentType: "object",
+            } as any
+          }
+        >
+          <VariableEditor />
+        </LocalJsonViewContext.Provider>
+      </ReactJsonViewContext.Provider>,
+    );
+
+    const clickToEditIconElement = document.querySelector(
+      ".variable-value ~ .click-to-edit .click-to-edit-icon",
+    )!;
+    expect(clickToEditIconElement).toBeInTheDocument();
+    fireEvent(
+      clickToEditIconElement,
+      new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+    const variableEditorElement = document.querySelectorAll(
+      ".variable-value .variable-editor",
+    );
+    expect(variableEditorElement.length).toBe(1);
+    expect((variableEditorElement[0] as HTMLTextAreaElement).value).toBe("{}");
+  });
+
+  it("VariableEditor detected array", () => {
+    const rjvId = "id";
+
+    render(
+      <ReactJsonViewContext.Provider
+        value={
+          {
+            props: {
+              canEdit: true,
+              canDelete: true,
+              enableClipboard: true,
+              theme: "rjvDefault",
+              indentWidth: 4,
+              quotesOnKeys: true,
+              displayArrayKey: true,
+            },
+            rjvId,
+          } as any
+        }
+      >
+        <LocalJsonViewContext.Provider
+          value={
+            {
+              value: "[1,2,3]",
+              namespace: ["name"],
+              parentType: "object",
+            } as any
+          }
+        >
+          <VariableEditor />
+        </LocalJsonViewContext.Provider>
+      </ReactJsonViewContext.Provider>,
+    );
+
+    const clickToEditIconElement = document.querySelector(
+      ".variable-value ~ .click-to-edit .click-to-edit-icon",
+    )!;
+    expect(clickToEditIconElement).toBeInTheDocument();
+    fireEvent(
+      clickToEditIconElement,
+      new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+    const variableEditorElement = document.querySelectorAll(
+      ".variable-value .variable-editor",
+    );
+    expect(variableEditorElement.length).toBe(1);
+    expect((variableEditorElement[0] as HTMLTextAreaElement).value).toBe(
+      "[1,2,3]",
+    );
+  });
 });

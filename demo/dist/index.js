@@ -29421,7 +29421,7 @@
   };
   var ObjectMeta = ({ rowHovered }) => {
     const {
-      props: { theme, enableClipboard, canDelete, canAdd }
+      props: { theme, enableClipboard, canDelete, canAdd, displayObjectSize }
     } = (0, import_react8.useContext)(ReactJsonViewContext_default);
     const { value } = (0, import_react8.useContext)(LocalJsonViewContext_default);
     const size = Object.keys(value).length;
@@ -29435,11 +29435,7 @@
           e.stopPropagation();
         },
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { className: "object-size", ...style(theme, "object-size"), children: [
-            size,
-            " item",
-            size === 1 ? "" : "s"
-          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "object-size", ...style(theme, "object-size"), children: displayObjectSize ? `${size} item${size === 1 ? "" : "s"}` : null }),
           enableClipboard ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(CopyToClipboard_default, { rowHovered }) : null,
           canAdd ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(AddAttribute, { rowHovered }) : null,
           canDelete ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(RemoveObject, { rowHovered }) : null

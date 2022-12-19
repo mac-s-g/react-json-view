@@ -103,7 +103,7 @@ const AddAttribute = ({ rowHovered }: { rowHovered: boolean }) => {
 
 const ObjectMeta = ({ rowHovered }: { rowHovered: boolean }) => {
   const {
-    props: { theme, enableClipboard, canDelete, canAdd },
+    props: { theme, enableClipboard, canDelete, canAdd, displayObjectSize },
   } = useContext(ReactJsonViewContext);
 
   const { value } = useContext(LocalJsonViewContext);
@@ -121,7 +121,7 @@ const ObjectMeta = ({ rowHovered }: { rowHovered: boolean }) => {
     >
       {/* size badge display */}
       <span className="object-size" {...Theme(theme, "object-size")}>
-        {size} item{size === 1 ? "" : "s"}
+        {displayObjectSize ? `${size} item${size === 1 ? "" : "s"}` : null}
       </span>
       {/* copy to clipboard icon */}
       {enableClipboard ? <CopyToClipboard rowHovered={rowHovered} /> : null}

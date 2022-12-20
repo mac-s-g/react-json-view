@@ -20,6 +20,10 @@ import {
 import Theme from "../../../../src/js/themes/getStyle";
 
 describe("<ToggleIcons />", () => {
+  afterEach(() => {
+    cleanup();
+  });
+
   it("ExpandedIcon render", () => {
     const rendered = render(
       <ReactJsonViewContext.Provider

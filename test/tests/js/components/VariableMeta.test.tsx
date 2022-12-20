@@ -8,7 +8,9 @@ import ObjectMeta from "../../../../src/js/components/ObjectMeta";
 import ReactJsonViewContext from "../../../../src/js/components/ReactJsonViewContext";
 
 describe("<ObjectMeta />", () => {
-  const rjvId = 1;
+  afterEach(() => {
+    cleanup();
+  });
 
   it("ObjectMeta clipboard should not exist", () => {
     const rendered = render(

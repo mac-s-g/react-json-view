@@ -30805,19 +30805,8 @@
   // demo/src/js/components/Demo.tsx
   var import_jsx_runtime19 = __toESM(require_jsx_runtime(), 1);
   var Demo = () => {
-    const [value, setValue] = (0, import_react22.useState)({
-      bool: true,
-      number: 5,
-      str: "test",
-      nan: NaN,
-      null: null,
-      arr: [1, 2],
-      obj: {
-        test: true
-      },
-      empty_arr: [],
-      empty_obj: {}
-    });
+    const largeArray = new Array(80).fill("test");
+    const [value, setValue] = (0, import_react22.useState)(largeArray);
     return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
       js_default,
       {

@@ -31,6 +31,7 @@
       "test/tests/js/components/**/*.tsx",
       "test/tests/js/helpers/*.tsx",
       "test/tests/js/stores/*.tsx",
+      "test/tests/js/themes/*.tsx",
     ],
     "exclude": [
       "**/node_modules",

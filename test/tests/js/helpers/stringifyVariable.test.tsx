@@ -1,6 +1,11 @@
+import { cleanup } from "@testing-library/react-hooks";
+
 import stringifyVariable from "../../../../src/js/helpers/stringifyVariable";
 
 describe("stringifyVariable", () => {
+  afterEach(() => {
+    cleanup();
+  });
   it("stringifyVariable integers", () => {
     let test = 5;
     expect(stringifyVariable(test)).toBe("5");

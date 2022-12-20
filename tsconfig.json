@@ -29,7 +29,8 @@
       "demo/src/**/*.ts",
       "test/tests/js/*.tsx",
       "test/tests/js/components/**/*.tsx",
-      "test/tests/js/helpers/*.tsx"
+      "test/tests/js/helpers/*.tsx",
+      "test/tests/js/stores/*.tsx",
     ],
     "exclude": [
       "**/node_modules",

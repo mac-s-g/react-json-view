@@ -1,6 +1,11 @@
+import { cleanup } from "@testing-library/react-hooks";
+
 import parseInput from "../../../../src/js/helpers/parseInput";
 
 describe("parseInput", () => {
+  afterEach(() => {
+    cleanup();
+  });
   it("parseInput array", () => {
     expect(parseInput(JSON.stringify([1, 2, "test"])).type).toBe("array");
   });

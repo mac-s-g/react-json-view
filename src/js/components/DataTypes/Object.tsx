@@ -159,7 +159,7 @@ const ObjectDataTypeContents = ({
   const type = toType(value);
 
   return (
-    <div className="pushed-content object-container">
+    <div className="pushed-content object-container" data-testid="json-object">
       <div className="object-content" {...Theme(theme, "pushed-content")}>
         {actualKeys.map((key) => (
           <Child

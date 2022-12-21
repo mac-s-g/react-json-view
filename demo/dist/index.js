@@ -30203,7 +30203,7 @@
     const shouldSort = sortKeys && objectType !== "array";
     const actualKeys = shouldSort ? baseKeys.sort() : baseKeys;
     const type = toType(value);
-    return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "pushed-content object-container", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "object-content", ...style(theme, "pushed-content"), children: actualKeys.map((key) => /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "pushed-content object-container", "data-testid": "json-object", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "object-content", ...style(theme, "pushed-content"), children: actualKeys.map((key) => /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
       Child_default,
       {
         depth: depth + DEPTH_INCREMENT,
@@ -30352,7 +30352,7 @@
   var import_jsx_runtime14 = __toESM(require_jsx_runtime(), 1);
   var ArrayGroup = () => {
     const uniqueId = (0, import_react17.useId)();
-    const { namespace, value, depth } = (0, import_react17.useContext)(LocalJsonViewContext_default);
+    const { namespace, value, depth, type, parentType, parentObj } = (0, import_react17.useContext)(LocalJsonViewContext_default);
     const {
       props: { theme, groupArraysAfterLength, indentWidth }
     } = (0, import_react17.useContext)(ReactJsonViewContext_default);
@@ -30433,11 +30433,24 @@
                       ]
                     }
                   ) : /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
-                    Object_default,
+                    LocalJsonViewContext_default.Provider,
                     {
-                      objectType: "array",
-                      indexOffset: 0,
-                      parentIsArrayGroup: true
+                      value: {
+                        depth,
+                        namespace,
+                        type,
+                        value: value.slice(i * size, i * size + size),
+                        parentType,
+                        parentObj
+                      },
+                      children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+                        Object_default,
+                        {
+                          objectType: "array",
+                          indexOffset: i * size,
+                          parentIsArrayGroup: true
+                        }
+                      )
                     }
                   )
                 ] })

@@ -13,7 +13,8 @@ import { CollapsedIcon, ExpandedIcon } from "./ToggleIcons";
 
 const ArrayGroup = () => {
   const uniqueId = useId();
-  const { namespace, value, depth } = useContext(LocalJsonViewContext);
+  const { namespace, value, depth, type, parentType, parentObj } =
+    useContext(LocalJsonViewContext);
   const {
     props: { theme, groupArraysAfterLength, indentWidth },
   } = useContext(ReactJsonViewContext);
@@ -98,11 +99,22 @@ const ArrayGroup = () => {
                   ]
                 </span>
               ) : (
-                <JsonObject
-                  objectType="array"
-                  indexOffset={0}
-                  parentIsArrayGroup
-                />
+                <LocalJsonViewContext.Provider
+                  value={{
+                    depth,
+                    namespace,
+                    type,
+                    value: (value as Json[]).slice(i * size, i * size + size),
+                    parentType,
+                    parentObj,
+                  }}
+                >
+                  <JsonObject
+                    objectType="array"
+                    indexOffset={i * size}
+                    parentIsArrayGroup
+                  />
+                </LocalJsonViewContext.Provider>
               )}
             </span>
           </div>

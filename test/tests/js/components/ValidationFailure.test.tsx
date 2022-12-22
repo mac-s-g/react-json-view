@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 
-import { prettyDOM, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { cleanup } from "@testing-library/react-hooks";
 
 import ReactJsonViewContext from "../../../../src/js/components/ReactJsonViewContext";
@@ -34,7 +34,6 @@ describe("<ValidationFailure />", () => {
         <ValidationFailure message="hello" active={false} />,
       </ReactJsonViewContext.Provider>,
     );
-    console.log(prettyDOM(rendered.container));
     const validationFailureElem = rendered.container.querySelectorAll(
       ".validation-failure",
     );
@@ -49,7 +48,6 @@ describe("<ValidationFailure />", () => {
         <ValidationFailure message="hello" active={false} />,
       </ReactJsonViewContext.Provider>,
     );
-    console.log(prettyDOM(rendered.container));
     const validationFailureElem = rendered.container.querySelectorAll(
       ".validation-failure",
     );

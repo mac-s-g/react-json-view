@@ -123,7 +123,7 @@ describe("<ObjectKeyModal />", () => {
         cancelable: true,
       }),
     );
-    console.log(prettyDOM(rendered.container));
+
     const keyModalRequestElem =
       rendered.container.querySelectorAll(".key-modal-request");
     expect(keyModalRequestElem).toHaveLength(0);

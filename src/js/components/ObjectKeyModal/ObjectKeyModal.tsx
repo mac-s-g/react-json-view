@@ -106,7 +106,7 @@ const ObjectKeyModal = ({
             onChange={(e) => {
               setInput(e.target.value);
             }}
-            onKeyPress={(e) => {
+            onKeyUp={(e) => {
               if (valid && e.key === "Enter") {
                 handleSubmit();
               } else if (e.key === "Escape") {

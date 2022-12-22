@@ -45,7 +45,7 @@ describe("<CopyToClipboard />", () => {
     ).toBe("inline-block");
   });
 
-  it.only("CopyToClipboard clipboard should be hidden", () => {
+  it("CopyToClipboard clipboard should be hidden", () => {
     const rendered = render(
       <ReactJsonViewContext.Provider
         value={

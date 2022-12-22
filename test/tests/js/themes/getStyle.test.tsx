@@ -17,9 +17,4 @@ describe("getStyle", () => {
     const style = getStyle("none", "app-container");
     expect(style.style).toBeDefined();
   });
-
-  it("test theme not set (NOTICE OUTPUT EXPECTED)", () => {
-    const style = getStyle("", "app-container");
-    expect(style.style).toBeDefined();
-  });
 });

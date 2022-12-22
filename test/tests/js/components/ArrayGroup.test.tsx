@@ -159,7 +159,7 @@ describe("<ArrayGroup />", () => {
     );
   });
 
-  it.only("ArrayGroup renders at root", () => {
+  it("ArrayGroup renders at root", () => {
     const rendered = render(
       <ReactJsonViewContext.Provider
         value={

@@ -29943,8 +29943,9 @@
     const {
       props: { theme, enableClipboard, canDelete, canAdd, displayObjectSize }
     } = (0, import_react12.useContext)(ReactJsonViewContext_default);
-    const { value } = (0, import_react12.useContext)(LocalJsonViewContext_default);
-    const size = Object.keys(value).length;
+    const { value, subArray } = (0, import_react12.useContext)(LocalJsonViewContext_default);
+    const displayValue = subArray ?? value;
+    const size = Object.keys(displayValue).length;
     return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(
       "div",
       {
@@ -30195,14 +30196,15 @@
     objectType,
     parentIsArrayGroup
   }) => {
-    const { depth, namespace, value } = (0, import_react15.useContext)(LocalJsonViewContext_default);
+    const { depth, namespace, value, subArray } = (0, import_react15.useContext)(LocalJsonViewContext_default);
     const {
       props: { sortKeys, theme }
     } = (0, import_react15.useContext)(ReactJsonViewContext_default);
-    const baseKeys = Object.keys(value);
+    const displayValue = subArray ?? value;
+    const baseKeys = Object.keys(displayValue);
     const shouldSort = sortKeys && objectType !== "array";
     const actualKeys = shouldSort ? baseKeys.sort() : baseKeys;
-    const type = toType(value);
+    const type = toType(displayValue);
     return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "pushed-content object-container", "data-testid": "json-object", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "object-content", ...style(theme, "pushed-content"), children: actualKeys.map((key) => /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
       Child_default,
       {
@@ -30210,9 +30212,9 @@
         namespace: namespace.concat(
           parentIsArrayGroup ? `${parseInt(key) + indexOffset}` : key
         ),
-        value: value[key],
+        value: displayValue[key],
         parentType: type,
-        parentObj: value
+        parentObj: displayValue
       },
       `${key}-${namespace}`
     )) }) });
@@ -30439,9 +30441,13 @@
                         depth,
                         namespace,
                         type,
-                        value: value.slice(i * size, i * size + size),
+                        value,
                         parentType,
-                        parentObj
+                        parentObj,
+                        subArray: value.slice(
+                          i * size,
+                          i * size + size
+                        )
                       },
                       children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
                         Object_default,
@@ -30815,7 +30821,7 @@
   // demo/src/js/components/Demo.tsx
   var import_jsx_runtime19 = __toESM(require_jsx_runtime(), 1);
   var Demo = () => {
-    const largeArray = new Array(100).fill("test");
+    const largeArray = new Array(102).fill("test");
     const [value, setValue] = (0, import_react22.useState)({
       bool: true,
       number: 5,

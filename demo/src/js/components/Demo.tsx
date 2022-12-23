@@ -6,7 +6,7 @@ import { Json } from "../../../../src/js/components/ReactJsonViewContext";
 import ReactJson from "../../../../src/js/index";
 
 const Demo = () => {
-  const largeArray = new Array(100).fill("test");
+  const largeArray = new Array(102).fill("test");
   const [value, setValue] = useState<Json & object>({
     bool: true,
     number: 5,

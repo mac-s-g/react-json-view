@@ -106,9 +106,9 @@ const ObjectMeta = ({ rowHovered }: { rowHovered: boolean }) => {
     props: { theme, enableClipboard, canDelete, canAdd, displayObjectSize },
   } = useContext(ReactJsonViewContext);
 
-  const { value } = useContext(LocalJsonViewContext);
-
-  const size = Object.keys(value as typeof value & object).length;
+  const { value, subArray } = useContext(LocalJsonViewContext);
+  const displayValue = subArray ?? value;
+  const size = Object.keys(displayValue as typeof displayValue & object).length;
 
   return (
     <div

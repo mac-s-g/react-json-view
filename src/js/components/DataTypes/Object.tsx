@@ -148,15 +148,16 @@ const ObjectDataTypeContents = ({
   parentIsArrayGroup: boolean;
   indexOffset: number;
 }) => {
-  const { depth, namespace, value } = useContext(LocalJsonViewContext);
+  const { depth, namespace, value, subArray } =
+    useContext(LocalJsonViewContext);
   const {
     props: { sortKeys, theme },
   } = useContext(ReactJsonViewContext);
-
-  const baseKeys = Object.keys(value as typeof value & object);
+  const displayValue = subArray ?? value;
+  const baseKeys = Object.keys(displayValue as typeof displayValue & object);
   const shouldSort = sortKeys && objectType !== "array";
   const actualKeys = shouldSort ? baseKeys.sort() : baseKeys;
-  const type = toType(value);
+  const type = toType(displayValue);
 
   return (
     <div className="pushed-content object-container" data-testid="json-object">
@@ -167,10 +168,10 @@ const ObjectDataTypeContents = ({
             namespace={namespace.concat(
               parentIsArrayGroup ? `${parseInt(key) + indexOffset}` : key,
             )}
-            value={(value as Record<string, Json>)[key] as Json}
+            value={(displayValue as Record<string, Json>)[key] as Json}
             key={`${key}-${namespace}`}
             parentType={type}
-            parentObj={value}
+            parentObj={displayValue}
           />
         ))}
       </div>

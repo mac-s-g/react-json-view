@@ -1,8 +1,8 @@
 import "@testing-library/jest-dom";
 
-import { fireEvent, prettyDOM, render, screen } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import { act, cleanup, renderHook } from "@testing-library/react-hooks";
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 
 import LocalJsonViewContext from "../../../../src/js/components/LocalJsonViewContext";
 import ReactJsonViewContext from "../../../../src/js/components/ReactJsonViewContext";

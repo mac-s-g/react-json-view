@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useContext, useState } from "react";
+import { useContext, useEffect, useId, useState } from "react";
 
 import { SINGLE_INDENT } from "../helpers/util";
 import Theme from "../themes/getStyle";
-import Child from "./Child";
-import ObjectComponent from "./DataTypes/Object";
+import { JsonObject } from "./DataTypes";
 import LocalJsonViewContext from "./LocalJsonViewContext";
 import ObjectMeta from "./ObjectMeta";
 import ObjectName from "./ObjectName";
@@ -13,7 +12,9 @@ import ReactJsonViewContext, { Json } from "./ReactJsonViewContext";
 import { CollapsedIcon, ExpandedIcon } from "./ToggleIcons";
 
 const ArrayGroup = () => {
-  const { namespace, value, depth } = useContext(LocalJsonViewContext);
+  const uniqueId = useId();
+  const { namespace, value, depth, type, parentType, parentObj } =
+    useContext(LocalJsonViewContext);
   const {
     props: { theme, groupArraysAfterLength, indentWidth },
   } = useContext(ReactJsonViewContext);
@@ -25,12 +26,8 @@ const ArrayGroup = () => {
   const toggleCollapsed = (i: number) => {
     setCollapsed({
       ...collapsed,
-      [i]: collapsed[i] === undefined ? false : !collapsed,
+      [i]: collapsed[i] === undefined ? true : !collapsed[i],
     });
-  };
-
-  const isCollapsed = (i: number) => {
-    return i === undefined || i;
   };
 
   const isRoot = depth === 0;
@@ -54,11 +51,11 @@ const ArrayGroup = () => {
         {/* TODO: Make this more acdcurate potentially */}
         <ObjectMeta rowHovered={false} />
       </span>
-      {[...Array(numGroups)]
-        .map((_, i) => i)
-        .map((i) => (
+      {[...Array(numGroups)].map((_, i) => {
+        const uniqueKey = uniqueId + i;
+        return (
           <div
-            key={i}
+            key={uniqueKey}
             className="object-key-val array-group"
             {...Theme(theme, "objectKeyVal", {
               marginLeft: 6,
@@ -73,9 +70,9 @@ const ArrayGroup = () => {
                   toggleCollapsed(i);
                 }}
               >
-                {isCollapsed(i) ? <CollapsedIcon /> : <ExpandedIcon />}
+                {!collapsed[i] ? <CollapsedIcon /> : <ExpandedIcon />}
               </div>
-              {isCollapsed(i) ? (
+              {!collapsed[i] ? (
                 <span
                   {...Theme(theme, "brace")}
                   onClick={(e) => {
@@ -102,17 +99,27 @@ const ArrayGroup = () => {
                   ]
                 </span>
               ) : (
-                <Child
-                  depth={depth + 1}
-                  namespace={namespace.concat(null)}
-                  parentType="array"
-                  value={(value as Json[]).slice(i * size, i * size + size)}
-                  parentObj={(value as Json[]).slice(i * size, i * size + size)}
-                />
+                <LocalJsonViewContext.Provider
+                  value={{
+                    depth,
+                    namespace,
+                    type,
+                    value: (value as Json[]).slice(i * size, i * size + size),
+                    parentType,
+                    parentObj,
+                  }}
+                >
+                  <JsonObject
+                    objectType="array"
+                    indexOffset={i * size}
+                    parentIsArrayGroup
+                  />
+                </LocalJsonViewContext.Provider>
               )}
             </span>
           </div>
-        ))}
+        );
+      })}
     </div>
   );
 };

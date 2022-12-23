@@ -16,8 +16,8 @@ import {
   RemoveCircle,
   SquareMinus,
   SquarePlus,
-} from "../../../../src/js/components/icons";
-import Theme from "../../../../src/js/themes/getStyle";
+} from "@/js/components/icons";
+import Theme from "@/js/themes/getStyle";
 
 describe("svg icons", () => {
   afterEach(() => {

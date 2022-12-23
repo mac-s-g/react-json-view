@@ -1,11 +1,11 @@
 import "@testing-library/jest-dom";
 
-import { prettyDOM, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { cleanup } from "@testing-library/react-hooks";
 
-import LocalJsonViewContext from "../../../../src/js/components/LocalJsonViewContext";
-import ObjectMeta from "../../../../src/js/components/ObjectMeta";
-import ReactJsonViewContext from "../../../../src/js/components/ReactJsonViewContext";
+import LocalJsonViewContext from "@/js/components/LocalJsonViewContext";
+import ObjectMeta from "@/js/components/ObjectMeta";
+import ReactJsonViewContext from "@/js/components/ReactJsonViewContext";
 
 describe("<ObjectMeta />", () => {
   afterEach(() => {

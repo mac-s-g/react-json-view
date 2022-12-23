@@ -1,12 +1,14 @@
 import "@testing-library/jest-dom";
 
-import { cleanup, prettyDOM, render, screen } from "@testing-library/react";
+import { cleanup, render } from "@testing-library/react";
 import React from "react";
 
-import Index from "../../../src/js/index";
+import Index from "@/js/index";
 
 describe("<Index />", () => {
-  const rjvId = 1;
+  afterEach(() => {
+    cleanup();
+  });
 
   it("render component with default props", () => {
     const rendered = render(<Index value={{}} />);

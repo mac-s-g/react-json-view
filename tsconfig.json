@@ -20,7 +20,12 @@
       "resolveJsonModule": true,
       "allowSyntheticDefaultImports": true,
       "downlevelIteration": true,
-      "declarationMap": true
+      "declarationMap": true,
+      "paths": {
+        "@*": [
+          "./src/*"
+        ]
+      }
     },
     "include": [
       "src/**/*.tsx",

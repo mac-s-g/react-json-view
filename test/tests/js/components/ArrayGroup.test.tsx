@@ -3,9 +3,9 @@ import "@testing-library/jest-dom";
 import { fireEvent, render } from "@testing-library/react";
 import { cleanup } from "@testing-library/react-hooks";
 
-import ArrayGroup from "../../../../src/js/components/ArrayGroup";
-import LocalJsonViewContext from "../../../../src/js/components/LocalJsonViewContext";
-import ReactJsonViewContext from "../../../../src/js/components/ReactJsonViewContext";
+import ArrayGroup from "@/js/components/ArrayGroup";
+import LocalJsonViewContext from "@/js/components/LocalJsonViewContext";
+import ReactJsonViewContext from "@/js/components/ReactJsonViewContext";
 
 describe("<ArrayGroup />", () => {
   afterEach(() => {

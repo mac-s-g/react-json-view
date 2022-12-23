@@ -3,9 +3,9 @@ import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import { cleanup } from "@testing-library/react-hooks";
 
-import CopyToClipboard from "../../../../src/js/components/CopyToClipboard";
-import LocalJsonViewContext from "../../../../src/js/components/LocalJsonViewContext";
-import ReactJsonViewContext from "../../../../src/js/components/ReactJsonViewContext";
+import CopyToClipboard from "@/js/components/CopyToClipboard";
+import LocalJsonViewContext from "@/js/components/LocalJsonViewContext";
+import ReactJsonViewContext from "@/js/components/ReactJsonViewContext";
 
 describe("<CopyToClipboard />", () => {
   afterEach(() => {

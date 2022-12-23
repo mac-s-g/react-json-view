@@ -1,6 +1,6 @@
 import { cleanup } from "@testing-library/react-hooks";
 
-import parseInput from "../../../../src/js/helpers/parseInput";
+import parseInput from "@/js/helpers/parseInput";
 
 describe("parseInput", () => {
   afterEach(() => {

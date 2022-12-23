@@ -48,7 +48,6 @@ const ArrayGroup = () => {
       <ObjectName />
 
       <span>
-        {/* TODO: Make this more acdcurate potentially */}
         <ObjectMeta rowHovered={false} />
       </span>
       {[...Array(numGroups)].map((_, i) => {

@@ -3,9 +3,9 @@ import "@testing-library/jest-dom";
 import { prettyDOM, render } from "@testing-library/react";
 import { cleanup } from "@testing-library/react-hooks";
 
-import JsonObject from "../../../../../src/js/components/DataTypes/Object";
-import LocalJsonViewContext from "../../../../../src/js/components/LocalJsonViewContext";
-import ReactJsonViewContext from "../../../../../src/js/components/ReactJsonViewContext";
+import JsonObject from "@/js/components/DataTypes/Object";
+import LocalJsonViewContext from "@/js/components/LocalJsonViewContext";
+import ReactJsonViewContext from "@/js/components/ReactJsonViewContext";
 
 describe("<JsonObject />", () => {
   afterEach(() => {

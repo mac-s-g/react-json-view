@@ -342,47 +342,9 @@ const VariableEditor = () => {
   const type = toType(value);
   const name = namespace.at(-1);
 
-  // const [edit, setEdit] = useState<EditState>({ editMode: false });
   const { edit, setEdit, enterEditMode, submitEdit } = useEditState();
   const [hovered, setHovered] = useState<boolean>(false);
   const [hoveredKey, setHoveredKey] = useState<boolean>(false);
-
-  // const enterEditMode = () => {
-  //   if (canEdit) {
-  //     const stringifiedValue = stringifyVariable(
-  //       value as number | string | boolean | null,
-  //     );
-
-  //     setEdit({
-  //       editMode: true,
-  //       editValue: stringifiedValue,
-  //     });
-  //   }
-  // };
-
-  // const submitEdit = (submitDetected?: boolean) => {
-  //   const newValue =
-  //     edit.editMode &&
-  //     (submitDetected ? parseInput(edit.editValue).value : edit.editValue);
-
-  //   setEdit({ editMode: false });
-
-  //   const data = {
-  //     name,
-  //     namespace,
-  //     existingValue: value,
-  //     newValue,
-  //     updatedSrc: {},
-  //     variableRemoved: false,
-  //   };
-
-  //   attributeStore.handleAction({
-  //     name: "VARIABLE_UPDATED",
-  //     rjvId,
-  //     data,
-  //   });
-  //   onChange(data.updatedSrc);
-  // };
 
   const removeVariable = (
     rjvId: string,

@@ -3,9 +3,9 @@ import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import { cleanup } from "@testing-library/react-hooks";
 
-import JsonNull from "../../../../../src/js/components/DataTypes/Null";
-import LocalJsonViewContext from "../../../../../src/js/components/LocalJsonViewContext";
-import ReactJsonViewContext from "../../../../../src/js/components/ReactJsonViewContext";
+import JsonNull from "@/js/components/DataTypes/Null";
+import LocalJsonViewContext from "@/js/components/LocalJsonViewContext";
+import ReactJsonViewContext from "@/js/components/ReactJsonViewContext";
 
 describe("<JsonNull />", () => {
   afterEach(() => {

@@ -1,6 +1,6 @@
 import { cleanup } from "@testing-library/react-hooks";
 
-import ObjectAttributes from "../../../../src/js/stores/ObjectAttributes";
+import ObjectAttributes from "@/js/stores/ObjectAttributes";
 
 describe("ObjectAttributes", () => {
   afterEach(() => {

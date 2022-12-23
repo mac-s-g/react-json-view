@@ -1,6 +1,6 @@
 import { cleanup } from "@testing-library/react-hooks";
 
-import stringifyVariable from "../../../../src/js/helpers/stringifyVariable";
+import stringifyVariable from "@/js/helpers/stringifyVariable";
 
 describe("stringifyVariable", () => {
   afterEach(() => {

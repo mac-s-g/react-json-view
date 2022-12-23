@@ -3,9 +3,9 @@ import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import { cleanup } from "@testing-library/react-hooks";
 
-import JsonBoolean from "../../../../../src/js/components/DataTypes/Boolean";
-import LocalJsonViewContext from "../../../../../src/js/components/LocalJsonViewContext";
-import ReactJsonViewContext from "../../../../../src/js/components/ReactJsonViewContext";
+import JsonBoolean from "@/js/components/DataTypes/Boolean";
+import LocalJsonViewContext from "@/js/components/LocalJsonViewContext";
+import ReactJsonViewContext from "@/js/components/ReactJsonViewContext";
 
 describe("<JsonBoolean />", () => {
   afterEach(() => {

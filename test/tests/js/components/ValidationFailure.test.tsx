@@ -3,8 +3,8 @@ import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import { cleanup } from "@testing-library/react-hooks";
 
-import ReactJsonViewContext from "../../../../src/js/components/ReactJsonViewContext";
-import ValidationFailure from "../../../../src/js/components/ValidationFailure";
+import ReactJsonViewContext from "@/js/components/ReactJsonViewContext";
+import ValidationFailure from "@/js/components/ValidationFailure";
 
 describe("<ValidationFailure />", () => {
   afterEach(() => {

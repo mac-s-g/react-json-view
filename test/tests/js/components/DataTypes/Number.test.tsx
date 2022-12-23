@@ -3,9 +3,9 @@ import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import { cleanup } from "@testing-library/react-hooks";
 
-import JsonNumber from "../../../../../src/js/components/DataTypes/Number";
-import LocalJsonViewContext from "../../../../../src/js/components/LocalJsonViewContext";
-import ReactJsonViewContext from "../../../../../src/js/components/ReactJsonViewContext";
+import JsonNumber from "@/js/components/DataTypes/Number";
+import LocalJsonViewContext from "@/js/components/LocalJsonViewContext";
+import ReactJsonViewContext from "@/js/components/ReactJsonViewContext";
 
 describe("<JsonNumber />", () => {
   afterEach(() => {

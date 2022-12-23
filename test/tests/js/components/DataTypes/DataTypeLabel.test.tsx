@@ -3,8 +3,8 @@ import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import { cleanup } from "@testing-library/react-hooks";
 
-import DataTypeLabel from "../../../../../src/js/components/DataTypes/DataTypeLabel";
-import ReactJsonViewContext from "../../../../../src/js/components/ReactJsonViewContext";
+import DataTypeLabel from "@/js/components/DataTypes/DataTypeLabel";
+import ReactJsonViewContext from "@/js/components/ReactJsonViewContext";
 
 describe("<DataTypeLabel />", () => {
   afterEach(() => {

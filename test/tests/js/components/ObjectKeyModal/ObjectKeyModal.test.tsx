@@ -1,12 +1,12 @@
 import "@testing-library/jest-dom";
 
-import { fireEvent, prettyDOM, render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import { cleanup } from "@testing-library/react-hooks";
 import { useLayoutEffect, useState } from "react";
 
-import ObjectKeyModal from "../../../../../src/js/components/ObjectKeyModal/ObjectKeyModal";
-import ReactJsonViewContext from "../../../../../src/js/components/ReactJsonViewContext";
-import attributeStore from "../../../../../src/js/stores/ObjectAttributes";
+import ObjectKeyModal from "@/js/components/ObjectKeyModal/ObjectKeyModal";
+import ReactJsonViewContext from "@/js/components/ReactJsonViewContext";
+import attributeStore from "@/js/stores/ObjectAttributes";
 
 const rjvId = 1;
 

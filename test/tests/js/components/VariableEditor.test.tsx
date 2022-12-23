@@ -4,12 +4,11 @@ import { fireEvent, render } from "@testing-library/react";
 import { act, cleanup, renderHook } from "@testing-library/react-hooks";
 import React, { useEffect } from "react";
 
-import LocalJsonViewContext from "../../../../src/js/components/LocalJsonViewContext";
-import ReactJsonViewContext from "../../../../src/js/components/ReactJsonViewContext";
-import useEditState from "../../../../src/js/components/useEditState";
-import VariableEditor from "../../../../src/js/components/VariableEditor";
-import Index from "../../../../src/js/index";
-import attributeStore from "../../../../src/js/stores/ObjectAttributes";
+import LocalJsonViewContext from "@/js/components/LocalJsonViewContext";
+import ReactJsonViewContext from "@/js/components/ReactJsonViewContext";
+import useEditState from "@/js/components/useEditState";
+import VariableEditor from "@/js/components/VariableEditor";
+import attributeStore from "@/js/stores/ObjectAttributes";
 
 describe("<VariableEditor />", () => {
   afterEach(() => {

@@ -1,6 +1,6 @@
 import { cleanup } from "@testing-library/react-hooks";
 
-import { isTheme, toType } from "../../../../src/js/helpers/util";
+import { isTheme, toType } from "@/js/helpers/util";
 
 describe("toType", () => {
   afterEach(() => {

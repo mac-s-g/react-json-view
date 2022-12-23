@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 
-import { prettyDOM, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { cleanup } from "@testing-library/react-hooks";
 
 import {
@@ -10,14 +10,10 @@ import {
   CirclePlus,
   SquareMinus,
   SquarePlus,
-} from "../../../../src/js/components/icons";
-import LocalJsonViewContext from "../../../../src/js/components/LocalJsonViewContext";
-import ReactJsonViewContext from "../../../../src/js/components/ReactJsonViewContext";
-import {
-  CollapsedIcon,
-  ExpandedIcon,
-} from "../../../../src/js/components/ToggleIcons";
-import Theme from "../../../../src/js/themes/getStyle";
+} from "@/js/components/icons";
+import ReactJsonViewContext from "@/js/components/ReactJsonViewContext";
+import { CollapsedIcon, ExpandedIcon } from "@/js/components/ToggleIcons";
+import Theme from "@/js/themes/getStyle";
 
 describe("<ToggleIcons />", () => {
   afterEach(() => {

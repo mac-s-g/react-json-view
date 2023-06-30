@@ -2,6 +2,11 @@
 
 [![npm](https://img.shields.io/npm/v/react-json-view.svg)](https://www.npmjs.com/package/react-json-view) [![npm](https://img.shields.io/npm/l/react-json-view.svg)](https://github.com/mac-s-g/react-json-view/blob/master/LISCENSE) [![Build Status](https://travis-ci.org/mac-s-g/react-json-view.svg)](https://travis-ci.org/mac-s-g/react-json-view) [![Coverage Status](https://coveralls.io/repos/github/mac-s-g/react-json-view/badge.svg?branch=master)](https://coveralls.io/github/mac-s-g/react-json-view?branch=master)
 
+### ⚠️ This project is no longer being maintained ⚠️
+Sorry for the silence, ya'll.  I'm no longer able to invest the time necessary to keep this project maintained.  It's been a great experience working with everyone. 
+based on recent discussion, it looks like [@microlink/react-json-view](https://github.com/microlinkhq/react-json-view) is a good candidate for replacement.
+Thank you to RJV users and everyone who contributed to this project. ❤️
+
 # react-json-view
 RJV is a React component for displaying and editing javascript **arrays** and **JSON objects**.
 

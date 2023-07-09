@@ -141,6 +141,12 @@ export interface ReactJsonViewProps {
    * Default: null
    */
   defaultValue?: TypeDefaultValue | TypeDefaultValue[] | null;
+  /**
+   * When set to true, the index of the elements prefix values
+   *
+   * Default: true
+   */
+  displayArrayKey?: boolean
 }
 
 export interface OnCopyProps {

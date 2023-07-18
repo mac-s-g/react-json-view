@@ -86,6 +86,19 @@ class VariableEditor extends React.PureComponent {
                     <span>
                         <span
                             {...Theme(theme, 'object-name')}
+                            onClick={
+                                onSelect === false
+                                    ? null
+                                    : e => {
+                                          let location = [...namespace];
+                                          location.shift();
+                                          onSelect({
+                                              isKey: true,
+                                              key: variable.name,
+                                              namespace: location
+                                          });
+                                      }
+                            }
                             class="object-key"
                             key={variable.name + '_' + namespace}
                         >

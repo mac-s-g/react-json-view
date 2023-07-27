@@ -41,6 +41,7 @@ const config = {
   resolve: {
     extensions: [".js", ".json", ".css", ".scss"]
   },
+  devtool: "source-map",
   module: {
     rules: [
       {

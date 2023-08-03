@@ -1,10 +1,10 @@
 import React from 'react';
-import DataTypeLabel from './DataTypeLabel';
 
 //theme
 import Theme from './../../themes/getStyle';
+import { DataTypeLabel } from './DataTypeLabel';
 
-export default class extends React.PureComponent {
+export class JsonBoolean extends React.PureComponent {
     render() {
         const type_name = 'bool';
         const { props } = this;
@@ -12,7 +12,9 @@ export default class extends React.PureComponent {
         return (
             <div {...Theme(props.theme, 'boolean')}>
                 <DataTypeLabel type_name={type_name} {...props} />
-                {props.value ? 'true' : 'false'}
+                <span style={{backgroundColor: props.isCurrent ? 'orange' : props.highlight ?  'yellow' : 'inherit'}}>
+                    {props.value ? 'true' : 'false'}
+                </span>
             </div>
         );
     }

@@ -52,6 +52,7 @@ ReactDom.render(
                 return false;
             }}
             defaultValue=""
+            searchable={true}
         />
 
         <br />

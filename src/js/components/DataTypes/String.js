@@ -1,14 +1,14 @@
 import React from 'react';
-import DataTypeLabel from './DataTypeLabel';
-import { toType } from './../../helpers/util';
+import { toType } from '../../helpers/util';
 
 //theme
 import Theme from './../../themes/getStyle';
 
 //attribute store for storing collapsed state
 import AttributeStore from './../../stores/ObjectAttributes';
+import { DataTypeLabel } from './DataTypeLabel';
 
-export default class extends React.PureComponent {
+export class JsonString extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -65,6 +65,7 @@ export default class extends React.PureComponent {
                     class="string-value"
                     {...style}
                     onClick={this.toggleCollapsed}
+                    style={{backgroundColor: props.isCurrent ? 'orange' : props.highlight ?  'yellow' : 'inherit'}}
                 >
                     "{value}"
                 </span>

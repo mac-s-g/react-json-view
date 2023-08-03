@@ -53,3 +53,67 @@ export function isTheme(theme) {
     }
     return false;
 }
+
+
+export function searchJson(json, searchTerm, levelPath = 'root')  {
+    const paths = [];
+
+    if (!searchTerm) {
+        return paths;
+    }
+
+    const normalized = searchTerm.toLowerCase();
+    for (const jsonElement of Object.keys(json).sort()) {
+        const path = `${levelPath}.${jsonElement}`;
+        if (typeof json[jsonElement] === 'string' && json[jsonElement].toLowerCase().includes(normalized)) {
+            paths.push(path);
+        } else if (
+            (typeof json[jsonElement] === 'number' ||
+                typeof json[jsonElement] === 'boolean' ||
+                json[jsonElement] === null ||
+                json[jsonElement] === undefined) &&
+            String(json[jsonElement]).includes(normalized)
+        ) {
+            paths.push(path);
+        } else if (typeof json[jsonElement] === 'object' && !(json[jsonElement] === null)) {
+            const result = searchJson(json[jsonElement], normalized, path);
+            if (result.length) {
+                paths.push(...result);
+            }
+        }
+    }
+    return paths;
+}
+
+export const jsonFlatPaths = (json, levelPath = 'root') => {
+    const paths = [];
+
+    for (const jsonElement in json) {
+        const path = `${levelPath}.${jsonElement}`;
+        if (typeof json[jsonElement] === 'object' && !(json[jsonElement] === null)) {
+            const result = jsonFlatPaths(json[jsonElement], path);
+            if (result.length) {
+                paths.push(...result);
+            }
+        } else {
+            paths.push(path);
+        }
+    }
+
+    return paths;
+};
+
+
+// source: https://codeburst.io/throttling-and-debouncing-in-javascript-646d076d0a44
+export function debounced(fn, delay) {
+    let timerId;
+    return function (...args) {
+        if (timerId) {
+            clearTimeout(timerId);
+        }
+        timerId = setTimeout(() => {
+            fn(...args);
+            timerId = null;
+        }, delay);
+    }
+}

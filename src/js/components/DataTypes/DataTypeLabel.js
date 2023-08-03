@@ -3,7 +3,7 @@ import React from 'react';
 //theme
 import Theme from './../../themes/getStyle';
 
-export default class extends React.PureComponent {
+export class DataTypeLabel extends React.PureComponent {
     render() {
         const { rjvId, type_name, displayDataTypes, theme } = this.props;
         if (displayDataTypes) {

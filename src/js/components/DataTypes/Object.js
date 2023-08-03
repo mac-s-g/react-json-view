@@ -5,11 +5,6 @@ import { toType } from './../../helpers/util';
 //data type components
 import { JsonObject } from './DataTypes';
 
-import VariableEditor from './../VariableEditor';
-import VariableMeta from './../VariableMeta';
-import ArrayGroup from './../ArrayGroup';
-import ObjectName from './../ObjectName';
-
 //attribute store
 import AttributeStore from './../../stores/ObjectAttributes';
 
@@ -18,6 +13,10 @@ import { CollapsedIcon, ExpandedIcon } from './../ToggleIcons';
 
 //theme
 import Theme from './../../themes/getStyle';
+import { ArrayGroup } from '../ArrayGroup';
+import { ObjectName } from '../ObjectName';
+import { VariableMeta } from '../VariableMeta';
+import { VariableEditor } from '../VariableEditor';
 
 //increment 1 with each nested object & array
 const DEPTH_INCREMENT = 1;
@@ -48,12 +47,13 @@ class RjvObject extends React.PureComponent {
                 }) === false) &&
             //initialize closed if object has no items
             size !== 0;
+        const path = props.namespace.join('.');
         const state = {
             expanded: AttributeStore.get(
                 props.rjvId,
                 props.namespace,
                 'expanded',
-                expanded
+                expanded ? expanded :props.paths?.some(name => name.includes(path))
             ),
             object_type: props.type === 'array' ? 'array' : 'object',
             parent_type: props.type === 'array' ? 'array' : 'object',

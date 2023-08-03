@@ -8,7 +8,7 @@ import { Add as Clear } from './icons';
 import Theme from './../themes/getStyle';
 
 //this input appears when adding a new value to an object
-export default class extends React.PureComponent {
+export class ValidationFailure extends React.PureComponent {
     render() {
         const { message, active, theme, rjvId } = this.props;
 

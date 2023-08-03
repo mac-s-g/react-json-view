@@ -1,7 +1,6 @@
 import React from 'react';
 import dispatcher from './../helpers/dispatcher';
 
-import CopyToClipboard from './CopyToClipboard';
 import { toType } from './../helpers/util';
 
 //icons
@@ -9,8 +8,9 @@ import { RemoveCircle as Remove, AddCircle as Add } from './icons';
 
 //theme
 import Theme from './../themes/getStyle';
+import { CopyToClipboard } from './CopyToClipboard';
 
-export default class extends React.PureComponent {
+export class VariableMeta extends React.PureComponent {
     getObjectSize = () => {
         const { size, theme, displayObjectSize } = this.props;
         if (displayObjectSize) {

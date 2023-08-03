@@ -1,13 +1,13 @@
 import React from 'react';
-import DataTypeLabel from './DataTypeLabel';
 
 //theme
 import Theme from './../../themes/getStyle';
 
 //attribute store for storing collapsed state
 import AttributeStore from './../../stores/ObjectAttributes';
+import { DataTypeLabel } from './DataTypeLabel';
 
-export default class extends React.PureComponent {
+export class JsonFunction extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {

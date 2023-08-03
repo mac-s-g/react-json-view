@@ -1,8 +1,8 @@
 import React from 'react';
+import { ArrayGroup } from './ArrayGroup';
 import JsonObject from './DataTypes/Object';
-import ArrayGroup from './ArrayGroup';
 
-export default class extends React.PureComponent {
+export class JsonViewer extends React.PureComponent {
     render = () => {
         const { props } = this;
         const namespace = [props.name];

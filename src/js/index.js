@@ -1,13 +1,13 @@
 import React from 'react';
 import { polyfill } from 'react-lifecycles-compat';
-import JsonViewer from './components/JsonViewer';
-import AddKeyRequest from './components/ObjectKeyModal/AddKeyRequest';
-import ValidationFailure from './components/ValidationFailure';
-import { toType, isTheme } from './helpers/util';
+import { toType, isTheme, searchJson, debounced, jsonFlatPaths } from './helpers/util';
 import ObjectAttributes from './stores/ObjectAttributes';
 
 //global theme
 import Theme from './themes/getStyle';
+import { ValidationFailure } from './components/ValidationFailure';
+import { AddKeyRequest } from './components/ObjectKeyModal/AddKeyRequest';
+import { JsonViewer } from './components/JsonViewer';
 
 //forward src through to JsonObject component
 class ReactJsonView extends React.PureComponent {
@@ -18,7 +18,11 @@ class ReactJsonView extends React.PureComponent {
             addKeyRequest: false,
             editKeyRequest: false,
             validationFailure: false,
+            paths: [],
+            refs: {},
+            current: 0,
             src: ReactJsonView.defaultProps.src,
+            searchable: ReactJsonView.defaultProps.searchable,
             name: ReactJsonView.defaultProps.name,
             theme: ReactJsonView.defaultProps.theme,
             validationMessage: ReactJsonView.defaultProps.validationMessage,
@@ -56,7 +60,8 @@ class ReactJsonView extends React.PureComponent {
         style: {},
         validationMessage: 'Validation Error',
         defaultValue: null,
-        displayArrayKey: true
+        displayArrayKey: true,
+        searchable: false
     };
 
     // will trigger whenever setState() is called, or parent passes in new props.
@@ -67,14 +72,22 @@ class ReactJsonView extends React.PureComponent {
             nextProps.theme !== prevState.prevTheme
         ) {
             // if we pass in new props, we re-validate
+            const allPaths = jsonFlatPaths(nextProps.src, nextProps.name);
+            const refs = allPaths.reduce((acc, value) => {
+                acc[value] = React.createRef();
+                return acc;
+            }, {});
+
             const newPartialState = {
                 src: nextProps.src,
+                refs: refs,
                 name: nextProps.name,
                 theme: nextProps.theme,
                 validationMessage: nextProps.validationMessage,
                 prevSrc: nextProps.src,
                 prevName: nextProps.name,
-                prevTheme: nextProps.theme
+                prevTheme: nextProps.theme,
+                searchable: nextProps.searchable
             };
             return ReactJsonView.validateState(newPartialState);
         }
@@ -106,6 +119,13 @@ class ReactJsonView extends React.PureComponent {
         if (prevState.editKeyRequest !== false) {
             this.setState({
                 editKeyRequest: false
+            });
+        }
+        if (prevState.current !== this.state.current && this.state.paths.length) {
+            console.log(this.state.paths[this.state.current]);
+            this.state.refs[this.state.paths[this.state.current]].current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
             });
         }
         if (prevProps.src !== this.state.src) {
@@ -158,6 +178,32 @@ class ReactJsonView extends React.PureComponent {
         };
     };
 
+    setPaths = debounced(searchTerm =>  {
+        const paths = searchJson(this.state.src, searchTerm, this.state.name)
+        this.setState({
+            paths,
+            current: paths.length && 0
+        })
+    }, 300)
+
+    handleSearch(e) {
+        this.setPaths(e.target.value);
+    }
+
+    handleDown = () => {
+        const expectedIndex = this.state.current + 1;
+        this.setState({
+            current:  expectedIndex >= this.state.paths.length ? 0: expectedIndex,
+        })
+    }
+
+    handleUp = () => {
+        const expectedIndex = this.state.current - 1;
+        this.setState({
+            current:  expectedIndex < 0 ? this.state.paths.length - 1: expectedIndex,
+        })
+    }
+
     render() {
         const {
             validationFailure,
@@ -165,7 +211,11 @@ class ReactJsonView extends React.PureComponent {
             addKeyRequest,
             theme,
             src,
-            name
+            name,
+            paths,
+            searchable,
+            refs,
+            current,
         } = this.state;
 
         const { style, defaultValue } = this.props;
@@ -181,9 +231,22 @@ class ReactJsonView extends React.PureComponent {
                     theme={theme}
                     rjvId={this.rjvId}
                 />
+
+                {searchable && <div style={{float: 'right', position: 'sticky', top: '50px'}}>
+                    <div style={{display: 'flex'}}>
+                        <div style={{marginRight: '10px', alignSelf: 'center'}}>{Boolean(paths.length) && `${current + 1} of ${paths.length}`}</div>
+                        <input type='text' onChange={e => this.handleSearch(e)} />
+                        <button onClick={this.handleUp}>▲</button>
+                        <button onClick={this.handleDown}>▼</button>
+                    </div>
+                </div>}
+
                 <JsonViewer
                     {...this.props}
+                    refs={refs}
+                    current={current}
                     src={src}
+                    paths={paths}
                     name={name}
                     theme={theme}
                     type={toType(src)}

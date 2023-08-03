@@ -7,7 +7,7 @@ import { CheckCircle, Add as Cancel } from './../icons';
 import Theme from './../../themes/getStyle';
 
 //this input appears when adding a new value to an object
-export default class extends React.PureComponent {
+export class ObjectKeyModal extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {

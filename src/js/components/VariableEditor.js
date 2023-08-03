@@ -1,25 +1,22 @@
 import React from 'react';
 import AutosizeTextarea from 'react-textarea-autosize';
 
-import { toType } from './../helpers/util';
 import dispatcher from './../helpers/dispatcher';
 import parseInput from './../helpers/parseInput';
 import stringifyVariable from './../helpers/stringifyVariable';
-import CopyToClipboard from './CopyToClipboard';
 
 //data type components
-import {
-    JsonBoolean,
-    JsonDate,
-    JsonFloat,
-    JsonFunction,
-    JsonInteger,
-    JsonNan,
-    JsonNull,
-    JsonRegexp,
-    JsonString,
-    JsonUndefined
-} from './DataTypes/DataTypes';
+import { JsonString } from './DataTypes/String';
+import { JsonInteger } from './DataTypes/Integer';
+import { JsonFloat } from './DataTypes/Float';
+import { JsonBoolean } from './DataTypes/Boolean';
+import { JsonFunction } from './DataTypes/Function';
+import { JsonNull } from './DataTypes/Null';
+import { JsonNan } from './DataTypes/Nan';
+import { JsonUndefined } from './DataTypes/Undefined';
+import { JsonDate } from './DataTypes/Date';
+import { JsonRegexp } from './DataTypes/Regexp';
+import { CopyToClipboard } from './CopyToClipboard';
 
 //clibboard icon
 import { Edit, CheckCircle, RemoveCircle as Remove } from './icons';
@@ -27,7 +24,7 @@ import { Edit, CheckCircle, RemoveCircle as Remove } from './icons';
 //theme
 import Theme from './../themes/getStyle';
 
-class VariableEditor extends React.PureComponent {
+export class VariableEditor extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -54,10 +51,18 @@ class VariableEditor extends React.PureComponent {
             onEdit,
             onDelete,
             onSelect,
+            paths,
+            refs,
+            current,
             displayArrayKey,
             quotesOnKeys
         } = this.props;
         const { editMode } = this.state;
+        const currentNamespace= [...namespace, variable.name];
+        const currentPath = currentNamespace.join('.');
+        const highlight = paths?.includes(currentPath);
+        const isCurrent = paths[current] ===  currentPath;
+
         return (
             <div
                 {...Theme(theme, 'objectKeyVal', {
@@ -71,6 +76,7 @@ class VariableEditor extends React.PureComponent {
                 }
                 class="variable-row"
                 key={variable.name}
+                ref={refs[currentPath]}
             >
                 {type == 'array' ? (
                     displayArrayKey ? (
@@ -127,7 +133,7 @@ class VariableEditor extends React.PureComponent {
                         cursor: onSelect === false ? 'default' : 'pointer'
                     })}
                 >
-                    {this.getValue(variable, editMode)}
+                    {this.getValue(variable, editMode, highlight, isCurrent)}
                 </div>
                 {enableClipboard ? (
                     <CopyToClipboard
@@ -135,7 +141,7 @@ class VariableEditor extends React.PureComponent {
                         hidden={editMode}
                         src={variable.value}
                         clickCallback={enableClipboard}
-                        {...{ theme, namespace: [...namespace, variable.name] }}
+                        {...{ theme, namespace: currentNamespace }}
                     />
                 ) : null}
                 {onEdit !== false && editMode == false
@@ -216,32 +222,32 @@ class VariableEditor extends React.PureComponent {
         );
     };
 
-    getValue = (variable, editMode) => {
+    getValue = (variable, editMode, highlight, isCurrent) => {
         const type = editMode ? false : variable.type;
         const { props } = this;
         switch (type) {
             case false:
                 return this.getEditInput();
             case 'string':
-                return <JsonString value={variable.value} {...props} />;
+                return <JsonString highlight={highlight} isCurrent={isCurrent} searchResult={true} value={variable.value} {...props} />;
             case 'integer':
-                return <JsonInteger value={variable.value} {...props} />;
+                return <JsonInteger highlight={highlight} isCurrent={isCurrent} value={variable.value} {...props} />;
             case 'float':
-                return <JsonFloat value={variable.value} {...props} />;
+                return <JsonFloat highlight={highlight} isCurrent={isCurrent} value={variable.value} {...props} />;
             case 'boolean':
-                return <JsonBoolean value={variable.value} {...props} />;
+                return <JsonBoolean highlight={highlight} isCurrent={isCurrent} value={variable.value} {...props} />;
             case 'function':
-                return <JsonFunction value={variable.value} {...props} />;
+                return <JsonFunction value={variable.value} isCurrent={isCurrent} {...props} />;
             case 'null':
-                return <JsonNull {...props} />;
+                return <JsonNull highlight={highlight} isCurrent={isCurrent} {...props} />;
             case 'nan':
-                return <JsonNan {...props} />;
+                return <JsonNan highlight={highlight} isCurrent={isCurrent} {...props} />;
             case 'undefined':
-                return <JsonUndefined {...props} />;
+                return <JsonUndefined highlight={highlight} isCurrent={isCurrent} {...props} />;
             case 'date':
-                return <JsonDate value={variable.value} {...props} />;
+                return <JsonDate highlight={highlight} isCurrent={isCurrent} value={variable.value} {...props} />;
             case 'regexp':
-                return <JsonRegexp value={variable.value} {...props} />;
+                return <JsonRegexp highlight={highlight} isCurrent={isCurrent} value={variable.value} {...props} />;
             default:
                 // catch-all for types that weren't anticipated
                 return (
@@ -455,5 +461,3 @@ class VariableEditor extends React.PureComponent {
     };
 }
 
-//export component
-export default VariableEditor;

@@ -3,8 +3,13 @@ import React from 'react';
 //theme
 import Theme from './../../themes/getStyle';
 
-export default class extends React.PureComponent {
+export class JsonUndefined extends React.PureComponent {
     render() {
-        return <div {...Theme(this.props.theme, 'undefined')}>undefined</div>;
+        const { props } = this;
+        return <div {...Theme(this.props.theme, 'undefined')}>
+            <span style={{backgroundColor: props.isCurrent ? 'orange' : props.highlight ?  'yellow' : 'inherit'}}>
+                undefined
+            </span>
+        </div>;
     }
 }

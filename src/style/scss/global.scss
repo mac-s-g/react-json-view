@@ -13,6 +13,9 @@
     .click-to-remove {
         display: none;
     }
+    .click-to-select {
+        display: none;
+    }
     .click-to-edit {
         display: none;
     }
@@ -28,6 +31,9 @@
             & > .click-to-remove {
                 display: inline-block;
             }
+            & > .click-to-select {
+                display: inline-block;
+            }
         }
     }
 
@@ -41,6 +47,9 @@
 
     .object-content .variable-row {
         &:hover .click-to-remove {
+            display: inline-block;
+        }
+        &:hover .click-to-select {
             display: inline-block;
         }
         &:hover .click-to-edit {

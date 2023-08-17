@@ -76,7 +76,7 @@ export default {
     editInputFontFamily: 'monospace',
 
     iconCursor: 'pointer',
-    iconFontSize: '15px',
+    iconFontSize: '17px',
     iconPaddingRight: '1px',
 
     dateValueMarginLeft: '2px',

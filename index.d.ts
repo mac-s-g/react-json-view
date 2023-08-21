@@ -12,7 +12,7 @@ export interface ReactJsonViewProps {
    *
    * Default: "root"
    */
-  name?: string | null | false;
+  name?: React.JSX.Element | string | null | false;
   /**
    * RJV supports base-16 themes. Check out the list of supported themes in the demo.
    * A custom "rjv-default" theme applies by default.

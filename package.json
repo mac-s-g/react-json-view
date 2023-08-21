@@ -4,6 +4,7 @@
     "version": "1.21.3",
     "main": "dist/main.js",
     "dependencies": {
+        "@types/react": "^18.2.20",
         "flux": "^4.0.1",
         "react-base16-styling": "^0.6.0",
         "react-lifecycles-compat": "^3.0.4",

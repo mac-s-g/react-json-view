@@ -46,7 +46,7 @@ Or add to your package.json config file:
 Name|Type|Default|Description
 |:---|:---|:---|:---
 `src`|`JSON Object`|None|This property contains your input JSON
-`name`|`string` or `false`|"root"|Contains the name of your root node.  Use `null` or `false` for no name.
+`name`|`string`|`JSX.Element` or `false`|"root"|Contains the name of your root node.  Use `null` or `false` for no name.
 `theme`|`string`|"rjv-default"|RJV supports base-16 themes.  Check out the list of supported themes [in the demo](https://mac-s-g.github.io/react-json-view/demo/dist/). A custom "rjv-default" theme applies by default.
 `style`|`object`|`{}`|Style attributes for react-json-view container.  Explicit style attributes will override attributes provided by a theme.
 `iconStyle`|`string`|"circle"| Style of expand/collapse icons.  Accepted values are "circle", triangle" or "square".

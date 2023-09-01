@@ -1,3 +1,5 @@
+import JSONBig from 'json-bigint';
+
 export default function parseInput(input) {
     //following code is to make a best guess at
     //the type for a variable being submitted.
@@ -5,13 +7,13 @@ export default function parseInput(input) {
     //we are working with a serialized data representation
     input = input.trim();
     try {
-        input = JSON.stringify(JSON.parse(input));
+        input = JSONBig.stringify(JSONBig.parse(input));
         if (input[0] === '[') {
             //array
-            return formatResponse('array', JSON.parse(input));
+            return formatResponse('array', JSONBig({ useNativeBigInt: true }).parse(input));
         } else if (input[0] === '{') {
             //object
-            return formatResponse('object', JSON.parse(input));
+            return formatResponse('object', JSONBig({ useNativeBigInt: true }).parse(input));
         } else if (
             input.match(/\-?\d+\.\d+/) &&
             input.match(/\-?\d+\.\d+/)[0] === input
@@ -28,6 +30,10 @@ export default function parseInput(input) {
             input.match(/\-?\d+/) &&
             input.match(/\-?\d+/)[0] === input
         ) {
+            //bigint
+            if (Number(input) > Number.MAX_SAFE_INTEGER) {
+                return formatResponse('bigint', BigInt(input));
+            }
             //integer
             return formatResponse('integer', parseInt(input));
         } else if (

@@ -5,6 +5,7 @@
     "main": "dist/main.js",
     "dependencies": {
         "flux": "^4.0.1",
+        "json-bigint": "^1.0.0",
         "react-base16-styling": "^0.6.0",
         "react-lifecycles-compat": "^3.0.4",
         "react-textarea-autosize": "^8.3.2"

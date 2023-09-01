@@ -5,6 +5,7 @@ export { default as JsonFunction } from './Function';
 export { default as JsonNan } from './Nan';
 export { default as JsonNull } from './Null';
 export { default as JsonInteger } from './Integer';
+export { default as JsonBigInt } from './BigInt';
 export { default as JsonObject } from './Object';
 export { default as JsonRegexp } from './Regexp';
 export { default as JsonString } from './String';

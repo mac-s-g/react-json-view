@@ -19,6 +19,7 @@ describe('<ArrayGroup />', function () {
                 theme="rjv-default"
                 jsvRoot={false}
                 indentWidth={4}
+                collapsed={false}
             />
         );
 
@@ -35,8 +36,15 @@ describe('<ArrayGroup />', function () {
                 theme="rjv-default"
                 jsvRoot={false}
                 indentWidth={4}
+                shouldCollapse={() => false}
+                collapsed={0}
+                depth={10}
             />
         );
+        
+        wrapper.find('.icon-container').first().simulate('click');
+
+        expect(wrapper.state().expanded[-1]).to.equal(true);
 
         wrapper.find('.array-group-brace').first().simulate('click');
 
@@ -49,6 +57,11 @@ describe('<ArrayGroup />', function () {
             .simulate('click');
 
         expect(wrapper.state().expanded[0]).to.equal(false);
+        
+        wrapper.find('.icon-container').first().simulate('click');
+
+        expect(wrapper.state().expanded[-1]).to.equal(false);
+
     });
 
     it('ArrayGroup displays arrays on expansion', function () {
@@ -61,10 +74,12 @@ describe('<ArrayGroup />', function () {
                 theme="rjv-default"
                 jsvRoot={false}
                 indentWidth={4}
+                collapsed={true}
+                shouldCollapse={()=>false}
             />
         );
 
-        wrapper.setState({ expanded: { 0: true } });
+        wrapper.setState({ expanded: { [-1]: true, 0: true } });
 
         expect(wrapper.find(JsonObject).length).to.equal(1);
 
@@ -83,12 +98,15 @@ describe('<ArrayGroup />', function () {
                 theme="rjv-default"
                 jsvRoot={false}
                 indentWidth={4}
+                collapsed={10}
+                depth={0}
+                shouldCollapse={()=>false}
             />
         );
 
         expect(wrapper.find('.array-group').length).to.equal(4);
 
-        wrapper.setState({ expanded: { 3: true } });
+        wrapper.setState({ expanded: { [-1]: true, 3: true } });
 
         expect(
             wrapper.find('.array-group').last().find(JsonString).length
@@ -105,6 +123,7 @@ describe('<ArrayGroup />', function () {
                 theme="rjv-default"
                 jsvRoot={true}
                 indentWidth={4}
+                collapsed={false}
             />
         );
 

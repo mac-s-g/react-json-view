@@ -53,6 +53,7 @@ class ReactJsonView extends React.PureComponent {
         onAdd: false,
         onSelect: false,
         iconStyle: 'triangle',
+        className: undefined,
         style: {},
         validationMessage: 'Validation Error',
         defaultValue: null,
@@ -168,11 +169,11 @@ class ReactJsonView extends React.PureComponent {
             name
         } = this.state;
 
-        const { style, defaultValue } = this.props;
+        const { className, style, defaultValue } = this.props;
 
         return (
             <div
-                class="react-json-view"
+                className={"react-json-view" + (className ? " " + className : "")}
                 style={{ ...Theme(theme, 'app-container').style, ...style }}
             >
                 <ValidationFailure

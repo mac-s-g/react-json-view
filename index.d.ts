@@ -21,6 +21,12 @@ export interface ReactJsonViewProps {
    */
   theme?: ThemeKeys | ThemeObject;
   /**
+   * Additional `className` string to append to the `className` of react-json-view's container.
+   *
+   * Default: undefined
+   */
+   className?: string;
+  /**
    * Style attributes for react-json-view container.
    * Explicit style attributes will override attributes provided by a theme.
    *

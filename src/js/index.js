@@ -43,6 +43,7 @@ class ReactJsonView extends React.PureComponent {
         shouldCollapse: false,
         sortKeys: false,
         quotesOnKeys: true,
+        quotesOnValues: true,
         groupArraysAfterLength: 100,
         indentWidth: 4,
         enableClipboard: true,

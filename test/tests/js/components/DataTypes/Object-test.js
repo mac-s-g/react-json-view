@@ -5,7 +5,11 @@ import { expect } from 'chai';
 import JsonObject from './../../../../../src/js/components/DataTypes/Object';
 
 describe('<JsonObject />', function () {
-    const rjvId = 1;
+    let rjvId = 1;
+
+    beforeEach(() => {
+        rjvId++;
+    });
 
     it('Object component should have a data type label', function () {
         let src = {
@@ -372,5 +376,53 @@ describe('<JsonObject />', function () {
             />
         );
         expect(wrapper.text()).to.equal('"":{"d":"d""b":"b""a":"a""c":"c"}');
+    });
+
+    it('Object click to expand', function () {
+        let src = {
+            obj: {
+                test: true
+            }
+        };
+        const wrapper = shallow(
+            <JsonObject src={src} rjvId={rjvId} namespace={['root']} />
+        );
+        expect(
+            wrapper.find('.rjv-object-container').prop('aria-expanded')
+        ).to.equal(false);
+        wrapper.find('.rjv-object-container').simulate('click');
+        expect(
+            wrapper.find('.rjv-object-container').prop('aria-expanded')
+        ).to.equal(true);
+    });
+
+    it('Object keydown to expand', function () {
+        let src = {
+            obj: {
+                test: true
+            }
+        };
+        const wrapper = shallow(
+            <JsonObject src={src} rjvId={rjvId} namespace={['root']} />
+        );
+
+        expect(
+            wrapper.find('.rjv-object-container').prop('aria-expanded')
+        ).to.equal(false);
+
+        wrapper
+            .find('.rjv-object-container')
+            .simulate('keydown', { key: 'Space' });
+
+        expect(
+            wrapper.find('.rjv-object-container').prop('aria-expanded')
+        ).to.equal(false);
+
+        wrapper
+            .find('.rjv-object-container')
+            .simulate('keydown', { key: 'Enter' });
+        expect(
+            wrapper.find('.rjv-object-container').at(0).prop('aria-expanded')
+        ).to.equal(true);
     });
 });

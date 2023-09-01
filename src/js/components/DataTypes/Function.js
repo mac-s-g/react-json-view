@@ -4,6 +4,8 @@ import DataTypeLabel from './DataTypeLabel';
 //theme
 import Theme from './../../themes/getStyle';
 
+import { generateExpanderProps } from '../../helpers/util';
+
 //attribute store for storing collapsed state
 import AttributeStore from './../../stores/ObjectAttributes';
 
@@ -48,7 +50,7 @@ export default class extends React.PureComponent {
                 <span
                     {...Theme(props.theme, 'function-value')}
                     class="rjv-function-container"
-                    onClick={this.toggleCollapsed}
+                    {...generateExpanderProps(this.toggleCollapsed, !collapsed)}
                 >
                     {this.getFunctionDisplay(collapsed)}
                 </span>

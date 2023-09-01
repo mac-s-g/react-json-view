@@ -1,6 +1,6 @@
 import React from 'react';
 import DataTypeLabel from './DataTypeLabel';
-import { toType } from './../../helpers/util';
+import { toType, generateExpanderProps } from './../../helpers/util';
 
 //theme
 import Theme from './../../themes/getStyle';
@@ -41,7 +41,11 @@ export default class extends React.PureComponent {
         const type_name = 'string';
         const { collapsed } = this.state;
         const { props } = this;
-        const { collapseStringsAfterLength, theme } = props;
+        const {
+            collapseStringsAfterLength,
+            theme,
+            quotesOnValues = true
+        } = props;
         let { value } = props;
         let collapsible = toType(collapseStringsAfterLength) === 'integer';
         let style = { style: { cursor: 'default' } };
@@ -57,16 +61,20 @@ export default class extends React.PureComponent {
                 );
             }
         }
-
         return (
             <div {...Theme(theme, 'string')}>
                 <DataTypeLabel type_name={type_name} {...props} />
                 <span
                     class="string-value"
                     {...style}
-                    onClick={this.toggleCollapsed}
+                    {...generateExpanderProps(
+                        this.toggleCollapsed,
+                        this.state.expanded
+                    )}
                 >
-                    "{value}"
+                    {quotesOnValues ? '"' : ''}
+                    {value}
+                    {quotesOnValues ? '"' : ''}
                 </span>
             </div>
         );

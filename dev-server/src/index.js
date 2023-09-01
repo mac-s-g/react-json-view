@@ -52,6 +52,7 @@ ReactDom.render(
                 return false;
             }}
             defaultValue=""
+            objectCollapsedMaxPropsCount={4}
         />
 
         <br />
@@ -84,6 +85,7 @@ ReactDom.render(
                 src.constructor &&
                 src.constructor.name === 'Moment'
             }
+            objectCollapsedMaxPropsCount={4}
         />
 
         <br />
@@ -95,6 +97,7 @@ ReactDom.render(
             name={'feature_set'}
             displayDataTypes={false}
             indentWidth={2}
+            objectCollapsedMaxPropsCount={4}
         />
 
         <br />
@@ -106,6 +109,7 @@ ReactDom.render(
             name={'feature_set'}
             displayDataTypes={false}
             indentWidth={5}
+            objectCollapsedMaxPropsCount={4}
         />
 
         <br />
@@ -119,6 +123,7 @@ ReactDom.render(
             displayObjectSize={false}
             displayDataTypes={false}
             enableClipboard={false}
+            objectCollapsedMaxPropsCount={4}
         />
 
         <br />
@@ -130,6 +135,7 @@ ReactDom.render(
             onEdit={edit => {
                 console.log(edit);
             }}
+            objectCollapsedMaxPropsCount={4}
         />
 
         <br />
@@ -159,6 +165,7 @@ ReactDom.render(
                 base0E: 'rgba(70, 70, 230, 1)',
                 base0F: 'rgba(70, 70, 230, 1)'
             }}
+            objectCollapsedMaxPropsCount={true}
         />
 
         <JsonViewer
@@ -167,6 +174,7 @@ ReactDom.render(
             name="large_array"
             groupArraysAfterLength={50}
             src={getExampleJson4()}
+            objectCollapsedMaxPropsCount={true}
         />
     </div>,
     document.getElementById('app-container')

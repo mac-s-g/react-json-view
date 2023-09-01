@@ -4,7 +4,7 @@ import { createStyling } from 'react-base16-styling';
 
 const colorMap = theme => ({
     backgroundColor: theme.base00,
-    ellipsisColor: theme.base09,
+    ellipsisColor: theme.base07,
     braceColor: theme.base07,
     expandedIcon: theme.base0D,
     collapsedIcon: theme.base0E,
@@ -82,6 +82,14 @@ const getDefaultThemeStyling = theme => {
         },
         'collapsed-icon': {
             color: colors.collapsedIcon
+        },
+        'ellipsis-metadata': {
+            display: 'inline-block',
+            color: colors.dataTypes.undefined,
+            fontSize: constants.undefinedFontSize,
+            padding: constants.undefinedPadding,
+            borderRadius: constants.undefinedBorderRadius,
+            cursor: 'pointer'
         },
         colon: {
             display: 'inline-block',

@@ -11,6 +11,8 @@ import Theme from './themes/getStyle';
 
 //forward src through to JsonObject component
 class ReactJsonView extends React.PureComponent {
+    wrapperRef = React.createRef();
+
     constructor(props) {
         super(props);
         this.state = {
@@ -94,6 +96,15 @@ class ReactJsonView extends React.PureComponent {
             addKeyRequest: false,
             editKeyRequest: false
         });
+
+        if (this.props.autoFocus) {
+            const rootKey = this.wrapperRef.current.querySelector(
+                '.object-key'
+            );
+            if (rootKey) {
+                rootKey.focus();
+            }
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -110,6 +121,20 @@ class ReactJsonView extends React.PureComponent {
         }
         if (prevProps.src !== this.state.src) {
             ObjectAttributes.set(this.rjvId, 'global', 'src', this.state.src);
+        }
+
+        if (
+            prevProps.src !== this.state.src ||
+            prevProps.autoFocus !== this.props.autoFocus
+        ) {
+            if (this.props.autoFocus) {
+                const rootKey = this.wrapperRef.current.querySelector(
+                    '.object-key'
+                );
+                if (rootKey) {
+                    rootKey.focus();
+                }
+            }
         }
     }
 
@@ -173,6 +198,7 @@ class ReactJsonView extends React.PureComponent {
         return (
             <div
                 class="react-json-view"
+                ref={this.wrapperRef}
                 style={{ ...Theme(theme, 'app-container').style, ...style }}
             >
                 <ValidationFailure

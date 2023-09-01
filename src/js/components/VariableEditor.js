@@ -1,7 +1,7 @@
 import React from 'react';
 import AutosizeTextarea from 'react-textarea-autosize';
 
-import { toType } from './../helpers/util';
+import { handleObjectKeyKeyDown, toType } from './../helpers/util';
 import dispatcher from './../helpers/dispatcher';
 import parseInput from './../helpers/parseInput';
 import stringifyVariable from './../helpers/stringifyVariable';
@@ -78,7 +78,14 @@ class VariableEditor extends React.PureComponent {
                             {...Theme(theme, 'array-key')}
                             key={variable.name + '_' + namespace}
                         >
-                            {variable.name}
+                            <span
+                                tabIndex={0}
+                                onKeyDown={e =>
+                                    handleObjectKeyKeyDown('array-variable', e)
+                                }
+                            >
+                                {variable.name}
+                            </span>
                             <div {...Theme(theme, 'colon')}>:</div>
                         </span>
                     ) : null
@@ -86,7 +93,11 @@ class VariableEditor extends React.PureComponent {
                     <span>
                         <span
                             {...Theme(theme, 'object-name')}
-                            class="object-key"
+                            class="object-key variable-name"
+                            tabIndex={0}
+                            onKeyDown={e =>
+                                handleObjectKeyKeyDown('variable', e)
+                            }
                             key={variable.name + '_' + namespace}
                         >
                             {!!quotesOnKeys && (

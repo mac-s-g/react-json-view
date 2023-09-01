@@ -141,6 +141,12 @@ export interface ReactJsonViewProps {
    * Default: null
    */
   defaultValue?: TypeDefaultValue | TypeDefaultValue[] | null;
+  /**
+   * Wether or not to automatically focus on the root key
+   *
+   * Default: false
+   */
+  autoFocus?: boolean;
 }
 
 export interface OnCopyProps {

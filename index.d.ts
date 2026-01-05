@@ -141,6 +141,19 @@ export interface ReactJsonViewProps {
    * Default: null
    */
   defaultValue?: TypeDefaultValue | TypeDefaultValue[] | null;
+
+  customButtonProps?: {
+    /**
+     * When set to true, the custom button will be shown even if the field is not hovered.
+     */
+    forceShow?: boolean;
+    icon: React.ReactNode;
+    /**
+     * @param data value is the field value, namespace is a list of the entire fields. Suppose the field is "example.parent.sibling1", then namespace is ["example", "parent", "sibling1"]
+     */
+    onClick: (data: { value: any; namespace: Array<string | null> }) => void;
+    title: string;
+  };
 }
 
 export interface OnCopyProps {

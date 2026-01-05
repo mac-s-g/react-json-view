@@ -190,6 +190,7 @@ class RjvObject extends React.PureComponent {
             theme,
             jsvRoot,
             iconStyle,
+            customButtonProps,
             ...rest
         } = this.props;
 
@@ -219,6 +220,7 @@ class RjvObject extends React.PureComponent {
                     ? this.getObjectContent(depth, src, {
                           theme,
                           iconStyle,
+                          customButtonProps,
                           ...rest
                       })
                     : this.getEllipsis()}
@@ -245,6 +247,7 @@ class RjvObject extends React.PureComponent {
             groupArraysAfterLength,
             namespace
         } = this.props;
+        const { customButtonProps } = props;
         const { object_type } = this.state;
         let elements = [],
             variable;
@@ -303,6 +306,7 @@ class RjvObject extends React.PureComponent {
                         singleIndent={SINGLE_INDENT}
                         namespace={namespace}
                         type={this.props.type}
+                        customButtonProps={customButtonProps}
                         {...props}
                     />
                 );

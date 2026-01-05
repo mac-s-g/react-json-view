@@ -15,7 +15,6 @@ export default class extends React.PureComponent {
         ) {
             ObjectComponent = ArrayGroup;
         }
-
         return (
             <div class="pretty-json-container object-container">
                 <div class="object-content">

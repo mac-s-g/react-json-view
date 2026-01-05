@@ -6,6 +6,7 @@ import dispatcher from './../helpers/dispatcher';
 import parseInput from './../helpers/parseInput';
 import stringifyVariable from './../helpers/stringifyVariable';
 import CopyToClipboard from './CopyToClipboard';
+import CustomButton from './CustomButton';
 
 //data type components
 import {
@@ -55,7 +56,8 @@ class VariableEditor extends React.PureComponent {
             onDelete,
             onSelect,
             displayArrayKey,
-            quotesOnKeys
+            quotesOnKeys,
+            customButtonProps
         } = this.props;
         const { editMode } = this.state;
         return (
@@ -135,6 +137,14 @@ class VariableEditor extends React.PureComponent {
                         hidden={editMode}
                         src={variable.value}
                         clickCallback={enableClipboard}
+                        {...{ theme, namespace: [...namespace, variable.name] }}
+                    />
+                ) : null}
+                {customButtonProps ? (
+                    <CustomButton
+                        rowHovered={this.state.hovered}
+                        customButtonProps={customButtonProps}
+                        src={variable.value}
                         {...{ theme, namespace: [...namespace, variable.name] }}
                     />
                 ) : null}

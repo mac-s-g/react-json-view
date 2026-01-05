@@ -14,15 +14,22 @@ function setUpDomEnvironment() {
 
     global.window = window;
     global.document = window.document;
-    global.navigator = {
-        userAgent: 'node.js'
-    };
     copyProps(window, global);
+    // Set navigator after copying props using defineProperty to override getter-only property
+    Object.defineProperty(global, 'navigator', {
+        value: {
+            userAgent: 'node.js'
+        },
+        writable: true,
+        configurable: true
+    });
 }
 
 function copyProps(src, target) {
     const props = Object.getOwnPropertyNames(src)
-        .filter(prop => typeof target[prop] === 'undefined')
+        .filter(
+            prop => typeof target[prop] === 'undefined' && prop !== 'navigator'
+        )
         .map(prop => Object.getOwnPropertyDescriptor(src, prop));
     Object.defineProperties(target, props);
 }

@@ -22,6 +22,7 @@ class ReactJsonView extends React.PureComponent {
             name: ReactJsonView.defaultProps.name,
             theme: ReactJsonView.defaultProps.theme,
             validationMessage: ReactJsonView.defaultProps.validationMessage,
+            customButtonProps: ReactJsonView.defaultProps.customButtonProps,
             // the state object also needs to remember the prev prop values, because we need to compare
             // old and new props in getDerivedStateFromProps().
             prevSrc: ReactJsonView.defaultProps.src,
@@ -56,7 +57,8 @@ class ReactJsonView extends React.PureComponent {
         style: {},
         validationMessage: 'Validation Error',
         defaultValue: null,
-        displayArrayKey: true
+        displayArrayKey: true,
+        customButtonProps: null
     };
 
     // will trigger whenever setState() is called, or parent passes in new props.
@@ -74,7 +76,8 @@ class ReactJsonView extends React.PureComponent {
                 validationMessage: nextProps.validationMessage,
                 prevSrc: nextProps.src,
                 prevName: nextProps.name,
-                prevTheme: nextProps.theme
+                prevTheme: nextProps.theme,
+                customButtonProps: nextProps.customButtonProps
             };
             return ReactJsonView.validateState(newPartialState);
         }
@@ -165,11 +168,11 @@ class ReactJsonView extends React.PureComponent {
             addKeyRequest,
             theme,
             src,
-            name
+            name,
+            customButtonProps
         } = this.state;
 
         const { style, defaultValue } = this.props;
-
         return (
             <div
                 class="react-json-view"
@@ -188,6 +191,7 @@ class ReactJsonView extends React.PureComponent {
                     theme={theme}
                     type={toType(src)}
                     rjvId={this.rjvId}
+                    customButtonProps={customButtonProps}
                 />
                 <AddKeyRequest
                     active={addKeyRequest}

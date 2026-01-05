@@ -1,4 +1,5 @@
 import React from 'react';
+import CustomButton from './CustomButton';
 import dispatcher from './../helpers/dispatcher';
 
 import CopyToClipboard from './CopyToClipboard';
@@ -114,7 +115,8 @@ export default class extends React.PureComponent {
             enableClipboard,
             src,
             namespace,
-            rowHovered
+            rowHovered,
+            customButtonProps
         } = this.props;
         return (
             <div
